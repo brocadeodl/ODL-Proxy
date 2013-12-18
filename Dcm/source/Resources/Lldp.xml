@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Framework Core Module. -->
+<!-- This file contains the resources for Wave Timer Module. -->
+
+<ModuleResources ModuleName = "Lldp" ComponentName = "LldpResourceIds">
+
+    <ResourceEnum Name = "LldpUserConfigurations">
+        <Resource Name = "LLDP_API_ERR_UNKNOWN">%% Command failed with error code </Resource>
+        <Resource Name = "LLDP_API_ERR_ONMD_NOT_EXIST">%% ONMD Not Active </Resource>
+		<Resource Name = "LLDP_API_ERR_LLDP_MASTER_NOT_EXIST">%% LLDP Not Active </Resource>
+		<Resource Name = "LLDP_API_ERR_IF_NOT_EXIST">%% Interface Not Found </Resource>
+		<Resource Name = "LLDP_API_ERR_LLDP_IF_NOT_EXIST">%% LLDP not configured for the interface </Resource>
+		<Resource Name = "LLDP_API_ERR_ONM_IF_NOT_EXIST">%% Interface Not Found </Resource>
+		<Resource Name = "LLDP_API_ERR_IF_NOT_UP">%% Interface Not Up </Resource>
+		<Resource Name = "LLDP_API_ERR_VR_NOT_UP">%% Interface Not Bound </Resource>
+		<Resource Name = "LLDP_API_ERR_LLDP_IF_MEMORY">%% Out of Memory </Resource>
+		<Resource Name = "LLDP_API_ERR_NO_MEMORY">%% Out of Memory </Resource>
+		<Resource Name = "LLDP_API_ERR_UNSUPPORTED_TLV">%% Internal Error </Resource>
+		<Resource Name = "LLDP_API_ERR_LLDP_MAC_ADDR_ERR">%% Invalid mac address format </Resource>
+		<Resource Name = "LLDP_API_ERR_LLDP_IP_ADDR_ERR">%% Invalid IP address format </Resource>
+		<Resource Name = "LLDP_API_ERR_DELETE_OLD_PROFILE">%% Delete old profile before adding new profile </Resource>
+		<Resource Name = "LLDP_API_ERR_INTERFACE_NOT_ETHERNET">%% Command allowed only on Physical Interface </Resource>
+		<Resource Name = "LLDP_API_ERR_UNKNOWN_PROFILE">%% Profile does not exist </Resource>
+		<Resource Name = "LLDP_API_ERR_NO_PROFILE_NAME">%% No name specified </Resource>
+		<Resource Name = "LLDP_API_ERR_LLDP_NOT_ON_DESTINATION_MIRR_PORT">%% LLDP cannot be enabled on destination mirror port </Resource>
+		<Resource Name = "LLDP_API_ERR_DEST_MIRR_PORT">%% Cannot be configured on destination mirror port </Resource>
+        <Resource Name = "LLDP_COMMON_ERR_CLUSTER_VALIDATE_VERSION_MISMATCH">%%Error: Cluster Validation failed - Version Mismatch.</Resource>
+    </ResourceEnum>
+
+</ModuleResources>

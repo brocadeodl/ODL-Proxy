@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-aaa-ext"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:aaa-extensions="urn:brocade.com:mgmt:brocade-aaa-ext"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def">
+  <namespace uri="urn:brocade.com:mgmt:brocade-aaa-ext"/>
+  <prefix value="aaa-extensions"/>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <revision date="2010-09-21">
+    <description>
+      <text>Added aaa-show-ext.</text>
+    </description>
+  </revision>
+  <augment target-node="/common-def:show">
+    <container name="aaa-users"/>
+  </augment>
+  <rpc name="user-session-info">
+    <output>
+      <leaf name="user-role">
+        <type name="string">
+          <length value="4 .. 32"/>
+        </type>
+      </leaf>
+    </output>
+  </rpc>
+</module>

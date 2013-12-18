@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for VcsFabricLocalObjectManager -->
+
+<ModuleResources ModuleName = "VcsCluster" ComponentName = "Dcm">
+    
+   <ResourceEnum Name = "VcsClusterManagedObjectSpecificStatus">
+        <Resource Name = "VCS_CLUSTER_SPECIFIC_STATUS_ALL_NODES_IN_CLUSTER">All Nodes Present in the Cluster</Resource>
+        <Resource Name = "VCS_CLUSTER_SPECIFIC_STATUS_NODES_DISCONNECTED_FROM_CLUSTER">Nodes Disconnected from Cluster</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "VcsClusterRaslogStatus">
+        <Resource Name = "VCS_CLUSTER_RASLOG_STATUS_CREATE">VCS cluster created with %1 member node(s): Rbridge-id(s) %2 (%3)</Resource>
+    </ResourceEnum>
+
+</ModuleResources>
+

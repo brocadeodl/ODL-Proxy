@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for VcsFabricLocalObjectManager. -->
+
+<ModuleResources ModuleName = "VcsFabricLocal" ComponentName = "Dcm">
+    
+   <ResourceEnum Name = "VcsFabricLocalManagedObjectSpecificStatus">
+        <Resource Name = "VCS_FABRIC_LOCAL_SPECIFIC_STATUS_STAND_ALONE">StandAlone</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_SPECIFIC_STATUS_PRIMARY">Co-ordinator</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_SPECIFIC_STATUS_SECONDARY">Connected to Cluster</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_SPECIFIC_STATUS_SECONDARY_DISCONNECTED_FROM_CLUSTER">Disconnected From Cluster</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_SPECIFIC_STATUS_WAITING_TO_REJOIN">Waiting To Rejoin</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_SPECIFIC_STATUS_NODE_REPLACEMENT_IN_PROGRESS">Switch Replacement In Progress</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_SPECIFIC_STATUS_SECONDARY_ADD_PHASE2_STARTED">Add Node - Internal Services Initializing</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_SPECIFIC_STATUS_SECONDARY_ADD_PHASE2_COMPLETED">Add Node - Internal Services Initialization Completed</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_SPECIFIC_STATUS_SECONDARY_REJOIN_PHASE2_STARTED">Rejoin Node - Internal Services Initializing</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_SPECIFIC_STATUS_SECONDARY_REJOIN_PHASE2_COMPLETED">Rejoin Node - Internal Services Initialization Completed</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_SPECIFIC_STATUS_SECONDARY_ADD_PHASE3_STARTED">Add Node - Application Services Initializing</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_SPECIFIC_STATUS_SECONDARY_REJOIN_PHASE3_STARTED">Rejoin Node - Application Services Initializing</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_CLUSTER_TYPE_STANDALONE">StandAlone</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_CLUSTER_TYPE_FABRIC">Local-Only</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_CLUSTER_TYPE_MGMT">Distributed</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_SPECIFIC_STATUS_CHASSIS_DISABLED_REPLACEMENT_MODEL_MISMATCH">Chassis disabled replacement switch model mismatch</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "VcsConfigDistributeOperations">
+        <Resource Name = "VCS_CONFIG_DISTRIBUTE_OPERATION_NONE">Config distribute will not perform any operation.</Resource>
+        <Resource Name = "VCS_CONFIG_DISTRIBUTE_OPERATION_RETRIEVE_GLOBAL_CONFIGS">Retrieve global-only configs.</Resource>
+        <Resource Name = "VCS_CONFIG_DISTRIBUTE_OPERATION_DISTRIBUTE_GLOBAL_CONFIGS">Perform a validation of global-only configs.</Resource>
+        <Resource Name = "VCS_CONFIG_DISTRIBUTE_OPERATION_PREPARE_CLUSTER_TRANSITION">Prepare selected nodes for a cluster mode transition.</Resource>
+        <Resource Name = "VCS_CONFIG_DISTRIBUTE_OPERATION_REBOOT">Reboot selected nodes.</Resource>
+        <Resource Name = "VCS_CONFIG_DISTRIBUTE_OPERATION_PRIMARY_REBOOT">Reboot primary node.</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "VcsConfigDistributeErrors">
+        <Resource Name = "VCS_CONFIG_DISTRIBUTE_ERROR_GLOBAL_CONFIG_FETCH_FAILED">%%ERROR : Failed to retrieve the global-only running-config.</Resource>
+        <Resource Name = "VCS_CONFIG_DISTRIBUTE_ERROR_GLOBAL_CONFIG_EMPTY">%%ERROR : The global-only running-config is empty.</Resource>
+        <Resource Name = "VCS_CONFIG_DISTRIBUTE_ERROR_GLOBAL_CONFIG_SAVE_FAILED">%%ERROR : Failed to save the global-only running-config to flash.</Resource>
+        <Resource Name = "VCS_CONFIG_DISTRIBUTE_ERROR_LOCAL_CONFIG_FETCH_FAILED">%%ERROR : Failed to retrieve the local-only running-config.</Resource>
+        <Resource Name = "VCS_CONFIG_DISTRIBUTE_ERROR_LOCAL_CONFIG_EMPTY">%%ERROR : The local-only running-config is empty.</Resource>
+        <Resource Name = "VCS_CONFIG_DISTRIBUTE_ERROR_LOCAL_CONFIG_SAVE_FAILED">%%ERROR : Failed to save the local-only running-config to flash.</Resource>
+        <Resource Name = "VCS_CONFIG_DISTRIBUTE_ERROR_GLOBAL_CONFIG_VALIDATION_MISMATCH">%%ERROR : The node's configuration is not consistent with the VCS cluster's configuration.</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "VcsConfigSnapshotErrors">
+        <Resource Name = "VCS_CONFIG_SNAPSHOT_MAX_LIMIT_REACHED">%%ERROR : Failed due to MAX snapshot limit reached</Resource> 
+        <Resource Name = "VCS_CONFIG_SNAPSHOT_ID_PRESENT">%%ERROR : Failed due to duplicate snapshotId</Resource>
+        <Resource Name = "VCS_CONFIG_SNAPSHOT_ID_NOT_PRESENT">%%ERROR : Failed due to snapshotId not present</Resource>
+        <Resource Name = "VCS_CONFIG_SNAPSHOT_CREATE_LOCAL_CONFIG_FILE_FAIL">%%ERROR : Failed to save local-config to flash</Resource>
+        <Resource Name = "VCS_CONFIG_SNAPSHOT_CREATE_GLOBAL_CONFIG_FILE_FAIL">%%ERROR : Failed to save global-config to flash</Resource>
+        <Resource Name = "VCS_CONFIG_SNAPSHOT_OPEN_LOCAL_CONFIG_FILE_FAIL">%%ERROR : Failed to retrieve local-config from flash</Resource>
+        <Resource Name = "VCS_CONFIG_SNAPSHOT_OPEN_GLOBAL_CONFIG_FILE_FAIL">%%ERROR : Failed to retrieve global-config from flash</Resource>
+        <Resource Name = "VCS_CONFIG_SNAPSHOT_SYNC_CONFIG_FILE_FAIL">%%ERROR : Failed to sync snapshot file</Resource>
+        <Resource Name = "VCS_CONFIG_SNAPSHOT_MODEL_MATCH_FAIL">%%ERROR : Failed due to mismatch in the switch model</Resource>
+        <Resource Name = "VCS_CONFIG_SNAPSHOT_MULTI_RESTORE_REQUEST">%%ERROR : Failed due to multiple restore request</Resource>
+        <Resource Name = "VCS_CONFIG_SNAPSHOT_CREATE_REPLAY_FILE_FAIL">%%ERROR : Failed to save replay file</Resource>
+        <Resource Name = "VCS_CONFIG_SNAPSHOT_COMMIT_DATABASE_FAIL">%%ERROR : Failed to Commit in to Database</Resource>
+        <Resource Name = "VCS_CONFIG_SNAPSHOT_FETCH_LOCAL_CONFIG_FAIL">%%ERROR : Failed to retrieve global-config from running-config</Resource>
+        <Resource Name = "VCS_CONFIG_SNAPSHOT_FETCH_GLOBAL_CONFIG_FAIL">%%ERROR : Failed to retrieve local-config from running-config</Resource>
+        <Resource Name = "VCS_CONFIG_SNAPSHOT_LOCAL_CONFIG_EMPTY">%%ERROR : Failed due to empty local-config</Resource>
+        <Resource Name = "VCS_CONFIG_SNAPSHOT_GLOBAL_CONFIG_EMPTY">%%ERROR : Failed due to empty global-config</Resource>
+        <Resource Name = "VCS_CONFIG_SNAPSHOT_ID_PRESENT_DURING_DOWNLOAD">%%ERROR : Failed to download the snapshot as it already exists</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "VcsFabricLocalObjectManagerState">
+        <Resource Name = "VCS_FABRIC_LOCAL_NOT_READY_TO_ACCEPT_SCN">VcsFabricLocalObjectManager is not ready to accept SCNs</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_IS_READY_TO_START_TIMER">VcsFabricLocalObjectManager is to start timer for cluster operations</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_NODE_IS_OFFLINE">Switch is in Offline state</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_NODE_OFFLINE_TRIGGERED">Switch offline is triggered for VcsFabricLocalObjectManager</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_NODE_RESTORE_TRIGGERED">Switch restore is in progress</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_ENQ_MESSAGE_IN_PROCESS">Handling the enquiry messages between Nodes</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_FC_PRINCIPAL_CHANGED">FC principal for this Vcs Cluster is changed</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_FC_PRINCIPAL_CHANGE_TRIGGERED">After Detecting HB failure for this node, sent message to frameowrk to take over as Primary</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_HEARTBEAT_TO_FC_PRINCIPAL_FAILED">Detected Principal Heartbeat Failure</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_CLUSTER_OPERATION_IN_PROGRESS">Started the cluster operation after enquiry message processing is completed</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_CLUSTER_ADD_REJOIN_IN_PROGRESS">Add Node / Rejoin Node is in progress</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_CLUSTER_SWITCH_OFFLINE_BUT_ADD_REJOIN_IN_PROGRESS">Received Switch Offline but add/rejoin request is not completed</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_CLUSTER_CREATION_IN_PROGRESS">Cluster Creation is in progress</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_CLUSTER_MERGE_REQUEST_IN_PROGRESS">Preparing for Cluster Merge</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "VcsClusterError">
+        <Resource Name = "VCS_CLUSTER_OPERATION_ALL_LOCATION_FAILED">All nodes failed to be in the cluster operation</Resource>
+        <Resource Name = "VCS_CLUSTER_NODE_NOT_PRESENT">%%ERROR : Node is not part of cluster</Resource>
+        <Resource Name = "VCS_CLUSTER_NODE_IN_TRANSITION">%%ERROR : Node is in transient state. Please try after sometime</Resource>
+        <Resource Name = "VCS_CLUSTER_PRIMARY_ELECTION_IN_PROGRESS">%%ERROR : Coordinator selection in progress. Please try after sometime</Resource>
+        <Resource Name = "VCS_CLUSTER_NODE_NOT_REACHABLE">%%ERROR : Node is offline. Please try after the node is online</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "VcsClusterManagedObjectStatus">
+        <Resource Name = "VCS_FABRIC_LOCAL_VCS_CLUSTER_GUID_QUERY_FAILED">Query for the vcs cluster guid failed.</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_VCS_CLUSTER_GUID_NOT_FOUND">Query for the vcs cluster guid returned an empty result.</Resource>
+        <Resource Name = "VCS_FABRIC_LOCAL_IN_MEMORY_VCS_CLUSTER_GUID_NOT_FOUND">In memory vcs cluster guid not found.</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "VcsPrincipalPriorityMessageStatus">
+        <Resource Name = "VCS_PRINCIPAL_PRIORITY_NOT_SET_FOR_SWITCHOVER">Logical chassis principal-priority not set. Please retry again after setting the principal-priority.</Resource>
+        <Resource Name = "VCS_PRINCIPAL_AND_PRIORITY_PRINCIPAL_MATCH">Failed to trigger logical chassis principal switchover. Logical chassis principal is same as the node with lowest principal-priority value.</Resource>
+    </ResourceEnum>
+
+</ModuleResources>
+

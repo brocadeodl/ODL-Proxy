@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<WavePlugin name="PortCfg" nameSpace="DcmNs"> 
+<Local name="PortCfg">
+   <ManagedObject name="PortCfg">
+	   <Member name="id" dataType="string"></Member>
+       <Member name="portStateEnable" dataType="bool"></Member>
+       <Member name="trunkEnable" dataType="bool"></Member>
+       <Member name="areaNumber" dataType="UI32"></Member>
+       <Member name="longDistance" dataType="bool"></Member>
+       <Member name="vcLinkInit" dataType="bool"></Member>
+       <Member name="disabledEPort" dataType="bool"></Member>
+       <Member name="lockedEPort" dataType="bool"></Member>
+       <Member name="npivCapability" dataType="bool"></Member>
+       <Member name="portAutoDisable" dataType="bool"></Member>
+       <Member name="rateLimit" dataType="bool"></Member>
+       <Member name="mirrorPort" dataType="bool"></Member>
+       <Member name="creditRecovery" dataType="bool"></Member>
+       <Member name="fportBuffers" dataType="bool"></Member>
+       <Member name="npivPPLimit" dataType="UI32"></Member>
+       <Member name="csctlMode" dataType="bool"></Member>
+       <Member name="switchPort" dataType="SI32"></Member>
+   </ManagedObject>
+
+   <ManagedObject name="PortFCCfg">
+      <Member name="id" dataType="string"></Member>
+      <Member name="speed" dataType="UI32"></Member>
+      <Member name="fillWord" dataType="UI32"></Member>
+      <Member name="longDistance" dataType="UI32"></Member>
+      <Member name="vcLinkInit" dataType="UI32"></Member>
+      <Member name="islRRdyMode" dataType="bool"></Member>
+
+      <Member name="switchPort" dataType="UI32"></Member>
+      <Member name="cliPort" dataType="UI32"></Member>
+      <Member name="type" dataType="string"></Member>
+      <Member name="slotPort" dataType="UI32"></Member>
+      <Member name="slot" dataType="SI32"></Member>
+	  <Member name="status" dataType="bool"></Member>
+      <Member name="portStateEnable" dataType="bool"></Member>
+      <Member name="oldDistance" dataType="UI32"></Member>
+      <Member name="gportLockdown" dataType="bool"></Member>
+      <Member name="trunkEnable" dataType="bool"></Member>
+      <Member name="fcAccConfig" dataType="bool"></Member>
+      <Member name="disableEport" dataType="bool"></Member>
+      <Member name="lportLockdown" dataType="bool"></Member>
+      <Member name="privLportLockdown" dataType="bool"></Member>
+      <Member name="vcxltLinit" dataType="bool"></Member>
+      <Member name="delayFlogi" dataType="UI32"></Member>
+      <Member name="islInterop" dataType="bool"></Member>
+      <Member name="pvtPortPersistentlyDisabled" dataType="bool"></Member>
+      <Member name="distance" dataType="UI32"></Member>
+      <Member name="bufStarvFlag" dataType="bool"></Member>
+      <Member name="lport_halfduplex" dataType="bool"></Member>
+      <Member name="lport_fairness" dataType="bool"></Member>
+      <Member name="credit_sharing" dataType="bool"></Member>
+      <Member name="pvt_port_permanently_disabled" dataType="bool"></Member>
+      <Member name="npiv_enabled" dataType="bool"></Member>
+      <Member name="npiv_configured" dataType="bool"></Member>
+      <Member name="rscn_suppress" dataType="bool"></Member>
+      <Member name="ex_port" dataType="bool"></Member>
+      <Member name="mirror_port" dataType="bool"></Member>
+      <Member name="soft_neg" dataType="bool"></Member>
+      <Member name="qos_enabled" dataType="bool"></Member>
+      <Member name="qos_configured" dataType="bool"></Member>
+      <Member name="rlimit" dataType="UI32"></Member>
+      <Member name="alpa13" dataType="bool"></Member>
+      <Member name="export_mode" dataType="UI32"></Member>
+      <Member name="losig" dataType="bool"></Member>
+      <Member name="asn_frc_hwretry" dataType="bool"></Member>
+      <Member name="cr_recov" dataType="bool"></Member>
+      <Member name="auto_disable" dataType="bool"></Member>
+      <Member name="fport_buffers" dataType="bool"></Member>
+      <Member name="rbridgeId" dataType="UI32"> </Member>
+      <Member name="locked_eport" dataType="bool"></Member>	
+      <Member name="clear_counter_ts" dataType="string"></Member>
+   </ManagedObject>
+
+   <Message name="PortCfgPortStateUpdate" sequencerType="SYNC" 
+       allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage"> 
+	   <Member name="id" dataType="string">
+	   </Member>
+       <Member name="portStateEnable" dataType="bool">
+       </Member>
+       <Member name="isIdComplete" dataType="bool">
+       </Member>
+       <Member name="portDisReason" dataType="SI32">
+       </Member>
+    </Message>
+
+   <Message name="PortCfgTrunkUpdate" sequencerType="SYNC" 
+       allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+	   <Member name="id" dataType="string">
+	   </Member>
+       <Member name="trunkEnable" dataType="bool">
+       </Member>
+       <Member name="isIdComplete" dataType="bool">
+       </Member>
+    </Message>
+
+   <Message name="PortCfgCreate" sequencerType="SYNC" 
+       allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+	   <Member name="id" dataType="string">
+	   </Member>
+       <Member name="isIdCompete" dataType="bool">
+       </Member>
+    </Message>
+
+      <Message name="PortCfgPortTranslate" sequencerType="SYNC" 
+       allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+	   <Member name="id" dataType="string"></Member>
+	   <Member name="type" dataType="string"></Member>
+   	   <Member name="phyPortId" dataType="string"></Member>
+	   <Member name="phyPortType" dataType="string"></Member>
+	   <Member name="switchPort" dataType="SI32"></Member>
+       <Member name="rbridge" dataType="SI32"></Member>
+    </Message>
+
+    <Message name="FCPortTranslate" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+        <Member name="id" dataType="string"> </Member>
+        <Member name="switchPort" dataType="SI32"> </Member>
+        <Member name="rbridgeId" dataType="UI32"> </Member>
+    </Message> 
+
+    <Message name="UpdateFCInfo" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+        <Member name="id" dataType="string"></Member>
+        <Member name="speed" dataType="UI32"></Member>
+        <Member name="fillWord" dataType="UI32"></Member>
+        <Member name="longDistance" dataType="UI32"></Member>
+        <Member name="vcLinkInit" dataType="UI32"></Member>
+        <Member name="islRRdyMode" dataType="bool"></Member>
+       <Member name="distance" dataType="UI32"></Member>
+        <Member name="dbEntryType" dataType="UI32"></Member>
+		<Member name="status" dataType="bool"></Member>
+        <Member name="respCode" dataType="UI32"></Member>
+    </Message>
+
+	<Message name="FCPortInterfaceInfo" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+		<Member name="portId" dataType="string"></Member>
+		<Member name="portType" dataType="string"></Member>
+		<Member name="portWWN" dataType="string"></Member>
+		<Member name="remotePortWWN" dataType="string"></Member>
+		<Member name="remoteNodeWWN" dataType="string"></Member>
+		<Member name="state" dataType="string"></Member>
+        <Member name="status" dataType="string"></Member>
+		<Member name="statusMessage" dataType="string"></Member>
+		<Member name="health" dataType="string"></Member>
+		<Member name="trunked" dataType="bool"></Member>
+		<Member name="trunkMaster" dataType="UI32"></Member>
+		<Member name="actualDistance" dataType="UI32"></Member>
+		<Member name="desiredCredit" dataType="UI32"></Member>
+		<Member name="bufferAllocated" dataType="UI32"></Member>
+		<Member name="licensed" dataType="bool"></Member>
+		<Member name="portaddr" dataType="string"></Member>
+	</Message>
+	<Message name="FCPortDetailedInfo" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+		<Member name="procInfo" dataType="string"></Member>
+		<Member name="portId" dataType="string"></Member>
+		<Member name="switchPort" dataType="SI32"> </Member>
+        <Member name="statsRx" dataType="vector/string/"></Member> 
+        <Member name="statsTx" dataType="vector/string/"></Member> 
+        <Member name="statsErr" dataType="vector/string/"></Member> 
+        <Member name="errInfo" dataType="vector/string/"></Member>
+		<Member name="lossOfSync" dataType="string"></Member>
+		<Member name="lossOfSig" dataType="string"></Member>
+		<Member name="Frjt" dataType="string"></Member>
+		<Member name="Fbsy" dataType="string"></Member>
+
+		<Member name="portState"  dataType="string"></Member>
+		<Member name="portMediaPresence" dataType="string"></Member>
+		<Member name="portLineSpeedActual" dataType="string"></Member>
+		<Member name="portLineSpeedCfg" dataType="string"></Member>
+		
+		<Member name="portCfg" dataType="vector/string/"></Member>
+		<Member name="portInfo" dataType="vector/string/"></Member>
+
+		<Member name="portCounters" dataType="string"></Member>
+
+		<Member name="rateInfo" dataType="string"></Member>
+		<Member name="rateInput" dataType="string"></Member>
+		<Member name="rateOutput" dataType="string"></Member>
+
+		<Member name="resvbuf" dataType="UI32"></Member>
+		<Member name="bufusage" dataType="UI32"></Member>
+		<Member name="neededbuf" dataType="UI32"></Member>
+		<Member name="linkdist" dataType="string"></Member>
+		<Member name="rembuf" dataType="UI32"></Member>
+		<Member name="lxmode" dataType="string"></Member>
+		<Member name="txperf" dataType="string"></Member>
+		<Member name="rxperf" dataType="string"></Member>
+		<Member name="bandwidth" dataType="UI32"></Member>
+	</Message>
+	<Message name="FibreChannelClear" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+		<Member name="cmdCode" dataType="UI32"></Member>
+		<Member name="switchPort" dataType="SI32"></Member>
+		<Member name="slotId" dataType="UI32"></Member>
+		<Member name="portId" dataType="string"></Member>
+		<Member name="rbridgeId" dataType="UI32"> </Member>
+	</Message>
+	<Message name="FibreChannelSfpShow" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+		<Member name="cmdCode" dataType="UI32"></Member>
+		<Member name="switchPort" dataType="vector/SI32/"></Member>
+		<Member name="portId" dataType="vector/string/"></Member>
+		<Member name="rbridgeId" dataType="vector/UI32/"> </Member>
+		<Member name="identifier" dataType="vector/string/"> </Member>
+		<Member name="connector" dataType="vector/string/"> </Member>
+		<Member name="transceiver" dataType="vector/string/"> </Member>
+		<Member name="encoding" dataType="vector/string/"> </Member>
+		<Member name="baudRate" dataType="vector/string/"> </Member>
+		<Member name="length_9u_Km" dataType="vector/string/"> </Member>
+		<Member name="length_9u_m" dataType="vector/string/"> </Member>
+		<Member name="length_50u" dataType="vector/string/"> </Member>
+		<Member name="length_62.5u" dataType="vector/string/"> </Member>
+		<Member name="length_Cu" dataType="vector/string/"> </Member>
+		<Member name="vendor_Name" dataType="vector/string/"> </Member>
+		<Member name="vendor_OUI" dataType="vector/string/"> </Member>
+		<Member name="vendor_PN" dataType="vector/string/"> </Member>
+		<Member name="vendor_Rev" dataType="vector/string/"> </Member>
+		<Member name="wavelength" dataType="vector/string/"> </Member>
+		<Member name="options" dataType="vector/string/"> </Member>
+		<Member name="brMax" dataType="vector/string/"> </Member>
+		<Member name="brMin" dataType="vector/string/"> </Member>
+		<Member name="serialNo" dataType="vector/string/"> </Member>
+		<Member name="dateCode" dataType="vector/string/"> </Member>
+		<Member name="ddType" dataType="vector/string/"> </Member>
+		<Member name="enhOptions" dataType="vector/string/"> </Member>
+		<Member name="statusCtrl" dataType="vector/string/"> </Member>
+		<Member name="alarmFlags" dataType="vector/string/"> </Member>
+		<Member name="warnFlags" dataType="vector/string/"> </Member>
+		<Member name="temperature" dataType="vector/string/"> </Member>
+		<Member name="coltage" dataType="vector/string/"> </Member>
+		<Member name="current" dataType="vector/string/"> </Member>
+		<Member name="txPower" dataType="vector/string/"> </Member>
+		<Member name="rxPower" dataType="vector/string/"> </Member>
+		<Member name="errInfo" dataType="vector/string/"> </Member>
+    </Message>
+    <Message name="GetFCPortInfo" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+        <Member name="cmdCode" dataType="UI32"></Member>
+        <Member name="rbridgeId" dataType="UI32"> </Member>
+        <Member name="slotId" dataType="UI32"></Member>
+        <Member name="respCode" dataType="UI32"></Member>
+	</Message>
+	<Message name="FCPortLoginInfo" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+		<Member name="portId" dataType="vector/string/"></Member>
+		<Member name="rbridgeId" dataType="vector/UI32/"> </Member>
+		<Member name="index" dataType="vector/UI32/"></Member>
+		<Member name="pid" dataType="vector/string/"></Member>
+		<Member name="portWWN" dataType="vector/string/"></Member>
+		<Member name="configMode" dataType="vector/string/"></Member>
+		<Member name="portstatus" dataType="vector/string/"></Member>
+        <Member name="portspeed" dataType="vector/string"></Member>
+        <Member name="device_count" dataType="vector/UI32/"> </Member>
+	</Message>
+	<Message name="PortIndexInterfaceInfo" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+		<Member name="switchPort" dataType="vector/UI32/"> </Member>
+		<Member name="portId" dataType="vector/string/"></Member>
+		<Member name="portType" dataType="vector/string/"></Member>
+	</Message>
+</Local>
+</WavePlugin>

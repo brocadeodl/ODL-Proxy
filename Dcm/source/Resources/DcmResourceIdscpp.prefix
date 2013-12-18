@@ -1,0 +1,16 @@
+#include "WaveResourceIds.h"
+#include "DcmResourceIds.h"
+#include <string>
+#include <map>
+
+using namespace std;
+using namespace WaveNs;
+
+namespace DcmNs
+{
+
+static map<unsigned long int, string> s_valResourceIdsMap;
+static map<unsigned long int, vector<unsigned long int> > s_valResourceEnumsMap;
+
+}
+

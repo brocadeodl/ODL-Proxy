@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Framework Core Module. -->
+
+<ModuleResources ModuleName = "Ipadm" ComponentName = "IpadmCompName">
+    <ResourceEnum Name = "IpadmResourceId">
+        <Resource Name = "IPADM_INTERNAL_ERROR">Internal Error changing IP address</Resource>
+        <Resource Name = "IPADM_IPV4_ADDRSET_ERROR">Cannot set IPv4 Address</Resource>
+        <Resource Name = "IPADM_IPV4_GWSET_ERROR">Cannot set IPv4 Gateway</Resource>
+        <Resource Name = "IPADM_IPV4_DHCP_ERROR">Cannot set IPv4 DHCP</Resource>
+        <Resource Name = "IPADM_IPV6_ADDRSET_ERROR">Cannot set IPv6 Address</Resource>
+        <Resource Name = "IPADM_IPV6_ADDRSET_DUP_ERROR">Cannot set IPv6 Address: Duplicate Address Specified</Resource>
+        <Resource Name = "IPADM_IPV6_AUTOCONF_ERROR">Cannot set IPv6 autoconf</Resource>
+        <Resource Name = "IPADM_IPV4_ADDRCLR_ERROR">Cannot clear IPv4 Address</Resource>
+        <Resource Name = "IPADM_IPV4_GWCLR_ERROR">Cannot clear IPv4 Gateway Address</Resource>
+        <Resource Name = "IPADM_IPV6_ADDRCLR_ERROR">Cannot clear IPv6 Address</Resource>
+        <Resource Name = "IPADM_IPV6_INV_REMOVE">no operation is not supported on this CLI</Resource>
+	<Resource Name = "IPADM_PHYINTF_INVALID_MAN">%%Error: Invalid Management Interface</Resource>
+        <Resource Name = "IPADM_SPEED_ERROR">Cannot set specified speed</Resource>
+    <Resource Name = "IPADM_DN_UNDEFINED_WARNING">Warning : Domain Name also needs to be configured for successful operation</Resource>
+    <Resource Name = "IPADM_NS_UNDEFINED_WARNING">Warning : Name Server also needs to be configured for successful operation</Resource>
+	<Resource Name = "IPADM_DNS_CONFIG_FAIL_ERROR">Error : DNS Update operation Failed</Resource>
+	<Resource Name = "IPADM_NO_SUPPORT_ON_PIZZA">Error : Command supported only in chassis switches</Resource>
+	<Resource Name = "IPADM_NO_SUPPORT_ON_L3_SWITCH">Command not supported on L3 switches. Use the 'ip route 0.0.0.0/0 &lt;gateway-ip-address&gt;' command from configure rbridge-id mode.</Resource>
+	<Resource Name = "IPADM_MM2_AUTOCONFIG_ERROR">Error: Autoconfig cannot be set separately for MM2. MM1 Management Interface Autoconfig Configuration will be applicable to MM2 also</Resource>
+	<Resource Name = "IPADM_ROUTE_ERROR">Invalid route operation for the management interface</Resource>
+	<Resource Name = "IPADM_ROUTE_EXISTS_ERROR">Error : Route for this destination already exists</Resource>
+	<Resource Name = "IPADM_NO_ROUTE_EXISTS_ERROR">Error : No such route exists</Resource>
+	<Resource Name = "IPADM_IPV6_DHCP_ERROR">Cannot set IPv6 DHCP</Resource>
+	<Resource Name = "IPADM_NO_DHCPV6_ON_CHASSIS">Error : Dhcpv6 supported only in Pizza box switches</Resource>
+        <Resource Name = "IPADM_NO_MGMT_NAME_EXISTS_ERROR">Error : Invalid Management Interface</Resource>
+        <Resource Name = "IPADM_ENABLE_ON_ALL_MGMT_INTERFACES">Info : This feature got enabled on all Management Interfaces of this chassis</Resource>
+        <Resource Name = "IPADM_DISABLE_ON_ALL_MGMT_INTERFACES">Info : This feature got disabled on all Management Interfaces of this chassis</Resource>
+        <Resource Name = "IPADM_CONFIG_FAILED_ON_ALL_NODES_IN_CLUSTER">Warning : Failed to configure on one or more nodes in the cluster</Resource>
+        <Resource Name = "IPADM_INVALID_ADDRESS">%%Error: Invalid address specified.</Resource>
+    </ResourceEnum>
+</ModuleResources>

@@ -1,0 +1,121 @@
+namespace WaveNs
+{
+
+void addResourceId (const unsigned long int &resourceId, const string &resourceDescription)
+{
+    s_waveResourceIdsMap[resourceId] = resourceDescription;
+}
+
+void addResourceIdToResourceEnum (const unsigned long int &resourceId, const unsigned long int &resourceEnum)
+{
+    s_waveResourceEnumsMap[resourceEnum].push_back (resourceId);
+}
+
+void addSourceCodeEnum (const unsigned long int &resourceId, const string &sourceCodeEnum)
+{
+    s_waveSourceCodeEnumsMap[resourceId] = sourceCodeEnum;
+    s_waveSourceCodeResourceIdsMap[sourceCodeEnum] = resourceId;
+}
+
+string localizeResourceId (unsigned long int resourceId)
+{
+    map<unsigned long int, string>::iterator element = s_waveResourceIdsMap.find (resourceId);
+    map<unsigned long int, string>::iterator end     = s_waveResourceIdsMap.end  ();
+
+    if (end != element)
+    {
+        return (element->second);
+    }
+    else
+    {
+        return ("N O T  A  K N O W N  R e s o u r c e I d");
+    }
+}
+
+bool isAResourceId (unsigned long int resourceId)
+{
+    map<unsigned long int, string>::iterator element = s_waveResourceIdsMap.find (resourceId);
+    map<unsigned long int, string>::iterator end     = s_waveResourceIdsMap.end  ();
+
+    if (end != element)
+    {
+        return (true);
+    }
+    else
+    {
+        return (false);
+    }
+}
+
+bool isAResourceEnum (unsigned long int resourceEnum)
+{
+    map<unsigned long int, vector<unsigned long int> >::iterator element = s_waveResourceEnumsMap.find (resourceEnum);
+    map<unsigned long int, vector<unsigned long int> >::iterator end     = s_waveResourceEnumsMap.end  ();
+
+    if (end != element)
+    {
+        return (true);
+    }
+    else
+    {
+        return (false);
+    }
+}
+
+void localizeResourceEnum (unsigned long int resourceEnum, vector<unsigned long int> &resourcesVector)
+{
+    map<unsigned long int, vector<unsigned long int> >::iterator element = s_waveResourceEnumsMap.find (resourceEnum);
+    map<unsigned long int, vector<unsigned long int> >::iterator end     = s_waveResourceEnumsMap.end  ();
+
+    if (end != element)
+    {
+        resourcesVector = element->second;
+    }
+}
+
+string localizeToSourceCodeEnum (unsigned long int resourceId)
+{
+    map<unsigned long int, string>::iterator element = s_waveSourceCodeEnumsMap.find (resourceId);
+    map<unsigned long int, string>::iterator end     = s_waveSourceCodeEnumsMap.end  ();
+
+    if (end != element)
+    {
+        return (element->second);
+    }
+    else
+    {
+        return ("N O T  A  K N O W N  R e s o u r c e I d");
+    }
+}
+
+unsigned long int localizeToSourceCodeResourceId (const string &sourceCodeEnum)
+{
+    map<string, unsigned long int>::iterator element = s_waveSourceCodeResourceIdsMap.find (sourceCodeEnum);
+    map<string, unsigned long int>::iterator end     = s_waveSourceCodeResourceIdsMap.end  ();
+
+    if (end != element)
+    {
+        return (element->second);
+    }
+    else
+    {
+        return (0);
+    }
+}
+
+void getAllResourceEnums (vector<unsigned long int> &resourceEnumsVector)
+{
+    map<unsigned long int, vector<unsigned long int> >::iterator element = s_waveResourceEnumsMap.begin ();
+    map<unsigned long int, vector<unsigned long int> >::iterator end     = s_waveResourceEnumsMap.end  ();
+
+    while (end != element)
+    {
+        resourceEnumsVector.push_back (element->first);
+
+        element++;
+    }
+
+    return;
+}
+
+}

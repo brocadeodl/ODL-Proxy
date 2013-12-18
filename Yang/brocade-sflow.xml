@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-sflow"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:sflow="urn:brocade.com:mgmt:brocade-sflow"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface">
+  <namespace uri="urn:brocade.com:mgmt:brocade-sflow"/>
+  <prefix value="sflow"/>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <organization>
+    <text>Brocade Communications</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+        San Jose, CA 95134
+        U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This submodule describes the data model for sFlow</text>
+  </description>
+  <revision date="2009-12-10">
+    <description>
+      <text>Initial Version</text>
+    </description>
+  </revision>
+  <grouping name="sflow-config">
+    <leaf name="polling-interval">
+      <default value="20"/>
+      <type name="uint32">
+        <range value="1..65535"/>
+      </type>
+    </leaf>
+    <leaf name="sample-rate">
+      <default value="32768"/>
+      <type name="uint32">
+        <range value="2..16777215"/>
+      </type>
+    </leaf>
+  </grouping>
+  <grouping name="common-phy-sflow-cmds">
+    <container name="sflow">
+      <leaf name="enable">
+        <type name="empty"/>
+      </leaf>
+      <uses name="sflow-config"/>
+    </container>
+  </grouping>
+  <typedef name="profile-name-type">
+    <type name="string">
+      <pattern value="[a-zA-Z]{1}([-a-zA-Z0-9_]{0,63})"/>
+    </type>
+  </typedef>
+  <container name="sflow">
+    <leaf name="enable">
+      <type name="empty"/>
+    </leaf>
+    <list name="collector">
+      <key value="collector-ip-address collector-port-number"/>
+      <unique tag="collector-ip-address collector-port-number"/>
+      <leaf name="collector-ip-address">
+        <type name="inet:ip-address"/>
+      </leaf>
+      <leaf name="collector-port-number">
+        <default value="6343"/>
+        <type name="uint32">
+          <range value="1..65535"/>
+        </type>
+      </leaf>
+    </list>
+    <uses name="sflow-config"/>
+  </container>
+  <list name="sflow-profile">
+    <key value="profile-name"/>
+    <leaf name="profile-name">
+      <mandatory value="true"/>
+      <type name="profile-name-type"/>
+    </leaf>
+    <leaf name="profile-sampling-rate">
+      <type name="uint32">
+        <range value="2..8388608"/>
+      </type>
+    </leaf>
+  </list>
+  <augment target-node="/interface:interface/interface:tengigabitethernet">
+    <uses name="common-phy-sflow-cmds"/>
+  </augment>
+  <augment target-node="/interface:interface/interface:gigabitethernet">
+    <uses name="common-phy-sflow-cmds"/>
+  </augment>
+  <augment target-node="/interface:interface/interface:fortygigabitethernet">
+    <uses name="common-phy-sflow-cmds"/>
+  </augment>
+</module>

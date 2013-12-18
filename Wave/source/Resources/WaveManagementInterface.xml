@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Timer Module. -->
+
+<ModuleResources ModuleName = "Management Interface" ComponentName = "Wave">
+    <ResourceEnum Name = "WaveManagementInterfaceConnectionToClientStatus">
+        <Resource Name = "WAVE_MGMT_INTF_CONNECTION_ESTABLISHED_TO_CLIENT">Wave Management Interface Successfully Established Connection To Client</Resource>
+        <Resource Name = "WAVE_MGMT_INTF_CONNECTION_FAILED_TO_CLIENT">Wave Management Interface Failed To Establish Connection To Client</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "WaveManagementInterfacePostingToClientStatus">
+        <Resource Name = "WAVE_MGMT_INTF_POST_TO_CLIENT_SUCCEEDED">Wave Management Interface Successfully Posted To Client</Resource>
+        <Resource Name = "WAVE_MGMT_INTF_POST_TO_CLIENT_FAILED">Wave Management Interface Failed To Post To Client</Resource>
+        <Resource Name = "WAVE_MGMT_INTF_UNKNOWN_CLIENT">Wave Management Interface Does Not Know The Client</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "WaveManagementInterfaceMessageStatus">
+        <Resource Name = "WAVE_MGMT_INTF_CLIENT_NOT_AVAILABLE">Wave Management Interface Client Is Not Available</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "WaveManagementInterfaceRole">
+        <Resource Name = "WAVE_MGMT_INTF_ROLE_SERVER">Wave Management Interface Server</Resource>
+        <Resource Name = "WAVE_MGMT_INTF_ROLE_CLIENT">Wave Management Interface Client</Resource>
+        <Resource Name = "WAVE_MGMT_INTF_ROLE_CLI">Wave Management Interface Client</Resource>
+    </ResourceEnum>
+</ModuleResources>

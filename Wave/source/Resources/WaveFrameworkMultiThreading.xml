@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Framework MultiThreading Module. -->
+
+<ModuleResources ModuleName = "FrameworkMultiThreading" ComponentName = "Wave">
+    <ResourceEnum Name = "WaveThreadStatus">
+        <Resource Name = "WAVE_THREAD_SUCCESS">Wave Thread operation generic success</Resource>
+        <Resource Name = "WAVE_THREAD_ERROR">Wave Thread operation generic error</Resource>
+        <Resource Name = "WAVE_THREAD_COULD_NOT_CREATE">Wave Thread could not be created</Resource>
+        <Resource Name = "WAVE_THREAD_ERROR_COULD_NOT_FIND_OM">Wave Thread could not find find Object Manager</Resource>
+    </ResourceEnum>
+</ModuleResources>

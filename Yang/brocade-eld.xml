@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-eld"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:eld="urn:brocade.com:mgmt:brocade-eld"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface">
+  <namespace uri="urn:brocade.com:mgmt:brocade-eld"/>
+  <prefix value="eld"/>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <revision date="2011-08-08">
+    <description>
+      <text>Initial version</text>
+    </description>
+  </revision>
+  <typedef name="rxlim-type">
+    <type name="uint32">
+      <range value="1 .. 5"/>
+    </type>
+  </typedef>
+  <typedef name="hellointerval-type">
+    <type name="uint32">
+      <range value="100 .. 5000"/>
+    </type>
+  </typedef>
+  <typedef name="shutdowntime-type">
+    <type name="uint32">
+      <range value="0|10 .. 1440"/>
+    </type>
+  </typedef>
+  <augment target-node="/interface:protocol">
+    <container name="edge-loop-detection">
+      <leaf name="pdu-rx-limit">
+        <type name="uint32">
+          <range value="1..5"/>
+        </type>
+        <default value="1"/>
+      </leaf>
+      <leaf name="hello-interval">
+        <type name="uint32">
+          <range value="100..5000"/>
+        </type>
+        <default value="1000"/>
+      </leaf>
+      <leaf name="shutdown-time">
+        <type name="uint32">
+          <range value="0|10..1440"/>
+        </type>
+        <default value="0"/>
+      </leaf>
+    </container>
+  </augment>
+</module>

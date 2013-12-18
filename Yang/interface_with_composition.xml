@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="interface_with_composition"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:interface_composition="http://brocade.com/ns/interface_composition">
+  <namespace uri="http://brocade.com/ns/interface_composition"/>
+  <prefix value="interface_composition"/>
+  <container name="interfaces_with_composition">
+    <list name="interface">
+      <key value="name"/>
+      <max-elements value="1024"/>
+      <leaf name="name">
+        <type name="string"/>
+      </leaf>
+      <list name="interface_rule">
+        <key value="rule_id"/>
+        <leaf name="rule_id">
+          <type name="int32"/>
+          <mandatory value="true"/>
+        </leaf>
+        <leaf name="isAllowed">
+          <type name="boolean"/>
+          <mandatory value="true"/>
+        </leaf>
+        <leaf name="operationalRule">
+          <type name="uint32"/>
+          <mandatory value="true"/>
+          <config value="false"/>
+        </leaf>
+        <leaf name="operationalRule1">
+          <type name="uint32"/>
+          <mandatory value="true"/>
+          <config value="false"/>
+        </leaf>
+      </list>
+    </list>
+  </container>
+</module>

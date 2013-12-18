@@ -1,0 +1,826 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-fabric-service"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:fabric-service="urn:brocade.com:mgmt:brocade-fabric-service"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface"
+        xmlns:rbridge="urn:brocade.com:mgmt:brocade-rbridge">
+  <namespace uri="urn:brocade.com:mgmt:brocade-fabric-service"/>
+  <prefix value="fabric-service"/>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <import module="brocade-rbridge">
+    <prefix value="rbridge"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+        San Jose, CA 95134
+U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.co
+Web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This management module gives Virtual Cluster Switching (VCS)
+FABRIC related information. VCS refers to the ability of
+a group of physical Ethernet switches, inter-connected
+in arbitrary fashion via the regular front-end
+data ports, to present themselves as one unified and
+transparent Ethernet switching service to the external network.
+The inter-connecting network that glues all these individual
+switches is refered as 'fabric', and the group of physical
+Ethernet switches in the fabric is refered to as 'cluster'.
+
+Glossary of the terms used:
+---------------------------
+RBridge     - A Routing Bridge or RBridge is a network device
+              that implements the TRILL protocol, as defined
+              by the IETF.
+
+RBridge-ID  - RBridge-ID is the unique identifier of a node
+              in the fabric. It can take values from 1 - 239.
+
+ISL         - A inter switch link (ISL) is the link directly
+              connecting a fabric port of one switch to fabric
+              port of another switch. For an ISL to come up
+              both side of the link need to have
+              compatible configurations.
+
+Trunk       - Brocade trunk is a hardware based LAG (link
+              aggregation group) that is formed dynamically.
+              It is a technology that allows to combine up to
+              8 ISLs into a single logical trunk that provides
+              up to 80 Gigabits per second (Gbps) data
+              transfers.
+              Trunking uses a simple algorithm to optimally
+              distribute frames across a set of available paths
+              that link two adjacent switches. Such a set of
+              links is called trunking group.
+              In a trunk group one of the trunk ports is
+              used to set up all routing paths for the entire
+              trunk group. This port is called the 'trunk
+              master'.
+
+WWN         - World Wide Name (WWN) is a unique 64 bit
+              identifier that is assigned to a manufacturer
+              by the Institute of Electrical and Electronic
+              Engineers(IEEE) and hard-coded into a Fibre
+              Channel (FC) device.
+
+Principle   - In a fabric one switch is elected to manage
+Switch        RBridge-ID assignments within the fabric.
+              This switch is called the Principal Switch.
+              Each fabric has its own Principal Switch. If the
+              fabric configuration changes, a different switch
+              could become principal.
+              Note: In case of a single switch fabric, the same
+              switch acts as the Principal Switch.
+
+ECMP        - Equal cost multiple path (ECMP) is a routing
+              strategy where next-hop packet forwarding to a
+              single destination can occur over multiple
+              'best paths' which tie for top place in routing
+              metric calculations.
+
+BUM         - Broadcast, Unknown Unicast &amp; Multicast (BUM)
+              traffic.
+
+FSPF        - Fabric Shortest Path First (FSPF) is a routing
+              protocol used in Fibre Channel networks.
+              It calculates the best path between switches,
+              establishes routes across the fabric and
+              calculates alternate routes in event of a
+              failure or topology change. FSPF guarantees
+              in-order delivery of frames, even if the
+              routing topology has changed during a failure,
+              by enforcing a 'hold down' time before a new
+              path is activated.
+
+Port ID(PID)- The Fibre Channel address ID in DDAAPP
+              hexadecimal format.
+
+VID         - VLAN identifier (VID).
+
+PISL        - Physical inter switch link (PISL).
+
+Note:
+The terms node and switch have been used interchangeably
+in this document. Both refer to the same.</text>
+  </description>
+  <reference>
+    <text>ANSI INCITS xxx-xxxx, Fibre Channel - Switch Fabric - 5
+(FC-SW-5).
+ANSI INCITS 463-2010, Fibre Channel - Generic Services - 6
+(FC-GS-6).</text>
+  </reference>
+  <revision date="2011-07-22">
+    <description>
+      <text>Initial version of this management module.</text>
+    </description>
+  </revision>
+  <typedef name="fabric-portid-type">
+    <type name="string">
+      <length value="6"/>
+      <pattern value="[0-9a-fA-F]*"/>
+    </type>
+    <description>
+      <text>The definition to specify the Fibre Channel address
+(FCID). It is a 24-bit value unique within the address
+space of a Fabric. This definition is canonical
+representation of the address in hexadecimal format.</text>
+    </description>
+  </typedef>
+  <typedef name="linkinfo-domain-reachable-type">
+    <type name="string">
+      <length value="0..3"/>
+      <pattern value="Yes|No|yes|no"/>
+    </type>
+    <description>
+      <text>Indicates whether the RBridge is reachable or not.
+Yes - Indicates RBridge is reachable
+No  - Indicates RBridge is not reachable.</text>
+    </description>
+  </typedef>
+  <typedef name="interfacetype-type">
+    <type name="string">
+      <length value="2"/>
+      <pattern value="Te|Fi"/>
+    </type>
+    <description>
+      <text>Indicates the interface type.
+It can take the following values:
+Te - for 10G Ethernet ports
+Fi - for Fibre Channel ports.</text>
+    </description>
+  </typedef>
+  <typedef name="linkinfo-trunked-type">
+    <type name="string">
+      <length value="0..3"/>
+      <pattern value="Yes|No|yes|no"/>
+    </type>
+    <description>
+      <text>Indicates whether the ISL is trunked or not.
+Yes - for trunked ISL port
+No  - for non trunked ISL port.</text>
+    </description>
+  </typedef>
+  <typedef name="trunk-list-is-primary-type">
+    <type name="string">
+      <length value="0..5"/>
+      <pattern value="True|False|true|false"/>
+    </type>
+    <description>
+      <text>Indicates whether the port is Trunk master or not.</text>
+    </description>
+  </typedef>
+  <typedef name="ethernet-port-type">
+    <type name="string">
+      <length value="0..4"/>
+      <pattern value="Te|FCOE"/>
+    </type>
+    <description>
+      <text>The port type of the RBridge.
+It can be either Te or FCOE.
+Te   - Stands for 10G Physical
+       Ethernet ports.
+FCOE - Stands for Fibre Channel over
+       Ethernet ports.</text>
+    </description>
+  </typedef>
+  <typedef name="fibrechannel-port-type">
+    <type name="string">
+      <length value="2"/>
+      <pattern value="Fi"/>
+    </type>
+    <description>
+      <text>The  Fibre Channel port type of the RBridge.
+Fi - Stands for Fibre Channel ports.</text>
+    </description>
+  </typedef>
+  <typedef name="porttype-type">
+    <type name="string">
+      <length value="6"/>
+      <pattern value="E-Port|U-Port|G-Port"/>
+    </type>
+    <description>
+      <text>Fibre Channel port type of the RBridge.
+This specifies the given port is
+E-Port, U-Port or F-Port.</text>
+    </description>
+  </typedef>
+  <typedef name="hashswap-type">
+    <type name="uint32">
+      <range value="0..4294967295"/>
+    </type>
+  </typedef>
+  <grouping name="rbridge-all">
+    <choice name="rbridge-id-or-all">
+      <case name="rbridge-id">
+        <leaf name="rbridge-id">
+          <type name="common-def:rbridge-id-type"/>
+          <description>
+            <text>This specifies the RBridge-ID of the switch to
+retrieve infomation from.</text>
+          </description>
+        </leaf>
+      </case>
+      <case name="all">
+        <leaf name="all">
+          <type name="empty"/>
+          <description>
+            <text>This specifies that the information needs to
+be retrieved from all RBridges in the
+cluster.</text>
+          </description>
+        </leaf>
+      </case>
+    </choice>
+  </grouping>
+  <grouping name="output-linkinfo">
+    <list name="show-link-info">
+      <key value="linkinfo-rbridgeid"/>
+      <leaf name="linkinfo-rbridgeid">
+        <type name="common-def:rbridge-id-type"/>
+        <description>
+          <text>The RBridge-ID of the node in the fabric.</text>
+        </description>
+      </leaf>
+      <leaf name="linkinfo-domain-reachable">
+        <type name="linkinfo-domain-reachable-type"/>
+        <description>
+          <text>Indicates whether the RBridge is reachable
+or not.
+Yes - Indicates RBridge is reachable
+No  - Indicates RBridge is not reachable.</text>
+        </description>
+      </leaf>
+      <leaf name="linkinfo-wwn">
+        <type name="common-def:wwn-type"/>
+        <description>
+          <text>The WWN of the switch.</text>
+        </description>
+      </leaf>
+      <leaf name="linkinfo-version">
+        <type name="uint32"/>
+        <description>
+          <text>FSPF version.</text>
+        </description>
+      </leaf>
+      <list name="linkinfo-isl">
+        <key value="linkinfo-isl-linknumber"/>
+        <leaf name="linkinfo-isl-linknumber">
+          <type name="uint32"/>
+          <description>
+            <text>ISL number.</text>
+          </description>
+        </leaf>
+        <leaf name="linkinfo-isllink-destdomain">
+          <type name="common-def:rbridge-id-type"/>
+          <description>
+            <text>RBridge-ID of the remote/destination switch.</text>
+          </description>
+        </leaf>
+        <leaf name="linkinfo-isllink-srcport">
+          <type name="uint16"/>
+          <description>
+            <text>The source port index of the
+RBridge.</text>
+          </description>
+        </leaf>
+        <leaf name="linkinfo-isllink-srcport-type">
+          <type name="interfacetype-type"/>
+          <description>
+            <text>Source port/interface type.
+It can take the following values:
+Te - for 10G Ethernet ports.
+Fi - for Fibre Channel ports.</text>
+          </description>
+        </leaf>
+        <leaf name="linkinfo-isllink-srcport-interface">
+          <type name="interface:interface-type"/>
+          <description>
+            <text>Source port interface information
+It is in the format
+rbridge-id/slot/port.</text>
+          </description>
+        </leaf>
+        <leaf name="linkinfo-isllink-destport">
+          <type name="uint16"/>
+          <description>
+            <text>Remote/Destination port index of the ISL
+connected to the source port.</text>
+          </description>
+        </leaf>
+        <leaf name="linkinfo-isllink-destport-type">
+          <type name="interfacetype-type"/>
+          <description>
+            <text>Remote/Destination port/interface type.
+It can take the following values:
+Te - for 10G Ethernet ports.
+Fi - for Fibre Channel ports.</text>
+          </description>
+        </leaf>
+        <leaf name="linkinfo-isllink-destport-interface">
+          <type name="interface:interface-type"/>
+          <description>
+            <text>Remote/Destination port interface information
+It is in the format
+rbridge-id/slot/port.</text>
+          </description>
+        </leaf>
+        <leaf name="linkinfo-isl-linkcost">
+          <type name="uint32"/>
+          <description>
+            <text>The cost of the link to reach the
+destination. This is a dimensionless
+positive number. Every ISL has a
+default cost that is inversely
+proportional to its bandwidth.</text>
+          </description>
+        </leaf>
+        <leaf name="linkinfo-isllink-costcount">
+          <type name="uint32"/>
+          <description>
+            <text>Cost count of the link.</text>
+          </description>
+        </leaf>
+        <leaf name="linkinfo-isllink-type">
+          <type name="uint32"/>
+          <description>
+            <text>Provides the type of the link.
+It can be point to point or
+virtual links or PISL  or
+point to point ethernet.
+This parameter is set to
+'1' for point to point,
+'2' for virtual links,
+'3' for PISL and 
+'4' for point to point ethernet.</text>
+          </description>
+        </leaf>
+        <leaf name="linkinfo-trunked">
+          <type name="linkinfo-trunked-type"/>
+          <description>
+            <text>Indicates whether the ISL is trunked or not.
+Yes - for trunked ISL port
+No  - for non trunked ISL port.</text>
+          </description>
+        </leaf>
+      </list>
+    </list>
+  </grouping>
+  <grouping name="mcast-priority">
+    <container name="route">
+      <description>
+        <text>Function to configure routing related information
+such as multicast priority.</text>
+      </description>
+      <container name="mcast">
+        <description>
+          <text>This function is to configure multicast routing
+related information for a switch.</text>
+        </description>
+        <leaf name="priority">
+          <description>
+            <text>This specifies the multicast priority
+to be configured for the switch.
+By default the multicast priority is 1.</text>
+          </description>
+          <type name="common-def:mcast-priority-type"/>
+          <default value="1"/>
+        </leaf>
+      </container>
+    </container>
+  </grouping>
+  <grouping name="ecmp-loadbalance">
+    <container name="ecmp">
+      <description>
+        <text>This function allows to configure ECMP
+related parameters.</text>
+      </description>
+      <leaf name="ecmp-load-balance">
+        <description>
+          <text>This function allows to configure load
+balancing parameters that are used in
+ECMP hashing.</text>
+        </description>
+        <type name="enumeration">
+          <enum name="dst-mac-vid">
+            <value value="1"/>
+            <description>
+              <text>Destination MAC address and
+VLAN ID(VID) based load balancing.</text>
+            </description>
+          </enum>
+          <enum name="src-mac-vid">
+            <value value="2"/>
+            <description>
+              <text>Source MAC address and VLAN ID (VID)
+based load balancing.</text>
+            </description>
+          </enum>
+          <enum name="src-dst-mac-vid">
+            <value value="3"/>
+            <description>
+              <text>Source and Destination MAC address
+and VLAN ID (VID) based load balancing.</text>
+            </description>
+          </enum>
+          <enum name="src-dst-ip">
+            <value value="4"/>
+            <description>
+              <text>Source and Destination IP address
+based load balancing.</text>
+            </description>
+          </enum>
+          <enum name="src-dst-ip-mac-vid">
+            <value value="5"/>
+            <description>
+              <text>Source and Destination IP and MAC
+address and VID based load balancing.</text>
+            </description>
+          </enum>
+          <enum name="src-dst-ip-port">
+            <value value="6"/>
+            <description>
+              <text>Source and Destination IP and
+TCP/UDP port based load balancing.</text>
+            </description>
+          </enum>
+          <enum name="src-dst-ip-mac-vid-port">
+            <value value="7"/>
+            <description>
+              <text>Source and Destination IP, MAC address,
+VID and TCP/UDP port based load
+balancing (default)</text>
+            </description>
+          </enum>
+        </type>
+        <default value="src-dst-ip-mac-vid-port"/>
+      </leaf>
+      <leaf name="load-balance-hash-swap">
+        <description>
+          <text>This command is used to configure how to swap
+the input fields before feeding them to the
+hash function.</text>
+        </description>
+        <type name="hashswap-type"/>
+        <default value="0"/>
+      </leaf>
+    </container>
+  </grouping>
+  <grouping name="vlag-loadbalance">
+    <list name="port-channel">
+      <key value="po-id"/>
+      <leaf name="po-id">
+        <type name="uint32"/>
+      </leaf>
+      <leaf name="vlag-load-balance">
+        <type name="enumeration">
+          <enum name="dst-mac-vid">
+            <value value="1"/>
+          </enum>
+          <enum name="src-mac-vid">
+            <value value="2"/>
+          </enum>
+          <enum name="src-dst-mac-vid">
+            <value value="3"/>
+          </enum>
+          <enum name="src-dst-ip">
+            <value value="4"/>
+          </enum>
+          <enum name="src-dst-ip-mac-vid">
+            <value value="5"/>
+          </enum>
+          <enum name="src-dst-ip-port">
+            <value value="6"/>
+          </enum>
+          <enum name="src-dst-ip-mac-vid-port">
+            <value value="7"/>
+          </enum>
+        </type>
+        <default value="src-dst-ip-mac-vid-port"/>
+      </leaf>
+    </list>
+  </grouping>
+  <augment target-node="/common-def:show">
+    <container name="fabric">
+      <description>
+        <text>This function provides fabric related information.
+This includes information about the various RBridges
+in the fabric, ISL connectivity information, fabric
+topology, routing info, multicast tree details, etc.
+This information is applicable/available only when
+the VCS mode is enabled. In VCS disabled mode
+(standalone mode) fabric does not exist.</text>
+      </description>
+      <container name="route">
+        <description>
+          <text>Provides routing related information.
+This includes multicast tree details, multicast
+priority, topology information, link cost etc.</text>
+        </description>
+      </container>
+    </container>
+  </augment>
+  <rpc name="show-linkinfo">
+    <description>
+      <text>Provides details of all the links connected in
+the fabric. This information is given in groups
+for all the RBridges in the fabric.</text>
+    </description>
+    <input>
+      <leaf name="all">
+        <type name="empty"/>
+      </leaf>
+    </input>
+    <output>
+      <uses name="output-linkinfo"/>
+    </output>
+  </rpc>
+  <rpc name="show-portindex-interface-info">
+    <description>
+      <text>Provides the details of 10G Ethernet and fibrechannel
+over ethernet ports. It consists of port index of the
+RBridge, port type (Te or FCOE) and port interface.
+Port interface is in the format
+rbridge-id/slot/port for Te ports and
+vlan-id/rbridge-id/port for FCOE ports.</text>
+    </description>
+    <input>
+      <leaf name="all">
+        <type name="empty"/>
+      </leaf>
+    </input>
+    <output>
+      <list name="show-portindex-interface">
+        <key value="portsgroup-rbridgeid"/>
+        <leaf name="portsgroup-rbridgeid">
+          <type name="common-def:rbridge-id-type"/>
+          <description>
+            <text>The RBridge-ID of the switch
+in the cluster.</text>
+          </description>
+        </leaf>
+        <list name="show-portindex">
+          <key value="port-index"/>
+          <leaf name="port-index">
+            <type name="uint32"/>
+            <description>
+              <text>The port index of the RBridge.</text>
+            </description>
+          </leaf>
+          <leaf name="port-type">
+            <type name="ethernet-port-type"/>
+            <description>
+              <text>The port type of the RBridge.
+It can be either Te or FCOE.
+Te   - Stands for 10G Physical
+       Ethernet ports.
+FCOE - Stands for Fibre Channel over
+       Ethernet ports.</text>
+            </description>
+          </leaf>
+          <leaf name="port-interface">
+            <type name="interface:interface-type"/>
+            <description>
+              <text>Port index interface representation.
+It is represented in the format
+Te   - rbridge-id/slot/port
+FCOE - vlan-id/rbridge-id/port.</text>
+            </description>
+          </leaf>
+        </list>
+      </list>
+    </output>
+  </rpc>
+  <rpc name="show-fibrechannel-interface-info">
+    <description>
+      <text>Provides all detailed information of fibrechannel ports
+in the RBridge. It consists of port index of the RBridge,
+port type (E-port/F-port/U-port), port interface, port
+address, port WWN, remote port WWN, remote node WWN,
+port state, port status, port status message, port health,
+trunk details, licence details etc.</text>
+    </description>
+    <input>
+      <leaf name="all">
+        <type name="empty"/>
+      </leaf>
+    </input>
+    <output>
+      <list name="show-fibrechannel-interface">
+        <key value="portsgroup-rbridgeid"/>
+        <leaf name="portsgroup-rbridgeid">
+          <type name="common-def:rbridge-id-type"/>
+          <description>
+            <text>The RBridge ID of the switch.</text>
+          </description>
+        </leaf>
+        <list name="show-fibrechannel-info">
+          <key value="port-index"/>
+          <leaf name="port-interface">
+            <type name="interface:interface-type"/>
+            <description>
+              <text>The Fibre Channel port interface.
+It is represented in the format
+rbridge-id/slot/port.</text>
+            </description>
+          </leaf>
+          <leaf name="port-index">
+            <type name="uint32"/>
+            <description>
+              <text>The Fibre Channel port index of the
+RBridge.</text>
+            </description>
+          </leaf>
+          <leaf name="port-type">
+            <type name="porttype-type"/>
+            <description>
+              <text>Fibre Channel port type of the RBridge.
+This specifies the given port is
+E-Port, U-Port or F-Port.</text>
+            </description>
+          </leaf>
+          <leaf name="port-wwn">
+            <type name="common-def:wwn-type"/>
+            <description>
+              <text>Local Fibre Channel port WWN.</text>
+            </description>
+          </leaf>
+          <leaf name="remote-port-wwn">
+            <type name="common-def:wwn-type"/>
+            <description>
+              <text>WWN of the remote port that connects
+to this Fibre Channel port.</text>
+            </description>
+          </leaf>
+          <leaf name="remote-node-wwn">
+            <type name="common-def:wwn-type"/>
+            <description>
+              <text>WWN of the remote switch that connects
+to this Fibre Channel port.</text>
+            </description>
+          </leaf>
+          <leaf name="port-state">
+            <type name="string"/>
+            <description>
+              <text>This specifies the Fibre Channel port
+State. The state can be 
+Online or Offline.</text>
+            </description>
+          </leaf>
+          <leaf name="port-status">
+            <type name="string"/>
+            <description>
+              <text>Provides the Fibre Channel port
+status. The Fibre Channel port status
+can be Online, No Module, No Light,
+In Sync, No Sync etc.</text>
+            </description>
+          </leaf>
+          <leaf name="port-status-message">
+            <type name="string"/>
+            <description>
+              <text>Provides the Fibre Channel port status
+messages. It consists of messages like
+down stream, trunk port, trunk
+master etc.</text>
+            </description>
+          </leaf>
+          <leaf name="port-health">
+            <type name="string"/>
+            <description>
+              <text>Provides the Fibre Channel port health
+information. It consists of information
+like fabric watch licence details, etc.</text>
+            </description>
+          </leaf>
+          <leaf name="port-trunked">
+            <type name="boolean"/>
+            <description>
+              <text>Provides the Fibre Channel port trunk
+information. This parameter is set to
+'true' for trunked ports and 'false' for
+non trunked ports.</text>
+            </description>
+          </leaf>
+          <leaf name="port-trunk-master">
+            <type name="uint32"/>
+            <description>
+              <text>Provides the Fibre Channel port trunk
+master information. This parameter value
+is set to '1' for trunk master and
+'0' for slave ports.</text>
+            </description>
+          </leaf>
+          <leaf name="port-actual-distance">
+            <type name="uint32"/>
+            <description>
+              <text>Provides the Fibre Channel port Actual
+Distance Information.</text>
+            </description>
+          </leaf>
+          <leaf name="port-desired-credit">
+            <type name="uint32"/>
+            <description>
+              <text>Provides the Fibre Channel port Desired
+Credit Information.</text>
+            </description>
+          </leaf>
+          <leaf name="port-buffer-allocated">
+            <type name="uint32"/>
+            <description>
+              <text>Provides the Fibre Channel port Buffer
+Allocation.</text>
+            </description>
+          </leaf>
+          <leaf name="port-licensed">
+            <type name="boolean"/>
+            <description>
+              <text>Indicates if the port is
+licensed or not. This is set to 'true'
+for licenced ports and 'false' for
+non licenced ports.</text>
+            </description>
+          </leaf>
+          <leaf name="port-address">
+            <type name="fabric-portid-type"/>
+            <description>
+              <text>Fibre Channel address (24 bit
+address PID).
+Uses hexadecimal format.</text>
+            </description>
+          </leaf>
+        </list>
+      </list>
+    </output>
+  </rpc>
+  <container name="fabric">
+    <description>
+      <text>This function is used to configure fabric
+parameters such as multicast priority.</text>
+    </description>
+    <container name="route">
+      <description>
+        <text>Function to configure routing related information
+such as multicast priority.</text>
+      </description>
+      <status value="deprecated"/>
+      <container name="mcast">
+        <description>
+          <text>This function is to configure multicast routing
+related information like multicast priority for
+a node. Node with highest multicast priority
+(and/or lowest RBridge-ID) becomes the root of
+the multicast tree.</text>
+        </description>
+        <list name="rbridge-id">
+          <description>
+            <text>This function is to configure multicast
+priority for a given RBridge.</text>
+          </description>
+          <key value="rbridge-id"/>
+          <leaf name="rbridge-id">
+            <type name="common-def:rbridge-id-type"/>
+            <description>
+              <text>This specifies the RBridge-ID of switch
+for which the multicast priority is to
+be configured.</text>
+            </description>
+          </leaf>
+          <leaf name="priority">
+            <type name="common-def:mcast-priority-type"/>
+            <default value="1"/>
+            <description>
+              <text>This specifies the multicast priority
+to be configured for the switch. A higher
+value indicates a higher priority.
+By default the multicast priority is 1.</text>
+            </description>
+          </leaf>
+        </list>
+      </container>
+    </container>
+  </container>
+  <augment target-node="/rbridge:rbridge-id">
+    <container name="fabric">
+      <description>
+        <text>This function is used to configure fabric
+parameters such as ECMP load balancing parameters
+and multicast priority.</text>
+      </description>
+      <uses name="ecmp-loadbalance"/>
+      <uses name="mcast-priority"/>
+      <uses name="vlag-loadbalance"/>
+    </container>
+  </augment>
+</module>

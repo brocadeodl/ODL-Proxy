@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<WavePlugin name="UidService" nameSpace="DcmNs">
+
+    <Global name="UidService">
+
+        <!-- UidManagedObject -->
+        <ManagedObject name="Uid" derivedClass="DcmManagedObject">
+            <Member name="entityName" dataType="string" />
+            <Member name="idType" dataType="UI32" />
+            <Member name="id" dataType="UI32" />
+            <Member name="active" dataType="bool" />
+        </ManagedObject>    
+
+        <!-- UidServiceMessage -->
+        <Message name="" sequencerType="SYNC" allowPreemption="FALSE" 
+                 derivedClass="ManagementInterfaceMessage">
+            <Member name="entityName" dataType="string" />
+            <Member name="idType" dataType="UI32" />
+            <Member name="id" dataType="UI32" />
+        </Message>
+
+    </Global>
+
+</WavePlugin>

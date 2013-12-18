@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="VcsNodeYangModel"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:brocade="http://brocade.com/dcmd/local">
+  <namespace uri="http://brocade.com/dcmd/local"/>
+  <prefix value="brocade"/>
+  <organization>
+    <text>Brocade Communications Inc.</text>
+  </organization>
+  <description>
+    <text>DCMD Base Services manual CLI interface model definition</text>
+  </description>
+  <revision date="2009-03-02"/>
+  <typedef name="mappedIdType">
+    <type name="uint16">
+      <range value="1..1023">
+        <error-message>
+          <value>Mapped IDs must be in the range 1..1024</value>
+        </error-message>
+      </range>
+    </type>
+    <description>
+      <text>MappedId is a unique ID assigned to a switch by DCMD, it does not changefor the life of a switch in a network. MappedIds must be in the range 1..1023</text>
+    </description>
+  </typedef>
+  <container name="vcs_node"/>
+</module>

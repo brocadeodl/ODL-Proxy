@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-port-profile-ext"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:appm-extensions="urn:brocade.com:mgmt:brocade-port-profile-ext"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-yang-types"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface">
+  <namespace uri="urn:brocade.com:mgmt:brocade-port-profile-ext"/>
+  <prefix value="appm-extensions"/>
+  <import module="ietf-yang-types">
+    <prefix value="inet"/>
+  </import>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+        San Jose, CA 95134
+        U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com 
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This management module is an extension to the port-profile
+model for 
+   - Defining RPCs to retrieve port-profile related operational
+     data in the managed device.</text>
+  </description>
+  <revision date="2000-07-15">
+    <description>
+      <text>Initial version of the management module
+port-profile-ext</text>
+    </description>
+  </revision>
+  <rpc name="get-port-profile-for-intf">
+    <description>
+      <text>This is a function that returns the port profiles applied 
+on port(s) and port-channels.</text>
+    </description>
+    <input>
+      <leaf name="rbridge-id">
+        <description>
+          <text>rbridge id of the node from which the data needs 
+to be fetched. When no rbridge id is given, data is fetched
+from all rbridges</text>
+        </description>
+        <type name="uint32"/>
+        <mandatory value="false"/>
+      </leaf>
+      <choice name="request-type">
+        <case name="get-request">
+          <uses name="interface:interface-name-info">
+            <description>
+              <text>This indicates the name and type of the interface
+            to query. 
+            The rpc response contians the list of port-profiles 
+            applied on the given interface.
+
+            The rpc request would look as below:
+            get-port-profile-for-intf 
+            interface-type=fortygigabitethernet
+            interface-name=1/0/1.
+            
+            The rpc response contains the list of 
+            port-profiles applied on the interface fo 1/0/1.
+            
+            The rpc response has an attribute has-more, 
+            which will always be false, since the rpc response 
+            contains all the port-profiles applied on the given 
+            interface.</text>
+            </description>
+          </uses>
+        </case>
+        <case name="getnext-request">
+          <container name="last-received-interface-info">
+            <uses name="interface:interface-name-info">
+              <description>
+                <text>This indicates the name and type of the last 
+interface, for which the list of applied 
+port-profiles is already received.</text>
+              </description>
+            </uses>
+            <description>
+              <text>The rpc returns the list of
+port-profiles associated with the next set of 
+interfaces.
+
+The rpc request would look as below:
+get-port-profile-for-intf
+last-received-interface-info/interface-type=
+fortygigabitethernet
+last-received-interface-info/interface-name=
+1/0/1.
+
+The rpc response will contain the list of 
+port-profiles applied on the interface fo 1/0/2,
+1/0/3 and so on till the page limit is reached.
+
+The rpc response has an attribute is-more, which 
+will be false, when all the interfaces are 
+exhausted.
+
+The getnext-request model can be used to retrieve
+the port-profiles applied on all the interfaces.
+
+The rpc returns the list of port-profiles applied 
+on the first set of interfaces when interface name 
+and interface type are not specified.</text>
+            </description>
+          </container>
+        </case>
+      </choice>
+    </input>
+    <output>
+      <list name="interface">
+        <uses name="interface:interface-name-info">
+          <description>
+            <text>The list of all the interfaces on which
+Port Profile is applied. Each row 
+represents interface details(type,name) and the
+Port Profile name applied on the interface.</text>
+          </description>
+        </uses>
+        <list name="port-profile">
+          <description>
+            <text>The list of port profiles applied on this
+interface. Each row contains Port Profile 
+name.</text>
+          </description>
+          <leaf name="name">
+            <type name="common-def:name-string64"/>
+            <description>
+              <text>This indicates Port Profile name 
+associated to this interface.</text>
+            </description>
+          </leaf>
+        </list>
+      </list>
+      <leaf name="has-more">
+        <type name="boolean"/>
+        <description>
+          <text>Value is :
+
+false, for get request model.
+false, when the port-profiled-ports are exhausted 
+in getnext request model.
+
+true, when more port-profiled ports exist in 
+getnext request model.</text>
+        </description>
+      </leaf>
+    </output>
+  </rpc>
+  <rpc name="get-port-profile-status">
+    <description>
+      <text>This is a function that returns the status of a port 
+profile or all the port profiles.</text>
+    </description>
+    <input>
+      <leaf name="rbridge-id">
+        <description>
+          <text>rbridge id of the node from which the data needs
+to be fetched. When no rbridge id is given, data is fetched
+from all rbridges</text>
+        </description>
+        <type name="uint32"/>
+        <mandatory value="false"/>
+      </leaf>
+      <leaf name="port-profile-name">
+        <type name="common-def:name-string64"/>
+        <mandatory value="false"/>
+        <description>
+          <text>This indicates the optional port profile name to
+query.It returns status of all profiles if no
+profile name is specified</text>
+        </description>
+      </leaf>
+      <leaf name="port-profile-status">
+        <type name="enumeration">
+          <enum name="activated">
+            <value value="1"/>
+            <description>
+              <text>Port Profile is activated.</text>
+            </description>
+          </enum>
+          <enum name="associated">
+            <value value="2"/>
+            <description>
+              <text>Port Profile is associated to one or more
+MAC addresses.</text>
+            </description>
+          </enum>
+          <enum name="applied">
+            <value value="3"/>
+            <description>
+              <text>Port Profile is applied on one or more
+interfaces.</text>
+            </description>
+          </enum>
+        </type>
+        <mandatory value="false"/>
+        <description>
+          <text>This indicates query is based on the port profile 
+status. Profiles are not filtered based on the
+status when this parameter is not specified</text>
+        </description>
+      </leaf>
+      <choice name="request-type">
+        <case name="getnext-request">
+          <container name="last-received-port-profile-info">
+            <leaf name="profile-name">
+              <type name="common-def:name-string64"/>
+              <mandatory value="false"/>
+              <description>
+                <text>This indicates the name of the last
+received port-profile.</text>
+              </description>
+            </leaf>
+            <leaf name="profile-mac">
+              <type name="inet:mac-address"/>
+              <mandatory value="false"/>
+              <description>
+                <text>This indicates the last received mac
+address of the last received port-profile.</text>
+              </description>
+            </leaf>
+            <description>
+              <text>get request : 
+provides data only for a given
+port profile based on the input attribute 
+port-profile-name.
+
+To begin with, user should provide 
+port-profile-name attribute and optional
+profile-mac value as 00:00:00:00:00:00.
+The response will contain the initial set of
+macs associated with the given port profile.
+
+For subsequent calls, user should provide 
+port-profile-name along with the 
+profile-mac value.
+Response will contain the next set of
+associated macs for the given port profile.
+
+Response has an attribute is-more, which
+will be false, when all the macs associated
+with a given port-profile are exhausted.
+
+getnext request : 
+To get the next record,
+provide both profile-name and profile-mac.
+
+To begin with, user can invoke the rpc 
+without providing profile-name and profile-mac
+attributes.
+The response will contain the initial set of 
+macs associated with the first port profile.
+
+For subsequent calls, user should provide 
+profile-name along with the profile-mac.
+
+If the user provides profile-name and last 
+profile mac associated with the profile, 
+the response will contain the next port profile
+info.
+
+Response has an attribute is-more, which will
+be false, when all the macs associated with all
+the port-profiles are exhausted.</text>
+            </description>
+          </container>
+        </case>
+      </choice>
+    </input>
+    <output>
+      <list name="port-profile">
+        <key value="name"/>
+        <description>
+          <text>The list of port profiles. Each row represents the
+port profile details, its status and its MAC
+associations.</text>
+        </description>
+        <leaf name="name">
+          <type name="common-def:name-string64"/>
+          <description>
+            <text>This indicates the name of the port profile.</text>
+          </description>
+        </leaf>
+        <leaf name="ppid">
+          <type name="uint32"/>
+          <description>
+            <text>This indicates the id of the Port Profile.</text>
+          </description>
+        </leaf>
+        <leaf name="is-active">
+          <type name="boolean"/>
+          <description>
+            <text>This indicates if this port-profile is 
+activated or not.</text>
+          </description>
+        </leaf>
+        <list name="mac-association">
+          <key value="mac"/>
+          <description>
+            <text>The list of MAC associations for this port 
+profile. Each row represents the MAC address 
+and the details of the interface to which
+the MAC is associated.</text>
+          </description>
+          <leaf name="mac">
+            <type name="inet:mac-address"/>
+            <description>
+              <text>This indicates the MAC addresses associated
+with this Port Profile.</text>
+            </description>
+          </leaf>
+          <container name="applied-interface">
+            <uses name="interface:interface-name-info"/>
+            <description>
+              <text>This container provides the grouping of
+elements required to identify the 
+interface on which  which this MAC 
+association is applied. No interface name 
+will be listed when the port profile is not
+applied with respect to this MAC.</text>
+            </description>
+          </container>
+        </list>
+        <leaf name="has-more">
+          <type name="boolean"/>
+          <description>
+            <text>Value is :
+false, if no more macs exist for a given 
+port-profile in get request model 
+or 
+no more macs exist for the
+last profile in getnext request model.
+    
+true, if more macs exist for a given profile
+in get request model
+or
+more macs [or profiles] exist in 
+getnext request model.</text>
+          </description>
+        </leaf>
+      </list>
+    </output>
+  </rpc>
+</module>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<WavePlugin name="Udld" nameSpace="DcmNs" yangModule="brocade-udld" yangPrefix="udld" >
+
+    <!-- UdldGlobalObjectManager -->
+    <Global name="UdldGlobal" >
+
+        <!-- UdldGlobalConfigManagedObject -->
+        <ManagedObject name="Config" sequenceForBackendUpdate="true" singletonMoUserTag="udld_udld" >
+
+            <Group id="proto_udld" backendName="UdldDCMClient">
+                <Member name="UdldPresent" defaultValueForMo="true" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="udld_udld" denotesPresence="true"  />
+            </Group>
+
+            <Group id="hello" backendName="UdldDCMClient">
+                <Member name="Hello" defaultValueForMo="5" defaultValueForAttribute="5" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="udld_hello" />
+            </Group>
+
+            <Group id="multiplier" backendName="UdldDCMClient">
+                <Member name="Multiplier" defaultValueForMo="5" defaultValueForAttribute="5" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="udld_multiplier" />
+            </Group>
+
+            <Group id="shutdown" backendName="UdldDCMClient">
+                <Member name="Shutdown" defaultValueForMo="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="udld_shutdown" />
+            </Group>
+
+            <ConfigDistribute serviceName="UdldLocalObjectManager" needSurrogateFlag="false" partialSuccessFlag="true" />
+
+            <Postboot passName= "DCM_POSTBOOT_GLOBAL_STAGE2" />
+
+        </ManagedObject>
+
+    </Global>
+
+    <!-- UdldLocalObjectManager -->
+    <Local name="Udld" globalName="UdldGlobal">
+    </Local>
+</WavePlugin>
+

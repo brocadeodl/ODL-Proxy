@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Framework Core Module. -->
+
+<ModuleResources ModuleName = "Alarm" ComponentName = "Wave">
+    <ResourceEnum Name = "WaveAlarmSeverity">
+        <Resource Name = "WAVE_ALARM_SEVERITY_CRITICAL">Critical Alarm</Resource>
+        <Resource Name = "WAVE_ALARM_SEVERITY_HIGH"    >High Alarm    </Resource>
+        <Resource Name = "WAVE_ALARM_SEVERITY_MEDIUM"  >Medium Alarm  </Resource>
+        <Resource Name = "WAVE_ALARM_SEVERITY_LOW"     >Low Alarm     </Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "WaveAlarmState">
+        <Resource Name = "WAVE_ALARM_STATE_NEW"          >New Alarm         </Resource>
+        <Resource Name = "WAVE_ALARM_STATE_ACKNOWLEDEGED">Acknowledged Alarm</Resource>
+        <Resource Name = "WAVE_ALARM_STATE_CLEARED"      >Cleared Alarm     </Resource>
+    </ResourceEnum>
+</ModuleResources>

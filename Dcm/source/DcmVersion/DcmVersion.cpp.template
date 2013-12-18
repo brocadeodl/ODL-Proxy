@@ -1,0 +1,93 @@
+/***************************************************************************
+ *   Copyright (C) 2009 Brocade Communications Systems, Inc.               *
+ *   All rights reserved.                                                  *
+ *   Author : Vidyasagara Reddy Guntaka                                    *
+ ***************************************************************************/
+
+#include "DcmVersion/DcmVersion.h"
+
+namespace DcmNs
+{
+
+DcmVersion::DcmVersion ()
+    : m_major       ("DCM_VERSION_MAJOR"),
+      m_minor       ("DCM_VERSION_MINOR"),
+      m_patch       ("DCM_VERSION_PATCH"),
+      m_revision    ("DCM_VERSION_REVISION"),
+      m_buildType   ("DCM_BUILD_TYPE"),
+      m_buildNumber ("DCM_BUILD_NUMBER"),
+      m_date        ("DCM_VERSION_DATE"),
+      m_user        ("DCM_VERSION_USER"),
+      m_host        ("DCM_VERSION_HOST"),
+      m_domain      ("DCM_VERSION_DOMAIN")
+{
+}
+
+DcmVersion::~DcmVersion ()
+{
+}
+
+string DcmVersion::getMajor () const
+{
+    return (m_major);
+}
+
+string DcmVersion::getMinor () const
+{
+    return (m_minor);
+}
+
+string DcmVersion::getPatch () const
+{
+    return (m_patch);
+}
+
+string DcmVersion::getRevision () const
+{
+    return (m_revision);
+}
+
+string DcmVersion::getBuildType () const
+{
+    return (m_buildType);
+}
+
+string DcmVersion::getBuildNumber () const
+{
+    return (m_buildNumber);
+}
+
+string DcmVersion::getDate () const
+{
+    return (m_date);
+}
+
+string DcmVersion::getUser () const
+{
+    return (m_user);
+}
+
+string DcmVersion::getHost () const
+{
+    return (m_host);
+}
+
+string DcmVersion::getDomain () const
+{
+    return (m_domain);
+}
+
+const DcmVersion *DcmVersion::getInstance ()
+{
+    static DcmVersion *pDcmVersion = NULL;
+
+    if (NULL == pDcmVersion)
+    {
+        pDcmVersion = new DcmVersion ();
+    }
+
+    return (pDcmVersion);
+}
+
+}
+

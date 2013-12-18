@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<WavePlugin name="IpPolicy" nameSpace="DcmNs"> 
+<Local name="IpPolicyLocal">
+    <EnumType name="PolicyAction">
+        <Enum name="unknown" value ="0" />
+        <Enum name="permit" value ="1" />
+        <Enum name="deny" value ="2" />
+    </EnumType>
+
+    <EnumType name="PolicyRouteType">
+        <Enum name="unknown" value ="0" />
+        <Enum name="internal" value ="1" />
+        <Enum name="type-1" value ="2" />
+        <Enum name="type-2" value ="3" />
+    </EnumType>
+
+    <EnumType name="PolicyMetricAction">
+        <Enum name="unknown" value ="0" />
+        <Enum name="add" value ="1" />
+        <Enum name="subtract" value ="2" />
+        <Enum name="assign" value ="3" />
+    </EnumType>
+    
+	<Worker name="IpPolicyLocal">
+		<ManagedObject name="RouteMap" key="name instance" create="true" delete="true">
+			<Member name="name" dataType="string">
+			</Member>
+			<Member name="instance" dataType="UI16">
+			</Member>
+			<Callpoint name="routemap_cp" className="RouteMap">
+			     <Member name="action" dataType="enum" enumType="PolicyAction" xmlTag="action-rm">
+			     </Member>
+			     <Member name="match_intf_eth" dataType="vector/string/" xmlTag="tengigabitethernet-rmm">
+			     </Member>
+			     <Member name="match_intf_vlan" dataType="vector/UI32/" xmlTag="vlan-rmm">
+			     </Member>
+			     <Member name="match_intf_po" dataType="vector/UI32/" xmlTag="port-channel-rmm">
+			     </Member>
+                 <Member name="match_addr_prefix" dataType="string" xmlTag="prefix-list-rmm">
+                 </Member>
+                 <Member name="match_nh_prefix" dataType="string" xmlTag="prefix-list-rmm-n">
+                 </Member>
+                 <Member name="match_metric" dataType="vector/UI32/" xmlTag="metric-rmm">
+                 </Member>
+                 <Member name="match_route_type" dataType="enum" enumType="PolicyRouteType" xmlTag="route-type-rmm">
+                 </Member>
+                 <Member name="match_route_tag" dataType="vector/UI32/" xmlTag="tag-rmm">
+                 </Member>
+                 <Member name="set_distance" dataType="UI32" xmlTag="dist-rms">
+                 </Member>
+                 <Member name="set_nh_ip" dataType="IpV4Address" xmlTag="addr-rms">
+                 </Member>
+                 <Member name="set_metric_action" dataType="enum" enumType="PolicyMetricAction" xmlTag="delta-rms">
+                 </Member>
+                 <Member name="set_metric" dataType="UI32" xmlTag="metric-rms">
+                 </Member>
+                 <Member name="set_route_type" dataType="enum" enumType="PolicyRouteType" xmlTag="route-type-rms">
+                 </Member>
+                 <Member name="set_route_tag" dataType="UI32" xmlTag="tag-rms">
+                 </Member>
+                 <Member name="set_route_weight" dataType="UI32" xmlTag="weight-value">
+                 </Member>
+                 <Member name="match_rs_prefix" dataType="string" xmlTag="prefix-list-rmrs">
+                 </Member>                                  
+			</Callpoint>
+		</ManagedObject>
+		
+		<ManagedObject name="IpPrefix" key="name instance" create="true" delete="true">
+            <Member name="name" dataType="string"/>
+            <Member name="instance" dataType="UI16"/>
+            <Callpoint name="ipprefix_cp" className="IpPrefix">
+                 <Member name="action" dataType="enum" enumType="PolicyAction" xmlTag="action-ipp">
+                 </Member>
+                 <Member name="ip_prefix" dataType="IpV4AddressNetworkMask" xmlTag="prefix-ipp">
+                 </Member>
+                 <Member name="ge" dataType="UI16" xmlTag="ge-ipp">
+                 </Member>
+                 <Member name="le" dataType="UI16" xmlTag="le-ipp">
+                 </Member>
+            </Callpoint>
+        </ManagedObject>
+	</Worker>
+</Local>
+</WavePlugin>

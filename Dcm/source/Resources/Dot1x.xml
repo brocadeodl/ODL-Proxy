@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ModuleResources ModuleName = "Dot1x" ComponentName = "Wave">
+    <ResourceEnum Name = "Dot1xReturnCode">
+
+		<!-- Dot1x common -->
+        <Resource Name = "AUTH_API_SET_ERROR">%% Error: RADIUS host does not exist</Resource>
+        <Resource Name = "AUTH_API_SET_ERR_INVALID_VALUE">%% Error: Invalid value</Resource>
+        <Resource Name = "MAC_AUTH_API_SET_ERR_VR_NOT_EXIST">%% Error: VR does not exist</Resource>
+        <Resource Name = "AUTH_API_SET_ERR_VR_NOT_EXIST">%% Error: VR does not exist</Resource>
+        <Resource Name = "AUTH_API_SET_ERR_PORT_NOT_EXIST">%% Error: 802.1X not configured for port</Resource>
+        <Resource Name = "AUTH_API_SET_ERR_IF_NOT_EXIST">%% Error: Interface does not exist</Resource>
+        <Resource Name = "AUTH_API_SET_ERR_HOST_NOT_CONFIGURED">%% Error: Radius-server host is not configured</Resource>
+        <Resource Name = "AUTH_API_SET_ERR_IF_IS_AGGREGATED">%% Error: 802.1x cannot be configured on aggregated port</Resource>
+        <Resource Name = "AUTH_API_SET_ERR_PORT_IS_INTERNAL">%% Error: 802.1x cannot be configured on an internal port</Resource>
+        <Resource Name = "AUTH_API_SET_ERR_PORT_IS_DEST_MIRROR">%% Error: 802.1x cannot be configured on a destination mirror port</Resource>
+        <Resource Name = "PORT_AUTH_EXIST">%% Error: Port authentication is configured</Resource>
+        <Resource Name = "MAC_AUTH_EXIST">%% Error: MAC-based authentication is configured</Resource>
+        <Resource Name = "MAC_AUTH_NOT_EXIST">%% Error: MAC-based authentication is not configured globally</Resource>
+        <Resource Name = "AUTH_MAC_NOT_ENABLED">%% Error: MAC-based authentication is not configured on this interface</Resource>
+        <Resource Name = "AUTH_API_GENERIC_ERROR">%% Error: Command failed</Resource>
+        <Resource Name = "AUTH_API_READINESS_TEST_ERROR">%% Error: Readiness test is in progress. Command not allowed</Resource>
+        <Resource Name = "AUTH_API_READINESS_NOT_ALLOWED">%% Error: Readiness test check is not allowed. Might be dot1x authentication is in progress</Resource>
+        <Resource Name = "AUTH_API_INTF_DOWN_ERROR">%% Error: Interface is down</Resource>
+        <Resource Name = "AUTH_API_SET_PORT_TYPE_UNKNOWN">%% Error: Port is of Unknown type</Resource>
+
+    </ResourceEnum>
+</ModuleResources>

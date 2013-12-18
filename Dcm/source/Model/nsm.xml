@@ -1,0 +1,1078 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<WavePlugin name="Nsm" nameSpace="DcmNs"> 
+<Global name="NsmGlobal">
+	<Worker name="IgmpsVlanGlobalConf">
+		<ManagedObject name="IgmpsVlanIntfConf">
+			<Member name="lmqi" dataType="UI32">
+			</Member>
+			<Member name="qmrt" dataType="UI32">
+			</Member>
+			<Member name="enable" dataType="bool">
+			</Member>
+			<Member name="fastLeave" dataType="bool">
+			</Member>
+			<Member name="queryInterval" dataType="UI32">
+			</Member>
+			<Member name="querierEnable" dataType="bool">
+			</Member>
+			<Member name="mrouterTimeout" dataType="UI32">
+			</Member>
+		</ManagedObject>
+		<ManagedObject name="IgmpsSgVlanConfig">
+			<Member name="groupAddress" dataType="IpV4Address">
+			</Member>
+			<Member name="interface" dataType="UI32">
+			</Member>
+			<Member name="ifType" dataType="UI32">
+			</Member>
+			<Member name="ifName" dataType="string">
+			</Member>
+		</ManagedObject>
+		<ManagedObject name="IgmpsMrtrVlanConfig">
+			<Member name="ifType" dataType="UI32">
+			</Member>
+			<Member name="ifName" dataType="string">
+			</Member>
+		</ManagedObject>
+
+        <Message name="UpdateIgmpsVlanConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="lmqi" dataType="UI32">
+			</Member>
+			<Member name="qmrt" dataType="UI32">
+			</Member>
+			<Member name="enable" dataType="bool">
+			</Member>
+			<Member name="fastLeave" dataType="bool">
+			</Member>
+			<Member name="queryInterval" dataType="UI32">
+			</Member>
+			<Member name="querierEnable" dataType="bool">
+			</Member>
+			<Member name="mrouterTimeout" dataType="UI32">
+			</Member>
+			<Member name="vlanId" dataType="UI32">
+			</Member>
+            <Member name="vlanIfName" dataType="string">
+			</Member>
+            <Member name="vlanIfIndex" dataType="UI64">
+			</Member>
+			<Member name="opCode" dataType="UI32" >
+			</Member>
+			<Member name="negation" dataType="bool">
+			</Member>
+		</Message>
+        <Message name="UpdateIgmpsSgVlanConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="groupAddress" dataType="IpV4Address">
+			</Member>
+			<Member name="interface" dataType="UI32">
+			</Member>
+			<Member name="ifType" dataType="UI32">
+			</Member>
+			<Member name="ifName" dataType="string">
+			</Member>
+			<Member name="vlanId" dataType="UI32">
+			</Member>
+            <Member name="vlanIfName" dataType="string">
+			</Member>
+            <Member name="vlanIfIndex" dataType="UI64">
+			</Member>
+			<Member name="negation" dataType="bool">
+			</Member>
+		</Message>
+        <Message name="UpdateIgmpsMrtrVlanConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ifType" dataType="UI32">
+			</Member>
+			<Member name="ifName" dataType="string">
+			</Member>
+			<Member name="vlanId" dataType="UI32">
+			</Member>
+            <Member name="vlanIfName" dataType="string">
+			</Member>
+            <Member name="vlanIfIndex" dataType="UI64">
+			</Member>
+			<Member name="negation" dataType="bool">
+			</Member>
+		</Message>
+	</Worker>
+
+	<Worker name="IntfGlobalConf">
+        <ManagedObject name="Intf">
+			<Member name="ifName" dataType="string">
+			</Member>
+			<Member name="ifIndex" dataType="UI64">
+			</Member>
+			<Member name="desc" dataType="string">
+			</Member>
+			<Member name="status" dataType="bool">
+			</Member>
+            <Member name="mtu" dataType="UI32">
+			</Member>
+		</ManagedObject>
+        
+		<ManagedObject name="VlanIntf"  derivedClass="Intf">
+			<Member name="id" dataType="UI32">
+			</Member>
+            <Member name="portMembers" dataType="vector/ObjectId/" 
+                    umlType="ASSOCIATION" referredObject="PoPhyIntf">
+            </Member>
+            <Member name="stpShutdown" dataType="bool">
+			</Member>
+            <Member name="igmpsVlanIntfConfig" 
+                    dataType="WaveManagedObjectPointer" 
+                    umlType="COMPOSITION" 
+                    referredObject="IgmpsVlanIntfConf">
+            </Member>
+            <Member name="igmpsSgVlanConfig" 
+                    dataType="vector/WaveManagedObjectPointer/" 
+                    umlType="COMPOSITION" 
+                    referredObject= "IgmpsSgVlanConfig">
+            </Member>
+            <Member name="igmpsMrtrVlanConfig" 
+                    dataType="vector/WaveManagedObjectPointer/" 
+                    umlType="COMPOSITION" 
+                    referredObject= "IgmpsMrtrVlanConfig">
+            </Member>
+		</ManagedObject>
+        
+        <ManagedObject name="PVlanIntf"  derivedClass="VlanIntf">
+		</ManagedObject>
+        
+        <ManagedObject name="SecondaryPVlanIntf"  derivedClass="PVlanIntf">
+            <Member name="primaryVlanId" dataType="ObjectId" 
+                    umlType="ASSOCIATION" referredObject="PrimaryPVlanIntf">
+            </Member>
+		</ManagedObject>
+        <ManagedObject name="IsolatedPVlanIntf"  
+                       derivedClass="SecondaryPVlanIntf">
+		</ManagedObject>
+        <ManagedObject name="CommunityPVlanIntf"  
+                       derivedClass="SecondaryPVlanIntf">
+		</ManagedObject>
+        <ManagedObject name="PrimaryPVlanIntf"  derivedClass="PVlanIntf">
+            <Member name="communityVlanIds" dataType="vector/ObjectId/" 
+                    umlType="ASSOCIATION" referredObject="SecondaryPVlanIntf">
+            </Member>
+            <Member name="isolatedVlanId" dataType="ObjectId" 
+                    umlType="ASSOCIATION" referredObject="IsolatedPVlanIntf">
+            </Member>
+		</ManagedObject>
+        
+        <ManagedObject name="SwProps">
+            <Member name="vlanId" dataType="ObjectId" umlType="ASSOCIATION" 
+                    referredObject="VlanIntf">
+            </Member>
+			<Member name="modeTag" dataType="UI32">
+			</Member>
+		</ManagedObject>
+        
+        <ManagedObject name="PvlanMapping">
+            <Member name="primaryVlanId" dataType="ObjectId" 
+                    umlType="ASSOCIATION" referredObject="PrimaryPVlanIntf">
+            </Member>
+            <Member name="operation" dataType="UI8">
+            </Member>
+            <Member name="secondaryVlanId" dataType="ObjectId" 
+                    umlType="ASSOCIATION" referredObject="SecondaryPVlanIntf">
+            </Member>
+        </ManagedObject>
+        
+        <ManagedObject name="HostAssociation">
+            <Member name="primaryVlanId" dataType="ObjectId" 
+                    umlType="ASSOCIATION" referredObject="PrimaryPVlanIntf">
+            </Member>
+            <Member name="secondaryVlanId" dataType="ObjectId" 
+                    umlType="ASSOCIATION" referredObject="SecondaryPVlanIntf">
+            </Member>
+		</ManagedObject>
+        <ManagedObject name="TrunkAssociation">
+            <Member name="primaryVlanId" dataType="ObjectId" 
+                    umlType="ASSOCIATION" referredObject="PrimaryPVlanIntf">
+            </Member>
+            <Member name="secondaryVlanId" dataType="ObjectId" 
+                    mlType="ASSOCIATION" referredObject="SecondaryPVlanIntf">
+            </Member>
+		</ManagedObject>        
+        
+        <ManagedObject name="PoPhyIntf" derivedClass="Intf">
+            <Member name="swModeFlag" dataType="bool">
+			</Member>
+            <Member name="swMode" dataType="UI32">
+            </Member>
+            <Member name="pvlanSwMode_Promiscuous" dataType="bool">
+            </Member>
+            <Member name="pvlanSwMode_Host" dataType="bool">
+            </Member>
+            <Member name="pvlanSwMode_Trunk" dataType="bool">
+            </Member>
+            <Member name="isAllowedVlanAll" dataType="bool">
+            </Member>
+            <Member name="vlanSwProps" 
+                    dataType="vector/WaveManagedObjectPointer/" 
+                    umlType="COMPOSITION" referredObject="SwProps">
+            </Member>
+            <!-- Sanjeev:Include VlanClassifierGroup for breeze compilation -->
+            <Member name="vlanClassifierGroupId" dataType="ObjectId" 
+                    umlType="ASSOCIATION" 
+                    referredObject="VlanClassifierGroup">
+            </Member>
+            
+            <Member name="vlanClassifierVlan" dataType="ObjectId" 
+                    umlType="ASSOCIATION" referredObject="VlanIntf">
+            </Member>
+            <Member name="pvlanMapping" dataType="vector/WaveManagedObjectPointer/" umlType="COMPOSITION" referredObject="PvlanMapping">
+            </Member>
+            <Member name="pvlanHostAssociation" dataType="vector/WaveManagedObjectPointer/" umlType="COMPOSITION" referredObject="HostAssociation">
+            </Member>
+            <Member name="pvlanTrunkAssociation" dataType="vector/WaveManagedObjectPointer/" umlType="COMPOSITION" referredObject="TrunkAssociation">
+            </Member>
+            
+            <!-- Sanjeev:Include required  MOs for breeze compilation -->
+            <Member name="portStpConfig" 
+                    dataType="WaveManagedObjectPointer" 
+                    umlType="COMPOSITION" 
+                    referredObject= "XstpPortConfig">
+            </Member>
+            
+            <Member name="portVlanStpConfig" 
+                    dataType="vector/WaveManagedObjectPointer/" 
+                    umlType="COMPOSITION" 
+                    referredObject= "XstpPortVlanConfig">
+            </Member>
+            
+            <Member name="portInstanceMstpConfig" 
+                    dataType="vector/WaveManagedObjectPointer/" 
+                    umlType="COMPOSITION" 
+                    referredObject= "MstpPortInstanceConfig">
+            </Member>
+            <!-- Breeze compilation note -->
+            
+		</ManagedObject>
+        <ManagedObject name="PoIntf" derivedClass="PoPhyIntf"> 
+			<Member name="id" dataType="UI32">
+			</Member>
+            <Member name="poMode" dataType="UI32">
+            </Member>
+            <Member name="poType" dataType="UI32">
+            </Member>
+            <!-- Sanjeev. Forward referencing does not work. -->
+            <Member name="portMembers" dataType="vector/ObjectId/" 
+                    umlType="ASSOCIATION" referredObject="PhyIntf"> 
+            </Member>
+             <!-- Breeze compilation note -->
+		</ManagedObject>
+
+		<ManagedObject name="LacpConfig">
+			<Member name="systemPriority" dataType="UI32">
+			</Member>
+		</ManagedObject>
+	        <Message name="CreateVlanIntf" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="id" dataType="UI32">
+			</Member>
+			<Member name="ifName" dataType="string">
+			</Member>
+            <Member name="ifIndex" dataType="UI64">
+			</Member>
+            <Member name="desc" dataType="string">
+			</Member>
+		</Message>
+        <Message name="UpdateVlanIntf" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="id" dataType="UI32">
+			</Member>
+            <Member name="ifName" dataType="string">
+			</Member>
+            <Member name="ifIndex" dataType="UI64">
+			</Member>
+            <Member name="desc" dataType="string">
+			</Member>
+            <Member name="flag" dataType="bool">
+			</Member>
+            <Member name="pvlanType" dataType="UI8">
+			</Member>
+            <Member name="secondaryVlanId" dataType="vector/UI32/">
+			</Member>
+            <Member name="cmdCode" dataType="UI32">
+			</Member>
+		</Message>
+        <Message name="DeleteVlanIntf" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="id" dataType="UI32">
+			</Member>
+            <Member name="ifIndex" dataType="UI64">
+			</Member>
+		</Message>
+        <Message name="CreatePoIntf" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="id" dataType="UI32">
+			</Member>
+			<Member name="ifName" dataType="string">
+			</Member>
+            <Member name="ifIndex" dataType="UI64">
+			</Member>
+            <Member name="desc" dataType="string">
+			</Member>
+            <Member name="poMode" dataType="UI32">
+            </Member>
+            <Member name="poType" dataType="UI32">
+            </Member>
+		</Message>
+        <Message name="UpdatePoIntf" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="id" dataType="UI32">
+			</Member>
+            <Member name="ifName" dataType="string">
+			</Member>
+            <Member name="ifIndex" dataType="UI64">
+			</Member>
+            <Member name="desc" dataType="string">
+			</Member>
+            <Member name="flag" dataType="bool">
+			</Member>
+            <Member name="swModeFlag" dataType="bool">
+			</Member>
+            <Member name="swMode" dataType="UI32">
+			</Member>
+			<Member name="isAllowedVlanAll" dataType="bool">
+			</Member>
+            <Member name="poMode" dataType="UI32">
+            </Member>
+            <Member name="poType" dataType="UI32">
+            </Member>
+            <Member name="cmdCode" dataType="UI32">
+			</Member>
+            <Member name="primaryVlanId" dataType="UI32">
+			</Member>
+            <Member name="secondaryVlanId" dataType="UI32">
+			</Member>
+		</Message>
+        <Message name="DeletePoIntf" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="id" dataType="UI32">
+			</Member>
+            <Member name="ifName" dataType="string">
+			</Member>
+            <Member name="ifIndex" dataType="UI64">
+			</Member>
+		</Message>
+        <Message name="AddPoToVlanIntf" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="poId" dataType="UI32">
+			</Member>
+            <Member name="poIfIndex" dataType="UI64">
+			</Member>
+            <Member name="poIfName" dataType="string">
+			</Member>
+            <Member name="vlanId" dataType="vector/UI32/">
+			</Member>
+            <Member name="vlanIfIndex" dataType="vector/UI64/">
+			</Member>
+            <Member name="vlanName" dataType="vector/string/">
+			</Member>
+            <Member name="tagStatus" dataType="vector/UI32/">
+			</Member>
+		</Message>
+        <Message name="DeletePoToVlanIntf" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="poId" dataType="UI32">
+			</Member>
+            <Member name="poIfIndex" dataType="UI64">
+			</Member>
+            <Member name="poIfName" dataType="string">
+			</Member>
+            <Member name="vlanId" dataType="vector/UI32/">
+			</Member>
+            <Member name="vlanIfIndex" dataType="vector/UI64/">
+			</Member>
+            <Member name="vlanName" dataType="vector/string/">
+			</Member>
+		</Message>
+		<Message name="UpdateLacpConfig" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="systemPriority" dataType="UI32">
+			</Member>
+			<Member name="cmdCode" dataType="UI8">
+			</Member>
+	    </Message>
+
+	</Worker>
+	<Worker name="IntfXstpGlobalConf">
+		<ManagedObject name="XstpPortConfig">
+			<Member name="priority" dataType="UI32">
+			</Member>
+			<Member name="helloTime" dataType="UI32">
+			</Member>
+			<Member name="cost" dataType="UI32">
+			</Member>
+			<Member name="restrictedRole" dataType="bool">
+			</Member>
+			<Member name="restrictedTcn" dataType="bool">
+			</Member>
+			<Member name="autoEdge" dataType="bool">
+			</Member>
+			<Member name="portFast" dataType="bool">
+			</Member>
+			<Member name="edgePort" dataType="bool">
+			</Member>
+			<Member name="bpduGuardEnable" dataType="bool">
+			</Member>
+			<Member name="bpduGuard" dataType="bool">
+			</Member>
+			<Member name="bpduFilter" dataType="bool">
+			</Member>
+			<Member name="guard" dataType="bool">
+			</Member>
+			<Member name="linkShared" dataType="bool">
+			</Member>
+			<Member name="stpEnable" dataType="bool">
+			</Member>
+		</ManagedObject>
+		<ManagedObject name="XstpPortVlanConfig">
+            <Member name="vid" dataType="ObjectId" umlType="ASSOCIATION" referredObject="VlanIntf">
+			</Member>
+			<Member name="port" dataType="string">
+			</Member>
+			<Member name="cost" dataType="UI32">
+			</Member>
+			<Member name="priority" dataType="UI32">
+			</Member>
+			<Member name="guard" dataType="bool">
+			</Member>
+			<Member name="restrictedTcn" dataType="bool">
+			</Member>
+			<Member name="restrictedRole" dataType="bool">
+			</Member>
+		</ManagedObject>
+        
+		<ManagedObject name="MstpInstanceConfig">
+        </ManagedObject>
+        
+		<ManagedObject name="MstpPortInstanceConfig">
+			<Member name="priority" dataType="UI32">
+			</Member>
+			<Member name="cost" dataType="UI32">
+			</Member>
+			<Member name="restrictedRole" dataType="bool">
+			</Member>
+			<Member name="restrictedTcn" dataType="bool">
+			</Member>
+			<Member name="instance" dataType="ObjectId" 
+                    umlType="ASSOCIATION" 
+                    referredObject= "MstpInstanceConfig">
+			</Member>
+		</ManagedObject>
+
+        	<Message name="CreatePoStpConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ifName" dataType="string">
+			</Member>
+		</Message>
+        	<Message name="DeletePoStpConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ifName" dataType="string">
+			</Member>
+		</Message>
+        	<Message name="UpdatePoStpConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            		<Member name="ifName" dataType="string">
+			</Member>
+            		<Member name="priority" dataType="UI16">
+			</Member>
+            		<Member name="helloTime" dataType="UI32">
+			</Member>
+            		<Member name="cost" dataType="UI32">
+			</Member>
+            		<Member name="cmdCode" dataType="UI32">
+			</Member>
+		</Message>
+        	<Message name="CreatePoVlanStpConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ifName" dataType="string">
+			</Member>
+			<Member name="vid" dataType="UI32">
+			</Member>
+		</Message>
+
+        	<Message name="DeletePoVlanStpConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ifName" dataType="string">
+			</Member>
+			<Member name="vid" dataType="UI32">
+			</Member>
+		</Message>
+
+        	<Message name="UpdatePoVlanStpConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            		<Member name="ifName" dataType="string">
+			</Member>
+			<Member name="vid" dataType="UI32">
+			</Member>
+            		<Member name="priority" dataType="UI16">
+			</Member>
+            		<Member name="cost" dataType="UI32">
+			</Member>
+            		<Member name="cmdCode" dataType="UI32">
+			</Member>
+		</Message>
+        	<Message name="UpdatePoMstpConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="mgmtFlag" dataType="UI32">
+			</Member>
+			<Member name="msgType" dataType="UI32">
+			</Member>
+			<Member name="cmdCode" dataType="UI32">
+			</Member>
+            		<Member name="ifName" dataType="string">
+			</Member>
+            		<Member name="priority" dataType="UI16">
+			</Member>
+            		<Member name="cost" dataType="UI32">
+			</Member>
+		</Message>
+	</Worker>
+	<Worker name="Dot1xGlobal">
+		<ManagedObject name="Dot1xConfigGlobal">
+			<Member name="Enable" dataType="bool">
+			</Member>
+		</ManagedObject>
+		<Message name="Dot1xUpdateConfig" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="Enable" dataType="bool">
+			</Member>
+		</Message>
+	</Worker>
+</Global>
+
+<Local name="Nsm">
+
+    <Worker name="LldpLocal">
+    
+        <!--  Sanjeev: dummy class for satisfying Breeze
+        <ManagedObject name="LldpGlobalProfileConf">
+            <Member name="profileName" dataType="string">
+            </Member>
+        </ManagedObject>
+         End of dummy class  -->        
+
+        <ManagedObject name="LldpIntfConf">
+            <Member name="dcbxVersion" dataType="UI8">
+            </Member>
+            <Member name="disable" dataType="bool">
+            </Member>
+            <Member name="profileId" dataType="ObjectId" 
+                    umlType="ASSOCIATION" 
+                    referredObject="LldpGlobalProfileConf">
+            </Member>
+            <Member name="iscsiPriority" dataType="UI32">
+            </Member>
+        </ManagedObject>
+
+        <Message name="LldpIntfConfSet" sequencerType="SYNC" 
+                allowPreemption="FALSE" 
+                derivedClass="ManagementInterfaceMessage">
+
+            <Member name="mgmtFlags" dataType="UI32">
+            </Member>
+            <Member name="cmdcode" dataType="UI32">
+            </Member>
+            <Member name="msgType" dataType="UI32">
+            </Member>  
+
+            <Member name="id" dataType="string">
+            </Member>
+            <Member name="ifName" dataType="string">
+            </Member>
+            <Member name="ifIndex" dataType="UI64">
+            </Member>
+            <Member name="dcbxVersion" dataType="UI8">
+            </Member>        
+            <Member name="disable" dataType="bool">
+            </Member>
+            <Member name="profile" dataType="string">
+            </Member>
+            <Member name="iscsiPriority" dataType="UI32">
+            </Member>
+        </Message>
+    </Worker> 
+    
+	<Worker name="IntfLocalConf">
+        <ManagedObject name="PhyIntf" derivedClass="PoPhyIntf">
+			<Member name="id" dataType="string">
+			</Member>
+            <Member name="poId" dataType="ObjectId" 
+                    umlType="ASSOCIATION" referredObject="PoIntf">
+            </Member>
+			<Member name="lacpTimeout" dataType="UI8">
+			</Member>
+            <Member name="lldpIntfConfig" 
+                    dataType="WaveManagedObjectPointer" 
+                    umlType="COMPOSITION" 
+                    referredObject="LldpIntfConf">
+            </Member>
+		</ManagedObject>
+        
+        <Message name="CreatePhyIntf" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="id" dataType="string">
+			</Member>
+			<Member name="ifName" dataType="string">
+			</Member>
+            <Member name="ifIndex" dataType="UI64">
+			</Member>
+            <Member name="mtu" dataType="UI32">
+			</Member>
+            <Member name="desc" dataType="string">
+			</Member>
+			<Member name="lacpTimeout" dataType="UI8">
+			</Member>
+		</Message>
+        <Message name="UpdatePhyIntf" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="id" dataType="string">
+			</Member>
+			<Member name="ifName" dataType="string">
+			</Member>
+            <Member name="ifIndex" dataType="UI64">
+			</Member>
+            <Member name="mtu" dataType="UI32">
+			</Member>
+            <Member name="desc" dataType="string">
+			</Member>
+            <Member name="flag" dataType="bool">
+			</Member>
+            <Member name="swMode" dataType="bool">
+            </Member>
+            <Member name="mode" dataType="UI32">
+            </Member>
+            <Member name="isAllowedVlanAll" dataType="bool">
+            </Member>
+            <Member name="cmdCode" dataType="UI32">
+            </Member>
+            <Member name="primaryVlanId" dataType="UI32">
+			</Member>
+            <Member name="secondaryVlanId" dataType="UI32">
+			</Member>
+			<Member name="lacpTimeout" dataType="UI8">
+			</Member>
+		</Message>
+        <Message name="DeletePhyIntf" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="id" dataType="string">
+			</Member>
+            <Member name="ifName" dataType="string">
+			</Member>
+            <Member name="ifIndex" dataType="UI64">
+			</Member>
+		</Message>
+        <Message name="AddPhyIntfToVlanIntf" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="phyId" dataType="string">
+			</Member>
+            <Member name="phyIfIndex" dataType="UI64">
+			</Member>
+            <Member name="phyIfName" dataType="string">
+			</Member>
+            <Member name="vlanId" dataType="vector/UI32/">
+			</Member>
+            <Member name="vlanIfIndex" dataType="vector/UI64/">
+			</Member>
+            <Member name="vlanName" dataType="vector/string/">
+			</Member>
+            <Member name="tagStatus" dataType="vector/UI32/">
+			</Member>
+		</Message>
+        <Message name="DeletePhyIntfToVlanIntf" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="phyId" dataType="string">
+			</Member>
+            <Member name="phyIfIndex" dataType="UI64">
+			</Member>
+            <Member name="phyIfName" dataType="string">
+			</Member>
+            <Member name="vlanId" dataType="vector/UI32/">
+			</Member>
+            <Member name="vlanIfIndex" dataType="vector/UI64/">
+			</Member>
+            <Member name="vlanName" dataType="vector/string/">
+			</Member>
+		</Message>
+        <Message name="AddPhyIntfToPoIntf" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="phyId" dataType="string">
+			</Member>
+            <Member name="phyIfIndex" dataType="UI64">
+			</Member>
+            <Member name="phyIfName" dataType="string">
+			</Member>
+            <Member name="poId" dataType="UI32">
+			</Member>
+            <Member name="poIfIndex" dataType="UI64">
+			</Member>
+            <Member name="poName" dataType="string">
+			</Member>
+            <Member name="mode" dataType="UI32">
+			</Member>
+            <Member name="type" dataType="UI32">
+			</Member>
+		</Message>
+        <Message name="DeletePhyIntfToPoIntf" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="phyId" dataType="string">
+            </Member>
+            <Member name="phyIfIndex" dataType="UI64">
+            </Member>
+            <Member name="phyIfName" dataType="string">
+            </Member>
+            <Member name="poId" dataType="UI32">
+            </Member>
+            <Member name="poIfIndex" dataType="UI64">
+            </Member>
+            <Member name="poName" dataType="string">
+            </Member>
+        </Message>     
+        <Message name="CreateVlanIntfSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="id" dataType="UI32">
+			</Member>
+			<Member name="ifName" dataType="string">
+			</Member>
+            <Member name="ifIndex" dataType="UI64">
+			</Member>
+            <Member name="desc" dataType="string">
+			</Member>
+		</Message>
+        <Message name="UpdateVlanIntfSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="id" dataType="UI32">
+			</Member>
+            <Member name="ifName" dataType="string">
+			</Member>
+            <Member name="ifIndex" dataType="UI64">
+			</Member>
+            <Member name="desc" dataType="string">
+			</Member>
+            <Member name="flag" dataType="bool">
+			</Member>
+            <Member name="pvlanType" dataType="UI8">
+			</Member>
+            <Member name="secondaryVlanId" dataType="UI32">
+			</Member>
+            <Member name="cmdCode" dataType="UI32">
+			</Member>
+		</Message>
+        <Message name="DeleteVlanIntfSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="id" dataType="UI32">
+			</Member>
+            <Member name="ifIndex" dataType="UI64">
+			</Member>
+		</Message>
+        <Message name="CreatePoIntfSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="id" dataType="UI32">
+			</Member>
+			<Member name="ifName" dataType="string">
+			</Member>
+            <Member name="ifIndex" dataType="UI64">
+			</Member>
+            <Member name="desc" dataType="string">
+			</Member>
+            <Member name="poMode" dataType="UI32">
+            </Member>
+            <Member name="poType" dataType="UI32">
+            </Member>
+		</Message>
+        <Message name="UpdatePoIntfSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="id" dataType="UI32">
+			</Member>
+            <Member name="ifName" dataType="string">
+			</Member>
+            <Member name="ifIndex" dataType="UI64">
+			</Member>
+            <Member name="desc" dataType="string">
+			</Member>
+            <Member name="flag" dataType="bool">
+			</Member>
+            <Member name="swModeFlag" dataType="bool">
+			</Member>
+            <Member name="swMode" dataType="UI32">
+			</Member>
+			<Member name="isAllowedVlanAll" dataType="bool">
+			</Member>
+            <Member name="poMode" dataType="UI32">
+            </Member>
+            <Member name="poType" dataType="UI32">
+            </Member>
+            <Member name="cmdCode" dataType="UI32">
+			</Member>
+            <Member name="primaryVlanId" dataType="UI32">
+			</Member>
+            <Member name="secondaryVlanId" dataType="UI32">
+			</Member>
+		</Message>
+        <Message name="DeletePoIntfSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="id" dataType="UI32">
+			</Member>
+            <Member name="ifName" dataType="string">
+			</Member>
+            <Member name="ifIndex" dataType="UI64">
+			</Member>
+		</Message>
+        <Message name="AddPoToVlanIntfSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="poId" dataType="UI32">
+			</Member>
+            <Member name="poIfIndex" dataType="UI64">
+			</Member>
+            <Member name="poIfName" dataType="string">
+			</Member>
+            <Member name="vlanId" dataType="vector/UI32/">
+			</Member>
+            <Member name="vlanIfIndex" dataType="vector/UI64/">
+			</Member>
+            <Member name="vlanName" dataType="vector/string/">
+			</Member>
+            <Member name="tagStatus" dataType="vector/UI32/">
+			</Member>
+		</Message>
+        <Message name="DeletePoToVlanIntfSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="poId" dataType="UI32">
+			</Member>
+            <Member name="poIfIndex" dataType="UI64">
+			</Member>
+            <Member name="poIfName" dataType="string">
+			</Member>
+            <Member name="vlanId" dataType="vector/UI32/">
+			</Member>
+            <Member name="vlanIfIndex" dataType="vector/UI64/">
+			</Member>
+            <Member name="vlanName" dataType="vector/string/">
+			</Member>
+		</Message>
+		<Message name="UpdateLacpConfigSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="systemPriority" dataType="UI32">
+			</Member>
+			<Member name="cmdCode" dataType="UI8">
+			</Member>
+	    </Message>
+       <Message name="CreatePhyVlanConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ifName" dataType="string">
+			</Member>
+			<Member name="vid" dataType="UI32">
+			</Member>
+		</Message>
+
+        <Message name="DeletePhyVlanConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ifName" dataType="string">
+			</Member>
+			<Member name="vid" dataType="UI32">
+			</Member>
+		</Message>
+
+        <Message name="UpdatePhyVlanConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="ifName" dataType="string">
+			</Member>
+			<Member name="vid" dataType="UI32">
+			</Member>
+            <Member name="priority" dataType="UI16">
+			</Member>
+            <Member name="cost" dataType="UI32">
+			</Member>
+            <Member name="cmdCode" dataType="UI32">
+			</Member>
+		</Message>
+	</Worker>
+	<Worker name="IntfXstpLocalConf">
+        	<Message name="CreatePhyStpConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ifName" dataType="string">
+			</Member>
+		</Message>
+        		<Message name="DeletePhyStpConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ifName" dataType="string">
+			</Member>
+		</Message>
+        	<Message name="UpdatePhyStpConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            		<Member name="ifName" dataType="string">
+			</Member>
+            		<Member name="priority" dataType="UI16">
+			</Member>
+            		<Member name="helloTime" dataType="UI32">
+			</Member>
+            		<Member name="cost" dataType="UI32">
+			</Member>
+            		<Member name="cmdCode" dataType="UI32">
+			</Member>
+		</Message>
+
+        	<Message name="CreatePoStpConfigSP" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ifName" dataType="string">
+			</Member>
+		</Message>
+
+        	<Message name="DeletePoStpConfigSP" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ifName" dataType="string">
+			</Member>
+		</Message>
+
+        	<Message name="UpdatePoStpConfigSP" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            		<Member name="ifName" dataType="string">
+			</Member>
+            		<Member name="priority" dataType="UI16">
+			</Member>
+            		<Member name="helloTime" dataType="UI32">
+			</Member>
+            		<Member name="cost" dataType="UI32">
+			</Member>
+            		<Member name="cmdCode" dataType="UI32">
+			</Member>
+		</Message>
+
+        	<Message name="CreatePoVlanStpConfigSP" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ifName" dataType="string">
+			</Member>
+			<Member name="vid" dataType="UI32">
+			</Member>
+		</Message>
+
+        	<Message name="DeletePoVlanStpConfigSP" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ifName" dataType="string">
+			</Member>
+			<Member name="vid" dataType="UI32">
+			</Member>
+		</Message>
+
+        	<Message name="UpdatePoVlanStpConfigSP" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            		<Member name="ifName" dataType="string">
+			</Member>
+			<Member name="vid" dataType="UI32">
+			</Member>
+            		<Member name="priority" dataType="UI16">
+			</Member>
+            		<Member name="cost" dataType="UI32">
+			</Member>
+            		<Member name="cmdCode" dataType="UI32">
+			</Member>
+		</Message>
+
+        	<Message name="UpdatePoMstpConfigSP" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="mgmtFlag" dataType="UI32">
+			</Member>
+			<Member name="msgType" dataType="UI32">
+			</Member>
+			<Member name="cmdCode" dataType="UI32">
+			</Member>
+            		<Member name="ifName" dataType="string">
+			</Member>
+            		<Member name="priority" dataType="UI16">
+			</Member>
+            		<Member name="cost" dataType="UI32">
+			</Member>
+		</Message>
+        	<Message name="UpdatePhyMstpConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="mgmtFlag" dataType="UI32">
+			</Member>
+			<Member name="msgType" dataType="UI32">
+			</Member>
+			<Member name="cmdCode" dataType="UI32">
+			</Member>
+            		<Member name="ifName" dataType="string">
+			</Member>
+            		<Member name="priority" dataType="UI16">
+			</Member>
+            		<Member name="cost" dataType="UI32">
+			</Member>
+		</Message>
+	</Worker>
+
+	<Worker name="VlanIntfIgmpsLocalConf">
+        <Message name="UpdateIgmpsVlanLocalConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="lmqi" dataType="UI32">
+			</Member>
+			<Member name="qmrt" dataType="UI32">
+			</Member>
+			<Member name="enable" dataType="bool">
+			</Member>
+			<Member name="fastLeave" dataType="bool">
+			</Member>
+			<Member name="queryInterval" dataType="UI32">
+			</Member>
+			<Member name="querierEnable" dataType="bool">
+			</Member>
+			<Member name="mrouterTimeout" dataType="UI32">
+			</Member>
+			<Member name="vlanId" dataType="UI32">
+			</Member>
+            <Member name="vlanIfName" dataType="string">
+			</Member>
+            <Member name="vlanIfIndex" dataType="UI64">
+			</Member>
+			<Member name="opCode" dataType="UI32" >
+			</Member>
+			<Member name="negation" dataType="bool">
+			</Member>
+		</Message>
+        <Message name="UpdateIgmpsSgVlanLocalConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="groupAddress" dataType="IpV4Address">
+			</Member>
+			<Member name="interface" dataType="UI32">
+			</Member>
+			<Member name="ifType" dataType="UI32">
+			</Member>
+			<Member name="ifName" dataType="string">
+			</Member>
+			<Member name="vlanId" dataType="UI32">
+			</Member>
+            <Member name="vlanIfName" dataType="string">
+			</Member>
+            <Member name="vlanIfIndex" dataType="UI64">
+			</Member>
+			<Member name="negation" dataType="bool">
+			</Member>
+		</Message>
+        <Message name="UpdateIgmpsMrtrVlanLocalConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ifType" dataType="UI32">
+			</Member>
+			<Member name="ifName" dataType="string">
+			</Member>
+			<Member name="vlanId" dataType="UI32">
+			</Member>
+            <Member name="vlanIfName" dataType="string">
+			</Member>
+            <Member name="vlanIfIndex" dataType="UI64">
+			</Member>
+			<Member name="negation" dataType="bool">
+			</Member>
+		</Message>
+	</Worker>
+
+	<Worker name="Dot1xLocal">
+
+	  <ManagedObject name="Dot1xPortConfig">
+		  <Member name="enabled" dataType="bool">
+		  </Member>
+		  <Member name="port_ctrl_type" dataType="UI32">
+		  </Member>
+		  <Member name="proto_version" dataType="UI32">
+		  </Member>
+		  <Member name="quiet_interval" dataType="UI32">
+		  </Member>
+		  <Member name="max_reauth_attempt" dataType="UI32">
+		  </Member>
+		  <Member name="enable_auth" dataType="bool">
+		  </Member>
+		  <Member name="reauth_timeout_interval" dataType="UI32">
+		  </Member>
+		  <Member name="server_timeout_interval" dataType="UI32">
+		  </Member>
+		  <Member name="supp_timeout_interval" dataType="UI32">
+		  </Member>
+		  <Member name="tx_timeout_interval" dataType="UI32">
+		  </Member>
+	  </ManagedObject>
+
+	  <Message name="Dot1xUpdateConfigSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+		  <Member name="Enable" dataType="bool">
+		  </Member>
+	  </Message>
+
+	  <Message name="Dot1xUpdatePortConfig" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+		  <Member name="enabled" dataType="bool">
+		  </Member>
+		  <Member name="port_ctrl_type" dataType="UI32">
+		  </Member>
+		  <Member name="proto_version" dataType="UI32">
+		  </Member>
+		  <Member name="quiet_interval" dataType="UI32">
+		  </Member>
+		  <Member name="max_reauth_attempt" dataType="UI32">
+		  </Member>
+		  <Member name="enable_auth" dataType="bool">
+		  </Member>
+		  <Member name="reauth_timeout_interval" dataType="UI32">
+		  </Member>
+		  <Member name="server_timeout_interval" dataType="UI32">
+		  </Member>
+		  <Member name="supp_timeout_interval" dataType="UI32">
+		  </Member>
+		  <Member name="tx_timeout_interval" dataType="UI32">
+		  </Member>
+		  <Member name="opcode" dataType="UI32">
+		  </Member>
+		  <Member name="cmdCode" dataType="UI32">
+		  </Member>
+	  </Message>
+    </Worker> 
+</Local>
+</WavePlugin>

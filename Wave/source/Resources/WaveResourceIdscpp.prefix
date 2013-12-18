@@ -1,0 +1,15 @@
+#include "WaveResourceIds.h"
+#include <string>
+#include <map>
+
+using namespace std;
+
+namespace WaveNs
+{
+
+static map<unsigned long int, string> s_waveResourceIdsMap;
+static map<unsigned long int, vector<unsigned long int> > s_waveResourceEnumsMap;
+static map<unsigned long int, string> s_waveSourceCodeEnumsMap;
+static map<string, unsigned long int> s_waveSourceCodeResourceIdsMap;
+
+}

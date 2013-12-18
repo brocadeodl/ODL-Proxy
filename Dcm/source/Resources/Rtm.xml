@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ModuleResources ModuleName = "Rtm" ComponentName = "Wave">
+    <ResourceEnum Name = "RtmReturnSatus">
+        <Resource Name = "WRC_RTM_ERR_STATIC_NON_CONT_SUBNETMASK">%% Error: Invalid mask input</Resource>
+        <Resource Name = "WRC_RTM_ERR_STATIC_INCONSISTENT_SUBNETMASK">%% Error: Inconsistent subnet mask</Resource>
+        <Resource Name = "WRC_RTM_ERR_STATIC_BAD_PREFIX">%% Error: Target network is invalid</Resource>
+        <Resource Name = "WRC_RTM_ERR_STATIC_MULTICAST_ADDRESS">%% Error: Target network is multicast</Resource>
+        <Resource Name = "WRC_RTM_ERR_STATIC_INVLD_PORT">%% Error: Specified interface type is wrong</Resource>
+        <Resource Name = "WRC_RTM_ERR_STATIC_DUPLICATE_ROUTE">%% Error: Duplicate route entry</Resource>
+        <Resource Name = "WRC_RTM_ERR_STATIC_INVLD_ROUTE">%% Error: Route does not exist</Resource>
+        <Resource Name = "WRC_RTM_ERR_STATIC_INVLD_NHOP">%% Error: Nexthop address is same as one of the interface IP addresses.</Resource>
+        <Resource Name = "WRC_RTM_ERR_STATIC_ZERO_NHOP">%% Error: 0.0.0.0 as nexthop not allowed</Resource>
+        <Resource Name = "WRC_RTM_ERR_STATIC_BAD_NHOP_IP">%% Error: nexthop ip address is invalid</Resource>
+        <Resource Name = "WRC_RTM_ERR_ROUTE_NOT_FOUND">%% Error: Can't find matching entry</Resource>
+        <Resource Name = "WRC_RTM_ERR_STATIC_ONE_PATH_ALLOWED">%% Error: Interface route can not form ECMP</Resource>
+        <Resource Name = "WRC_RTM_ERR_STATIC_INT_DEF_NOT_ALLOWED">%% Error: Interface route can not be default route</Resource>
+        <Resource Name = "WRC_RTM_ERR_STATIC_OIF_NOT_EXIST">%% Error: Invalid outgoing interface</Resource>
+        <Resource Name = "WRC_RTM_ERR_STATIC_MAX_ROUTES_REACHED">%% Error: Max number of static route configuration reached</Resource>
+        <Resource Name = "WRC_RTM_ERR_INVALID_ROUTER_ID">%% Error: Invalid Router ID</Resource>
+        <Resource Name = "WRC_RTM_ERR_STATIC_INVALID_NULL_INTF">%% Error: Invalid null interface. Only null 0 is supported</Resource>
+        <Resource Name = "WRC_RTM_ERR_UNKNOWN">%% Error: Unknown error</Resource>
+
+        <Resource Name = "RTM_ERR_PO_OUT_OF_RANGE">%%Error: Port-channel id is out of range [1-6144]</Resource>
+        <Resource Name = "RTM_ERR_VE_OUT_OF_RANGE">%%Error: VE id is out of range [2-4090]</Resource>
+        <Resource Name = "RTM_ERR_INVALID_VRF">%% Error: Vrf doesn't exists</Resource>
+        <Resource Name = "RTM_ERR_RD_CONFIGURED">%% Error: RD cannot be changed after configured, delete the VRF first</Resource>
+        <Resource Name = "WRC_RTM_ERR_VRF_RD_AF_NOTSET">%% Error: VRF RD/AF Not set/reset</Resource>
+        <Resource Name = "WRC_RTM_ERR_VRF_INVLD_RD">%% Error: Invalid Route Distinguisher</Resource>
+        <Resource Name = "RTM_MAX_ROUTES_CANT_BE_CONFIGURED">%% Error: Maxroutes cannot be changed after configured, delete the VRF first</Resource>
+
+    </ResourceEnum>
+</ModuleResources>

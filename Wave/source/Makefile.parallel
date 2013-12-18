@@ -1,0 +1,180 @@
+export WAVE_HOME              := $(shell pwd)/..
+export SRC_ROOT               := $(shell pwd)
+export SPRINGBOARD            := $(SRC_ROOT)/../../../../..
+
+include Makefile.versioninfo
+
+export IS_DEPEND_NEEDED       := true
+
+all: buildall
+
+include Makefile.tools
+
+export APPLICATION_ROOT       := $(WAVE_SRC_DIR)/../application
+
+export CFG                    := 0
+CURRENT_ABSOLUTE_DIR          := $(shell pwd)
+CURRENT_ABSOLUTE_PARENT_DIR   := $(dir $(CURRENT_ABSOLUTE_DIR))
+CURRENT_DIR                   := $(notdir $(CURRENT_ABSOLUTE_DIR))
+SUB_DIRS                      := $(shell find . -mindepth 1 -maxdepth 1 -type d | sort | sed "s/^\.\///g")
+
+.PHONY: $(SUB_DIRS)
+
+buildall: extractxercesc extractpostgresql extractzlib createdirs version resources rmprojectlibneeded buildsubdirs buildversion buildresources applyexclusions
+	$(ECHOCMD) L - $(WAVE_PROJECT_NAME); 
+	if [ -f $(WAVE_BUILD_DIR_OBJ)/.project_lib_needed ]; then \
+	    cd $(WAVE_BUILD_DIR_LIB); rm -f lib$(WAVE_PROJECT_NAME).a; $(AR) -r lib$(WAVE_PROJECT_NAME).a `find $(WAVE_BUILD_DIR_OBJ) -name "*.o" -print`; $(CXX) -shared -mimpure-text -fPIC -Wl,-soname,lib$(WAVE_PROJECT_NAME).so.$(WAVE_VERSION_MAJOR) -o lib$(WAVE_PROJECT_NAME).so.$(WAVE_VERSION_MAJOR).$(WAVE_VERSION_MINOR).$(WAVE_VERSION_PATCH) `find $(WAVE_BUILD_DIR_OBJ) -name "*.o" -print`; rm -f lib$(WAVE_PROJECT_NAME).so; rm -f lib$(WAVE_PROJECT_NAME).so.$(WAVE_VERSION_MAJOR); ln -s lib$(WAVE_PROJECT_NAME).so.$(WAVE_VERSION_MAJOR).$(WAVE_VERSION_MINOR).$(WAVE_VERSION_PATCH) lib$(WAVE_PROJECT_NAME).so.$(WAVE_VERSION_MAJOR); ln -s lib$(WAVE_PROJECT_NAME).so.$(WAVE_VERSION_MAJOR) lib$(WAVE_PROJECT_NAME).so; \
+	fi;
+
+createdirs: $(WAVE_BUILD_DIR_OBJ) $(WAVE_BUILD_DIR_LIB) $(WAVE_BUILD_DIR_SDK) $(WAVE_BUILD_DIR_INTERNAL_SDK) $(WAVE_BUILD_DIR_DYNAMIC_SRC) extractzlib
+
+
+applyexclusions: buildresources
+	cd $(WAVE_BUILD_DIR_OBJ); \
+	if [ -f "$(SRC_ROOT)/Config$(CFG).exclude" ]; then \
+	    for i in `cat $(SRC_ROOT)/Config$(CFG).exclude`; do \
+	    	$(ECHOCMD) X - $$i; \
+	        rm -f $$i.o; \
+	    done; \
+	fi;
+
+rmprojectlibneeded: resources
+	rm -f $(WAVE_BUILD_DIR_OBJ)/.project_lib_needed; 
+
+buildsubdirs: rmprojectlibneeded
+	for i in $(SUB_DIRS); do \
+	$(ECHOCMD) -n O - $$i; \
+	rm -f $(WAVE_BUILD_DIR_OBJ)/.sub_dir_build_succeeded; \
+	rm -f $(WAVE_BUILD_DIR_OBJ)/.sub_dir_lib_needed; \
+	rm -f $(WAVE_BUILD_DIR_OBJ)/.Makefile.tmp.depend; \
+	touch $(WAVE_BUILD_DIR_OBJ)/.Makefile.tmp.depend; \
+	$(MAKE)  -C $(CURRENT_ABSOLUTE_DIR)/$$i -f $(SRC_ROOT)/Makefile.library.parallel VPATH="$(WAVE_BUILD_DIR_OBJ)/$$i" depend; \
+	$(MAKE)  -C $(CURRENT_ABSOLUTE_DIR)/$$i -f $(SRC_ROOT)/Makefile.library.parallel VPATH="$(WAVE_BUILD_DIR_OBJ)/$$i" all; \
+	if [ ! -f $(WAVE_BUILD_DIR_OBJ)/.sub_dir_build_succeeded ]; then \
+	    $(ECHOCMD); \
+	    $(ECHOCMD) Build Failed For $$i; \
+	    exit 1; \
+	fi; \
+	done;
+
+buildversion: buildsubdirs
+	$(ECHOCMD) -n "Generating Wave Version Library ... ";
+	$(MAKE) -C $(SRC_ROOT)/Version -f Makefile.build;
+	$(ECHOCMD) "Done";
+
+buildresources: buildversion
+	$(ECHOCMD) -n "Generating Wave Resources Library ... ";
+	$(MAKE) -C $(SRC_ROOT)/Resources -f Makefile.build;
+	$(ECHOCMD) "Done";
+
+resources: version
+	cd $(SRC_ROOT)/Resources; $(MAKE) -f Makefile.resources;
+
+version: createdirs
+	cd $(SRC_ROOT)/Version; $(MAKE) -f Makefile.version;
+
+sdk: all
+	cd $(WAVE_BUILD_DIR_SDK); \
+	rm -rf $(WAVE_PROJECT_NAME)SDK; \
+	rm -f $(WAVE_PROJECT_NAME)SDK.$(OS).$(ARCH).tgz; \
+	mkdir -p $(WAVE_PROJECT_NAME)SDK; \
+	mkdir -p $(WAVE_PROJECT_NAME)SDK/include; \
+	mkdir -p $(WAVE_PROJECT_NAME)SDK/lib; \
+	cp $(SRC_ROOT)/App/AppInterface.h $(WAVE_PROJECT_NAME)SDK/include; \
+	cp $(SRC_ROOT)/Framework/ServiceInterface/ApplicationService.h $(WAVE_PROJECT_NAME)SDK/include; \
+	cp $(WAVE_BUILD_DIR_DYNAMIC_SRC)/WaveCStatus.h $(WAVE_PROJECT_NAME)SDK/include; \
+	cp -pr $(WAVE_BUILD_DIR_LIB)/lib$(WAVE_PROJECT_NAME).a $(WAVE_BUILD_DIR_LIB)/lib$(WAVE_PROJECT_NAME).so.$(WAVE_VERSION_MAJOR).$(WAVE_VERSION_MINOR).$(WAVE_VERSION_PATCH) $(WAVE_BUILD_DIR_LIB)/lib$(WAVE_PROJECT_NAME).so.$(WAVE_VERSION_MAJOR) $(WAVE_PROJECT_NAME)SDK/lib; \
+	cp $(WAVE_DEPENDENCIES_ROOT)/$(OS)/$(ARCH)/postgresql/lib/libpq.a $(WAVE_PROJECT_NAME)SDK/lib; \
+	tar -zcf $(WAVE_PROJECT_NAME)SDK.$(OS).$(ARCH).tgz $(WAVE_PROJECT_NAME)SDK;
+
+internalsdk: all examples
+	cd $(WAVE_BUILD_DIR_INTERNAL_SDK); \
+	rm -rf $(WAVE_PROJECT_NAME)InternalSDK; \
+	rm -f $(WAVE_PROJECT_NAME)InteranalSDK.$(OS).$(ARCH).tgz; \
+	mkdir -p $(WAVE_PROJECT_NAME)InternalSDK; \
+	mkdir -p $(WAVE_PROJECT_NAME)InternalSDK/include; \
+	mkdir -p $(WAVE_PROJECT_NAME)InternalSDK/lib; \
+	cd $(SRC_ROOT); tar -zcf $(WAVE_BUILD_DIR_INTERNAL_SDK)/$(WAVE_PROJECT_NAME)InternalSDK-temp.tgz `find . -name "*.h"; find . -name "*.xml"; find . -name "*.prefix"; find . -name "*.postfix";`; cd $(WAVE_BUILD_DIR_INTERNAL_SDK); \
+	tar -C $(WAVE_PROJECT_NAME)InternalSDK/include -zxf $(WAVE_PROJECT_NAME)InternalSDK-temp.tgz; \
+	rm -rf $(WAVE_PROJECT_NAME)InternalSDK-temp.tgz; \
+	cp $(WAVE_BUILD_DIR_DYNAMIC_SRC)/*.h $(WAVE_PROJECT_NAME)InternalSDK/include; \
+	cp $(SRC_ROOT)/Framework/MultiThreading/PrismMessageQueue.cpp $(WAVE_PROJECT_NAME)InternalSDK/include/Framework/MultiThreading/PrismMessageQueue.cpp; \
+	cp -f $(POSTGRESQL_INCLUDE_DIR)/libpq-fe.h $(POSTGRESQL_INCLUDE_DIR)/postgres_ext.h  $(WAVE_PROJECT_NAME)InternalSDK/include; \
+	cp -p $(WAVE_BUILD_DIR_LIB)/lib$(WAVE_PROJECT_NAME).a $(WAVE_BUILD_DIR_LIB)/lib$(WAVE_PROJECT_NAME).so.$(WAVE_VERSION_MAJOR).$(WAVE_VERSION_MINOR).$(WAVE_VERSION_PATCH) $(WAVE_BUILD_DIR_LIB)/lib$(WAVE_PROJECT_NAME).so.$(WAVE_VERSION_MAJOR) $(WAVE_BUILD_DIR_LIB)/lib$(WAVE_PROJECT_NAME).so $(WAVE_PROJECT_NAME)InternalSDK/lib; \
+	cp $(WAVE_DEPENDENCIES_ROOT)/$(OS)/$(ARCH)/postgresql/lib/libpq.a $(WAVE_PROJECT_NAME)InternalSDK/lib; \
+	tar -zcf $(WAVE_PROJECT_NAME)InternalSDK.$(OS).$(ARCH).tgz $(WAVE_PROJECT_NAME)InternalSDK;
+
+examples: $(WAVE_BUILD_DIR_EXAMPLES)
+	for i in `find . -name "Test"`; do \
+	    mkdir -p $(WAVE_BUILD_DIR_EXAMPLES)/$$i; \
+	    cp -r `ls $$i/* | grep -v "~" | grep -v ".keep"` $(WAVE_BUILD_DIR_EXAMPLES)/$$i; \
+	done;
+
+clean:
+	mkdir -p $(WAVE_BUILD_DIR_OBJ); \
+	touch $(WAVE_BUILD_DIR_OBJ)/.Makefile.tmp.depend; \
+	for i in $(SUB_DIRS); do \
+	    if [ -d "$(CURRENT_ABSOLUTE_DIR)/$$i" ]; then \
+		    cd $(CURRENT_ABSOLUTE_DIR)/$$i; \
+	        $(MAKE) -f $(SRC_ROOT)/Makefile.library.parallel clean; \
+	    fi; \
+	done;\
+	rm -f $(WAVE_BUILD_DIR_LIB)/lib$(WAVE_PROJECT_NAME).a; rm -f $(WAVE_BUILD_DIR_LIB)/lib$(WAVE_PROJECT_NAME).so.$(WAVE_VERSION_MAJOR) $(WAVE_BUILD_DIR_LIB)/lib$(WAVE_PROJECT_NAME).so.$(WAVE_VERSION_MAJOR).$(WAVE_VERSION_MINOR).$(WAVE_VERSION_PATCH) $(WAVE_BUILD_DIR_LIB)/lib$(WAVE_PROJECT_NAME).so; \
+	if [ -d "$(WAVE_BUILD_DIR_DYNAMIC_SRC)" ]; then \
+	    rm -rf $(WAVE_BUILD_DIR_DYNAMIC_SRC)/*; \
+	fi;
+	if [ -d "$(WAVE_BUILD_DIR_SDK)" ]; then \
+	    rm -rf $(WAVE_BUILD_DIR_SDK)/*; \
+	fi;
+	if [ -d "$(WAVE_BUILD_DIR_INTERNAL_SDK)" ]; then \
+	    rm -rf $(WAVE_BUILD_DIR_INTERNAL_SDK)/*; \
+	fi;
+	if [ -d "$(WAVE_BUILD_DIR_EXAMPLES)" ]; then \
+	    rm -rf $(WAVE_BUILD_DIR_EXAMPLES)/*; \
+	fi;
+
+setcleanflags:
+	export IS_DEPEND_NEEDED=false
+
+cleanbuild: clean setcleanflags all
+
+kdevelop:
+	sed "s#MAINPROGRAM#$(APPLICATION_ROOT)/Spectrum.$(OS).$(ARCH)#g" ../projects/kdevelop/WaveProjectFileForKdevelop | sed "s#CUSTOMDIR#$(APPLICATION_ROOT)#g" | sed "s#AUTHOR#$(WAVE_USER_NAME)#g" | sed "s#EMAIL#$(USER)@brocade.com#g" > ../projects/kdevelop/Wave.kdevelop; \
+	chmod 644 ../projects/kdevelop/Wave.kdevelop; \
+	if [ ! -d "../projects/kdevelop/source" ]; then \
+	    ln -s $(SRC_ROOT) ../projects/kdevelop/source; \
+	fi; \
+	find . -name "*.h" | sed "s#^\.\/#source\/#g" > ../projects/kdevelop/Wave.kdevelop.filelist; \
+	find . -name "*.cpp" | sed "s#^\.\/#source\/#g" >> ../projects/kdevelop/Wave.kdevelop.filelist; \
+	cd ../projects/kdevelop; /usr/bin/ctags -L Wave.kdevelop.filelist -R --c++-types=+px --excmd=pattern --exclude=Makefile --exclude=. -f tags;
+
+extractxercesc: $(XERCESC_BUILD_ROOT)
+	cd $(XERCESC_BUILD_ROOT); \
+	if [ ! -f $(XERCESC_VERSION)/.__Extraction_Completed__ ]; then \
+		$(ECHOCMD) -n "Extracting xerces-c SDK ... "; \
+		rm -rf $(XERCESC_VERSION); \
+		tar -zxf $(XERCESC_FILE); \
+		touch $(XERCESC_VERSION)/.__Extraction_Completed__; \
+		$(ECHOCMD) "Done"; \
+	fi;
+
+extractpostgresql: $(POSTGRESQL_BUILD_ROOT) extractxercesc
+	cd $(POSTGRESQL_BUILD_ROOT); \
+	if [ ! -f $(POSTGRESQL_VERSION)/.__Extraction_Completed__ ]; then \
+		$(ECHOCMD) -n "Extracting posgresql SDK ... "; \
+		rm -rf $(POSTGRESQL_VERSION); \
+		tar -zxf $(POSTGRESQL_FILE); \
+		touch $(POSTGRESQL_VERSION)/.__Extraction_Completed__; \
+		$(ECHOCMD) "Done"; \
+	fi;
+
+extractzlib: $(ZLIB_BUILD_ROOT) extractpostgresql
+	cd $(ZLIB_BUILD_ROOT); \
+	if [ ! -f $(ZLIB_VERSION)/.__Extraction_Completed__ ]; then \
+	    $(ECHOCMD) -n "Extracting zlib SDK ... "; \
+	    rm -rf $(ZLIB_VERSION); \
+	    tar -zxf $(ZLIB_FILE); \
+	    touch $(ZLIB_VERSION)/.__Extraction_Completed__; \
+	    $(ECHOCMD) "Done"; \
+	fi; \
+

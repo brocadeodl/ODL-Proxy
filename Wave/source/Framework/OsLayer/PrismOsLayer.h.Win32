@@ -1,0 +1,52 @@
+/***************************************************************************
+ *   Copyright (C) 2005 Brocade Communications Systems, Inc.               *
+ *   All rights reserved.                                                  *
+ *   Author : Vidyasagara Reddy Guntaka                                    *
+ ***************************************************************************/
+
+#ifndef PRISMOSLAYER_H
+#define PRISMOSLAYER_H
+
+#include <time.h>
+#include "pthread.h"
+#include <winsock.h>
+#include <iostream>
+#include <vector>
+#include <string>
+#include "Framework/Trace/TraceTypes.h"
+
+using namespace std;
+
+int  gettimeofday (struct timeval *tv, struct timezone *tz);
+int  inet_pton    (int af, const char *src, void *dst);
+
+struct itimerval {
+    struct timeval it_interval; /* next value */
+    struct timeval it_value;    /* current value */
+};
+
+typedef int socklen_t;
+
+VOID CALLBACK timerExpirationCallback (HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime);
+
+namespace WaveNs
+{
+
+unsigned int  prismSleep                 (unsigned int numberOfSecondsToSleep);
+void          prismSysLog                (char *pStringToLog);
+void          initializePrismSocketLayer ();
+void          getIpAddressesForThisHost  (vector<string> &ipAddressesForThisHost);
+int           prismCloseSocket           (int fd);
+void          prismBlockSignals          ();
+char         *prismGetCwd                (char *buf, size_t size);
+void          prismWaitForAlarmSignal    ();
+void          prismCreateWaitableTimer   ();
+int           prismSetITimer             (struct itimerval *pItimerValue);
+HANDLE        getPrismTimerHandle        ();
+void          prismSetConsoleTextColor   (TraceLevel requestedTraceLevel);
+void          prismResetConsoleTextColor ();
+
+}
+
+#endif // PRISMOSLAYER_H
+

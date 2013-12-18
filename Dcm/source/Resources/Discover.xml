@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Framework Core Module. -->
+<!-- This file contains the resources for Wave Timer Module. -->
+
+<ModuleResources ModuleName = "Discover" ComponentName = "DiscoverResourceIds">
+
+    <ResourceEnum Name = "DiscoverUserConfigurations">
+        <Resource Name = "DISC_API_ERR_UNKNOWN">%% Command failed with error code </Resource>
+        <Resource Name = "DISC_COMMON_ERR_CLUSTER_VALIDATE_VERSION_MISMATCH">%%Error: Cluster Validation failed - Version Mismatch.</Resource>
+        <Resource Name = "DISC_COMMON_ERR_NOT_ACTIVATER">%%Error: Discover failed - Discover not activated.</Resource>
+        <Resource Name = "DISC_COMMON_ERR_LOST_CONNECTION">%%Error: Discover failed - Lost connection.</Resource>
+        <Resource Name = "DISC_COMMON_ERR_BAD_CREDENTIALS">%%Error: Discover failed - Bad credentials</Resource>
+        <Resource Name = "DISC_COMMON_ERR_DISC_FAILED">%%Error: Discover failed</Resource>
+    </ResourceEnum>
+
+</ModuleResources>

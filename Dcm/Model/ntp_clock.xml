@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<WavePlugin name="NTP_Clock" nameSpace="DcmNs">
+
+<Global name="NTPClockGlobal">
+
+	<ManagedObject name="NTPServer">
+		<Member name="server" dataType="IpV4Address"/>
+	</ManagedObject>
+	<Message name="AddServer" sequencerType="ASYNC" allowPreemption="FALSE">
+		<Member name="IpAddr" dataType="IpV4Address" />
+	</Message>
+	<Message name="RemoveServer" sequencerType="ASYNC" allowPreemption="FALSE">
+		<Member name="IpAddr" dataType="IpV4Address" />
+	</Message>
+
+	<Message name="GetServer" sequencerType="ASYNC" allowPreemption="FALSE">
+		<Member name="ActiveServer" dataType="IpV4Address" />
+		<Member name="MappedId" dataType="UI16" />
+	</Message>
+
+	<Message name="SetClock" sequencerType="ASYNC" allowPreemption="FALSE">
+		<Member name="ClockDateTime" dataType="DateTime" />
+	</Message>
+	<Message name="GetClock" sequencerType="ASYNC" allowPreemption="FALSE">
+		<Member name="ClockDateTime" dataType="DateTime" />
+		<Member name="MappedId" dataType="UI16" />
+	</Message>
+
+	<ManagedObject name="TimeZone">
+		<Member name="timezonestring" dataType="string"/>
+	</ManagedObject>
+	<Message name="SetZone" sequencerType="ASYNC" allowPreemption="FALSE">
+		<Member name="Timezone" dataType="UI32" />
+	</Message>
+
+</Global>
+
+
+<Local name="NTPClock">
+
+	<Message name="SetSwitchClock" sequencerType="ASYNC" allowPreemption="FALSE">
+		<Member name="ClockDateTime" dataType="DateTime" />
+	</Message>
+	<Message name="SetSwitchZone" sequencerType="ASYNC" allowPreemption="FALSE">
+		<Member name="Timezone" dataType="string" />
+	</Message>
+	<Message name="GetSwitchClock" sequencerType="ASYNC" allowPreemption="FALSE">
+		<Member name="ClockDateTime" dataType="DateTime" />
+	</Message>
+
+	<Message name="GetActiveServer" sequencerType="ASYNC" allowPreemption="FALSE">
+		<Member name="IpAddr" dataType="IpV4Address" />
+	</Message>
+	<Message name="SetServers" sequencerType="ASYNC" allowPreemption="FALSE">
+		<Member name="IpAddrList" dataType="string" />
+	</Message>
+
+</Local>

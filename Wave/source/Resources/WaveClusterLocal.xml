@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Cluster Local Module. -->
+
+<ModuleResources ModuleName = "ClusterLocal" ComponentName = "Wave">
+    <ResourceEnum Name = "ClusterLocalSetThisNodeIpAddressStatus">
+        <Resource Name = "CLUSTER_LOCAL_SET_THIS_NODE_IP_ADDRESS_STATUS_INVALID_IP_ADDRESS">Invalid IP address</Resource>
+        <Resource Name = "CLUSTER_LOCAL_SET_THIS_NODE_IP_ADDRESS_STATUS_CANNOT_FIND_LOCAL_NODE">Cannot Find Local Wave Node</Resource>
+        <Resource Name = "CLUSTER_LOCAL_SET_THIS_NODE_IP_ADDRESS_STATUS_CANNOT_CAST_LOCAL_NODE">Cannot Cast To Wave Node</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "WaveNodeStartMode">
+        <Resource Name = "WAVE_NODE_START_AS_NORMAL">Wave Node is launched in Normal mode</Resource>
+        <Resource Name = "WAVE_NODE_START_AS_CONTROLLER">Wave Node is launched in controller mode</Resource>
+        <Resource Name = "WAVE_NODE_START_AS_CLIENT">Wave Node is launched in Client mode</Resource>
+    </ResourceEnum>
+</ModuleResources>

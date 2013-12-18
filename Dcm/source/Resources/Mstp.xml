@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ModuleResources ModuleName = "Mstp" ComponentName = "Wave">
+    <ResourceEnum Name = "MstpReturnSatus">
+        <Resource Name = "MSTP_SYSTEM_ERROR">%% Error: System error</Resource>
+        <Resource Name = "MSTP_IS_VCS_MODE_ERROR">%% Error: Command is supported only in non-VCS mode</Resource>
+        <Resource Name = "MIN_LINK_IN_VCS_MODE_ERROR">%% Error: minimum-links is supported only in non VCS mode</Resource>
+		<!-- Bridge Config -->
+        <Resource Name = "MSTP_BRIDGE_NOT_MSTP">%% Error: Bridge is not configured as MSTP</Resource>
+        <Resource Name = "MSTP_BRIDGE_NOT_PVST">%% Error: Bridge is not configured as PVST/RPVST</Resource>
+        <Resource Name = "MSTP_BRIDGE_PRIORITY_ERROR">%% Error: The priority value must be in multiples of 4096</Resource>
+        <Resource Name = "MSTP_BRIDGE_FWDDELAY_ERROR">%% Error: Cannot set forward-delay,bridge_max_age &lt;= 2*(bridge_forward_delay - 1)</Resource>
+        <Resource Name = "MSTP_BRIDGE_MAXAGE_ERROR">%% Error: Cannot set max-age, 2*(bridge_forward_delay - 1)>=bridge_max_age>=2*(bridge_hello_time + 1)</Resource>
+        <Resource Name = "MSTP_BRIDGE_HELLO_ERROR">%% Error: Cannot set hello-time, bridge_max_age >=2*(bridge_hello_time + 1)</Resource>
+        <Resource Name = "MSTP_MAXAGE_FWDDLY_HELLOTIME_MISMATCH">%% Error: Configuration requires:2*(bridge_forward_delay - 1)>=bridge_max_age>=2*(bridge_hello_time + 1)</Resource>
+		<!-- MSTP instance Config -->
+        <Resource Name = "MSTP_VLAN_NOT_FOUND_ERROR">%% Error: One or more VLANs doesn't exist</Resource>
+        <Resource Name = "MSTP_INST_OVERLAP_ERROR">%% Error: One or more VLANs overlap with another MSTP instance </Resource>
+        <Resource Name = "MSTP_INST_NOT_EXIST">%% Error: Instance doesn't exist</Resource>
+        <Resource Name = "MSTP_INST_VLAN_OUT_OF_RANGE">%% Error: Vlan should be between 1 - 4090 </Resource>
+        <Resource Name = "MSTP_INST_VLAN_NON_DOT1Q_VLAN_NOT_ALLOWED">%% Error: Vlans more than 4096 are not allowed </Resource>
+
+		<!-- Vlan Config -->
+        <Resource Name = "MSTP_VLAN_INCOMPLETE_ERROR">syntax error: incomplete path</Resource>
+        <Resource Name = "MSTP_VLAN_NOT_EXIST">%% Error: Vlan doesn't exist</Resource>
+        <Resource Name = "MSTP_VLAN_NO_MAP">%% Error: Vlan should not map into any instance</Resource>
+        <Resource Name = "MSTP_VLAN_NO_PVST_INSTANCE">%% Error: Maximum number of PVST instances exceeded</Resource>
+        <Resource Name = "MSTP_PVLAN_MSTP_SECVLAN">%% Error: MSTP Configuration not allowed as one/more vlan is secondary private vlan</Resource>
+        <Resource Name = "MSTP_PVLAN_XSTP_SECVLAN">%% Error: Configuration not allowed as vlan is secondary private vlan</Resource>
+        <Resource Name = "MSTP_PVLAN_STP_HOST_MODE">%% Error: Spanning tree configurations not allowed as port is a private-vlan host port</Resource>
+        <Resource Name = "MSTP_REMOTE_SPAN_VLAN_ERROR">%% Error: Spanning tree configuration not allowed for rspan-vlan</Resource>
+     
+		<!-- Port Config -->
+        <Resource Name = "MSTP_PORT_NO_SW_ERROR">%% Error: Interface is not in L2 mode</Resource>
+        <Resource Name = "MSTP_PORT_PRIORITY_ERROR">%% Error: Priority is not a multiples of 16</Resource>
+        <Resource Name = "MSTP_PORT_INST_NOT_EXIST">%% Error: Port doesn't configure for the instance</Resource>
+        <Resource Name = "MSTP_PORT_VLAN_NOT_EXIST">%% Error: Port doesn't configure for the vlan</Resource>
+        <Resource Name = "MSTP_PORT_ELD_ENABLED_ERROR">%% Error: Edge-loop-detection is enabled on this interface; cannot enable spanning tree.</Resource>
+
+        <Resource Name = "BPDUDROP_WARNING">%% Warning: Enabling bpdu-drop can cause bridging loops. Use with caution.</Resource>
+        <Resource Name = "NOT_ALLOWED_WITH_SPT">%% Error: This configuration is not allowed when spanning tree protocol is configred</Resource>
+        <Resource Name = "NOT_ALLOWED_WITH_BPDU_DROP">%% Error: This configuration is not allowed when bpdu-drop is enabled on any interface</Resource>
+        <Resource Name = "NOT_ALLOWED_WITH_TAGGED_BPDU">%% Error: This configuration is not allowed when tagged bpdu tunnelling is enabled on any interface</Resource>
+        <Resource Name = "NOT_ALLOWED_WITH_NON_DOT1Q_VLAN">%% Error: MSTP configuration is not allowed when non dot1q vlan is configured with enabled spanning-tree</Resource>
+
+        <!-- show spanning-tree -->
+        <Resource Name = "MSTP_OUT_OF_RANGE_ERROR">% Error: Value out of range</Resource>
+        <Resource Name = "MSTP_NO_SPT_ERROR">% Error: Spanning-tree is not configured</Resource>
+        <Resource Name = "MSTP_BRIDGE_SHUT_ERROR">% Error: Bridge spanning-tree is shutdown</Resource>
+        <Resource Name = "MSTP_NO_MSTI_INFO_ERROR">% Error: No information available for MST instance</Resource>
+        <Resource Name = "MSTP_NO_BRIDGE_ERROR">% Error: Bridge not found</Resource>
+        <Resource Name = "MSTP_MAX_PVST_INSTANCE_ERROR">% Error: Bridge spanning-tree instance disabled due to max instance reached</Resource>
+
+        <!-- spanning-tree sys-id-byte -->
+        <Resource Name = "MSTP_SYSIDSET_SPT_ENABLED_ERROR">Cannot set system id when spanning tree protocol is enabled. Disable the protocol and try again.</Resource>
+
+    </ResourceEnum>
+</ModuleResources>

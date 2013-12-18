@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Timer Module. -->
+
+<ModuleResources ModuleName = "Management Interface Client Interface" ComponentName = "Wave">
+    <ResourceEnum Name = "WaveConnectionStatus">
+        <Resource Name = "WAVE_MGMT_CLIENT_INTF_CONNECTION_NOT_ATTEMPTED_TO_SERVER">Wave Client Connection Not Attempted To Server</Resource>
+        <Resource Name = "WAVE_MGMT_CLIENT_INTF_CONNECTION_ESTABLISHED_TO_SERVER">Wave Client Connection Estabilished To Server</Resource>
+        <Resource Name = "WAVE_MGMT_CLIENT_INTF_CONNECTION_FAILED_TO_SERVER">Wave Client Connection Failed To Server</Resource>
+        <Resource Name = "WAVE_MGMT_CLIENT_INTF_CONNECTION_CLOSED_TO_SERVER">Wave Client Connection Closed To Server</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "WaveManagementClientInterfacePostingToClientStatus">
+        <Resource Name = "WAVE_MGMT_CLIENT_INTF_POST_TO_SERVER_SUCCEEDED">Wave Management Client Interface Successfully Posted To Server</Resource>
+        <Resource Name = "WAVE_MGMT_CLIENT_INTF_POST_TO_SERVER_FAILED">Wave Management Client Interface Failed To Post To Server</Resource>
+        <Resource Name = "WAVE_MGMT_CLIENT_INTF_UNKNOWN_SERVER">Wave Management Client Interface Does Not Know The Server</Resource>
+        <Resource Name = "WAVE_MGMT_CLIENT_INTF_SERVICE_NOT_AVAILABLE">Wave Management Client Interface Does Not Have The Remote Service Available</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "WaveManagementClientInterfaceMessageStatus">
+        <Resource Name = "WAVE_MGMT_CLIENT_INTF_SERVER_NOT_AVAILABLE">Wave Management Client Interface Server Is Not Available</Resource>
+        <Resource Name = "WAVE_MGMT_CLIENT_INTF_CLIENT_ASYNC_REPSONSE">Wave Management Client Interface Server Is Not Available</Resource>
+        <Resource Name = "WAVE_MGMT_CLIENT_ZEROIZE_NODE_NOT_STANDALONE">FIPS zeroization is supported only in Standalone mode. Command Aborted</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "WaveManagementClientInterfaceClientProcessingStatus">
+        <Resource Name = "WAVE_MGMT_CLIENT_INTF_CLIENT_NO_MESSAGE_HANDLER">Wave Management Client Interface Client Has No Message Handler Registered</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "WaveCDataType">
+        <Resource Name = "WAVE_CVALUE_UI32">UI32 type</Resource>
+        <Resource Name = "WAVE_CVALUE_BOOL">BOOL type</Resource>
+        <Resource Name = "WAVE_CVALUE_BOOL_VECTOR">BOOL_VECTOR type</Resource>
+        <Resource Name = "WAVE_CVALUE_STRING">string type (NULL terminated)</Resource>
+        <Resource Name = "WAVE_CVALUE_SI32">SI32 type </Resource>
+        <Resource Name = "WAVE_CVALUE_SI64">SI64 type </Resource>
+        <Resource Name = "WAVE_CVALUE_UI64">UI64 type </Resource>
+        <Resource Name = "WAVE_CVALUE_UI16">UI16 type </Resource>
+        <Resource Name = "WAVE_CVALUE_SI16">SI16 type </Resource>
+        <Resource Name = "WAVE_CVALUE_UI8">UI8 type </Resource>
+        <Resource Name = "WAVE_CVALUE_SI8">SI8 type </Resource>
+        <Resource Name = "WAVE_CVALUE_CHAR">CHAR type </Resource>
+        <Resource Name = "WAVE_CVALUE_STRING_VECTOR">STRING_VECTOR type </Resource>
+        <Resource Name = "WAVE_CVALUE_SI32_VECTOR">SI32_VECTOR type </Resource>
+        <Resource Name = "WAVE_CVALUE_UI32_VECTOR">UI32_VECTOR type </Resource>
+        <Resource Name = "WAVE_CVALUE_SI64_VECTOR">SI64_VECTOR type </Resource>
+        <Resource Name = "WAVE_CVALUE_UI64_VECTOR">UI64_VECTOR type </Resource>
+        <Resource Name = "WAVE_CVALUE_BITMAP">BITMAP type </Resource>
+        <Resource Name = "WAVE_CVALUE_DATE">DATE type </Resource>
+        <Resource Name = "WAVE_CVALUE_DATE_VECTOR">DATE_VECTOR type </Resource>
+        <Resource Name = "WAVE_CVALUE_DATE_TIME">DATE_TIME type </Resource>
+        <Resource Name = "WAVE_CVALUE_DATE_TIME_VECTOR">DATE_TIME_VECTOR type </Resource>
+        <Resource Name = "WAVE_CVALUE_DECIMAL_64">DECIMAL_64 type </Resource>
+        <Resource Name = "WAVE_CVALUE_DECIMAL_64_VECTOR">DECIMAL_64_VECTOR type </Resource>
+        <Resource Name = "WAVE_CVALUE_HOST">HOST type </Resource>
+        <Resource Name = "WAVE_CVALUE_IPADDRESS_MASK">IPADDRESS_MASK type </Resource>
+        <Resource Name = "WAVE_CVALUE_IPADDRESS">IPVXADDRESS type </Resource>
+        <Resource Name = "WAVE_CVALUE_IPADDRESS_VECTOR">IPVXADDRESS_VECTOR type </Resource>
+        <Resource Name = "WAVE_CVALUE_LARGEOBJECT">LARGEOBJECT type </Resource>
+        <Resource Name = "WAVE_CVALUE_SNMP_OBJECT_ID">SNMP_OBJECT_ID type </Resource>
+        <Resource Name = "WAVE_CVALUE_TIME">CVALUE_TIME type </Resource>
+        <Resource Name = "WAVE_CVALUE_TIME_VECTOR">TIME_VECTOR type </Resource>
+        <Resource Name = "WAVE_CVALUE_WORLD_WIDE_NAME">WORLD_WIDE_NAME type </Resource>
+        <Resource Name = "WAVE_CVALUE_WORLD_WIDE_NAME_VECTOR">WORLD_WIDE_NAME_VECTOR type </Resource>
+        <Resource Name = "WAVE_CVALUE_MAC_ADDRESS">MAC_ADDRESS type </Resource>
+        <Resource Name = "WAVE_CVALUE_MAC_ADDRESS_VECTOR">MAC_ADDRESS_VECTOR type </Resource>
+        <Resource Name = "WAVE_CVALUE_MAC_ADDRESS2">MAC_ADDRESS2 type </Resource>
+        <Resource Name = "WAVE_CVALUE_MAC_ADDRESS2_VECTOR">MAC_ADDRESS2_VECTOR type </Resource>
+        <Resource Name = "WAVE_CVALUE_MAC_RANGE">MAC_RANGE type </Resource>
+    </ResourceEnum>
+    
+</ModuleResources>

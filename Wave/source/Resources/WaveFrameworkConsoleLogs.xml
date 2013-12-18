@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Framework RAS Logs. -->
+
+<ModuleResources ModuleName = "FrameworkOperationStatusLogs" ComponentName = "Wave">
+    <ResourceEnum Name = "CopyOperationStatus">
+        <Resource Name = "COPY_DEFAULT_TO_STARTUP_SUCCESS">Copy default-config startup-config operation successful.</Resource>
+        <Resource Name = "COPY_DEFAULT_TO_STARTUP_FAILURE">Copy default-config startup-config operation failure.</Resource>
+    </ResourceEnum>
+
+<!-- Following resourceIds are for FIPS Operation status. -->
+
+    <ResourceEnum Name = "FIPSOperationStatus">
+        <Resource Name = "FIPS_OPERATION_ZEROIZE_REQUEST_RECEIVED">FIPS Zeroize operation request received.</Resource>
+        <Resource Name = "FIPS_OPERATION_FAILED_FOR_NODE_NOT_STANDALONE">FIPS Zeroize operation failed as vcs mode is enabled.</Resource>
+        <Resource Name = "FIPS_OPERATION_CONFIRMED_NODE_AS_STANDALONE">FIPS Zeroize operation : confirmed node is standalone.</Resource>
+        <Resource Name = "FIPS_OPERATION_NOTIFY_SESSIONS_ABT_ZEROIZE">FIPS Zeroize operation : all client sessions are notified about zeroize in progress.</Resource>
+        <Resource Name = "FIPS_OPERATION_TRIGGER_CLEANUP_FOR_ZEROIZE">FIPS Zeroize operation : starting with cleanup for zeroize.</Resource>
+        <Resource Name = "FIPS_OPERATION_SHUT_DOWN_SERVICES_FOR_ZEROIZE">FIPS Zeroize operation : shutting down all the services for zeroize.</Resource>
+        <Resource Name = "FIPS_OPERATION_FAILED_FOR_SERVICES_NOT_SHUT_DOWN">FIPS Zeroize operation failed because all the services could not be shut down successfully.</Resource>
+        <Resource Name = "FIPS_OPERATION_RUN_ZEROIZE_FOR_SUPPORTED_SERVICES">FIPS Zeroize operation : Running zeroize for all supported services.</Resource>
+        <Resource Name = "FIPS_OPERATION_FAILED_FOR_RUNNING_ZEROIZE_FOR_SUPPORTED_SERVICES">FIPS Zeroize operation failed for running zeroize for supported services.</Resource>
+        <Resource Name = "FIPS_OPERATION_ZEROIZE_FAILED">FIPS Zeroize operation failed.</Resource>
+        <Resource Name = "FIPS_OPERATION_ZEROIZE_SUCCESS">FIPS Zeroize operation executed successfully.</Resource>
+        <Resource Name = "FIPS_OPERATION_ZEROIZE_FAILED_ALREADY_ZEROIZED">FIPS Zeroize operation failed. Node zeroizing or already zeroized.</Resource>
+        <Resource Name = "FIPS_OPERATION_ZEROIZE_FAILED_LOCATION_NOT_READY">FIPS Zeroize operation failed. Node is not ready for Zeroization.</Resource>
+    </ResourceEnum>
+
+
+<!-- Following resourceIds are fro DB Conversion. -->
+    <ResourceEnum Name = "DatabaseSchemaConversion">
+        <Resource Name = "DATABASE_SCHEMA_CONVERSION_SUCCEEDED">Database Schema Conversion  successful.</Resource>
+        <Resource Name = "DATABASE_SCHEMA_CONVERSION_FAILED">Database Schema Conversion failed.</Resource>
+        <Resource Name = "DATABASE_SCHEMA_CONVERSION_NOT_ATTEMPTED">Database Schema Conversion has not been attempted</Resource>
+        <Resource Name = "REBOOT_FOR_SERVICE_UPGRADE_FAILURE_AUTO_RECOVERY">Node is going down for auto recovery as upgrade function failed.</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "DBCorruptionRecoveryUpdate">
+        <Resource Name = "REBOOT_FOR_DB_CORRUPTION_AUTO_RECOVERY">Node is going down for auto recovery for encountered db corruption.</Resource>
+    </ResourceEnum>
+</ModuleResources>
+

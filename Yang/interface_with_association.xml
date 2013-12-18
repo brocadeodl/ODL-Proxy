@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="interface_with_association"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:DcmInterfaceAssociation="http://brocade.com/ns/DcmInterfaceAssociation">
+  <namespace uri="http://brocade.com/ns/DcmInterfaceAssociation"/>
+  <prefix value="DcmInterfaceAssociation"/>
+  <typedef name="UI32Range">
+    <type name="string">
+      <pattern value="[0-9]+(-[0-9]+)?(,[0-9]+(-[0-9]+)?)*"/>
+    </type>
+  </typedef>
+  <container name="samplevlan">
+    <list name="vlans">
+      <key value="id"/>
+      <leaf name="id">
+        <type name="uint32"/>
+        <mandatory value="true"/>
+      </leaf>
+    </list>
+  </container>
+  <container name="interfaces_with_association">
+    <list name="interface">
+      <key value="name"/>
+      <max-elements value="1024"/>
+      <leaf name="name">
+        <type name="string"/>
+      </leaf>
+      <leaf name="vlanId">
+        <type name="leafref">
+          <path value="/samplevlan/vlans/id"/>
+        </type>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="nullObjectId">
+        <type name="leafref">
+          <path value="/samplevlan/vlans/id"/>
+        </type>
+        <mandatory value="false"/>
+      </leaf>
+      <leaf-list name="vlanIdList">
+        <type name="leafref">
+          <path value="/samplevlan/vlans/id"/>
+        </type>
+      </leaf-list>
+      <leaf name="vlanIdList2">
+        <type name="UI32Range"/>
+      </leaf>
+    </list>
+  </container>
+</module>

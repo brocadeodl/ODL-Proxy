@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-ip-administration"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:ip-administration="urn:brocade.com:mgmt:brocade-ip-administration"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def">
+  <namespace uri="urn:brocade.com:mgmt:brocade-ip-administration"/>
+  <prefix value="ip-administration"/>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+        San Jose, CA 95134
+        U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This management module is an instrumentation to ipadm
+level commands</text>
+  </description>
+  <revision date="2011-04-11">
+    <description>
+      <text>Initial version of this management module.</text>
+    </description>
+  </revision>
+  <augment target-node="/common-def:ip">
+    <description>
+      <text>IP Configurations</text>
+    </description>
+    <container name="dns">
+      <container name="dom-name">
+        <leaf name="domain-name">
+          <mandatory value="false"/>
+          <type name="string">
+            <length value="4..63"/>
+          </type>
+        </leaf>
+      </container>
+      <list name="name-server">
+        <max-elements value="2"/>
+        <key value="name-server-ip"/>
+        <leaf name="name-server-ip">
+          <type name="inet:ip-address"/>
+        </leaf>
+      </list>
+    </container>
+  </augment>
+</module>

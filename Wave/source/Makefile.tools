@@ -1,0 +1,385 @@
+################################################################################
+# this file has tools and related common stuff used in all Wave and dcm makefiles
+# main Makefiles are the only one that build, 
+# so stuff related to building need not be here
+
+# this makefile is included in all dcm makefiles
+
+# the including makefile should establish TOPDIR
+# so this makefile can figure out where it is,
+# regardless if we are in an expected ("springboard") location or not
+################################################################################
+
+# except perhaps for generated makefiles (like dependencies) which should not be 
+# touched by the user anyway
+
+# this makefile should not include other makefiles 
+# (because there is no such thing as 
+# "current directory" rule like for -I compiler options,
+# it is hard to determine what path to give if we included
+# here)
+#
+# instead, the includer should include everything else as needed
+
+.SUFFIXES:
+MAKEFLAGS += -R 
+
+OS	:= $(shell uname -s)
+ECHOCMD	:= $(if $(filter $(OS),SunOS),/usr/ucb/echo,echo)
+
+ifeq "1" "$(OPTIMIZED)"
+	DEBUG	:= 0
+else
+	DEBUG	:= 1
+endif
+
+ifeq "1" "$(DEBUG)"
+	BUILD_TYPE := debug
+else
+	BUILD_TYPE := optimized
+endif
+
+#establish CXXFLAGS as immediate variable
+CXXFLAGS	:=
+
+PROFILE		:= 0
+GPROF		:= 0
+
+ifeq "$(PROFILE)" "1"
+    CXXFLAGS += -finstrument-functions
+endif
+ifeq "$(GPROF)" "1"
+    CXXFLAGS += -pg
+endif
+
+ARCH_HOST := $(shell uname -m)
+HOSTCXX := g++
+
+TOOLCHAIN_PREFIX :=
+ARCH	         := $(ARCH_HOST)
+LDFLAGS	         := -Wl,-R.
+
+OS_ARCH_XT := $(OS).$(ARCH)
+CXX	:= $(TOOLCHAIN_PREFIX)g++$(GCCVERSION)
+AR	:= $(TOOLCHAIN_PREFIX)ar
+
+# from a make target $(1) establish a variable with the same name and value
+# this way we can override checking that target from command line
+TARGET_TO_VAR = $(eval $(1) := $(1))
+
+DYNAMIC_SRC	:= DynamicSource
+BIN_DIR := bin
+
+ifeq "$(WAVE_HOME)" ""
+    WAVE_HOME := $(shell pwd | grep Wave | sed "s/Wave.*/Wave/")
+endif 
+ifeq "$(WAVE_HOME)" ""
+    $(ECHOCMD) "Please Set WAVE_HOME variable to the location of the WAVE source code."
+endif 
+export WAVE_HOME
+export WAVE_SRC := $(WAVE_HOME)/source
+WAVE_DEPENDENCIES_OS_ARCH := $(WAVE_HOME)/WaveDependencies/$(OS)/$(ARCH)
+WAVE_DEPENDENCIES_OS_ARCH_HOST := $(WAVE_HOME)/WaveDependencies/$(OS)/$(ARCH_HOST)
+
+BUILD_DIR_DEPENDENCIES := $(WAVE_HOME)/build/target26
+
+DCM_HOME := $(shell pwd | sed "s/Dcm.*/Dcm/")
+DCM_SRC := $(DCM_HOME)/source
+
+SLM_HOME := $(shell pwd | sed "s/Slm.*/Slm/")
+
+FSC_HOME := $(shell pwd | sed "s/Fsc.*/Fsc/")
+
+RESOURCE_GENERATOR := $(WAVE_HOME)/resourcegenerator/WaveResourceGenerator.$(OS).$(ARCH_HOST)
+
+
+#yes these things should be put in individual lib makefiles
+# but, for simplicity, 
+# we want to include this common makefile first in each makefile, 
+# and everything else after
+# so we need to compute a few basic library-specific things here
+
+# PROJECT is the project name, such as Dcm or Wave
+# HOME is the top of tree for that project
+
+ifneq '$(findstring Dcm,$(CURDIR))' ''
+	PROJECT := Dcm
+	HOME := $(DCM_HOME)
+	VERSION_FULL = $(DCM_VERSION_MAJOR).$(DCM_VERSION_MINOR).$(DCM_VERSION_PATCH) 
+	VERSION_MAJOR = $(DCM_VERSION_MAJOR)
+	BUILD_OS_DIR := $(HOME)/build/$(PROJECT)/$(OS)
+	BUILD_DIR := $(BUILD_OS_DIR)/$(ARCH)/$(BUILD_TYPE)
+	LIB_TO_BUILD = $(LIB.SO.VER)
+	BUILD_DIR_DYNAMIC_SRC	:= $(BUILD_DIR)/$(DYNAMIC_SRC)
+	DCM_CLISPEC_GENERATOR_PGM   := \
+		$(BUILD_OS_DIR)/$(ARCH_HOST)/$(BUILD_TYPE)/$(BIN)/CliSpecGenerator.$(OS).$(ARCH_HOST)
+
+else ifneq '$(findstring uBreeze,$(CURDIR))' ''
+	PROJECT := uBreeze
+	HOME := $(WAVE_HOME)/breeze/uBreeze
+	BUILD_DIR := $(HOME)/build
+	LIB_TO_BUILD = $(LIB.SO)
+
+	#don't need resources for this lib
+	RESOURCE_GENERATOR :=
+
+else ifneq '$(findstring Wave,$(CURDIR))' ''
+	PROJECT := Wave
+	HOME := $(WAVE_HOME)
+	VERSION_FULL = $(WAVE_VERSION_MAJOR).$(WAVE_VERSION_MINOR).$(WAVE_VERSION_PATCH)
+	VERSION_MAJOR = $(WAVE_VERSION_MAJOR)
+	BUILD_DIR := $(HOME)/build/$(PROJECT)/$(OS)/$(ARCH)/$(BUILD_TYPE)
+	LIB_TO_BUILD = $(LIB.SO.VER)
+	BUILD_DIR_DYNAMIC_SRC	:= $(BUILD_DIR)/$(DYNAMIC_SRC)
+
+else ifneq '$(findstring slm,$(CURDIR))' ''
+	PROJECT := Slm
+	HOME := $(SLM_HOME)
+	VERSION_FULL = $(SLM_VERSION_MAJOR).$(SLM_VERSION_MINOR).$(SLM_VERSION_PATCH)
+	VERSION_MAJOR = $(SLM_VERSION_MAJOR)
+	BUILD_DIR := $(HOME)/build/$(PROJECT)/$(OS)/$(ARCH)/$(BUILD_TYPE)
+	LIB_TO_BUILD = $(LIB.SO.VER)
+	BUILD_DIR_DYNAMIC_SRC	:= $(BUILD_DIR)/$(DYNAMIC_SRC)
+
+else ifneq '$(findstring fsc,$(CURDIR))' ''
+	PROJECT := Fsc
+	HOME := $(FSC_HOME)
+	VERSION_FULL = $(FSC_VERSION_MAJOR).$(FSC_VERSION_MINOR).$(FSC_VERSION_PATCH)
+	VERSION_MAJOR = $(FSC_VERSION_MAJOR)
+	BUILD_DIR := $(HOME)/build/$(PROJECT)/$(OS)/$(ARCH)/$(BUILD_TYPE)
+	LIB_TO_BUILD = $(LIB.SO.VER)
+	BUILD_DIR_DYNAMIC_SRC	:= $(BUILD_DIR)/$(DYNAMIC_SRC)
+
+endif
+
+
+SRC_ROOT := $(HOME)/source
+
+LIB_DIR	:= lib
+BUILD_DIR_LIB	:= $(BUILD_DIR)/$(LIB_DIR)
+OBJ_DIR	:= obj
+BUILD_DIR_OBJ	:= $(BUILD_DIR)/$(OBJ_DIR)
+
+$(call TARGET_TO_VAR,$(BUILD_DIR_DYNAMIC_SRC)/.)
+
+BUILD_DIR_BIN := $(BUILD_DIR)/$(BIN_DIR)
+$(call TARGET_TO_VAR,$(BUILD_DIR_BIN)/.)
+
+
+LIB.SO := $(BUILD_DIR_LIB)/lib$(PROJECT).so
+LIB.A := $(BUILD_DIR_LIB)/lib$(PROJECT).a
+
+
+# all the variables below work for any project, depending on which tree we are
+# including this makefile from
+
+# because Wave is used in all projects, there are a few Wave-specific variables - 
+# they start with WAVE_...
+
+
+# this sentinel files are touched whenever the associated multiple resource files are
+# built
+WAVE_RESOURCES := \
+	$(WAVE_SRC)/Resources/resources
+
+# Wave dynamic sources that do not depend on architecture and kind of build:
+# headers and resource files
+WAVE_BUILD_DIR_DYNAMIC_SRC_ARCH_KIND_INDEP := \
+	$(WAVE_HOME)/build/Wave/$(OS)/$(DYNAMIC_SRC)
+$(call TARGET_TO_VAR,$(WAVE_BUILD_DIR_DYNAMIC_SRC_ARCH_KIND_INDEP)/.)
+
+WAVE_APPLICATION := $(WAVE_HOME)/application
+WAVE_UBREEZE_APPLICATION := $(WAVE_HOME)/breeze/uBreeze/uBreeze
+
+WAVE_WYSER_BIN := $(WAVE_APPLICATION)/Wyser.Linux.$(ARCH_HOST)
+
+WAVE_UBREEZE_BIN	:= $(WAVE_UBREEZE_APPLICATION)/uBreeze.Linux.$(ARCH_HOST)
+UBREEZE_ADD_DEPENDENCY             :=
+ifeq "$(ARCH)" "$(ARCH_HOST)"
+UBREEZE_ADD_DEPENDENCY			   := ${WAVE_UBREEZE_BIN}
+endif
+
+WAVE_HASH_USERTAGS_PGM      := $(WAVE_APPLICATION)/hashusertags.erl
+
+WAVE_BUILD_DIR := $(WAVE_HOME)/build/Wave/$(OS)/$(ARCH)/$(BUILD_TYPE)
+WAVE_BUILD_DIR_LIB := $(WAVE_BUILD_DIR)/$(LIB_DIR)
+WAVE_BUILD_DIR_DYNAMIC_SRC := $(WAVE_BUILD_DIR)/$(DYNAMIC_SRC)
+$(call TARGET_TO_VAR,$(WAVE_BUILD_DIR_DYNAMIC_SRC)/.)
+
+# Adding the dcm side for slm openflow usage
+DCM_BUILD_DIR = $(DCM_HOME)/build/Dcm/$(OS)/$(ARCH)/$(BUILD_TYPE)
+DCM_BUILD_DIR_LIB := $(DCM_BUILD_DIR)/$(LIB_DIR)
+
+DCM_BUILD_DIR_DYNAMIC_SRC := $(DCM_BUILD_DIR)/$(DYNAMIC_SRC)
+$(call TARGET_TO_VAR,$(DCM_BUILD_DIR_DYNAMIC_SRC)/.)
+
+XERCESC	:= xercesc
+XERCESC_VERSION	:= 3.1.1
+XERCESC_ARCH_DIR := $(BUILD_DIR_DEPENDENCIES)/$(XERCESC)/$(ARCH)
+XERCESC_DIR := $(XERCESC_ARCH_DIR)/$(XERCESC_VERSION)
+XERCESC_INCLUDE_DIR	:= $(XERCESC_DIR)/include
+XERCESC_LIB_DIR	:= $(XERCESC_DIR)/lib
+XERCESC_FILE_WAVE := $(WAVE_DEPENDENCIES_OS_ARCH)/$(XERCESC)/$(XERCESC)-$(XERCESC_VERSION).tgz
+
+POSTGRESQL	:= postgresql
+POSTGRESQL_VERSION	:= 9.1.3
+POSTGRESQL_ARCH_DIR := $(BUILD_DIR_DEPENDENCIES)/$(POSTGRESQL)/$(ARCH)
+POSTGRESQL_DIR := $(POSTGRESQL_ARCH_DIR)/$(POSTGRESQL_VERSION)
+POSTGRESQL_INCLUDE_DIR	:= $(POSTGRESQL_DIR)/include
+POSTGRESQL_LIB_DIR	:= $(POSTGRESQL_DIR)/lib
+POSTGRESQL_FILE_WAVE := $(WAVE_DEPENDENCIES_OS_ARCH)/$(POSTGRESQL)/$(POSTGRESQL)-$(POSTGRESQL_VERSION).tgz
+
+TPS_CONFIGD_VERSION	:= LATEST
+TPS_CONFIGD_ALL_ARCH_DIR := $(ABS_SRC_TOPDIR)/build/target26/tps_configd/$(TPS_CONFIGD_VERSION)
+TPS_CONFIGD_DIR	:= $(TPS_CONFIGD_ALL_ARCH_DIR)/$(TPS_CONFIGD_ARCH)
+TPS_CONFIGD_DIR_HOST	:= $(TPS_CONFIGD_ALL_ARCH_DIR)/$(ARCH_HOST)
+TPS_CONFIGDC_HOST	:= $(TPS_CONFIGD_DIR_HOST)/bin/tps_configdc
+TPS_CONFIGD_FILE_WAVE := $(ABS_SRC_TOPDIR)/tps/tps_configd/$(TPS_CONFIGD_VERSION)/tps_configd-$(TPS_CONFIGD_ARCH).tgz
+
+PYANG	:= $(BUILD_DIR_DEPENDENCIES)/pyang/x86_64/1.4.1/bin/pyang
+
+ZLIB	:= zlib
+ZLIB_VERSION	:= 1.2.3
+ZLIB_ARCH_DIR := $(BUILD_DIR_DEPENDENCIES)/$(ZLIB)/$(ARCH)
+ZLIB_DIR	:= $(ZLIB_ARCH_DIR)/$(ZLIB_VERSION)
+ZLIB_LIB_DIR	:= $(ZLIB_DIR)/lib
+ZLIB_FILE_WAVE	:= $(WAVE_DEPENDENCIES_OS_ARCH)/$(ZLIB)/$(ZLIB)-$(ZLIB_VERSION).tgz
+
+LIBERTY	:= liberty
+LIBERTY_DIR	:= $(BUILD_DIR_DEPENDENCIES)/$(LIBERTY)/$(ARCH)
+LIBERTY_LIB_DIR	:= $(LIBERTY_DIR)/lib
+LIBERTY_FILE_WAVE	:= $(WAVE_DEPENDENCIES_OS_ARCH)/$(LIBERTY)/$(LIBERTY).tgz
+
+ERLANG	:= erlang-otp
+ERLANG_ARCH_HOST_DIR := $(BUILD_DIR_DEPENDENCIES)/$(ERLANG)/$(ARCH_HOST)
+ERLANG_VERSION	:= R15B01
+ERLANG_FILE_WAVE := $(WAVE_DEPENDENCIES_OS_ARCH_HOST)/$(ERLANG)/$(ERLANG)-$(ERLANG_VERSION).tgz
+ERLANG_BIN             := $(ERLANG_ARCH_HOST_DIR)/$(ERLANG_VERSION)/bin
+
+OPENVSWITCH		:= openvswitch
+OPENVSWITCH_ARCH_DIR := $(BUILD_DIR_DEPENDENCIES)/$(OPENVSWITCH)/$(ARCH)
+OPENVSWITCH_VERSION		:= 1.7.0
+OPENVSWITCH_FILE_WAVE := \
+	$(WAVE_DEPENDENCIES_OS_ARCH_HOST)/$(OPENVSWITCH)/$(OPENVSWITCH)-$(OPENVSWITCH_VERSION).tgz
+OPENVSWITCH_LIB_DIR		:= $(OPENVSWITCH_ARCH_DIR)/$(OPENVSWITCH_VERSION)/lib
+OPENVSWITCH_INCLUDE_DIR		:= $(OPENVSWITCH_ARCH_DIR)/$(OPENVSWITCH_VERSION)/include
+
+WAVEOSS		:= waveoss
+WAVEOSS_ARCH_DIR := $(BUILD_DIR_DEPENDENCIES)/$(WAVEOSS)/$(ARCH)
+WAVEOSS_VERSION		:= 1.0.0
+WAVEOSS_FILE_WAVE := \
+	$(WAVE_DEPENDENCIES_OS_ARCH_HOST)/$(WAVEOSS)/$(WAVEOSS)-$(WAVEOSS_VERSION).tgz
+WAVEOSS_LIB_DIR		:= $(WAVEOSS_ARCH_DIR)/$(WAVEOSS_VERSION)/lib
+WAVEOSS_INCLUDE_DIR		:= $(WAVEOSS_ARCH_DIR)/$(WAVEOSS_VERSION)/include
+
+
+TPS_CONFIGD	:= $(TPS_CONFIGD_DIR)/bin/tps_configd
+TPS_CONFIGDC	:= $(TPS_CONFIGD_DIR)/bin/tps_configdc
+
+TPS_CONFIGD_FLAGS	:= --addloadpath $(TPS_CONFIGD_DIR)/etc/tps_configd --addloadpath $(BUILD_DIR_DYNAMIC_SRC) --addloadpath $(BUILD_DIR_LIB)
+TPS_CONFIGD_FLAGS	+= --addloadpath $(FABOS_ROOT)/src/yang --addloadpath $(FABOS_ROOT)/src/tps_configd/cli
+
+LDFLAGS	+= -L$(XERCESC_LIB_DIR) -Wl,-R$(XERCESC_LIB_DIR)
+LDFLAGS += -L $(WAVE_BUILD_DIR_LIB) -Wl,-R$(WAVE_BUILD_DIR_LIB)
+LDFLAGS	+= -L $(ABS_TOPDIR)/target/lib
+
+ifeq "x86_64" "$(ARCH)"
+	LDFLAGS		+= -L$(LIBERTY_LIB_DIR)
+endif
+
+
+USE_STATIC_LIBS	:= 0
+USE_FULL_STATIC_LIBS	:= 0
+XALANC                 := xalanc
+XALANC_VERSION         := 1.11
+XALANC_ARCH_DIR       := $(BUILD_DIR_DEPENDENCIES)/$(XALANC)/$(ARCH)
+XALANC_FILE_WAVE       := $(WAVE_DEPENDENCIES_OS_ARCH_HOST)/$(XALANC)/$(XALANC)-$(XALANC_VERSION).tgz
+XALANC_INCLUDE_DIR     := $(XALANC_ARCH_DIR)/$(XALANC_VERSION)/include
+XALANC_LIB_DIR         := $(XALANC_ARCH_DIR)/$(XALANC_VERSION)/lib
+
+export LDFLAGS          += -L$(XERCESC_LIB_DIR) -Wl,-R$(XERCESC_LIB_DIR) -L$(XALANC_LIB_DIR) -Wl,-R$(XALANC_LIB_DIR) -L $(OPENVSWITCH_LIB_DIR) -Wl,-R$(OPENVSWITCH_LIB_DIR) -L $(WAVEOSS_LIB_DIR) -Wl,-R$(WAVEOSS_LIB_DIR)
+
+ifeq "$(USE_STATIC_LIBS)" "1"
+    LDFLAGS += -static
+endif
+
+ifeq "$(USE_FULL_STATIC_LIBS)" "1"
+    LDFLAGS += -static -static-libgcc
+endif
+
+CXXFLAGS	+= -D _REENTRANT -D _THREAD_SAFE -D _POSIX_PTHREAD_SEMANTICS -Wall -Wshadow -Wno-long-long -ansi -pedantic -Werror -fPIC
+CXXFLAGS	+= $(if $(filter 1,$(DEBUG)),-g3)
+CXXFLAGS	+= $(if $(filter 1,$(OPTIMIZED)),$(DEBUG_FLAG_G) -O3)
+CXXFLAGS	+= $(if $(filter $(OS),SunOS),-D SOLARIS -D BSD_COMP)
+CXXFLAGS	+= $(if $(filter $(OS),Linux),-D LINUX)
+
+
+ifeq "1" "$(GPROF)"
+LIBFILES	+= $(WAVE_BUILD_DIR_LIB)/libWave.a
+else
+LIBFILES	+= -lWave
+endif
+
+LIBFILES += -lxerces-c -lxalan-c -lxalanMsg -lcurl -lssl -lidn $(POSTGRESQL_LIB_DIR)/libpq.a -lcrypto \
+	-lpam -luuid -lpthread
+LIBFILES	+= -lrt -liberty 
+LIBFILES	+= $(ZLIB_LIB_DIR)/libz.a
+LIBFILES	+= $(if $(filter $(OS),SunOS),-lsocket -lnsl)
+
+
+################################################################################
+#generate dependencies for target $@ in the file $(@:.o=.P)
+# 
+# the output file $(@:.o=.d) of the -MMD option does not have empty rules for dependencies against their deletion
+# so we take that output and change the first line, so that instead of target there, we have an immediate variable
+# we also remove dup words and put each word on it's own line 
+# (it's strange that -MMD does not do these things already) 
+# with a Perl hash
+# 
+# DEPS established whose value is all the dependencies
+# after that we just put
+# target: $(DEPS)
+# $(DEPS):
+#
+# filter-out of absolute paths in $(DEPS): is just a workaround for some strange emake bug - reported to ElectricCloud
+# they have conflicts on the empty recipes here, for untarred files which are shown here as absolute paths
+# these files would not be deleted by themselves so it is OK
+################################################################################
+GEN_DEPS = \
+@perl -e 'open FH, qq($(@:.o=.d)); while (1) {$$_ = <FH>; if (/:/o) {print qq(DEPS:=\\\n); last}}; \
+	while (<FH>) {foreach (split /\s+|\\/) {next unless $$_; if (!$$seen{$$_}++) {print; print qq(\t\\\n)}}}; \
+	print qq(\n$@:\$$(DEPS)\n\$$(filter-out /%,\$$(DEPS)):)' \
+	> $(@:.o=.P)
+
+
+################################################################################
+# macro to update any object - compile and generate dependency makefile
+# 
+# you should have already established CXX, CXXFLAGS, and WHO_GENERATES_INCLUDES
+#
+# (if WHO_GENERATES_INCLUDES itself has variables then)
+# we want the _unexpanded_ value of WHO_GENERATES_INCLUDES to land in the 
+# dependency makefiles
+# that's why we are taking $(value) of it, but then, only each starting "$" of the resulting string
+# needs to be escaped with "\"
+# so we substitute the first "$" with "\$$"
+#
+# for silent operation, the users still want some printout... the dot
+################################################################################
+define OBJ_UPDATE_CMDS
+	$(CXX) -MMD $(CXXFLAGS) -c $< -o $@
+	$(GEN_DEPS)
+endef
+
+ifeq '$(findstring s,$(MAKEFLAGS))' ''
+define OBJ_UPDATE
+	$(OBJ_UPDATE_CMDS)
+endef
+else 
+define OBJ_UPDATE
+	echo -n .
+	$(OBJ_UPDATE_CMDS)
+endef
+endif
+
+MKFS = $(MAKEFILE_LIST)

@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<WavePlugin name="AAA" nameSpace="DcmNs">
+
+<Global name="AAAGlobal">
+	<Worker name="GlobalAuthentication">
+		<ManagedObject name="User">
+			<Member name="name" dataType="string" />
+			<Member name="password" dataType="string" />
+			<Member name="role" dataType="ObjectId" umlType="ASSOCIATION" referredObject="Role"/>
+			<Member name="description" dataType="string" />
+			<Member name="enabled" dataType="bool" />
+			<Member name="uid" dataType="SI32" />
+			<Member name="gid" dataType="SI32" />
+			<Member name="ssh_keydir" dataType="string" />
+			<Member name="homedir" dataType="string" />
+		</ManagedObject>
+
+		<Message name="AddUser" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="name" dataType="string" />
+			<Member name="password" dataType="string" />
+			<Member name="role" dataType="string" />
+			<Member name="description" dataType="string" />
+			<Member name="enabled" dataType="bool" />
+			<Member name="enabledFlag" dataType="bool" />
+			<Member name="loginUser" dataType="string" />
+		</Message>
+		<Message name="ChangeUser" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="name" dataType="string" />
+			<Member name="password" dataType="string" />
+			<Member name="role" dataType="string" />
+			<Member name="description" dataType="string" />
+			<Member name="enabled" dataType="bool" />
+			<Member name="enabledFlag" dataType="bool" />
+			<Member name="loginUser" dataType="string" />
+		</Message>
+		<Message name="DeleteUser" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="name" dataType="string" />
+		</Message>
+
+		<ManagedObject name="Role">
+			<Member name="name" dataType="string" />
+			<Member name="description" dataType="string" />
+			<Member name="users" dataType="vector/ObjectId/" umlType="ASSOCIATION" referredObject="User"/>
+			<Member name="gid" dataType="SI32" />
+		</ManagedObject>
+		<Message name="AddRole" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="name" dataType="string" />
+			<Member name="description" dataType="string" />
+		</Message>
+		<Message name="ChangeRole" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="name" dataType="string" />
+			<Member name="description" dataType="string" />
+		</Message>
+		<Message name="DeleteRole" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="name" dataType="string" />
+		</Message>
+	</Worker>
+
+	<Worker name="GlobalServerMgmt">
+		<!-- Single instance managed object -->
+		<ManagedObject name="RadiusSettings">
+			<Member name="protocol" dataType="UI32" />
+			<Member name="key" dataType="string" />
+			<Member name="retransmit" dataType="UI32" />
+			<Member name="timeout" dataType="UI32" />
+			<Member name="deadtime" dataType="UI32" />
+			<Member name="hosts" dataType="vector/ObjectId/" umlType="ASSOCIATION" referredObject="RadiusHost" />
+		</ManagedObject>
+		<Message name="ChangeRadiusSettings" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="protocol" dataType="UI32" />
+			<Member name="deadtime" dataType="UI32" />
+			<Member name="key" dataType="string" />
+			<Member name="retransmit" dataType="UI32" />
+			<Member name="timeout" dataType="UI32" />
+		</Message>
+
+		<ManagedObject name="RadiusHost">
+			<Member name="host" dataType="string" /> <!-- IPv4, IPv6 or DomainName -->
+			<Member name="port" dataType="UI32" />
+			<Member name="protocol" dataType="UI32" />
+			<Member name="key" dataType="string" />
+			<Member name="retransmit" dataType="UI32" />
+			<Member name="timeout" dataType="UI32" />
+		</ManagedObject>
+		<Message name="AddRadiusHost" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="host" dataType="string" />
+			<Member name="port" dataType="UI32" />
+			<Member name="protocol" dataType="UI32" />
+			<Member name="key" dataType="string" />
+			<Member name="retransmit" dataType="UI32" />
+			<Member name="timeout" dataType="UI32" />
+		</Message>
+		<Message name="ChangeRadiusHost" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="host" dataType="string" />
+			<Member name="port" dataType="UI32" />
+			<Member name="protocol" dataType="UI32" />
+			<Member name="key" dataType="string" />
+			<Member name="retransmit" dataType="UI32" />
+			<Member name="timeout" dataType="UI32" />
+		</Message>
+		<Message name="DeleteRadiusHost" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="host" dataType="string" />
+		</Message>
+
+		<!-- Single instance managed object -->
+		<ManagedObject name="TacacsSettings">
+			<Member name="protocol" dataType="UI8" />
+			<Member name="key" dataType="string" />
+			<Member name="retries" dataType="UI8" />
+			<Member name="timeout" dataType="UI8" />
+			<Member name="hosts" dataType="vector/ObjectId/" umlType="ASSOCIATION" referredObject="TacacsHost" />
+		</ManagedObject>
+		<Message name="ChangeTacacsSettings" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="protocol" dataType="SI8" />
+			<Member name="key" dataType="string" />
+			<Member name="retries" dataType="SI8" />
+			<Member name="timeout" dataType="SI8" />
+		</Message>
+
+		<ManagedObject name="TacacsHost">
+			<Member name="host" dataType="string" /> <!-- IPv4, IPv6 or DomainName -->
+			<Member name="port" dataType="UI16" />
+			<Member name="protocol" dataType="UI8" />
+			<Member name="key" dataType="string" />
+			<Member name="retries" dataType="UI8" />
+			<Member name="timeout" dataType="UI8" />
+		</ManagedObject>
+		<Message name="AddTacacsHost" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="host" dataType="string" />
+			<Member name="port" dataType="SI32" />
+			<Member name="protocol" dataType="SI8" />
+			<Member name="key" dataType="string" />
+			<Member name="retries" dataType="SI8" />
+			<Member name="timeout" dataType="SI8" />
+		</Message>
+		<Message name="ChangeTacacsHost" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="host" dataType="string" />
+			<Member name="port" dataType="SI32" />
+			<Member name="protocol" dataType="SI8" />
+			<Member name="key" dataType="string" />
+			<Member name="retries" dataType="SI8" />
+			<Member name="timeout" dataType="SI8" />
+		</Message>
+		<Message name="DeleteTacacsHost" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="host" dataType="string" />
+		</Message>
+
+		<!-- Single instance managed object -->
+		<ManagedObject name="AuthLoginMode">
+			<Member name="first" dataType="UI32" />
+			<Member name="second" dataType="UI32" />
+		</ManagedObject>
+		<Message name="ChangeAuthLoginMode" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="first" dataType="UI32" />
+			<Member name="second" dataType="UI32" />
+		</Message>
+	</Worker>
+
+	<Worker name="GlobalDiscreteObjs">
+		<ManagedObject name="PasswordAttributes">
+			<Member name="minlength" dataType="UI32" />
+			<Member name="maxretry" dataType="UI32" />
+			<Member name="uppercase" dataType="UI32" />
+			<Member name="lowercase" dataType="UI32" />
+			<Member name="numerics" dataType="UI32" />
+			<Member name="splchars" dataType="UI32" />
+		</ManagedObject>
+
+		<Message name="SetPasswordAttributes" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="minlength" dataType="SI32" />
+			<Member name="maxretry" dataType="SI32" />
+			<Member name="uppercase" dataType="SI32" />
+			<Member name="lowercase" dataType="SI32" />
+			<Member name="numerics" dataType="SI32" />
+			<Member name="splchars" dataType="SI32" />
+			<Member name="reset" dataType="bool" />
+		</Message>
+
+		<ManagedObject name="Banner">
+			<Member name="login" dataType="string" />
+		</ManagedObject>
+		<Message name="SetBanner" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="banner" dataType="string" />
+			<Member name="reset" dataType="bool" />
+		</Message>
+
+		<ManagedObject name="PasswordEncryption">
+			<Member name="passwdEnc" dataType="bool" />
+		</ManagedObject>
+		<Message name="SetPasswordEncryption" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="passwdEnc" dataType="bool" />
+		</Message>
+	</Worker>
+
+	<Worker name="GlobalSession">
+		<Message name="GlobalGetActiveUsers" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="userName" dataType="string" />
+			<Member name="hostName" dataType="string" />
+			<Member name="ipAddr" dataType="string" />
+			<Member name="deviceName" dataType="string" />
+			<Member name="sessionId" dataType="UI32" />
+			<Member name="pId" dataType="UI32" />
+			<Member name="loggedSince" dataType="DateTime" />
+			<Member name="switchid" dataType="UI32" />
+			<Member name="role" dataType="string" />
+		</Message>
+
+		<Message name="GlobalGetLockedUsers" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="userName" dataType="string" />
+			<Member name="switchid" dataType="UI32" />
+		</Message>
+    </Worker>
+
+</Global>
+
+<Local name="AAALocal">
+	<Worker name="LocalAuthentication">
+		<Message name="AddUser" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="name" dataType="string" />
+			<Member name="password" dataType="string" />
+			<Member name="role" dataType="string" />
+			<Member name="usersOfRole" dataType="string" />
+			<Member name="description" dataType="string" />
+			<Member name="enabled" dataType="bool" />
+		</Message>
+		<Message name="ChangeUser" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="name" dataType="string" />
+			<Member name="password" dataType="string" />
+			<Member name="role" dataType="string" />
+			<Member name="usersOfRole" dataType="string" />
+			<Member name="oldRole" dataType="string" />
+			<Member name="usersOfOldRole" dataType="string" />
+			<Member name="description" dataType="string" />
+			<Member name="enabled" dataType="bool" />
+		</Message>
+		<Message name="DeleteUser" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="name" dataType="string" />
+			<Member name="role" dataType="string" />
+			<Member name="usersOfRole" dataType="string" />
+		</Message>
+
+		<Message name="AddRole" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="name" dataType="string" />
+			<Member name="description" dataType="string" />
+			<Member name="gid" dataType="UI32" />
+		</Message>
+		<Message name="ChangeRole" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="name" dataType="string" />
+			<Member name="description" dataType="string" />
+		</Message>
+		<Message name="DeleteRole" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="name" dataType="string" />
+		</Message>
+	</Worker>
+
+	<Worker name="LocalServerMgmt">
+		<Message name="AddRadiusHost" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="host" dataType="string" />
+			<Member name="port" dataType="UI32" />
+			<Member name="protocol" dataType="UI32" />
+			<Member name="key" dataType="string" />
+			<Member name="retransmit" dataType="UI32" />
+			<Member name="timeout" dataType="UI32" />
+		</Message>
+		<Message name="ChangeRadiusHost" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="host" dataType="string" />
+			<Member name="port" dataType="UI32" />
+			<Member name="protocol" dataType="UI32" />
+			<Member name="key" dataType="string" />
+			<Member name="retransmit" dataType="UI32" />
+			<Member name="timeout" dataType="UI32" />
+		</Message>
+		<Message name="DeleteRadiusHost" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="host" dataType="string" />
+		</Message>
+
+		<Message name="AddTacacsHost" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="host" dataType="string" />
+			<Member name="port" dataType="UI16" />
+			<Member name="protocol" dataType="SI8" />
+			<Member name="key" dataType="string" />
+			<Member name="retries" dataType="SI8" />
+			<Member name="timeout" dataType="SI8" />
+		</Message>
+		<Message name="ChangeTacacsHost" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="host" dataType="string" />
+			<Member name="port" dataType="UI8" />
+			<Member name="protocol" dataType="SI8" />
+			<Member name="key" dataType="string" />
+			<Member name="retries" dataType="SI8" />
+			<Member name="timeout" dataType="SI8" />
+		</Message>
+		<Message name="DeleteTacacsHost" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="host" dataType="string" />
+		</Message>
+
+		<Message name="ChangeAuthLoginMode" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="first" dataType="UI32" />
+			<Member name="second" dataType="UI32" />
+		</Message>
+	</Worker>
+
+	<Worker name="LocalDiscreteObjs">
+		<Message name="SetPasswordAttributes" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="minlength" dataType="SI32" />
+			<Member name="maxretry" dataType="SI32" />
+			<Member name="uppercase" dataType="SI32" />
+			<Member name="lowercase" dataType="SI32" />
+			<Member name="numerics" dataType="SI32" />
+			<Member name="splchars" dataType="SI32" />
+		</Message>
+
+		<Message name="SetBanner" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="banner" dataType="string" />
+		</Message>
+	</Worker>
+
+	<Worker name="LocalSession">
+		<Message name="LocalGetActiveUsers" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="userName" dataType="string" />
+			<Member name="hostName" dataType="string" />
+			<Member name="ipAddr" dataType="string" />
+			<Member name="deviceName" dataType="string" />
+			<Member name="sessionId" dataType="UI32" />
+			<Member name="pId" dataType="UI32" />
+			<Member name="loggedSince" dataType="DateTime" />
+		</Message>
+
+		<Message name="LocalGetLockedUsers" sequencerType="ASYNC" allowPreemption="FALSE">
+			<Member name="userName" dataType="string" />
+		</Message>
+    </Worker>
+
+</Local>
+
+</WavePlugin>

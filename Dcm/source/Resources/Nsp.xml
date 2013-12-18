@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for NSP Module. -->
+
+<ModuleResources ModuleName = "Nsp" ComponentName = "Dcm">
+    <ResourceEnum Name = "NspCreateNetworkStatus">
+        <Resource Name = "NSP_CREATE_NETWORK_ERROR_DUPLICATE_NAME_OR_ID">A Network with given Name/Id already exists.</Resource>
+        <Resource Name = "NSP_CREATE_NETWORK_ERROR_OUT_OF_NETWORKS">Out of available networks.</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "NetworkInterfaceStatus">
+        <Resource Name = "NETWORK_INTERFACE_ACTIVE"  >ACTIVE</Resource>
+        <Resource Name = "NETWORK_INTERFACE_INACTIVE">INACTIVE</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "NspCreateInterfaceStatus">
+        <Resource Name = "NSP_CREATE_INTERFACE_ERROR_NETWORK_DOES_NOT_EXIST">Network with given id does not exist.</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "NspattachVirtualInterfaceStatus">
+        <Resource Name = "NSP_ATTACH_INTERFACE_ERROR_NETWORK_DOES_NOT_EXIST">Network with given id does not exist.</Resource>
+        <Resource Name = "NSP_ATTACH_INTERFACE_ERROR_INTERFACE_DOES_NOT_EXIST">Interface with given id does not exist.</Resource>
+        <Resource Name = "NSP_ATTACH_INTERFACE_ERROR_INTERFACE_ALREADY_USED">Interface is already in use.</Resource>
+        <Resource Name = "NSP_ATTACH_INTERFACE_ERROR_VM_ALREADY_ATTACHED">Given Virtual Machine is already attached elsewhere.</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "NspDeleteNetworkStatus">
+        <Resource Name = "NSP_DELETE_NETWORK_ERROR_NO_NETWORK_WITH_NAME_OR_ID">A Network with given Name/Id does not exist.</Resource>
+    </ResourceEnum>
+</ModuleResources>

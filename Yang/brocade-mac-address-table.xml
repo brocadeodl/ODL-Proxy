@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-mac-address-table"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:mac-address-table="urn:brocade.com:mgmt:brocade-mac-address-table"
+        xmlns:yang="urn:ietf:params:xml:ns:yang:ietf-yang-types"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface"
+        xmlns:mac-access-list="urn:brocade.com:mgmt:brocade-mac-access-list">
+  <namespace uri="urn:brocade.com:mgmt:brocade-mac-address-table"/>
+  <prefix value="mac-address-table"/>
+  <import module="ietf-yang-types">
+    <prefix value="yang"/>
+  </import>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <import module="brocade-mac-access-list">
+    <prefix value="mac-access-list"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+       San Jose, CA 95134
+       U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com
+Web: www.brocade.com</text>
+  </contact>
+  <description>
+    <text>Mac forwarding table</text>
+  </description>
+  <revision date="2011-02-15">
+    <description>
+      <text>Added rpc to show mac-address-table for a given
+mac-address.</text>
+    </description>
+  </revision>
+  <typedef name="mac-address-table-aging-time">
+    <type name="uint32">
+      <range value="0|10..100000"/>
+    </type>
+    <default value="300"/>
+  </typedef>
+  <typedef name="mac-address-table-interface">
+    <type name="enumeration">
+      <enum name="gigabitethernet">
+        <value value="1"/>
+      </enum>
+      <enum name="tengigabitethernet">
+        <value value="2"/>
+      </enum>
+      <enum name="fortygigabitethernet">
+        <value value="3"/>
+      </enum>
+      <enum name="port-channel">
+        <value value="4"/>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="mac-address-table-vlan">
+    <type name="enumeration">
+      <enum name="vlan">
+        <value value="1"/>
+      </enum>
+    </type>
+  </typedef>
+  <container name="mac-address-table">
+    <list name="static">
+      <key value="mac-address forward interface-type interface-name vlan vlanid"/>
+      <leaf name="mac-address">
+        <type name="mac-access-list:mac-address-type"/>
+      </leaf>
+      <leaf name="forward">
+        <type name="enumeration">
+          <enum name="forward">
+            <value value="1"/>
+          </enum>
+        </type>
+      </leaf>
+      <leaf name="interface-type">
+        <type name="enumeration">
+          <enum name="gigabitethernet">
+            <value value="1"/>
+          </enum>
+          <enum name="tengigabitethernet">
+            <value value="2"/>
+          </enum>
+          <enum name="fortygigabitethernet">
+            <value value="3"/>
+          </enum>
+          <enum name="port-channel">
+            <value value="4"/>
+          </enum>
+        </type>
+      </leaf>
+      <leaf name="interface-name">
+        <type name="string"/>
+      </leaf>
+      <leaf name="vlan">
+        <type name="enumeration">
+          <enum name="vlan">
+            <value value="1"/>
+          </enum>
+        </type>
+      </leaf>
+      <leaf name="vlanid">
+        <type name="interface:vlan-type"/>
+      </leaf>
+    </list>
+    <leaf name="aging-time">
+      <type name="uint32">
+        <range value="0|10..100000"/>
+      </type>
+      <default value="300"/>
+    </leaf>
+  </container>
+  <list name="mac-group">
+    <key value="mac-group-id"/>
+    <leaf name="mac-group-id">
+      <type name="interface:mac-group-id-type"/>
+    </leaf>
+    <list name="mac-group-entry">
+      <key value="entry-address"/>
+      <leaf name="entry-address">
+        <type name="interface:mac-address-type"/>
+      </leaf>
+      <leaf name="entry-mask">
+        <type name="interface:mac-address-type"/>
+      </leaf>
+    </list>
+  </list>
+  <rpc name="get-mac-address-table">
+    <description>
+      <text>This is a function that returns operational data for a
+given mac entry and the corresponding details of that mac
+entry. The mac entries are fetched similar to the snmp 
+get-next model. When no input is given to this rpc, first
+set of mac entries will be fetched. If there are any
+more extra mac entries that are there to be fetched,
+the flag has-more at the end of the o/p will be set to
+true. To get the next set of mac entries, this rpc has to
+be queried again with the last mac entry details of the
+previous set as the input in get-next-request case. With
+get-next-request all three fields i.e. last-mac-address,
+last-vlan-id and last-mac-type need to be passed as input.
+When the rpc is queried with a mac-address as input in the 
+get-request case the corresponding mac entry, if exists,
+will be fetched.</text>
+    </description>
+    <input>
+      <choice name="request-type">
+        <case name="get-request">
+          <leaf name="mac-address">
+            <type name="yang:mac-address"/>
+            <description>
+              <text>The Mac Address for which the
+corresponding mac entry will be
+fetched. The i/p should be in 
+xx:xx:xx:xx:xx:xx format.</text>
+            </description>
+          </leaf>
+        </case>
+        <case name="get-next-request">
+          <container name="last-mac-address-details">
+            <leaf name="last-mac-address">
+              <type name="yang:mac-address"/>
+              <description>
+                <text>The Mac Address information of the
+last mac entry in the previous set, 
+from which the next set of mac entries
+will be fetched. The i/p should be in 
+xx:xx:xx:xx:xx:xx format.</text>
+              </description>
+            </leaf>
+            <leaf name="last-vlan-id">
+              <type name="interface:vlan-type"/>
+              <description>
+                <text>The Vlan Id information of the
+last mac entry in the previous set, 
+from which the next set of mac entries
+will be fetched.</text>
+              </description>
+            </leaf>
+            <leaf name="last-mac-type">
+              <type name="enumeration">
+                <enum name="static">
+                  <value value="1"/>
+                </enum>
+                <enum name="dynamic">
+                  <value value="2"/>
+                </enum>
+                <enum name="fpma">
+                  <value value="3"/>
+                </enum>
+                <enum name="system">
+                  <value value="4"/>
+                </enum>
+              </type>
+              <description>
+                <text>The indicates whether the last mac entry
+in the previous set of entries is a
+static or a dynamic entry</text>
+              </description>
+            </leaf>
+          </container>
+        </case>
+      </choice>
+    </input>
+    <output>
+      <list name="mac-address-table">
+        <key value="vlanid mac-address"/>
+        <leaf name="vlanid">
+          <type name="interface:vlan-type"/>
+          <description>
+            <text>vlan id</text>
+          </description>
+        </leaf>
+        <leaf name="mac-address">
+          <type name="yang:mac-address"/>
+          <description>
+            <text>Mac Address</text>
+          </description>
+        </leaf>
+        <leaf name="mac-type">
+          <type name="enumeration">
+            <enum name="static">
+              <value value="1"/>
+            </enum>
+            <enum name="dynamic">
+              <value value="2"/>
+            </enum>
+            <enum name="fpma">
+              <value value="3"/>
+            </enum>
+            <enum name="system">
+              <value value="4"/>
+            </enum>
+          </type>
+          <description>
+            <text>Mac Address type</text>
+          </description>
+        </leaf>
+        <leaf name="mac-state">
+          <type name="enumeration">
+            <enum name="active">
+              <value value="1"/>
+            </enum>
+            <enum name="inactive">
+              <value value="2"/>
+            </enum>
+            <enum name="remote">
+              <value value="3"/>
+            </enum>
+            <enum name="unknown">
+              <value value="4"/>
+            </enum>
+          </type>
+          <description>
+            <text>Mac Address state</text>
+          </description>
+        </leaf>
+        <list name="forwarding-interface">
+          <description>
+            <text>List of forwarding interfaces</text>
+          </description>
+          <uses name="interface:interface-name-info"/>
+        </list>
+      </list>
+      <leaf name="has-more">
+        <type name="boolean"/>
+        <description>
+          <text>This indicates whether there are more mac
+records to fetch or not.</text>
+        </description>
+      </leaf>
+    </output>
+  </rpc>
+</module>

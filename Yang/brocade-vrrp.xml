@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-vrrp"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:vrrp="urn:brocade.com:mgmt:brocade-vrrp"
+        xmlns:rbridge="urn:brocade.com:mgmt:brocade-rbridge"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types">
+  <namespace uri="urn:brocade.com:mgmt:brocade-vrrp"/>
+  <prefix value="vrrp"/>
+  <import module="brocade-rbridge">
+    <prefix value="rbridge"/>
+  </import>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 1745 Technology Drive,
+        San Jose, CA 95110
+         U.S.A
+Tel: +1-408-392-6061
+E-mail: support@Brocade.com
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This module describes the data model for Virtual Router Redundancy Protocol</text>
+  </description>
+  <reference>
+    <text>RFC 3768 'Virtual Router Redundancy Protocol (VRRP)' and 
+RFC 2787 'Definitions of Managed Objects for the Virtual Router Redundancy Protocol'</text>
+  </reference>
+  <revision date="2011-10-31">
+    <description>
+      <text>Initial version of this management module.</text>
+    </description>
+  </revision>
+  <typedef name="vrid-type">
+    <type name="uint8">
+      <range value="1..255">
+        <description>
+          <text>Virtual router identifier, Range: 1-255</text>
+        </description>
+      </range>
+    </type>
+  </typedef>
+  <typedef name="track-iftype">
+    <type name="enumeration">
+      <enum name="gigabitethernet">
+        <value value="0"/>
+        <description>
+          <text>Gigabit Ethernet interface</text>
+        </description>
+      </enum>
+      <enum name="tengigabitethernet">
+        <value value="1"/>
+        <description>
+          <text>TenGigabit Ethernet interface</text>
+        </description>
+      </enum>
+      <enum name="fortygigabitethernet">
+        <value value="2"/>
+        <description>
+          <text>FortyGigabit Ethernet interface</text>
+        </description>
+      </enum>
+      <enum name="port-channel">
+        <value value="3"/>
+        <description>
+          <text>Port-channel interface</text>
+        </description>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="track-ifname">
+    <type name="string">
+      <pattern value="(((([1-9]|[1-9][0-9]|1[0-9]{2}|2[0-3][0-9])/)?(([0-9]|1[0-6]))/([1-9]|[1-9][0-9]))|([1-9]|[1-9][0-9]|[1-9][0-9]{2}|[1-5][0-9]{3}|6[0-1][0-4]{2}))"/>
+    </type>
+  </typedef>
+  <grouping name="global-vrrp-cmds">
+    <container name="hide-vrrp-holder">
+      <leaf name="vrrp">
+        <type name="empty"/>
+        <description>
+          <text>Virtual Router Redundacy Protocol (VRRP)</text>
+        </description>
+      </leaf>
+      <leaf name="vrrp-extended">
+        <type name="empty"/>
+        <description>
+          <text>Virtual Router Redundacy Protocol Extended (VRRP-E)</text>
+        </description>
+      </leaf>
+    </container>
+  </grouping>
+  <grouping name="vrrp-interface-cmds">
+    <list name="vrrp">
+      <description>
+        <text>Start VRRP configuration</text>
+      </description>
+      <key value="vrid"/>
+      <leaf name="vrid">
+        <type name="vrid-type"/>
+      </leaf>
+      <list name="virtual-ip">
+        <key value="virtual-ipaddr"/>
+        <leaf name="virtual-ipaddr">
+          <type name="inet:ipv4-address"/>
+          <description>
+            <text>Virtual IPv4 address in dotted decimal</text>
+          </description>
+        </leaf>
+      </list>
+      <container name="track">
+        <description>
+          <text>Interface to be tracked</text>
+        </description>
+        <list name="interface">
+          <key value="interface-type interface-name"/>
+          <leaf name="interface-type">
+            <type name="track-iftype"/>
+          </leaf>
+          <leaf name="interface-name">
+            <type name="track-ifname"/>
+          </leaf>
+          <leaf name="track-priority">
+            <type name="uint8">
+              <range value="1..254"/>
+            </type>
+            <description>
+              <text>Track Priority</text>
+            </description>
+          </leaf>
+        </list>
+      </container>
+      <uses name="vrrp-groups"/>
+    </list>
+    <list name="vrrpe">
+      <key value="vrid"/>
+      <leaf name="vrid">
+        <type name="vrid-type"/>
+      </leaf>
+      <list name="virtual-ip">
+        <key value="virtual-ipaddr"/>
+        <leaf name="virtual-ipaddr">
+          <type name="inet:ipv4-address"/>
+          <description>
+            <text>Virtual IPv4 address</text>
+          </description>
+        </leaf>
+      </list>
+      <container name="track">
+        <description>
+          <text>Interface to be tracked</text>
+        </description>
+        <list name="interface">
+          <key value="interface-type interface-name"/>
+          <leaf name="interface-type">
+            <type name="track-iftype"/>
+          </leaf>
+          <leaf name="interface-name">
+            <type name="track-ifname"/>
+          </leaf>
+          <leaf name="track-priority">
+            <type name="uint8">
+              <range value="1..254"/>
+            </type>
+            <description>
+              <text>Track Priority</text>
+            </description>
+          </leaf>
+        </list>
+      </container>
+      <uses name="vrrp-groups"/>
+      <uses name="vrrpe-cmds-only"/>
+    </list>
+  </grouping>
+  <container name="protocol-vrrp">
+    <description>
+      <text>An intermediary node that separates the protocol vrrp from other protocols.</text>
+    </description>
+    <container name="protocol"/>
+  </container>
+  <augment target-node="/rbridge:rbridge-id/interface:protocol">
+    <uses name="global-vrrp-cmds"/>
+  </augment>
+  <grouping name="vrrpe-cmds-only">
+    <leaf name="advertise-backup">
+      <type name="empty"/>
+      <description>
+        <text>Enable periodic backup advertisement messages</text>
+      </description>
+    </leaf>
+    <leaf name="vrrpe-garp-timer">
+      <type name="uint32">
+        <range value="0..3600"/>
+      </type>
+    </leaf>
+    <leaf name="backup-advertisement-interval">
+      <type name="uint32">
+        <range value="60..3600"/>
+      </type>
+      <default value="60"/>
+      <description>
+        <text>Set Backup advertisement interval</text>
+      </description>
+    </leaf>
+    <container name="short-path-forwarding">
+      <description>
+        <text>Enable backup router to send traffic</text>
+      </description>
+      <leaf name="basic">
+        <type name="empty"/>
+      </leaf>
+      <leaf name="revert-priority">
+        <type name="uint8">
+          <range value="1..254"/>
+        </type>
+        <description>
+          <text>Set revert priority</text>
+        </description>
+      </leaf>
+    </container>
+  </grouping>
+  <grouping name="vrrp-vcs-cmds">
+    <leaf name="priority">
+      <type name="uint8">
+        <range value="1..254"/>
+      </type>
+      <default value="100"/>
+      <description>
+        <text>Set router priority within virtual router</text>
+      </description>
+    </leaf>
+    <leaf name="description">
+      <type name="string">
+        <length value="1..64">
+          <description>
+            <text>Characters describing this interface (Max Size - 64)</text>
+          </description>
+        </length>
+      </type>
+      <description>
+        <text>Interface specific description</text>
+      </description>
+    </leaf>
+  </grouping>
+  <grouping name="vrrp-groups">
+    <leaf name="advertisement-interval">
+      <type name="uint32">
+        <range value="1..255"/>
+      </type>
+      <default value="1"/>
+      <description>
+        <text>Set advertisement interval</text>
+      </description>
+    </leaf>
+    <leaf name="enable">
+      <type name="empty"/>
+      <description>
+        <text>Enable Session</text>
+      </description>
+    </leaf>
+    <leaf name="hold-time">
+      <type name="uint32">
+        <range value="1..3600"/>
+      </type>
+      <description>
+        <text>Configure hold time for this session</text>
+      </description>
+    </leaf>
+    <leaf name="preempt-mode">
+      <type name="empty"/>
+      <description>
+        <text>Set preempt mode for the session</text>
+      </description>
+    </leaf>
+    <uses name="vrrp-vcs-cmds"/>
+  </grouping>
+  <augment target-node="/interface:interface/interface:tengigabitethernet">
+    <uses name="vrrp-interface-cmds"/>
+  </augment>
+  <augment target-node="/interface:interface/interface:gigabitethernet">
+    <uses name="vrrp-interface-cmds"/>
+  </augment>
+  <augment target-node="/interface:interface/interface:fortygigabitethernet">
+    <uses name="vrrp-interface-cmds"/>
+  </augment>
+  <augment target-node="/rbridge:rbridge-id/interface:interface/interface:ve">
+    <list name="vrrp">
+      <key value="vrid"/>
+      <leaf name="vrid">
+        <type name="vrid-type"/>
+      </leaf>
+      <list name="virtual-ip">
+        <key value="virtual-ipaddr"/>
+        <leaf name="virtual-ipaddr">
+          <type name="inet:ipv4-address"/>
+          <description>
+            <text>Virtual IPv4 address</text>
+          </description>
+        </leaf>
+      </list>
+      <container name="track">
+        <description>
+          <text>Interface to be tracked</text>
+        </description>
+        <list name="interface">
+          <key value="interface-type interface-name"/>
+          <leaf name="interface-type">
+            <type name="track-iftype"/>
+          </leaf>
+          <leaf name="interface-name">
+            <type name="track-ifname"/>
+          </leaf>
+          <leaf name="track-priority">
+            <type name="uint8">
+              <range value="1..254"/>
+            </type>
+            <description>
+              <text>Track Priority</text>
+            </description>
+          </leaf>
+        </list>
+      </container>
+      <uses name="vrrp-groups"/>
+    </list>
+    <list name="vrrpe">
+      <key value="vrid"/>
+      <leaf name="vrid">
+        <type name="vrid-type"/>
+      </leaf>
+      <list name="virtual-ip">
+        <key value="virtual-ipaddr"/>
+        <leaf name="virtual-ipaddr">
+          <type name="inet:ipv4-address"/>
+          <description>
+            <text>Virtual IPv4 address</text>
+          </description>
+        </leaf>
+      </list>
+      <container name="track">
+        <description>
+          <text>Interface to be tracked</text>
+        </description>
+        <list name="interface">
+          <key value="interface-type interface-name"/>
+          <leaf name="interface-type">
+            <type name="track-iftype"/>
+          </leaf>
+          <leaf name="interface-name">
+            <type name="track-ifname"/>
+          </leaf>
+          <leaf name="track-priority">
+            <type name="uint8">
+              <range value="1..254"/>
+            </type>
+            <description>
+              <text>Track Priority</text>
+            </description>
+          </leaf>
+        </list>
+      </container>
+      <uses name="vrrp-groups"/>
+      <uses name="vrrpe-cmds-only"/>
+    </list>
+  </augment>
+  <augment target-node="/interface:interface-vlan/interface:interface/interface:ve">
+    <list name="vrrp">
+      <key value="vrid"/>
+      <leaf name="vrid">
+        <type name="vrid-type"/>
+      </leaf>
+      <list name="virtual-ip">
+        <key value="virtual-ipaddr"/>
+        <leaf name="virtual-ipaddr">
+          <type name="inet:ipv4-address"/>
+          <description>
+            <text>Virtual IPv4 address</text>
+          </description>
+        </leaf>
+      </list>
+      <container name="track">
+        <description>
+          <text>Interface to be tracked</text>
+        </description>
+        <list name="interface">
+          <key value="interface-type interface-name"/>
+          <leaf name="interface-type">
+            <type name="track-iftype"/>
+          </leaf>
+          <leaf name="interface-name">
+            <type name="track-ifname"/>
+          </leaf>
+          <leaf name="track-priority">
+            <type name="uint8">
+              <range value="1..254"/>
+            </type>
+            <description>
+              <text>Track Priority</text>
+            </description>
+          </leaf>
+        </list>
+      </container>
+      <uses name="vrrp-groups"/>
+    </list>
+    <list name="vrrpe">
+      <key value="vrid"/>
+      <leaf name="vrid">
+        <type name="vrid-type"/>
+      </leaf>
+      <list name="virtual-ip">
+        <key value="virtual-ipaddr"/>
+        <leaf name="virtual-ipaddr">
+          <type name="inet:ipv4-address"/>
+          <description>
+            <text>Virtual IPv4 address</text>
+          </description>
+        </leaf>
+      </list>
+      <container name="track">
+        <description>
+          <text>Interface to be tracked</text>
+        </description>
+        <list name="interface">
+          <key value="interface-type interface-name"/>
+          <leaf name="interface-type">
+            <type name="track-iftype"/>
+          </leaf>
+          <leaf name="interface-name">
+            <type name="track-ifname"/>
+          </leaf>
+          <leaf name="track-priority">
+            <type name="uint8">
+              <range value="1..254"/>
+            </type>
+            <description>
+              <text>Track Priority</text>
+            </description>
+          </leaf>
+        </list>
+      </container>
+      <uses name="vrrp-groups"/>
+      <uses name="vrrpe-cmds-only"/>
+    </list>
+  </augment>
+  <augment target-node="/interface:interface/interface:port-channel">
+    <container name="hide-vrrp-holer">
+      <list name="vrrp">
+        <key value="vrid"/>
+        <leaf name="vrid">
+          <type name="vrid-type"/>
+        </leaf>
+        <list name="virtual-ip">
+          <key value="virtual-ipaddr"/>
+          <leaf name="virtual-ipaddr">
+            <type name="inet:ipv4-address"/>
+            <description>
+              <text>Virtual IPv4 address</text>
+            </description>
+          </leaf>
+        </list>
+        <container name="track">
+          <description>
+            <text>Interface to be tracked</text>
+          </description>
+          <list name="interface">
+            <key value="interface-type interface-name"/>
+            <leaf name="interface-type">
+              <type name="track-iftype"/>
+            </leaf>
+            <leaf name="interface-name">
+              <type name="track-ifname"/>
+            </leaf>
+            <leaf name="track-priority">
+              <type name="uint8">
+                <range value="1..254"/>
+              </type>
+              <description>
+                <text>Track Priority</text>
+              </description>
+            </leaf>
+          </list>
+        </container>
+        <uses name="vrrp-groups"/>
+      </list>
+      <list name="vrrpe">
+        <key value="vrid"/>
+        <leaf name="vrid">
+          <type name="vrid-type"/>
+        </leaf>
+        <list name="virtual-ip">
+          <key value="virtual-ipaddr"/>
+          <leaf name="virtual-ipaddr">
+            <type name="inet:ipv4-address"/>
+            <description>
+              <text>Virtual IPv4 address</text>
+            </description>
+          </leaf>
+        </list>
+        <container name="track">
+          <description>
+            <text>Interface to be tracked</text>
+          </description>
+          <list name="interface">
+            <key value="interface-type interface-name"/>
+            <leaf name="interface-type">
+              <type name="track-iftype"/>
+            </leaf>
+            <leaf name="interface-name">
+              <type name="track-ifname"/>
+            </leaf>
+            <leaf name="track-priority">
+              <type name="uint8">
+                <range value="1..254"/>
+              </type>
+              <description>
+                <text>Track Priority</text>
+              </description>
+            </leaf>
+          </list>
+        </container>
+        <uses name="vrrp-groups"/>
+        <uses name="vrrpe-cmds-only"/>
+      </list>
+    </container>
+  </augment>
+</module>

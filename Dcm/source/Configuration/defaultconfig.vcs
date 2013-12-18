@@ -1,0 +1,39 @@
+vlan dot1q tag native
+!
+cee-map default
+remap fabric-priority priority 0
+remap lossless-priority priority 0
+priority-group-table 15.0 pfc off
+priority-group-table 1 weight 40 pfc on
+priority-group-table 2 weight 60 pfc off
+priority-table 2 2 2 1 2 2 2 15.0
+!
+interface Vlan 1
+no shutdown
+!
+port-profile default
+vlan-profile
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan all
+!
+protocol lldp
+!
+fcoe
+ fabric-map default
+  vlan           1002
+  priority       3
+  virtual-fabric 128
+  fcmap          0E:FC:00
+  advertisement interval 8000
+  keep-alive timeout
+ !                               
+ map default
+  fabric-map default
+  cee-map    default
+ !
+logging auditlog class CONFIGURATION
+logging auditlog class FIRMWARE
+logging auditlog class SECURITY
+!
+end

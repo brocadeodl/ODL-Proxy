@@ -1,0 +1,277 @@
+################################################################################
+# this common makefile has whatever may be needed at the end of the makefiles that include it
+#
+# it is better to put common rules here
+# whereas variables in a "beginning" common Makefile such as Makefile.tools
+################################################################################
+
+.PHONY: phony
+
+################################################################################
+#common rule for directories
+# we recognize directories by "." suffix (as / alone does not work)
+################################################################################
+.PRECIOUS: %/.
+%/.:
+	mkdir -p $@
+
+
+################################################################################
+# rule for programs
+# specific dependencies for each program are listed in their makefile
+# 
+# there may be files linked-to coming here, from diagnostics for auto-dependencies, so we filter them out
+# they are all absolute, start with /
+#
+# don't depend on any junk like destinations of links - make sure everything is listed in $(COMMON_DEPENDENCIES)
+################################################################################
+#pragma noautodep *
+%.$(OS_ARCH_XT): $(COMMON_DEPENDENCIES) $(MKFS)
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) $(LIBFILES) $(filter-out /%,$(filter %.cpp,$^)) -o $@
+
+
+################################################################################
+# process objects to be linked to a library, if any
+# OBJS from static sources and DYN_OBJS from dynamic sources are already listed
+# in the including makefile
+#
+# more dependencies for objects are later
+#
+# restrict if the user says on command line CHANG=... - changes restricted to some subdirectories where files changed
+# ###############################################################################
+ifdef CHANG
+ABS_OBJS := $(addprefix $(BUILD_DIR_OBJ)/,$(filter $(addsuffix %, $(CHANG)), $(OBJS)))
+else
+ABS_OBJS := $(addprefix $(BUILD_DIR_OBJ)/,$(OBJS))
+endif
+
+#pragma noautodep */toolchain*
+$(ABS_OBJS) : $(BUILD_DIR_OBJ)/%.o: %.cpp 
+	$(OBJ_UPDATE)
+
+ifndef CHANG
+# now add dynamics  - put dynamics first as there is usually a big one there and
+# parallel makes are fastest with long jobs listed first 
+ABS_OBJS := $(addprefix $(BUILD_DIR_OBJ)/,$(DYN_OBJS)) $(ABS_OBJS)
+endif
+OBJS += $(DYN_OBJS)
+
+
+.SECONDEXPANSION:
+
+################################################################################
+# implicit rule to build dynamic sources
+#
+# if the static rule to build static sources did not catch
+# this catches the dynamic sources
+################################################################################
+$(BUILD_DIR_OBJ)/%.o: $(BUILD_DIR_DYNAMIC_SRC)/%.cpp $(MKFS) | $$(@D)/.
+	$(OBJ_UPDATE)
+$(BUILD_DIR_OBJ)/%.o: $(WAVE_BUILD_DIR_DYNAMIC_SRC_ARCH_KIND_INDEP)/%.cpp $(MKFS) | $$(@D)/.
+	$(OBJ_UPDATE)
+
+
+################################################################################
+# dump 1st arg variable value to 2nd arg file
+# one word on a line (and no whitespace)
+#
+# all on one line so you can stick it into a recipe shell command as whitespace
+#
+# call it like this:
+# $(call ECHO_TO_FILE,FOOBAR, foobar.txt)
+# (notice no space around FOOBAR)
+#
+# this works around the argument list too long error that may happen when you try to use 
+# echo $(FOOBAR)
+# in recipe
+################################################################################
+ECHO_TO_FILE	= \
+	$(shell echo $(word 1,$($(1)))>$(2)) \
+	$(foreach word,$(wordlist 2,$(words $($(1))),$($(1))),$(shell echo $(word) >> $(2)))
+
+# second expansion pass for prerequsites is needed to resolve things like $$(@D)
+# these directory targets are recognized by /. suffix, 
+# and are existence-only (order-only)  prerequisites for their targets
+
+# function to split the giant $OBJ line into multiple smaller archive commands.  It uses a single archive.  There must be 
+# an issue with ar as only the "q" option seems to work when adding to the archive.
+#	arg1 = archive command
+#	arg2 = count of files per invocation
+#	arg3 = object list
+define split_objs   
+	$(eval _args:=)   
+	$(foreach obj,$3,$(eval _args+=$(obj)) $(if $(word $2,$(_args)),$1$(_args)$(EOL)$(eval _args:=))) 
+	$(if $(_args),$1$(_args)) 
+endef 
+# EOL needs 2 new lines here.  
+define EOL 
+
+
+endef
+
+ifeq '$(OBJS)' ''
+# if we don't have objects, that means we are in an application
+# go build in the proper directory, SRC_ROOT for that application library
+$(LIB_TO_BUILD): phony | $(WAVE_RESOURCES) $(RESOURCE_GENERATOR) $(MKFS)
+	$(MAKE) -C $(SRC_ROOT) $@ WAVE_RESOURCES= RESOURCE_GENERATOR=
+else
+
+$(LIB_TO_BUILD): $(ABS_OBJS) $(MKFS) | $$(@D)/.
+	$(ECHOCMD) L - $(PROJECT)
+	-cd $(BUILD_DIR_OBJ); /bin/rm -f $(notdir $@).a
+	$(call split_objs,cd $(BUILD_DIR_OBJ); $(AR) q $(notdir $@).a,500,$(OBJS))
+	cd $(BUILD_DIR_OBJ); \
+	$(CXX) -shared -fPIC -Wl,--relax,-soname,$(notdir $(LIB.SO)) $(ZVM_LDFLAGS) -o $@ -Wl,--whole-archive $(notdir $@).a -Wl,--no-whole-archive
+endif
+
+ifneq '$(LIB.SO.VER)' ''
+################################################################################
+# make links if there is something to link to
+#
+#the links do not depend on their targets, and in fact may be created to not-yet existing targets
+# the order-only dependency on $(LIB.SO.VER) is necessary only because gnu make accesses
+# a link target to cache it, and emake behaves compatibly
+################################################################################
+
+$(LIB.SO) $(LIB.SO.MAJOR):  | $$(@D)/. $(LIB.SO.VER)
+	ln -sf $(notdir $(LIB.SO.VER)) $@
+
+endif
+
+
+################################################################################
+# more dependencies for objects
+# remaining dependencies are in dynamically-generated dep makefiles
+#
+# the reason for $(WHO_GENERATES_INCLUDES) here is that if there are
+# no dependency makefiles generated yet, we need some way to order
+# the generation of includes first, before objects
+# otherwise, that the includes were regenerated, does not of itself mean
+# we need to rebuild every object - that decision comes from dependency
+# makefiles if they exist
+################################################################################
+$(ABS_OBJS): $(MKFS) | $(WHO_GENERATES_INCLUDES) $$(@D)/. 
+
+# the strange stuff with 
+# WAVE_RESOURCES and WAVE_BUILD_DIR_DYNAMIC_SRC_ARCH_KIND_INDEP
+# is to avoid parallelism bugs with the recursive makes
+# see the manual for explanation
+
+$(WAVE_RESOURCES): phony | \
+	$(RESOURCE_GENERATOR) $($(WAVE_BUILD_DIR_DYNAMIC_SRC_ARCH_KIND_INDEP)/.)
+	$(MAKE) -C $(WAVE_SRC)/Resources -f Makefile.resources \
+		RESOURCE_GENERATOR= $(WAVE_BUILD_DIR_DYNAMIC_SRC_ARCH_KIND_INDEP)/.=
+
+$(RESOURCE_GENERATOR): phony
+	$(MAKE) -C $(WAVE_HOME)/resourcegenerator
+
+
+################################################################################
+# here we process some information about each of $(MAKECMDGOALS):
+#
+# we figure out which dependency makefiles are necessary to include 
+# (there is a huge number of them and they may be big)
+# this is variable NEEDED_DEP_MAKEFILES
+#
+# note that if the including makefile does not have OBJS, we don't have to worry about that
+#
+# and if there are prefixes of real goals on command line, we expand them to their real goals
+################################################################################
+DEP_MAKEFILES := $(ABS_OBJS:.o=.P)
+
+ifdef MAKECMDGOALS
+
+ifeq '$(filter $(ALL_DEPS_GOALS),$(MAKECMDGOALS))' ''
+	NEEDED_DEP_MAKEFILES :=
+else
+	NEEDED_DEP_MAKEFILES := $(DEP_MAKEFILES)
+endif
+
+# this macro processes one goal $(1)
+define PROCESS_MAKECMDGOAL
+
+# objects for which this goal is a prefix
+# either absolute or relative to $(BUILD_DIR_OBJ)
+GOAL_MATCHING_OBJS := $(filter-out $(1),$(filter $(1)% $(BUILD_DIR_OBJ)/$(1)%,$(ABS_OBJS)))
+
+ifneq '$$(GOAL_MATCHING_OBJS)' ''
+NEEDED_DEP_MAKEFILES += $$(GOAL_MATCHING_OBJS:.o=.P) 
+
+#if we are a prefix of objects and are not not an object ourselves, 
+# then reduce to them
+ifeq '$(filter $(OBJS),$(1))' ''
+$(1): $$(GOAL_MATCHING_OBJS) 
+endif
+
+endif
+
+endef
+
+$(foreach goal,$(MAKECMDGOALS),$(eval $(call PROCESS_MAKECMDGOAL,$(goal))))
+
+else # if no goals, include all 
+
+	NEEDED_DEP_MAKEFILES := $(DEP_MAKEFILES)
+
+endif
+
+-include $(DEP_MAKEFILES)
+
+# don't try to remake makefiles
+$(MKFS): extractxercesc extractpostgresql extractzlib extractxalanc;
+
+#not needed for the OS build
+$(LIB.A): $(ABS_OBJS) $(MKFS)
+	$(AR) -r $@ $(ABS_OBJS)
+
+$(XERCESC_ARCH_DIR):
+	mkdir -p $(XERCESC_ARCH_DIR)
+
+extractxercesc: $(XERCESC_ARCH_DIR)
+	cd $(XERCESC_ARCH_DIR); \
+        if [ ! -f $(XERCESC_VERSION)/.__Extraction_Completed__ ]; then \
+                $(ECHOCMD) -n "Extracting xerces-c SDK ... "; \
+                rm -rf $(XERCESC_VERSION); \
+                tar -zxf $(XERCESC_FILE_WAVE); \
+                touch $(XERCESC_VERSION)/.__Extraction_Completed__; \
+                $(ECHOCMD) "Done"; \
+        fi;
+
+$(POSTGRESQL_ARCH_DIR):
+	mkdir -p $(POSTGRESQL_ARCH_DIR)
+
+extractpostgresql: $(POSTGRESQL_ARCH_DIR) extractxercesc
+	cd $(POSTGRESQL_ARCH_DIR); \
+        if [ ! -f $(POSTGRESQL_VERSION)/.__Extraction_Completed__ ]; then \
+                $(ECHOCMD) -n "Extracting posgresql SDK ... "; \
+                rm -rf $(POSTGRESQL_VERSION); \
+                tar -zxf $(POSTGRESQL_FILE_WAVE); \
+                touch $(POSTGRESQL_VERSION)/.__Extraction_Completed__; \
+                $(ECHOCMD) "Done"; \
+        fi;
+
+$(ZLIB_ARCH_DIR):
+	mkdir -p $(ZLIB_ARCH_DIR)
+
+extractzlib: $(ZLIB_ARCH_DIR) extractpostgresql
+	cd $(ZLIB_ARCH_DIR); \
+        if [ ! -f $(ZLIB_VERSION)/.__Extraction_Completed__ ]; then \
+            $(ECHOCMD) -n "Extracting zlib SDK ... "; \
+            rm -rf $(ZLIB_VERSION); \
+            tar -zxf $(ZLIB_FILE_WAVE); \
+            touch $(ZLIB_VERSION)/.__Extraction_Completed__; \
+            $(ECHOCMD) "Done"; \
+        fi; \
+
+$(XALANC_ARCH_DIR):
+	mkdir -p $(XALANC_ARCH_DIR)
+
+extractxalanc: $(XALANC_ARCH_DIR) extractpostgresql
+	cd $(XALANC_ARCH_DIR); \
+        if [ ! -f $(XALANC_VERSION)/.__Extraction_Completed__ ]; then \
+            $(ECHOCMD) -n "Extracting zlib SDK ... "; \
+            rm -rf $(XALANC_VERSION); \
+            tar -zxf $(XALANC_FILE_WAVE); \
+            touch $(XALANC_VERSION)/.__Extraction_Completed__; \
+            $(ECHOCMD) "Done"; \
+        fi; \

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="beacon"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:beacon="urn:brocade.com:mgmt:brocade-beacon">
+  <namespace uri="urn:brocade.com:mgmt:brocade-beacon"/>
+  <prefix value="beacon"/>
+  <revision date="2011-10-31">
+    <description>
+      <text>Initial version of this management module.</text>
+    </description>
+  </revision>
+  <container name="beacon">
+    <container name="enable"/>
+    <container name="disable"/>
+  </container>
+</module>

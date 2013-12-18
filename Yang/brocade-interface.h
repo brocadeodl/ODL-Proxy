@@ -1,0 +1,298 @@
+/* Copyright (c) 2005-2013 Brocade Communications Systems, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at:
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#ifndef BROCADE_INTERFACE_H
+#define BROCADE_INTERFACE_H
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+#define brocade_interface__ns 998135944
+
+#define brocade_interface_10 1
+#define brocade_interface_100 2
+#define brocade_interface_1000 1
+#define brocade_interface_10000 2
+#define brocade_interface_1gbps 1
+#define brocade_interface_2000 2000
+#define brocade_interface_2gbps 2
+#define brocade_interface_30000 30000
+#define brocade_interface_40000 3
+#define brocade_interface_4gbps 4
+#define brocade_interface_5000 5000
+#define brocade_interface_8gbps 5
+#define brocade_interface_aa_then_ia 3
+#define brocade_interface_access 304644663
+#define brocade_interface_access_gvlan 1204561519
+#define brocade_interface_accessvlan 801826276
+#define brocade_interface_active 1
+#define brocade_interface_actual 1749258173
+#define brocade_interface_add 448306044
+#define brocade_interface_add_rspan_trunk_vlan 1576711196
+#define brocade_interface_address 1266954393
+#define brocade_interface_all 2031982792
+#define brocade_interface_allowed 1631106802
+#define brocade_interface_allowed_ouis 1829416510
+#define brocade_interface_allowed_vlan_oper_type_add 1
+#define brocade_interface_allowed_vlan_oper_type_except 3
+#define brocade_interface_allowed_vlan_oper_type_remove 2
+#define brocade_interface_arb 1
+#define brocade_interface_arbff_arbff 1
+#define brocade_interface_association 279541532
+#define brocade_interface_auto 0
+#define brocade_interface_autoconfig 1131888271
+#define brocade_interface_basic 626535515
+#define brocade_interface_brocade 2
+#define brocade_interface__wysereaconfigurationid_ctag_pvlan_classification_phy_config "ctag-pvlan-classification-phy-config"
+#define brocade_interface__wysereaconfigurationid_ctag_pvlan_classification_phy_remove_config "ctag-pvlan-classification-phy-remove-config"
+#define brocade_interface__wysereaconfigurationid_ctag_pvlan_classification_po_config "ctag-pvlan-classification-po-config"
+#define brocade_interface__wysereaconfigurationid_ctag_pvlan_classification_po_remove_config "ctag-pvlan-classification-po-remove-config"
+#define brocade_interface__wysereaconfigurationid_ctag_vlan_classification_phy_config "ctag-vlan-classification-phy-config"
+#define brocade_interface__wysereaconfigurationid_ctag_vlan_classification_phy_remove_config "ctag-vlan-classification-phy-remove-config"
+#define brocade_interface__wysereaconfigurationid_ctag_vlan_classification_po_config "ctag-vlan-classification-po-config"
+#define brocade_interface__wysereaconfigurationid_ctag_vlan_classification_po_remove_config "ctag-vlan-classification-po-remove-config"
+#define brocade_interface__wysereaconfigurationid_gvlan_access_port_config_phy "gvlan-access-port-config-phy"
+#define brocade_interface__wysereaconfigurationid_gvlan_access_port_config_po "gvlan-access-port-config-po"
+#define brocade_interface__wysereaconfigurationid_interface_fcport "interface_fcport"
+#define brocade_interface__wysereaconfigurationid_interface_fortygigabit "interface_fortygigabit"
+#define brocade_interface__wysereaconfigurationid_interface_onegigabit "interface_onegigabit"
+#define brocade_interface__wysereaconfigurationid_interface_po "interface_po"
+#define brocade_interface__wysereaconfigurationid_interface_po_portsecurity "interface_po_portsecurity"
+#define brocade_interface__wysereaconfigurationid_interface_po_portsecurity_mac "interface_po_portsecurity_mac"
+#define brocade_interface__wysereaconfigurationid_interface_po_portsecurity_oui "interface_po_portsecurity_oui"
+#define brocade_interface__wysereaconfigurationid_interface_portsecurity "interface_portsecurity"
+#define brocade_interface__wysereaconfigurationid_interface_portsecurity_mac "interface_portsecurity_mac"
+#define brocade_interface__wysereaconfigurationid_interface_portsecurity_oui "interface_portsecurity_oui"
+#define brocade_interface__wysereaconfigurationid_interface_portsecurity_po_sticky_mac "interface_portsecurity_po_sticky_mac"
+#define brocade_interface__wysereaconfigurationid_interface_portsecurity_sticky_mac "interface_portsecurity_sticky_mac"
+#define brocade_interface__wysereaconfigurationid_interface_tengigabite "interface_tengigabite"
+#define brocade_interface__wysereaconfigurationid_interface_vlan "interface_vlan"
+#define brocade_interface__wysereaconfigurationid_ipv4staticcpt "ipv4staticcpt"
+#define brocade_interface__wysereaconfigurationid_mac_group_vlan_classification_config_phy "mac-group-vlan-classification-config-phy"
+#define brocade_interface__wysereaconfigurationid_mac_group_vlan_classification_config_po "mac-group-vlan-classification-config-po"
+#define brocade_interface__wysereaconfigurationid_native_vlan_phy_interface_conf "native_vlan_phy_interface_conf"
+#define brocade_interface__wysereaconfigurationid_native_vlan_po_interface_conf "native_vlan_po_interface_conf"
+#define brocade_interface__wysereaconfigurationid_node_interface_vlan_cp "node_interface_vlan_cp"
+#define brocade_interface__wysereaconfigurationid_nsmReservedVlanConfig "nsmReservedVlanConfig"
+#define brocade_interface__wysereaconfigurationid_pvlanMappingWyserEaConfigurationWorker_po "pvlanMappingWyserEaConfigurationWorker_po"
+#define brocade_interface__wysereaconfigurationid_pvlanMappingWyserEaConfigurationWorker_te "pvlanMappingWyserEaConfigurationWorker_te"
+#define brocade_interface__wysereaconfigurationid_pvlanTrunkAssocWyserEaConfigurationWorker "pvlanTrunkAssocWyserEaConfigurationWorker"
+#define brocade_interface__wysereaconfigurationid_pvlanTrunkAssocWyserEaConfigurationWorker_po "pvlanTrunkAssocWyserEaConfigurationWorker_po"
+#define brocade_interface__wysereaconfigurationid_rspan_gvlan_trunk_port_phy_config "rspan-gvlan-trunk-port-phy-config"
+#define brocade_interface__wysereaconfigurationid_rspan_gvlan_trunk_port_phy_remove_config "rspan-gvlan-trunk-port-phy-remove-config"
+#define brocade_interface__wysereaconfigurationid_rspan_mac_address_vlan_classification_config_phy "rspan-mac-address-vlan-classification-config-phy"
+#define brocade_interface__wysereaconfigurationid_rspan_mac_group_vlan_classification_config_phy "rspan-mac-group-vlan-classification-config-phy"
+#define brocade_interface__typepointid_mac_address "mac_address"
+#define brocade_interface_cee 2067384661
+#define brocade_interface_channel_group 1885065389
+#define brocade_interface_community 3
+#define brocade_interface_config_mode 1428013043
+#define brocade_interface_configured 727385972
+#define brocade_interface_delete 2
+#define brocade_interface_description 202559156
+#define brocade_interface_desire_distance 981832175
+#define brocade_interface_dhcp 990408299
+#define brocade_interface_dhcpv6 1164719995
+#define brocade_interface_dst_mac_vid 1
+#define brocade_interface_echo_reply 630395511
+#define brocade_interface_edge_loop_detection 275443440
+#define brocade_interface_eldprio 882794679
+#define brocade_interface_eldvlan 838416223
+#define brocade_interface_eport 2
+#define brocade_interface_except 1911518660
+#define brocade_interface_fc_port 681236149
+#define brocade_interface_fc_speed_cfg 1611719956
+#define brocade_interface_fill_word 1796766085
+#define brocade_interface_fortygigabitethernet 2080260720
+#define brocade_interface_forwarding 1238173057
+#define brocade_interface_fport 4
+#define brocade_interface_gateway 501528536
+#define brocade_interface_gateway_address 1861837140
+#define brocade_interface_gigabitethernet 1874635240
+#define brocade_interface_gvlan 430766026
+#define brocade_interface_gvlan_trunk_ctag_id 948676751
+#define brocade_interface_gvlan_trunk_vlan_id 1204418847
+#define brocade_interface_host 1711485895
+#define brocade_interface_host_association 238628556
+#define brocade_interface_host_pri_pvlan 1039589989
+#define brocade_interface_host_sec_pvlan 718750445
+#define brocade_interface_icmp 1656649427
+#define brocade_interface_icmpv6 1931943631
+#define brocade_interface_idle 0
+#define brocade_interface_idle_arbff 2
+#define brocade_interface_idle_idle 0
+#define brocade_interface_ifindex 1259815303
+#define brocade_interface_ignore_split 640218808
+#define brocade_interface_index_address 1130537755
+#define brocade_interface_interface 221572658
+#define brocade_interface_interface_name 1322899300
+#define brocade_interface_interface_type 1566485963
+#define brocade_interface_interface_type_fibrechannel 8
+#define brocade_interface_interface_type_fortygigabitethernet 4
+#define brocade_interface_interface_type_gigabitethernet 2
+#define brocade_interface_interface_type_l2vlan 6
+#define brocade_interface_interface_type_loopback 7
+#define brocade_interface_interface_type_port_channel 5
+#define brocade_interface_interface_type_tengigabitethernet 3
+#define brocade_interface_interface_type_unknown 1
+#define brocade_interface_interface_vlan 389906115
+#define brocade_interface_ip 1643785435
+#define brocade_interface_ip_address 36594129
+#define brocade_interface_ipv6 1228132394
+#define brocade_interface_ipv6_address 731894850
+#define brocade_interface_ipv6_address_cont 919997933
+#define brocade_interface_ipv6_gateways 1903240760
+#define brocade_interface_ipv6_global_address 1655260960
+#define brocade_interface_isl_r_rdy_mode 822939250
+#define brocade_interface_isolated 2
+#define brocade_interface_l0 0
+#define brocade_interface_l2_mode_type_access 1
+#define brocade_interface_l2_mode_type_trunk 2
+#define brocade_interface_ld 5
+#define brocade_interface_le 3
+#define brocade_interface_line_speed 117847933
+#define brocade_interface_load_balance 1634872787
+#define brocade_interface_long_distance 1013702715
+#define brocade_interface_long_distance_isl 1431730311
+#define brocade_interface_ls 6
+#define brocade_interface_mac_addr_rspan_vlan 315471255
+#define brocade_interface_mac_address 2110689796
+#define brocade_interface_mac_group 2111975675
+#define brocade_interface_mac_group_classification_group 662785131
+#define brocade_interface_mac_group_classification_vlan 2053562735
+#define brocade_interface_mac_group_rspan_vlan 2102820105
+#define brocade_interface_mac_group_vlan 1942806914
+#define brocade_interface_management 1308506682
+#define brocade_interface_mapping 1103274290
+#define brocade_interface_minimum_links 314100244
+#define brocade_interface_mode 575893728
+#define brocade_interface_mode_hybrid 1
+#define brocade_interface_mode_native 0
+#define brocade_interface_mtu 1751455506
+#define brocade_interface_name 1998270519
+#define brocade_interface_native 472211213
+#define brocade_interface_native_vlan 1159886695
+#define brocade_interface_nativevlanid 1365609432
+#define brocade_interface_no_action 0
+#define brocade_interface_none 432063804
+#define brocade_interface_nport 3
+#define brocade_interface_on 3
+#define brocade_interface_openflow 491007989
+#define brocade_interface_openflow_enable 1660024870
+#define brocade_interface_oper 1313484953
+#define brocade_interface_oper_address 553146699
+#define brocade_interface_oper_gateway 792900272
+#define brocade_interface_oper_gateway_con 663681520
+#define brocade_interface_oper_ip_address 6700220
+#define brocade_interface_oui 169238003
+#define brocade_interface_passive 2
+#define brocade_interface_po_speed 1225288038
+#define brocade_interface_port_channel 763837956
+#define brocade_interface_port_int 1045411602
+#define brocade_interface_port_sec_max 970722158
+#define brocade_interface_port_sec_violation 561155663
+#define brocade_interface_port_sec_vlan 2020184859
+#define brocade_interface_port_security 750205970
+#define brocade_interface_port_secutiry_mac_address 182126902
+#define brocade_interface_primary 1
+#define brocade_interface_private_vlan 1900986503
+#define brocade_interface_private_vlan_trunk 807402579
+#define brocade_interface_promis_pri_pvlan 741918284
+#define brocade_interface_promis_sec_pvlan_range 1610207311
+#define brocade_interface_promiscuous 971975881
+#define brocade_interface_protocol 943257313
+#define brocade_interface_pvlan_type_leaf 1478367305
+#define brocade_interface_pvlanNativevlan 513420671
+#define brocade_interface_pvlan_add 418060189
+#define brocade_interface_pvlan_all 1517965715
+#define brocade_interface_pvlan_except 1209871863
+#define brocade_interface_pvlan_none 951087115
+#define brocade_interface_pvlan_remove 1687745270
+#define brocade_interface_ra_guard 214084114
+#define brocade_interface_rate_limiting 531570573
+#define brocade_interface_remove 73860692
+#define brocade_interface_remove_rspan_trunk_vlan 1338120586
+#define brocade_interface_reserved_vlan 1706946133
+#define brocade_interface_reserved_vlan_end 1191269835
+#define brocade_interface_reserved_vlan_start 1273598540
+#define brocade_interface_restrict 1
+#define brocade_interface_rspan_access 878255183
+#define brocade_interface_rspan_access_vlan 2028910932
+#define brocade_interface_rspan_gvlan_mac_address 1523159719
+#define brocade_interface_rspan_gvlan_mac_group 1781521351
+#define brocade_interface_rspan_gvlan_trunk_ctag_id 807085664
+#define brocade_interface_rspan_gvlan_trunk_remove_ctag_id 1654310402
+#define brocade_interface_rspan_gvlan_trunk_remove_vlan_id 1622538663
+#define brocade_interface_rspan_gvlan_trunk_vlan_id 1823207792
+#define brocade_interface_rspan_mac_address_classification_address 581382279
+#define brocade_interface_rspan_mac_address_classification_vlan 1566299190
+#define brocade_interface_rspan_mac_group_classification_group 945190958
+#define brocade_interface_rspan_mac_group_classification_vlan 1412909850
+#define brocade_interface_rspan_vlan 1796802191
+#define brocade_interface_sec_assoc_add 1261055181
+#define brocade_interface_sec_assoc_remove 646006296
+#define brocade_interface_shutdown 460723287
+#define brocade_interface_shutdown_time 1349186245
+#define brocade_interface_speed 1423237997
+#define brocade_interface_src_dst_ip 4
+#define brocade_interface_src_dst_ip_mac_vid 5
+#define brocade_interface_src_dst_ip_mac_vid_port 7
+#define brocade_interface_src_dst_ip_port 6
+#define brocade_interface_src_dst_mac_vid 3
+#define brocade_interface_src_mac_vid 2
+#define brocade_interface_standard 1
+#define brocade_interface_sticky 1697710675
+#define brocade_interface_switchport 423938883
+#define brocade_interface_swmode_type_access 1
+#define brocade_interface_swmode_type_converged 3
+#define brocade_interface_swmode_type_pvlan_host 6
+#define brocade_interface_swmode_type_pvlan_promiscuous 4
+#define brocade_interface_swmode_type_pvlan_trunk 8
+#define brocade_interface_swmode_type_pvlan_trunk_host 7
+#define brocade_interface_swmode_type_pvlan_trunk_promiscuous 5
+#define brocade_interface_swmode_type_trunk 2
+#define brocade_interface_swmode_type_unknown 0
+#define brocade_interface_tag 21925559
+#define brocade_interface_tengigabitethernet 120960371
+#define brocade_interface_trunk 797138583
+#define brocade_interface_trunk_basic 1386219758
+#define brocade_interface_trunk_enable 1826620541
+#define brocade_interface_trunk_host 454147604
+#define brocade_interface_trunk_pri_pvlan 303366577
+#define brocade_interface_trunk_promiscuous 855120123
+#define brocade_interface_trunk_sec_pvlan 166444275
+#define brocade_interface_type 2040883914
+#define brocade_interface_unreachable 1344603974
+#define brocade_interface_v6_echo_reply 1746247347
+#define brocade_interface_v6_rate_limiting 628764117
+#define brocade_interface_v6_unreachable 445433749
+#define brocade_interface_vc_link_init 312345492
+#define brocade_interface_ve 290909456
+#define brocade_interface_vepa 913693223
+#define brocade_interface_vepa_enable 640742489
+#define brocade_interface_vlag 1303630107
+#define brocade_interface_vlan 71481437
+#define brocade_interface_vlan_mode 2011626588
+#define brocade_interface_vlanoper 1988488867
+#define brocade_interface_vrf 1281310328
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
+

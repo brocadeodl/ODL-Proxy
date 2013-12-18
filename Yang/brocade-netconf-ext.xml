@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-netconf-ext"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:netconf-extensions="urn:brocade.com:mgmt:brocade-netconf-ext"
+        xmlns:ietfyang="urn:ietf:params:xml:ns:yang:ietf-yang-types"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types">
+  <namespace uri="urn:brocade.com:mgmt:brocade-netconf-ext"/>
+  <prefix value="netconf-extensions"/>
+  <import module="ietf-yang-types">
+    <prefix value="ietfyang"/>
+  </import>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+   San Jose, CA 95134
+   U.S.A
+Tel: +1-408-333-6061
+E-mail: support@Brocade.com
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This sub module defines NETCONF information.
+ Copyright(c) 2010-2011 by Brocade Communications Systems, Inc.
+ All rights reserved.</text>
+  </description>
+  <reference>
+    <text></text>
+  </reference>
+  <revision date="2012-02-03">
+    <description>
+      <text>Added new RPC for NETCONF Client information for NETCONF 
+interface.</text>
+    </description>
+    <reference>
+      <text></text>
+    </reference>
+  </revision>
+  <rpc name="get-netconf-client-capabilities">
+    <description>
+      <text>This RPC displays the vendor information 
+of all the NETCONF clients</text>
+    </description>
+    <input>
+      <leaf name="session-id">
+        <type name="uint32"/>
+        <description>
+          <text>This specifies session id for which this function
+is invoked. This is optional input, when not
+specified means 'all' sessions.</text>
+        </description>
+      </leaf>
+    </input>
+    <output>
+      <list name="session">
+        <leaf name="session-id">
+          <type name="uint32"/>
+          <description>
+            <text>Session Id of the NETCONF client session.</text>
+          </description>
+        </leaf>
+        <leaf name="user-name">
+          <type name="string"/>
+          <description>
+            <text>Login name of the user for the NETCONF client
+session.</text>
+          </description>
+        </leaf>
+        <leaf name="vendor">
+          <type name="string"/>
+          <mandatory value="false"/>
+          <description>
+            <text>Vendor name of the NETCONF client session.</text>
+          </description>
+        </leaf>
+        <leaf name="product">
+          <type name="string"/>
+          <mandatory value="false"/>
+          <description>
+            <text>Product name of the NETCONF client session.</text>
+          </description>
+        </leaf>
+        <leaf name="version">
+          <type name="string"/>
+          <mandatory value="false"/>
+          <description>
+            <text>Product version of the NETCONF client
+session.</text>
+          </description>
+        </leaf>
+        <leaf name="identity">
+          <type name="string"/>
+          <mandatory value="false"/>
+          <description>
+            <text>Identity of the NETCONF client session.</text>
+          </description>
+        </leaf>
+        <leaf name="af-type">
+          <type name="enumeration">
+            <enum name="IPV4">
+              <value value="2"/>
+            </enum>
+            <enum name="IPV6">
+              <value value="10"/>
+            </enum>
+          </type>
+          <description>
+            <text>This leaf indicates the address family type. If the value is IPV4
+then the client host IP will be present in the host-ip leaf.
+If the value is IPV6, then the client host IP will be present in
+host-ip-V6 leaf</text>
+          </description>
+        </leaf>
+        <leaf name="host-ip-v6">
+          <type name="inet:ipv6-address"/>
+          <description>
+            <text>IP Address of NETCONF client session</text>
+          </description>
+        </leaf>
+        <leaf name="host-ip">
+          <type name="inet:ipv4-address"/>
+          <description>
+            <text>IP Address of NETCONF client session</text>
+          </description>
+        </leaf>
+        <leaf name="time">
+          <type name="ietfyang:date-and-time"/>
+          <description>
+            <text>Login time of NETCONF client session</text>
+          </description>
+        </leaf>
+      </list>
+    </output>
+  </rpc>
+</module>

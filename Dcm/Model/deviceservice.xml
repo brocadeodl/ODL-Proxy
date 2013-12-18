@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<WavePlugin name="DeviceService" nameSpace="DcmNs"> 
+<Local name="DeviceService">
+	<Message name="GetAll" sequencerType="SYNC" allowPreemption="FALSE"> 
+		<Member name="domain_id" dataType="UI32">
+		</Member>
+		<Member name="request_type" dataType="UI32">
+		</Member>
+		<Member name="port_id" dataType="vector/UI32/">
+		</Member>
+		<Member name="port_type" dataType="vector/UI32/">
+		</Member>
+		<Member name="class_of_service" dataType="vector/UI32/">
+		</Member>
+		<Member name="port_wwn_name" dataType="vector/WorldWideName/">
+		</Member>
+		<Member name="node_wwn_name" dataType="vector/WorldWideName/">
+		</Member>
+		<Member name="state_change_registration" dataType="vector/UI32/">
+		</Member>
+		<Member name="fc4s_supported" dataType="vector/UI32/">
+		</Member>
+		<Member name="port_symbolic_name" dataType="vector/string/">
+		</Member>
+		<Member name="node_symbolic_name" dataType="vector/string/">
+		</Member>
+		<Member name="fabric_port_wwn_name" dataType="vector/WorldWideName/">
+		</Member>
+		<Member name="permanent_port_wwn_name" dataType="vector/WorldWideName/">
+		</Member>
+		<Member name="port_index" dataType="vector/UI32/">
+		</Member>
+		<Member name="shared_area" dataType="vector/UI32/">
+		</Member>
+		<Member name="frame_redirection" dataType="vector/UI32/">
+		</Member>
+		<Member name="inq_string" dataType="vector/string/">
+		</Member>
+		<Member name="partial_entry" dataType="vector/UI32/">
+		</Member>
+		<Member name="device_type" dataType="vector/UI32/">
+		</Member>
+		<Member name="device_ip_addr" dataType="vector/IpV6Address/">
+		</Member>
+		<Member name="device_ipa" dataType="vector/UI32/">
+		</Member>
+		<Member name="device_ip_port" dataType="vector/IpV6Address/">
+		</Member>
+	</Message>
+</Local>
+</WavePlugin>

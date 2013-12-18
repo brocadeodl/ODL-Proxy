@@ -1,0 +1,766 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-ospf"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:ospf="urn:brocade.com:mgmt:brocade-ospf"
+        xmlns:rbridge="urn:brocade.com:mgmt:brocade-rbridge"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface"
+        xmlns:ip-config="urn:brocade.com:mgmt:brocade-ip-config"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def"
+        xmlns:intf-loopback="urn:brocade.com:mgmt:brocade-intf-loopback"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types">
+  <namespace uri="urn:brocade.com:mgmt:brocade-ospf"/>
+  <prefix value="ospf"/>
+  <import module="brocade-rbridge">
+    <prefix value="rbridge"/>
+  </import>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <import module="brocade-ip-config">
+    <prefix value="ip-config"/>
+  </import>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <import module="brocade-intf-loopback">
+    <prefix value="intf-loopback"/>
+  </import>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way,
+        San Jose, CA 95134 
+         U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com 
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This management module is an instrumentation to manage 
+OSPF Version 2 Protocol.</text>
+  </description>
+  <revision date="2010-11-29">
+    <description>
+      <text>Initial version of this management module.</text>
+    </description>
+  </revision>
+  <typedef name="ospf-area-id">
+    <type name="string">
+      <pattern value="((([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.)(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){2}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))|(([0-9])|([1-9]([0-9]{1,8}))|([1]([0-9]{1,9}))|([2][0]([0-9]{1,8}))|([2][1][0-3]([0-9]{1,7}))|([2][1][4][0-6]([0-9]{1,6}))|([2][1][4][7][0-3]([0-9]{1,5}))|([2][1][4][7][4][0-7]([0-9]{1,4}))|([2][1][4][7][4][8][0-2]([0-9]{1,3}))|([2][1][4][7][4][8][3][0-5]([0-9]{1,2}))|([2][1][4][7][4][8][3][6][0-3][0-9])|([2][1][4][7][4][8][3][6][4][0-7]))"/>
+    </type>
+  </typedef>
+  <typedef name="ospf-auth-psswd-string">
+    <type name="string"/>
+  </typedef>
+  <typedef name="big-metric">
+    <type name="uint32"/>
+  </typedef>
+  <typedef name="range-metric">
+    <type name="uint32"/>
+  </typedef>
+  <typedef name="band-width">
+    <type name="uint32">
+      <range value="1..4294967"/>
+    </type>
+    <units name="megabits per second"/>
+  </typedef>
+  <typedef name="metric-type">
+    <type name="enumeration">
+      <enum name="type1">
+        <value value="1"/>
+      </enum>
+      <enum name="type2">
+        <value value="2"/>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="route-option-type">
+    <type name="enumeration">
+      <enum name="all">
+        <value value="1"/>
+      </enum>
+      <enum name="connected">
+        <value value="2"/>
+      </enum>
+      <enum name="static">
+        <value value="4"/>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="route-type-enum">
+    <type name="enumeration">
+      <enum name="external">
+        <value value="1"/>
+      </enum>
+      <enum name="inter-area">
+        <value value="2"/>
+      </enum>
+      <enum name="intra-area">
+        <value value="3"/>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="match-set-metric-option-type">
+    <type name="enumeration">
+      <enum name="match-metric">
+        <value value="1"/>
+      </enum>
+      <enum name="set-metric">
+        <value value="2"/>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="key-type">
+    <type name="uint32">
+      <range value="0|2|255"/>
+    </type>
+  </typedef>
+  <typedef name="ospf-hexstring">
+    <type name="string">
+      <pattern value="[0-9a-fA-F]{1,8}"/>
+    </type>
+  </typedef>
+  <typedef name="ospf-ipv4-address">
+    <type name="inet:ipv4-address"/>
+  </typedef>
+  <typedef name="ospf-ipv4-prefix">
+    <type name="inet:ipv4-prefix"/>
+  </typedef>
+  <typedef name="ospf-link-state-id">
+    <type name="inet:ipv4-address"/>
+  </typedef>
+  <typedef name="ospf-adv-router-id">
+    <type name="inet:ipv4-address"/>
+  </typedef>
+  <typedef name="ospf-router-id">
+    <type name="inet:ipv4-address"/>
+  </typedef>
+  <typedef name="ospf-lsdb-index">
+    <type name="uint32"/>
+  </typedef>
+  <typedef name="ospf-show-area-id-num-range">
+    <type name="uint32">
+      <range value="0..2147483647"/>
+    </type>
+  </typedef>
+  <typedef name="ospf-show-area-id-ip-range">
+    <type name="inet:ipv4-address"/>
+  </typedef>
+  <typedef name="ospf-show-area-id-range">
+    <type name="union">
+      <type name="ospf-show-area-id-num-range"/>
+      <type name="ospf-show-area-id-ip-range"/>
+    </type>
+  </typedef>
+  <typedef name="ospf-neighbor-rid">
+    <type name="inet:ipv4-address"/>
+  </typedef>
+  <typedef name="ospf-entry-index">
+    <type name="uint32"/>
+  </typedef>
+  <typedef name="ospf-interface-ip">
+    <type name="inet:ipv4-address"/>
+  </typedef>
+  <typedef name="ospf-route-dest">
+    <type name="inet:ipv4-address"/>
+  </typedef>
+  <typedef name="ospf-route-prefix">
+    <type name="inet:ipv4-address"/>
+  </typedef>
+  <typedef name="ospf-route-mask">
+    <type name="inet:ipv4-address"/>
+  </typedef>
+  <grouping name="common-link-props">
+    <container name="authentication-key">
+      <container name="no-encrypt-auth-key-table">
+        <leaf name="no-encrypt-auth-key">
+          <type name="ospf-auth-psswd-string"/>
+        </leaf>
+      </container>
+      <container name="auth-key-table">
+        <leaf name="encrypttype">
+          <type name="key-type"/>
+        </leaf>
+        <leaf name="auth-key">
+          <type name="ospf-auth-psswd-string"/>
+        </leaf>
+      </container>
+    </container>
+    <leaf name="dead-interval">
+      <default value="40"/>
+      <type name="common-def:time-interval-sec">
+        <range value="3..65535"/>
+      </type>
+    </leaf>
+    <leaf name="hello-interval">
+      <default value="10"/>
+      <type name="common-def:time-interval-sec">
+        <range value="1..65535"/>
+      </type>
+    </leaf>
+    <leaf name="retransmit-interval">
+      <type name="common-def:time-interval-sec">
+        <range value="0..3600"/>
+      </type>
+    </leaf>
+    <leaf name="transmit-delay">
+      <type name="common-def:time-interval-sec">
+        <range value="0..3600"/>
+      </type>
+    </leaf>
+    <container name="md5-authentication">
+      <leaf name="key-activation-wait-time">
+        <type name="common-def:time-interval-sec">
+          <range value="0..14400"/>
+        </type>
+      </leaf>
+      <container name="no-encrypt-key-table">
+        <leaf name="no-encrypt-key-id">
+          <type name="uint32">
+            <range value="1..255"/>
+          </type>
+        </leaf>
+        <leaf name="no-encrypt-key">
+          <type name="ospf-auth-psswd-string"/>
+        </leaf>
+      </container>
+      <container name="key-table">
+        <leaf name="key-id">
+          <type name="uint32">
+            <range value="1..255"/>
+          </type>
+        </leaf>
+        <leaf name="key">
+          <type name="key-type"/>
+          <description>
+            <text>MD5 Authentication password (key)</text>
+          </description>
+        </leaf>
+        <leaf name="md5-authentication-key">
+          <type name="ospf-auth-psswd-string"/>
+        </leaf>
+      </container>
+    </container>
+  </grouping>
+  <grouping name="interface-fo-ospf">
+    <container name="interface-fo-ospf-conf">
+      <uses name="interface-ospf"/>
+    </container>
+  </grouping>
+  <grouping name="interface-te-ospf">
+    <container name="interface-te-ospf-conf">
+      <uses name="interface-ospf"/>
+    </container>
+  </grouping>
+  <grouping name="interface-gi-ospf">
+    <container name="interface-gi-ospf-conf">
+      <uses name="interface-ospf"/>
+    </container>
+  </grouping>
+  <grouping name="interface-PO-ospf">
+    <container name="interface-PO-ospf-conf">
+      <uses name="interface-ospf"/>
+    </container>
+  </grouping>
+  <grouping name="interface-vlan-ospf">
+    <container name="interface-vlan-ospf-conf">
+      <uses name="interface-ospf"/>
+    </container>
+  </grouping>
+  <grouping name="interface-loopback-ospf">
+    <container name="interface-loopback-ospf-conf">
+      <uses name="interface-ospf"/>
+    </container>
+  </grouping>
+  <typedef name="database-filter-options">
+    <type name="enumeration">
+      <enum name="allow-default-out">
+        <value value="1"/>
+      </enum>
+      <enum name="allow-default-and-type4-out">
+        <value value="2"/>
+      </enum>
+      <enum name="out">
+        <value value="3"/>
+      </enum>
+    </type>
+  </typedef>
+  <grouping name="interface-ospf">
+    <container name="ospf1">
+      <leaf name="area">
+        <type name="ospf-area-id"/>
+      </leaf>
+      <leaf name="auth-change-wait-time">
+        <type name="common-def:time-interval-sec">
+          <range value="0..14400"/>
+        </type>
+      </leaf>
+      <uses name="common-link-props"/>
+      <leaf name="cost">
+        <default value="1"/>
+        <type name="uint32">
+          <range value="1..65535"/>
+        </type>
+      </leaf>
+      <container name="database-filter">
+        <leaf name="all-out">
+          <type name="empty"/>
+        </leaf>
+        <leaf name="all-external">
+          <type name="database-filter-options"/>
+        </leaf>
+        <leaf name="all-summary-external">
+          <type name="database-filter-options"/>
+        </leaf>
+      </container>
+      <leaf name="mtu-ignore">
+        <type name="empty"/>
+      </leaf>
+      <leaf name="network">
+        <type name="enumeration">
+          <enum name="broadcast">
+            <value value="1"/>
+          </enum>
+          <enum name="non-broadcast">
+            <value value="2"/>
+          </enum>
+          <enum name="point-to-point">
+            <value value="3"/>
+          </enum>
+        </type>
+      </leaf>
+      <leaf name="active">
+        <type name="empty"/>
+      </leaf>
+      <leaf name="passive">
+        <type name="empty"/>
+      </leaf>
+      <leaf name="priority">
+        <type name="uint32">
+          <range value="0..255"/>
+        </type>
+      </leaf>
+    </container>
+  </grouping>
+  <grouping name="global-ospf">
+    <leaf name="database-overflow-interval">
+      <type name="common-def:time-interval-sec">
+        <range value="0..86400"/>
+      </type>
+    </leaf>
+    <container name="default-information-originate">
+      <presence value="true"/>
+      <leaf name="always">
+        <type name="empty"/>
+      </leaf>
+      <leaf name="def-orig-metric">
+        <type name="uint32">
+          <range value="1..65535"/>
+        </type>
+      </leaf>
+      <leaf name="def-orig-metric-type">
+        <type name="metric-type"/>
+      </leaf>
+      <leaf name="def-orig-route-map">
+        <default value=""/>
+        <type name="string"/>
+      </leaf>
+    </container>
+    <leaf name="default-passive-interface">
+      <type name="empty"/>
+    </leaf>
+    <leaf name="default-metric">
+      <type name="uint32">
+        <range value="1..65535"/>
+      </type>
+      <default value="10"/>
+    </leaf>
+    <leaf name="external-lsdb-limit">
+      <type name="uint32">
+        <range value="1..14913080"/>
+      </type>
+      <default value="14913080"/>
+    </leaf>
+    <container name="log">
+      <container name="adjacency">
+        <presence value="true"/>
+        <leaf name="dr-only">
+          <type name="empty"/>
+        </leaf>
+      </container>
+      <leaf name="log-all">
+        <type name="empty"/>
+      </leaf>
+      <container name="bad-packet">
+        <presence value="true"/>
+        <leaf name="log-checksum">
+          <type name="empty"/>
+        </leaf>
+      </container>
+      <leaf name="log-database">
+        <type name="empty"/>
+      </leaf>
+      <leaf name="log-retransmit">
+        <type name="empty"/>
+      </leaf>
+    </container>
+    <leaf name="ospf-metric-type">
+      <type name="metric-type"/>
+    </leaf>
+    <list name="neighbor">
+      <key value="neighbor-addr"/>
+      <leaf name="neighbor-addr">
+        <type name="ospf-ipv4-address"/>
+      </leaf>
+    </list>
+    <container name="nssa-translator">
+      <presence value="nssaTranslator"/>
+      <description>
+        <text>Enable NSSA Type 7 to Type 5 LSA translation</text>
+      </description>
+      <leaf name="nssa-translator-flag">
+        <type name="empty"/>
+      </leaf>
+    </container>
+    <container name="redistribute">
+      <container name="connected">
+        <presence value="true"/>
+        <leaf name="connected-route-map">
+          <type name="common-def:name-string63"/>
+        </leaf>
+      </container>
+      <container name="static">
+        <presence value="true"/>
+        <leaf name="static-route-map">
+          <type name="common-def:name-string63"/>
+        </leaf>
+      </container>
+      <container name="bgp">
+        <presence value="true"/>
+        <leaf name="bgp-route-map">
+          <type name="common-def:name-string63"/>
+        </leaf>
+      </container>
+    </container>
+    <container name="rfc1583-compatibility">
+      <presence value="rfc1583"/>
+      <leaf name="rfc1583-compatibility-flag">
+        <type name="empty"/>
+      </leaf>
+    </container>
+    <list name="area">
+      <key value="area-id"/>
+      <leaf name="area-id">
+        <type name="ospf-area-id"/>
+      </leaf>
+      <leaf name="normal">
+        <type name="empty"/>
+      </leaf>
+      <container name="nssa">
+        <container name="metric">
+          <leaf name="nssa-value">
+            <type name="big-metric"/>
+          </leaf>
+          <leaf name="no-summary1">
+            <type name="empty"/>
+          </leaf>
+        </container>
+        <leaf name="default-information-originate">
+          <type name="empty"/>
+        </leaf>
+      </container>
+      <list name="range">
+        <key value="range-address range-mask"/>
+        <leaf name="range-address">
+          <type name="inet:ipv4-address"/>
+          <mandatory value="true"/>
+        </leaf>
+        <leaf name="range-mask">
+          <type name="inet:ipv4-address"/>
+          <mandatory value="true"/>
+        </leaf>
+        <leaf name="range-effect">
+          <type name="enumeration">
+            <enum name="advertise">
+              <value value="1"/>
+            </enum>
+            <enum name="not-advertise">
+              <value value="2"/>
+            </enum>
+          </type>
+        </leaf>
+        <leaf name="range-cost">
+          <type name="range-metric"/>
+          <default value="0"/>
+        </leaf>
+      </list>
+      <container name="stub">
+        <container name="metric">
+          <leaf name="stub-value">
+            <type name="big-metric"/>
+          </leaf>
+          <leaf name="no-summary">
+            <type name="empty"/>
+          </leaf>
+        </container>
+      </container>
+      <list name="virtual-link">
+        <key value="virt-link-neighbor"/>
+        <leaf name="virt-link-neighbor">
+          <type name="inet:ipv4-address"/>
+        </leaf>
+        <uses name="common-link-props"/>
+      </list>
+    </list>
+    <container name="auto-cost">
+      <container name="reference-bandwidth">
+        <leaf name="ref-bandwidth">
+          <type name="band-width"/>
+        </leaf>
+        <leaf name="use-active-ports">
+          <type name="empty"/>
+        </leaf>
+      </container>
+    </container>
+    <list name="distance">
+      <key value="route-type"/>
+      <leaf name="route-type">
+        <type name="route-type-enum"/>
+      </leaf>
+      <leaf name="dist-value">
+        <type name="uint32">
+          <range value="1..255"/>
+        </type>
+      </leaf>
+    </list>
+    <container name="distribute-list">
+      <container name="route-map">
+        <leaf name="route-map">
+          <type name="common-def:name-string63"/>
+        </leaf>
+        <leaf name="in">
+          <type name="empty"/>
+        </leaf>
+      </container>
+    </container>
+    <container name="max-metric">
+      <container name="router-lsa">
+        <presence value="true"/>
+        <leaf name="all-vrfs">
+          <type name="empty"/>
+        </leaf>
+        <leaf name="all-lsas">
+          <type name="empty"/>
+        </leaf>
+        <container name="external-lsa">
+          <presence value="true"/>
+          <leaf name="external-lsa-val">
+            <type name="uint32">
+              <range value="1..16777214"/>
+            </type>
+            <default value="16711680"/>
+          </leaf>
+        </container>
+        <container name="summary-lsa">
+          <presence value="true"/>
+          <leaf name="summary-lsa-val">
+            <type name="uint32">
+              <range value="1..16777214"/>
+            </type>
+            <default value="16711680"/>
+          </leaf>
+        </container>
+        <container name="link">
+          <leaf name="all">
+            <type name="empty"/>
+          </leaf>
+          <leaf name="ptp">
+            <type name="empty"/>
+          </leaf>
+          <leaf name="stub">
+            <type name="empty"/>
+          </leaf>
+          <leaf name="transit">
+            <type name="empty"/>
+          </leaf>
+        </container>
+        <container name="on-startup">
+          <leaf name="time">
+            <type name="uint32">
+              <range value="5 ..86400"/>
+            </type>
+            <units name="seconds"/>
+          </leaf>
+          <leaf name="wait-for-bgp">
+            <type name="empty"/>
+          </leaf>
+          <leaf name="all-lsas-onstartup">
+            <type name="empty"/>
+          </leaf>
+          <container name="external-lsa-onstartup">
+            <presence value="true"/>
+            <leaf name="external-lsa-val-onstartup">
+              <type name="uint32">
+                <range value="1..16777214"/>
+              </type>
+              <default value="16711680"/>
+            </leaf>
+          </container>
+          <container name="summary-lsa-onstartup">
+            <presence value="true"/>
+            <leaf name="summary-lsa-val-onstartup">
+              <type name="uint32">
+                <range value="1..16777214"/>
+              </type>
+              <default value="16711680"/>
+            </leaf>
+          </container>
+          <container name="link-onstartup">
+            <leaf name="all-link-onstartup">
+              <type name="empty"/>
+            </leaf>
+            <leaf name="ptp-link-onstartup">
+              <type name="empty"/>
+            </leaf>
+            <leaf name="stub-link-onstartup">
+              <type name="empty"/>
+            </leaf>
+            <leaf name="transit-link-onstartup">
+              <type name="empty"/>
+            </leaf>
+          </container>
+        </container>
+      </container>
+    </container>
+    <list name="summary-address">
+      <key value="sum-address sum-address-mask"/>
+      <leaf name="sum-address">
+        <type name="ospf-ipv4-address"/>
+      </leaf>
+      <leaf name="sum-address-mask">
+        <type name="inet:ipv4-address"/>
+      </leaf>
+    </list>
+    <container name="timers">
+      <leaf name="lsa-group-pacing">
+        <type name="common-def:time-interval-sec">
+          <range value="10..1800"/>
+        </type>
+      </leaf>
+      <container name="throttle">
+        <container name="spf">
+          <leaf name="init-delay">
+            <type name="common-def:time-interval-msec">
+              <range value="0..60000"/>
+            </type>
+          </leaf>
+          <leaf name="hold-time">
+            <type name="common-def:time-interval-msec">
+              <range value="0..60000"/>
+            </type>
+          </leaf>
+          <leaf name="max-hold-time">
+            <type name="common-def:time-interval-msec">
+              <range value="0..60000"/>
+            </type>
+          </leaf>
+        </container>
+      </container>
+    </container>
+    <container name="permit">
+      <list name="redistribute">
+        <key value="redist-value route-option"/>
+        <leaf name="redist-value">
+          <type name="uint32">
+            <range value="1..64"/>
+          </type>
+        </leaf>
+        <leaf name="route-option">
+          <type name="route-option-type"/>
+        </leaf>
+        <leaf name="address">
+          <type name="inet:ipv4-address"/>
+        </leaf>
+        <leaf name="mask">
+          <type name="inet:ipv4-address"/>
+        </leaf>
+        <leaf name="set-metric-val">
+          <type name="uint32">
+            <range value="1..4294967295"/>
+          </type>
+        </leaf>
+        <leaf name="match-metric-val">
+          <type name="uint32">
+            <range value="1..4294967295"/>
+          </type>
+        </leaf>
+      </list>
+    </container>
+    <container name="deny">
+      <list name="redistribute">
+        <key value="redist-value route-option"/>
+        <leaf name="redist-value">
+          <type name="uint32">
+            <range value="1..64"/>
+          </type>
+        </leaf>
+        <leaf name="route-option">
+          <type name="route-option-type"/>
+        </leaf>
+        <leaf name="address">
+          <type name="inet:ipv4-address"/>
+        </leaf>
+        <leaf name="mask">
+          <type name="inet:ipv4-address"/>
+        </leaf>
+        <leaf name="set-metric-val">
+          <type name="uint32">
+            <range value="1..4294967295"/>
+          </type>
+        </leaf>
+        <leaf name="match-metric-val">
+          <type name="uint32">
+            <range value="1..4294967295"/>
+          </type>
+        </leaf>
+      </list>
+    </container>
+    <leaf name="vrf-lite-capability">
+      <type name="empty"/>
+    </leaf>
+  </grouping>
+  <augment target-node="/rbridge:rbridge-id/rbridge:router">
+    <list name="ospf">
+      <key value="vrf"/>
+      <leaf name="vrf">
+        <type name="string">
+          <length value="1..64"/>
+        </type>
+      </leaf>
+      <uses name="global-ospf"/>
+    </list>
+  </augment>
+  <augment target-node="/rbridge:rbridge-id/interface:interface/interface:ve/ip-config:ip">
+    <uses name="interface-vlan-ospf"/>
+  </augment>
+  <augment target-node="/interface:interface-vlan/interface:interface/interface:ve/interface:ip">
+    <uses name="interface-vlan-ospf"/>
+  </augment>
+  <augment target-node="/rbridge:rbridge-id/interface:interface/intf-loopback:loopback/ip-config:ip">
+    <uses name="interface-loopback-ospf"/>
+  </augment>
+  <augment target-node="/interface:interface/interface:fortygigabitethernet/interface:ip">
+    <uses name="interface-fo-ospf"/>
+  </augment>
+  <augment target-node="/interface:interface/interface:tengigabitethernet/interface:ip">
+    <uses name="interface-te-ospf"/>
+  </augment>
+  <augment target-node="/interface:interface/interface:gigabitethernet/interface:ip">
+    <uses name="interface-gi-ospf"/>
+  </augment>
+</module>

@@ -1,0 +1,24 @@
+include ../Makefile.versioninfo
+include $(WAVE_HOME)/source/Makefile.tools
+
+DCM_VERSION_FILE := $(BUILD_DIR_DYNAMIC_SRC)/DcmVersion.cpp
+
+.PHONY: all
+all: $(DCM_VERSION_FILE)
+
+.SECONDEXPANSION:
+
+MKFS := $(MAKEFILE_LIST)
+$(DCM_VERSION_FILE): DcmVersion.cpp.template DcmVersion.h $(MKFS) | $$($$(@D)/.)
+	sed "s/DCM_VERSION_MAJOR/$(DCM_VERSION_MAJOR)/g" $< | \
+	sed "s/DCM_VERSION_MINOR/$(DCM_VERSION_MINOR)/g"                           | \
+	sed "s/DCM_VERSION_PATCH/$(DCM_VERSION_PATCH)/g"                           | \
+	sed "s/DCM_VERSION_REVISION/$(DCM_VERSION_REVISION)/g"                     | \
+	sed "s/DCM_BUILD_TYPE/$(DCM_BUILD_TYPE)/g"                                 | \
+	sed "s/DCM_BUILD_NUMBER/$(DCM_BUILD_NUMBER)/g"                             | \
+	sed "s/DCM_VERSION_DATE/$(DCM_VERSION_DATE)/g"                             | \
+	sed "s/DCM_VERSION_USER/$(DCM_VERSION_USER)/g"                             | \
+	sed "s/DCM_VERSION_HOST/$(DCM_VERSION_HOST)/g"                             | \
+	sed "s/DCM_VERSION_DOMAIN/$(DCM_VERSION_DOMAIN)/g" > $@
+
+include $(WAVE_HOME)/source/commonMakefileEnd

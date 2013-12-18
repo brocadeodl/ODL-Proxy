@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<WavePlugin name="Nsm" nameSpace="DcmNs"> 
+<Global name="NsmGlobal">
+	<Worker name="VlanClassifierGlobalConf">
+        <ManagedObject name="VlanClassifierRules">
+			<Member name="ruleId" dataType="UI32">
+			</Member>
+			<Member name="mac" dataType="MacAddress">
+			</Member>
+			<Member name="protoVal" dataType="UI32">
+			</Member>
+			<Member name="encap" dataType="UI32">
+			</Member>
+		</ManagedObject>
+        <ManagedObject name="VlanClassifierGroup">
+            <Member name="groupId" dataType="UI32">
+			</Member>
+            <Member name="ruleIds" dataType="vector/ObjectId/" umlType="ASSOCIATION" referredObject="VlanClassifierRules">
+            </Member>
+		</ManagedObject>
+        <Message name="CreateVlanClassifierRule" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ruleId" dataType="UI32">
+			</Member>
+			<Member name="mac" dataType="string">
+			</Member>
+            <Member name="protoVal" dataType="UI32">
+			</Member>
+            <Member name="encap" dataType="UI32">
+			</Member>
+		</Message>
+        <Message name="DeleteVlanClassifierRule" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ruleId" dataType="UI32">
+			</Member>
+		</Message>
+        <Message name="UpdateVlanClassifierGroup" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="groupId" dataType="UI32">
+			</Member>
+            <Member name="operation" dataType="UI32">
+			</Member>
+            <Member name="ruleId" dataType="UI32">
+			</Member>
+		</Message>
+        <Message name="DeleteVlanClassifierGroup" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="groupId" dataType="UI32">
+			</Member>
+		</Message>
+        <Message name="AddVlanClassifierToPo" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="id" dataType="UI32">
+			</Member>
+			<Member name="ifName" dataType="string">
+			</Member>
+            <Member name="ifIndex" dataType="UI64">
+			</Member>
+			<Member name="groupId" dataType="UI32">
+			</Member>
+            <Member name="vlanId" dataType="UI32">
+			</Member>
+		</Message>
+        <Message name="DeleteVlanClassifierToPo" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="id" dataType="UI32">
+			</Member>
+			<Member name="ifName" dataType="string">
+			</Member>
+            <Member name="ifIndex" dataType="UI64">
+			</Member>
+			<Member name="groupId" dataType="UI32">
+			</Member>
+		</Message>
+	</Worker>
+</Global>
+<Local name="Nsm">
+	<Worker name="VlanClassifierLocalConf">
+         <Message name="AddVlanClassifierToPhy" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="id" dataType="string">
+			</Member>
+			<Member name="ifName" dataType="string">
+			</Member>
+            <Member name="ifIndex" dataType="UI64">
+			</Member>
+			<Member name="groupId" dataType="UI32">
+			</Member>
+            <Member name="vlanId" dataType="UI32">
+			</Member>
+		</Message>
+        <Message name="DeleteVlanClassifierToPo" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="id" dataType="string">
+			</Member>
+			<Member name="ifName" dataType="string">
+			</Member>
+            <Member name="ifIndex" dataType="UI64">
+			</Member>
+			<Member name="groupId" dataType="UI32">
+			</Member>
+		</Message>
+        <Message name="CreateVlanClassifierRuleSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ruleId" dataType="UI32">
+			</Member>
+			<Member name="mac" dataType="string">
+			</Member>
+            <Member name="protoVal" dataType="UI32">
+			</Member>
+            <Member name="encap" dataType="UI32">
+			</Member>
+		</Message>
+        <Message name="DeleteVlanClassifierRuleSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ruleId" dataType="UI32">
+			</Member>
+		</Message>
+        <Message name="UpdateVlanClassifierGroupSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="groupId" dataType="UI32">
+			</Member>
+            <Member name="operation" dataType="UI32">
+			</Member>
+            <Member name="ruleId" dataType="UI32">
+			</Member>
+		</Message>
+        <Message name="DeleteVlanClassifierGroupSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="groupId" dataType="UI32">
+			</Member>
+		</Message>
+        <Message name="AddVlanClassifierToPoSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="id" dataType="UI32">
+			</Member>
+			<Member name="ifName" dataType="string">
+			</Member>
+            <Member name="ifIndex" dataType="UI64">
+			</Member>
+			<Member name="groupId" dataType="UI32">
+			</Member>
+            <Member name="vlanId" dataType="UI32">
+			</Member>
+		</Message>
+        <Message name="DeleteVlanClassifierToPoSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="id" dataType="UI32">
+			</Member>
+			<Member name="ifName" dataType="string">
+			</Member>
+            <Member name="ifIndex" dataType="UI64">
+			</Member>
+			<Member name="groupId" dataType="UI32">
+			</Member>
+		</Message>
+	</Worker>
+</Local>

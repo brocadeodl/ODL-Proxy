@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Framework ObjectModel Module. -->
+
+<ModuleResources ModuleName = "FrameworkObjectModel" ComponentName = "Wave">
+    <ResourceEnum Name = "WaveManagedObjectGenericStatus">
+        <Resource Name = "WAVE_MANAGED_OBJECT_GENERIC_STATUS_GOOD">Good</Resource>
+        <Resource Name = "WAVE_MANAGED_OBJECT_GENERIC_STATUS_DEGRADED">Degraded</Resource>
+        <Resource Name = "WAVE_MANAGED_OBJECT_GENERIC_STATUS_FAILED">Failed</Resource>
+        <Resource Name = "WAVE_MANAGED_OBJECT_GENERIC_STATUS_OFFLINE">Offline</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "WaveManagedObjectDataFieldType">
+        <Resource Name = "WAVE_MANAGED_OBJECT_DATA_FIELD_CONFIGURATION">Configuration Only</Resource>
+        <Resource Name = "WAVE_MANAGED_OBJECT_DATA_FIELD_OPERATIONAL">Operational Only</Resource>
+        <Resource Name = "WAVE_MANAGED_OBJECT_DATA_FIELD_OPERATIONAL_BUT_CONFIGURATION">Operational But Configuration</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "WaveManagedObjectLoadOperationalDataStatus">
+        <Resource Name = "WAVE_MANAGED_OBJECT_LOAD_OPERATIONAL_DATA_OBJECT_NOT_FOUND">Wave Managed Object Not Found To Load Operational Data</Resource>
+        <Resource Name = "WAVE_MANAGED_OBJECT_LOAD_OPERATIONAL_DATA_OBJECT_OWNER_NOT_FOUND">Wave Managed Object Owner Not Found To Load Operational Data</Resource>
+        <Resource Name = "WAVE_MANAGED_OBJECT_LOAD_OPERATIONAL_DATA_COMPOSED_OBJECT_NOT_FOUND_BY_OWNER">Wave Managed Composed Object Not Found By Owner To Load Operational Data</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "WaveManagedObjectUpdateDataStatus">
+        <Resource Name = "WAVE_MANAGED_OBJECT_UPDATE_OBJECT_NOT_FOUND">Wave Managed Object Not Found To update</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "WaveManagedObjectDeleteDataStatus">
+        <Resource Name = "WAVE_MANAGED_OBJECT_DELETE_OBJECT_NOT_FOUND">Wave Managed Object Not Found To Delete</Resource>
+    </ResourceEnum>
+</ModuleResources>

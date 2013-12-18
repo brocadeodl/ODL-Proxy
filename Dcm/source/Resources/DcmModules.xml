@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file describes the various modules that contain Val Resources. -->
+
+<Modules ComponentName = "Dcm">
+    <Module Name = "VcsFabricLocal"               Source = "VcsFabricLocal.xml"             ></Module>
+    <Module Name = "VcsHa"                        Source = "VcsHa.xml"                      ></Module>
+    <Module Name = "VcsCluster"                   Source = "VcsCluster.xml"                 ></Module>
+    <Module Name = "DcmClientInterface"           Source = "DcmClientInterface.xml"         ></Module>
+    <Module Name = "DcmFssServices"               Source = "DcmFssServices.xml"             ></Module>
+	<Module Name = "Discover"                     Source = "Discover.xml"                   ></Module>
+	<Module Name = "Vcenter"                      Source = "Vcenter.xml"                    ></Module>
+    <Module Name = "NsmClientInterface"           Source = "NsmClientInterface.xml"         ></Module>
+    <Module Name = "AAA"                          Source = "AAA.xml"                        ></Module>
+    <Module Name = "snmpserver"                   Source = "snmp.xml"                       ></Module>
+    <Module Name = "ntpclock"                     Source = "ntpclock_retcode.xml"           ></Module>
+    <Module Name = "Diag"                   	  Source = "Diag.xml"                       ></Module>
+	<Module Name = "Lldp"                         Source = "Lldp.xml"                       ></Module>
+	<Module Name = "Lacp"                         Source = "Lacp.xml"                       ></Module>
+    <Module Name = "Fcoe"                         Source = "Fcoe.xml"                       ></Module>
+    <Module Name = "Ssm"                          Source = "Ssm.xml"                        ></Module>
+    <Module Name = "Mstp"                         Source = "Mstp.xml"                       ></Module>
+    <Module Name = "Igmps"                        Source = "Igmps.xml"                      ></Module>
+    <Module Name = "Sflow"                        Source = "Sflow.xml"                      ></Module>
+	<Module Name = "Arp"                          Source = "Arp.xml"                        ></Module>
+	<Module Name = "L3ss"                         Source = "L3sys.xml"                      ></Module>
+    <Module Name = "Rtm"                          Source = "Rtm.xml"                        ></Module>
+    <Module Name = "Appm"                         Source = "APPM.xml"                       ></Module>
+	<Module Name = "L2sys"                        Source = "L2sys.xml"                      ></Module>
+	<Module Name = "Rmon"                         Source = "Rmon.xml"                       ></Module>
+	<Module Name = "Ipadm"                        Source = "Ipadm.xml"                      ></Module>
+	<Module Name = "Dot1x"                        Source = "Dot1x.xml"                      ></Module>
+	<Module Name = "RAS"                          Source = "RAS.xml"                        ></Module>
+    <Module Name = "VcsCommon"                    Source = "VcsCommon.xml"                  ></Module>
+    <Module Name = "FabricServices"               Source = "Fabric.xml"                     ></Module>
+    <Module Name = "LicenseDPOD"                  Source = "LicenseDPOD.xml"                ></Module>
+    <Module Name = "VcsMode"                      Source = "VcsMode.xml"                    ></Module>
+    <Module Name = "Zone"                         Source = "Zone.xml"                       ></Module>
+    <Module Name = "DcmToolKit"                   Source = "DcmToolKit.xml"                 ></Module>
+    <Module Name = "Terminal"                     Source = "Terminal.xml"                   ></Module>
+    <Module Name = "SystemMonitor"                Source = "SystemMonitor.xml"              ></Module>
+    <Module Name = "Vrrp"                         Source = "Vrrp.xml"                       ></Module>
+    <Module Name = "ospf"                         Source = "ospf.xml"                       ></Module>
+    <Module Name = "Pim"                          Source = "Pim.xml"                        ></Module>
+    <Module Name = "Nsp"                          Source = "Nsp.xml"                        ></Module>
+    <Module Name = "LinecardManagement"           Source = "LinecardManagement.xml"         ></Module>
+	<Module Name = "ThresholdMonitor"             Source = "ThresholdMonitor.xml"></Module>
+    <Module Name = "Layer3License"         Source = "Layer3License.xml"> </Module>
+    <Module Name = "Fc"                	   Source = "Fc.xml"></Module>
+    <Module Name = "FCAuth"                Source = "FCAuth.xml"></Module>
+    <Module Name = "FCPathUtil"            Source = "FCPathUtil.xml"></Module>
+    <Module Name = "Capabilities"          Source = "Capabilities.xml"> </Module>
+    <Module Name = "Bgp"          		   Source = "Bgp.xml"> </Module>
+    <Module Name = "Vrf"          		   Source = "Vrf.xml"> </Module>
+    <Module Name = "UidService"            Source = "UidService.xml"> </Module>
+    <Module Name = "Alias"                 Source = "Alias.xml"> </Module> 
+    <Module Name = "UDLD"                  Source = "Udld.xml"> </Module> 
+    <Module Name = "AG"                           Source = "AG.xml"                         ></Module>
+    <Module Name = "QOS"                   Source = "Qos.xml"> </Module>
+    <Module Name = "HA"                    Source = "HA.xml"> </Module>
+    <Module Name = "dhcprel"                         Source = "dhcprel.xml"                       ></Module>
+    <Module Name = "OpenFlowCapableSwitch"        Source = "OpenFlowCapableSwitch.xml"      ></Module>
+    <Module Name = "OpenFlowLogicalSwitch"        Source = "OpenFlowLogicalSwitch.xml"      ></Module>
+    <Module Name = "OpenFlowController"           Source = "OpenFlowController.xml"         ></Module>
+</Modules>

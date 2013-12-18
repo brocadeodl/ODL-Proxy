@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<WavePlugin name="LicenseService" namespace="DcmNs">
+	<Local name="LicenseService">
+		<Message name="Remove" sequencerType="SYNC" allowPreemption="FALSE">
+				<Member name="msgStatus" dataType="string"> </Member>
+		</Message>
+		<Message name="Add" sequencerType="SYNC" allowPreemption="FALSE">
+				<Member name="msgStatus" dataType="string"> </Member>
+		</Message>
+		<Message name="Show" sequencerType="SYNC" allowPreemption="FALSE">
+				<Member name="license" dataType="vector/string/"> </Member>
+				<Member name="expirydatestr" dataType="vector/string/"> </Member>
+				<Member name="featureName" dataType="vector/string/"> </Member>
+		</Message>
+        <Message name="PodShow" sequencerType="SYNC" allowPreemption="FALSE">
+                <Member name="podstr" dataType="vector/string/"> </Member>
+				<Member name="max_DPOD_Ports" dataType="vector/UI32/"> </Member>
+				<Member name="num_DPOD_Licenses" dataType="vector/UI32/"> </Member>
+				<Member name="max_DPOD_provisioned" dataType="vector/UI32/"> </Member>
+				<Member name="reserved_ports" dataType="vector/UI32/"> </Member>
+				<Member name="released_ports" dataType="vector/UI32/"> </Member>
+        </Message>
+		<Message name="GetLicenseIdShow" sequencerType="SYNC" allowPreemption="FALSE">
+				<Member name="licenseid" dataType="vector/WorldWideName/"> </Member>
+		</Message>
+        <Message name="Pod" sequencerType="SYNC" allowPreemption="FALSE">
+                <Member name="option" dataType="string"> </Member>
+				<Member name="interface" dataType="string"> </Member>
+				<Member name="swSlotPort" dataType="string"> </Member>
+        </Message>
+
+        <ManagedObject name="LicensePod">
+                <Member name="portId" dataType="string"> </Member>
+                <Member name="assignedPodset" dataType="string"> </Member>
+                <Member name="operation" dataType="string"> </Member>
+        </ManagedObject>
+        <Message name="UpdateLicensePodInfo" sequencerType="SYNC" allowPreemption="FALSE">
+                <Member name="portId"     dataType="string"> </Member>
+                <Member name="assignType" dataType="string"> </Member>
+	    </Message>
+        <Message name="UpdateLicenseFabsysInfo" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+                <Member name="portId"     dataType="string"> </Member>
+                <Member name="assignType" dataType="string"> </Member>
+	    </Message>
+		
+	</Local>
+</WavePlugin>

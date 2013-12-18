@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?> 
+<WavePlugin name="Span" nameSpace="DcmNs">
+	<Local  name="SpanLocal">
+	<Worker name="SpanLocalConfig">
+		<ManagedObject name="SpanLocalConfig">
+ 			<Member name="session_id" dataType="UI32" >
+                        </Member>
+ 			<Member name="source_ifName" dataType="string" >
+                        </Member>
+                        <Member name="dest_ifName" dataType="string" >
+                        </Member>
+			<Member name="direction" dataType="UI32" >
+			</Member>
+			<Member name="description" dataType="string" >
+			</Member>
+		</ManagedObject>
+		<Message name="SpanLocalConfig" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+ 			<Member name="session_id" dataType="UI32" >
+                        </Member>
+ 			<Member name="source_ifName" dataType="string" >
+                        </Member>
+                        <Member name="dest_ifName" dataType="string" >
+                        </Member>
+			<Member name="direction" dataType="UI32" >
+			</Member>
+			<Member name="opCode" dataType="UI32" >
+			</Member>
+			<Member name="messageType" dataType="UI32" >
+			</Member>
+			<Member name="description" dataType="string" >
+			</Member>
+        </Message>
+	</Worker>
+	</Local>
+</WavePlugin>

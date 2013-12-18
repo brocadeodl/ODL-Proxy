@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ModuleResources ModuleName = "Sflow" ComponentName = "Wave">
+    <ResourceEnum Name = "SflowReturnCode">
+        <Resource Name = "SFLOW_SET_ERR_PORT_NOT_EXIST">%% Error: sFlow is not enabled on this interface</Resource>
+        <Resource Name = "SFLOW_SET_ERR_COLLECTOR_NOT_CONFIGURED">%% Error: Collector does not exist</Resource>
+        <Resource Name = "SFLOW_SET_ERR_MAX_COLLECTORS_CONFIGURED">%% Error: Maximum number (5) of collectors already configured.</Resource>
+        <Resource Name = "SFLOW_SET_ERR_INVALID_COLLECTOR_IP">%% Error: Given IP is Invalid for Sflow collector.</Resource>
+        <Resource Name = "SFLOW_PROFILE_SAMPLING_RATE_NOT_POWER_OF_TWO">%% Error: Sflow profile sampling rate has to be a power of 2</Resource>
+        <Resource Name = "SFLOW_PROFILE_MAX_PROFILES_CONFIGURED">%% Error: Maximum number (16) of profiles already configured</Resource>
+		<Resource Name = "SFLOW_FB_ETOOMANY_CASTOR_PLATFORM">%% Error: Maximum of 8 profiles is supported on this platform</Resource>
+        <Resource Name = "SFLOW_PROFILE_ERR_NOT_SUPPORTED_PLATFORM">%% Error: Sflow profiles not supported on this platform.</Resource>
+        <Resource Name = "SFLOW_PROFILE_BOUND_TO_INTERFACE">%% Error: Sflow profile cannot be deleted because it is bound to an interface</Resource>
+        <Resource Name = "SFLOW_PROFILE_BOUND_TO_CLASSMAP">%% Error: Sflow profile cannot be deleted because it is bound to a class map</Resource>
+    </ResourceEnum>
+</ModuleResources>

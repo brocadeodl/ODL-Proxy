@@ -1,0 +1,11 @@
+void                addResourceId               (const unsigned long int &resourceId, const string &resourceDescription);
+void                addResourceIdToResourceEnum (const unsigned long int &resourceId, const unsigned long int &resourceEnum);
+void                addSourceCodeEnum           (const unsigned long int &resourceId, const string &sourceCodeEnum);
+void                initializeWaveResourceIds   ();
+string              localizeResourceId          (unsigned long int resourceId);
+void                localizeResourceEnum        (unsigned long int resourceEnum, vector<unsigned long int> &resourcesVector);
+string              localizeToSourceCodeEnum    (unsigned long int resourceId);
+unsigned long int   localizeToSourceCodeResourceId  (const string &sourceCodeEnum);
+bool                isAResourceId               (unsigned long int resourceId);
+bool                isAResourceEnum             (unsigned long int resourceEnum);
+void                getAllResourceEnums         (vector<unsigned long int> &resourceEnumsVector);

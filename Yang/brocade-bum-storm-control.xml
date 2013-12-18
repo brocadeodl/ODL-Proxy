@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-bum-storm-control"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:bum-storm-control="urn:brocade.com:mgmt:brocade-bum-storm-control"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface">
+  <namespace uri="urn:brocade.com:mgmt:brocade-bum-storm-control"/>
+  <prefix value="bum-storm-control"/>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+        San Jose, CA 95134
+        U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>A traffic storm occurs when packets flood the LAN, 
+creating excessive traffic and degrading network performance.  
+The BUM storm control feature is meant to prevent disruptions 
+on Layer 2 physical ports caused by excessive ingress broadcast, 
+multicast, and unknown unicast. BUM Storm control allows the 
+user to limit the amount of BUM traffic admitted to the system.</text>
+  </description>
+  <revision date="2011-11-10">
+    <description>
+      <text>Initial version of this management module.</text>
+    </description>
+  </revision>
+  <typedef name="percentage-rate-limit">
+    <type name="uint32">
+      <range value="0 .. 100"/>
+    </type>
+  </typedef>
+  <typedef name="bps-rate-limit">
+    <type name="uint64">
+      <range value="0 .. 40000000000"/>
+    </type>
+  </typedef>
+  <grouping name="common-phy-storm-control-cmds">
+    <container name="storm-control">
+      <list name="ingress">
+        <key value="protocol-type"/>
+        <leaf name="protocol-type">
+          <type name="enumeration">
+            <enum name="broadcast">
+              <value value="1"/>
+            </enum>
+            <enum name="multicast">
+              <value value="2"/>
+            </enum>
+            <enum name="unknown-unicast">
+              <value value="3"/>
+            </enum>
+          </type>
+        </leaf>
+        <leaf name="rate-format">
+          <type name="enumeration">
+            <enum name="limit-bps">
+              <value value="1"/>
+            </enum>
+            <enum name="limit-percent">
+              <value value="2"/>
+            </enum>
+          </type>
+        </leaf>
+        <leaf name="rate-bps">
+          <type name="bps-rate-limit"/>
+        </leaf>
+        <leaf name="rate-percent">
+          <type name="percentage-rate-limit"/>
+        </leaf>
+        <leaf name="bum-action">
+          <type name="enumeration">
+            <enum name="monitor">
+              <value value="2"/>
+            </enum>
+            <enum name="shutdown">
+              <value value="3"/>
+            </enum>
+          </type>
+        </leaf>
+      </list>
+    </container>
+  </grouping>
+  <augment target-node="/interface:interface/interface:tengigabitethernet">
+    <uses name="common-phy-storm-control-cmds"/>
+  </augment>
+  <augment target-node="/interface:interface/interface:gigabitethernet">
+    <uses name="common-phy-storm-control-cmds"/>
+  </augment>
+  <augment target-node="/interface:interface/interface:fortygigabitethernet">
+    <uses name="common-phy-storm-control-cmds"/>
+  </augment>
+</module>

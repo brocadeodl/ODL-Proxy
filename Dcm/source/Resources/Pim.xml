@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ModuleResources ModuleName = "Pim" ComponentName = "Wave">
+    <ResourceEnum Name = "PimCfgRetStatus">
+        <Resource Name = "PIM_CLI_ERR_NO_PIM_INST">%% Error: No Such PIM instance</Resource>
+        <Resource Name = "PIM_CLI_ERR_PIM_INST_NOT_RUNNING">%% Error: PIM instance not running</Resource>
+        <Resource Name = "PIM_CLI_ERR_INVALID_CLI_CTX">%% Error: Invalid CLI context</Resource>
+        <Resource Name = "PIM_CLI_ERR_INVALID_VRF">%% Error: Invalid VRF context</Resource>
+        <Resource Name = "PIM_CLI_ERR_NO_IF_FOR_IPADDR">%% Error: No interface is configured with the ip address</Resource>
+        <Resource Name = "PIM_CLI_ERR_NO_IFNAME_TO_PORT_MAP">%% Error: Ifindex to Port mapping doesn't exist</Resource>
+        <Resource Name = "PIM_CLI_ERR_NO_IF">%% Error: Cannot find the interface</Resource>
+        <Resource Name = "PIM_CLI_ERR_SET_DR_PRIO">%% Error: Could not change DR priority. Using default value</Resource>
+        <Resource Name = "PIM_CLI_ERR_RESET_DR_PRIO">%% Error: Could not reset DR priority to default</Resource>
+        <Resource Name = "PIM_CLI_ERR_SET_TTL">%% Error: Could not change TTL threshold. Using default value</Resource>
+        <Resource Name = "PIM_CLI_ERR_RESET_TTL">%% Error: Could not reset TTL threshold to default</Resource>
+        <Resource Name = "PIM_CLI_ERR_NBR_TIMEOUT">%% Error: Could not change the neighbor timeout</Resource>
+        <Resource Name = "PIM_CLI_ERR_NO_PIMSM">%% Error: PIM-SM needs to be enabled on this interface first</Resource>
+        <Resource Name = "PIM_CLI_ERR_SET_SPT_THR">%% Error: Could not change SPT-threshold. Using default value (1)</Resource>
+        <Resource Name = "PIM_CLI_ERR_RESET_SPT_THR">%% Error: Could not reset SPT-threshold. Using previously configured value</Resource>
+        <Resource Name = "PIM_CLI_ERR_SET_MAX_MCACHE">%% Error: Could not change max mcache. Using default value (0)</Resource>
+        <Resource Name = "PIM_CLI_ERR_RESET_MAX_MCACHE">%% Error: Could not reset max mcache. Using previously configured value</Resource>
+        <Resource Name = "PIM_CLI_ERR_VRF_NOT_PIM_EN">%% Error: VRF not PIM enabled</Resource>
+        <Resource Name = "PIM_CLI_ERR_GLBL_PIM_NOT_EN">%% Error: PIM not enabled on this switch</Resource>
+        <Resource Name = "PIM_CLI_ERR_INTF_NOT_PIM_EN">%% Error: Interface is not PIM enabled</Resource>
+        <Resource Name = "PIM_CLI_ERR_PIM_EN_ON_INTF">%% Error: Could not enable PIM on this interface</Resource>
+        <Resource Name = "PIM_CLI_ERR_SET_PIM_BRDR">%% Error: Config ignored. PIM border requires PIM-SM</Resource>
+        <Resource Name = "PIM_CLI_ERR_PIM_EN_ON_L2_INTF">%% Error: Cannot enable PIM on L2 interface</Resource>
+		<Resource Name = "PIM_CLI_ERR_SET_MULT_BNDRY">%% Error: Cannot configure Multicast Boundary on this interface</Resource>
+		<Resource Name = "PIM_CLI_ERR_INVALID_RP_ADDR">%% Error: Invalid RP address. Must be a non-zero unicast address</Resource>
+		<Resource Name = "PIM_CLI_ERR_RP_CAND_PREFIX_NOTFOUND">%% Error: RP candidate prefix not found</Resource>
+		<Resource Name = "PIM_CLI_ERR_PIM_EN_ON_MIRROR_INTF">%% Error: Cannot enable PIM on destination mirror port</Resource>
+		<Resource Name = "PIM_CLI_WARN_CAND_NOTACTV">%% Warning: Candidate not activated as interface is either down or not PIM-SM enabled</Resource>
+		<Resource Name = "PIM_CLI_ERR_NOT_PIM_SUPPORTED_PLATFORM">%% Error: PIM is not supported on this platform</Resource>
+        <Resource Name = "PIM_CLI_ERR_SHOW_MC_ADDR">%% Error: Incorrect combination of source and group IP address</Resource>
+		<Resource Name = "PIM_CLI_ERR_NBR_TIMEOUT_LESS">%% Error: Nbr Timeout is less than 3.5 times of Hello Timer</Resource>
+		<Resource Name = "PIM_CLI_VRF_CONFIGURED_INTERFACE_ERROR">%% Error: VRF configured on this interface</Resource>
+	</ResourceEnum>
+</ModuleResources>

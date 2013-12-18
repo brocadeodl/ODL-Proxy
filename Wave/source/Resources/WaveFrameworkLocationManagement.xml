@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Framework Core Module. -->
+
+<ModuleResources ModuleName = "FrameworkLocationManagement" ComponentName = "Wave">
+    <ResourceEnum Name = "LocationRole">
+        <Resource Name = "LOCATION_STAND_ALONE">Stand Alone Location</Resource>
+        <Resource Name = "LOCATION_PRIMARY">Primary Location</Resource>
+        <Resource Name = "LOCATION_SECONDARY_CLUSTER_PHASE_0">Secondary Location in Cluster Phase 0</Resource>
+        <Resource Name = "LOCATION_SECONDARY_CLUSTER_PHASE_1">Secondary Location in Cluster Phase 1</Resource>
+        <Resource Name = "LOCATION_SECONDARY_CLUSTER_PHASE_2">Secondary Location in Cluster Phase 2</Resource>
+        <Resource Name = "LOCATION_SECONDARY_CLUSTER_PHASE_3">Secondary Location in Cluster Phase 3</Resource>
+        <Resource Name = "LOCATION_SECONDARY_REJOIN_PHASE_0">Secondary Location in Rejoin Phase 0</Resource>
+        <Resource Name = "LOCATION_SECONDARY_REJOIN_PHASE_1">Secondary Location in Rejoin Phase 1</Resource>
+        <Resource Name = "LOCATION_SECONDARY_REJOIN_PHASE_2">Secondary Location in Rejoin Phase 2</Resource>
+        <Resource Name = "LOCATION_SECONDARY_REJOIN_PHASE_3">Secondary Location in Rejoin Phase 3</Resource>
+        <Resource Name = "LOCATION_SECONDARY">Secondary Location</Resource>
+        <Resource Name = "LOCATION_PRIMARY_UNCONFIRMED">Primary Location Unconfirmed</Resource>
+        <Resource Name = "LOCATION_SECONDARY_UNCONFIRMED">Secondary Location Unconfirmed</Resource>
+        <Resource Name = "LOCATION_SUB_LOCATION">Sub Location</Resource>
+    </ResourceEnum>
+</ModuleResources>

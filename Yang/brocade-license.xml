@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-license"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:brocade-license="urn:brocade.com:mgmt:brocade-license"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def">
+  <namespace uri="urn:brocade.com:mgmt:brocade-license"/>
+  <prefix value="brocade-license"/>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 1745 Technology Drive,
+San Jose, CA 95110
+U.S.A
+Tel: +1-408-392-6061
+E-mail: support@Brocade.com
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This management sub-module is an instrumentation to manage
+the licenses in the VCS fabric.
+
+Glossary of the terms used:
+---------------------------
+DPOD        -   Dynamic ports on demand
+licStr      -   License string (i.e., license key)
+POD         -   Ports on demand
+</text>
+  </description>
+  <revision date="2011-08-22">
+    <description>
+      <text>Providing Netconf Support to the existing version.</text>
+    </description>
+  </revision>
+  <typedef name="license-dpod-operation-type">
+    <type name="enumeration">
+      <enum name="release">
+        <value value="1"/>
+        <description>
+          <text>DPOD operation to release a license.</text>
+        </description>
+      </enum>
+      <enum name="reserve">
+        <value value="2"/>
+        <description>
+          <text>DPOD operation to reserve a license.</text>
+        </description>
+      </enum>
+    </type>
+  </typedef>
+  <augment target-node="/common-def:show">
+    <container name="license"/>
+    <container name="enh-show-license-keys"/>
+  </augment>
+  <container name="license">
+    <description>
+      <text>The function for installing or uninstalling the license
+keys of a given RBridge.</text>
+    </description>
+  </container>
+  <container name="dpod">
+    <list name="port-id">
+      <ordered-by value="user"/>
+      <key value="port-id"/>
+      <leaf name="port-id">
+        <type name="interface:interface-type"/>
+        <mandatory value="true"/>
+        <description>
+          <text>Port details for identification
+[rbridge-id/slot/port].</text>
+        </description>
+      </leaf>
+      <leaf name="operation">
+        <type name="license-dpod-operation-type"/>
+        <default value="reserve"/>
+        <description>
+          <text>Operation to release or reserve a DPOD
+license for this port.</text>
+        </description>
+      </leaf>
+    </list>
+  </container>
+</module>

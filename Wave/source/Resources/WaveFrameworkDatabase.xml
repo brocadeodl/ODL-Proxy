@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Framework Database Module. -->
+
+<ModuleResources ModuleName = "FrameworkDatabase" ComponentName = "Wave">
+    <ResourceEnum Name = "WaveDatabaseQueryStatus">
+        <Resource Name = "WAVE_MESSAGE_ERROR_INIT_DATABASE_FAILED">INITDB has failed during database installation.</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_START_DATABASE_FAILED">Command to start Database has Failed.</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_CREATE_DATABASE_FAILED">Command to create new Database has failed.</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_QUERY_TO_DATABASE_FAILED">Query to Database failed: Memory Exhausted or Send to Database Server Failed.</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_DATABASE_RESULT_STATUS_FAILED">PQresultStatus results in error.</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_COLUMN_IN_DATABASE_NOT_FOUND">Column Requested is not found in the Database table.</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_COUNT_QUERY_NOT_SUPPORTED_ON_NON_INTEGER_RANGE">Count Query is not supported for non integer range.</Resource>
+    </ResourceEnum>
+</ModuleResources>

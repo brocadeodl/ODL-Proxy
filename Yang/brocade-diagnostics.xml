@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-diagnostics"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:diagnostics="urn:brocade.com:mgmt:brocade-diagnostics"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def"
+        xmlns:interfaces="urn:brocade.com:mgmt:brocade-interface">
+  <namespace uri="urn:brocade.com:mgmt:brocade-diagnostics"/>
+  <prefix value="diagnostics"/>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <import module="brocade-interface">
+    <prefix value="interfaces"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>sshaik@brocade.com</text>
+  </contact>
+  <description>
+    <text>Modules for entities implementing FOS Diagnostics</text>
+  </description>
+  <revision date="2010-09-20">
+    <description>
+      <text>Initial version.</text>
+    </description>
+  </revision>
+  <feature name="platform_chassis">
+    <description>
+      <text>chassis-platform</text>
+    </description>
+  </feature>
+  <feature name="platform_pizzabox">
+    <description>
+      <text>pizzabox-platform</text>
+    </description>
+  </feature>
+  <feature name="portlevel_testing_on">
+    <description>
+      <text>Enables port level testing options</text>
+    </description>
+  </feature>
+  <feature name="portlevel_testing_off">
+    <description>
+      <text>Disables port level testing options</text>
+    </description>
+  </feature>
+  <typedef name="slotidtype">
+    <type name="string">
+      <length value="2"/>
+    </type>
+  </typedef>
+  <container name="diag">
+    <container name="post">
+      <list name="rbridge-id">
+        <key value="rbridge-id"/>
+        <leaf name="enable">
+          <type name="empty"/>
+        </leaf>
+        <leaf name="rbridge-id">
+          <type name="common-def:rbridge-id-type"/>
+        </leaf>
+      </list>
+      <leaf name="enable">
+        <type name="empty"/>
+      </leaf>
+    </container>
+  </container>
+  <container name="fos"/>
+</module>

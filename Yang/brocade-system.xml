@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-system"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:system="urn:brocade.com:mgmt:brocade-system"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def">
+  <namespace uri="urn:brocade.com:mgmt:brocade-system"/>
+  <prefix value="system"/>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+San Jose, CA 95134
+U.S.A
+Tel: +1-408-333-6061
+E-mail: support@Brocade.com
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This module defines SYSTEM related information.</text>
+  </description>
+  <revision date="2011-08-09">
+    <description>
+      <text>Added new get system uptime interface for netconf.</text>
+    </description>
+  </revision>
+  <rpc name="get-system-uptime">
+    <description>
+      <text>This is a functions that returns time
+since this managed entity was last re-initialized.</text>
+    </description>
+    <input>
+      <leaf name="rbridge-id">
+        <type name="common-def:rbridge-id-type"/>
+      </leaf>
+    </input>
+    <output>
+      <list name="show-system-uptime">
+        <key value="rbridge-id"/>
+        <leaf name="rbridge-id">
+          <type name="common-def:rbridge-id-type"/>
+        </leaf>
+        <leaf name="days">
+          <type name="common-def:time-interval-day"/>
+          <description>
+            <text>Indicates the number of days this managed 
+node is up since its last re-initialization.</text>
+          </description>
+        </leaf>
+        <leaf name="hours">
+          <type name="common-def:time-interval-hour"/>
+          <description>
+            <text>Indicates the number of hours this managed 
+node is up since its last re-initialization. 
+This is in addition to the value of 
+corresponding instance of 'days'.</text>
+          </description>
+        </leaf>
+        <leaf name="minutes">
+          <type name="common-def:time-interval-minute"/>
+          <description>
+            <text>Indicates the number of minutes this managed
+node is up since its last re-initialization.
+This is in addition to the values of 
+corresponding instance of 'days' and 'hours'.</text>
+          </description>
+        </leaf>
+        <leaf name="seconds">
+          <type name="common-def:time-interval-sec"/>
+          <description>
+            <text>Indicates the number of seconds this managed
+node is up since its last re-initialization.
+This is in addition to the values of 
+corresponding instance of 'days', 'hours' 
+and 'minutes'.</text>
+          </description>
+        </leaf>
+      </list>
+      <leaf name="cmd-error">
+        <type name="string"/>
+      </leaf>
+    </output>
+  </rpc>
+</module>

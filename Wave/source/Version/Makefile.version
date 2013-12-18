@@ -1,0 +1,26 @@
+TOPDIR := ../../../../../..
+
+include ../Makefile.versioninfo
+include ../Makefile.tools
+
+PRISM_VERSION := $(BUILD_DIR_DYNAMIC_SRC)/PrismVersion.cpp
+
+.PHONY: all
+all: $(PRISM_VERSION)
+
+.SECONDEXPANSION:
+
+MKFS := $(MAKEFILE_LIST)
+$(PRISM_VERSION): PrismVersion.h PrismVersion.cpp.template $(MKFS) | $(BUILD_DIR_DYNAMIC_SRC)/.
+	sed "s/WAVE_VERSION_MAJOR/$(WAVE_VERSION_MAJOR)/g" PrismVersion.cpp.template | \
+	sed "s/WAVE_VERSION_MINOR/$(WAVE_VERSION_MINOR)/g"                           | \
+	sed "s/WAVE_VERSION_PATCH/$(WAVE_VERSION_PATCH)/g"                           | \
+	sed "s/WAVE_VERSION_REVISION/$(WAVE_VERSION_REVISION)/g"                     | \
+	sed "s/WAVE_BUILD_TYPE/$(WAVE_BUILD_TYPE)/g"                                 | \
+	sed "s/WAVE_BUILD_NUMBER/$(WAVE_BUILD_NUMBER)/g"                             | \
+	sed "s/WAVE_VERSION_DATE/$(WAVE_VERSION_DATE)/g"                             | \
+	sed "s/WAVE_VERSION_USER/$(WAVE_VERSION_USER)/g"                             | \
+	sed "s/WAVE_VERSION_HOST/$(WAVE_VERSION_HOST)/g"                             | \
+	sed "s/WAVE_VERSION_DOMAIN/$(WAVE_VERSION_DOMAIN)/g" > $@
+
+include $(SRC_ROOT)/commonMakefileEnd

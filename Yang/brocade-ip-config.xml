@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-ip-config"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:ip-config="urn:brocade.com:mgmt:brocade-ip-config"
+        xmlns:rbridge="urn:brocade.com:mgmt:brocade-rbridge"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def"
+        xmlns:intf-loopback="urn:brocade.com:mgmt:brocade-intf-loopback">
+  <namespace uri="urn:brocade.com:mgmt:brocade-ip-config"/>
+  <prefix value="ip-config"/>
+  <import module="brocade-rbridge">
+    <prefix value="rbridge"/>
+  </import>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <import module="brocade-intf-loopback">
+    <prefix value="intf-loopback"/>
+  </import>
+  <revision date="2011-10-31">
+    <description>
+      <text>Initial version of this management module.</text>
+    </description>
+  </revision>
+  <grouping name="phy-intf-ip-config">
+    <container name="ip-config">
+      <leaf name="mtu">
+        <type name="uint32">
+          <range value="576..9018"/>
+        </type>
+        <default value="1500"/>
+      </leaf>
+      <leaf name="directed-broadcast">
+        <type name="empty"/>
+      </leaf>
+      <leaf name="proxy-arp">
+        <type name="empty"/>
+      </leaf>
+      <leaf name="arp-aging-timeout">
+        <type name="uint32">
+          <range value="0..240"/>
+        </type>
+        <default value="240"/>
+      </leaf>
+      <list name="address">
+        <ordered-by value="user"/>
+        <key value="address"/>
+        <leaf name="address">
+          <type name="common-def:ipv4-prefix-mask"/>
+        </leaf>
+        <leaf name="secondary">
+          <type name="empty"/>
+        </leaf>
+        <leaf name="ospf-passive">
+          <type name="empty"/>
+        </leaf>
+        <leaf name="ospf-ignore">
+          <type name="empty"/>
+        </leaf>
+      </list>
+    </container>
+  </grouping>
+  <grouping name="intf-vlan-ip-config">
+    <container name="ip-config">
+      <leaf name="mtu">
+        <type name="uint32">
+          <range value="576..9018"/>
+        </type>
+        <default value="1500"/>
+      </leaf>
+      <leaf name="directed-broadcast">
+        <type name="empty"/>
+      </leaf>
+      <leaf name="proxy-arp">
+        <type name="empty"/>
+      </leaf>
+      <leaf name="arp-aging-timeout">
+        <type name="uint32">
+          <range value="0..240"/>
+        </type>
+        <default value="240"/>
+        <description>
+          <text>Set arp age timeout value to interface 
+(default value 240)</text>
+        </description>
+      </leaf>
+      <list name="address">
+        <ordered-by value="user"/>
+        <key value="address"/>
+        <leaf name="address">
+          <type name="common-def:ipv4-prefix-mask"/>
+        </leaf>
+        <leaf name="secondary">
+          <type name="empty"/>
+        </leaf>
+        <leaf name="ospf-passive">
+          <type name="empty"/>
+        </leaf>
+        <leaf name="ospf-ignore">
+          <type name="empty"/>
+        </leaf>
+      </list>
+    </container>
+  </grouping>
+  <grouping name="intf-po-ip-config">
+    <container name="ip-config">
+      <leaf name="mtu">
+        <type name="uint32">
+          <range value="576..9018"/>
+        </type>
+        <default value="1500"/>
+      </leaf>
+      <leaf name="directed-broadcast">
+        <type name="empty"/>
+      </leaf>
+      <leaf name="proxy-arp">
+        <type name="empty"/>
+      </leaf>
+      <leaf name="arp-aging-timeout">
+        <type name="uint32">
+          <range value="0..35790"/>
+        </type>
+        <default value="240"/>
+      </leaf>
+      <list name="address">
+        <key value="address"/>
+        <leaf name="address">
+          <type name="common-def:ipv4-prefix-mask"/>
+        </leaf>
+        <leaf name="secondary">
+          <type name="empty"/>
+        </leaf>
+      </list>
+    </container>
+  </grouping>
+  <grouping name="loopback-intf-ip-config">
+    <container name="ip-config">
+      <list name="address">
+        <key value="address"/>
+        <leaf name="address">
+          <type name="intf-loopback:intf-loopback-ipv4addr-type"/>
+        </leaf>
+      </list>
+    </container>
+  </grouping>
+  <augment target-node="/interface:interface/interface:tengigabitethernet/interface:ip">
+    <uses name="phy-intf-ip-config"/>
+  </augment>
+  <augment target-node="/interface:interface/interface:fortygigabitethernet/interface:ip">
+    <uses name="phy-intf-ip-config"/>
+  </augment>
+  <augment target-node="/interface:interface/interface:gigabitethernet/interface:ip">
+    <uses name="phy-intf-ip-config"/>
+  </augment>
+  <augment target-node="/rbridge:rbridge-id/interface:interface/intf-loopback:loopback">
+    <container name="ip">
+      <uses name="loopback-intf-ip-config"/>
+    </container>
+  </augment>
+  <augment target-node="/intf-loopback:hide-intf-loopback-holder/intf-loopback:interface/intf-loopback:loopback">
+    <container name="ip">
+      <uses name="loopback-intf-ip-config"/>
+    </container>
+  </augment>
+  <augment target-node="/rbridge:rbridge-id/interface:interface/interface:ve">
+    <uses name="interface:interface-vrf-config"/>
+    <container name="ip">
+      <uses name="intf-vlan-ip-config"/>
+    </container>
+    <leaf name="shutdown">
+      <type name="empty"/>
+    </leaf>
+  </augment>
+  <augment target-node="/interface:interface-vlan/interface:interface/interface:ve">
+    <leaf name="shutdown">
+      <type name="empty"/>
+    </leaf>
+  </augment>
+  <augment target-node="/interface:interface-vlan/interface:interface/interface:ve/interface:ip">
+    <uses name="intf-vlan-ip-config"/>
+  </augment>
+  <augment target-node="/interface:interface/interface:port-channel/interface:ip">
+    <container name="hide-ip-holder">
+      <uses name="intf-po-ip-config"/>
+    </container>
+  </augment>
+</module>

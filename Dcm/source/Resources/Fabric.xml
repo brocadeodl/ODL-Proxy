@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Fabric and Fspf Plugins -->
+
+<ModuleResources ModuleName = "Fabric" ComponentName = "Dcm">
+	<ResourceEnum Name = "FabricErrorStatus">
+		<Resource Name = "FABRIC_INVALID_XML_TAG">RBridge ID is invalid.</Resource>
+	</ResourceEnum>
+</ModuleResources>

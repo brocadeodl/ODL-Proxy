@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ModuleResources ModuleName = "Ssm" ComponentName = "Wave">
+    <ResourceEnum Name = "SsmReturnCode">
+
+		<!-- Ssm common -->
+        <Resource Name = "SSM_MEMORY_ALLOCATION_FAILED">%%Error: Memory allocation failed</Resource>
+        <Resource Name = "SSM_UNKNOWN_INTERNAL_ERROR">%%Error: Unknown internal backend error</Resource>
+        <Resource Name = "SSM_INTERFACE_DOESNOT_EXIST">%% Error: Interface does not exist</Resource>
+        <Resource Name = "SSM_DCM_ERR_INCOMPLETE_COMMAND">%% Error: Incomplete command.</Resource>
+        <Resource Name = "SSM_SWITCH_IN_VCS_MODE">%% Error: Command not valid in VCS mode.</Resource>
+        <Resource Name = "SSM_CLUSTER_VERSION_MISMATCH">%% Error: Cluster validation failed - Version mismatch.</Resource>
+
+		<Resource Name = "SSM_INTF_CANT_ENABLE_PFC_AS_COS_UNTRUSTED">%%Error: PFC cannot be enabled because cos is untrusted</Resource>
+		<!-- Acl -->
+        <Resource Name = "SSM_DCM_ERR_ACL_EEXIST">%%Error: ACL does not exist.</Resource>
+        <Resource Name = "SSM_DCM_ERR_ACL_EXCEED_LIMIT">%%Error: Exceed limitation.</Resource>
+        <Resource Name = "SSM_DCM_ERR_ACL_INVALID_NAME">%%Error: ACL name more than 64 characters long.</Resource>
+        <Resource Name = "SSM_DCM_ERR_ACL_ALREADY_EXISTS">%%Error: An Access list with this name already exists</Resource>
+        <Resource Name = "SSM_DCM_ERR_ACL_ALREADY_EXISTS_MAC">%%Error: An MAC access list with this name already exists</Resource>
+        <Resource Name = "SSM_DCM_ERR_ACL_ALREADY_EXISTS_IP">%%Error: An IP access list with this name already exists</Resource>	
+        <Resource Name = "SSM_DCM_ERR_ACL_ALREADY_EXISTS_IPV6">%%Error: An IPv6 access list with this name already exists</Resource>
+        <Resource Name = "SSM_DCM_ERR_ACL_RULE_EXISTS">%%Error: Access-list entry does not exists.</Resource>
+        <Resource Name = "SSM_DCM_ERR_ACL_RULE_SEQ_EXISTS">%%Error: The acl rule with provided sequence number does not exist</Resource>
+        <Resource Name = "SSM_DCM_ERR_ACL_RULE_ALREADY_EXISTS">%%Error: Access-list entry already exists at sequence number %1</Resource>
+        <Resource Name = "SSM_DCM_ERR_ACL_RULE_SEQ_ALREADY_EXISTS">%%Error: Access-list entry with sequence number %1 already exists.</Resource>
+        <Resource Name = "SSM_DCM_ERR_ACL_NOT_APPLIED">%%Error: ACL not applied</Resource>
+        <Resource Name = "SSM_DCM_ERR_ACL_MAC_PORT">%%Error: This interface is not configured to layer2 mode</Resource>
+        <Resource Name = "SSM_DCM_ERR_ACL_RULE_DUP">%%Error: An ACL is already configured on this interface or interface hierarchy.</Resource>
+        <Resource Name = "SSM_DCM_ERR_ACL_INTERFACE_NOT_FOUND">%%Error: An ACL is configured on an unknown interface</Resource>
+        <Resource Name = "SSM_DCM_ERR_ACL_APPLIED">%%Error: Cannot delete an ACL. ACL currently active on an interface</Resource>
+        <Resource Name = "SSM_DCM_ERR_MAC_ACL_APPLIED">%%Error: MAC ACL Delete is not allowed as its currently active on an interface.</Resource>
+        <Resource Name = "SSM_DCM_ERR_MAC_ACL_ACTIVE_ON_A_CLASS_MAP">%%Error: MAC ACL Delete is not allowed as its currently active on a class-map.</Resource>
+        <Resource Name = "SSM_DCM_ERR_IP_ACL_APPLIED">%%Error: IP ACL Delete is not allowed as its currently active on an interface.</Resource>        
+	  	<Resource Name = "SSM_DCM_ERR_ACL_RULE_LIMIT">%%Error: Exceeds the maximum number of rules(%1) in this ACL. Entry not accepted</Resource>
+	  	<Resource Name = "SSM_DCM_ERR_ACL_RULE_LIMIT_NO_LC">%%Error: Exceeds the maximum number of rules(256) in this ACL. Entry not accepted</Resource>
+	  	<Resource Name = "SSM_DCM_ERR_ACL_RULE_LIMIT_WITH_LC">%%Error: Exceeds the maximum number of rules(2048) in this ACL. Entry not accepted</Resource>
+	  	<Resource Name = "SSM_DCM_ERR_ACL_LIMIT">%%Error: Exceeds the maximum number of ACLs. ACL is not accepted</Resource>
+	  	<Resource Name = "SSM_DCM_ERR_ACL_LIMIT_NO_LC">%%Error: Exceeds the maximum number of ACLs(256). ACL is not accepted</Resource>
+	  	<Resource Name = "SSM_DCM_ERR_ACL_LIMIT_WTH_LC">%%Error: Exceeds the maximum number of ACLs(512). ACL is not accepted</Resource>
+	  	<Resource Name = "SSM_DCM_ERR_ACL_RULE_LIMIT_GLOBAL">%%Error: Exceeds the global maximum number of ACL rules. Entry not accepted</Resource>
+	  	<Resource Name = "SSM_DCM_ERR_ACL_RULE_EXCEED_LIMIT">%%Error: Sequence number cannot exceed 4294967290</Resource>
+		<Resource Name = "SSM_DCM_ERR_ACL_PORT_RANGE_ERROR">%%Error: Higher Range Value should be greater then Lower Range Value</Resource>
+		<Resource Name = "SSM_DCM_ERR_ACL_RULE_CONFLICT">%%Error:Command failed because ACL configured on port conflicts with ACL of this VLAN.</Resource>
+		<Resource Name = "SSM_DCM_ERR_ACL_PORTCHANNEL_PHYINTF_CONFLICT">%%Error:Cannot apply an ACL on Portchannel member.</Resource>
+       	<Resource Name = "SSM_DCM_ERR_ACL_EAGAIN">%%Error:ACL operation is in progress. Please retry after some time.</Resource>
+		<Resource Name = "SSM_DCM_ERR_ACL_CMD_FAIL_RETRY">%%Error:Command failed. Please retry after some time.</Resource>
+        <Resource Name = "SSM_DCM_ERR_ACL_APPLIED_INTF_EGRESS">%%Error:Applying ACL in egress direction not supported.</Resource>
+        <Resource Name = "SSM_DCM_ERR_CLEAR_ACL_INTF_EGRESS">%%Error:Clear ACL in egress direction not supported.</Resource>
+ 	    <Resource Name = "SSM_DCM_ERR_APPLY_MAC_ACL_ON_INTF">%%Error:Can not apply a MAC access list as IP Access list.</Resource> 
+        <Resource Name = "SSM_DCM_ERR_APPLY_IP_ACL_ON_INTF">%%Error:Can not apply a IP access list as MAC Access list.</Resource>        
+        <Resource Name = "SSM_DCM_ERR_SPL_NO_ERR_MESSAGE"></Resource>
+        <!--Temporary Resource Ids  -->
+        <Resource Name = "SSM_DCM_ERR_ACL_CONFIG_CHANGE_TMP">%%Error: ACL configuration changed. Please try again.</Resource>
+        <Resource Name = "SSM_DCM_ERR_MAC_ACL_EXIST_TMP">%%Error: MAC access-list %s doesn't exist.</Resource>
+        <Resource Name = "SSM_DCM_ERR_IP_ACL_EXIST_TMP">%%Error: IP access-list %s doesn't exist.</Resource>
+        <Resource Name = "SSM_DCM_ERR_ACL_NOT_APPLIED_TMP">%%Error: ACL not applied.</Resource>
+		<Resource Name = "SSM_DCM_ERR_ACL_CMD_FAIL_RETRY_AGAIN_TMP">%%Error:Command failed. Please retry after some time.</Resource>
+        <!-- IP policy -->
+        <Resource Name = "IPPOLICY_DCM_ERR_IPPREFIX_ALREADY_EXISTS">%%Error: An IP prefix with this name and instance number already exists</Resource>
+        <Resource Name = "IPPOLICY_DCM_ERR_ASPATHACCESSLIST_ALREADY_EXISTS">%%Error: An AS Path with this name and instance number already exists</Resource>
+        <Resource Name = "IPPOLICY_DCM_ERR_IPCOMMUNITYACCESSLIST_ALREADY_EXISTS">%%Error: An IP Community access-list with this name and instance number already exists</Resource>
+        <Resource Name = "IPPOLICY_DCM_ERR_IPCOMMUNITYACCESSLIST_ALREADY_EXISTS_STD">%%Error: An IP Community access-list with this name and instance number already exists in Standard Community</Resource>
+        <Resource Name = "IPPOLICY_DCM_ERR_IPCOMMUNITYACCESSLIST_ALREADY_EXISTS_EXTD">%%Error: An IP Community access-list with this name and instance number already exists in Extended Community</Resource>
+		<Resource Name = "IPPOLICY_DCM_ERR_ROUTE_MAP_IP_ASPATH_LIMIT">%%Error: Maximum number of AS numbers allowed is 20</Resource>
+		<Resource Name = "IPPOLICY_DCM_ERR_ROUTE_MAP_MATCH_ACL_PLATFORM_LT">%%Error: Applying Acl match criteria on Route-Map is not supported on this platform</Resource>
+		<Resource Name = "IPPOLICY_DCM_ERR_ROUTE_MAP_MORE_THAN_3_NH">%%Error: Cannot configure more than 3 NH in a single PBR stanza</Resource>
+		<Resource Name = "IPPOLICY_DCM_ERR_ROUTE_MAP_APPLIED_ON_INTERFACE">%%Error: Cannot remove since already applied on an interface</Resource>
+		<Resource Name = "IPPOLICY_DCM_ERR_ROUTE_MAP_MORE_THAN_8_NEXT_HOP">%%Error: Max Number of configurable next hops within a single PBR stanza</Resource>
+		
+		<Resource Name = "GENERIC_BACKEND_ERR">%1</Resource>
+    </ResourceEnum>
+</ModuleResources>

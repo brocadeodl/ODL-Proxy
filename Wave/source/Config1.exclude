@@ -1,0 +1,12 @@
+./Framework/Core/PrismBasedApplicationWithSas
+./Framework/Core/SasPrism
+./SacGateway/SasVolumeServiceGroup
+./SacGateway/SasSacInterfaceObjectManager
+./SacGateway/SasCopyServiceGroup
+./SacGateway/SasApplicationPlatformNodeServiceGroup
+./SacGateway/SasDiskServiceGroup
+./SacGateway/SasSacMessengerObjectManager
+./SacGateway/SasServiceGroup
+./SacGateway/SasDrlServiceGroup
+./SacGateway/SasSalServiceGroup
+./SacGateway/SasNsServiceGroup

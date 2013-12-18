@@ -1,0 +1,40 @@
+CURRENT_ABSOLUTE_DIR             := $(shell pwd)
+CURRENT_ABSOLUTE_PARENT_DIR      := $(dir $(CURRENT_ABSOLUTE_DIR))
+CURRENT_DIR                      := $(notdir $(CURRENT_ABSOLUTE_DIR))
+CURRENT_DIR_RELATIVE_TO_SRC_ROOT := $(shell pwd | sed "s!$(SRC_ROOT)/!!g")
+TARGET_DIR                       := $(BUILD_DIR_OBJ)/$(CURRENT_DIR_RELATIVE_TO_SRC_ROOT)
+CURRENT_LIB_NAME                 := $(shell $(ECHOCMD) -n $(CURRENT_DIR_RELATIVE_TO_SRC_ROOT) | sed "s!/[a-zA-Z/]*!!g")
+export PARENT_DIR                := $(CURRENT_DIR)
+override SUB_DIRS                := $(shell find . -mindepth 1 -maxdepth 1 -type d | sort | sed "s/^\.\///g")
+SRCS                             := $(wildcard *.cpp)
+OBJS                             := $(patsubst %.cpp,$(TARGET_DIR)/%.o,$(SRCS))
+
+.PHONY: dcm clean $(SUB_DIRS)
+
+dcm: $(BUILD_DIR_LIB) $(TARGET_DIR) $(OBJS) $(SUB_DIRS)
+
+$(SUB_DIRS):
+	$(ECHOCMD) "O - $(PARENT_DIR)/$@ : "; \
+	mkdir -p $(TARGET_DIR)/$@; \
+	$(MAKE) -C $(CURRENT_ABSOLUTE_DIR)/$@ -f $(SRC_ROOT)/Makefile.leaf VPATH=$(TARGET_DIR)/$@ dcm; \
+
+clean:
+	rm -rf $(TARGET_DIR)
+	rm -rf $(BUILD_DIR_LIB)/lib$(CURRENT_LIB_NAME).a
+
+$(TARGET_DIR): $(BUILD_DIR_OBJ)
+	if [ -d "$(TARGET_DIR)" ]; then true; else mkdir $(TARGET_DIR); fi
+
+df = $(TARGET_DIR)/$(*F)
+
+$(TARGET_DIR)/%.o : %.cpp
+	$(ECHOCMD) -n "."
+	$(CXX) -MMD -c -o $@ $(CXXFLAGS) $<
+	$(Q)cp $(df).d $(df).P; \
+		sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
+			-e '/^$$/ d' -e 's/$$/ :/' < $(df).d >> $(df).P; \
+		rm -f $(df).d
+
+ifneq ($(strip $(SRCS)),)
+-include $(SRCS:%.cpp=$(TARGET_DIR)/%.P)
+endif

@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-fcoe-ext"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:fcoe-extensions="urn:brocade.com:mgmt:brocade-fcoe-ext"
+        xmlns:yang="urn:ietf:params:xml:ns:yang:ietf-yang-types"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def"
+        xmlns:fcoe="urn:brocade.com:mgmt:brocade-fcoe"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface">
+  <namespace uri="urn:brocade.com:mgmt:brocade-fcoe-ext"/>
+  <prefix value="fcoe-extensions"/>
+  <import module="ietf-yang-types">
+    <prefix value="yang"/>
+  </import>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <import module="brocade-fcoe">
+    <prefix value="fcoe"/>
+  </import>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+        San Jose, CA 95134
+         U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com 
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This management module is an extension to FCOE model for
+    - Defining RPCs to retrieve operational information of 
+      the FCoE.
+        
+Glossary of the terms used:
+---------------------------
+ACC frame - Accept frame
+
+FCoE -      Fibre Channel over Ethernet (FCoE) is an 
+           encapsulation of Fibre Channel frames over Ethernet
+           networks. 
+
+FIP -       FCoE Intialization Protocol is the standard for 
+           intilization of FCoE network.
+
+FCF -       Fibre Channel Forwarder is a network entity 
+           responsible for forwarding the FCoE traffic.
+
+FLOGI -     Fabric Login is a frame used by the end devices to 
+           login to a Fibre Channel or FCoE Fabric.
+
+FDISC -     Fabric Discovery is a frame used by the end devices 
+           to perform logins of all the loop attached ports.
+
+LOGO -      Logout is a frame used by the end devices to logout 
+           of the Fibre Channel or FCoE Fabric.
+
+ENODE -     End Node is the term used to refer End devices in 
+           the FCoE network.
+
+VN-Port -   Virtual N-Port is the FCoE equivalent of the Fibre 
+           Channel N-Port.
+
+CVL -       Clear Virtual Links is the frame to tear the Virtual
+           Links in the FCoE Network.</text>
+  </description>
+  <reference>
+    <text>The FC-BB-5 standard ANSI/INCITS 462-2010.</text>
+  </reference>
+  <revision date="2011-07-15">
+    <description>
+      <text>Initial version of the FCoE extension management module.</text>
+    </description>
+  </revision>
+  <typedef name="fcoe-port-mode-type">
+    <type name="enumeration">
+      <enum name="VF">
+        <value value="1"/>
+        <description>
+          <text>Virtual F-port capable of carrying FCoE 
+frame.</text>
+        </description>
+      </enum>
+    </type>
+    <description>
+      <text>This definition specifies the mode in which a fcoe port
+can be in.</text>
+    </description>
+  </typedef>
+  <typedef name="fcoe-binding-type">
+    <type name="enumeration">
+      <enum name="Static">
+        <value value="1"/>
+        <description>
+          <text>The ethernet port or Enode mac is
+statically bound to the fcoe interface.</text>
+        </description>
+      </enum>
+      <enum name="Dynamic">
+        <value value="2"/>
+        <description>
+          <text>The ethernet port or Enode mac is
+dynamically bound to the fcoe interface.</text>
+        </description>
+      </enum>
+      <enum name="Unknown">
+        <value value="3"/>
+        <description>
+          <text>The binding type between the ethernet
+port or Enode Mac and the fcoe interface
+is Unknown.</text>
+        </description>
+      </enum>
+    </type>
+    <description>
+      <text>This definition specifies the binding type between
+the ethernet port or Enode Mac and the logical fcoe
+interface.</text>
+    </description>
+  </typedef>
+  <typedef name="fcoe-counters-date-and-time-type">
+    <type name="string">
+      <pattern value="\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{6}"/>
+    </type>
+    <description>
+      <text>The fcoe-counters-date-and-time-type is a slightly
+modified version of the yang data type date-and-time
+that has been reformatted to display the date and time
+  according to the fcoe show output.</text>
+    </description>
+  </typedef>
+  <typedef name="fcoe-port-state-type">
+    <type name="string">
+      <pattern value="Up|Down|up|down"/>
+    </type>
+    <description>
+      <text>This data type provides the operational state of the 
+ fcoe port.</text>
+    </description>
+  </typedef>
+  <typedef name="fcoe-map-name">
+    <type name="string">
+      <pattern value="[a-zA-Z0-9_]{1,30}"/>
+    </type>
+    <description>
+      <text>This data type provides the fcoe map names such as
+the fabric-map name, cee-map name, etc.</text>
+    </description>
+  </typedef>
+  <rpc name="fcoe-get-interface">
+    <description>
+      <text>This function is to get the operational state of an FCoE
+interface(s).</text>
+    </description>
+    <input>
+      <leaf name="fcoe-intf-name">
+        <type name="fcoe:interface-fcoe-type"/>
+        <mandatory value="false"/>
+        <description>
+          <text>This specifies the specific FCoE interface for 
+which this rpc function is invoked. In response to
+this request, the managed device returns the FCoE 
+operational information for this interface.</text>
+        </description>
+      </leaf>
+      <leaf name="fcoe-intf-rbridge-id">
+        <type name="common-def:rbridge-id-all-type"/>
+        <mandatory value="false"/>
+        <description>
+          <text>This specifies the rbridge-id for which this rpc 
+function is invoked. In response to this request,
+the managed device returns the FCoE operational 
+information for all the interfaces of this 
+rbridge-id or all rbridges if rbridge-id value is 'all'</text>
+        </description>
+      </leaf>
+      <leaf name="fcoe-intf-include-stats">
+        <type name="boolean"/>
+        <mandatory value="false"/>
+        <description>
+          <text>This specifies if the FCoE interface statistics 
+should be included in the output.</text>
+        </description>
+      </leaf>
+    </input>
+    <output>
+      <list name="fcoe-intf-list">
+        <key value="fcoe-intf-fcoe-port-id"/>
+        <description>
+          <text>The format of the output for this rpc function 
+will be a list of entries. Each row represents a 
+FCoE interface operational characteristics such as 
+fcoe port number, ethernet port number, the current
+operational mode of the port and Tx/Rx stats for 
+control traffic on that port.</text>
+        </description>
+        <leaf name="fcoe-intf-fcoe-port-id">
+          <type name="fcoe:interface-fcoe-type"/>
+          <description>
+            <text>This indicates the name of this FCoE 
+interface.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-port-type">
+          <type name="fcoe-port-mode-type"/>
+          <description>
+            <text>This indicates the current operational mode
+of this FCoE interface.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-config-port-type">
+          <type name="fcoe-port-mode-type"/>
+          <description>
+            <text>This indicates the configured mode of this
+FCoE interface.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-port-state">
+          <type name="fcoe-port-state-type"/>
+          <description>
+            <text>This indicates the operational state of the 
+FCoE interface.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-fabric-map-name">
+          <type name="fcoe-map-name"/>
+          <description>
+            <text>This indicates the fabric map name associated
+with this interface.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-eth-port-id">
+          <type name="interface:interface-type"/>
+          <description>
+            <text>This indicates the name of the ethernet
+interface bound by this FCoE interface.
+This leaf will be deprecated, and the
+interface-name leaf in the interface-name-info
+grouping should be used instead.</text>
+          </description>
+        </leaf>
+        <uses name="interface:interface-name-info">
+          <description>
+            <text>This indicates the ethernet port information.
+This grouping contains two parts: the 
+interface-name and the interface-type.</text>
+          </description>
+        </uses>
+        <leaf name="fcoe-intf-admin-status">
+          <type name="boolean"/>
+          <description>
+            <text>This indicates the administratively 
+configured state of the FCoE interface.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-peer-fcf-mac">
+          <type name="yang:mac-address"/>
+          <description>
+            <text>The value of this leaf indicates the MAC 
+address of the neighboring FCF connected via 
+this VE interface.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-device-count">
+          <type name="yang:zero-based-counter32"/>
+          <description>
+            <text>This indicates the number of devices logged in
+on this interface.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-ifindex">
+          <type name="uint32"/>
+          <description>
+            <text>This indicates the Interface index of the Ethernet
+port.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-wwn">
+          <type name="common-def:wwn-type"/>
+          <description>
+            <text>This indicates the Fabric WWN of this FCoE 
+interface.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-enode-bind-type">
+          <type name="fcoe-binding-type"/>
+          <description>
+            <text>This indicates if the enode is statically bound to
+the fcoe interface or not i.e. if statically bound 
+this enode's mac will always login on the same fcoe
+port.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-port-bind-type">
+          <type name="fcoe-binding-type"/>
+          <description>
+            <text>This indicates if the ethernet port is statically
+bound to the fcoe interface or not i.e. if statically
+bound the ethernet port and the fcoe interface will
+have a static 1-to-1 mapping.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-enode-mac-address">
+          <type name="yang:mac-address"/>
+          <description>
+            <text>This indicates the enode mac-addresss of the
+device that is statically or dynamically 
+bound to the fcoe port.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-rx-vlan-disc-req">
+          <type name="yang:zero-based-counter32"/>
+          <mandatory value="false"/>
+          <description>
+            <text>This indicates the number of FIP VLAN 
+Discovery requests received on this FCoE 
+interface.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-rx-disc-solicitations">
+          <type name="yang:zero-based-counter32"/>
+          <mandatory value="false"/>
+          <description>
+            <text>This indicates the number of FCF Discovery 
+   solicitations received on this FCoE interface.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-rx-flogi">
+          <type name="yang:zero-based-counter32"/>
+          <mandatory value="false"/>
+          <description>
+            <text>This indicates the number of FLOGI requests 
+   received on this FCoE interface.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-rx-fdiscs">
+          <type name="yang:zero-based-counter32"/>
+          <mandatory value="false"/>
+          <description>
+            <text>This indicates the number of FDISC requests 
+   received on this FCoE interface.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-rx-logo">
+          <type name="yang:zero-based-counter32"/>
+          <mandatory value="false"/>
+          <description>
+            <text>This indicates the number of FIP LOGO requests 
+   received on this FCoE interface.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-rx-errors">
+          <type name="yang:zero-based-counter32"/>
+          <mandatory value="false"/>
+          <description>
+            <text>This indicates the Number of Errors 
+encountered on this FCoE interface.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-tx-vlan-disc-resp">
+          <type name="yang:zero-based-counter32"/>
+          <mandatory value="false"/>
+          <description>
+            <text>This indicates the Number of FIP 
+VLAN Discovery response frames transmitted on 
+this FCoE interface.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-tx-disc-sol-adv">
+          <type name="yang:zero-based-counter32"/>
+          <mandatory value="false"/>
+          <description>
+            <text>This indicates the number of FCF solicited  
+   advertisements transmitted on this FCoE 
+   interface.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-tx-disc-unsol-adv">
+          <type name="yang:zero-based-counter32"/>
+          <mandatory value="false"/>
+          <description>
+            <text>This indicates the Number of unsolicited 
+  advertisements transmitted on this FCoE 
+  interface.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-rx-enode-ka">
+          <type name="yang:zero-based-counter32"/>
+          <mandatory value="false"/>
+          <description>
+            <text>This indicates the number of ENODE keep-alive
+frames recieved.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-rx-vnport-ka">
+          <type name="yang:zero-based-counter32"/>
+          <mandatory value="false"/>
+          <description>
+            <text>This indicates the number of VN-Port keep-alive
+frames recieved.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-tx-accepts">
+          <type name="yang:zero-based-counter32"/>
+          <mandatory value="false"/>
+          <description>
+            <text>This indicates the number of ACC frames  
+   transmitted on this FCoE interface in response
+   to FLOGI/FDISC.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-tx-ls-rjt">
+          <type name="yang:zero-based-counter32"/>
+          <mandatory value="false"/>
+          <description>
+            <text>This indicates the number of Reject frames 
+    transmitted on this FCoE interface in response
+    to FLOGI/FDISC/LOGO.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-time-since-last-change">
+          <type name="fcoe-counters-date-and-time-type"/>
+          <mandatory value="false"/>
+          <description>
+            <text>This indicates the time elapsed since the 
+status of this FCoE port last changed.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-last-counters-cleared">
+          <type name="fcoe-counters-date-and-time-type"/>
+          <mandatory value="false"/>
+          <description>
+            <text>This indicates the time when the interface 
+counters were last cleared.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-intf-tx-cvls">
+          <mandatory value="false"/>
+          <type name="yang:zero-based-counter32"/>
+          <description>
+            <text>This indicates the number of CVL frames
+transmitted.</text>
+          </description>
+        </leaf>
+      </list>
+      <leaf name="fcoe-intf-total-interfaces">
+        <type name="yang:zero-based-counter32"/>
+        <description>
+          <text>This leaf indicates the total Number of interfaces
+whose details are being returned by this 
+function.</text>
+        </description>
+      </leaf>
+    </output>
+  </rpc>
+  <rpc name="fcoe-get-login">
+    <description>
+      <text>This function provides the login information on FCoE 
+End nodes that have logged in to the managed device.</text>
+    </description>
+    <input>
+      <leaf name="fcoe-login-interface">
+        <type name="fcoe:interface-fcoe-type"/>
+        <mandatory value="false"/>
+        <description>
+          <text>This specifies the fcoe interface for which this 
+rpc function is invoked. In response to this 
+request, the managed device returns the list of all
+FCoE devices that have logged in on this 
+interface.</text>
+        </description>
+      </leaf>
+      <leaf name="fcoe-login-vfid">
+        <type name="fcoe:fcoe-vfid-type"/>
+        <mandatory value="false"/>
+        <description>
+          <text>This specifies the virtual fabric id for which 
+this rpc function is invoked. In response to this 
+request, the managed device returns a list of all
+FCoE devices that have logged in to this virtual
+fabric.</text>
+        </description>
+      </leaf>
+      <leaf name="fcoe-login-vlan">
+        <type name="fcoe:fcoe-vlan-type"/>
+        <mandatory value="false"/>
+        <description>
+          <text>This specifies the vlan id for which this rpc
+function is invoked. In response to this request, 
+the managed device returns the list of all FCoE 
+devices that have logged in on this vlan.</text>
+        </description>
+      </leaf>
+      <leaf name="fcoe-login-rbridge-id">
+        <type name="common-def:rbridge-id-all-type"/>
+        <mandatory value="false"/>
+        <description>
+          <text>This specifies the rbridge-id for which this rpc 
+function is invoked. In response to this request, 
+the managed device returns a list of all FCoE 
+devices that have logged in to given rbridge or 
+all rbridges if rbridge-id value is 'all'</text>
+        </description>
+      </leaf>
+    </input>
+    <output>
+      <list name="fcoe-login-list">
+        <key value="fcoe-login-session-mac"/>
+        <description>
+          <text>This is a list of logged-in FCoE End nodes. 
+Each row represents a logged-in FCoE device 
+operational details such as ethernet port number, 
+the WWN and MAC address of the device that has 
+logged in and session MAC. The session MAC is used
+as the key for this list as it will be unique 
+for each entry.</text>
+        </description>
+        <leaf name="fcoe-login-session-mac">
+          <type name="yang:mac-address"/>
+          <description>
+            <text>This leaf indicates the fabric assigned 
+session MAC address of the End Node.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-login-fcoe-interface-name">
+          <type name="fcoe:interface-fcoe-type"/>
+          <description>
+            <text>This leaf indicates the FCoE interface name.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-login-interface-name">
+          <type name="union">
+            <type name="interface:interface-type"/>
+            <type name="interface:portchannel-type"/>
+          </type>
+          <description>
+            <text>This leaf indicates the Interface name.
+This leaf will be deprecated, and the
+interface-name leaf in the interface-name-info
+grouping should be used instead.</text>
+          </description>
+        </leaf>
+        <uses name="interface:interface-name-info">
+          <description>
+            <text>This leaf gives the ethernet port info.
+This grouping contains two parts: the
+interface-name and the interface-type.</text>
+          </description>
+        </uses>
+        <leaf name="fcoe-login-device-wwn">
+          <type name="common-def:wwn-type"/>
+          <description>
+            <text>This leaf indicates the World Wide Name of the
+End Node.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-login-device-mac">
+          <type name="yang:mac-address"/>
+          <description>
+            <text>This leaf indicates the MAC address of  
+the End Node.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-login-direct-attached">
+          <type name="boolean"/>
+          <description>
+            <text>This leaf indicates if the device is  directly 
+connected to the FCF.
+                        
+The value of 'true' indicates that this device 
+is directly attached. The value of 'false' 
+indicates that this device is not directly 
+attached.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-login-connected-peer-type">
+          <type name="enumeration">
+            <enum name="peer-fcf">
+              <value value="1"/>
+            </enum>
+            <enum name="peer-fcoe-device">
+              <value value="2"/>
+            </enum>
+          </type>
+          <description>
+            <text>This leaf indicates the type of device 
+connected to the FCF.</text>
+          </description>
+        </leaf>
+      </list>
+      <leaf name="fcoe-login-total-logins">
+        <type name="yang:zero-based-counter32"/>
+        <description>
+          <text>This leaf indicates the Total Number of devices
+logged in.</text>
+        </description>
+      </leaf>
+    </output>
+  </rpc>
+</module>

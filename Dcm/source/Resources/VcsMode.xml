@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave License & PortCfg Module. -->
+
+<ModuleResources ModuleName = "VcsMode" ComponentName = "Dcm">
+    <ResourceEnum Name = "VCSOperationErrorStatus">
+        <Resource Name = "VCS_ERROR_1001">%%Error: Command not supported while VCS is disabled.</Resource>
+        <Resource Name = "VCS_ERROR_1002">%%Error: Command not supported while VCS is enabled.</Resource>
+        <Resource Name = "VCS_RBRIDGE_INPUT_NOT_IN_CLUSTER">%%Error: Input rbridge-id is not in the cluster.</Resource>
+    </ResourceEnum>
+    <ResourceEnum Name = "VcsDistribuitionMode">
+        <Resource Name = "DCM_ONLY">For Dcmd only</Resource>
+        <Resource Name = "CCM_ONLY">For Ccmd Only</Resource>
+        <Resource Name = "DCM_CCM" >For Dcmd and Ccmd as Single Daemon</Resource>
+        <Resource Name = "CCM_NOOP">Ccmd in No Operation Mode Daemon</Resource>
+        <Resource Name = "DCM_NSP" >Network Service Provider</Resource>
+        <Resource Name = "DCM_SMD" >System Management Daemon</Resource>
+    </ResourceEnum>
+</ModuleResources>

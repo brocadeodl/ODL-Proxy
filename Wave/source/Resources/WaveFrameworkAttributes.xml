@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Framework Attributes-->
+
+<ModuleResources ModuleName = "Attributes" ComponentName = "Wave">
+     <ResourceEnum Name = "AttributeTypeString">
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_UI32"                    >UI32</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_WAVE_MESSAGE_TYPE"       >Wave Message Type</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_WAVE_MESSAGE_PRIORITY"   >Wave Message Priority</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_PRISM_SERVICE_ID"        >Prism Service Id</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_SERIALIZABLE_OBJECT_TYPE">Serializable Object Type</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_LOCATIONID"              >LocationId</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_UI32_VECTOR"             >UI32 Vector</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_UI64"                    >UI64</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_UI64_VECTOR"             >UI64 Vector</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_SI64"                    >SI64</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_SI64_VECTOR"             >SI64 Vector</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_SI32"                    >SI32</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_SI32_VECTOR"             >SI32 Vector</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_UI16"                    >UI16</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_UI16_VECTOR"             >UI16 Vector</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_SI16"                    >SI16</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_SI16_VECTOR"             >SI16 Vector</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_UI8"                     >UI8</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_UI8_VECTOR"              >UI8 Vector</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_SI8"                     >SI8</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_SI8_VECTOR"              >SI8 Vector</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_OBJECTID"                >ObjectId</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_OBJECTID_VECTOR"         >ObjectId Vector</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_COMPOSITION"             >Composition</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_COMPOSITION_VECTOR"      >Composition Vector</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_BOOL"                    >Bool</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_BOOL_VECTOR"             >Bool Vector</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_CHAR"                    >Char</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_STRING"                  >String</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_STRING_VECTOR"           >String Vector</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_WORLD_WIDE_NAME"         >World Wide Name</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_WORLD_WIDE_NAME_VECTOR"  >World Wide Name Vector</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_MACADDRESS"              >MacAddress</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_MACADDRESS_VECTOR"       >MacAddress Vector</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_IPV4ADDRESS"             >IpV4Address</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_IPV4ADDRESS_VECTOR"      >IpV4Address Vector</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_IPV6ADDRESS"             >IpV6Address</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_IPV6ADDRESS_VECTOR"      >IpV6Address Vector</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_ENUM"                    >Enum</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_DATE"                    >Date</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_DATE_VECTOR"             >Date Vector</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_TIME"                    >Time</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_TIME_VECTOR"             >Time Vector</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_DATETIME"                >DateTime</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_DATETIME_VECTOR"         >DateTime Vector</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_BITMAP"                  >BitMap</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_DECIMAL64"               >Decimal64</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_DECIMAL64_VECTOR"        >Decimal64 Vector</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_UNION"                   >Union</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_IPV4ADDRESS_NETWORK_MASK">IpV4Address NetworkMask</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_IPV6ADDRESS_NETWORK_MASK">IpV6Address NetworkMask</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_SNMPOBJECTID"            >SnmpObjectId</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_UI32_RANGE"              >UI32 Range</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_IPVXADDRESS"             >IpVxAddress</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_IPVXADDRESS_VECTOR"      >IpVxAddress Vector</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_LARGEOBJECT"             >LargeObject</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_MAC_RANGE"               >MAC Range</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_UI32_UC"                 >UI32 User Configured</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_STRING_UC"               >String User Configured</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_BOOL_UC"                 >Bool User Configured</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_ENUM_UC"                 >Enum User Configured</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_MACADDRESS2"             >MacAddress2</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_MACADDRESS2_VECTOR"      >MacAddress2 Vector</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_RESOURCEID"              >ResourceId</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_RESOURCEENUM"            >ResourceEnum</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_RESOURCEID_VECTOR"       >ResourceId Vector</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_RESOURCEENUM_VECTOR"     >ResourceEnum Vector</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_IPV4ADDRESS_UC"          >IpV4Address User Configured</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_UI32_VECTOR_UC"          >UI32 Vector User Configured</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_STRING_VECTOR_UC"        >String Vector User Configured</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_HOST_UC"                 >Host User Configured</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_UI64_UC"                 >UI64 User Configured</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_UUID"                    >Uuid</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_SQL_BETWEEN"             >Sql Between</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_SQL_IN"                  >Sql In</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_STRING_VECTOR_VECTOR"    >String Vector Vector</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_SERIALIZABLE_OBJECT"     >Serializable Object</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_SQL_EXISTS"              >Sql Exists</Resource>
+          <Resource Name = "WAVE_ATTRIBUTE_TYPE_URI"                     >Uri</Resource>
+     </ResourceEnum>
+</ModuleResources>

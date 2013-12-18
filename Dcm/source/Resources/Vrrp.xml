@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<ModuleResources ModuleName="Vrrp" ComponentName="Wave">
+	<ResourceEnum Name="VrrpReturnStatus">
+		<Resource Name="VRRP_API_SET_ERR_NO_EXIST">%% Error: VRID does not exist (cannot delete)</Resource>
+		<Resource Name="VRRP_API_SET_ERR_ENABLED">%% Error: Session is already enabled</Resource>
+		<Resource Name="VRRP_API_SET_ERR_DISABLED">%% Error: Session is already disabled</Resource>
+		<Resource Name="VRRP_API_SET_ERR_BAD_IP_ADDR">%% Error: Malformed IP address</Resource>
+		<Resource Name="VRRP_API_SET_ERR_BAD_INTF">%% Error: Cannot find specified interface</Resource>
+		<Resource Name="VRRP_API_SET_ERR_NO_INTF_IP">%% Error: VRRP interface has no IP addresses</Resource>
+		<Resource Name="VRRP_API_SET_ERR_VIP_UNSET">%% Error: MUST configure virtual IP address first</Resource>
+		<Resource Name="VRRP_API_SET_ERR_PRIO_CANT_255">%% Error: MUST be virtual IP owner to have priority 255</Resource>
+		<Resource Name="VRRP_API_SET_ERR_PRIO_MUST_255">%% Error: IP Address owner priority MUST be 255</Resource>
+		<Resource Name="VRRP_API_SET_ERR_CONFIG_UNSET">%% Error: Virtual Router configuration incomplete (not enabled)</Resource>
+		<Resource Name="VRRP_API_SET_ERR_ENABLE">%% Error: Unexpected error enabling</Resource>
+		<Resource Name="VRRP_API_SET_ERR_DISABLE">%% Error: Unexpected error disabling</Resource>
+		<Resource Name="VRRP_API_SET_ERR_PRIO_MISMATCH">%% Error: VRRP router priority mismatch (IP owner priority is 255)</Resource>
+		<Resource Name="VRRP_API_SET_ERR_VIP_SET">%% Error: Must unset Virtual IP first</Resource>
+		<Resource Name="VRRP_API_SET_ERR_CANT_BE_OWNER">%% Error: Virtual IP address not found; Cannot set default 'master'</Resource>
+		<Resource Name="VRRP_API_SET_ERR_MUST_BE_OWNER">%% Error: Virtual IP address exists; Cannot set default 'backup'</Resource>
+		<Resource Name="VRRP_API_SET_ERR_INTERFACE_CONFLICT_VIP_OWNER">%% Error: Interface must have VIP master address.</Resource>
+		<Resource Name="VRRP_API_SET_ERR_NO_SUCH_SESSION">%% Error: The VRRP session does not exist</Resource>
+		<Resource Name="VRRP_API_SET_ERR_DUPLICATE_SESSION">%% Error: Duplicate VRRP session</Resource>
+		<Resource Name="VRRP_API_SET_ERR_CANNOT_ADD_VRRP_INSTANCE">%% Error: Cannot reefine the \"old style\" VRRP session</Resource>
+		<Resource Name="VRRP_API_SET_ERR_CANNOT_ADD_TO_INTERFACE">%% Error: Cannot attach the session to the interface</Resource>
+		<Resource Name="VRRP_API_SET_ERR_NO_SUCH_INTERFACE">%% Error: No such interface</Resource>
+		<Resource Name="VRRP_API_SET_ERR_INVALID_LINKLOCAL_ADDRESS">%% Error: Virtual IPv6 address must be link local addres</Resource>
+		<Resource Name="VRRP_API_SET_ERR_DUPLICATE_VIP">%% Error: Same Virtual IP is already configured</Resource>
+		<Resource Name="VRRP_API_SET_ERR_LOCAL_INTERFACE">%% Error: Trackport cannot be enabled on the interface on which this session is configured</Resource>
+		<Resource Name="VRRP_API_SET_ERR_TRACK_PRIO">%% Error: Group Track Priority cannot be greater than Priority set</Resource>
+		<Resource Name="VRRP_API_SET_ERR_TRACKPORT_MAX">%% Error: Max number of tracked interfaces reached</Resource>
+		<Resource Name="VRRP_API_SET_ERR_NOT_VRRPE">%% Error: Works only in VRRPE mode</Resource>
+		<Resource Name="VRRP_API_SET_ERR_NO_SUCH_VIP">%% Error: The Virtual IP Address does not exist</Resource>
+		<Resource Name="VRRP_API_SET_ERR_DUPLICATE_TRACKPORT">%% Error: This port is already being tracked</Resource>
+		<Resource Name="VRRP_API_SET_ERR_NO_SUCH_TRACKPORT">%% Error: This port is not being tracked</Resource>
+		<Resource Name="VRRP_API_SET_ERR_VIP_MAX">%% Error: Max number of Virtual IPs have been configured</Resource>
+		<Resource Name="VRRP_API_SET_ERR_SAME_REALIP_VIP">%% Error: VRRPE: Interface IP and Virtual IP cannot be the same</Resource>
+		<Resource Name="VRRP_API_SET_ERR_PREFIX_NOT_SAME">%% Error: Virtual IP address should involve the Interface IP prefix</Resource>
+		<Resource Name="VRRP_API_SET_ERR_GLOBAL_CONFIG_DISABLED">%% Error: VRRP config is globally disabled</Resource>
+		<Resource Name="VRRP_API_SET_ERR_VRRP_NOT_CONFIGURED">%% Error: VRRP session is not configured</Resource>
+		<Resource Name="VRRP_API_SET_ERR_OWNER_NOT_REAL_VIP">%% Error: Only Owning Virtual IP address can be configured on Owner session</Resource>
+		<Resource Name="VRRP_API_SET_ERR_NON_OWNER_REAL_VIP">%% Error: Owning Virtual IP address can not be configured on Non-Owner session</Resource>
+		<Resource Name="VRRP_API_SET_ERR_TRACKPORT_ON_OWNER">%% Error: Trackport can not be configured on Owner</Resource>
+		<Resource Name="VRRP_API_SET_ERR_REAL_VIP_ON_TRACKED_SESSION">%% Error: Session can not be configured as Owner when track port is enabled</Resource>
+    	<Resource Name="VRRP_API_SET_ERR_VRRP_GLOBAL_CONFIG_DISABLED">%% Error: VRRP config is globally disabled</Resource>
+    	<Resource Name="VRRP_API_SET_ERR_VRRPE_GLOBAL_CONFIG_DISABLED">%% Error: VRRPE config is globally disabled</Resource>
+		<Resource Name="VRRP_API_SET_ERR_L2_PORT">%% Error: VRRP cannot be configured on a Switchport</Resource>
+		<Resource Name="VRRP_API_SET_ERR_MAX_SESS">%% Error: Maximum number of VRRP Sessions already configured</Resource>
+		<Resource Name="VRRP_API_SET_ERR_MAX_SESS_PER_INTF">%% Error: Maximum number of allowed VRRP Sessions on this interface has already been configured</Resource>
+		<Resource Name="VRRP_API_SET_ERR_INTF_SHUT">%% Error: VRRP Interface is shut; Cannot configure Virtual-IP</Resource>
+		<Resource Name="VRRP_API_SET_ERR_L3_NOT_READY">%% Error: Interface is not in L3 mode.</Resource>
+		<Resource Name="VRRP_API_SET_ERR_VRRPE_VLAN_VCS">%% Error: VRRPE Config in VCS mode is allowed only on Vlan Interfaces </Resource>
+		<Resource Name="VRRP_API_SET_ERR_GLOBAL_VRRP_ENABLED">%% Error: VRRP config is globally enabled. Disable it first.</Resource>
+		<Resource Name="VRRP_API_SET_ERR_GLOBAL_VRRPE_ENABLED">%% Error: VRRPE config is globally enabled. Disable it first.</Resource>
+		<Resource Name="VRRP_API_SET_ERR_VRRPE_NOT_SUPPORTED">%% Error: VRRPE is not supported on this platform.</Resource>
+
+		<Resource Name="VRRP_API_ERROR_UNKNOWN">%% Error: Unknown VRRP API error</Resource>
+	</ResourceEnum>
+</ModuleResources>

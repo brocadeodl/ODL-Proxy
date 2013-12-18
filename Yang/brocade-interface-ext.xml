@@ -1,0 +1,1301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-interface-ext"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:interface-extensions="urn:brocade.com:mgmt:brocade-interface-ext"
+        xmlns:yang="urn:ietf:params:xml:ns:yang:ietf-yang-types"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface">
+  <namespace uri="urn:brocade.com:mgmt:brocade-interface-ext"/>
+  <prefix value="interface-extensions"/>
+  <import module="ietf-yang-types">
+    <prefix value="yang"/>
+  </import>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+       San Jose, CA 95134
+       U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com
+Web: www.brocade.com</text>
+  </contact>
+  <description>
+    <text>This module is an extension to interface model for 
+ - Defining RPCs to retrieve interface related operational data
+   in the managed device.
+ 
+Glossary of the terms used:
+--------------------------- 
+HDLC - High-Level Data Link Control.
+PPP  - Point-to-Point Protocol.
+ATM  - Asynchronous Transfer Mode.
+GBIC - Gigabit Interface Converter.
+SFP  - small form-factor.
+XFP  - 10 Gigabit Small Form Factor Pluggable.
+xFF  -
+XFP-E - XFP Extended.
+ISL   - Inter switch Link.</text>
+  </description>
+  <revision date="2011-07-05">
+    <description>
+      <text>Initial version of this management module.</text>
+    </description>
+  </revision>
+  <typedef name="line-speed">
+    <type name="enumeration">
+      <enum name="nil">
+        <value value="1"/>
+      </enum>
+      <enum name="auto">
+        <value value="2"/>
+      </enum>
+      <enum name="1Gbps">
+        <value value="3"/>
+      </enum>
+      <enum name="10Gbps">
+        <value value="4"/>
+      </enum>
+      <enum name="40Gbps">
+        <value value="5"/>
+      </enum>
+    </type>
+    <units name="Bits per Second"/>
+  </typedef>
+  <grouping name="media-vendor-attr">
+    <leaf name="vendor-name">
+      <type name="string"/>
+      <description>
+        <text>This indicates the Vendor of this interface.</text>
+      </description>
+    </leaf>
+    <leaf name="vendor-oui">
+      <type name="string"/>
+      <description>
+        <text>This indicates the Vendor IEEE company ID.</text>
+      </description>
+    </leaf>
+    <leaf name="vendor-pn">
+      <type name="string"/>
+      <description>
+        <text>This indicates the Part number.</text>
+      </description>
+    </leaf>
+    <leaf name="vendor-rev">
+      <type name="string"/>
+      <description>
+        <text>This indicates the Revision level.</text>
+      </description>
+    </leaf>
+  </grouping>
+  <grouping name="sfp-attr">
+    <leaf name="distance">
+      <type name="enumeration">
+        <enum name="short-dist">
+          <value value="1"/>
+        </enum>
+        <enum name="inter-dist">
+          <value value="2"/>
+        </enum>
+        <enum name="long-dist">
+          <value value="3"/>
+        </enum>
+        <enum name="unknown">
+          <value value="4"/>
+        </enum>
+      </type>
+    </leaf>
+    <leaf name="media-form-factor">
+      <type name="enumeration">
+        <enum name="sm">
+          <value value="1"/>
+        </enum>
+        <enum name="mx">
+          <value value="2"/>
+        </enum>
+        <enum name="m5">
+          <value value="3"/>
+        </enum>
+        <enum name="m6">
+          <value value="4"/>
+        </enum>
+        <enum name="tv">
+          <value value="5"/>
+        </enum>
+        <enum name="mi">
+          <value value="6"/>
+        </enum>
+        <enum name="tp">
+          <value value="7"/>
+        </enum>
+        <enum name="tw">
+          <value value="8"/>
+        </enum>
+        <enum name="unknown">
+          <value value="9"/>
+        </enum>
+      </type>
+    </leaf>
+    <leaf name="wavelength">
+      <type name="string"/>
+      <description>
+        <text>Wavelength of pluggable media</text>
+      </description>
+    </leaf>
+    <leaf name="serial-no">
+      <type name="string"/>
+      <description>
+        <text>This indicates the Serial number.</text>
+      </description>
+    </leaf>
+    <leaf name="date-code">
+      <type name="string"/>
+      <description>
+        <text>This indicates the Vendor's 
+manufactoring date code.</text>
+      </description>
+    </leaf>
+    <leaf name="temperature">
+      <type name="uint32"/>
+      <mandatory value="false"/>
+      <description>
+        <text>This indicates the  Module
+temperature (degrees C)</text>
+      </description>
+    </leaf>
+    <leaf name="voltage">
+      <type name="decimal64">
+        <fraction-digits value="1"/>
+      </type>
+      <mandatory value="false"/>
+      <description>
+        <text>This indicates the Supply voltage
+(Volts)</text>
+      </description>
+    </leaf>
+    <leaf name="current">
+      <type name="decimal64">
+        <fraction-digits value="3"/>
+      </type>
+      <mandatory value="false"/>
+      <description>
+        <text>This indicates the Laser diode
+drive current (milliAmps)</text>
+      </description>
+    </leaf>
+    <leaf name="tx-power">
+      <type name="decimal64">
+        <fraction-digits value="1"/>
+      </type>
+      <mandatory value="false"/>
+      <description>
+        <text>This indicates the Transmitted
+optical power (microWatts)</text>
+      </description>
+    </leaf>
+    <leaf name="rx-power">
+      <type name="decimal64">
+        <fraction-digits value="1"/>
+      </type>
+      <mandatory value="false"/>
+      <description>
+        <text>This indicates the Received
+optical power (microWatts)</text>
+      </description>
+    </leaf>
+  </grouping>
+  <grouping name="media-attr">
+    <leaf name="speed">
+      <type name="line-speed"/>
+      <description>
+        <text>The actual line speed of this interface.</text>
+      </description>
+    </leaf>
+    <leaf name="connector">
+      <type name="enumeration">
+        <enum name="sc">
+          <value value="1"/>
+        </enum>
+        <enum name="style-1-copper">
+          <value value="2"/>
+        </enum>
+        <enum name="style-2-copper">
+          <value value="3"/>
+        </enum>
+        <enum name="bnc-tnc">
+          <value value="4"/>
+        </enum>
+        <enum name="coaxial">
+          <value value="5"/>
+        </enum>
+        <enum name="fiber-jack">
+          <value value="6"/>
+        </enum>
+        <enum name="lc">
+          <value value="7"/>
+        </enum>
+        <enum name="mt-rj">
+          <value value="8"/>
+        </enum>
+        <enum name="mu">
+          <value value="9"/>
+        </enum>
+        <enum name="sg">
+          <value value="10"/>
+        </enum>
+        <enum name="optical-pigtail">
+          <value value="11"/>
+        </enum>
+        <enum name="hssdc-ii">
+          <value value="12"/>
+        </enum>
+        <enum name="copper-pigtail">
+          <value value="13"/>
+        </enum>
+        <enum name="cat-5-copper-cable">
+          <value value="14"/>
+        </enum>
+        <enum name="unknown">
+          <value value="15"/>
+        </enum>
+      </type>
+      <description>
+        <text>This specifies the type of connector
+connected to the interface.</text>
+      </description>
+    </leaf>
+    <leaf name="encoding">
+      <type name="enumeration">
+        <enum name="rz">
+          <value value="1"/>
+        </enum>
+        <enum name="nrz">
+          <value value="2"/>
+        </enum>
+        <enum name="sonet">
+          <value value="3"/>
+        </enum>
+        <enum name="8b10b">
+          <value value="4"/>
+        </enum>
+        <enum name="64b66b">
+          <value value="5"/>
+        </enum>
+        <enum name="4b5b">
+          <value value="6"/>
+        </enum>
+        <enum name="manchester">
+          <value value="7"/>
+        </enum>
+        <enum name="ieee-802-3ab">
+          <value value="8"/>
+        </enum>
+        <enum name="unknown">
+          <value value="9"/>
+        </enum>
+      </type>
+      <description>
+        <text>This indicates the type of encoding used to
+transmit the data on this interface.</text>
+      </description>
+    </leaf>
+    <uses name="media-vendor-attr"/>
+  </grouping>
+  <rpc name="get-vlan-brief">
+    <description>
+      <text>This is a function that returns operational data for a 
+given vlan and enumeration of all the interfaces belonging 
+to this vlan. The vlan output records are fetched similar
+to the snmp get-next model. When no input is given to this
+rpc, first set of vlan output records will be fetched. If
+there are any more extra vlan output records that are there
+to be fetched, the flag has-more at the end of the output
+will be set to true and the next set of vlan records will
+have to be fetched by querying with the last-vlan-id, in
+get-next-request, as the input to this function, again.
+When a vlan-id is  given as an input argument in the 
+get-request case, only that corresponding vlan output 
+record, if exists, will be fetched.</text>
+    </description>
+    <input>
+      <choice name="request-type">
+        <case name="get-request">
+          <leaf name="vlan-id">
+            <type name="interface:vlan-type"/>
+            <description>
+              <text>This specifies vlan id for which this 
+function is invoked. This is optional 
+input, when not specified means 
+'all' vlans.</text>
+            </description>
+          </leaf>
+        </case>
+        <case name="get-next-request">
+          <leaf name="last-rcvd-vlan-id">
+            <type name="interface:vlan-type"/>
+            <description>
+              <text>This specifies the vlan-id, from which
+the next set of vlan output records are
+to be fetched.</text>
+            </description>
+          </leaf>
+        </case>
+      </choice>
+    </input>
+    <output>
+      <list name="vlan">
+        <key value="vlan-id"/>
+        <description>
+          <text>The list of vlans. Each row represents a vlan  and 
+its operational characteristics in the managed 
+device.</text>
+        </description>
+        <leaf name="vlan-id">
+          <type name="interface:vlan-type"/>
+          <description>
+            <text>This indicates the Vlan identifier of this
+vlan.</text>
+          </description>
+        </leaf>
+        <leaf name="vlan-type">
+          <type name="enumeration">
+            <enum name="fcoe">
+              <value value="1"/>
+              <description>
+                <text>FCOE vlan</text>
+              </description>
+            </enum>
+            <enum name="static">
+              <value value="2"/>
+              <description>
+                <text>Static vlan</text>
+              </description>
+            </enum>
+          </type>
+          <description>
+            <text>This indicates the type of the vlan. 
+The 'fcoe' value indicates that the vlan 
+corresponding to it is an FCOE vlan.
+The 'static' value indicates that the vlan 
+corresponding to it is a Static vlan.</text>
+          </description>
+        </leaf>
+        <leaf name="vlan-name">
+          <type name="string"/>
+          <description>
+            <text>The indicates administrative name of this 
+vlan.</text>
+          </description>
+        </leaf>
+        <leaf name="vlan-state">
+          <type name="enumeration">
+            <enum name="invalid">
+              <value value="1"/>
+              <description>
+                <text>The vlan is an invalid state</text>
+              </description>
+            </enum>
+            <enum name="suspend">
+              <value value="2"/>
+              <description>
+                <text>The vlan is inactive as there are no member ports</text>
+              </description>
+            </enum>
+            <enum name="active">
+              <value value="3"/>
+              <description>
+                <text>The vlan is in active state</text>
+              </description>
+            </enum>
+            <enum name="members-down">
+              <value value="4"/>
+              <description>
+                <text>The vlan is inactive as members are down</text>
+              </description>
+            </enum>
+          </type>
+          <description>
+            <text>This indicates the operational state of this 
+vlan.</text>
+          </description>
+        </leaf>
+        <list name="interface">
+          <key value="interface-type interface-name"/>
+          <uses name="interface:interface-name-info"/>
+          <description>
+            <text>This is a list of interfaces which form the 
+membership for this vlan. Each row represents 
+an interface (physical/logical) with relevant
+operational details.</text>
+          </description>
+          <leaf name="tag">
+            <type name="enumeration">
+              <enum name="untagged">
+                <value value="1"/>
+                <description>
+                  <text>This indicates that the interface
+is in access mode.</text>
+                </description>
+              </enum>
+              <enum name="tagged">
+                <value value="2"/>
+                <description>
+                  <text>This indicates that the interface
+is in trunk mode.</text>
+                </description>
+              </enum>
+              <enum name="converged">
+                <value value="3"/>
+                <description>
+                  <text>This indicates that the interface
+is in hybrid mode.</text>
+                </description>
+              </enum>
+            </type>
+          </leaf>
+        </list>
+      </list>
+      <leaf name="last-vlan-id">
+        <type name="interface:vlan-type"/>
+        <description>
+          <text>This specifies the last vlan record that has been 
+fetched.</text>
+        </description>
+      </leaf>
+      <leaf name="has-more">
+        <type name="boolean"/>
+        <description>
+          <text>This indicates whether there are more vlan
+records to fetch or not.</text>
+        </description>
+      </leaf>
+    </output>
+  </rpc>
+  <rpc name="get-interface-switchport">
+    <description>
+      <text>This is a function that returns switch-port/L2 
+characteristics of all the interfaces in the managed 
+device.</text>
+    </description>
+    <output>
+      <list name="switchport">
+        <key value="interface-type interface-name"/>
+        <uses name="interface:interface-name-info">
+          <description>
+            <text>Interface type and name.</text>
+          </description>
+        </uses>
+        <description>
+          <text>This is a list of all the switch-ports in the 
+managed device. Each row represents an L2 port 
+along with the operational characteristics.</text>
+        </description>
+        <leaf name="mode">
+          <type name="interface:switchport-mode-type"/>
+          <description>
+            <text>This indicates the mode of Layer2 interface.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-port-enabled">
+          <type name="boolean"/>
+          <description>
+            <text>This indicates if the FCoE capability is 
+enabled on this interface.
+                        
+The value of 'true' indicates that the port is 
+enabled for FCoE. The value of 'false' 
+indicates that the port is not enabled for 
+FCoE.</text>
+          </description>
+        </leaf>
+        <leaf name="ingress-filter-enabled">
+          <type name="boolean"/>
+          <description>
+            <text>This indicates if the 'Ingress filtering' is 
+enabled for this interface.
+                        
+The value of 'true' indicates that the port is 
+enabled for 'Ingress filtering'. The value of 
+'false' indicates that the port is not enabled 
+for 'Ingress filtering'.</text>
+          </description>
+        </leaf>
+        <leaf name="acceptable-frame-type">
+          <type name="enumeration">
+            <enum name="admit-all">
+              <value value="1"/>
+              <description>
+                <text>All frames are admitted.</text>
+              </description>
+            </enum>
+            <enum name="admit-only-vlan-tagged">
+              <value value="2"/>
+              <description>
+                <text>Only tagged vlans are allowed.</text>
+              </description>
+            </enum>
+          </type>
+          <description>
+            <text>This specifies the switch-port ingress 
+Frame admission policy - whether only tagged 
+Frames are allowed or all.</text>
+          </description>
+        </leaf>
+        <leaf name="default-vlan">
+          <type name="interface:vlan-type"/>
+          <description>
+            <text>This indicates the 'default vlan' identifier 
+value for this switch-port. If switch-port mode 
+as indicated by the value of the corresponding 
+instance of 'mode' is 'trunk', Native vlan is 
+returned. If switch-port mode is 'access', 
+default vlan is returned.</text>
+          </description>
+        </leaf>
+        <container name="active-vlans">
+          <description>
+            <text>A conceptual group indicating the active vlans
+for this switch-port interface.</text>
+          </description>
+          <leaf-list name="vlanid">
+            <type name="interface:vlan-type"/>
+            <description>
+              <text>This is a list of active vlan 
+identifiers.</text>
+            </description>
+          </leaf-list>
+        </container>
+        <container name="inactive-vlans">
+          <description>
+            <text>A conceptual group indicating the in-active 
+vlans for this switch-port interface.</text>
+          </description>
+          <leaf-list name="vlanid">
+            <type name="interface:vlan-type"/>
+            <description>
+              <text>This is a list in-active vlan 
+identifiers.</text>
+            </description>
+          </leaf-list>
+        </container>
+      </list>
+    </output>
+  </rpc>
+  <rpc name="get-ip-interface">
+    <description>
+      <text>This is a function that serves to return brief details 
+of all interfaces, loopback and VE interface details of  
+particular managed entity. Phy interface details of 
+particular managed entity cannot be given</text>
+    </description>
+    <input>
+      <choice name="request-type">
+        <case name="get-request">
+          <uses name="interface:interface-name-info">
+            <description>
+              <text>This specifies the interface for which
+this function is  invoked. This is 
+optional input, when not specified means
+'all' interfaces in the managed entity.</text>
+            </description>
+          </uses>
+          <leaf name="rbridge-id">
+            <mandatory value="false"/>
+            <type name="uint32">
+              <range value="1..255"/>
+            </type>
+          </leaf>
+        </case>
+      </choice>
+    </input>
+    <output>
+      <list name="interface">
+        <key value="interface-type interface-name"/>
+        <description>
+          <text>A list of interface entries. Each row represents
+management information applicable to a particular
+interface.</text>
+        </description>
+        <uses name="interface:interface-name-info"/>
+        <leaf name="if-name">
+          <type name="string"/>
+          <description>
+            <text>This indicates the interface display name as 
+in MIB-II's ifTable. However interface-name and
+interface-type values of this instance forms 
+fully qualified name for this interface.</text>
+          </description>
+        </leaf>
+        <list name="ip-address">
+          <key value="ipv4"/>
+          <description>
+            <text>This indicates whether IP address is primary/secondary
+and corresponding Broadcast IP</text>
+          </description>
+          <leaf name="ipv4">
+            <type name="string"/>
+            <description>
+              <text>A.B.C.D/M IP address in dotted decimal/Mask</text>
+            </description>
+          </leaf>
+          <leaf name="ipv4-type">
+            <mandatory value="false"/>
+            <type name="enumeration">
+              <enum name="primary">
+                <value value="1"/>
+                <description>
+                  <text>Primary IP address.</text>
+                </description>
+              </enum>
+              <enum name="secondary">
+                <value value="2"/>
+                <description>
+                  <text>Secondary IP address.</text>
+                </description>
+              </enum>
+            </type>
+          </leaf>
+          <leaf name="broadcast">
+            <mandatory value="false"/>
+            <type name="string"/>
+            <description>
+              <text>Broadcast IP address.</text>
+            </description>
+          </leaf>
+          <leaf name="ip-mtu">
+            <mandatory value="false"/>
+            <type name="interface:mtu-type"/>
+            <units name="Bytes"/>
+            <description>
+              <text>This specifies the IP MTU value of this 
+interface.</text>
+            </description>
+          </leaf>
+        </list>
+        <leaf name="if-state">
+          <type name="enumeration">
+            <enum name="unknown">
+              <value value="1"/>
+              <description>
+                <text>status cannot be determined for some 
+reason.</text>
+              </description>
+            </enum>
+            <enum name="up">
+              <value value="2"/>
+              <description>
+                <text>ready to pass packets.</text>
+              </description>
+            </enum>
+            <enum name="down">
+              <value value="3"/>
+              <description>
+                <text>down state.</text>
+              </description>
+            </enum>
+            <enum name="testing">
+              <value value="4"/>
+              <description>
+                <text>in a test mode.</text>
+              </description>
+            </enum>
+          </type>
+          <description>
+            <text>This indicates the current operational state
+of this interface. The 'testing' state 
+indicates that no operational packets can be
+passed. If 'shutdown' leaf of corresponding 
+interface instance of brocade-interface module
+is set, then 'if-state' should be 'down'. 
+If 'shutdown' is changed deleted, then 
+'if-state' should change to 'up' if the 
+interface is ready to transmit and receive 
+network traffic; it should remain in the 'down'
+state if and only if there is a fault that 
+prevents it from going to the 'up' state.</text>
+          </description>
+        </leaf>
+        <leaf name="line-protocol-state">
+          <type name="enumeration">
+            <enum name="unknown">
+              <value value="1"/>
+              <description>
+                <text>status cannot be determined for some
+reason.</text>
+              </description>
+            </enum>
+            <enum name="up">
+              <value value="2"/>
+              <description>
+                <text>Line protocol state up.</text>
+              </description>
+            </enum>
+            <enum name="down">
+              <value value="3"/>
+              <description>
+                <text>Line protocol state down.</text>
+              </description>
+            </enum>
+          </type>
+          <description>
+            <text>This indicates the 'Line protocol' state of
+this interface.</text>
+          </description>
+        </leaf>
+        <leaf name="proxy-arp">
+          <mandatory value="false"/>
+          <type name="string"/>
+          <description>
+            <text>This indicates the 'proxy-arp' state of the
+interface.</text>
+          </description>
+        </leaf>
+        <leaf name="vrf">
+          <mandatory value="false"/>
+          <type name="string"/>
+          <description>
+            <text>This indicates the 'vrf' of the interface.</text>
+          </description>
+        </leaf>
+      </list>
+      <leaf name="has-more">
+        <type name="boolean"/>
+        <description>
+          <text>Informs whether backend has more
+interfaces that are not part of 
+current response. Based on this
+flag remaining interfaces can be 
+fetched with another request</text>
+        </description>
+      </leaf>
+    </output>
+  </rpc>
+  <rpc name="get-interface-detail">
+    <description>
+      <text>This is a function that serves to return all the possible
+interfaces of the managed entity. This function can be used
+to discover basic characteristics of all the interfaces in
+the system. Each sub-layer below the internetwork-layer of
+a network interface is considered to be an interface.</text>
+    </description>
+    <reference>
+      <text>K. McCloghrie, 'The Interfaces Group MIB', RFC 2863, 
+June 2000.</text>
+    </reference>
+    <input>
+      <choice name="request-type">
+        <case name="get-request">
+          <uses name="interface:interface-name-info">
+            <description>
+              <text>This specifies the interface for which
+this function is  invoked. This is 
+optional input, when not specified means
+'all' interfaces in the managed entity.</text>
+            </description>
+          </uses>
+        </case>
+        <case name="get-next-request">
+          <container name="last-rcvd-interface">
+            <uses name="interface:interface-name-info">
+              <description>
+                <text>This specifies the last interface
+received in the preceeding request.
+Is an optional field for the first
+request. For subsequent requests
+this must be filled with the last 
+interface received in the
+preceding request.</text>
+              </description>
+            </uses>
+          </container>
+        </case>
+      </choice>
+    </input>
+    <output>
+      <list name="interface">
+        <key value="interface-type interface-name"/>
+        <description>
+          <text>A list of interface entries. Each row represents
+management information applicable to a particular
+interface.</text>
+        </description>
+        <uses name="interface:interface-name-info"/>
+        <leaf name="ifindex">
+          <type name="uint64"/>
+          <description>
+            <text>A unique value, greater than zero, for each
+interface.</text>
+          </description>
+        </leaf>
+        <leaf name="mtu">
+          <type name="interface:mtu-type"/>
+          <default value="2500"/>
+          <units name="Bytes"/>
+          <description>
+            <text>The size of the largest packet which can be 
+sent/received on the interface, specified in 
+octets. For interfaces that are used for
+transmitting network datagrams, this is the
+size of the largest network datagram that can 
+be sent on the interface.</text>
+          </description>
+        </leaf>
+        <leaf name="ip-mtu">
+          <type name="interface:mtu-type"/>
+          <units name="Bytes"/>
+          <description>
+            <text>This specifies the IP MTU value of this 
+interface.</text>
+          </description>
+        </leaf>
+        <leaf name="if-name">
+          <type name="string"/>
+          <description>
+            <text>This indicates the interface display name as 
+in MIB-II's ifTable. However interface-name and
+interface-type values of this instance forms 
+fully qualified name for this interface.</text>
+          </description>
+        </leaf>
+        <leaf name="if-state">
+          <type name="enumeration">
+            <enum name="unknown">
+              <value value="1"/>
+              <description>
+                <text>status cannot be determined for some 
+reason.</text>
+              </description>
+            </enum>
+            <enum name="up">
+              <value value="2"/>
+              <description>
+                <text>ready to pass packets.</text>
+              </description>
+            </enum>
+            <enum name="down">
+              <value value="3"/>
+              <description>
+                <text>down state.</text>
+              </description>
+            </enum>
+            <enum name="testing">
+              <value value="4"/>
+              <description>
+                <text>in a test mode.</text>
+              </description>
+            </enum>
+          </type>
+          <description>
+            <text>This indicates the current operational state
+of this interface. The 'testing' state 
+indicates that no operational packets can be
+passed. If 'shutdown' leaf of corresponding 
+interface instance of brocade-interface module
+is set, then 'if-state' should be 'down'. 
+If 'shutdown' is changed deleted, then 
+'if-state' should change to 'up' if the 
+interface is ready to transmit and receive 
+network traffic; it should remain in the 'down'
+state if and only if there is a fault that 
+prevents it from going to the 'up' state.</text>
+          </description>
+        </leaf>
+        <leaf name="line-protocol-state">
+          <type name="enumeration">
+            <enum name="unknown">
+              <value value="1"/>
+              <description>
+                <text>status cannot be determined for some
+reason.</text>
+              </description>
+            </enum>
+            <enum name="up">
+              <value value="2"/>
+              <description>
+                <text>Line protocol state up.</text>
+              </description>
+            </enum>
+            <enum name="down">
+              <value value="3"/>
+              <description>
+                <text>Line protocol state down.</text>
+              </description>
+            </enum>
+          </type>
+          <description>
+            <text>This indicates the 'Line protocol' state of
+this interface.</text>
+          </description>
+        </leaf>
+        <leaf name="line-protocol-state-info">
+          <type name="string"/>
+          <description>
+            <text>This indicates the reason for the current line
+protocol state of this interface.</text>
+          </description>
+        </leaf>
+        <leaf name="line-protocol-exception-info">
+          <type name="string"/>
+          <description>
+            <text>This indicates the 'Exception information' of 
+line protocol.</text>
+          </description>
+        </leaf>
+        <leaf name="hardware-type">
+          <type name="enumeration">
+            <enum name="unknown">
+              <value value="1"/>
+              <description>
+                <text>none of the other enumerations 
+defined.</text>
+              </description>
+            </enum>
+            <enum name="ethernet">
+              <value value="2"/>
+              <description>
+                <text>for all ethernet-like interfaces,
+regardless of speed, as per RFC3635.</text>
+              </description>
+            </enum>
+            <enum name="loopback">
+              <value value="3"/>
+              <description>
+                <text>loop back address.</text>
+              </description>
+            </enum>
+            <enum name="hdlc">
+              <value value="4"/>
+              <description>
+                <text>HDLC interface.</text>
+              </description>
+            </enum>
+            <enum name="ppp">
+              <value value="5"/>
+              <description>
+                <text>PPP interface.</text>
+              </description>
+            </enum>
+            <enum name="atm">
+              <value value="6"/>
+              <description>
+                <text>ATM interface.</text>
+              </description>
+            </enum>
+            <enum name="vlan">
+              <value value="7"/>
+              <description>
+                <text>Layer 2 Virtual LAN using 802.1Q.</text>
+              </description>
+            </enum>
+            <enum name="aggregate">
+              <value value="8"/>
+              <description>
+                <text>IEEE 802.3ad Link Aggregate.</text>
+              </description>
+            </enum>
+            <enum name="frame-relay">
+              <value value="9"/>
+              <description>
+                <text>Frame-relay.</text>
+              </description>
+            </enum>
+            <enum name="tunnel">
+              <value value="10"/>
+              <description>
+                <text>tunnel/encapsulation.</text>
+              </description>
+            </enum>
+          </type>
+          <description>
+            <text>This indicates the type of this interface.</text>
+          </description>
+        </leaf>
+        <leaf name="logical-hardware-address">
+          <type name="yang:mac-address"/>
+          <description>
+            <text>This indicates the address of this interface at
+its protocol sub-layer.</text>
+          </description>
+        </leaf>
+        <leaf name="current-hardware-address">
+          <type name="yang:mac-address"/>
+          <description>
+            <text>This indicates the address of this interface at
+its protocol sub-layer.</text>
+          </description>
+        </leaf>
+        <leaf name="media-type">
+          <type name="enumeration">
+            <enum name="unknown">
+              <value value="1"/>
+              <description>
+                <text>none of the other enumerations 
+defined.</text>
+              </description>
+            </enum>
+            <enum name="gbic">
+              <value value="2"/>
+              <description>
+                <text>GBIC.</text>
+              </description>
+            </enum>
+            <enum name="fixed">
+              <value value="3"/>
+              <description>
+                <text>Fixed.</text>
+              </description>
+            </enum>
+            <enum name="sfp">
+              <value value="4"/>
+              <description>
+                <text>SFP based.</text>
+              </description>
+            </enum>
+            <enum name="xfp">
+              <value value="5"/>
+              <description>
+                <text>XFP.</text>
+              </description>
+            </enum>
+            <enum name="xff">
+              <value value="6"/>
+              <description>
+                <text>XFF.</text>
+              </description>
+            </enum>
+            <enum name="xfp-e">
+              <value value="7"/>
+              <description>
+                <text>XFP-E.</text>
+              </description>
+            </enum>
+          </type>
+          <description>
+            <text>The specifies the type of the media plugged in
+for this interface.</text>
+          </description>
+        </leaf>
+        <leaf name="wavelength">
+          <type name="uint32"/>
+          <description>
+            <text>Wavelength of pluggable media</text>
+          </description>
+        </leaf>
+        <leaf name="if-description">
+          <type name="string"/>
+          <description>
+            <text>This specifies a textual string containing
+information about the interface.</text>
+          </description>
+        </leaf>
+        <leaf name="actual-line-speed">
+          <type name="string"/>
+          <description>
+            <text>The actual line speed of this interface.</text>
+          </description>
+        </leaf>
+        <leaf name="configured-line-speed">
+          <type name="line-speed"/>
+          <description>
+            <text>The administratively configured line speed of
+this interface. This should be same as what is
+returned by value of corresponding instance of
+'speed' of 'brocade-interface' module.</text>
+          </description>
+        </leaf>
+        <leaf name="line-duplex-state">
+          <type name="enumeration">
+            <enum name="unknown">
+              <value value="1"/>
+              <description>
+                <text>The state cannot be determined for
+some reason.</text>
+              </description>
+            </enum>
+            <enum name="half">
+              <value value="2"/>
+              <description>
+                <text>half-duplex mode.</text>
+              </description>
+            </enum>
+            <enum name="full">
+              <value value="3"/>
+              <description>
+                <text>full-duplex mode.</text>
+              </description>
+            </enum>
+          </type>
+          <description>
+            <text>This indicates the 'Line duplex state' of this
+interface.</text>
+          </description>
+        </leaf>
+        <leaf name="flow-control">
+          <type name="bits">
+            <bit name="received">
+              <position value="0"/>
+            </bit>
+            <bit name="transmitted">
+              <position value="1"/>
+            </bit>
+          </type>
+          <description>
+            <text>This indicates the 'Flow control' for this
+interface.</text>
+          </description>
+        </leaf>
+        <leaf name="queuing-strategy">
+          <type name="enumeration">
+            <enum name="fifo">
+              <value value="1"/>
+              <description>
+                <text>FIFO.</text>
+              </description>
+            </enum>
+          </type>
+          <description>
+            <text>This indicates the 'Queuing strategy' for 
+this interface.</text>
+          </description>
+        </leaf>
+        <leaf name="port-role">
+          <type name="enumeration">
+            <enum name="isl">
+              <value value="1"/>
+              <description>
+                <text>ISL port.</text>
+              </description>
+            </enum>
+            <enum name="edge">
+              <value value="2"/>
+              <description>
+                <text>Edge port.</text>
+              </description>
+            </enum>
+          </type>
+          <description>
+            <text>This indicates current that this interface is
+playing. This is applicable only for physical
+interfaces.</text>
+          </description>
+        </leaf>
+        <leaf name="port-mode">
+          <type name="enumeration">
+            <enum name="unknown">
+              <value value="0"/>
+              <description>
+                <text>Port mode is unknown</text>
+              </description>
+            </enum>
+            <enum name="l3">
+              <value value="1"/>
+              <description>
+                <text>Layer3.</text>
+              </description>
+            </enum>
+            <enum name="l2">
+              <value value="2"/>
+              <description>
+                <text>Layer2.</text>
+              </description>
+            </enum>
+            <enum name="mirror">
+              <value value="3"/>
+              <description>
+                <text>Port mode is 'mirror'.  Mirrored port
+can't be configured with L3/L2 
+configurations.</text>
+              </description>
+            </enum>
+          </type>
+          <description>
+            <text>This indicates operational mode of this 
+interface. This is applicable only for physical
+interfaces/port channel interfaces.</text>
+          </description>
+        </leaf>
+      </list>
+      <leaf name="has-more">
+        <type name="boolean"/>
+        <description>
+          <text>Informs whether backend has more
+interfaces that are not part of 
+current response. Based on this
+flag remaining interfaces can be 
+fetched with another request</text>
+        </description>
+      </leaf>
+    </output>
+  </rpc>
+  <rpc name="get-media-detail">
+    <description>
+      <text>This is a function that serves to return the media 
+properities of all the interfaces of the managed entity.</text>
+    </description>
+    <input>
+      <uses name="interface:interface-name-info">
+        <description>
+          <text>This specifies the interface for which this 
+function is  invoked. This is optional input, 
+when not specified means 'all' interfaces in the 
+managed entity.</text>
+        </description>
+      </uses>
+    </input>
+    <output>
+      <list name="interface">
+        <key value="interface-type interface-name"/>
+        <description>
+          <text>A list of interface entries. Each row represents
+management information applicable to a particular 
+interface.</text>
+        </description>
+        <uses name="interface:interface-name-info"/>
+        <choice name="interface-identifier">
+          <case name="sfp">
+            <container name="sfp">
+              <uses name="media-attr"/>
+              <uses name="sfp-attr"/>
+            </container>
+          </case>
+          <case name="on-board">
+            <container name="on-board">
+              <uses name="media-attr"/>
+            </container>
+          </case>
+          <case name="gbic">
+            <container name="gbc">
+              <uses name="media-vendor-attr"/>
+            </container>
+          </case>
+          <case name="xfp">
+            <container name="xfp">
+              <uses name="media-vendor-attr"/>
+            </container>
+          </case>
+          <case name="unknown">
+            <container name="unknown">
+              <uses name="media-vendor-attr"/>
+            </container>
+          </case>
+          <case name="qsfp">
+            <container name="qsfp">
+              <uses name="media-attr"/>
+              <uses name="sfp-attr"/>
+            </container>
+          </case>
+          <case name="qsfpp">
+            <container name="qsfpp">
+              <uses name="media-attr"/>
+              <uses name="sfp-attr"/>
+            </container>
+          </case>
+        </choice>
+      </list>
+    </output>
+  </rpc>
+</module>

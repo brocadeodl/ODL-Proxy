@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Feature Capabilities -->
+
+<ModuleResources ModuleName = "Capabilities" ComponentName = "CapabilitiesIds">
+	<ResourceEnum Name = "capability_t">
+        <Resource Name = "FEAT_CAPABILITY_INDEX">Do not remove this entry, This is used for indexing.</Resource>	
+		<Resource Name = "FEAT_CAPABILITY_POLICER">Policer Feature</Resource>
+		<Resource Name = "FEAT_CAPABILITY_LINECARD">Not available on pizza box platforms</Resource>
+		<Resource Name = "FEAT_CAPABILITY_STORMCONTROL">StormControl Feature</Resource>
+        <Resource Name = "MULTIPLE_ACL_ALLOWED_ON_A_PROFILED_PORT">Security Profile Validation</Resource>
+        <Resource Name = "FEAT_CAPABILITY_64_PORT_CHANNEL">64 Port-Channel for pizza box platforms</Resource>
+        <Resource Name = "FEAT_CAPABILITY_192_PORT_CHANNEL">192 Port-Channel for M4 platforms</Resource>
+        <Resource Name = "FEAT_CAPABILITY_384_PORT_CHANNEL">384 Port-Channel for M8 platforms</Resource>
+        <Resource Name = "FEAT_CAPABILITY_31_PVLAN_DOMAIN">max 31 pvlan domain for callisto</Resource>
+        <Resource Name = "FEAT_CAPABILITY_1000_PVLAN_DOMAIN">max 1000 pvlan domain for mercury</Resource>
+		<Resource Name = "FEAT_CAPABILITY_ACL_APPLIED_INTF_EGRESS">Apply ACL in egress</Resource>
+		<Resource Name = "EXTENDED_QOS_STATS_SHOW">Extended QOS Statistics Show</Resource>	
+		<Resource Name = "QOS_RED_PROFILE_CAPABILITY">QoS Red Profile support</Resource>
+		<Resource Name = "FEAT_CAPABILITY_MCAST_PIM_SUPPORT">Not available for Callisto platform</Resource>
+        <Resource Name = "POLICER_DEBUG_COMMANDS">Policer debug commands are not supported on the callisto platform</Resource>
+		<Resource Name = "PO_40G_SPEED_CAPABILITY">Not available for Callisto platforms</Resource>
+		<Resource Name = "PO_LOAD_BALANCE_CAPABILITY">Not available for Callisto platforms</Resource>
+		<Resource Name = "L3_SUPPORT_SA_MODE">Not available for Callisto and Carme platforms in SA mode</Resource>
+		<Resource Name = "QOS_SHOW_RCV_QUEUE_CAPABILITY">Support for show qos rcv queue</Resource>
+        <Resource Name = "QOS_RCV_QUEUE_MULTICAST_CAPABILITY">Support for qos rcv queue multicast capability</Resource>
+        <Resource Name = "QOS_SHOW_RCV_QUEUE_MULTICAST_CAPABILITY">Support for show qos rcv queue multicast</Resource>
+        <Resource Name = "QOS_RCV_QUEUE_PER_INTERFACE_CAPABILITY">Support for qos rcv queue per interface</Resource>
+		<Resource Name = "CHASSIS_FAN_AIRFLOW_DIRECTION">Not available on this platform</Resource>
+	    <Resource Name = "MULTI_VRF_CAPABILITY">Multi VRF support is not available on this platform</Resource>
+	    <Resource Name = "MULTI_VRF_CAPABILITY_MAX_8">Multi VRF support is not available on this platform</Resource>
+	    <Resource Name = "FEAT_CAPABILITY_RSPAN_SOURCE">RSPAN source is not supported on this platform</Resource>
+	    <Resource Name = "FEAT_CAPABILITY_SPAN_OVER_VCS_SOURCE">Span source is not supported on this platform</Resource>
+	<Resource Name = "FEAT_CAPABILITY_IGMP_SNOOPING_RESTRICT_UNKNOWN_MCAST">Not available for Callisto platform.</Resource>
+	<Resource Name = "FEAT_CAPABILITY_IGMP">Not available for Callisto platform.</Resource>
+	<Resource Name = "IPV6_RA_GUARD">Not available for Mercury platform.</Resource>
+    <Resource Name = "VRRP_CAPABILITY_MULTI_MODE">VRRP and VRRPE cannot be enabled simultaneously on this platform</Resource>
+        <Resource Name = "SFP_BREAKOUT_CAPABILITY">SFP Breakout capability is not supported on this platform</Resource>
+        <Resource Name = "GVLAN_CAPABILITY">GVlan capability is not supported on this platform.</Resource>
+	<Resource Name = "ROUTE_MAP_MATCH_ACL">Applying ACL match criteria on Route-Map is not supported on this platform</Resource>
+	</ResourceEnum>
+
+	
+</ModuleResources>

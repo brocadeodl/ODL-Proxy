@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the common Resource Ids for VCS & Non-VCS modes. -->
+
+<ModuleResources ModuleName = "VcsCommon" ComponentName = "Dcm">
+    
+    <ResourceEnum Name = "VcsModeErrorCodes">
+        <Resource Name = "VCS_MODE_FEATURE_NOT_SUPPORTED">%%Error: This feature is not supported in VCS mode.</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "StandaloneModeErrorCodes">
+        <Resource Name = "STANDALONE_MODE_FEATURE_NOT_SUPPORTED">%%Error: This feature is not supported in Standalone(Non-VCS) mode.</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "DceClusterUtils">
+        <Resource Name = "DCE_CLUSTER_UTIL_SUCCESS"> Success.</Resource>
+        <Resource Name = "DCE_CLUSTER_UTIL_INVALID_ARG"> %%Error: Cluster-utils received an invalid arg.</Resource>
+        <Resource Name = "DCE_CLUSTER_UTIL_ALLOC_FAILED"> %%Error: Cluster-utils failed to allocate memory.</Resource>
+        <Resource Name = "DCE_CLUSTER_UTIL_REC_NOT_FOUND"> %%Error: Cluster-utils failed to find record in the validation data.</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "VirtualIpErrorCode">
+        <Resource Name = "VIP_INVALID_ADDRESS">%%Error: Invalid address specified.</Resource>
+        <Resource Name = "VIP_DUPLICATE_HOST_IP">%%Error: Host is already in use.</Resource>
+        <Resource Name = "VIP_BIND_FAILED">%%Error: Could not bind the virtual ip address.</Resource>
+        <Resource Name = "VIP_UNBIND_FAILED">%%Error: Failed to unbind the virtual ip address.</Resource>
+        <Resource Name = "VIP_UNBIND_FAILED_FOR_UPDATE">%%Error: Failed to unbind the previously configured virtual ip address.</Resource>
+        <Resource Name = "VIP_QUERY_FAILED">Failed to query the virtual ip global managed object.</Resource>
+        <Resource Name = "VIP_DOES_NOT_EXIST">The virtual ip global managed object does not exist.</Resource>
+        <Resource Name = "VIP_MULTIPLE_EXIST">Multiple virtual ip global managed objects exist.</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "DcmdWyserEaGeneralErrors">
+        <Resource Name = "NODE_IS_NOT_READY">%%INFO : This command is not yet available. Please try again after sometime.</Resource>
+        <Resource Name = "CLUSTER_FORMATION_IS_IN_PROGRESS">Cluster formation is in progress. Please try after sometime.</Resource>
+        <Resource Name = "NODE_IS_ZEROIZED">Node Zeroized no commands will be processed. Please logout, switch might reboot.</Resource>
+        <Resource Name = "OPERATION_IS_NOT_SUPPORTED_IN_MC_MODE">%%Error: This operation is not supported in logical-chassis mode.</Resource>
+        <Resource Name = "UNAVAIL_IN_STANDBY_STATE">%%INFO : This command is not available in standby state.</Resource>
+        <Resource Name = "DUPLICATE_ALIAS_FOUND">%%ERROR : Similar Alias present in the database, Please create new alias.</Resource>
+        <Resource Name = "NO_ALIAS_FOUND">%%ERROR : No such alias found.</Resource>
+        <Resource Name = "NO_ALIAS_USER_FOUND">%%ERROR : No such User found.</Resource>
+        <Resource Name = "MAX_ALIAS_LIMIT">%%ERROR : Aliases reached its maximum limit of 4000. Please remove some aliases..</Resource>
+        <Resource Name = "MAX_USER_LIMIT">%%ERROR : Users reached its maximum limit of 4000.</Resource>
+        <Resource Name = "WAIT_FOR_WYSEREA_PHASE2_TIMED_OUT">Waiting for WyserEa start phase 2 timed out.</Resource>
+        <Resource Name = "WAIT_FOR_WYSEREA_PHASE2_COMPLETED">WyserEa start phase 2 completed.</Resource>
+        <Resource Name = "OPERATION_NOT_SUPPORTED_FROM_SECONDARY"> %%Error: This operation is not supported from a secondary node </Resource>
+        <Resource Name = "ISSU_IS_IN_PROGRESS">%%INFO : Chassis Firmware Upgrade is in progress. Please try after sometime.</Resource>
+        <Resource Name = "REPLACEMENT_SWITCH_MODEL_MISMATCH">%%ERROR : Replacement switch model is different from the switch being replaced. Please use a like model for a replacement switch.</Resource>
+        <Resource Name = "SWITCH_IN_FAULTY_STATE">%%ERROR : Switch is in faulty state.</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "VcsNodeSpecificErrors">
+        <Resource Name = "VCS_RBRIDGE_RBRIDGE_DOES_NOT_EXIST">%%Error: Rbridge does not exist.</Resource>
+        <Resource Name = "VCS_RBRIDGE_OPERATION_NOT_SUPPORTED">%%Error: Operation not supported.</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "DemoActionpointErrors">
+        <Resource Name = "DEMO_ACTIONPOINT_ERROR_NOT_DIVISIBLE">%%Error: Incorrect Value Specified : %1 is not divisible by  %2.</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "DcmConfigFilterContextTypes">
+        <Resource Name = "DCM_CONFIG_FILTER_CONTEXT_NONE">No config filter context.</Resource>
+        <Resource Name = "DCM_CONFIG_FILTER_CONTEXT_GLOBAL">Global managed object config filter context.</Resource>
+        <Resource Name = "DCM_CONFIG_FILTER_CONTEXT_LOCAL">Local managed object config filter context.</Resource>
+        <Resource Name = "DCM_CONFIG_FILTER_CONTEXT_RBRIDGE_LOCAL">Node specific Local managed object config filter context.</Resource>
+        <Resource Name = "DCM_CONFIG_FILTER_CONTEXT_RBRIDGE_GLOBAL">Node specific Global managed object config filter context.</Resource>     
+    </ResourceEnum>
+
+    <ResourceEnum Name = "DcmBypassCliValidationsTypes">
+        <Resource Name = "DCM_BYPASS_CLI_VALIDATIONS_TYPE_NONE">No CLI validations bypassed.</Resource>
+        <Resource Name = "DCM_BYPASS_CLI_VALIDATIONS_TYPE_ALL">All CLI validations bypassed.</Resource>
+        <Resource Name = "DCM_BYPASS_CLI_VALIDATIONS_TYPE_ACTIVATION">Activation CLI validation bypassed.</Resource>
+        <Resource Name = "DCM_BYPASS_CLI_VALIDATIONS_TYPE_POSTBOOT">Postboot CLI validation bypassed.</Resource>
+        <Resource Name = "DCM_BYPASS_CLI_VALIDATIONS_TYPE_CONFIG_REPLAY">Config replay CLI validation bypassed.</Resource>
+        <Resource Name = "DCM_BYPASS_CLI_VALIDATIONS_TYPE_CLUSTER_FORMATION">Cluster formation CLI validation bypassed.</Resource>
+        <Resource Name = "DCM_BYPASS_CLI_VALIDATIONS_TYPE_PRINCIPAL_ONLY">Principal only CLI validation bypassed.</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "DcmWyserEaGatewayTypes">
+        <Resource Name = "DCM_RESOURCE_NOT_FOUND">Resource not found.</Resource>
+        <Resource Name = "DCM_RESOURCE_FOUND">Resource found.</Resource>
+    </ResourceEnum>
+
+</ModuleResources>
+

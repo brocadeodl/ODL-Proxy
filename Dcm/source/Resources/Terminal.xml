@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Terminal Module. -->
+
+<ModuleResources ModuleName = "Terminal" ComponentName = "Wave">
+    <ResourceEnum Name = "TerminalReturnCodes">
+        <Resource Name = "IDLE_TIMEOUT">Warning: The modified value will be in effect from next Login</Resource>
+    </ResourceEnum>
+</ModuleResources>

@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for AAA Plugin -->
+
+<ModuleResources ModuleName = "AAA" ComponentName = "AAAResourceIds">
+	<ResourceEnum Name = "AAAGeneric">
+		<Resource Name = "AAA_UNKNOWN_ELEMENT">%% Error: Error processing parameters. Found unknown element.</Resource>
+		<Resource Name = "AAA_UNEXPECTED_OP">%% Error: Received unexpected operation</Resource>
+		<Resource Name = "AAA_NO_MEMORY">%% Error: FATAL: System out of memory</Resource>
+		<Resource Name = "AAA_GENERIC_ERROR">%% Error: System error. Operation failed.</Resource>
+		<Resource Name = "AAA_CUSTOM_ERROR">%% Error: %1</Resource>
+		<Resource Name = "AAA_INCONSISTENT_FS_ERROR">%% Error: Inconsistent user-database. Operation failed.</Resource>
+	</ResourceEnum>
+
+	<ResourceEnum Name = "UserConfiguration">
+		<Resource Name = "USER_MAX_LIMIT">%% Error: Maximum limit of 64 users has reached</Resource>
+		<Resource Name = "USER_INVALID_NAME">%% Error: Invalid user account name</Resource>
+		<Resource Name = "USER_NAME_RESERVED">%% Error: The user-name specified is reserved</Resource>
+		<Resource Name = "USER_NAME_ROLE_MATCH">%% Error: A user cannot have the name of an existing role.</Resource>
+		<Resource Name = "USER_INVALID_ROLE">%% Error: Invalid role</Resource>
+		<Resource Name = "USER_MANDATORY_ROLE">%% Error: User is not assigned a role</Resource>
+		<Resource Name = "USER_INVALID_DESC">%% Error: Invalid user account description</Resource>
+		<Resource Name = "USER_INVALID_PASSWORD">%% Error: Invalid user password</Resource>
+		<Resource Name = "USER_INVALID_ENCRYPTED_PASSWORD">%% Error: Invalid encrypted password. Please check the encryption-level.</Resource>
+		<Resource Name = "USER_INVALID_ENCRYPTION_LEVEL">%% Error: Password encryption level should be 0 or 7</Resource>
+		<Resource Name = "USER_ENCLEVEL_NO_PASS">%% Error: Password should be specified along with encryption level</Resource>
+		<Resource Name = "USER_DOESNT_EXIST">%% Error: User does not exist.</Resource>
+		<Resource Name = "USER_CHANGE_DEFAULT">%% Error: Default users cannot be changed</Resource>
+		<!-- <Resource Name = "USER_LAST_ADMIN_CHANGE">%% Error: Cannot change the last admin privilege account</Resource> -->
+		<Resource Name = "USER_DELETE_DEFAULT">%% Error: Default users cannot be deleted</Resource>
+		<Resource Name = "USER_SET_LOCK">%% Error: User account can only be unlocked when it is auto-locked by the system.</Resource>
+		<Resource Name = "USER_PASSWORD_ERROR">%% Error: Password should meet the criteria : %1</Resource>
+		<Resource Name = "USER_PASSWORD_PAM_ERROR">%% Error: Processing the password failed</Resource>
+		<Resource Name = "USER_ADD_ERROR">%% Error: Adding user failed</Resource>
+		<Resource Name = "USER_CHANGE_ERROR">%% Error: Changing user properties failed</Resource>
+		<Resource Name = "USER_DELETE_ERROR">%% Error: Deleting user failed</Resource>
+		<Resource Name = "USER_ADD_FS_ERROR">%% Error: Adding user to the file-system failed</Resource>
+		<Resource Name = "USER_ADD_DB_ERROR">%% Error: Adding user to the database failed</Resource>
+		<Resource Name = "USER_CHANGE_FS_ERROR">%% Error: Changing the user in the file-system failed</Resource>
+		<Resource Name = "USER_CHANGE_DB_ERROR">%% Error: Changing the user in the database failed</Resource>
+		<Resource Name = "USER_FS_DB_ERROR">%% Error: Building account database in the file-system failed</Resource>
+		<Resource Name = "USER_DELETE_FS_ERROR">%% Error: Deleting user from the file-system failed</Resource>
+		<Resource Name = "USER_DELETE_DB_ERROR">%% Error: Deleting user from the database failed</Resource>
+		<Resource Name = "USER_PASSWD_ENCDEC_ERROR">%% Error: Password Encryption/Decryption failed.</Resource>
+		<Resource Name = "USER_ADD_SUCCESS">User account is added successfully.</Resource>
+		<Resource Name = "USER_DELETE_SUCCESS">User account is deleted successfully.</Resource>
+		<Resource Name = "USER_CHANGE_SUCCESS">User account properties are changed successfully.</Resource>
+		<Resource Name = "USER_NO_ATTRIBUTES_CHANGED">Input same as existing configuration. User account unchanged.</Resource>
+		<Resource Name = "USER_DELETE_PARAM_ERROR">%% Error: Defaulting an attribute of the user is not supported</Resource>
+		<Resource Name = "USER_DELETE_BULK_ERROR">%% Error: Deleting all users in one transaction is not permitted</Resource>
+		<Resource Name = "USER_UNLOCK_ERROR">%% Error: Unlocking the user account failed</Resource>
+		<Resource Name = "USER_NOT_LOCKED_ERROR">%% Error: The user account is not locked currently. It cannot be unlocked!</Resource>
+		<Resource Name = "USER_UNLOCK_INVALID_MAPPED_ID">%% Error: rbridge-id is not valid</Resource>
+	</ResourceEnum>
+
+	<ResourceEnum Name = "RoleConfiguration">
+		<Resource Name = "ROLE_MAX_LIMIT">%% Error: Maximum limit of 64 roles has reached</Resource>
+		<Resource Name = "ROLE_NAME_RESERVED">%% Error: The role name specified is reserved</Resource>
+		<Resource Name = "ROLE_NAME_USER_MATCH">%% Error: A role cannot have the name of an existing user.</Resource>
+		<Resource Name = "ROLE_INVALID_NAME">%% Error: Invalid role name</Resource>
+		<Resource Name = "ROLE_INVALID_DESC">%% Error: Invalid role description</Resource>
+		<Resource Name = "ROLE_DOESNT_EXIST">%% Error: Role does not exist.</Resource>
+		<Resource Name = "ROLE_CHANGE_DEFAULT">%% Error: Default roles cannot be changed</Resource>
+		<Resource Name = "ROLE_DELETE_DEFAULT">%% Error: Default roles cannot be deleted</Resource>
+		<Resource Name = "ROLE_PRIMARY_USER_DELETE">%% Error: Role cannot be deleted if it is a primary role for a user.</Resource>
+		<Resource Name = "ROLE_ADD_ERROR">%% Error: Adding role failed</Resource>
+		<Resource Name = "ROLE_CHANGE_ERROR">%% Error: Changing role properties failed</Resource>
+		<Resource Name = "ROLE_DELETE_ERROR">%% Error: Deleting role failed</Resource>
+		<Resource Name = "ROLE_ADD_FS_ERROR">%% Error: Adding role to the FS failed</Resource>
+		<Resource Name = "ROLE_CHANGE_FS_ERROR">%% Error: Changing the role in the FS failed</Resource>
+		<Resource Name = "ROLE_DELETE_FS_ERROR">%% Error: Deleting role from the FS failed</Resource>
+		<Resource Name = "ROLE_DELETE_PARAM_ERROR">%% Error: Defaulting an attribute of the role is not supported</Resource>
+		<Resource Name = "ROLE_DELETE_BULK_ERROR">%% Error: Deleting all roles in one transaction is not permitted</Resource>
+		<Resource Name = "ROLE_ASSOCIATED_TO_RULE">%% Error: Role cannot be deleted if it is associated to a rule</Resource>
+		<Resource Name = "ROLE_ASSOCIATED_TO_LDAP">%% Error: Role cannot be deleted if it is mapped to Active Directory Group</Resource>
+	</ResourceEnum>
+
+	<ResourceEnum Name = "RBAC">
+		<Resource Name = "RULE_ADD_ERROR">%% Error: Adding rule failed</Resource>
+		<Resource Name = "RULE_MAX_LIMIT">%% Error: Maximum of 1024 rules can be configured</Resource>
+		<Resource Name = "RULE_CHANGE_ERROR">%% Error: Changing rule properties failed</Resource>
+		<Resource Name = "RULE_DEL_ERROR">%% Error: Deleting rule failed</Resource>
+		<Resource Name = "RULE_DOESNT_EXIST">%% Error: Rule does not exist</Resource>
+		<Resource Name = "RULE_CHANGE_PREDEFINED">%% Error: Pre-defined rules cannot be changed</Resource>
+		<Resource Name = "RULE_DELETE_PREDEFINED">%% Error: Pre-defined rules cannot be deleted</Resource>
+		<Resource Name = "RULE_MANDATORY_FIELDS">%% Error: role is mandatory</Resource>
+		<Resource Name = "RULE_INVALID_COMMAND">%% Error: Invalid Command</Resource>
+		<Resource Name = "RULE_DELETE_PARAM_ERROR">%% Error: Deletion of the Rule's fields are not allowed</Resource>
+		<Resource Name = "RULE_INDEX_INVALID">%% Error: Rule index is not in the valid range</Resource>
+		<Resource Name = "RULE_SET_PREDEFINED_ROLE">%% Error: Rules cannot be set for predefined roles</Resource>
+		<Resource Name = "AAA_CLEAN_CACHE_ERROR">%% Warning: Refreshing AAA cache failed. RBAC may not be enforced correctly for the latest AAA configuration changes.</Resource>
+	</ResourceEnum>
+
+	<ResourceEnum Name = "RadiusServer">
+		<Resource Name = "RADIUS_INVALID_HOST">%% Error: Invalid host name or IP address</Resource>
+		<Resource Name = "RADIUS_INVALID_PORT_NUMBER">%% Error: Invalid port number</Resource>
+		<Resource Name = "RADIUS_INVALID_PROTOCOL">%% Error: Invalid authentication protocol</Resource>
+		<Resource Name = "RADIUS_INVALID_KEY">%% Error: Invalid shared key</Resource>
+		<Resource Name = "RADIUS_INVALID_RETRANSMIT">%% Error: Invalid value for retransmit</Resource>
+		<Resource Name = "RADIUS_INVALID_TIMEOUT">%% Error: Invalid value for timeout</Resource>
+		<Resource Name = "RADIUS_INVALID_DEADTIME">%% Error: Invalid value for deadtime</Resource>
+		<Resource Name = "RADIUS_MSCHAP_V6_ERROR">%% Error: PEAP-MS-CHAP protocol is not supported for IPv6 Address</Resource>
+		<Resource Name = "RADIUS_SERVER_SET_SUCCESS">Changing global Radius settings is successful.</Resource>
+		<Resource Name = "RADIUS_SERVER_SET_ERROR">%% Error: Changing global Radius Server parameters failed.</Resource>
+		<Resource Name = "RADIUS_HOST_ADD_SUCCESS">Radius host is added to the system successful.</Resource>
+		<Resource Name = "RADIUS_HOST_ADD_ERROR">%% Error: Adding Radius host failed.</Resource>
+		<Resource Name = "RADIUS_HOST_CHANGE_SUCCESS">Radius host parameters are changed successful.</Resource>
+		<Resource Name = "RADIUS_HOST_DOESNT_EXIST">%% Error: Radius host does not exist.</Resource>
+		<Resource Name = "RADIUS_HOST_CHANGE_ERROR">%% Error: Changing Radius host configuration failed.</Resource>
+		<Resource Name = "RADIUS_HOST_DEL_SUCCESS">Radius host is removed from the database successful.</Resource>
+		<Resource Name = "RADIUS_HOST_DEL_ERROR">%% Error: Deleting Radius host failed.</Resource>
+		<Resource Name = "RADIUS_HOST_MAX_LIMIT">%% Error: Maximum of 5 Radius servers can be configured.</Resource>
+		<Resource Name = "RADIUS_HOST_LAST_AUTH_SERVER">%% Error: Cannot remove last server when Login Authentication source is RADIUS.</Resource>
+		<Resource Name = "RADIUS_HOST_DEL_PARAM_ERROR">%% Error: Defaulting an attribute of the radius host is not supported</Resource>
+		<Resource Name = "RADIUS_HOST_DEL_BULK_ERROR">%% Error: Deleting all radius servers in one transaction is not permitted</Resource>
+	</ResourceEnum>
+
+	<ResourceEnum Name = "TacacsServer">
+		<Resource Name = "TACACS_INVALID_HOST">%% Error: Invalid host name or IP address</Resource>
+		<Resource Name = "TACACS_INVALID_PORT_NUMBER">%% Error: Invalid port number</Resource>
+		<Resource Name = "TACACS_INVALID_PROTOCOL">%% Error: Invalid authentication protocol</Resource>
+		<Resource Name = "TACACS_INVALID_KEY">%% Error: Invalid shared key</Resource>
+		<Resource Name = "TACACS_INVALID_RETRIES">%% Error: Invalid value for retries</Resource>
+		<Resource Name = "TACACS_INVALID_TIMEOUT">%% Error: Invalid value for timeout</Resource>
+		<Resource Name = "TACACS_SERVER_SET_SUCCESS">Changing global Tacacs settings is successful.</Resource>
+		<Resource Name = "TACACS_SERVER_SET_ERROR">%% Error: Changing global Tacacs Server parameters failed.</Resource>
+		<Resource Name = "TACACS_HOST_ADD_SUCCESS">Tacacs host is added to the system successful.</Resource>
+		<Resource Name = "TACACS_HOST_ADD_ERROR">%% Error: Adding Tacacs host failed.</Resource>
+		<Resource Name = "TACACS_HOST_CHANGE_SUCCESS">Tacacs host parameters are changed successful.</Resource>
+		<Resource Name = "TACACS_HOST_DOESNT_EXIST">%% Error: Tacacs host does not exist.</Resource>
+		<Resource Name = "TACACS_HOST_CHANGE_ERROR">%% Error: Changing Tacacs host configuration failed.</Resource>
+		<Resource Name = "TACACS_HOST_DEL_SUCCESS">Tacacs host is removed from the database successful.</Resource>
+		<Resource Name = "TACACS_HOST_DELETE_ERROR">%% Error: Deleting Tacacs host failed.</Resource>
+		<Resource Name = "TACACS_HOST_BULK_DEL_ERR">%% Error: Bulk delete of tacacs+ servers is not allowed. Host should be specified.</Resource>
+		<Resource Name = "TACACS_HOST_LAST_AUTH_SERVER">%% Error: Cannot remove last server when Login Authentication source is TACACS+.</Resource>
+		<Resource Name = "TACACS_HOST_LAST_ACC_SERVER">%% Error: Cannot remove last server when Login or Command Accounting source is TACACS+.</Resource>
+		<Resource Name = "TACACS_HOST_DEL_PARAM_ERROR">%% Error: Defaulting an attribute of the tacacs host is not supported</Resource>
+		<Resource Name = "TACACS_HOST_MAX_LIMIT">%% Error: Maximum of 5 Tacacs servers can be configured.</Resource>
+		<Resource Name = "TACACS_HOST_DEL_BULK_ERROR">%% Error: Deleting all tacacs servers in one transaction is not permitted</Resource>
+	</ResourceEnum>
+
+	<ResourceEnum Name = "LDAPServer">
+		<Resource Name = "LDAP_INVALID_HOST">%% Error: Invalid host name or IP address</Resource>
+		<Resource Name = "LDAP_INVALID_PORT_NUMBER">%% Error: Invalid port number</Resource>
+		<Resource Name = "LDAP_INVALID_PROTOCOL">%% Error: Invalid authentication protocol</Resource>
+		<Resource Name = "LDAP_INVALID_KEY">%% Error: Invalid shared key</Resource>
+		<Resource Name = "LDAP_INVALID_RETRIES">%% Error: Invalid value for retries</Resource>
+		<Resource Name = "LDAP_INVALID_TIMEOUT">%% Error: Invalid value for timeout</Resource>
+		<Resource Name = "LDAP_SERVER_SET_SUCCESS">Changing global LDAP settings is successful.</Resource>
+		<Resource Name = "LDAP_SERVER_SET_ERROR">%% Error: Changing global LDAP Server parameters failed.</Resource>
+		<Resource Name = "LDAP_HOST_ADD_SUCCESS">LDAP host is added to the system successful.</Resource>
+		<Resource Name = "LDAP_HOST_ADD_ERROR">%% Error: Adding LDAP host failed.</Resource>
+		<Resource Name = "LDAP_HOST_CHANGE_SUCCESS">LDAP host parameters are changed successful.</Resource>
+		<Resource Name = "LDAP_HOST_DOESNT_EXIST">%% Error: LDAP host does not exist.</Resource>
+		<Resource Name = "LDAP_HOST_CHANGE_ERROR">%% Error: Changing LDAP host configuration failed.</Resource>
+		<Resource Name = "LDAP_HOST_DEL_SUCCESS">LDAP host is removed from the database successful.</Resource>
+		<Resource Name = "LDAP_HOST_DELETE_ERROR">%% Error: Deleting LDAP host failed.</Resource>
+		<Resource Name = "LDAP_HOST_BULK_DEL_ERR">%% Error: Bulk delete of LDAP servers is not allowed. Host should be specified.</Resource>
+		<Resource Name = "LDAP_HOST_LAST_AUTH_SERVER">%% Error: Cannot remove last server when Login Authentication source is LDAP.</Resource>
+		<Resource Name = "LDAP_HOST_DEL_PARAM_ERROR">%% Error: Defaulting an attribute of the LDAP host is not supported</Resource>
+		<Resource Name = "LDAP_HOST_MAX_LIMIT">%% Error: Maximum of 5 LDAP servers can be configured.</Resource>
+		<Resource Name = "LDAP_HOST_DEL_BULK_ERROR">%% Error: Deleting all LDAP servers in one transaction is not permitted</Resource>
+	</ResourceEnum>
+
+	<ResourceEnum Name = "MapRoleConfiguration">
+		<Resource Name = "MAPROLE_INVALID_ROLE">%% Error: Mapping AD group to Invalid switch role</Resource>
+		<Resource Name = "MAPROLE_INVALID_GROUP">%% Error: Mapping Invalid AD group to switch role</Resource>
+		<Resource Name = "MAPROLE_ADGROUP_DOESNT_EXIST">%% Error: AD Group does not exist.</Resource>
+		<Resource Name = "MAPROLE_ADD_ERROR">%% Error: Mapping from AD group to switch role failed</Resource>
+		<Resource Name = "MAPROLE_CHANGE_ERROR">%% Error: Changing mapped role failed</Resource>
+		<Resource Name = "MAPROLE_DELETE_ERROR">%% Error: Deleting the mapped role failed</Resource>
+		<Resource Name = "MAPROLE_ADD_FS_ERROR">%% Error: Mapping from AD group to switch role in the back end failed</Resource>
+		<Resource Name = "MAPROLE_ADD_FS_MAX_ERROR">%% Error: Exceeding maximum number of mappings from AD groups to roles</Resource>
+		<Resource Name = "MAPROLE_CHANGE_FS_ERROR">%% Error: Changing mapped role in the back end failed</Resource>
+		<Resource Name = "MAPROLE_DELETE_FS_ERROR">%% Error: Deleting the mapped role in the back end failed</Resource>
+		<Resource Name = "MAPROLE_ROOT_CANT_MAPPED">%% Error: Root role can't be mapped to AD groups</Resource>
+		<Resource Name = "MAPROLE_DELETE_PARAM_ERROR">%% Error: Defaulting the mapping of the AD groups is not supported</Resource>
+		<Resource Name = "MAPROLE_DELETE_BULK_ERROR">%% Error: Deleting the mapping of all groups in one transaction is not permitted</Resource>
+	</ResourceEnum>
+
+	<ResourceEnum Name = "LoginAuthSpecification">
+		<Resource Name = "AUTH_LOGIN_INVALID_MODE">%% Error: Invalid value for mode.</Resource>
+		<Resource Name = "AUTH_LOGIN_NO_SERVER">%% Error: No active AAA server configuration exists to support the mode.</Resource>
+		<Resource Name = "AUTH_LOGIN_NO_RADIUS">%% Error: No active RADIUS server configuration exists to support the mode.</Resource>
+		<Resource Name = "AUTH_LOGIN_NO_TACACS">%% Error: No active TACACS server configuration exists to support the mode.</Resource>
+		<Resource Name = "AUTH_LOGIN_NO_LDAP">%% Error: No active LDAP server configuration exists to support the mode.</Resource>
+		<Resource Name = "AUTH_LOGIN_PRIMARY_MANDATORY">%% Error: Specifying first source of AAA service is mandatory.</Resource>
+		<Resource Name = "AUTH_LOGIN_DEFAULT_SECONDARY">%% Error: Second source cannot be specified when 'default' is used.</Resource>
+		<Resource Name = "AUTH_LOGIN_MODE_SET_ERROR">%% Error: Changing Authentication Login mode failed.</Resource>
+		<Resource Name = "AUTH_LOGIN_MODE_SET_SUCCESS">Authentication Login mode is changed successfully.</Resource>
+	</ResourceEnum>
+
+	<ResourceEnum Name = "PasswordAttributes">
+		<Resource Name = "PASSWORD_ATTRIBS_SET_SUCCESS">Password attributes are changed successfully.</Resource>
+		<Resource Name = "PASSWORD_ATTRIBS_SET_ERROR">%% Error: Changing password attributes failed.</Resource>
+		<Resource Name = "PASSWORD_ATTRIBS_SET_FS_ERROR">%% Error: Changing password attributes in the file system failed.</Resource>
+		<Resource Name = "PASSWORD_ATTRIBS_MIN_LEN_RULE_ERR">%% Error: The total of the lower, upper, numeric and special characters parameter value must be less than or equal to min-length</Resource>
+		<Resource Name = "PASSWORD_ATTRIBS_UPPER_CASE_RULE_ERR">%% Error: Number of upper-case characters must be less than or equal to min-length</Resource>
+		<Resource Name = "PASSWORD_ATTRIBS_LOWER_CASE_RULE_ERR">%% Error: Number of lower-case characters must be less than or equal to min-length</Resource>
+		<Resource Name = "PASSWORD_ATTRIBS_NUMERICS_RULE_ERR">%% Error: Number of numerics characters must be less than or equal to min-length</Resource>
+		<Resource Name = "PASSWORD_ATTRIBS_SPL_CHARS_RULE_ERR">%% Error: Number of special characters must be less than or equal to min-length</Resource>
+	</ResourceEnum>
+
+	<ResourceEnum Name = "Banner">
+		<Resource Name = "BANNER_LOGIN_SET_SUCCESS">Login banner is set successfully.</Resource>
+		<Resource Name = "BANNER_SET_ERROR">%% Error: Setting banner failed.</Resource>
+		<Resource Name = "BANNER_SET_FS_ERROR">%% Error: Setting banner in the file system failed.</Resource>
+		<Resource Name = "BANNER_INVALID_LENGTH">%% Error: Length of the banner cannot be more than 2048 characters.</Resource>
+	</ResourceEnum>
+
+	<ResourceEnum Name = "TelnetServer">
+		<Resource Name = "TELNET_SERVER_CONFIG_SUCCESS">Telnet server configured successfully.</Resource>
+		<Resource Name = "TELNET_SERVER_CONFIG_ERROR">%% Error: Telnet server configuration failed.</Resource>
+		<Resource Name = "TELNET_SERVER_INVALID_MAPPED_ID">%% Error: rbridge-id is not valid</Resource>
+	</ResourceEnum>
+
+	<ResourceEnum Name = "SSHServer">
+		<Resource Name = "SSH_SERVER_CONFIG_SUCCESS">SSH Server configured successfully.</Resource>
+		<Resource Name = "SSH_SERVER_CONFIG_ERROR">%% Error: SSH Server configuration failed.</Resource>
+		<Resource Name = "SSH_SERVER_LIST_ADD_ERROR">%% Error: SSH Server key exchange add failed.</Resource>
+		<Resource Name = "SSH_SERVER_LIST_DELETE_ERROR">%% Error: SSH Server key exchange delete failed.</Resource>
+		<Resource Name = "SSH_SERVER_LIST_SHOW_ERROR">%% Error: SSH Server key exchange show failed.</Resource>
+		<Resource Name = "SSH_SERVER_INVALID_MAPPED_ID">%% Error: rbridge-id is not valid</Resource>
+	</ResourceEnum>
+
+	<ResourceEnum Name = "ShowUsers">
+		<Resource Name = "SHOWUSER_ROLE_ERR">%% Error: User role lookup error</Resource>
+		<Resource Name = "SHOWUSER_NO_MEM">%% Error: Memory allocation failed</Resource>
+		<Resource Name = "SHOWUSER_NO_ACCESS">%% Error: Access not available</Resource>
+		<Resource Name = "SHOWUSER_DB_ERROR">%% Error: Database error</Resource>
+		<Resource Name = "SHOWUSER_BACKEND_ERROR">%% Error: Backend error</Resource>
+	</ResourceEnum>
+
+	<ResourceEnum Name = "PasswordEncryption">
+		<Resource Name = "SERVICE_PASSWORD_ENCRYPTION_CHANGE_ERROR">%% Error: Changing Password Encryption configuration failed.</Resource>
+	</ResourceEnum>
+
+	<ResourceEnum Name = "IpAcl">
+		<Resource Name = "IP_ACL_DOESNT_EXIST">%% Error: Access control list does not exist.</Resource>
+		<Resource Name = "IP_ACL_RULE_DOESNT_EXIST">%% Error: ACL rule does not exist.</Resource>
+		<Resource Name = "IP_ACL_ADD_ERROR">%% Error: Adding the Access control list failed.</Resource>
+		<Resource Name = "IP_ACL_CHANGE_ERROR">%% Error: Adding the Access control list failed.</Resource>
+		<Resource Name = "IP_ACL_DEL_ERROR">%% Error: Deleting the Access control list failed.</Resource>
+		<Resource Name = "IP_ACL_NAME_EXISTS_ERROR">%% Error: Policy name already exists.</Resource>
+		<Resource Name = "IP_ACL_ENFORCED_POLICY_DEL_ERROR">%% Error: Enforced policy cannot be deleted.</Resource>
+		<Resource Name = "IP_ACL_RULES_EXIST_DEL_ERROR">%% Error: Policy contains rules.</Resource>
+		<Resource Name = "IP_ACL_INVALID_MGMT_INTF">%% Error: Invalid Management Interface.</Resource>
+		<Resource Name = "IP_ACL_INVALID_OPTION">%% Error: Invalid Option.</Resource>
+		<Resource Name = "IP_ACL_INTERNAL_ERROR">%% Error: Internal Error.</Resource>
+		<Resource Name = "IP_ACL_RULE_ADD_ERROR">%% Error: Adding the the Rule to the Access control list failed.</Resource>
+		<Resource Name = "IP_ACL_RULE_CHANGE_ERROR">%% Error: Modifying the existing ACL Rule is not supported.</Resource>
+		<Resource Name = "IP_ACL_RULE_DEL_ERROR">%% Error: Deleting the Rule to the Access control list failed.</Resource>
+		<Resource Name = "IP_ACL_DB_LOCKED">%% Error: IP ACL policy DB Locked.Please run the command after sometime.</Resource>
+		<Resource Name = "IP_ACL_INVALID_DESTPORT">%% Error: Invalid destination port.</Resource>
+		<Resource Name = "IP_ACL_INVALID_DESTPORT_RANGE">%% Error: Invalid destination port range.</Resource>
+	</ResourceEnum>
+
+	<ResourceEnum Name = "Certutil">
+		<Resource Name = "CERTUTIL_LDAPCA_IMPORT_SUCCESSFUL">%% Success: LDAP CA Certificate imported successfully.</Resource>
+		<Resource Name = "CERTUTIL_LDAPCA_IMPORT_FAILURE">%% Error: Importing LDAP CA certificate failed.</Resource>
+		<Resource Name = "CERTUTIL_LDAPCA_IMPORT_INTERNAL_ERROR">%% Error: Importing LDAP CA certificate failed due to internal error.</Resource>
+		<Resource Name = "CERTUTIL_LDAPCA_DELETE_SUCCESSFUL">%% Error: LDAP CA Certificate deleted successfully.</Resource>
+		<Resource Name = "CERTUTIL_LDAPCA_DELETE_FAILURE">%% Error: Deleting LDAP CA certificate failed.</Resource>
+		<Resource Name = "CERTUTIL_LDAPCA_DELETE_INTERNAL_ERROR">%% Error: Deleting LDAP CA certificate failed due to internal error.</Resource>
+        <Resource Name = "CERTUTIL_LDAPCA_NO_CERT">%% Error: LDAP CA certificate does not exist.</Resource>
+        <Resource Name = "CERTUTIL_LDAPCA_DELETE_OPERATION_CANCELLED">%% Error: Deleting LDAP CA certificate is canceled.</Resource>
+        <Resource Name = "CERTUTIL_LDAPCA_SHOW_SUCCESSFUL">%% Success: LDAPCA File exists and data returned.</Resource>
+        <Resource Name = "CERTUTIL_LDAPCA_SHOW_FAILURE">%% Error: LDAPCA Show file error.</Resource>
+        <Resource Name = "CERTUTIL_LDAPCA_SHOW_INTERNAL_ERROR">%% Error: LDAPCA Show file failed due to internal error.</Resource>
+		<Resource Name = "CERTUTIL_SYSLOGCA_IMPORT_SUCCESSFUL">%% Success: Syslog CA Certificate imported successfully.</Resource>
+		<Resource Name = "CERTUTIL_SYSLOGCA_IMPORT_FAILURE">%% Error: Importing syslog CA certificate failed.</Resource>
+		<Resource Name = "CERTUTIL_SYSLOGCA_IMPORT_CERT_EXIST">%% Error: Syslog CA certificate is already installed. Please delete existing certificate.</Resource>
+        <Resource Name = "CERTUTIL_SYSLOGCA_IMPORT_INVALID_FILE">%% Error: Only .pem formatted certificate files can be imported.</Resource>
+		<Resource Name = "CERTUTIL_SYSLOGCA_IMPORT_INTERNAL_ERROR">%% Error: Importing syslog CA certificate failed due to internal error.</Resource>
+		<Resource Name = "CERTUTIL_SYSLOGCA_DELETE_SUCCESSFUL">%% Error: Syslog CA Certificate deleted successfully.</Resource>
+		<Resource Name = "CERTUTIL_SYSLOGCA_DELETE_FAILURE">%% Error: Deleting syslog CA certificate failed.</Resource>
+		<Resource Name = "CERTUTIL_SYSLOGCA_DELETE_INTERNAL_ERROR">%% Error: Deleting syslog CA certificate failed due to internal error.</Resource>
+		<Resource Name = "CERTUTIL_SYSLOGCA_NO_CERT">%% Error: Syslog CA certificate does not exist.</Resource>
+		<Resource Name = "CERTUTIL_SYSLOGCA_DELETE_OPERATION_CANCELLED">%% Error: Deleting syslog CA certificate is cancelled.</Resource>
+		<Resource Name = "CERTUTIL_SYSLOGCA_SHOW_SUCCESSFUL">%% Success: Syslog CA File exists and data returned.</Resource>
+		<Resource Name = "CERTUTIL_SYSLOGCA_SHOW_FAILURE">%% Error: Syslog CA Show file error.</Resource>
+		<Resource Name = "CERTUTIL_SYSLOGCA_SHOW_INTERNAL_ERROR">%% Error: Syslog CA show file failed due to internal error.</Resource>
+		<Resource Name = "CERTUTIL_SSHKEY_IMPORT_SUCCESSFUL">%% Success: SSH public key file imported successfully.</Resource>
+		<Resource Name = "CERTUTIL_SSHKEY_IMPORT_FAILURE">%% Error: Importing SSH public key file failed.</Resource>
+		<Resource Name = "CERTUTIL_SSHKEY_IMPORT_INVALID_FILE">%% Error: Only .pub formatted SSH public key file can be imported.</Resource>
+		<Resource Name = "CERTUTIL_SSHKEY_IMPORT_DOWNLOAD_FAILURE">%% Error: SSH public key file download operation failed.  Please check download parameters.</Resource>
+		<Resource Name = "CERTUTIL_SSHKEY_IMPORT_INTERNAL_ERROR">%% Error: Importing SSH public key file failed due to internal error.</Resource>
+		<Resource Name = "CERTUTIL_SSHKEY_SHOW_SUCCESSFUL">%% Success: SSH public key file exists and data returned.</Resource>
+		<Resource Name = "CERTUTIL_SSHKEY_SHOW_FAILURE">%% Error: SSH public key file show error.</Resource>
+		<Resource Name = "CERTUTIL_SSHKEY_SHOW_INTERNAL_ERROR">%% Error: Show SSH public key file failed due to internal error.</Resource>
+		<Resource Name = "CERTUTIL_SSHKEY_DELETE_SUCCESSFUL">%% Error: SSH public key file deleted successfully.</Resource>
+		<Resource Name = "CERTUTIL_SSHKEY_DELETE_FAILURE">%% Error: Deleting SSH public key file failed.</Resource>
+		<Resource Name = "CERTUTIL_SSHKEY_DELETE_INTERNAL_ERROR">%% Error: Deleting SSH public key file failed due to internal error.</Resource>
+		<Resource Name = "CERTUTIL_SSHKEY_DELETE_OPERATION_CANCELLED">%% Error: SSH public key file delete operation is cancelled.</Resource>
+		<Resource Name = "CERTUTIL_SSHKEY_FILE_NOT_EXIST">%% Error: SSH public key file for the specified user does not exist.</Resource>
+		<Resource Name = "CERTUTIL_GENERATE_FCAPKEYCSR_SUCCESSFUL">%% Success: Generated FCAP keys and CSR successfully.</Resource>
+		<Resource Name = "CERTUTIL_GENERATE_FCAPKEYCSR_FAILURE">%% Error: Generate FCAP keys and CSR failed.</Resource>
+		<Resource Name = "CERTUTIL_GENERATE_FCAPKEYCSR_INTERNAL_ERROR">%% Error: Generate FCAP keys and CSR failed due to internal error.</Resource>
+		<Resource Name = "CERTUTIL_EXPORT_FCAP_SUCCESSFUL">%% Success: Export FCAP successfully.</Resource>
+		<Resource Name = "CERTUTIL_EXPORT_FCAP_FAILURE">%% Error: Export FCAP failed.</Resource>
+		<Resource Name = "CERTUTIL_EXPORT_FCAP_INTERNAL_ERROR">%% Error: Export FCAP failed due to internal error.</Resource>
+		<Resource Name = "CERTUTIL_EXPORT_MISSING_PARAM">%% Error: File to export not specified.</Resource>
+		<Resource Name = "CERTUTIL_IMPORT_FCAP_SUCCESSFUL">%% Success: Import FCAP certificate successfully.</Resource>
+		<Resource Name = "CERTUTIL_IMPORT_FCAP_FAILURE">%% Error: Import FCAP certificate failed.</Resource>
+		<Resource Name = "CERTUTIL_IMPORT_FCAP_INTERNAL_ERROR">%% Error: Import FCAP certificate failed due to internal error.</Resource>
+		<Resource Name = "CERTUTIL_IMPORT_MISSING_PARAM">%% Error: File to import not specified.</Resource>
+		<Resource Name = "CERTUTIL_DELETE_FCAPALL_SUCCESSFUL">%% Success: Deleted FCAP certificate files successfully.</Resource>
+		<Resource Name = "CERTUTIL_DELETE_FCAPALL_FAILURE">%% Error: Deleting FCAP certificate files failed.</Resource>
+		<Resource Name = "CERTUTIL_DELETE_FCAPALL_INTERNAL_ERROR">%% Error: Deleting FCAP certificate files failed due to internal error.</Resource>
+        <Resource Name = "CERTUTIL_DELETE_FCAPALL_OPERATION_CANCELLED">%% Error: Delete FCAP certificate files is canceled.</Resource>
+		<Resource Name = "CERTUTIL_DELETE_FCAPALL_NO_FILE">%% Error: No FCAP files to delete.</Resource>
+		<Resource Name = "CERTUTIL_DELETE_FCAPSWCERT_SUCCESSFUL">%% Success: Deleted FCAP switch certificate successfully.</Resource>
+		<Resource Name = "CERTUTIL_DELETE_FCAPSWCERT_FAILURE">%% Error: Deleting FCAP switch certificate failed.</Resource>
+		<Resource Name = "CERTUTIL_DELETE_FCAPSWCERT_INTERNAL_ERROR">%% Error: Deleting FCAP switch certificate failed due to internal error.</Resource>
+		<Resource Name = "CERTUTIL_DELETE_FCAPSWCERT_NO_FILE">%% Error: No FCAP switch certificate file to delete.</Resource>
+		<Resource Name = "CERTUTIL_DELETE_FCAPCACERT_SUCCESSFUL">%% Success: Deleted FCAP CA root certificate successfully.</Resource>
+		<Resource Name = "CERTUTIL_DELETE_FCAPCACERT_FAILURE">%% Error: Deleting FCAP CA root certificate failed.</Resource>
+		<Resource Name = "CERTUTIL_DELETE_FCAPCACERT_INTERNAL_ERROR">%% Error: Deleting FCAP CA root certificate failed due to internal error.</Resource>
+		<Resource Name = "CERTUTIL_DELETE_FCAPCACERT_NO_FILE">%% Error: No FCAP CA root certificate file to delete.</Resource>
+		<Resource Name = "CERTUTIL_DELETE_MISSING_PARAM">%% Error: Target of deletion not specified.</Resource>
+		<Resource Name = "CERTUTIL_DELETE_INPUT_ERROR">%% Error: Cannot confirm delete.</Resource>
+		<Resource Name = "CERTUTIL_DELETE_OPERATION_CANCELLED">%% Error: FCAP deletion operation cancelled.</Resource>
+		<Resource Name = "CERTUTIL_SHOW_FCAPALL_SUCCESSFUL">%% Success: Show FCAP certificate files completed successfully.</Resource>
+		<Resource Name = "CERTUTIL_SHOW_FCAPALL_FAILURE">%% Error: Show FCAP certificate files failed.</Resource>
+		<Resource Name = "CERTUTIL_SHOW_FCAPALL_INTERNAL_ERROR">%% Error: Show FCAP certificate files failed due to internal error.</Resource>
+        <Resource Name = "CERTUTIL_SHOW_FCAPALL_OPERATION_CANCELLED">%% Error: Show FCAP certificate files is canceled.</Resource>
+		<Resource Name = "CERTUTIL_SHOW_FCAPSWCERT_SUCCESSFUL">%% Success: Show FCAP switch certificate completed successfully.</Resource>
+		<Resource Name = "CERTUTIL_SHOW_FCAPSWCERT_FAILURE">%% Error: Show FCAP switch certificate failed.</Resource>
+		<Resource Name = "CERTUTIL_SHOW_FCAPSWCERT_INTERNAL_ERROR">%% Error: Show FCAP switch certificate failed due to internal error.</Resource>
+		<Resource Name = "CERTUTIL_SHOW_FCAPSWCERT_NO_FILE">%% Error: No FCAP switch certificate file to show.</Resource>
+		<Resource Name = "CERTUTIL_SHOW_FCAPCACERT_SUCCESSFUL">%% Success: Show FCAP CA root certificate completed successfully.</Resource>
+		<Resource Name = "CERTUTIL_SHOW_FCAPCACERT_FAILURE">%% Error: Show FCAP CA root certificate failed.</Resource>
+		<Resource Name = "CERTUTIL_SHOW_FCAPCACERT_INTERNAL_ERROR">%% Error: Show FCAP CA root certificate failed due to internal error.</Resource>
+		<Resource Name = "CERTUTIL_SHOW_FCAPCACERT_NO_FILE">%% Error: No FCAP CA certificate file to show.</Resource>
+		<Resource Name = "CERTUTIL_SHOW_MISSING_PARAM">%% Error: Target of show not specified.</Resource>
+		<Resource Name = "CERTUTIL_UNKNOWN_COMMAND">%% Error: Unknown certificate operation.</Resource>
+		<Resource Name = "CERTUTIL_PASSWORD_INTERNAL_ERROR">%% Error: Unable to retrieve password.</Resource>
+		<Resource Name = "CERTUTIL_INVALID_MAPPED_ID">%% Error: rbridge-id is not valid</Resource>
+	</ResourceEnum>
+	<ResourceEnum Name = "Accounting">
+        <Resource Name = "ACC_LOGIN_ENABLE_SUCCESS">Login Accounting is enabled successfully.</Resource>
+        <Resource Name = "ACC_LOGIN_ENABLE_ERROR">%% Error: Enabling Login Accounting failed.</Resource>
+        <Resource Name = "ACC_CMD_ENABLE_SUCCESS">Command Accounting is enabled successfully.</Resource>
+        <Resource Name = "ACC_CMD_ENABLE_ERROR">%% Error: Enabling Command Accounting failed.</Resource>
+        <Resource Name = "ACC_UNKNOWN_ACCOUNT_TYPE">%% Error: Unknown Accounting type.</Resource>
+        <Resource Name = "ACC_UNKNOWN_ERROR">%% Error: Unknown Error.</Resource>
+        <Resource Name = "ACC_NO_TACACS_SERVER">%% Error: No active TACACS server configuration exists to support accounting.</Resource>
+    </ResourceEnum>
+	<ResourceEnum Name = "ClearSessions">
+        <Resource Name = "CLEAR_SESSIONS_OPERATION_CANCELLED">%% Error: Clear sessions operation is cancelled</Resource>
+		<Resource Name = "CLEAR_SESSIONS_INVALID_MAPPED_ID">%% Error: rbridge-id is not valid</Resource>
+		<Resource Name = "CLEAR_SESSIONS_SUCCESSFUL">%% Success: Clear Sessions is successful</Resource>
+		<Resource Name = "CLEAR_SESSIONS_FAILED">%% Success: Clear sessions failed</Resource>
+		<Resource Name = "CLEAR_SESSIONS_INTERNAL_ERROR">%% Error: Clear sessions failed due to internal error</Resource>
+    </ResourceEnum>
+</ModuleResources>

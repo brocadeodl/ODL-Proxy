@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-system-monitor"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:system-monitor="urn:brocade.com:mgmt:brocade-system-monitor"
+        xmlns:rbridge="urn:brocade.com:mgmt:brocade-rbridge"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types">
+  <namespace uri="urn:brocade.com:mgmt:brocade-system-monitor"/>
+  <prefix value="system-monitor"/>
+  <import module="brocade-rbridge">
+    <prefix value="rbridge"/>
+  </import>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Address :  120 Holger Way
+           San Jose, CA 95134
+           U.S.A
+Phone    :  +1-408-333-8000
+E-mail   :  support@brocade.com
+Website  :  www.brocade.com</text>
+  </contact>
+  <description>
+    <text>Data Model for Brocade's System Monitor configuration CLIs</text>
+  </description>
+  <revision date="2011-11-16">
+    <description>
+      <text>Addition of all FRUs</text>
+    </description>
+  </revision>
+  <revision date="2011-04-29">
+    <description>
+      <text>Initial modelling of Yang</text>
+    </description>
+  </revision>
+  <typedef name="supported-state">
+    <type name="bits">
+      <bit name="removed">
+        <position value="0"/>
+      </bit>
+      <bit name="inserted">
+        <position value="1"/>
+      </bit>
+      <bit name="on">
+        <position value="2"/>
+      </bit>
+      <bit name="faulty">
+        <position value="4"/>
+      </bit>
+      <bit name="none">
+        <position value="5"/>
+      </bit>
+      <bit name="all">
+        <position value="6"/>
+      </bit>
+    </type>
+  </typedef>
+  <typedef name="sfp-supported-state">
+    <type name="bits">
+      <bit name="removed">
+        <position value="0"/>
+      </bit>
+      <bit name="inserted">
+        <position value="1"/>
+      </bit>
+      <bit name="faulty">
+        <position value="4"/>
+      </bit>
+      <bit name="none">
+        <position value="5"/>
+      </bit>
+      <bit name="all">
+        <position value="6"/>
+      </bit>
+    </type>
+  </typedef>
+  <typedef name="supported-actions">
+    <type name="bits">
+      <bit name="none">
+        <position value="0"/>
+      </bit>
+      <bit name="all">
+        <position value="1"/>
+      </bit>
+      <bit name="email">
+        <position value="2"/>
+      </bit>
+      <bit name="raslog">
+        <position value="3"/>
+      </bit>
+    </type>
+  </typedef>
+  <grouping name="system-monitor-group">
+    <container name="fan">
+      <container name="threshold">
+        <leaf name="marginal-threshold">
+          <type name="uint32"/>
+        </leaf>
+        <leaf name="down-threshold">
+          <type name="uint32"/>
+        </leaf>
+      </container>
+      <container name="alert">
+        <leaf name="state">
+          <type name="supported-state"/>
+        </leaf>
+        <leaf name="action">
+          <type name="supported-actions"/>
+        </leaf>
+      </container>
+    </container>
+    <container name="power">
+      <container name="threshold">
+        <leaf name="marginal-threshold">
+          <type name="uint32"/>
+        </leaf>
+        <leaf name="down-threshold">
+          <type name="uint32"/>
+        </leaf>
+      </container>
+      <container name="alert">
+        <leaf name="state">
+          <type name="supported-state"/>
+        </leaf>
+        <leaf name="action">
+          <type name="supported-actions"/>
+        </leaf>
+      </container>
+    </container>
+    <container name="temp">
+      <container name="threshold">
+        <leaf name="marginal-threshold">
+          <type name="uint32"/>
+        </leaf>
+        <leaf name="down-threshold">
+          <type name="uint32"/>
+        </leaf>
+      </container>
+    </container>
+    <container name="cid-card">
+      <container name="threshold">
+        <leaf name="marginal-threshold">
+          <type name="uint32"/>
+        </leaf>
+        <leaf name="down-threshold">
+          <type name="uint32"/>
+        </leaf>
+      </container>
+      <container name="alert">
+        <leaf name="state">
+          <type name="supported-state"/>
+        </leaf>
+        <leaf name="action">
+          <type name="supported-actions"/>
+        </leaf>
+      </container>
+    </container>
+    <container name="sfp">
+      <container name="alert">
+        <leaf name="state">
+          <type name="sfp-supported-state"/>
+        </leaf>
+        <leaf name="action">
+          <type name="supported-actions"/>
+        </leaf>
+      </container>
+    </container>
+    <container name="compact-flash">
+      <container name="threshold">
+        <leaf name="marginal-threshold">
+          <type name="uint32"/>
+        </leaf>
+        <leaf name="down-threshold">
+          <type name="uint32"/>
+        </leaf>
+      </container>
+    </container>
+    <container name="MM">
+      <container name="threshold">
+        <leaf name="marginal-threshold">
+          <type name="uint32"/>
+        </leaf>
+        <leaf name="down-threshold">
+          <type name="uint32"/>
+        </leaf>
+      </container>
+    </container>
+    <container name="LineCard">
+      <container name="threshold">
+        <leaf name="marginal-threshold">
+          <type name="uint32"/>
+        </leaf>
+        <leaf name="down-threshold">
+          <type name="uint32"/>
+        </leaf>
+      </container>
+      <container name="alert">
+        <leaf name="state">
+          <type name="supported-state"/>
+        </leaf>
+        <leaf name="action">
+          <type name="supported-actions"/>
+        </leaf>
+      </container>
+    </container>
+    <container name="SFM">
+      <container name="threshold">
+        <leaf name="marginal-threshold">
+          <type name="uint32"/>
+        </leaf>
+        <leaf name="down-threshold">
+          <type name="uint32"/>
+        </leaf>
+      </container>
+    </container>
+  </grouping>
+  <augment target-node="/rbridge:rbridge-id">
+    <container name="system-monitor">
+      <uses name="system-monitor-group"/>
+    </container>
+  </augment>
+  <container name="system-monitor">
+    <uses name="system-monitor-group"/>
+  </container>
+  <container name="system-monitor-mail">
+    <container name="fru">
+      <leaf name="enable">
+        <type name="empty"/>
+      </leaf>
+      <list name="email-list">
+        <key value="email"/>
+        <max-elements value="5"/>
+        <leaf name="email">
+          <type name="string"/>
+        </leaf>
+      </list>
+    </container>
+    <container name="sfp">
+      <leaf name="enable">
+        <type name="empty"/>
+      </leaf>
+      <list name="email-list">
+        <key value="email"/>
+        <max-elements value="5"/>
+        <leaf name="email">
+          <type name="string"/>
+        </leaf>
+      </list>
+    </container>
+    <container name="security">
+      <leaf name="enable">
+        <type name="empty"/>
+      </leaf>
+      <list name="email-list">
+        <key value="email"/>
+        <max-elements value="5"/>
+        <leaf name="email">
+          <type name="string"/>
+        </leaf>
+      </list>
+    </container>
+    <container name="interface">
+      <leaf name="enable">
+        <type name="empty"/>
+      </leaf>
+      <list name="email-list">
+        <key value="email"/>
+        <max-elements value="5"/>
+        <leaf name="email">
+          <type name="string"/>
+        </leaf>
+      </list>
+    </container>
+    <list name="relay">
+      <max-elements value="1"/>
+      <key value="host-ip"/>
+      <leaf name="host-ip">
+        <type name="inet:host"/>
+      </leaf>
+      <leaf name="domain-name">
+        <type name="string">
+          <length value="0 .. 64">
+            <error-message>
+              <value>Domain name should be
+in the range 0-64</value>
+            </error-message>
+          </length>
+        </type>
+        <default value=""/>
+      </leaf>
+    </list>
+  </container>
+</module>

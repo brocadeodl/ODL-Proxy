@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<WavePlugin name="Beacon" namespace="DcmNs">
+	<Local name="Beacon">
+        <Message name="BeaconService" sequencerType="SYNC" allowPreemption="FALSE">
+                <Member name="cmdId"     dataType="UI32"> </Member>
+                <Member name="if"     dataType="string"> </Member>
+                <Member name="msgStatus" dataType="string"> </Member>
+	    </Message>
+	</Local>
+</WavePlugin>

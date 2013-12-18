@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<WavePlugin name="OSPF" nameSpace="DcmNs"> 
+<Global name="OSPF">
+	<Worker name="OSPFGlobalConf">
+        <Message name="InterfaceGlobal" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="opCode" dataType="UI8">
+            </Member>
+            <Member name="cmdCode" dataType="UI8">
+            </Member>
+            <Member name="areaId" dataType="IpV4Address">
+            </Member>
+			<Member name="HelloInterval" dataType="UI32">
+			</Member>
+			<Member name="RouterDeadInterval" dataType="UI32">
+			</Member>
+			<Member name="RetransmitInterval" dataType="UI32">
+			</Member>
+			<Member name="TransDelay" dataType="UI32">
+			</Member>
+			<Member name="Cost" dataType="UI32">
+			</Member>
+			<Member name="Priority" dataType="UI32">
+			</Member>
+			<Member name="AuthType" dataType="UI32">
+			</Member>
+			<Member name="EncryptionType" dataType="UI32">
+			</Member>
+			<Member name="AuthKey" dataType="string">
+			</Member>
+			<Member name="AuthChangeWaitTime" dataType="UI32">
+			</Member>
+			<Member name="MD5KeyId" dataType="UI32">
+			</Member>
+			<Member name="MD5Key" dataType="UI32">
+			</Member>
+			<Member name="FilterAll" dataType="bool">
+			</Member>
+			<Member name="FilterAllExternal" dataType="bool">
+			</Member>
+			<Member name="FilterAllSummaryExternal" dataType="bool">
+			</Member>
+			<Member name="AllowDefault" dataType="bool">
+			</Member>
+			<Member name="AllowType4" dataType="bool">
+			</Member>
+			<Member name="NetworkType" dataType="UI32">
+			</Member>
+        </Message>
+
+        <Message name="RouterConfigGlobal" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="opCode" dataType="UI8" >
+            </Member>
+            <Member name="cmdCode" dataType="UI8" >
+            </Member>
+            <Member name="idAddress" dataType="IpV4Address">
+			</Member>
+            <Member name="idNumber" dataType="UI32">
+			</Member>
+            <Member name="isNSSA" dataType="bool">
+			</Member>
+            <Member name="NSSAMetric" dataType="UI32">
+			</Member>
+            <Member name="rangeAddress" dataType="IpV4Address">
+			</Member>
+            <Member name="rangeMask" dataType="IpV4Address">
+			</Member>
+            <Member name="rangeAdvertise" dataType="bool">
+	        </Member>
+            <Member name="StubMetric" dataType="UI32">
+			</Member>
+            <Member name="virtualLinkRouterId" dataType="IpV4Address">
+			</Member>
+			<Member name="virtualLinkHelloInterval" dataType="UI32">
+			</Member>
+			<Member name="virtualLinkRouterDeadInterval" dataType="UI32">
+			</Member>
+			<Member name="virtualLinkRetransmitInterval" dataType="UI32">
+			</Member>
+			<Member name="virtualLinkTransDelay" dataType="UI32">
+			</Member>
+			<Member name="virtualLinkAuthType" dataType="UI32">
+			</Member>
+			<Member name="virtualLinkEncryptionType" dataType="UI32">
+			</Member>
+			<Member name="virtualLinkAuthKey" dataType="string">
+			</Member>
+			<Member name="virtualLinkMD5KeyActWaitTime" dataType="UI32">
+			</Member>
+			<Member name="virtualLinkMD5KeyId" dataType="UI32">
+			</Member>
+			<Member name="virtualLinkMD5Key" dataType="UI32">
+			</Member>
+            <Member name="referenceBandwidth" dataType="UI32">
+			</Member>
+            <Member name="databaseOverflowInterval" dataType="UI32">
+			</Member>
+            <Member name="defInfoOrigMetric" dataType="UI32">
+			</Member>
+            <Member name="defInfoOrigMetricType" dataType="UI8">  <!--this should be enum-->
+			</Member>
+			<Member name="defaultMetric" dataType="UI32">
+			</Member>
+            <Member name="extMetricType" dataType="UI8">   <!--this should be enum-->
+			</Member>
+			<Member name="distanceExternal" dataType="UI32">
+			</Member>
+			<Member name="distanceInterArea" dataType="UI32">
+			</Member>
+			<Member name="distanceIntraArea" dataType="UI32">
+			</Member>
+			<Member name="routeMap" dataType="string">
+			</Member>
+			<Member name="domainId" dataType="UI32">
+			</Member>
+			<Member name="domainTag" dataType="UI32">
+			</Member>
+			<Member name="extLSDBLimit" dataType="UI32">
+			</Member>
+			<Member name="gracefulRestartHelper" dataType="bool">
+			</Member>
+			<Member name="gracefulRestartNotifyTime" dataType="UI32">
+			</Member>
+			<Member name="gracefulRestartRestartTime" dataType="UI32">
+			</Member>
+			<Member name="neighborAddress" dataType="IpV4Address">
+			</Member>
+			<Member name="summaryAddress" dataType="IpV4Address">
+			</Member>
+			<Member name="summaryMask" dataType="IpV4Address">
+			</Member>
+			<Member name="redistributeIndex" dataType="UI32">
+			</Member>
+			<Member name="redistributeAll" dataType="bool">
+			</Member>
+			<Member name="redistributeConnected" dataType="bool">
+			</Member>
+			<Member name="redistributeConnectedRouteMap" dataType="string">
+			</Member>
+			<Member name="redistributeRip" dataType="bool">
+			</Member>
+			<Member name="redistributeRipRouteMap" dataType="string">
+			</Member>
+			<Member name="redistributeStatic" dataType="bool">
+			</Member>
+			<Member name="redistributeStaticRouteMap" dataType="string">
+			</Member>
+			<Member name="redistributeSubNet" dataType="IpV4Address">
+			</Member>
+			<Member name="redistributeMask" dataType="IpV4Address">
+			</Member>
+			<Member name="redistributeMatchMetric" dataType="UI32">
+			</Member>
+        </Message>
+
+	</Worker>
+</Global>
+<Local name="OSPF">
+    <Worker name="OSPFLocalConf">
+        <ManagedObject name="OSPFNeighborIPAddress">
+             <Member name="neighborAddress" dataType="IpV4Address">
+			 </Member>
+		</ManagedObject>
+
+        <ManagedObject name="OSPFSummaryAddress">
+             <Member name="summaryAddress" dataType="IpV4Address">
+			 </Member>
+             <Member name="summaryMask" dataType="IpV4Address">
+			 </Member>
+		</ManagedObject>
+
+        <ManagedObject name="OSPFDistance">
+             <Member name="distanceType" dataType="UI8"> <!--this should be enum-->
+			 </Member>
+             <Member name="distanceValue" dataType="UI32">
+			 </Member>
+		</ManagedObject>
+		
+        <ManagedObject name="OSPFConfig">
+             <Member name="status" dataType="bool">
+			 </Member>
+             <Member name="domainId" dataType="UI32">
+			 </Member>
+             <Member name="domainTag" dataType="UI32">
+			 </Member>
+             <Member name="extLSDBLimit" dataType="UI32">
+			 </Member>
+             <Member name="defaultMetric" dataType="UI32">
+			 </Member>
+             <Member name="extMetricType" dataType="UI8">   <!--this should be enum-->
+			 </Member>
+             <Member name="ReferenceBandwidth" dataType="UI32">
+			 </Member>
+             <Member name="useActivePorts" dataType="bool">
+			 </Member>
+             <Member name="databaseOverflowInterval" dataType="UI32">
+			 </Member>
+             <Member name="defInfoOrig" dataType="bool">
+			 </Member>
+             <Member name="always" dataType="bool">
+			 </Member>
+             <Member name="defInfoOrigMetric" dataType="UI32">
+			 </Member>
+             <Member name="defInfoOrigMetricType" dataType="UI8">  <!--this should be enum-->
+			 </Member>
+             <Member name="isNSSATranslator" dataType="bool">
+			 </Member>
+             <Member name="redistributeStatic" dataType="bool">
+			 </Member>
+             <Member name="redistributeConnected" dataType="bool">
+			 </Member>
+             <Member name="redistributeRip" dataType="bool">
+			 </Member>
+             <Member name="rfc1583Compatibility" dataType="bool">
+			 </Member>
+             <Member name="rfc1587Compatibility" dataType="bool">
+			 </Member>
+			 <Member name="routeMap" dataType="string">
+			 </Member>
+             <Member name="gracefulRestartHelper" dataType="bool">
+			 </Member>
+             <Member name="gracefulRestartNotifyTime" dataType="UI32">
+			 </Member>
+             <Member name="gracefulRestartRestartTime" dataType="UI32">
+			 </Member>
+             <Member name="area"
+                     dataType="vector/WaveManagedObjectPointer/"
+                     umlType="COMPOSITION"
+                     referredObject= "OSPFArea">
+             </Member>
+             <Member name="distance"
+                     dataType="vector/WaveManagedObjectPointer/"
+                     umlType="COMPOSITION"
+                     referredObject= "OSPFDistance">
+             </Member>
+             <Member name="neighborList"
+                     dataType="vector/WaveManagedObjectPointer/"
+                     umlType="COMPOSITION"
+                     referredObject= "OSPFNeighborIPAddress">
+             </Member>
+             <Member name="permitDenyRedistribute"
+                     dataType="vector/WaveManagedObjectPointer/"
+                     umlType="COMPOSITION"
+                     referredObject= "OSPFPermitDenyRedistribute">
+             </Member>
+             <Member name="summary"
+                     dataType="vector/WaveManagedObjectPointer/"
+                     umlType="COMPOSITION"
+                     referredObject= "OSPFSummaryAddress">
+             </Member>
+		</ManagedObject>
+
+        <ManagedObject name="OSPFAreaRange">
+             <Member name="rangeAddress" dataType="IpV4Address">
+			 </Member>
+             <Member name="rangeMask" dataType="IpV4Address">
+			 </Member>
+             <Member name="rangeAdvertise" dataType="bool">
+			 </Member>
+		</ManagedObject>
+
+        <ManagedObject name="OSPFArea">
+             <Member name="idAddress" dataType="IpV4Address">
+			 </Member>
+             <Member name="idNumber" dataType="UI32">
+			 </Member>
+             <Member name="isStub" dataType="bool">
+			 </Member>
+             <Member name="stubMetric" dataType="UI32">
+			 </Member>
+             <Member name="stubNoSummary" dataType="bool">
+			 </Member>
+             <Member name="isNSSA" dataType="bool">
+			 </Member>
+             <Member name="NSSAMetric" dataType="UI32">
+			 </Member>
+             <Member name="NSSADefInfoOrig" dataType="bool">
+			 </Member>
+             <Member name="NSSANoSummary" dataType="bool">
+			 </Member>
+             <Member name="range"
+                     dataType="vector/WaveManagedObjectPointer/"
+                     umlType="COMPOSITION"
+                     referredObject= "OSPFAreaRange">
+             </Member>
+             <Member name="virtualLink"
+                     dataType="vector/WaveManagedObjectPointer/"
+                     umlType="COMPOSITION"
+                     referredObject= "OSPFVirtualLink">
+             </Member>
+		</ManagedObject>
+
+        <ManagedObject name="OSPFVirtualLink">
+             <Member name="virtualLinkRouterId" dataType="IpV4Address">
+			 </Member>
+			<Member name="HelloInterval" dataType="UI32">
+			</Member>
+			<Member name="RouterDeadInterval" dataType="UI32">
+			</Member>
+			<Member name="RetransmitInterval" dataType="UI32">
+			</Member>
+			<Member name="TransDelay" dataType="UI32">
+			</Member>
+			<Member name="AuthType" dataType="UI32">
+			</Member>
+			<Member name="EncryptionType" dataType="UI32">
+			</Member>
+			<Member name="AuthKey" dataType="string">
+			</Member>
+			<Member name="MD5KeyActWaitTime" dataType="UI32">
+			</Member>
+			<Member name="MD5KeyId" dataType="UI32">
+			</Member>
+			<Member name="MD5Key" dataType="UI32">
+			</Member>
+		</ManagedObject>
+
+        <ManagedObject name="OSPFPermitDenyRedistribute">
+			<Member name="index" dataType="UI32">
+			</Member>
+			<Member name="isPermit" dataType="bool">
+			</Member>
+			<Member name="all" dataType="bool">
+			</Member>
+			<Member name="connected" dataType="bool">
+			</Member>
+			<Member name="rip" dataType="bool">
+			</Member>
+			<Member name="Static" dataType="bool">
+			</Member>
+			<Member name="subNet" dataType="IpV4Address">
+			</Member>
+			<Member name="mask" dataType="IpV4Address">
+			</Member>
+			<Member name="matchMetric" dataType="UI32">
+			</Member>
+    	</ManagedObject>
+
+        <ManagedObject name="OSPFInterface">
+			<Member name="id" dataType="string">
+			</Member>
+			<Member name="Type" dataType="string">
+			</Member>
+			<Member name="Area" dataType="ObjectId" umlType="ASSOCIATION" referredObject="OSPFArea"> <!--leaf area-->
+			</Member>
+			<Member name="HelloInterval" dataType="UI32"> <!--leaf hello-interval-->
+			</Member>
+			<Member name="RouterDeadInterval" dataType="UI32"> <!--leaf dead-interval-->
+			</Member>
+			<Member name="RetransmitInterval" dataType="UI32"> <!--leaf retransmit-interval-->
+			</Member>
+			<Member name="TransDelay" dataType="UI32"> <!--leaf transmit-delay-->
+			</Member>
+			<Member name="Cost" dataType="UI32"> <!--leaf cost-->
+			</Member>
+			<Member name="Priority" dataType="UI32"> <!--leaf priority-->
+			</Member>
+			<Member name="AuthType" dataType="UI32">
+			</Member>
+			<Member name="EncryptionType" dataType="UI32"> <!--leaf encrypttype-->
+			</Member>
+			<Member name="AuthKey" dataType="string"> <!--leaf key-->
+			</Member>
+			<Member name="AuthChangeWaitTime" dataType="UI32"> <!--leaf auth-change-wait-time-->
+			</Member>
+			<Member name="MD5KeyActWaitTime" dataType="UI32"> <!--key-activation-wait-time-->
+			</Member>
+			<Member name="MD5KeyId" dataType="UI32"> <!--leaf key-id-->
+			</Member>
+			<Member name="MD5Key" dataType="UI32"> <!-- leaf authentication-key-->
+			</Member>
+			<Member name="FilterAll" dataType="bool">
+			</Member>
+			<Member name="FilterAllExternal" dataType="bool">
+			</Member>
+			<Member name="FilterAllSummaryExternal" dataType="bool">
+			</Member>
+			<Member name="AllowDefault" dataType="bool">
+			</Member>
+			<Member name="AllowType4" dataType="bool">
+			</Member>
+			<Member name="MtuIgnore" dataType="bool"> <!--leaf mtu-ignore-->
+			</Member>
+			<Member name="NetworkType" dataType="UI32"> <!--leaf network-->
+			</Member>
+			<Member name="Passive" dataType="bool"> <!--leaf passive-->
+			</Member>
+		</ManagedObject>
+
+        <Message name="InterfaceLocal" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="opCode" dataType="UI8">
+            </Member>
+            <Member name="cmdCode" dataType="UI8">
+            </Member>
+            <Member name="areaId" dataType="IpV4Address">
+            </Member>
+			<Member name="HelloInterval" dataType="UI32">
+			</Member>
+			<Member name="RouterDeadInterval" dataType="UI32">
+			</Member>
+			<Member name="RetransmitInterval" dataType="UI32">
+			</Member>
+			<Member name="TransDelay" dataType="UI32">
+			</mEMBer>
+			<Member name="Cost" dataType="UI32">
+			</Member>
+			<Member name="Priority" dataType="UI32">
+			</Member>
+			<Member name="AuthType" dataType="UI32">
+			</Member>
+			<Member name="EncryptionType" dataType="UI32">
+			</Member>
+			<Member name="AuthKey" dataType="string">
+			</Member>
+			<Member name="AuthChangeWaitTime" dataType="UI32">
+			</Member>
+			<Member name="MD5KeyId" dataType="UI32">
+			</Member>
+			<Member name="MD5Key" dataType="UI32">
+			</Member>
+			<Member name="FilterAll" dataType="bool">
+			</Member>
+			<Member name="FilterAllExternal" dataType="bool">
+			</Member>
+			<Member name="FilterAllSummaryExternal" dataType="bool">
+			</Member>
+			<Member name="AllowDefault" dataType="bool">
+			</Member>
+			<Member name="AllowType4" dataType="bool">
+			</Member>
+			<Member name="NetworkType" dataType="UI32">
+			</Member>
+        </Message>
+
+        <Message name="RouterConfigLocal" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="opCode" dataType="UI8" >
+            </Member>
+            <Member name="cmdCode" dataType="UI8" >
+            </Member>
+            <Member name="idAddress" dataType="IpV4Address">
+			</Member>
+            <Member name="idNumber" dataType="UI32">
+			</Member>
+            <Member name="isNSSA" dataType="bool">
+			</Member>
+            <Member name="NSSAMetric" dataType="UI32">
+			</Member>
+            <Member name="rangeAddress" dataType="IpV4Address">
+			</Member>
+            <Member name="rangeMask" dataType="IpV4Address">
+			</Member>
+            <Member name="rangeAdvertise" dataType="bool">
+	        </Member>
+            <Member name="StubMetric" dataType="UI32">
+			</Member>
+            <Member name="virtualLinkRouterId" dataType="IpV4Address">
+			</Member>
+			<Member name="virtualLinkHelloInterval" dataType="UI32">
+			</Member>
+			<Member name="virtualLinkRouterDeadInterval" dataType="UI32">
+			</Member>
+			<Member name="virtualLinkRetransmitInterval" dataType="UI32">
+			</Member>
+			<Member name="virtualLinkTransDelay" dataType="UI32">
+			</Member>
+			<Member name="virtualLinkAuthType" dataType="UI32">
+			</Member>
+			<Member name="virtualLinkEncryptionType" dataType="UI32">
+			</Member>
+			<Member name="virtualLinkAuthKey" dataType="string">
+			</Member>
+			<Member name="virtualLinkMD5KeyActWaitTime" dataType="UI32">
+			</Member>
+			<Member name="virtualLinkMD5KeyId" dataType="UI32">
+			</Member>
+			<Member name="virtualLinkMD5Key" dataType="UI32">
+			</Member>
+            <Member name="referenceBandwidth" dataType="UI32">
+			</Member>
+            <Member name="databaseOverflowInterval" dataType="UI32">
+			</Member>
+            <Member name="defInfoOrigMetric" dataType="UI32">
+			</Member>
+            <Member name="defInfoOrigMetricType" dataType="UI8">  <!--this should be enum-->
+			</Member>
+			<Member name="defaultMetric" dataType="UI32">
+			</Member>
+            <Member name="extMetricType" dataType="UI8">   <!--this should be enum-->
+			</Member>
+			<Member name="distanceExternal" dataType="UI32">
+			</Member>
+			<Member name="distanceInterArea" dataType="UI32">
+			</Member>
+			<Member name="distanceIntraArea" dataType="UI32">
+			</Member>
+			<Member name="routeMap" dataType="string">
+			</Member>
+			<Member name="domainId" dataType="UI32">
+			</Member>
+			<Member name="domainTag" dataType="UI32">
+			</Member>
+			<Member name="extLSDBLimit" dataType="UI32">
+			</Member>
+			<Member name="gracefulRestartHelper" dataType="bool">
+			</Member>
+			<Member name="gracefulRestartNotifyTime" dataType="UI32">
+			</Member>
+			<Member name="gracefulRestartRestartTime" dataType="UI32">
+			</Member>
+			<Member name="neighborAddress" dataType="IpV4Address">
+			</Member>
+			<Member name="summaryAddress" dataType="IpV4Address">
+			</Member>
+			<Member name="summaryMask" dataType="IpV4Address">
+			</Member>
+			<Member name="redistributeIndex" dataType="UI32">
+			</Member>
+			<Member name="redistributeAll" dataType="bool">
+			</Member>
+			<Member name="redistributeConnected" dataType="bool">
+			</Member>
+			<Member name="redistributeRip" dataType="bool">
+			</Member>
+			<Member name="redistributeStatic" dataType="bool">
+			</Member>
+			<Member name="redistributeSubNet" dataType="IpV4Address">
+			</Member>
+			<Member name="redistributeMask" dataType="IpV4Address">
+			</Member>
+			<Member name="redistributeMatchMetric" dataType="UI32">
+			</Member>
+        </Message>
+	</Worker>
+</Local>

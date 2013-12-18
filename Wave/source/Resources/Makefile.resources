@@ -1,0 +1,34 @@
+TOPDIR := ../../../../../..
+
+all:
+
+include ../Makefile.tools
+
+.PHONY: all phony
+
+all: resources
+
+XML_SOURCES := $(wildcard *.xml)
+
+WAVE_RESOURCE_GENERATOR := ../../resourcegenerator/WaveResourceGenerator.$(OS).$(ARCH_HOST)
+
+vpath %.h $(BUILD_DIR_DYNAMIC_SRC)
+
+.SECONDEXPANSION:
+
+resources: $(XML_SOURCES) $(RESOURCE_GENERATOR) $(MKFS) | $($(WAVE_BUILD_DIR_DYNAMIC_SRC_ARCH_KIND_INDEP)/.)
+	@$(ECHOCMD) "Generating Wave Resources ..."
+	@$(ECHOCMD) ""
+	$(WAVE_RESOURCE_GENERATOR) WaveComponents.xml $(WAVE_BUILD_DIR_DYNAMIC_SRC_ARCH_KIND_INDEP) Wave
+	@$(ECHOCMD) ""
+	@$(ECHOCMD) "Completed generating Wave Resources."
+	@$(ECHOCMD) ""
+	touch $@
+
+# this target is obsolete, better make all
+WaveResourceIds.h: resources
+
+clean:
+	echo do not clean here, do it with Wave/source directory Makefile
+
+include $(SRC_ROOT)/commonMakefileEnd

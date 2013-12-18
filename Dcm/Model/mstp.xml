@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<WavePlugin name="Mstp" nameSpace="DcmNs"> 
+<Global name="MstpGlobal">
+	<Worker name="MstpGlobal">
+		<ManagedObject name="XstpBridgeConfig">
+			<Member name="priority" dataType="UI32">
+			</Member>
+			<Member name="desc" dataType="string">
+			</Member>
+			<Member name="errDisableInterval" dataType="UI32">
+			</Member>
+			<Member name="errDisableEnable" dataType="bool">
+			</Member>
+            		<Member name="forwardDelay" dataType="UI32">
+			</Member>
+            		<Member name="maxAge" dataType="UI32">
+			</Member>
+            		<Member name="poPathcostStd" dataType="bool">
+			</Member>
+            		<Member name="stpEnable" dataType="bool">
+			</Member>
+		</ManagedObject>
+
+		<ManagedObject name="PvstBridgeConfig"  derivedClass="XstpBridgeConfig">
+			<Member name="helloTime" dataType="UI32">
+			</Member>
+			<Member name="bpduMac" dataType="bool">
+			</Member>
+			<Member name="macReduction" dataType="bool">
+			</Member>
+            <Member name="activeVlan" dataType="vector/ObjectId/" umlType="ASSOCIATION" referredObject="VlanIntf">
+            </Member>
+            <Member name="inactiveVlan" dataType="vector/ObjectId/" umlType="ASSOCIATION" referredObject="VlanIntf">
+            </Member>
+		</ManagedObject>
+
+		<ManagedObject name="RpvstBridgeConfig"  derivedClass="XstpBridgeConfig">
+			<Member name="helloTime" dataType="UI32">
+			</Member>
+			<Member name="txHoldCount" dataType="UI32">
+			</Member>
+			<Member name="bpduMac" dataType="bool">
+			</Member>
+			<Member name="macReduction" dataType="bool">
+			</Member>
+            <Member name="activeVlan" dataType="vector/ObjectId/" umlType="ASSOCIATION" referredObject="VlanIntf">
+            </Member>
+            <Member name="inactiveVlan" dataType="vector/ObjectId/" umlType="ASSOCIATION" referredObject="VlanIntf">
+            </Member>
+		</ManagedObject>
+
+		<ManagedObject name="VlanBridgeStpConfig">
+            <Member name="vid" dataType="ObjectId" umlType="ASSOCIATION" referredObject="VlanIntf">
+            </Member>
+			<Member name="priority" dataType="UI32">
+			</Member>
+			<Member name="fwdDelay" dataType="UI32">
+			</Member>
+			<Member name="maxAge" dataType="UI32">
+			</Member>
+			<Member name="helloTime" dataType="UI32">
+			</Member>
+			<Member name="agingTime" dataType="UI32">
+			</Member>
+		</ManagedObject>
+
+		<ManagedObject name="StpBridgeConfig"  derivedClass="XstpBridgeConfig">
+			<Member name="helloTime" dataType="UI32">
+			</Member>
+		</ManagedObject>
+		<ManagedObject name="RstpBridgeConfig"  derivedClass="XstpBridgeConfig">
+			<Member name="helloTime" dataType="UI32">
+			</Member>
+			<Member name="txHoldCount" dataType="UI32">
+			</Member>
+		</ManagedObject>
+		<ManagedObject name="InstanceBase">
+			<Member name="instanceId" dataType="UI8">
+			</Member>
+			<Member name="vlanid" dataType="vector/ObjectId/" umlType="ASSOCIATION" referredObject="VlanIntf">
+			</Member>
+		</ManagedObject>
+		<ManagedObject name="MstpBridgeConfig"  derivedClass="XstpBridgeConfig">
+			<Member name="region" dataType="string">
+			</Member>
+			<Member name="revision" dataType="UI16">
+			</Member>
+			<Member name="ciscoInterop" dataType="bool">
+			</Member>
+			<Member name="txHoldCount" dataType="UI32">
+			</Member>
+			<Member name="maxHop" dataType="UI32">
+			</Member>
+		</ManagedObject>
+		<ManagedObject name="MstpInstanceConfig"  derivedClass="InstanceBase">
+			<Member name="priority" dataType="UI32">
+			</Member>
+		</ManagedObject>
+		
+        <Message name="CreateBridgeConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="mode" dataType="UI32">
+			</Member>
+		</Message>
+
+        <Message name="DeleteBridgeConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+		</Message>
+
+        <Message name="UpdateBridgeConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="priority" dataType="UI32">
+			</Member>
+            <Member name="forwardDelay" dataType="UI32">
+			</Member>
+            <Member name="helloTime" dataType="UI32">
+			</Member>
+            <Member name="maxAge" dataType="UI32">
+			</Member>
+            <Member name="maxHop" dataType="UI32">
+			</Member>
+			<Member name="desc" dataType="string">
+			</Member>
+			<Member name="errDisableInterval" dataType="UI32">
+			</Member>
+			<Member name="txHoldCount" dataType="UI32">
+			</Member>
+			<Member name="revision" dataType="UI16">
+			</Member>
+			<Member name="region" dataType="string">
+			</Member>
+            <Member name="cmdCode" dataType="UI32">
+			</Member>
+		</Message>
+
+
+        <Message name="CreateVlanBridgeConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="id" dataType="UI32">
+			</Member>
+		</Message>
+
+        <Message name="DeleteVlanBridgeConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="id" dataType="UI32">
+			</Member>
+		</Message>
+
+        <Message name="UpdateVlanBridgeConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="id" dataType="UI32">
+			</Member>
+            <Member name="priority" dataType="UI32">
+			</Member>
+            <Member name="forwardDelay" dataType="UI32">
+			</Member>
+            <Member name="helloTime" dataType="UI32">
+			</Member>
+            <Member name="maxAge" dataType="UI32">
+			</Member>
+            <Member name="agingTime" dataType="UI32">
+			</Member>
+            <Member name="cmdCode" dataType="UI32">
+			</Member>
+		</Message>
+
+		<Message name="UpdateMstpInstanceConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="mgmtFlag" dataType="UI32">
+			</Member>
+			<Member name="msgType" dataType="UI32">
+			</Member>
+			<Member name="cmdCode" dataType="UI32">
+			</Member>
+			<Member name="vlanid" dataType="vector/ObjectId/">
+			</Member>
+			<Member name="instanceId" dataType="UI8">
+			</Member>
+			<Member name="priority" dataType="UI32">
+			</Member>
+		</Message>
+        	
+	</Worker>
+</Global>
+<Local name="Mstp">
+	<Worker name="MstpLocal">
+        <Message name="CreateBridgeConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="mode" dataType="UI32">
+			</Member>
+		</Message>
+
+        <Message name="DeleteBridgeConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+		</Message>
+
+        <Message name="UpdateBridgeConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="priority" dataType="UI32">
+			</Member>
+            <Member name="forwardDelay" dataType="UI32">
+			</Member>
+            <Member name="helloTime" dataType="UI32">
+			</Member>
+            <Member name="maxAge" dataType="UI32">
+			</Member>
+            <Member name="maxHop" dataType="UI32">
+			</Member>
+			<Member name="desc" dataType="string">
+			</Member>
+			<Member name="errDisableInterval" dataType="UI32">
+			</Member>
+			<Member name="txHoldCount" dataType="UI32">
+			</Member>
+			<Member name="revision" dataType="UI16">
+			</Member>
+			<Member name="region" dataType="string">
+			</Member>
+            <Member name="cmdCode" dataType="UI32">
+			</Member>
+		</Message>
+
+
+        <Message name="CreateVlanBridgeConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="id" dataType="UI32">
+			</Member>
+		</Message>
+
+        <Message name="DeleteVlanBridgeConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="id" dataType="UI32">
+			</Member>
+		</Message>
+
+        <Message name="UpdateVlanBridgeConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="id" dataType="UI32">
+			</Member>
+            <Member name="priority" dataType="UI32">
+			</Member>
+            <Member name="forwardDelay" dataType="UI32">
+			</Member>
+            <Member name="helloTime" dataType="UI32">
+			</Member>
+            <Member name="maxAge" dataType="UI32">
+			</Member>
+            <Member name="agingTime" dataType="UI32">
+			</Member>
+            <Member name="cmdCode" dataType="UI32">
+			</Member>
+		</Message>
+
+		<Message name="UpdateMstpInstanceConfig" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="mgmtFlag" dataType="UI32">
+			</Member>
+			<Member name="msgType" dataType="UI32">
+			</Member>
+			<Member name="cmdCode" dataType="UI32">
+			</Member>
+			<Member name="vlanid" dataType="vector/ObjectId/">
+			</Member>
+			<Member name="instanceId" dataType="UI8">
+			</Member>
+			<Member name="priority" dataType="UI32">
+			</Member>
+		</Message>
+
+	</Worker>
+</Local>
+</WavePlugin> 
+

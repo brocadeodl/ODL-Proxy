@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ConfigReplayTables> 
+    <Pass name = "DCM_POSTBOOT_GLOBAL_BEGIN">
+    </Pass>
+    <Pass name = "DCM_POSTBOOT_GLOBAL_STAGE1">
+        <Service name = "VcsFabObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+        <Service name = "VrfLocalObjectManager">
+            <Recovery name = "Cold"/>
+            <Recovery name = "Warm"/>
+        </Service>
+        <Service name = "NsmLocalObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+		<Service name = "SsmLocalObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+		<Service name = "QosLocalObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+		<Service name = "FcoeLocalObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+		<Service name = "SflowLocalObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+		<Service name = "LldpLocalObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+		<Service name = "IgmpsLocalObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+		<Service name = "RmonLocalObjectManager">
+            <Recovery name = "Cold"/>
+			<Recovery name = "Warm"/>
+        </Service>
+		<Service name = "IpadmLocalObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+		<Service name = "IpadmChassisObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+		<Service name = "RASLocalObjectManager">
+            <Recovery name = "Cold"/>
+			<Recovery name = "Warm"/>
+        </Service>
+		<Service name = "SpanLocalLocalObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+		<Service name = "PolicerLocalObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+        <Service name = "CompanyManagementObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+    </Pass>
+	<Pass name = "DCM_POSTBOOT_GLOBAL_STAGE2">
+        <Service name = "VrfLocalObjectManager">
+            <Recovery name = "Cold"/>
+            <Recovery name = "Warm"/>
+        </Service>
+		<Service name = "FcoeLocalObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+     	<Service name = "NsmLocalObjectManager">
+            <Recovery name = "Cold"/>
+			<Recovery name = "Warm"/>
+        </Service>
+		<Service name = "MstpLocalObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+		<Service name = "UdldLocalObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+    </Pass>
+    <Pass name = "DCM_POSTBOOT_GLOBAL_STAGE3">
+        <Service name = "APPMLocalObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+        <Service name = "L2sysLocalObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+		<Service name = "IgmpsLocalObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+		<Service name = "QosLocalObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+    	<Service name = "PolicerLocalObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>        
+     	<Service name = "NsmLocalObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+    </Pass>
+    <Pass name = "DCM_POSTBOOT_GLOBAL_STAGE4">
+        <Service name = "NsmLocalObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+        <Service name = "ValInterfaceLocalObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+        <Service name = "IgmpLocalObjectManager">
+            <Recovery name = "Cold"/>
+            <Recovery name = "Warm"/>
+        </Service>
+        <Service name = "CityObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+    </Pass>
+    <Pass name = "DCM_POSTBOOT_GLOBAL_STAGE5">
+        <Service name = "SsmLocalObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+		<Service name = "IpPolicyLocalObjectManager">
+            <Recovery name = "Cold"/>
+            <Recovery name = "Warm"/>
+        </Service>
+        <Service name = "RtmLocalObjectManager">
+            <Recovery name = "Cold"/>
+            <Recovery name = "Warm"/>
+        </Service>
+        <Service name = "OSPFLocalObjectManager">
+            <Recovery name = "Cold"/>
+            <Recovery name = "Warm"/>
+        </Service>
+        <Service name = "VRRPLocalObjectManager">
+            <Recovery name = "Cold"/>
+            <Recovery name = "Warm"/>
+        </Service>
+        <Service name = "PimLocalObjectManager">
+            <Recovery name = "Cold"/>
+            <Recovery name = "Warm"/>
+        </Service>
+        <Service name = "ArpLocalObjectManager">
+            <Recovery name = "Cold"/>
+            <Recovery name = "Warm"/>
+        </Service>
+        <Service name = "BgpLocalObjectManager">
+            <Recovery name = "Cold"/>
+            <Recovery name = "Warm"/>
+        </Service>
+        <Service name = "DhcpRelLocalObjectManager">
+            <Recovery name = "Cold"/>
+            <Recovery name = "Warm"/>
+        </Service>
+    </Pass>
+    <Pass name = "DCM_POSTBOOT_GLOBAL_END">
+    </Pass>
+    <Pass name = "DCM_POSTBOOT_SLOT_BEGIN">
+    </Pass>
+    <Pass name = "DCM_POSTBOOT_SLOT_STAGE1">
+        <Service name = "NsmLocalObjectManager">
+            <Recovery name = "Cold"/>
+            <Recovery name = "Warm"/>
+        </Service>
+        <Service name = "PortCfgLocalObjectManager">
+            <Recovery name = "Cold"/>
+            <Recovery name = "Warm"/>
+        </Service>
+        <Service name = "AgLocalObjectManager">
+            <Recovery name = "Cold"/>
+            <Recovery name = "Warm"/>
+        </Service>
+    </Pass>
+    <Pass name = "DCM_POSTBOOT_SLOT_STAGE2">
+    	<Service name = "PolicerLocalObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+		<Service name = "SsmLocalObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+		<Service name = "IpPolicyLocalObjectManager">
+            <Recovery name = "Cold"/>
+            <Recovery name = "Warm"/>
+        </Service>
+	</Pass>
+    <Pass name = "DCM_POSTBOOT_SLOT_STAGE5">
+        <Service name = "RtmLocalObjectManager">
+            <Recovery name = "Cold"/>
+            <Recovery name = "Warm"/>
+        </Service>
+        <Service name = "ArpLocalObjectManager">
+            <Recovery name = "Cold"/>
+            <Recovery name = "Warm"/>
+        </Service>
+    </Pass>
+    <Pass name = "DCM_POSTBOOT_SLOT_END">
+        <Service name = "NsmLocalObjectManager">
+            <Recovery name = "Cold"/>
+        </Service>
+    </Pass>
+</ConfigReplayTables> 

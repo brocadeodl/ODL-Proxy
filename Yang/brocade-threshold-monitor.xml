@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-threshold-monitor"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:threshold-monitor="urn:brocade.com:mgmt:brocade-threshold-monitor"
+        xmlns:rbridge="urn:brocade.com:mgmt:brocade-rbridge">
+  <namespace uri="urn:brocade.com:mgmt:brocade-threshold-monitor"/>
+  <prefix value="threshold-monitor"/>
+  <import module="brocade-rbridge">
+    <prefix value="rbridge"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Address :  120 Holger Way
+    San Jose, CA 95134
+    U.S.A
+Phone    :  +1-408-333-8000
+E-mail   :  support@brocade.com
+Website  :  www.brocade.com</text>
+  </contact>
+  <description>
+    <text>Data Model for Brocade's System Monitor configuration CLIs</text>
+  </description>
+  <revision date="2011-11-24">
+    <description>
+      <text>Initial modelling of Yang</text>
+    </description>
+  </revision>
+  <typedef name="supported-actions">
+    <type name="bits">
+      <bit name="none">
+        <position value="0"/>
+      </bit>
+      <bit name="all">
+        <position value="1"/>
+      </bit>
+      <bit name="email">
+        <position value="2"/>
+      </bit>
+      <bit name="raslog">
+        <position value="3"/>
+      </bit>
+    </type>
+  </typedef>
+  <typedef name="int-supported-actions">
+    <type name="bits">
+      <bit name="none">
+        <position value="0"/>
+      </bit>
+      <bit name="all">
+        <position value="1"/>
+      </bit>
+      <bit name="email">
+        <position value="2"/>
+      </bit>
+      <bit name="raslog">
+        <position value="3"/>
+      </bit>
+      <bit name="fence">
+        <position value="4"/>
+      </bit>
+    </type>
+  </typedef>
+  <typedef name="supported-monitoring">
+    <type name="enumeration">
+      <enum name="custom-monitoring"/>
+      <enum name="default-monitoring"/>
+    </type>
+  </typedef>
+  <typedef name="supported-config">
+    <type name="string"/>
+  </typedef>
+  <typedef name="supported-timebase">
+    <type name="enumeration">
+      <enum name="none">
+        <value value="0"/>
+      </enum>
+      <enum name="minute">
+        <value value="2"/>
+      </enum>
+      <enum name="hour">
+        <value value="3"/>
+      </enum>
+      <enum name="day">
+        <value value="4"/>
+      </enum>
+    </type>
+  </typedef>
+  <grouping name="threshold-monitor-group">
+    <container name="threshold-monitor">
+      <container name="sfp">
+        <leaf name="apply">
+          <type name="supported-config"/>
+        </leaf>
+        <leaf name="pause">
+          <type name="empty"/>
+        </leaf>
+        <list name="policy">
+          <key value="policy_name"/>
+          <leaf name="policy_name">
+            <type name="string"/>
+          </leaf>
+          <list name="area">
+            <key value="type area_value"/>
+            <leaf name="type">
+              <type name="enumeration">
+                <enum name="1GSR">
+                  <value value="0"/>
+                </enum>
+                <enum name="1GLR">
+                  <value value="1"/>
+                </enum>
+                <enum name="10GSR">
+                  <value value="2"/>
+                </enum>
+                <enum name="10GLR">
+                  <value value="3"/>
+                </enum>
+                <enum name="10GUSR">
+                  <value value="4"/>
+                </enum>
+                <enum name="QSFP">
+                  <value value="5"/>
+                </enum>
+              </type>
+            </leaf>
+            <leaf name="area_value">
+              <type name="enumeration">
+                <enum name="Temperature">
+                  <value value="0"/>
+                </enum>
+                <enum name="RXP">
+                  <value value="1"/>
+                </enum>
+                <enum name="TXP">
+                  <value value="2"/>
+                </enum>
+                <enum name="Current">
+                  <value value="3"/>
+                </enum>
+                <enum name="Voltage">
+                  <value value="4"/>
+                </enum>
+              </type>
+            </leaf>
+            <container name="threshold">
+              <leaf name="high-threshold">
+                <type name="int32"/>
+              </leaf>
+              <leaf name="low-threshold">
+                <type name="int32"/>
+              </leaf>
+              <leaf name="buffer">
+                <type name="int32"/>
+              </leaf>
+            </container>
+            <container name="alert">
+              <container name="above">
+                <leaf name="above-highthresh-action">
+                  <type name="supported-actions"/>
+                </leaf>
+              </container>
+              <container name="below">
+                <leaf name="below-highthresh-action">
+                  <type name="supported-actions"/>
+                </leaf>
+                <leaf name="below-lowthresh-action">
+                  <type name="supported-actions"/>
+                </leaf>
+              </container>
+            </container>
+          </list>
+        </list>
+      </container>
+      <container name="security">
+        <leaf name="apply">
+          <type name="supported-config"/>
+        </leaf>
+        <leaf name="pause">
+          <type name="empty"/>
+        </leaf>
+        <list name="policy">
+          <key value="sec_policy_name"/>
+          <leaf name="sec_policy_name">
+            <type name="string"/>
+          </leaf>
+          <list name="area">
+            <key value="sec_area_value"/>
+            <leaf name="sec_area_value">
+              <type name="enumeration">
+                <enum name="telnet-violation">
+                  <value value="0"/>
+                </enum>
+                <enum name="login-violation">
+                  <value value="11"/>
+                </enum>
+              </type>
+            </leaf>
+            <leaf name="timebase">
+              <type name="supported-timebase"/>
+            </leaf>
+            <container name="threshold">
+              <leaf name="sec-high-threshold">
+                <type name="int32"/>
+              </leaf>
+              <leaf name="sec-low-threshold">
+                <type name="int32"/>
+              </leaf>
+              <leaf name="sec-buffer">
+                <type name="int32"/>
+              </leaf>
+            </container>
+            <container name="alert">
+              <container name="above">
+                <leaf name="sec-above-highthresh-action">
+                  <type name="supported-actions"/>
+                </leaf>
+              </container>
+              <container name="below">
+                <leaf name="sec-below-highthresh-action">
+                  <type name="supported-actions"/>
+                </leaf>
+                <leaf name="sec-below-lowthresh-action">
+                  <type name="supported-actions"/>
+                </leaf>
+              </container>
+            </container>
+          </list>
+        </list>
+      </container>
+      <container name="Cpu">
+        <leaf name="poll">
+          <type name="uint32">
+            <range value="10 .. 3600">
+              <error-message>
+                <value>Polling interval must be in range
+10 - 3600</value>
+              </error-message>
+            </range>
+          </type>
+          <default value="120"/>
+        </leaf>
+        <leaf name="retry">
+          <type name="uint32">
+            <range value="1 .. 100">
+              <error-message>
+                <value>Retries must be in range 1 - 100</value>
+              </error-message>
+            </range>
+          </type>
+          <default value="3"/>
+        </leaf>
+        <leaf name="limit">
+          <type name="uint32">
+            <range value="0 .. 80">
+              <error-message>
+                <value>Usage limit must be in range 0 - 80</value>
+              </error-message>
+            </range>
+          </type>
+          <default value="75"/>
+        </leaf>
+        <leaf name="actions">
+          <type name="enumeration">
+            <enum name="none">
+              <value value="1"/>
+            </enum>
+            <enum name="raslog">
+              <value value="2"/>
+            </enum>
+          </type>
+          <default value="none"/>
+        </leaf>
+      </container>
+      <container name="Memory">
+        <leaf name="poll">
+          <type name="uint32">
+            <range value="10 .. 3600">
+              <error-message>
+                <value>Polling interval must be in range
+10 - 3600</value>
+              </error-message>
+            </range>
+          </type>
+          <default value="120"/>
+        </leaf>
+        <leaf name="retry">
+          <type name="uint32">
+            <range value="1 .. 100">
+              <error-message>
+                <value>Retries must be in range 1 - 100</value>
+              </error-message>
+            </range>
+          </type>
+          <default value="3"/>
+        </leaf>
+        <leaf name="limit">
+          <type name="uint32">
+            <range value="0 .. 80">
+              <error-message>
+                <value>Memory usage limit must be in range 0 - 80</value>
+              </error-message>
+            </range>
+          </type>
+          <default value="60"/>
+        </leaf>
+        <leaf name="high-limit">
+          <type name="uint32">
+            <range value="0 .. 80">
+              <error-message>
+                <value>Memory usage high-limit must be in range 0 - 80</value>
+              </error-message>
+            </range>
+          </type>
+          <default value="70"/>
+        </leaf>
+        <leaf name="low-limit">
+          <type name="uint32">
+            <range value="0 .. 80">
+              <error-message>
+                <value>Memory usage low-limit must be in range 0 - 80</value>
+              </error-message>
+            </range>
+          </type>
+          <default value="40"/>
+        </leaf>
+        <leaf name="actions">
+          <type name="enumeration">
+            <enum name="none">
+              <value value="1"/>
+            </enum>
+            <enum name="raslog">
+              <value value="2"/>
+            </enum>
+          </type>
+          <default value="none"/>
+        </leaf>
+      </container>
+      <container name="interface">
+        <leaf name="apply">
+          <type name="supported-config"/>
+        </leaf>
+        <leaf name="pause">
+          <type name="empty"/>
+        </leaf>
+        <list name="policy">
+          <key value="policy_name"/>
+          <leaf name="policy_name">
+            <type name="string"/>
+          </leaf>
+          <list name="area">
+            <key value="type area_value"/>
+            <leaf name="type">
+              <type name="enumeration">
+                <enum name="Ethernet">
+                  <value value="0"/>
+                </enum>
+              </type>
+            </leaf>
+            <leaf name="area_value">
+              <type name="enumeration">
+                <enum name="MissingTerminationCharacter">
+                  <value value="0"/>
+                </enum>
+                <enum name="CRCAlignErrors">
+                  <value value="1"/>
+                </enum>
+                <enum name="SymbolErrors">
+                  <value value="2"/>
+                </enum>
+                <enum name="IFG">
+                  <value value="3"/>
+                </enum>
+              </type>
+            </leaf>
+            <container name="threshold">
+              <leaf name="timebase_value">
+                <type name="supported-timebase"/>
+              </leaf>
+              <leaf name="high-threshold">
+                <type name="int32"/>
+              </leaf>
+              <leaf name="low-threshold">
+                <type name="int32"/>
+              </leaf>
+              <leaf name="buffer">
+                <type name="int32"/>
+              </leaf>
+            </container>
+            <container name="alert">
+              <container name="above">
+                <leaf name="above-highthresh-action">
+                  <type name="int-supported-actions"/>
+                </leaf>
+                <leaf name="above-lowthresh-action">
+                  <type name="supported-actions"/>
+                </leaf>
+              </container>
+              <container name="below">
+                <leaf name="below-highthresh-action">
+                  <type name="supported-actions"/>
+                </leaf>
+                <leaf name="below-lowthresh-action">
+                  <type name="supported-actions"/>
+                </leaf>
+              </container>
+            </container>
+          </list>
+        </list>
+      </container>
+    </container>
+  </grouping>
+  <augment target-node="/rbridge:rbridge-id">
+    <uses name="threshold-monitor-group"/>
+  </augment>
+  <container name="threshold-monitor-hidden">
+    <uses name="threshold-monitor-group"/>
+  </container>
+</module>

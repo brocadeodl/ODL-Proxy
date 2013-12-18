@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-system-monitor-ext"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:system-monitor-extensions="urn:brocade.com:mgmt:brocade-system-monitor-ext"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types"
+        xmlns:ietfyang="urn:ietf:params:xml:ns:yang:ietf-yang-types"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def">
+  <namespace uri="urn:brocade.com:mgmt:brocade-system-monitor-ext"/>
+  <prefix value="system-monitor-extensions"/>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <import module="ietf-yang-types">
+    <prefix value="ietfyang"/>
+  </import>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+        San Jose, CA 95134
+        U.S.A
+Tel: +1-408-333-6061
+E-mail: support@Brocade.com
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This sub module defines show system-monitor data model
+Copyright (c) 2011 by Brocade Communications Systems, Inc.
+All rights reserved.</text>
+  </description>
+  <revision date="2011-05-05">
+    <description>
+      <text>Initial version of this module.</text>
+    </description>
+  </revision>
+  <typedef name="system-monitor-health-state-enum">
+    <type name="enumeration">
+      <enum name="state-unknown"/>
+      <enum name="state-healthy"/>
+      <enum name="state-marginal"/>
+      <enum name="state-down"/>
+      <enum name="state-unmonitored"/>
+    </type>
+  </typedef>
+  <typedef name="system-monitor-port-state-enum">
+    <type name="enumeration">
+      <enum name="port-healthy"/>
+      <enum name="port-marginal"/>
+      <enum name="port-faulty"/>
+      <enum name="port-offline"/>
+    </type>
+  </typedef>
+  <augment target-node="/common-def:show">
+    <container name="system"/>
+  </augment>
+  <rpc name="show-system-monitor">
+    <input>
+      <leaf name="rbridge-id">
+        <mandatory value="false"/>
+        <type name="common-def:rbridge-id-all-type"/>
+      </leaf>
+    </input>
+    <output>
+      <list name="switch-status">
+        <leaf name="rbridge-id-out">
+          <type name="common-def:rbridge-id-type"/>
+        </leaf>
+        <leaf name="switch-name">
+          <type name="string"/>
+          <description>
+            <text>name of the switch</text>
+          </description>
+        </leaf>
+        <leaf name="switch-ip">
+          <type name="inet:ip-address"/>
+          <description>
+            <text>ip address of the switch</text>
+          </description>
+        </leaf>
+        <leaf name="report-time">
+          <type name="ietfyang:date-and-time"/>
+          <description>
+            <text>switch report timestamp</text>
+          </description>
+        </leaf>
+        <leaf name="switch-state">
+          <type name="system-monitor-health-state-enum"/>
+          <description>
+            <text>switch status based on components</text>
+          </description>
+        </leaf>
+        <leaf name="switch-state-reason">
+          <type name="string"/>
+          <description>
+            <text>component reason for switch status</text>
+          </description>
+        </leaf>
+        <list name="component-status">
+          <leaf name="component-name">
+            <type name="string"/>
+            <description>
+              <text>component name</text>
+            </description>
+          </leaf>
+          <leaf name="component-state">
+            <type name="system-monitor-health-state-enum"/>
+            <description>
+              <text>component status based on thresholds</text>
+            </description>
+          </leaf>
+        </list>
+        <list name="port-status">
+          <leaf name="port-area">
+            <type name="uint32"/>
+            <description>
+              <text>port identifier</text>
+            </description>
+          </leaf>
+          <leaf name="port-name">
+            <type name="string"/>
+          </leaf>
+          <leaf name="port-state">
+            <type name="system-monitor-port-state-enum"/>
+            <description>
+              <text>port state</text>
+            </description>
+          </leaf>
+        </list>
+      </list>
+    </output>
+  </rpc>
+</module>

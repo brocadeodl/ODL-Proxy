@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Framework Core Module. -->
+
+<ModuleResources ModuleName = "FrameworkMessagingBrokerBasedMessagingBus" ComponentName = "Wave">
+    <ResourceEnum Name = "WaveBrokerBasedMessageType">
+        <Resource Name = "WAVE_BROKER_BASED_MESSAGING_BUS_MESSAGE_TYPE_UNKNOWN">Subscribe</Resource>
+        <Resource Name = "WAVE_BROKER_BASED_MESSAGING_BUS_MESSAGE_TYPE_SUBSCRIBE">Subscribe</Resource>
+        <Resource Name = "WAVE_BROKER_BASED_MESSAGING_BUS_MESSAGE_TYPE_UNSUBSCRIBE">Unsubscribe</Resource>
+        <Resource Name = "WAVE_BROKER_BASED_MESSAGING_BUS_MESSAGE_TYPE_PUBLISH">Publish</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "WaveMessageBrokerStatus">
+        <Resource Name = "WAVE_MESSAGE_BROKER_SUCCESS">Succeeded</Resource>
+        <Resource Name = "WAVE_MESSAGE_BROKER_ERROR_UNKNOWN">Unknown Broker</Resource>
+        <Resource Name = "WAVE_MESSAGE_BROKER_ERROR_NOT_CONNECTED">Broker Not Connected</Resource>
+        <Resource Name = "WAVE_MESSAGE_BROKER_ERROR_REQUEST_CACHED">Broker Request Cached</Resource>
+        <Resource Name = "WAVE_MESSAGE_BROKER_ERROR_PUBLISHING_MESSAGE">Broker Request to Publish Message Failed</Resource>
+        <Resource Name = "WAVE_MESSAGE_BROKER_ERROR_RETRYING_CONNECTION_BACKGROUND">Connection to Broker is being retried in the background</Resource>
+        <Resource Name = "WAVE_MESSAGE_BROKER_ERROR_COULD_NOT_ADD_DUPLICATE_PARAMETERS">A New Broker Could not be added due to duplciate paramters</Resource>
+    </ResourceEnum>
+</ModuleResources>

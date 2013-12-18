@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Framework Core Module. -->
+
+<ModuleResources ModuleName = "systemmonitor" ComponentName = "SystemMonitorResourceIds">
+    <ResourceEnum Name = "SystemMonitorRetcodeEnum">
+        <Resource Name = "SYSTEMMONITOR_INTERNAL_ERROR">%% Error: Internal error</Resource>
+        <Resource Name = "SYSTEMMONITOR_WAVE_ERROR">%% Error: Unable to send request</Resource>
+        <Resource Name = "SYSTEMMONITOR_INVALID_MAPPED_ID">%% Error: Specified rbridge-id is invalid</Resource>
+        <Resource Name = "SYSTEMMONITOR_INVALID_VALUE">%% Error: Input out of bounds</Resource>
+        <Resource Name = "SYSTEMMONITOR_SHOW_HEALTH_ERROR">%% Error: Unable to get switch health report</Resource>
+        <Resource Name = "SYSTEMMONITOR_FW_UNINIT_ERROR">%% Error: FabricWatch has not been initialized</Resource>
+        <Resource Name = "SYSTEMMONITOR_NO_MEMORY">%% Error: Unable to allocate memory</Resource>
+        <Resource Name = "SYSTEMMONITOR_INVALID_SIZE">%% Error: Incorrect buffer size allocated</Resource>
+        <Resource Name = "SYSTEMMONITOR_BACKEND_ERROR">%% Error: Unspecified error from the backend</Resource>
+        <Resource Name = "SYSTEMMONITOR_NOT_LICENSED">%% Error: Fabric Watch license required</Resource>
+        <Resource Name = "SYSTEMMONITOR_INVALID_CLASS">%% Error: Unknown class</Resource>
+        <Resource Name = "SYSTEMMONITOR_MAILFLAG_ERROR">%% Error: No emails configured to enable</Resource>
+        <Resource Name = "SYSTEMMONITOR_EMAIL_ERROR">%% Error: Unknown email format</Resource>
+        <Resource Name = "SYSTEMMONITOR_EMAIL_MAX">%% Error: Exceeded max supported emails</Resource>
+        <Resource Name = "SYSTEMMONITOR_EMAIL_NOT_IN_LIST">%% Error: Cannot find email to delete in list</Resource>
+        <Resource Name = "SYSTEMMONITOR_EMAIL_IN_LIST">%% Error: Email already in list</Resource>
+        <Resource Name = "SYSTEMMONITOR_FRUDB_ERROR">%% Error: Error saving FRU mail in DB</Resource>
+        <Resource Name = "SYSTEMMONITOR_SECDB_ERROR">%% Error: Error saving Security mail in DB</Resource>
+        <Resource Name = "SYSTEMMONITOR_SFPDB_ERROR">%% Error: Error saving Sfp mail in DB</Resource>
+        <Resource Name = "SYSTEMMONITOR_INTDB_ERROR">%% Error: Error saving Interface mail in DB</Resource>
+        <Resource Name = "SYSTEMMONITOR_RESOURCEDB_ERROR">%% Error: Error saving Resource mail in DB</Resource>
+        <Resource Name = "SYSTEMMONITOR_HOSTNAME_ERROR">%% Error: Input a valid IPv4/IPv6 address </Resource>
+    </ResourceEnum>
+    <ResourceEnum Name = "systemMonitorFRU">
+        <Resource Name = "SM_FW_NOTREADY_ERROR">%% Error: Fabric Watch has not finished initialization. Try again after sometime </Resource>
+        <Resource Name = "SM_INVALID_ACTION_ERROR">%% Error: Not a supported action</Resource>
+        <Resource Name = "SM_INVALID_LOWLIMIT_ERROR">%% Error: Low Limit or Limit cannot be higher than High Limit</Resource>
+        <Resource Name = "SM_INVALID_LIMIT_ERROR">%% Error: Limit cannot be lower than Low Limit</Resource>
+        <Resource Name = "SM_INVALID_STATE_ERROR">%% Error: Not a supported state</Resource>
+        <Resource Name = "SM_FW_GET_BACKEND_ERROR">%% Error: Fabric Watch Backend Get Call Failed. Most likely FW is not ready </Resource>
+        <Resource Name = "SM_FW_SET_BACKEND_ERROR">%% Error: Fabric Watch Backend Set Call Failed. Most likely FW is not ready </Resource>
+        <Resource Name = "SM_INVALID_THRESH_ERROR">%% Error: Threshold value provided is greater than number of components present in the system</Resource>
+    </ResourceEnum>
+</ModuleResources>

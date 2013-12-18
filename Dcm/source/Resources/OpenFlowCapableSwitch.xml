@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for NSP Module. -->
+
+<ModuleResources ModuleName = "OpenFlowCapableSwitch" ComponentName = "Slm">
+    <ResourceEnum Name = "OpenFlowCapableSwitchCreationStatus">
+        <Resource Name = "OPEN_FLOW_CAPABLE_SWITCH_ERROR_ALREADY_EXISTS">An Open Flow Capable Switch with the given parameters already exists</Resource>
+    </ResourceEnum>
+</ModuleResources>

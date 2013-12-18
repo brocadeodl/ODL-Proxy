@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Zone Module. -->
+
+<ModuleResources ModuleName = "Zone" ComponentName = "Dcm">
+    <ResourceEnum Name = "ZoneOperationErrorStatus">
+        <Resource Name = "ZONE_ERROR_VCS_DISABLED">%% Error: Command not supported while VCS is disabled.</Resource>
+        <Resource Name = "ZONE_ERROR_INVALID_KEY">%% Error: Input name/value is not found.</Resource>
+        <Resource Name = "ZONE_ERROR_TRANS_IN_PROGRESS">%% Error: Another Transaction is already in progress.</Resource>
+        <Resource Name = "ZONE_ERROR_DUPLICATE_KEY">%% Error: Duplicate member.</Resource>
+        <Resource Name = "ZONE_ERROR_NO_MEMORY">%% Error: Unable to allocate Memory.</Resource>
+        <Resource Name = "ZONE_ERROR_TRANS_ABORT_MERGE_RECEIVED">%% Error: Request failed because Zoning Transaction was aborted when Zone Merge was received sometime before the request. Try again.</Resource>
+        <Resource Name = "ZONE_ERROR_TRANS_ABORT_CFG_UPD_RECEIVED">%% Warning: Zone Config update received.</Resource>
+        <Resource Name = "ZONE_ERROR_TRANS_ABORT_BAD_CFG">%% Error: Bad Zone Config.</Resource>
+        <Resource Name = "ZONE_ERROR_TRANS_ABORT_OPERATION_FAILED">%% Error: Zoning Operation failed.</Resource>
+        <Resource Name = "ZONE_ERROR_TRANS_ABORT_SHELL_EXITED">%% Error: Shell exited.</Resource>
+        <Resource Name = "ZONE_ERROR_TRANS_ABORT_USER_COMMAND">%% Warning: User command.</Resource>
+        <Resource Name = "ZONE_ERROR_TRANS_ABORT_DANGLING_XACT">%% Warning: Removed dangling transaction.</Resource>
+        <Resource Name = "ZONE_ERROR_TRANS_ABORT_SYNCDUMP_OCCURRED">%% Warning: Sync dump occurred.</Resource>
+        <Resource Name = "ZONE_ERROR_NO_EFF_CFG">%% Error: No effective configuration found.</Resource>
+        <Resource Name = "ZONE_ERROR_INVALID_VALUE">%% Error: Invalid value.</Resource>
+        <Resource Name = "ZONE_ERROR_MBR_EXIST">%% Error: Cfg member already exists.</Resource>
+        <Resource Name = "ZONE_ERROR_DUPLICATE_NAME">%% Error: Duplicate name.</Resource>
+        <Resource Name = "ZONE_ERROR_NON_EXIST">%% Error: Name not found in zone database.</Resource>
+        <Resource Name = "ZONE_ERROR_INVALID_NAME">%% Error: Invalid name.</Resource>
+        <Resource Name = "ZONE_ERROR_UNEXPECTED_ERR">%% Error: Zoning operation failed.</Resource>
+        <Resource Name = "ZONE_ERROR_UNSUPPORTED_FIRMWARE_IN_FABRIC">%% Error: Zoning is not supported because unsupported firmware is present in the fabric.</Resource>
+        <Resource Name = "ZONE_ERROR_UNSUPPORTED_MODE">%% Error: Zoning is not supported because rbridge is in unsupported mode.</Resource>
+        <Resource Name = "ZONE_ERROR_ACTIVE_TRANSACTION_PRESENT">%% Error: Command fails due to presence of an active fabric wide transaction.</Resource>
+        <Resource Name = "ZONE_ERROR_UNSUPPORTED_MEMBER_TYPE">%% Error: Command fails due to unsupported member type given.</Resource>
+        <Resource Name = "ZONE_ERROR_READ_ONLY">%% Error: Invalid Command.</Resource>
+        <Resource Name = "ZONE_ERROR_INVALID_WWN">%% Error: Invalid WWN.</Resource>
+        <Resource Name = "ZONE_ERROR_NOMEMORY">%% Error: Generic malloc failure.</Resource>
+        <Resource Name = "ZONE_ERROR_EZACCEPT">%% Warning: No zoning rule violation.</Resource>
+        <Resource Name = "ZONE_ERROR_EZBADPORT">%% Error: Non-existent port number.</Resource>
+        <Resource Name = "ZONE_ERROR_FCTYPEMIX">%% Error: Specific FC type and wildcard mix.</Resource>
+        <Resource Name = "ZONE_ERROR_ERSINGLEDEV">%% Error: More than one dev when LUN presents.</Resource>
+        <Resource Name = "ZONE_ERROR_EZLUNMIX">%% Error: Mixture of devices with and without LUN at the same port.</Resource>
+        <Resource Name = "ZONE_ERROR_EZMENMIX">%% Error: Mix of port and WWN zone members.</Resource>
+        <Resource Name = "ZONE_ERROR_EZHARDSOFTMIX">%% Error: Mix of hard and soft zones.</Resource>
+        <Resource Name = "ZONE_ERROR_EZFAQLMIX">%% Error: Mixing hard zoning with FA or QL zone.</Resource>
+        <Resource Name = "ZONE_ERROR_EZLUNMENMIX">%% Error: Mix of QQQ.</Resource>
+        <Resource Name = "ZONE_ERROR_EZNEMENMIX">%% Error: Mix of QQQ.</Resource>
+        <Resource Name = "ZONE_ERROR_EZLUNOFFSETFULL">%% Error: Lun offset entries takes more than 4.</Resource>
+        <Resource Name = "ZONE_ERROR_ZT_SOFTZONE">%% Warning: Soft zoning - no need for ZT.</Resource>
+        <Resource Name = "ZONE_ERROR_ZT_FABASSIST">%% Warning: FA zone - no need for ZT.</Resource>
+        <Resource Name = "ZONE_ERROR_ZT_QLOOPZONE">%% Warning: Quick loop zoning - no need for ZT.</Resource>
+        <Resource Name = "ZONE_ERROR_ZT_DRIVERERR">%% Error: Driver returns error.</Resource>
+        <Resource Name = "ZONE_ERROR_ZG_NO_MORE_CAM">%% Error: No more CAM entry in port driver.</Resource>
+        <Resource Name = "ZONE_ERROR_ZCHECKBADWWN">%% Error: Zone check bad WWN authentication.</Resource>
+        <Resource Name = "ZONE_ERROR_WWN_IN_PORTZONE">%% Error: WWN device in hard PORT zone.</Resource>
+        <Resource Name = "ZONE_ERROR_OFFSET_MASK_FULL">%% Error: No offset register available.</Resource>
+        <Resource Name = "ZONE_ERROR_PORT_IS_OFFLINE">%% Error: Port is offline.</Resource>
+        <Resource Name = "ZONE_ERROR_ALL_PORTS_ARE_OFFLINE">%% Error: All ports are offline.</Resource>
+        <Resource Name = "ZONE_ERROR_QLOOP_NOT_SUPPORTED">%% Error: QuickLoop not supported.</Resource>
+        <Resource Name = "ZONE_ERROR_PORT_EPORT">%% Error: Port is an E-port.</Resource>
+        <Resource Name = "ZONE_ERROR_NO_CHANGE_NO_SAVE">%% Warning: No changes in the zoning configuration to be saved.</Resource>
+        <Resource Name = "ZONE_ERROR_NO_CHANGE_NO_ENABLE">%% Warning: No changes in the zoning configuration to be enabled.</Resource>
+        <Resource Name = "ZONE_ERROR_EMPTY_CFG_W_ENABLE">%% Error: No new cfg,zone,alias groups defined.</Resource>
+        <Resource Name = "ZONE_ERROR_INDEX_TOO_BIG">%% Error: Switch in the fabric cannot handle.</Resource>
+        <Resource Name = "ZONE_WARN_DEFAULT_ZONE_ACCESS_MODE">%% Warning: Default Zone Access Mode is effective only when there is no enabled cfg in effect and will not take effect until transaction is committed.</Resource>
+        <Resource Name = "ZONE_WARN_DEFAULT_ZONE_NEED_SAVE">%% Warning: Default Zone Access Mode is already in requested mode and will not take effect until transaction is committed.</Resource>
+        <Resource Name = "ZONE_ERROR_EAGAIN">%% Error: %1</Resource>
+        <Resource Name = "ZONE_ERROR_ABORT_FAILED">%% Error: Transaction abort failed.</Resource>
+        <Resource Name = "ZONE_ERROR_USE_DEFINE">%% Error: Invalid command. Update defined-configuration and use cfg-name or cfg-action to commit changes.</Resource>
+        <Resource Name = "ZONE_ERROR_NO_TRANS">%% Error: There is no outstanding transaction.</Resource>
+        <Resource Name = "ZONE_ERROR_COMMAND_DID_NOT_COMPLETE">%% Error: Command Failed.  Please retry later.</Resource>
+        <Resource Name = "ZONE_ERROR_EMPTY_ZONE_OBJECT">%% Error: Command Failed. %1</Resource>
+        <Resource Name = "ZONE_ERROR_CFG_ENABLE_INVALID_CFGNAME">%% Error: Cfg-name '%1' not found. Please retry using a valid cfg-name.</Resource>
+        <Resource Name = "ZONE_ERROR_CFG_ALIAS_MEMBER">%% Error: Command Failed. %1</Resource>
+        <Resource Name = "ZONE_ERROR_MULTI_MEMBER">%% Error: Command Failed. Multi-member remove operation is not supported</Resource>
+    </ResourceEnum>
+</ModuleResources>
+    </ResourceEnum>
+</ModuleResources>

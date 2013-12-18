@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-port-profile"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:appm="urn:brocade.com:mgmt:brocade-port-profile"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface"
+        xmlns:mac-access-list="urn:brocade.com:mgmt:brocade-mac-access-list">
+  <namespace uri="urn:brocade.com:mgmt:brocade-port-profile"/>
+  <prefix value="appm"/>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <import module="brocade-mac-access-list">
+    <prefix value="mac-access-list"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+        San Jose, CA 95134
+         U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com 
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This management module is an instrumentation to manage  
+Automatic Port Profiles in the device.
+        
+Glossary of the terms used:
+--------------------------- 
+APPM - Automatic Port Profile Management.
+AMPP - Automatic Migration of Port Profile.
+VM   - Virtual Machine.
+VAL  - Virtual Access Layer, provided by VCS.
+VCS  - Virtual Cluster Switching.
+        
+        
+A port-profile is a collection of network policies to be 
+applied on a network traffic on a given port.
+        
+Automatic Migration of Port Profile (AMPP) functionality 
+provides fabric wide configuration of Ethernet policies and 
+achieves per port-profile forwarding and enables network level 
+features to support VM mobility.
+        
+With Server Virtualization infrastructure, a VM can move from 
+one physical server to another. When such move occurs, it is 
+ideal for access-layer to apply the network policies on the 
+VM transparently. The Brocade VAL service provides such 
+automatic migration of the port-profile on a given VMAC 
+transparently. 
+   
+                                          [Hypervisor2]
+                                           _____
+                                          |     |
+                                         /|VMAC |
+                     '*************'    / |_____|
+                     '             '   /     ^
+                     '             '  /      |
+                     '             '_/       ^
+                     ' [VCS Fabric]'_        |
+                     ' VMAC-PP map ' \     VM mobility
+                     '             '  \      |
+                     '             '   \     ^
+                     '*************'    \  __|__
+                                         \|     |
+                                          |VMAC |
+                                          |_____|
+                                          [Hypervisor1]
+                                          
+This management module provides instrumentation to 
+   - create/activate port-profile
+   - map port-profile to MAC
+
+A Port-profile typically comprises of:
++--------------------------------------------------------------+
+| sub-profile         Description                              |
++--------------------------------------------------------------+
+| Vlan profile        Vlan membership and filtering rules.     |
+| QoS profile         Qos policies.                            |
+| FCoE profile        The attributes needed for the port to    |
+|                     support FCoE: FCoE VLAN, FCMAP, FCoE     |
+|                     Priority, Virtual Fabric ID etc.         |
+| Security profile    Security rules needed for the server     |
+|                     port, typically enabling 802.1x with EAP |
+|                     TLV extensions for VM Mobility, MAC based|
+|                     standard and extended ACLs.              |
++--------------------------------------------------------------+
+        
+VM MAC addresses are added to a port-profile to specify all the 
+network attributes for a server port. A port-profile is 
+activated on a server port when as part of regular MAC learning. 
+VM MAC to port-profile association is specified using this 
+management module. The actual association in hardware is applied
+when the MAC address is learned.</text>
+  </description>
+  <revision date="2011-07-21">
+    <description>
+      <text>Initial version of this management module.</text>
+    </description>
+  </revision>
+  <typedef name="port-profile-name-type">
+    <type name="common-def:name-string128"/>
+    <description>
+      <text>The name of the port-profile.</text>
+    </description>
+  </typedef>
+  <typedef name="port-profile-domain-name-type">
+    <type name="common-def:name-string128"/>
+    <description>
+      <text>The name of the port-profile-domain.</text>
+    </description>
+  </typedef>
+  <typedef name="appm-sw-mode-type">
+    <type name="enumeration">
+      <enum name="access">
+        <value value="1"/>
+        <description>
+          <text>Set the layer2 interface to
+access mode.</text>
+        </description>
+      </enum>
+      <enum name="trunk">
+        <value value="2"/>
+        <description>
+          <text>Set the layer 2 interface to 
+trunk mode.</text>
+        </description>
+      </enum>
+    </type>
+    <description>
+      <text>The definition for specifying the mode of the L2 
+interface.'access' sets the layer2 interface to access
+mode and 'trunk' sets the layer2 interface to trunk
+mode.</text>
+    </description>
+  </typedef>
+  <list name="port-profile">
+    <key value="name"/>
+    <description>
+      <text>The list of port-profiles in the managed device. Each row
+represents port profile name and its subprofiles.</text>
+    </description>
+    <leaf name="name">
+      <type name="common-def:name-string128"/>
+      <description>
+        <text>The name of the port-profile.</text>
+      </description>
+    </leaf>
+    <container name="allow">
+      <description>
+        <text>Allow/Drop non-profiled macs</text>
+      </description>
+      <leaf name="nonprofiledmacs">
+        <description>
+          <text>non-profiled macs</text>
+        </description>
+        <type name="empty"/>
+      </leaf>
+    </container>
+    <container name="vlan-profile">
+      <presence value="true"/>
+      <description>
+        <text>The Vlan profile.</text>
+      </description>
+    </container>
+    <container name="fcoe-profile">
+      <presence value="true"/>
+      <description>
+        <text>The FCoE profile.</text>
+      </description>
+    </container>
+    <container name="qos-profile">
+      <presence value="true"/>
+      <description>
+        <text>The QoS profile.</text>
+      </description>
+    </container>
+    <container name="security-profile">
+      <presence value="true"/>
+      <description>
+        <text>The Security profile.</text>
+      </description>
+    </container>
+    <container name="restrict-flooding-container">
+      <leaf name="restrict-flooding">
+        <type name="empty"/>
+        <description>
+          <text>Restrict flooding</text>
+        </description>
+      </leaf>
+    </container>
+  </list>
+  <container name="port-profile-global">
+    <description>
+      <text>This provides the grouping for configuration parameters
+to activate and MAC for a port profile.</text>
+    </description>
+    <list name="port-profile">
+      <key value="name"/>
+      <description>
+        <text>The list of automatic port profiles. Each row
+provides the name of the port profile, indicates if the
+profile is activated and the list of MAC addresses 
+associated to the port profile.  </text>
+      </description>
+      <leaf name="name">
+        <type name="common-def:name-string128"/>
+        <description>
+          <text>The name of the port-profile.</text>
+        </description>
+      </leaf>
+      <leaf name="activate">
+        <type name="empty"/>
+        <description>
+          <text>This specifies if this port-profile needs to be 
+activated or not. The presence of this leaf 
+indicates that this  profile is activated for 
+profiling. Else, it is not activated.</text>
+        </description>
+      </leaf>
+      <list name="static">
+        <key value="mac-address"/>
+        <description>
+          <text> The list of static VM macs associated to
+port profile. Each row represents a MAC address
+associated to the port profile.</text>
+        </description>
+        <leaf name="mac-address">
+          <type name="mac-access-list:mac-address-type"/>
+          <description>
+            <text>This specifies the  MAC address for a 
+port-profile identified by the value of the 
+corresponding instance of 'port-profile/name'
+can be mapped and applied.</text>
+          </description>
+        </leaf>
+      </list>
+    </list>
+  </container>
+  <grouping name="port-profile-port-cmds">
+    <leaf name="port-profile-port">
+      <type name="empty"/>
+      <description>
+        <text>This specifies if a physical/logical port can be 
+enabled for port-profiling. The presence of this 
+leaf indicates that the port is enabled for 
+port-profiling. Else, it is not enabled.
+                
+Enabling a port for port-profiling results in to
+application of network policies (as per PP-MAC mapping)
+following MAC learning process.</text>
+      </description>
+    </leaf>
+  </grouping>
+  <grouping name="port-profile-port-association-cmds">
+    <container name="port-profile-to-interface-associations">
+      <container name="port-profile-port">
+        <container name="port-to-port-profile-domain-association">
+          <description>
+            <text>Associate a port-profile-domain with an interface.</text>
+          </description>
+          <leaf name="profile-domain-name">
+            <type name="port-profile-domain-name-type"/>
+            <description>
+              <text>The name of the port-profile-domain.</text>
+            </description>
+          </leaf>
+        </container>
+        <list name="port-to-port-profile-associations">
+          <key value="port-to-port-profile-association"/>
+          <description>
+            <text>The list of automatic port profiles. Each row
+provides the name of the port profile associated 
+with an interface.</text>
+          </description>
+          <leaf name="port-to-port-profile-association">
+            <type name="port-profile-name-type"/>
+            <description>
+              <text>The name of the port-profile.</text>
+            </description>
+          </leaf>
+        </list>
+      </container>
+    </container>
+  </grouping>
+  <grouping name="appm-allowed-vlan-cmds">
+    <container name="allowed">
+      <description>
+        <text>A set of Vlan related configuration elements.</text>
+      </description>
+      <container name="vlan">
+        <description>
+          <text>This provides the grouping of all VLAN 
+configuration elements for the port profile.</text>
+        </description>
+        <leaf name="all">
+          <type name="empty"/>
+          <description>
+            <text>This specifies whether all the VLANs should be
+allowed to transmit or receive through the
+Layer2 interface or not.
+
+The presence of this leaf specifies that all 
+the VLANs are allowed to 
+transmit/receive through the layer 2
+interface.</text>
+          </description>
+        </leaf>
+        <leaf name="none">
+          <type name="empty"/>
+          <description>
+            <text>This specifies whether no vlan is allowed to
+transmit or receive through the Layer 2 
+interface or not.
+
+The presence of this leaf specifies that no 
+VLAN is allowed to transmit or
+receive through the layer2 interface.</text>
+          </description>
+        </leaf>
+        <leaf name="add">
+          <type name="interface:ui32-vlan-range"/>
+          <description>
+            <text>This specifies that only the VLANs or range of 
+VLANs configured for this leaf are allowed to 
+transmit or receive through the
+layer 2 interface.</text>
+          </description>
+        </leaf>
+        <leaf name="except">
+          <type name="interface:ui32-vlan-range"/>
+          <description>
+            <text>This specifies that all VLANs
+except this VLAN range will be allowed to
+transmit or receive through this 
+Layer2 interface.</text>
+          </description>
+        </leaf>
+        <leaf name="remove">
+          <type name="interface:ui32-vlan-range"/>
+          <description>
+            <text>This specifies that the specified VLAN range 
+will be removed from the list of VLAN ranges
+allowed to transmit or receive through this 
+Layer2 interface.</text>
+          </description>
+        </leaf>
+      </container>
+    </container>
+  </grouping>
+  <grouping name="appm-trunk-vlan-classification">
+    <description>
+      <text>A set of elements defining the vlan access policy.</text>
+    </description>
+    <container name="trunk-vlan-classification">
+      <container name="allowed">
+        <description>
+          <text>Set the VLANs that will Xmit/Rx through the Layer2
+interface</text>
+        </description>
+        <container name="vlan">
+          <list name="add">
+            <key value="trunk-vlan-id trunk-ctag-id"/>
+            <leaf name="trunk-vlan-id">
+              <type name="interface:vlan-type"/>
+            </leaf>
+            <leaf name="trunk-ctag-id">
+              <type name="interface:dot1q-vlan-type"/>
+            </leaf>
+          </list>
+          <list name="remove">
+            <key value="trunk-vlan-id trunk-ctag-id"/>
+            <leaf name="trunk-vlan-id">
+              <type name="interface:vlan-type"/>
+            </leaf>
+            <leaf name="trunk-ctag-id">
+              <type name="interface:dot1q-vlan-type"/>
+            </leaf>
+          </list>
+        </container>
+      </container>
+    </container>
+  </grouping>
+  <augment target-node="/port-profile/vlan-profile">
+    <container name="switchport">
+      <presence value="true"/>
+      <description>
+        <text>This provides the grouping of all Switching character 
+configuration elements of Layer 2 interface.</text>
+      </description>
+      <leaf name="basic">
+        <type name="empty"/>
+        <description>
+          <text>This specifies if the Layer 2 interface is in
+basic Switching mode or not.
+ 
+The presence of this leaf specifies that Ethernet
+port acts as a basic Layer2 interface.</text>
+        </description>
+      </leaf>
+      <container name="mode">
+        <description>
+          <text>The mode of the Layer2 interface.</text>
+        </description>
+        <leaf name="vlan-mode">
+          <type name="appm-sw-mode-type"/>
+          <description>
+            <text> This specifies the mode of operation for
+the Layer 2 ethernet port.</text>
+          </description>
+        </leaf>
+      </container>
+      <container name="access">
+        <description>
+          <text>This specifies that the Layer 2 interface is in
+access mode.</text>
+        </description>
+        <container name="vlan">
+          <description>
+            <text>This provides the grouping of Access VLAN 
+configuration elements.</text>
+          </description>
+          <leaf name="name">
+            <type name="interface:vlan-type"/>
+            <description>
+              <text>This specifies the Interface VLAN number.</text>
+            </description>
+          </leaf>
+        </container>
+      </container>
+      <container name="access-mac-vlan-classification">
+        <container name="access">
+          <description>
+            <text>The access layer characteristics of this
+interface.</text>
+          </description>
+          <list name="vlan">
+            <key value="access-vlan-id access-mac-address"/>
+            <leaf name="access-vlan-id">
+              <type name="interface:vlan-type"/>
+              <description>
+                <text>Set the default VLAN for the interface</text>
+              </description>
+            </leaf>
+            <leaf name="access-mac-address">
+              <type name="interface:mac-address-type"/>
+              <description>
+                <text>Associate the Mac address with a vlan</text>
+              </description>
+            </leaf>
+          </list>
+        </container>
+      </container>
+      <container name="access-mac-group-vlan-classification">
+        <container name="access">
+          <description>
+            <text>The access layer characteristics of this
+interface.</text>
+          </description>
+          <list name="vlan">
+            <key value="access-vlan-id access-vlan-mac-group"/>
+            <leaf name="access-vlan-id">
+              <type name="interface:vlan-type"/>
+              <description>
+                <text>Set the default VLAN for the interface</text>
+              </description>
+            </leaf>
+            <leaf name="access-vlan-mac-group">
+              <type name="uint32"/>
+              <description>
+                <text>Associate a Mac group with a vlan</text>
+              </description>
+            </leaf>
+          </list>
+        </container>
+      </container>
+      <container name="trunk">
+        <uses name="appm-allowed-vlan-cmds"/>
+        <uses name="appm-trunk-vlan-classification"/>
+        <description>
+          <text>This specifies that Layer2 interface in
+trunking mode.</text>
+        </description>
+        <container name="native-vlan">
+          <description>
+            <text>This specifies the native VLAN characteristics
+of the Layer2 trunk interface for classifying
+untagged traffic.</text>
+          </description>
+          <leaf name="native-vlan-id">
+            <type name="uint32">
+              <range value="1..8191">
+                <description>
+                  <text>This specifies the range of values for 
+Vlan interface number.</text>
+                </description>
+              </range>
+            </type>
+          </leaf>
+          <leaf name="trunk-native-vlan-ctag-id">
+            <type name="interface:dot1q-vlan-type"/>
+          </leaf>
+        </container>
+      </container>
+    </container>
+  </augment>
+  <augment target-node="/port-profile/qos-profile">
+    <leaf name="cee">
+      <type name="common-def:name-string32"/>
+      <description>
+        <text> This specifies QoS CEE Map for the port.</text>
+      </description>
+    </leaf>
+    <container name="qos">
+      <description>
+        <text>This provides the grouping of all Quality of Service 
+parameters for the port.</text>
+      </description>
+      <leaf name="cos">
+        <type name="int32">
+          <range value="0 .. 7">
+            <description>
+              <text>The Range of Default CoS value.</text>
+            </description>
+          </range>
+        </type>
+        <default value="0"/>
+        <description>
+          <text>This specifies the default Class of Service
+(CoS).</text>
+        </description>
+      </leaf>
+      <container name="trust">
+        <description>
+          <text>This specifies QoS Trust.</text>
+        </description>
+        <leaf name="trust-cos">
+          <type name="empty"/>
+          <description>
+            <text>This specifies that trust L2 CoS field 
+in incoming packets for 
+deriving internal Traffic Class.</text>
+          </description>
+        </leaf>
+      </container>
+      <leaf name="cos-mutation">
+        <type name="common-def:name-string32"/>
+        <description>
+          <text>This specifies the CoS-t0-CoS mutation value.</text>
+        </description>
+      </leaf>
+      <leaf name="cos-traffic-class">
+        <type name="common-def:name-string32"/>
+        <description>
+          <text>This specifies the mapping between Class of service
+to Traffic class.</text>
+        </description>
+      </leaf>
+      <container name="flowcontrol">
+        <description>
+          <text>This provides the grouping of all flow control 
+configuration elements.</text>
+        </description>
+        <container name="flowcontrolglobal">
+          <leaf name="tx">
+            <type name="enumeration">
+              <enum name="on">
+                <value value="1"/>
+                <description>
+                  <text>Enable Pause generation.</text>
+                </description>
+              </enum>
+              <enum name="off">
+                <value value="0"/>
+                <description>
+                  <text>Disable Pause generation.</text>
+                </description>
+              </enum>
+            </type>
+            <description>
+              <text>This specifies if the pause generation is 
+enabled or disabled.</text>
+            </description>
+          </leaf>
+          <leaf name="rx">
+            <type name="enumeration">
+              <enum name="on">
+                <value value="1"/>
+                <description>
+                  <text>Enable Pause reception.</text>
+                </description>
+              </enum>
+              <enum name="off">
+                <value value="0"/>
+                <description>
+                  <text>Disable Pause reception</text>
+                </description>
+              </enum>
+            </type>
+            <description>
+              <text>This specifies if the Pause reception is
+enabled or disabled.</text>
+            </description>
+          </leaf>
+        </container>
+        <list name="pfc">
+          <key value="pfc-cos"/>
+          <description>
+            <text>The list of priority based flow control 
+elements.Each row represents the Pfc Cos, 
+Pause generation and reception values</text>
+          </description>
+          <leaf name="pfc-cos">
+            <type name="int32">
+              <range value="0 .. 7">
+                <description>
+                  <text>This specifies the range for CoS 
+Value.</text>
+                </description>
+              </range>
+            </type>
+            <description>
+              <text>This specifies the CoS value.</text>
+            </description>
+          </leaf>
+          <leaf name="pfc-tx">
+            <type name="enumeration">
+              <enum name="on">
+                <value value="1"/>
+                <description>
+                  <text>Enable pause generation.</text>
+                </description>
+              </enum>
+              <enum name="off">
+                <value value="0"/>
+                <description>
+                  <text>Disable pause generation.</text>
+                </description>
+              </enum>
+            </type>
+            <mandatory value="true"/>
+            <description>
+              <text>This specifies if the Pause generation is
+enabled or disabled. 'on' enables the pause
+generation and 'off' disables pause 
+generation.</text>
+            </description>
+          </leaf>
+          <leaf name="pfc-rx">
+            <type name="enumeration">
+              <enum name="on">
+                <value value="1"/>
+                <description>
+                  <text>Enable pause reception.</text>
+                </description>
+              </enum>
+              <enum name="off">
+                <value value="0"/>
+                <description>
+                  <text>Disable pause reception.</text>
+                </description>
+              </enum>
+            </type>
+            <mandatory value="true"/>
+            <description>
+              <text>This specifies if the Pause reception is
+enabled or disabled. 'on' enables the pause
+reception and 'off' disables pause
+reception.</text>
+            </description>
+          </leaf>
+        </list>
+      </container>
+    </container>
+  </augment>
+  <augment target-node="/port-profile/fcoe-profile">
+    <container name="fcoeport">
+      <description>
+        <text>The port associated with this port profile
+will act as an FCOE port.</text>
+      </description>
+      <leaf name="fcoe-map-name">
+        <type name="string">
+          <length value="1..32">
+            <description>
+              <text>This specifies the range of characters 
+that can be used for FCOE map name.</text>
+            </description>
+          </length>
+        </type>
+      </leaf>
+    </container>
+  </augment>
+  <augment target-node="/port-profile/security-profile">
+    <container name="mac">
+      <description>
+        <text>This provides the grouping for MAC configuration
+elements.</text>
+      </description>
+      <container name="access-group">
+        <description>
+          <text>This provides the grouping of configuration
+elements of MAC access list.</text>
+        </description>
+        <leaf name="access-group-name">
+          <type name="mac-access-list:mac-acl-name"/>
+          <description>
+            <text>This specifies the Access list name which is 
+already configured at the global level. This
+access list contains access rules.</text>
+          </description>
+        </leaf>
+        <leaf name="in">
+          <type name="empty"/>
+          <description>
+            <text>This specifies if the direction is ingress or
+not.
+The presence of this leaf indicates Ingress 
+direction.</text>
+          </description>
+        </leaf>
+      </container>
+    </container>
+  </augment>
+  <list name="port-profile-domain">
+    <key value="port-profile-domain-name"/>
+    <leaf name="port-profile-domain-name">
+      <type name="port-profile-domain-name-type"/>
+    </leaf>
+    <list name="profile">
+      <key value="profile-name"/>
+      <leaf name="profile-name">
+        <type name="port-profile-name-type"/>
+      </leaf>
+    </list>
+  </list>
+  <augment target-node="/interface:interface/interface:fortygigabitethernet">
+    <uses name="port-profile-port-cmds"/>
+    <uses name="port-profile-port-association-cmds"/>
+  </augment>
+  <augment target-node="/interface:interface/interface:tengigabitethernet">
+    <uses name="port-profile-port-cmds"/>
+    <uses name="port-profile-port-association-cmds"/>
+  </augment>
+  <augment target-node="/interface:interface/interface:gigabitethernet">
+    <uses name="port-profile-port-cmds"/>
+    <uses name="port-profile-port-association-cmds"/>
+  </augment>
+  <augment target-node="/interface:interface/interface:port-channel">
+    <uses name="port-profile-port-cmds"/>
+    <uses name="port-profile-port-association-cmds">
+      <refine target-node="port-profile-to-interface-associations/port-profile-port/port-to-port-profile-associations"/>
+      <refine target-node="port-profile-to-interface-associations/port-profile-port/port-to-port-profile-domain-association"/>
+    </uses>
+  </augment>
+</module>

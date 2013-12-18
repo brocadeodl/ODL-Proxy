@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-arp"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:arp="urn:brocade.com:mgmt:brocade-arp"
+        xmlns:mac-access-list="urn:brocade.com:mgmt:brocade-mac-access-list"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface"
+        xmlns:rbridge="urn:brocade.com:mgmt:brocade-rbridge"
+        xmlns:vrf="urn:brocade.com:mgmt:brocade-vrf"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types">
+  <namespace uri="urn:brocade.com:mgmt:brocade-arp"/>
+  <prefix value="arp"/>
+  <import module="brocade-mac-access-list">
+    <prefix value="mac-access-list"/>
+  </import>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <import module="brocade-rbridge">
+    <prefix value="rbridge"/>
+  </import>
+  <import module="brocade-vrf">
+    <prefix value="vrf"/>
+  </import>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger way,
+San Jose, CA 95134,
+U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This management module is an instrumentation to manage
+ARPD Daemon</text>
+  </description>
+  <revision date="2011-10-31">
+    <description>
+      <text>Initial version of this management module.</text>
+    </description>
+  </revision>
+  <typedef name="slot-id">
+    <type name="uint8">
+      <range value="1..16">
+        <description>
+          <text>Slot-ID;;  1..16</text>
+        </description>
+      </range>
+    </type>
+  </typedef>
+  <grouping name="arp_cmds">
+    <container name="system-max">
+      <status value="obsolete"/>
+      <leaf name="arp">
+        <type name="uint32">
+          <range value="0..16384"/>
+        </type>
+        <default value="4096"/>
+      </leaf>
+      <description>
+        <text>Configure system-wide maximum values (reload required)'.
+           This support is obsoleted.</text>
+      </description>
+    </container>
+    <uses name="arp-entry-group"/>
+  </grouping>
+  <grouping name="arp-entry-group">
+    <list name="arp-entry">
+      <key value="arp-ip-address"/>
+      <leaf name="arp-ip-address">
+        <type name="inet:ipv4-address"/>
+        <description>
+          <text>IPv4 Address</text>
+        </description>
+      </leaf>
+      <leaf name="mac-address-value">
+        <type name="mac-access-list:mac-address-type"/>
+      </leaf>
+      <leaf name="interfacename">
+        <type name="enumeration">
+          <enum name="interface">
+            <description>
+              <text>Interface to use</text>
+            </description>
+          </enum>
+        </type>
+      </leaf>
+      <choice name="interfacetype">
+        <case name="GigabitEthernet">
+          <leaf name="GigabitEthernet">
+            <description>
+              <text>GigabitEthernet</text>
+            </description>
+            <type name="interface:interface-type"/>
+          </leaf>
+        </case>
+        <case name="TenGigabitEthernet">
+          <leaf name="TenGigabitEthernet">
+            <description>
+              <text>TenGigabitEthernet</text>
+            </description>
+            <type name="interface:interface-type"/>
+          </leaf>
+        </case>
+        <case name="FortyGigabitEthernet">
+          <leaf name="FortyGigabitEthernet">
+            <description>
+              <text>FortyGigabitEthernet</text>
+            </description>
+            <type name="interface:interface-type"/>
+          </leaf>
+        </case>
+        <case name="Ve">
+          <leaf name="Ve">
+            <description>
+              <text>Ve</text>
+            </description>
+            <type name="interface:vlan-type"/>
+          </leaf>
+        </case>
+      </choice>
+    </list>
+  </grouping>
+  <augment target-node="/rbridge:rbridge-id">
+    <uses name="arp_cmds"/>
+  </augment>
+  <container name="hide-arp-holder">
+    <uses name="arp_cmds"/>
+  </container>
+  <augment target-node="/rbridge:rbridge-id/vrf:vrf/vrf:address-family/vrf:ipv4">
+    <uses name="arp-entry-group"/>
+  </augment>
+  <rpc name="get-arp">
+    <description>
+      <text>This RPC returns ARP entries of the managed entity.
+Depending on the input argument, the ARP entries are
+displayed. When there is no input argument entered, all
+the ARP entries of the managed entity are returned.</text>
+    </description>
+    <input>
+      <choice name="input-type">
+        <case name="interface">
+          <uses name="interface:interface-name-info"/>
+        </case>
+        <case name="dynamic">
+          <leaf name="dynamic">
+            <type name="empty"/>
+            <description>
+              <text>This input queries for all the dynamic
+arp entries</text>
+            </description>
+          </leaf>
+        </case>
+        <case name="static">
+          <leaf name="static">
+            <type name="empty"/>
+            <description>
+              <text>This input queries for all the static
+arp entries</text>
+            </description>
+          </leaf>
+        </case>
+        <case name="ip">
+          <leaf name="ip-address">
+            <type name="inet:ipv4-address"/>
+            <description>
+              <text>This input queries for all the arp
+entries for this ip address</text>
+            </description>
+          </leaf>
+        </case>
+      </choice>
+    </input>
+    <output>
+      <list name="arp-entry">
+        <key value="ip-address"/>
+        <leaf name="ip-address">
+          <type name="inet:ipv4-address"/>
+          <description>
+            <text>IP address of the ARP entry</text>
+          </description>
+        </leaf>
+        <leaf name="mac-address">
+          <type name="mac-access-list:mac-address-type"/>
+          <description>
+            <text>Mac address of the ARP entry</text>
+          </description>
+        </leaf>
+        <uses name="interface:interface-name-info"/>
+        <leaf name="is-resolved">
+          <type name="boolean"/>
+          <description>
+            <text>This indicates whether the arp entry is
+resolved or not</text>
+          </description>
+        </leaf>
+        <leaf name="age">
+          <type name="string"/>
+          <description>
+            <text>This indicates the age of the arp entry</text>
+          </description>
+        </leaf>
+        <leaf name="entry-type">
+          <type name="enumeration">
+            <enum name="static">
+              <value value="1"/>
+            </enum>
+            <enum name="dynamic">
+              <value value="2"/>
+            </enum>
+            <enum name="unknown">
+              <value value="3"/>
+            </enum>
+          </type>
+          <description>
+            <text>This indicates the type of the arp entry</text>
+          </description>
+        </leaf>
+      </list>
+    </output>
+  </rpc>
+</module>

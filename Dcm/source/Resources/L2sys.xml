@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ModuleResources ModuleName = "L2sys" ComponentName = "Wave">
+    <ResourceEnum Name = "L2sysReturnCode">
+
+		<!-- L2sys common -->
+        <Resource Name = "L2SYS_UNKNOWN_VLAN">Error: Unknown VLAN</Resource>
+        <Resource Name = "L2SYS_NO_FORWARD_ENTRY">Error: No Forwarding entry for VLAN</Resource>
+        <Resource Name = "L2SYS_NO_BRIDGE_CONFIGURED">Error: No Bridge configured with specified type</Resource>
+        <Resource Name = "L2SYS_NO_BRIDGE_FOUND">Error: Bridge not found</Resource>
+        <Resource Name = "L2SYS_INVALID_MESSAGE">Error: Invalid message passed</Resource>
+        <Resource Name = "L2SYS_NO_INTERFACE_FOUND">Error: Interface not found</Resource>
+        <Resource Name = "L2SYS_ERROR_ADDRESS_TRANSLATION">Error: Unable to translate mac address</Resource>
+        <Resource Name = "L2SYS_UNABLE_CLEAR_MAC">Error: Unable to clear forwarding table</Resource>
+        <Resource Name = "L2SYS_NO_DEFAULT_BRIDGE">Error: Default Bridge not found</Resource>
+        <Resource Name = "L2SYS_NO_VALID_IFINDEX">Could not generate a valid ifindex</Resource>
+        <Resource Name = "L2SYS_RESERVED_ADDRESS_NOT_ALLOWED">Reserved address is not allowed</Resource>
+        <Resource Name = "L2SYS_RESERVED_BCAST_ADDRESS_NOT_ALLOWED">Broadcast address is not allowed</Resource>
+        <Resource Name = "L2SYS_RESERVED_MCAST_ADDRESS_NOT_ALLOWED">Reserved multicast address is not allowed</Resource>
+        <Resource Name = "L2SYS_INVALID_ADDRESS">Error: Invalid source MAC address</Resource>
+        <Resource Name = "L2SYS_DUPLICATE_MAC_ADDRESS">Error: Static mac configuration conflicts in vlan</Resource>
+        <Resource Name = "L2SYS_FAILED_DELETE_MAC">Error: Failed to delete fdb entry to bridge.</Resource>
+        <Resource Name = "L2SYS_FAILED_ADD_MAC">Error: Failed to add fdb entry to bridge.</Resource>
+        <Resource Name = "L2SYS_DCM_MAC_ADDRESS_NOT_FOUND">Error: No such static mac configured on vlan</Resource>
+        <Resource Name = "L2SYS_DCM_MAC_ADDR_NOT_ON_PORT">Error: Mac-address not learnt on this port.</Resource>
+        <Resource Name = "L2SYS_DCM_MAC_TYPE_MISMATCH">Error: Mac-address is not statically configured.</Resource>
+        <Resource Name = "L2SYS_INVALID_LINECARD">Error: Linecard number entered is invalid.</Resource>
+        <Resource Name = "L2SYS_INVALID_PORT">Error: Port-set number entered is invalid.</Resource>
+        <Resource Name = "L2SYS_VLAN_NOT_EXIST">Error : Vlan does not exist.</Resource>
+        <Resource Name = "L2SYS_MAC_NOT_FOUND">Error: Mac-address not found.</Resource>
+        <Resource Name = "L2SYS_FAILED_DELETE_MAC_FROM_BRIDGE">Error: Failed to delete mac filter from bridge.</Resource>
+        <Resource Name = "L2SYS_FAILED_CLEAT_FORWARDING_TABLE">Error: Unable to clear forwarding table.</Resource>
+    	<Resource Name = "L2SYS_VLAN_RANGE_ERROR">%% Error: Vlan value out of range</Resource>
+    	<Resource Name = "L2SYS_INVALID_PO_RANGE_VCS">%% Error: Port-channel id value out of range. Valid range is 1-6144</Resource>
+    	<Resource Name = "L2SYS_INVALID_VCS_MAC_AGING">%% Error: Mac aging in VCS mode should be (0 | 60 .. 100000) </Resource>
+    	<Resource Name = "L2SYS_INVALID_PO_RANGE_NON_VCS">%% Error: Port-channel id value out of range. Valid range is 1-64</Resource>
+    	<Resource Name = "L2SYS_FABRIC_FLUSH_IN_PROGRESS">%% Error: Clear fabric-mac is in progress!</Resource>
+        <Resource Name = "L2SYS_COMMON_ERR_CLUSTER_VALIDATE_VERSION_MISMATCH">%%Error: Cluster Validation failed - Version Mismatch.</Resource>
+		<Resource Name = "L2SYS_MCAST_MAC_ADDRESS_NOT_ALLOWED">%% Error: Multicast MAC address is not allowed</Resource>
+		<Resource Name = "L2SYS_EMPTY_COMMAND_ERROR">%%Error: Empty Command.</Resource>
+		<Resource Name = "L2SYS_INCOMPLETE_COMMAND_ERROR">%%Error: Incomplete command.</Resource>
+		<Resource Name = "L2SYS_INVALID_INTERFACE_TYPE_ERROR">%%Error: Invalid interface Type.</Resource>		
+		<Resource Name = "L2SYS_STATIC_MAC_ADDRESS_NOT_ALLOWED_ON_ISL_PORT">%% Error: Static MAC address is not allowed on an ISL port</Resource>
+    </ResourceEnum>
+</ModuleResources>

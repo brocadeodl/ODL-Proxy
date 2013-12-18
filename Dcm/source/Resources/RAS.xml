@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for RAS Module. -->
+
+<ModuleResources ModuleName = "RAS" ComponentName = "Wave">
+    <ResourceEnum Name = "RASReturnCodes">
+    <Resource Name = "INVALID_SWITCH_ID">Error: Invalid rbridge-id specified, command failed</Resource>
+	<Resource Name = "INVALID_SEVRTY_LVL">Error: Invalid severity level specified, command failed</Resource>
+	<Resource Name = "INVALID_LONG_NAME">Error: Invalid input - new name is too long, command failed</Resource>
+	<Resource Name = "INVALID_NAME_DIGIT">Error: Invalid input - new name contains invalid characters or begins with a digit, command failed</Resource>
+    <Resource Name = "INVALID_NAME">Error: Invalid input - new name string contain blank space </Resource>         
+	<Resource Name = "FAILED_HOST_NAME">Error: Failed to set the host-name at backend, command failed</Resource>
+	<Resource Name = "FAILED_CHASSIS_NAME">Error: Failed to set the chassis-name at backend, command failed</Resource>
+	<Resource Name = "FAILED_SEVRTY_CRITICAL">Error: Failed to set the severity level to CRITICAL, command failed</Resource>
+	<Resource Name = "FAILED_SEVRTY_ERROR">Error: Failed to set the severity level to ERROR, command failed</Resource>
+	<Resource Name = "FAILED_SEVRTY_WARNING">Error: Failed to set the severity level to WARNING, command failed</Resource>
+	<Resource Name = "FAILED_SEVRTY_INFO">Error: Failed to set the severity level to INFO, command failed</Resource>
+	<Resource Name = "FAILED_SUPPORT_FFDC">Error: Failed to change the support FFDC state at backend, command failed</Resource>
+    <Resource Name = "INVALID_MSGID">Error: Invalid message ID</Resource>
+    <Resource Name = "INVALID_MODULE">Error: Unknown Module</Resource>
+    <Resource Name = "INVALID_MSGID_SEVERITY">Error: Cannot change severity of an auditlog message</Resource>
+    <Resource Name = "INVALID_RASLOG_DISABLE">Error: This is an internal RAS log and cannnot be blocked</Resource>
+    <Resource Name = "INVALID_LOG_DISABLE">Error: This is either an auditlog or FFDC log and cannot be blocked</Resource>
+    <Resource Name = "FAILED_LOG_DISABLE">Error: This log is used for internal purpose, cannot be blocked</Resource>
+    <Resource Name = "INVALID_RASLOG_SYSLOG">Error: This is not an internal raslog. Please provide internal raslog</Resource>
+    </ResourceEnum>
+</ModuleResources>

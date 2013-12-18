@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ModuleResources ModuleName = "Arp" ComponentName = "Wave">
+    <ResourceEnum Name = "ArpReturnCode">
+
+		<!-- ARP common -->
+        <Resource Name = "ARP_MEMORY_ALLOCATION_FAILED">Memory allocation failed</Resource>
+        <Resource Name = "ARP_UNKNOWN_INTERNAL_ERROR">Unknown internal error</Resource>
+		<Resource Name = "ARP_DCM_API_ERROR">This CLI not  supported</Resource>
+		<Resource Name = "ARP_DCM_LINUX_FILEDOESNOT_EXIST">Linux proc file system error</Resource>
+		<Resource Name = "ARP_DCM_API_MSG_ERROR">Message Couldnot be received at Client Side. Retry the CLI</Resource>
+        <Resource Name = "ARP_L3_COMMANDS_NOT_ALLOWED_ON_L2_INTERFACE">%%Error: Layer3 commands cannot be configured when interface is in switchport mode.</Resource>
+		<Resource Name = "ARP_L3_COMMANDS_NOT_ALLOWED_ON_PO_INTERFACE">%%Error: Layer3 commands cannot be configured when Lag interface is in switchport mode.</Resource>
+		<Resource Name = "ARP_ILLEGAL_IP">%% Error: Illegal IP Address</Resource>
+		<Resource Name = "ARP_ILLEGAL_MAC">%% Error: Illegal MAC Address</Resource>
+		<Resource Name = "ARP_STATIC_EXISTS">%% Error: Static ARP Exists</Resource>
+		<Resource Name = "ARP_INTERFACE_DOES_NOT_EXIST">%% Error: Not a Layer 3 Interface</Resource>
+		<Resource Name = "ARP_INTERFACE_IS_LOOPBACK">%% Error: Interface is a Loopback</Resource>
+		<Resource Name = "PORT_CHANNEL_CONFIG_NOT_SUPPORTED">%% Error: Not a L3 Interface</Resource>
+		<Resource Name = "ARP_MAPPED_ID_IFNAME_MISMATCH">%% Error: Rbridge Mode And Interface Name Doesn't Match</Resource>
+        <Resource Name = "ARP_INVALID_COMMAND_ERROR">%%Error: Invalid command.</Resource>
+        <Resource Name = "ARP_INVALID_IF_TYPE_ERROR">%%Error: Invalid Interface Type.</Resource>
+        <Resource Name = "ARP_INVALID_RBRIDGE_ERROR">%%Error: Invalid Rbridge-Id.</Resource>
+    </ResourceEnum>
+</ModuleResources>

@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-vcs"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:vcs="urn:brocade.com:mgmt:brocade-vcs"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types"
+        xmlns:yang="urn:ietf:params:xml:ns:yang:ietf-yang-types"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def">
+  <namespace uri="urn:brocade.com:mgmt:brocade-vcs"/>
+  <prefix value="vcs"/>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <import module="ietf-yang-types">
+    <prefix value="yang"/>
+  </import>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+        San Jose, CA 95134
+         U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com 
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This management module is an instrumentation to manage  
+Virtual Cluster Switching (VCS).
+        
+Glossary of the terms used:
+--------------------------- 
+VAL  - Virtual Access Layer, provided by VCS.
+VCS  - Virtual Cluster Switching.
+TRILL - Transparent Interconnection of Lot of Links.
+TLS - Transparent LAN Services.
+        
+        
+VCS refers to the ability of a group of physical Ethernet 
+switches, inter-connected in arbitrary fashion via the regular 
+front-end data ports, to present themselves as one unified and
+transparent Ethernet switching service to the external network. 
+The inter-connecting network that glues all these individual 
+switches is refered as 'fabric', and the group of physical 
+Ethernet switches in the fabric is refered to as 'cluster'. 
+        
++--------+                                   +--------+
+|External|                                   |External| 
+|Non-VCS |                                   |Non-VCS |
+|Switch  |                                   |Switch  |
++--------+                                   +--------+          
+  |                                              |
+  |                                              |
+  |                                              |
++---+                                            |          
+|   |                                            | 
+|S1 |                                      ******************
++---+                                      * Logical Switch *  
+  |&lt;------ Fabric Port    \----&gt;           *                *  
+  |                       /----&gt;           * (VCS Cluster)  *
++---+                                      ******************
+|   |                                            |
+|S2 |                                            |
++---+                                            |
+  |&lt;----- Edge Port                              |
+  |                                              |
++-------+                                   +-------+
+|Server |                                   |Server |
++-------+                                   +-------+
+
+[Physical View]                            [Logical View]
+
+As shown in the figure above, the fabric ports are transparent 
+as far as the external devices connected to the VCS are 
+concerned. In this sense the whole of the cluster behaves like 
+a logical switch to the external network.         </text>
+  </description>
+  <revision date="2011-05-26">
+    <description>
+      <text>Initial version of this management module.</text>
+    </description>
+  </revision>
+  <typedef name="vcs-cluster-type">
+    <type name="enumeration">
+      <enum name="vcs-unknown-cluster">
+        <value value="1"/>
+        <description>
+          <text>Unknown cluster mode.</text>
+        </description>
+      </enum>
+      <enum name="vcs-stand-alone">
+        <value value="2"/>
+        <description>
+          <text>Stand-alone mode. No VCS services are enabled.</text>
+        </description>
+      </enum>
+      <enum name="vcs-fabric-cluster">
+        <value value="3"/>
+        <description>
+          <text>Fabric-cluster mode. VCS services are enabled.</text>
+        </description>
+      </enum>
+      <enum name="vcs-management-cluster">
+        <value value="4"/>
+        <description>
+          <text>Management-cluster mode. VCS services are enabled 
+with cluster-wide configuration distribution 
+capability.</text>
+        </description>
+      </enum>
+    </type>
+    <description>
+      <text>Category of VCS Cluster
+vcs-unknown-cluster    - Unknown cluster 
+vcs-stand-alone        - VCS is in stand alone
+vcs-fabric-cluster     - Fabric cluster 
+vcs-management-cluster - Management cluster</text>
+    </description>
+  </typedef>
+  <typedef name="node-hw-sync-state-type">
+    <type name="enumeration">
+      <enum name="node-unknown">
+        <value value="1"/>
+        <description>
+          <text>'Unknown' state.</text>
+        </description>
+      </enum>
+      <enum name="node-uninitialized">
+        <value value="2"/>
+        <description>
+          <text>'Uninitialized' state.</text>
+        </description>
+      </enum>
+      <enum name="node-synchronizing">
+        <value value="3"/>
+        <description>
+          <text>'Synchronizing' state.</text>
+        </description>
+      </enum>
+      <enum name="node-in-sync">
+        <value value="4"/>
+        <description>
+          <text>'In-Sync' state.</text>
+        </description>
+      </enum>
+      <enum name="node-out-of-sync">
+        <value value="5"/>
+        <description>
+          <text>'Out of sync' state.</text>
+        </description>
+      </enum>
+    </type>
+    <description>
+      <text>Category of node hardware synchronization states
+   node-unknown        - Unknown
+   node-uninitialized  - Uninitialized
+   node-synchronizing  - Synchronizing
+   node-in-sync        - In sync
+   node-out-of-sync    - Out of sync</text>
+    </description>
+  </typedef>
+  <typedef name="node-state-type">
+    <type name="enumeration">
+      <enum name="Unknown">
+        <value value="1"/>
+        <description>
+          <text>'Unknown' state.</text>
+        </description>
+      </enum>
+      <enum name="Online">
+        <value value="2"/>
+        <description>
+          <text>'Co-ordinator' or 'Connected to Cluster'.</text>
+        </description>
+      </enum>
+      <enum name="Offline">
+        <value value="3"/>
+        <description>
+          <text>Disconnected From Cluster.</text>
+        </description>
+      </enum>
+      <enum name="Replacing">
+        <value value="4"/>
+        <description>
+          <text>Switch Replacement In Progress.</text>
+        </description>
+      </enum>
+      <enum name="Coming-Online">
+        <value value="5"/>
+        <description>
+          <text>Coming Online.</text>
+        </description>
+      </enum>
+      <enum name="Rejoining">
+        <value value="6"/>
+        <description>
+          <text>Rejoining.</text>
+        </description>
+      </enum>
+      <enum name="Awaiting-Rejoin">
+        <value value="7"/>
+        <description>
+          <text>Awaiting Rejoin.</text>
+        </description>
+      </enum>
+    </type>
+    <description>
+      <text>Category of node states
+   unknown          - 'Unknown' state
+   online           - 'Co-ordinator' or 'Connected to Cluster'
+   offline          - Disconnected From Cluster
+   replacing        - Switch Replacement In Progress
+   coming-online    - Coming Online
+   rejoining        - Rejoining
+   awaiting-rejoin  - Awaiting Rejoin</text>
+    </description>
+  </typedef>
+  <typedef name="snapshot-id-all-type">
+    <type name="string"/>
+  </typedef>
+  <typedef name="snapshot-id-type">
+    <type name="string">
+      <pattern value="[a-zA-Z0-9]{1,50}"/>
+    </type>
+  </typedef>
+  <container name="vcsmode">
+    <config value="false"/>
+    <leaf name="vcs-mode">
+      <type name="boolean"/>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="vcs-cluster-mode">
+      <type name="boolean"/>
+      <mandatory value="true"/>
+    </leaf>
+  </container>
+  <container name="local-node">
+    <config value="false"/>
+    <leaf name="swbd-number">
+      <type name="uint32"/>
+      <mandatory value="true"/>
+    </leaf>
+  </container>
+  <rpc name="get-last-config-update-time">
+    <description>
+      <text>This rpc function provides time-stamp of the last 
+configutation change done on the managed device.</text>
+    </description>
+    <output>
+      <leaf name="last-config-update-time">
+        <type name="uint64"/>
+        <description>
+          <text>This leaf indicates the time-stamp of the last 
+configuration change on the system.</text>
+        </description>
+      </leaf>
+    </output>
+  </rpc>
+  <grouping name="vcs-general-info-grouping">
+    <leaf name="principal-switch-wwn">
+      <type name="string"/>
+      <description>
+        <text>Vcs Cluster Co-ordinator node wwn</text>
+      </description>
+    </leaf>
+    <leaf name="co-ordinator-wwn">
+      <type name="string"/>
+      <description>
+        <text>Vcs Cluster Co-ordinator node wwn</text>
+      </description>
+    </leaf>
+    <leaf name="vcs-cluster-type-info">
+      <type name="vcs-cluster-type"/>
+      <description>
+        <text>Vcs Type</text>
+      </description>
+    </leaf>
+    <leaf name="vcs-guid">
+      <type name="string"/>
+      <description>
+        <text>Vcs Cluster GUID</text>
+      </description>
+    </leaf>
+    <leaf name="virtual-ip-address">
+      <type name="string"/>
+      <description>
+        <text>Cluster virtual IP address</text>
+      </description>
+    </leaf>
+    <leaf name="total-nodes-in-cluster">
+      <type name="uint16"/>
+      <description>
+        <text>Total number of nodes in cluster</text>
+      </description>
+    </leaf>
+    <leaf name="nodes-disconnected-from-cluster">
+      <type name="uint16"/>
+      <description>
+        <text>Number of nodes disconnected from cluster</text>
+      </description>
+    </leaf>
+    <leaf name="cluster-generic-status">
+      <type name="string"/>
+      <description>
+        <text>Cluster Generic Status</text>
+      </description>
+    </leaf>
+    <leaf name="cluster-specific-status">
+      <type name="string"/>
+      <description>
+        <text>Cluster Specific Status</text>
+      </description>
+    </leaf>
+  </grouping>
+  <grouping name="vcs-node-info-grouping">
+    <list name="vcs-node-info">
+      <leaf name="node-num">
+        <type name="uint16"/>
+        <description>
+          <text>Node number</text>
+        </description>
+      </leaf>
+      <leaf name="node-serial-num">
+        <type name="string"/>
+        <description>
+          <text>Serial number</text>
+        </description>
+      </leaf>
+      <leaf name="node-condition">
+        <type name="string"/>
+        <description>
+          <text>Node condition</text>
+        </description>
+      </leaf>
+      <leaf name="node-status">
+        <type name="string"/>
+        <description>
+          <text>Node status</text>
+        </description>
+      </leaf>
+      <leaf name="node-hw-sync-state">
+        <type name="node-hw-sync-state-type"/>
+        <description>
+          <text>Node hardware synchronization state</text>
+        </description>
+      </leaf>
+      <leaf name="node-vcs-mode">
+        <type name="string"/>
+        <description>
+          <text>Node's VCS mode</text>
+        </description>
+      </leaf>
+      <leaf name="node-vcs-id">
+        <type name="uint16"/>
+        <description>
+          <text>Node VCS id</text>
+        </description>
+      </leaf>
+      <leaf name="node-rbridge-id">
+        <type name="uint16"/>
+        <description>
+          <text>Node rbridge Id</text>
+        </description>
+      </leaf>
+      <leaf name="node-is-principal">
+        <type name="boolean"/>
+        <description>
+          <text>Whether node is management cluster principal.</text>
+        </description>
+      </leaf>
+      <leaf name="co-ordinator">
+        <type name="boolean"/>
+        <description>
+          <text>Whether node is management cluster co-ordinator.</text>
+        </description>
+      </leaf>
+      <leaf name="node-switch-mac">
+        <type name="yang:mac-address"/>
+        <description>
+          <text>Node switch mac address</text>
+        </description>
+      </leaf>
+      <leaf name="node-switch-wwn">
+        <type name="string"/>
+        <description>
+          <text>Node switch WWN</text>
+        </description>
+      </leaf>
+      <leaf name="switch-fcf-mac">
+        <type name="yang:mac-address"/>
+        <description>
+          <text>Node fcf mac address</text>
+        </description>
+      </leaf>
+      <leaf name="node-internal-ip-address">
+        <type name="inet:ipv4-address"/>
+        <description>
+          <text>Node internal IP address</text>
+        </description>
+      </leaf>
+      <list name="node-public-ip-addresses">
+        <leaf name="node-public-ip-address">
+          <type name="inet:ipv4-address"/>
+          <description>
+            <text>Node public ip address</text>
+          </description>
+        </leaf>
+      </list>
+      <list name="node-public-ipv6-addresses">
+        <leaf name="node-public-ipv6-address">
+          <type name="inet:ipv6-address"/>
+          <description>
+            <text>Node public ipv6 address</text>
+          </description>
+        </leaf>
+      </list>
+      <leaf name="firmware-version">
+        <type name="string"/>
+        <description>
+          <text>Node Firmware version</text>
+        </description>
+      </leaf>
+      <leaf name="node-swbd-number">
+        <type name="int32"/>
+        <description>
+          <text>Node SWBD number.</text>
+        </description>
+      </leaf>
+      <leaf name="node-switchname">
+        <type name="string"/>
+        <description>
+          <text>Node switchname.</text>
+        </description>
+      </leaf>
+      <leaf name="node-state">
+        <type name="node-state-type"/>
+        <description>
+          <text>Node state</text>
+        </description>
+      </leaf>
+    </list>
+  </grouping>
+  <rpc name="show-vcs">
+    <output>
+      <uses name="vcs-general-info-grouping"/>
+      <container name="vcs-nodes">
+        <uses name="vcs-node-info-grouping"/>
+      </container>
+    </output>
+  </rpc>
+  <rpc name="get-vcs-details">
+    <output>
+      <container name="vcs-details">
+        <leaf name="principal-switch-wwn">
+          <type name="string"/>
+          <description>
+            <text>WWN of principal switch</text>
+          </description>
+        </leaf>
+        <leaf name="co-ordinator-wwn">
+          <type name="string"/>
+          <description>
+            <text>WWN of Co-ordinator switch</text>
+          </description>
+        </leaf>
+        <leaf name="local-switch-wwn">
+          <type name="string"/>
+          <description>
+            <text>WWN of local switch</text>
+          </description>
+        </leaf>
+        <leaf name="node-vcs-mode">
+          <type name="boolean"/>
+          <description>
+            <text>Node's VCS mode</text>
+          </description>
+        </leaf>
+        <leaf name="node-vcs-type">
+          <type name="vcs-cluster-type"/>
+          <description>
+            <text>Vcs Type</text>
+          </description>
+        </leaf>
+        <leaf name="node-vcs-id">
+          <type name="uint32"/>
+          <description>
+            <text>Vcs Id</text>
+          </description>
+        </leaf>
+      </container>
+    </output>
+  </rpc>
+  <rpc name="vcs-rbridge-context">
+    <input>
+      <leaf name="rbridge-id">
+        <type name="uint16">
+          <range value="1..239">
+            <error-message>
+              <value>rbridge-id must be in the range 1..239</value>
+            </error-message>
+          </range>
+        </type>
+      </leaf>
+    </input>
+  </rpc>
+  <rpc name="no-vcs-rbridge-context"/>
+  <rpc name="get-last-config-update-time-for-xpaths">
+    <input>
+      <list name="xpath-strings">
+        <key value="xpath-string"/>
+        <leaf name="xpath-string">
+          <type name="string"/>
+        </leaf>
+      </list>
+    </input>
+    <output>
+      <list name="last-config-update-time-for-xpaths">
+        <key value="xpath-string"/>
+        <leaf name="xpath-string">
+          <type name="string"/>
+        </leaf>
+        <leaf name="last-config-update-time">
+          <type name="uint64"/>
+        </leaf>
+      </list>
+    </output>
+  </rpc>
+  <container name="vcs">
+    <container name="virtual">
+      <container name="ip">
+        <leaf name="address">
+          <type name="common-def:ipv4-address-prefix-type"/>
+        </leaf>
+      </container>
+    </container>
+  </container>
+</module>

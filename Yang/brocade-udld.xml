@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-udld"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:udld="urn:brocade.com:mgmt:brocade-udld"
+        xmlns:intf="urn:brocade.com:mgmt:brocade-interface">
+  <namespace uri="urn:brocade.com:mgmt:brocade-udld"/>
+  <prefix value="udld"/>
+  <import module="brocade-interface">
+    <prefix value="intf"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+        San Jose, CA 95134
+        U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com
+Web: www.brocade.com</text>
+  </contact>
+  <description>
+    <text>This management module is an instrumentation to manage UDLD
+protocol configuration.
+
+Glossary of the terms used:
+---------------------------
+PDU    - Protocol Data Unit. In the context of this module PDU
+         refers to Layer2 frame transmitted or received by
+         UDLD protocol.
+UDLD   - UniDirectional Link Detection</text>
+  </description>
+  <revision date="2012-03-20">
+    <description>
+      <text>Initial version; defines UDLD protocol configurations and
+interface configuration to enable and disable UDLD on it.</text>
+    </description>
+  </revision>
+  <augment target-node="/intf:protocol">
+    <container name="udld">
+      <presence value="true"/>
+      <description>
+        <text>UDLD protocol configuration. UDLD protocol will be
+enabled when '/protocol/udld' container is created. To
+disable delete it or set '/protocol/udld/shutdown'
+leaf</text>
+      </description>
+      <leaf name="hello">
+        <description>
+          <text>Hello interval is the time period between
+successive PDU transmissions. UDLD protocol also
+expects to receive PDUs from the peer at the same
+rate.
+Hello interval is measured in deciseconds (100 
+milliseconds). Default hello interval is 5.</text>
+        </description>
+        <type name="uint32">
+          <range value="1..60"/>
+        </type>
+        <default value="5"/>
+        <units name="100 milliseconds"/>
+      </leaf>
+      <leaf name="multiplier">
+        <description>
+          <text>Multiplier configures UDLD protocol timeout, which
+is the product of multiplier and hello interval. If
+no UDLD PDU is received over a link during timeout
+period, the link is deemed unidirectional.
+Default multiplier value is 5.</text>
+        </description>
+        <type name="uint32">
+          <range value="3..10"/>
+        </type>
+        <default value="5"/>
+      </leaf>
+      <leaf name="shutdown">
+        <description>
+          <text>When present indicates that UDLD protocol is
+disabled on this switch. Disabling UDLD protocol
+will not clear other configurations.</text>
+        </description>
+        <type name="empty"/>
+      </leaf>
+    </container>
+  </augment>
+  <grouping name="udld-intf-configs">
+    <container name="udld">
+      <description>
+        <text>Interface specific UDLD configurations.</text>
+      </description>
+      <leaf name="udld-enable">
+        <description>
+          <text>When present, indicates that UDLD protocol is
+activated on this interface. By default the UDLD
+will not be active on any interface. It needs to
+be enabled explicitly.</text>
+        </description>
+        <type name="empty"/>
+      </leaf>
+    </container>
+  </grouping>
+  <augment target-node="/intf:interface/intf:gigabitethernet">
+    <uses name="udld-intf-configs"/>
+  </augment>
+  <augment target-node="/intf:interface/intf:tengigabitethernet">
+    <uses name="udld-intf-configs"/>
+  </augment>
+  <augment target-node="/intf:interface/intf:fortygigabitethernet">
+    <uses name="udld-intf-configs"/>
+  </augment>
+</module>

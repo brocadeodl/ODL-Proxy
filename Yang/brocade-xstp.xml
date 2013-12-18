@@ -1,0 +1,681 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-xstp"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:xstp="urn:brocade.com:mgmt:brocade-xstp"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface">
+  <namespace uri="urn:brocade.com:mgmt:brocade-xstp"/>
+  <prefix value="xstp"/>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+       San Jose, CA 95134
+       U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com
+Web: www.brocade.com</text>
+  </contact>
+  <description>
+    <text>This management module is an instrumentation to manage the 
+Spanning Tree Protocol (STP).          
+        
+Glossary of the terms used:
+--------------------------- 
+        </text>
+  </description>
+  <revision date="2012-09-13">
+    <description>
+      <text>Added configuration to enable/disable tunneling of tagged
+IEEE BPDUs through VCS fabric</text>
+    </description>
+  </revision>
+  <revision date="2011-07-05">
+    <description>
+      <text>Initial version of this management module.</text>
+    </description>
+  </revision>
+  <typedef name="xstp-ui32-vlan-range">
+    <type name="string">
+      <pattern value="(([1-9][0-9]{0,2})|([1-7][0-9]{3})|(80[0-9]{2})|(81[0-8][0-9])|(819[01]))(-(([2-9])|([1-9][0-9]{1,2})|([1-7][0-9]{3})|(80[0-9]{2})|(81[0-8][0-9])|(819[01])))?((,(([2-9])|([1-9][0-9]{1,2})|([1-7][0-9]{3})|(80[0-9]{2})|(81[0-8][0-9])|(819[01]))(-(([3-9])|([1-9][0-9]{1,2})|([1-7][0-9]{3})|(80[0-9]{2})|(81[0-8][0-9])|(819[01])))?)?)*">
+        <description>
+          <text>The definition for specifying the vlan range.</text>
+        </description>
+      </pattern>
+    </type>
+  </typedef>
+  <typedef name="mstp-instance-type">
+    <type name="uint8">
+      <range value="1..31">
+        <error-message>
+          <value>% Error: Value out of range at '^' marker</value>
+        </error-message>
+      </range>
+    </type>
+  </typedef>
+  <typedef name="sysid-byte-type">
+    <type name="union">
+      <type name="uint32">
+        <range value="1..255"/>
+      </type>
+      <type name="enumeration">
+        <enum name="auto"/>
+      </type>
+    </type>
+  </typedef>
+  <grouping name="xstp-config">
+    <leaf name="description">
+      <type name="string">
+        <length value="0..64"/>
+      </type>
+      <default value=""/>
+    </leaf>
+    <leaf name="bridge-priority">
+      <type name="uint32">
+        <range value="0..61440">
+          <error-message>
+            <value>% Error: Value out of range at '^' marker</value>
+          </error-message>
+        </range>
+      </type>
+      <default value="32768"/>
+    </leaf>
+    <container name="error-disable-timeout">
+      <leaf name="enable">
+        <type name="empty"/>
+      </leaf>
+      <leaf name="interval">
+        <type name="uint32">
+          <range value="10..1000000">
+            <error-message>
+              <value>% Error: Value out of range at '^' marker</value>
+            </error-message>
+          </range>
+        </type>
+        <default value="300"/>
+      </leaf>
+    </container>
+    <leaf name="forward-delay">
+      <type name="uint32">
+        <range value="4..30">
+          <error-message>
+            <value>% Error: Value out of range at '^' marker</value>
+          </error-message>
+        </range>
+      </type>
+      <default value="15"/>
+    </leaf>
+    <leaf name="max-age">
+      <type name="uint32">
+        <range value="6..40">
+          <error-message>
+            <value>% Error: Value out of range at '^' marker</value>
+          </error-message>
+        </range>
+      </type>
+      <default value="20"/>
+    </leaf>
+    <container name="port-channel">
+      <leaf name="path-cost">
+        <type name="enumeration">
+          <enum name="custom"/>
+          <enum name="standard"/>
+        </type>
+        <default value="standard"/>
+      </leaf>
+    </container>
+    <leaf name="shutdown">
+      <type name="empty"/>
+    </leaf>
+  </grouping>
+  <grouping name="pvst-config">
+    <uses name="xstp-config"/>
+    <leaf name="hello-time">
+      <type name="uint32">
+        <range value="1..10">
+          <error-message>
+            <value>% Error: Value out of range at '^' marker</value>
+          </error-message>
+        </range>
+      </type>
+      <default value="2"/>
+    </leaf>
+    <list name="vlan">
+      <key value="id"/>
+      <leaf name="id">
+        <type name="uint32">
+          <range value="1..8191">
+            <error-message>
+              <value>% Error: Value out of range at '^' marker</value>
+            </error-message>
+          </range>
+        </type>
+      </leaf>
+      <leaf name="priority">
+        <type name="uint32">
+          <range value="0..61440">
+            <error-message>
+              <value>% Error: Value out of range at '^' marker</value>
+            </error-message>
+          </range>
+        </type>
+      </leaf>
+      <leaf name="forward-delay">
+        <type name="uint32">
+          <range value="4..30">
+            <error-message>
+              <value>% Error: Value out of range at '^' marker</value>
+            </error-message>
+          </range>
+        </type>
+      </leaf>
+      <leaf name="max-age">
+        <type name="uint32">
+          <range value="6..40">
+            <error-message>
+              <value>% Error: Value out of range at '^' marker</value>
+            </error-message>
+          </range>
+        </type>
+      </leaf>
+      <leaf name="hello-time">
+        <type name="uint32">
+          <range value="1..10">
+            <error-message>
+              <value>% Error: Value out of range at '^' marker</value>
+            </error-message>
+          </range>
+        </type>
+      </leaf>
+    </list>
+  </grouping>
+  <grouping name="port-inst-xstp-config">
+    <leaf name="cost">
+      <type name="uint32">
+        <range value="1..200000000">
+          <error-message>
+            <value>% Error: Value out of range at '^' marker</value>
+          </error-message>
+        </range>
+      </type>
+    </leaf>
+    <leaf name="priority">
+      <type name="uint32">
+        <range value="0..240">
+          <error-message>
+            <value>% Error: Value out of range at '^' marker</value>
+          </error-message>
+        </range>
+      </type>
+      <default value="128"/>
+    </leaf>
+    <leaf name="restricted-role">
+      <type name="empty"/>
+    </leaf>
+    <leaf name="restricted-tcn">
+      <type name="empty"/>
+    </leaf>
+  </grouping>
+  <grouping name="bpdu-guard-config">
+    <leaf name="enable">
+      <type name="empty"/>
+    </leaf>
+    <leaf name="direction">
+      <type name="enumeration">
+        <enum name="rx">
+          <value value="1"/>
+        </enum>
+        <enum name="tx">
+          <value value="2"/>
+        </enum>
+        <enum name="all">
+          <value value="3"/>
+        </enum>
+      </type>
+      <default value="rx"/>
+    </leaf>
+  </grouping>
+  <grouping name="phy-intf-tagged-bpdu-config">
+    <container name="tunnel">
+      <leaf name="tagged-ieee-bpdu">
+        <type name="empty"/>
+      </leaf>
+    </container>
+  </grouping>
+  <grouping name="port-xstp-config">
+    <leaf name="autoedge">
+      <type name="empty"/>
+    </leaf>
+    <leaf name="cost">
+      <type name="uint32">
+        <range value="1..200000000"/>
+      </type>
+    </leaf>
+    <container name="portfast">
+      <leaf name="portfastbasic">
+        <type name="empty"/>
+      </leaf>
+      <leaf name="bpdu-guard">
+        <type name="empty"/>
+      </leaf>
+      <leaf name="bpdu-filter">
+        <type name="empty"/>
+      </leaf>
+    </container>
+    <container name="edgeport">
+      <leaf name="edgeportbasic">
+        <type name="empty"/>
+      </leaf>
+      <leaf name="bpdu-guard">
+        <type name="empty"/>
+      </leaf>
+      <leaf name="bpdu-filter">
+        <type name="empty"/>
+      </leaf>
+    </container>
+    <container name="guard">
+      <leaf name="root">
+        <type name="empty"/>
+      </leaf>
+    </container>
+    <leaf name="hello-time">
+      <type name="uint32">
+        <range value="1..10">
+          <error-message>
+            <value>% Error: Value out of range at '^' marker</value>
+          </error-message>
+        </range>
+      </type>
+    </leaf>
+    <leaf name="bpdu-mac">
+      <type name="enumeration">
+        <enum name="0304.0800.0700"/>
+        <enum name="0100.0ccc.cccd"/>
+      </type>
+    </leaf>
+    <leaf name="link-type">
+      <type name="enumeration">
+        <enum name="point-to-point"/>
+        <enum name="shared"/>
+      </type>
+    </leaf>
+    <leaf name="priority">
+      <type name="uint32">
+        <range value="0..240">
+          <error-message>
+            <value>% Error: Value out of range at '^' marker</value>
+          </error-message>
+        </range>
+      </type>
+    </leaf>
+    <leaf name="restricted-role">
+      <type name="empty"/>
+    </leaf>
+    <leaf name="restricted-tcn">
+      <type name="empty"/>
+    </leaf>
+    <leaf name="shutdown">
+      <type name="empty"/>
+    </leaf>
+  </grouping>
+  <augment target-node="/interface:protocol">
+    <container name="spanning-tree">
+      <container name="stp">
+        <presence value="true"/>
+        <uses name="xstp-config"/>
+        <leaf name="hello-time">
+          <type name="uint32">
+            <range value="1..10">
+              <error-message>
+                <value>% Error: Value out of range at '^'
+marker</value>
+              </error-message>
+            </range>
+          </type>
+          <default value="2"/>
+        </leaf>
+      </container>
+      <container name="rstp">
+        <presence value="true"/>
+        <uses name="xstp-config"/>
+        <leaf name="hello-time">
+          <type name="uint32">
+            <range value="1..10">
+              <error-message>
+                <value>% Error: Value out of range at '^'
+marker</value>
+              </error-message>
+            </range>
+          </type>
+          <default value="2"/>
+        </leaf>
+        <leaf name="transmit-holdcount">
+          <type name="uint32">
+            <range value="1..10">
+              <error-message>
+                <value>% Error: Value out of range at '^'
+marker</value>
+              </error-message>
+            </range>
+          </type>
+          <default value="6"/>
+        </leaf>
+      </container>
+      <container name="pvst">
+        <presence value="true"/>
+        <uses name="pvst-config"/>
+      </container>
+      <container name="rpvst">
+        <presence value="true"/>
+        <uses name="pvst-config"/>
+        <leaf name="transmit-holdcount">
+          <type name="uint32">
+            <range value="1..10">
+              <error-message>
+                <value>% Error: Value out of range at '^'
+marker</value>
+              </error-message>
+            </range>
+          </type>
+          <default value="6"/>
+        </leaf>
+      </container>
+      <container name="mstp">
+        <presence value="true"/>
+        <uses name="xstp-config"/>
+        <leaf name="cisco-interoperability">
+          <type name="enumeration">
+            <enum name="enable"/>
+            <enum name="disable"/>
+          </type>
+          <default value="disable"/>
+        </leaf>
+        <list name="instance">
+          <key value="id"/>
+          <leaf name="id">
+            <type name="mstp-instance-type"/>
+          </leaf>
+          <leaf name="vlan">
+            <type name="xstp-ui32-vlan-range"/>
+          </leaf>
+          <leaf name="priority">
+            <type name="uint32">
+              <range value="0..61440">
+                <error-message>
+                  <value>% Error: Value out of range at
+ '^' marker</value>
+                </error-message>
+              </range>
+            </type>
+          </leaf>
+        </list>
+        <leaf name="region">
+          <type name="string">
+            <length value="0..32"/>
+          </type>
+          <default value=""/>
+        </leaf>
+        <leaf name="revision">
+          <type name="uint16">
+            <range value="0..255">
+              <error-message>
+                <value>% Error: Value out of range at 
+'^' marker</value>
+              </error-message>
+            </range>
+          </type>
+          <default value="0"/>
+        </leaf>
+        <leaf name="max-hops">
+          <type name="uint32">
+            <range value="1..40">
+              <error-message>
+                <value>% Error: Value out of range at '^'
+marker</value>
+              </error-message>
+            </range>
+          </type>
+          <default value="20"/>
+        </leaf>
+        <leaf name="transmit-holdcount">
+          <type name="uint32">
+            <range value="1..10">
+              <error-message>
+                <value>% Error: Value out of range at '^'
+marker</value>
+              </error-message>
+            </range>
+          </type>
+          <default value="6"/>
+        </leaf>
+      </container>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface/interface:tengigabitethernet">
+    <container name="bpdu-drop">
+      <uses name="bpdu-guard-config"/>
+    </container>
+    <uses name="phy-intf-tagged-bpdu-config"/>
+    <container name="spanning-tree">
+      <uses name="port-xstp-config"/>
+      <list name="vlan">
+        <key value="id"/>
+        <leaf name="id">
+          <type name="uint32">
+            <range value="1..8191">
+              <error-message>
+                <value>VLAN number out of range</value>
+              </error-message>
+            </range>
+          </type>
+        </leaf>
+        <leaf name="cost">
+          <type name="uint32">
+            <range value="1..200000000">
+              <error-message>
+                <value>% Error: Value out of range at '^' 
+marker</value>
+              </error-message>
+            </range>
+          </type>
+        </leaf>
+        <leaf name="priority">
+          <type name="uint32">
+            <range value="0..240">
+              <error-message>
+                <value>% Error: Value out of range at '^' 
+marker</value>
+              </error-message>
+            </range>
+          </type>
+        </leaf>
+        <container name="guard">
+          <leaf name="root">
+            <type name="empty"/>
+          </leaf>
+        </container>
+      </list>
+      <list name="instance">
+        <key value="id"/>
+        <leaf name="id">
+          <type name="mstp-instance-type"/>
+        </leaf>
+        <uses name="port-inst-xstp-config"/>
+      </list>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface/interface:fortygigabitethernet">
+    <container name="bpdu-drop">
+      <uses name="bpdu-guard-config"/>
+    </container>
+    <uses name="phy-intf-tagged-bpdu-config"/>
+    <container name="spanning-tree">
+      <uses name="port-xstp-config"/>
+      <list name="vlan">
+        <key value="id"/>
+        <leaf name="id">
+          <type name="uint32">
+            <range value="1..8191">
+              <error-message>
+                <value>VLAN number out of range</value>
+              </error-message>
+            </range>
+          </type>
+        </leaf>
+        <leaf name="cost">
+          <type name="uint32">
+            <range value="1..200000000">
+              <error-message>
+                <value>% Error: Value out of range at '^' marker</value>
+              </error-message>
+            </range>
+          </type>
+        </leaf>
+        <leaf name="priority">
+          <type name="uint32">
+            <range value="0..240">
+              <error-message>
+                <value>% Error: Value out of range at '^' marker</value>
+              </error-message>
+            </range>
+          </type>
+        </leaf>
+        <container name="guard">
+          <leaf name="root">
+            <type name="empty"/>
+          </leaf>
+        </container>
+      </list>
+      <list name="instance">
+        <key value="id"/>
+        <leaf name="id">
+          <type name="mstp-instance-type"/>
+        </leaf>
+        <uses name="port-inst-xstp-config"/>
+      </list>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface/interface:gigabitethernet">
+    <container name="bpdu-drop">
+      <uses name="bpdu-guard-config"/>
+    </container>
+    <uses name="phy-intf-tagged-bpdu-config"/>
+    <container name="spanning-tree">
+      <uses name="port-xstp-config"/>
+      <list name="vlan">
+        <key value="id"/>
+        <leaf name="id">
+          <type name="uint32">
+            <range value="1..8191">
+              <error-message>
+                <value>% Error: Value out of range at '^' 
+marker</value>
+              </error-message>
+            </range>
+          </type>
+        </leaf>
+        <leaf name="cost">
+          <type name="uint32">
+            <range value="1..200000000">
+              <error-message>
+                <value>% Error: Value out of range at '^' 
+marker</value>
+              </error-message>
+            </range>
+          </type>
+        </leaf>
+        <leaf name="priority">
+          <type name="uint32">
+            <range value="0..240">
+              <error-message>
+                <value>% Error: Value out of range at '^' 
+marker</value>
+              </error-message>
+            </range>
+          </type>
+        </leaf>
+        <container name="guard">
+          <leaf name="root">
+            <type name="empty"/>
+          </leaf>
+        </container>
+      </list>
+      <list name="instance">
+        <key value="id"/>
+        <leaf name="id">
+          <type name="mstp-instance-type"/>
+        </leaf>
+        <uses name="port-inst-xstp-config"/>
+      </list>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface/interface:port-channel">
+    <container name="bpdu-drop">
+      <uses name="bpdu-guard-config"/>
+    </container>
+    <container name="tunnel">
+      <leaf name="tagged-ieee-bpdu">
+        <type name="empty"/>
+      </leaf>
+    </container>
+    <container name="spanning-tree">
+      <uses name="port-xstp-config"/>
+      <list name="vlan">
+        <key value="id"/>
+        <leaf name="id">
+          <type name="uint32">
+            <range value="1..8191">
+              <error-message>
+                <value>% Error: Value out of range at '^' 
+marker</value>
+              </error-message>
+            </range>
+          </type>
+        </leaf>
+        <leaf name="cost">
+          <type name="uint32">
+            <range value="1..200000000">
+              <error-message>
+                <value>% Error: Value out of range at '^' 
+marker</value>
+              </error-message>
+            </range>
+          </type>
+        </leaf>
+        <leaf name="priority">
+          <type name="uint32">
+            <range value="0..240">
+              <error-message>
+                <value>% Error: Value out of range at '^' 
+marker</value>
+              </error-message>
+            </range>
+          </type>
+        </leaf>
+        <container name="guard">
+          <leaf name="root">
+            <type name="empty"/>
+          </leaf>
+        </container>
+      </list>
+      <list name="instance">
+        <key value="id"/>
+        <leaf name="id">
+          <type name="mstp-instance-type"/>
+        </leaf>
+        <uses name="port-inst-xstp-config"/>
+      </list>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface-vlan/interface:interface/interface:vlan">
+    <container name="spanning-tree">
+      <leaf name="stp-shutdown">
+        <type name="empty"/>
+      </leaf>
+    </container>
+  </augment>
+</module>

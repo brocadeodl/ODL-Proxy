@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+    <WavePlugin name="Lldp" nameSpace="DcmNs"> 
+    <Global name="LldpGlobal">
+        <Worker name="LldpGlobalConf">
+        <!-- C++ Base class. The Managed Object classes - LldpGlobalConf and 
+             LldpProfileGlobalConf are derived from this class.-->
+       <ManagedObject name="LldpAdvertiseParams">
+            <Member name="description" dataType="string">
+            </Member>
+            <Member name="hello" dataType="UI32">
+            </Member>        
+            <Member name="mode" dataType="UI8">
+            </Member>
+            <Member name="multiplier" dataType="UI32">
+            </Member>        
+            <Member name="dcbxFcoeAppTlv" dataType="bool">
+            </Member>
+            <Member name="dcbxFcoeLogicalLinkTlv" dataType="bool">
+            </Member>   
+            <Member name="dcbxIscsiAppTlv" dataType="bool">
+            </Member>
+            <Member name="dot1xTlv" dataType="bool">
+            </Member>  
+            <Member name="dot3xTlv" dataType="bool">
+            </Member>  
+            <Member name="mgmtAddrTlv" dataType="bool">
+            </Member>  
+            <Member name="portDescrTlv" dataType="bool">
+            </Member>         
+            <Member name="sysCapTlv" dataType="bool">
+            </Member>      
+            <Member name="sysDescrTlv" dataType="bool">
+            </Member>   
+            <Member name="sysNameTlv" dataType="bool">
+            </Member>         
+        </ManagedObject>
+       
+        <ManagedObject name="LldpGlobalScalarsConf" 
+                       derivedClass="LldpAdvertiseParams">
+            <Member name="sysName" dataType="string">
+            </Member>
+            <Member name="sysDescr" dataType="string">
+            </Member>
+            <Member name="disable" dataType="bool">
+            </Member>
+            <Member name="iscsiPriority" dataType="UI32">
+            </Member>
+        </ManagedObject>
+        
+        <ManagedObject name="LldpGlobalProfileConf" 
+                       derivedClass="LldpAdvertiseParams">
+            <Member name="profileName" dataType="string">
+            </Member>
+        </ManagedObject>
+        
+        <Message name="ScalarsConfSet" sequencerType="SYNC" 
+                allowPreemption="FALSE" 
+                derivedClass="ManagementInterfaceMessage">
+            <Member name="mgmtFlags" dataType="UI32">
+            </Member>
+            <Member name="cmdcode" dataType="UI32">
+            </Member>
+            <Member name="msgType" dataType="UI32">
+            </Member>  
+            
+            <Member name="description" dataType="string"> 
+            </Member>
+            <Member name="hello" dataType="UI32">
+            </Member>
+            <Member name="mode" dataType="UI8">
+            </Member>
+            <Member name="multiplier" dataType="UI32">
+            </Member>        
+            <Member name="dcbxFcoeAppTlv" dataType="bool">
+            </Member>
+            <Member name="dcbxFcoeLogicalLinkTlv" dataType="bool">
+            </Member>   
+            <Member name="dcbxIscsiAppTlv" dataType="bool">
+            </Member>
+            <Member name="dot1xTlv" dataType="bool">
+            </Member>  
+            <Member name="dot3xTlv" dataType="bool">
+            </Member>  
+            
+            <!-- The following are Optional TLVs -->
+            <Member name="mgmtAddrTlv" dataType="bool">
+            </Member>  
+            <Member name="portDescrTlv" dataType="bool">
+            </Member>         
+            <Member name="sysCapTlv" dataType="bool">
+            </Member>      
+            <Member name="sysDescrTlv" dataType="bool">
+            </Member>   
+            <Member name="sysNameTlv" dataType="bool">
+            </Member>   
+            <!-- End of Optional TLVs -->
+            
+            <Member name="sysName" dataType="string">
+            </Member>
+            <Member name="sysDescr" dataType="string">
+            </Member>
+            <Member name="disable" dataType="bool">
+            </Member>
+            <Member name="iscsiPriority" dataType="UI32">
+            </Member>
+        </Message>
+        
+        <Message name="ProfileConfSet" sequencerType="SYNC" 
+                 allowPreemption="FALSE" 
+                 derivedClass="ManagementInterfaceMessage">
+                 
+            <Member name="mgmtFlags" dataType="UI32">
+            </Member>
+            <Member name="cmdcode" dataType="UI32">
+            </Member>
+            <Member name="msgType" dataType="UI32">
+            </Member>  
+            
+            <Member name="profileName" dataType="string">
+            </Member>
+            <Member name="description" dataType="string"> 
+            </Member>
+            <Member name="hello" dataType="UI32">
+            </Member>
+            <Member name="mode" dataType="UI8">
+            </Member>
+            <Member name="multiplier" dataType="UI32">
+            </Member>        
+            <Member name="dcbxFcoeAppTlv" dataType="bool">
+            </Member>
+            <Member name="dcbxFcoeLogicalLinkTlv" dataType="bool">
+            </Member>   
+            <Member name="dcbxIscsiAppTlv" dataType="bool">
+            </Member>
+            <Member name="dot1xTlv" dataType="bool">
+            </Member>  
+            <Member name="dot3xTlv" dataType="bool">
+            </Member>  
+            
+            <!-- The following are Optional TLVs -->
+            <Member name="mgmtAddrTlv" dataType="bool">
+            </Member>  
+            <Member name="portDescrTlv" dataType="bool">
+            </Member>         
+            <Member name="sysCapTlv" dataType="bool">
+            </Member>      
+            <Member name="sysDescrTlv" dataType="bool">
+            </Member>   
+            <Member name="sysNameTlv" dataType="bool">
+            </Member>   
+            <!-- End of Optional TLVs -->        
+        </Message>
+        </Worker>
+    </Global>
+
+    <Local name="Lldp">
+        <Worker name="LldpLocalConf">
+        <Message name="ScalarsConfSet" sequencerType="SYNC" 
+                allowPreemption="FALSE" 
+                derivedClass="ManagementInterfaceMessage">
+            <Member name="mgmtFlags" dataType="UI32">
+            </Member>
+            <Member name="cmdcode" dataType="UI32">
+            </Member>
+            <Member name="msgType" dataType="UI32">
+            </Member>  
+            
+            <Member name="description" dataType="string"> 
+            </Member>
+            <Member name="hello" dataType="UI32">
+            </Member>
+            <Member name="mode" dataType="UI8">
+            </Member>
+            <Member name="multiplier" dataType="UI32">
+            </Member>        
+            <Member name="dcbxFcoeAppTlv" dataType="bool">
+            </Member>
+            <Member name="dcbxFcoeLogicalLinkTlv" dataType="bool">
+            </Member>   
+            <Member name="dcbxIscsiAppTlv" dataType="bool">
+            </Member>
+            <Member name="dot1xTlv" dataType="bool">
+            </Member>  
+            <Member name="dot3xTlv" dataType="bool">
+            </Member>  
+            
+            <!-- The following are Optional TLVs -->
+            <Member name="mgmtAddrTlv" dataType="bool">
+            </Member>  
+            <Member name="portDescrTlv" dataType="bool">
+            </Member>         
+            <Member name="sysCapTlv" dataType="bool">
+            </Member>      
+            <Member name="sysDescrTlv" dataType="bool">
+            </Member>   
+            <Member name="sysNameTlv" dataType="bool">
+            </Member>   
+            <!-- End of Optional TLVs -->
+            
+            <Member name="sysName" dataType="string">
+            </Member>
+            <Member name="sysDescr" dataType="string">
+            </Member>
+            <Member name="disable" dataType="bool">
+            </Member>
+            <Member name="iscsiPriority" dataType="UI32">
+            </Member>
+        </Message>
+        
+        <Message name="ProfileConfSet" sequencerType="SYNC" 
+                 allowPreemption="FALSE" 
+                 derivedClass="ManagementInterfaceMessage">
+                 
+            <Member name="mgmtFlags" dataType="UI32">
+            </Member>
+            <Member name="cmdcode" dataType="UI32">
+            </Member>
+            <Member name="msgType" dataType="UI32">
+            </Member>  
+            
+            <Member name="ProfileName" dataType="string">
+            </Member>
+            <Member name="description" dataType="string"> 
+            </Member>
+            <Member name="hello" dataType="UI32">
+            </Member>
+            <Member name="mode" dataType="UI8">
+            </Member>
+            <Member name="multiplier" dataType="UI32">
+            </Member>        
+            <Member name="dcbxFcoeAppTlv" dataType="bool">
+            </Member>
+            <Member name="dcbxFcoeLogicalLinkTlv" dataType="bool">
+            </Member>   
+            <Member name="dcbxIscsiAppTlv" dataType="bool">
+            </Member>
+            <Member name="dot1xTlv" dataType="bool">
+            </Member>  
+            <Member name="dot3xTlv" dataType="bool">
+            </Member>  
+            
+            <!-- The following are Optional TLVs -->
+            <Member name="mgmtAddrTlv" dataType="bool">
+            </Member>  
+            <Member name="portDescrTlv" dataType="bool">
+            </Member>         
+            <Member name="sysCapTlv" dataType="bool">
+            </Member>      
+            <Member name="sysDescrTlv" dataType="bool">
+            </Member>   
+            <Member name="sysNameTlv" dataType="bool">
+            </Member>   
+            <!-- End of Optional TLVs -->        
+        </Message>
+        </Worker>
+    </Local>
+</WavePlugin>    

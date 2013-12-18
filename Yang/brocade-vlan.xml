@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-vlan"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:brocade-vlan="urn:brocade.com:mgmt:brocade-vlan"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface">
+  <namespace uri="urn:brocade.com:mgmt:brocade-vlan"/>
+  <prefix value="brocade-vlan"/>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+        San Jose, CA 95134
+        U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This submodule Manages Vlan classifier related CLI.</text>
+  </description>
+  <revision date="2009-12-10">
+    <description>
+      <text>Initial Version of this management module.</text>
+    </description>
+  </revision>
+  <typedef name="vlan-classifier-group-type">
+    <type name="uint32">
+      <range value="1..16"/>
+    </type>
+  </typedef>
+  <typedef name="vlan-classifier-rule-type">
+    <type name="uint32">
+      <range value="1..256"/>
+    </type>
+  </typedef>
+  <typedef name="vmac-address-type">
+    <type name="string">
+      <pattern value="[0-9a-fA-F]{4}(\.[0-9a-fA-F]{4}){2}"/>
+    </type>
+  </typedef>
+  <typedef name="ethernet-hexstring">
+    <type name="string">
+      <pattern value="[0][x][0-9a-fA-F]{3,4}"/>
+    </type>
+  </typedef>
+  <grouping name="vlan-classifier-activate">
+    <container name="classifier">
+      <container name="activate">
+        <list name="group">
+          <key value="groupid vlan-name vlan"/>
+          <leaf name="groupid">
+            <type name="uint32">
+              <range value="1..16"/>
+            </type>
+          </leaf>
+          <leaf name="vlan-name">
+            <type name="enumeration">
+              <enum name="vlan">
+                <value value="0"/>
+              </enum>
+            </type>
+          </leaf>
+          <leaf name="vlan">
+            <type name="interface:vlan-type"/>
+          </leaf>
+        </list>
+      </container>
+    </container>
+  </grouping>
+  <container name="vlan">
+    <container name="classifier">
+      <list name="rule">
+        <key value="ruleid"/>
+        <leaf name="ruleid">
+          <type name="uint32">
+            <range value="1..256"/>
+          </type>
+        </leaf>
+        <choice name="class-type">
+          <case name="mac">
+            <container name="mac">
+              <leaf name="address">
+                <type name="vmac-address-type"/>
+              </leaf>
+            </container>
+          </case>
+          <case name="proto">
+            <container name="proto">
+              <leaf name="proto-val">
+                <type name="union">
+                  <type name="enumeration">
+                    <enum name="arp">
+                      <value value="2054"/>
+                    </enum>
+                    <enum name="ip">
+                      <value value="2048"/>
+                    </enum>
+                    <enum name="ipv6">
+                      <value value="34525"/>
+                    </enum>
+                  </type>
+                  <type name="ethernet-hexstring"/>
+                </type>
+              </leaf>
+              <leaf name="encap">
+                <type name="enumeration">
+                  <enum name="ethv2">
+                    <value value="1"/>
+                  </enum>
+                  <enum name="nosnapllc">
+                    <value value="3"/>
+                  </enum>
+                  <enum name="snapllc">
+                    <value value="2"/>
+                  </enum>
+                </type>
+              </leaf>
+            </container>
+          </case>
+        </choice>
+      </list>
+      <list name="group">
+        <key value="groupid oper rule-name ruleid"/>
+        <leaf name="groupid">
+          <type name="uint32">
+            <range value="1..16"/>
+          </type>
+        </leaf>
+        <leaf name="oper">
+          <type name="rule-opp-type"/>
+        </leaf>
+        <leaf name="rule-name">
+          <type name="rule-name-type"/>
+        </leaf>
+        <leaf name="ruleid">
+          <type name="uint32">
+            <range value="1..256"/>
+          </type>
+        </leaf>
+      </list>
+    </container>
+    <typedef name="rule-opp-type">
+      <type name="enumeration">
+        <enum name="add">
+          <value value="1"/>
+        </enum>
+        <enum name="delete">
+          <value value="2"/>
+        </enum>
+      </type>
+      <description>
+        <text>Add/Delete Rule</text>
+      </description>
+    </typedef>
+    <typedef name="rule-name-type">
+      <type name="enumeration">
+        <enum name="rule">
+          <value value="0"/>
+        </enum>
+      </type>
+    </typedef>
+    <container name="dot1q">
+      <container name="tag">
+        <leaf name="native">
+          <type name="empty"/>
+        </leaf>
+      </container>
+    </container>
+  </container>
+  <augment target-node="/interface:interface/interface:fortygigabitethernet">
+    <container name="vlan">
+      <uses name="vlan-classifier-activate"/>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface/interface:tengigabitethernet">
+    <container name="vlan">
+      <uses name="vlan-classifier-activate"/>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface/interface:gigabitethernet">
+    <container name="vlan">
+      <uses name="vlan-classifier-activate"/>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface/interface:port-channel">
+    <container name="vlan">
+      <uses name="vlan-classifier-activate"/>
+    </container>
+  </augment>
+</module>

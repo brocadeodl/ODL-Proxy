@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Cluster Module. -->
+
+<ModuleResources ModuleName = "WaveHttpInterface" ComponentName = "Wave">
+    <ResourceEnum Name = "WaveHttpInterfaceMethod">
+        <Resource Name = "WAVE_HTTP_INTERFACE_METHOD_UNKNOWN">Uknown</Resource>
+        <Resource Name = "WAVE_HTTP_INTERFACE_METHOD_GET"    >GET</Resource>
+        <Resource Name = "WAVE_HTTP_INTERFACE_METHOD_DELETE" >DELETE</Resource>
+        <Resource Name = "WAVE_HTTP_INTERFACE_METHOD_HEAD"   >HEAD</Resource>
+        <Resource Name = "WAVE_HTTP_INTERFACE_METHOD_PUT"    >PUT</Resource>
+        <Resource Name = "WAVE_HTTP_INTERFACE_METHOD_POST"   >POST</Resource>
+        <Resource Name = "WAVE_HTTP_INTERFACE_METHOD_OPTIONS">OPTIONS</Resource>
+        <Resource Name = "WAVE_HTTP_INTERFACE_METHOD_TRACE"  >TRACE</Resource>
+        <Resource Name = "WAVE_HTTP_INTERFACE_METHOD_CONNECT">CONNECT</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "WaveHttpContentType">
+        <Resource Name = "WAVE_HTTP_CONTENT_TYPE_UNKNOWN"                    >Unknown</Resource>
+        <Resource Name = "WAVE_HTTP_CONTENT_TYPE_TEXT_PLAIN"                 >text/plain</Resource>
+        <Resource Name = "WAVE_HTTP_CONTENT_TYPE_TEXT_HTML"                  >text/html</Resource>
+        <Resource Name = "WAVE_HTTP_CONTENT_TYPE_TEXT_XML"                   >text/xml</Resource>
+        <Resource Name = "WAVE_HTTP_CONTENT_TYPE_APPLICATION_OCTET_STREAM"   >application/octet-stream</Resource>
+        <Resource Name = "WAVE_HTTP_CONTENT_TYPE_APPLICATION_ATOM_XML"       >application/atom+xml</Resource>
+        <Resource Name = "WAVE_HTTP_CONTENT_TYPE_APPLICATION_FORM_URLENCODED">application/x-www-form-urlencoded</Resource>
+        <Resource Name = "WAVE_HTTP_CONTENT_TYPE_APPLICATION_JSON"           >application/json</Resource>
+        <Resource Name = "WAVE_HTTP_CONTENT_TYPE_APPLICATION_XHTML_XML"      >application/xhtml+xml</Resource>
+        <Resource Name = "WAVE_HTTP_CONTENT_TYPE_MULTIPART_FORM_DATA"        >multipart/form-data</Resource>
+        <Resource Name = "WAVE_HTTP_CONTENT_TYPE_IMAGE_GIF"                  >image/gif</Resource>
+        <Resource Name = "WAVE_HTTP_CONTENT_TYPE_IMAGE_PNG"                  >image/png</Resource>
+        <Resource Name = "WAVE_HTTP_CONTENT_TYPE_IMAGE_JPEG"                 >image/jpeg</Resource>
+    </ResourceEnum>
+</ModuleResources>

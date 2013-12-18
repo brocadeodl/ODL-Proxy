@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Vrf Module. -->
+
+<ModuleResources ModuleName = "Vrf" ComponentName = "Dcm">
+    <ResourceEnum Name = "VrfReturnCode">
+        <Resource Name = "VRF_RD_ADDR_FAMILY_NOT_CONFIGURED">%% Error: VRF does not exist or Route-Distinguisher not specified or Address Family not configured</Resource>
+        <Resource Name = "DEFAULT_VRF_RESERVE_ERROR">%% Error: default-vrf is reserved</Resource>
+        <Resource Name = "VRF_RD_NOT_CONFIGURED">%% Error:VRF Route-Distinguisher not specified </Resource>
+        <Resource Name = "VRF_ADDR_FAMILY_NOT_CONFIGURED">%% Error: VRF Address Family not configured</Resource>
+        <Resource Name = "VRF_DOES_NOT_EXIST">%% Error: VRF does not exist </Resource>
+        <Resource Name = "VRF_RTM_RD_NOT_CONFIGURED">%%Error: configure RD before configuring an address family</Resource>
+        <Resource Name = "VRF_ERR_MAX_VRF_COUNT">%% Error: reached maximum system limit of VRFs</Resource>
+        <Resource Name = "VRF_DUPLOCATE_RD_ERROR">%% Error: This RD is already configured for another VRF</Resource>
+        <Resource Name = "VRF_MIRROR_PORT_ERROR">%% Error: VRF configuration not allowed on destination mirror port</Resource>
+        <Resource Name = "VRF_BGP_SUPPORT_ERROR">%% Error: BGP-VRF is not supported on this firmware</Resource>
+        <Resource Name = "VRF_SET_INVLD_CONFIG_FOR_AGG_MEM">%% Error: VRF configuration not allowed on aggregate members</Resource>
+    </ResourceEnum>
+</ModuleResources>
+    </ResourceEnum>
+</ModuleResources>

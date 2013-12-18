@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-ntp"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:ntp-server="urn:brocade.com:mgmt:brocade-ntp"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def">
+  <namespace uri="urn:brocade.com:mgmt:brocade-ntp"/>
+  <prefix value="ntp-server"/>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+        San Jose, CA 95134
+         U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>Instrument to configure ntp servers and monitoring active server</text>
+  </description>
+  <revision date="2009-05-01">
+    <description>
+      <text>Initial version of this module.</text>
+    </description>
+  </revision>
+  <rpc name="show-ntp">
+    <description>
+      <text>show active ntp server for cluster or specified switchid</text>
+    </description>
+    <input>
+      <leaf name="rbridge-id">
+        <mandatory value="false"/>
+        <type name="common-def:rbridge-id-all-type"/>
+      </leaf>
+    </input>
+    <output>
+      <list name="node-active-server">
+        <leaf name="rbridge-id-out">
+          <type name="common-def:rbridge-id-type"/>
+        </leaf>
+        <choice name="ip4-6-or-local">
+          <case name="ipv4-6">
+            <leaf name="active-server">
+              <type name="inet:ip-address"/>
+            </leaf>
+          </case>
+          <case name="local">
+            <leaf name="LOCL">
+              <default value="true"/>
+              <type name="boolean"/>
+            </leaf>
+          </case>
+        </choice>
+      </list>
+    </output>
+  </rpc>
+  <container name="ntp">
+    <list name="server">
+      <key value="ip"/>
+      <max-elements value="5"/>
+      <leaf name="ip">
+        <type name="inet:ip-address"/>
+      </leaf>
+      <leaf name="key">
+        <type name="uint32">
+          <range value="0 .. 65535">
+            <error-message>
+              <value>Key ID must be in the range
+1..65535</value>
+            </error-message>
+          </range>
+        </type>
+        <default value="0"/>
+      </leaf>
+    </list>
+    <list name="authentication-key">
+      <key value="keyid"/>
+      <max-elements value="5"/>
+      <leaf name="keyid">
+        <type name="uint32">
+          <range value="1 .. 65535">
+            <error-message>
+              <value>Key ID must be in the range
+1..65535</value>
+            </error-message>
+          </range>
+        </type>
+      </leaf>
+      <leaf name="md5">
+        <type name="string">
+          <length value="1 .. 15">
+            <error-message>
+              <value>MD5 string must be in the range
+1 .. 15 alphanumeric characters</value>
+            </error-message>
+          </length>
+        </type>
+      </leaf>
+    </list>
+  </container>
+</module>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-ip-forward"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:ip-forward="urn:brocade.com:mgmt:brocade-ip-forward"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def"
+        xmlns:rbridge="urn:brocade.com:mgmt:brocade-rbridge"
+        xmlns:vcs="urn:brocade.com:mgmt:brocade-vcs">
+  <namespace uri="urn:brocade.com:mgmt:brocade-ip-forward"/>
+  <prefix value="ip-forward"/>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <import module="brocade-rbridge">
+    <prefix value="rbridge"/>
+  </import>
+  <import module="brocade-vcs">
+    <prefix value="vcs"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 1745 Technology Drive,
+San Jose, CA 95110
+U.S.A
+Tel: +1-408-392-6061
+E-mail: support@Brocade.com
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This management module is an instrumentationfor the management
+of CIDR multipath IP Routes. Multipath IP routes have the
+same network  number but differing network masks.</text>
+  </description>
+  <revision date="2011-07-18">
+    <description>
+      <text>Initial version of this management module.</text>
+    </description>
+  </revision>
+  <grouping name="ipv6_route">
+    <list name="route">
+      <key value="dest"/>
+      <leaf name="dest">
+        <type name="inet:ipv6-prefix"/>
+      </leaf>
+      <choice name="next">
+        <mandatory value="true"/>
+        <case name="ipv6-hop">
+          <leaf name="next-hop">
+            <type name="inet:ipv6-address"/>
+          </leaf>
+        </case>
+      </choice>
+    </list>
+  </grouping>
+  <augment target-node="/rbridge:rbridge-id/rbridge:ipv6">
+    <when condition='/vcs:vcsmode/vcs:vcs-mode = "true"'/>
+    <uses name="ipv6_route"/>
+  </augment>
+  <augment target-node="/common-def:ipv6">
+    <when condition='/vcs:vcsmode/vcs:vcs-mode = "false"'/>
+    <uses name="ipv6_route"/>
+  </augment>
+</module>

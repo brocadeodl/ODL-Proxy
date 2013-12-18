@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<WavePlugin name="snmpServer" nameSpace="DcmNs">
+<Global name="snmpServer">
+    <Worker name="SnmpCommunity">
+        <ManagedObject name="Community">
+            <Member name="community" dataType="string">
+            </Member>
+
+<!--    Access is an enum. Not supported as a part of breeze yet.
+            <Member name="access" dataType="string">
+            </Member>
+-->
+        </ManagedObject>
+        <Message name="snmpConfigSetComm" sequencerType="ASYNC" allowPreemption="FALSE">
+            <Member name="community" dataType="string">
+            </Member>
+<!--    Access is an enum. Not supported as a part of breeze yet.
+            <Member name="access" dataType="string">
+            </Member>
+-->
+        </Message>
+
+        <Message name="snmpConfigRemoveComm" sequencerType="ASYNC" allowPreemption="FALSE">
+            <Member name="community" dataType="string">
+            </Member>
+        </Message>
+
+        <Message name="snmpConfigAddComm" sequencerType="ASYNC" allowPreemption="FALSE">
+            <Member name="community" dataType="string">
+            </Member>
+<!--    Access is an enum. Not supported as a part of breeze yet.
+            <Member name="access" dataType="string">
+            </Member>
+-->
+        </Message>
+    </Worker>
+
+    <Worker name="ConfigHost">
+        <ManagedObject name="Hosts">
+            <Member name="ip" dataType="IpV4Address">
+            </Member>
+            <Member name="version" dataType="string">
+            </Member>
+            <Member name="community" dataType="ObjectId" umlType="ASSOCIATION" referredObject="Community">
+            </Member>
+            <Member name="udpPort" dataType="UI32">
+            </Member>
+            <Member name="sevLevel" dataType="string">
+            </Member>
+        </ManagedObject>
+
+        <Message name="snmpConfigAddHost" sequencerType="ASYNC" allowPreemption="FALSE">
+            <Member name="ip" dataType="IpV4Address">
+            </Member>
+            <Member name="version" dataType="string">
+            </Member>
+            <Member name="udpPort" dataType="UI32">
+            </Member>
+            <Member name="community" dataType="string">
+            </Member>
+            <Member name="sevLevel" dataType="string">
+            </Member>
+        </Message>
+
+        <Message name="snmpConfigDelHost" sequencerType="ASYNC" allowPreemption="FALSE">
+            <Member name="ip" dataType="IpV4Address">
+            </Member>
+            <Member name="community" dataType="string">
+            </Member>
+        </Message>
+
+        <Message name="snmpConfigChangeHost" sequencerType="ASYNC" allowPreemption="FALSE">
+            <Member name="ip" dataType="IpV4Address">
+            </Member>
+            <Member name="version" dataType="string">
+            </Member>
+            <Member name="udpPort" dataType="UI32">
+            </Member>
+            <Member name="community" dataType="string">
+            </Member>
+            <Member name="sevLevel" dataType="string">
+            </Member>
+        </Message>
+
+    </Worker>
+
+    <Worker name="ConfigSystemGroup">
+        <ManagedObject name="SystemGroup">
+            <Member name="contact" dataType="string">
+            </Member>
+            <Member name="location" dataType="string">
+            </Member>
+            <Member name="sysDescr" dataType="string">
+            </Member>
+        </ManagedObject>
+
+        <Message name="snmpConfigSetContact" sequencerType="ASYNC" allowPreemption="FALSE">
+            <Member name="contact" dataType="string">
+            </Member>
+        </Message>
+
+        <Message name="snmpConfigSetLocation" sequencerType="ASYNC" allowPreemption="FALSE">
+            <Member name="location" dataType="string">
+            </Member>
+        </Message>
+
+        <Message name="snmpConfigSetSysDescr" sequencerType="ASYNC" allowPreemption="FALSE">
+            <Member name="sysDescr" dataType="string">
+            </Member>
+        </Message>
+
+    </Worker>
+</Global>
+
+
+<Local name="snmpServerInt">
+    <Worker name="ConfigCommunityInt">
+        <Message name="snmpConfigSetCommInt" sequencerType="ASYNC" allowPreemption="FALSE">
+            <Member name="community" dataType="string">
+            </Member>
+<!--    Access is an enum. Not supported as a part of breeze yet.
+            <Member name="access" dataType="string">
+            </Member>
+-->
+        </Message>
+
+        <Message name="snmpConfigRemoveCommInt" sequencerType="ASYNC" allowPreemption="FALSE">
+            <Member name="community" dataType="string">
+            </Member>
+        </Message>
+
+        <Message name="snmpConfigAddCommInt" sequencerType="ASYNC" allowPreemption="FALSE">
+            <Member name="community" dataType="string">
+            </Member>
+<!--    Access is an enum. Not supported as a part of breeze yet.
+            <Member name="access" dataType="string">
+            </Member>
+-->
+        </Message>
+    </Worker>
+
+    <Worker name="ConfigHostInt">
+        <Message name="snmpConfigAddHostInt" sequencerType="ASYNC" allowPreemption="FALSE">
+            <Member name="ip" dataType="IpV4Address">
+            </Member>
+            <Member name="version" dataType="string">
+            </Member>
+            <Member name="udpPort" dataType="UI32">
+            </Member>
+            <Member name="community" dataType="string">
+            </Member>
+            <Member name="sevLevel" dataType="string">
+            </Member>
+        </Message>
+
+        <Message name="snmpConfigDelHostInt" sequencerType="ASYNC" allowPreemption="FALSE">
+            <Member name="ip" dataType="IpV4Address">
+            </Member>
+            <Member name="community" dataType="string">
+            </Member>
+        </Message>
+
+
+        <Message name="snmpConfigChangeHostInt" sequencerType="ASYNC" allowPreemption="FALSE">
+            <Member name="ip" dataType="IpV4Address">
+            </Member>
+            <Member name="version" dataType="string">
+            </Member>
+            <Member name="udpPort" dataType="UI32">
+            </Member>
+            <Member name="community" dataType="string">
+            </Member>
+            <Member name="sevLevel" dataType="string">
+            </Member>
+        </Message>
+    </Worker>
+
+    <Worker name="ConfigSystemGroupInt">
+        <Message name="snmpConfigSetContactInt" sequencerType="ASYNC" allowPreemption="FALSE">
+            <Member name="contact" dataType="string">
+            </Member>
+        </Message>
+
+        <Message name="snmpConfigSetLocationInt" sequencerType="ASYNC" allowPreemption="FALSE">
+            <Member name="location" dataType="string">
+            </Member>
+        </Message>
+
+        <Message name="snmpConfigSetSysDescr" sequencerType="ASYNC" allowPreemption="FALSE">
+            <Member name="sysDescr" dataType="string">
+            </Member>
+        </Message>
+    </Worker>
+
+</Local>
+</WavePlugin>

@@ -1,0 +1,247 @@
+/***************************************************************************
+ *   Copyright (C) 2005 Brocade Communications Systems, Inc.               *
+ *   All rights reserved.                                                  *
+ *   Author : Vidyasagara Reddy Guntaka                                    *
+ ***************************************************************************/
+
+#define _WIN32_WINNT 0x0500
+
+#include "Framework/OsLayer/PrismOsLayer.h"
+#include <sys/timeb.h>
+#include <time.h>
+#include <iostream>
+#include <direct.h>
+#include <windows.h>
+#include "Framework/Utils/PrismMutex.h"
+#include "Framework/Utils/StringUtils.h"
+#include "Framework/Utils/TraceUtils.h"
+#include "Framework/Utils/AssertUtils.h"
+
+using namespace std;
+
+static HANDLE                     hTimer                     = NULL;
+static CONSOLE_SCREEN_BUFFER_INFO s_consoleScreenBufferInfo;
+
+int gettimeofday(struct timeval *tv, struct timezone *tz)
+{
+    struct __timeb32  timeBuffer;
+
+    _ftime32_s (&timeBuffer);
+
+    tv->tv_sec  = timeBuffer.time;
+    tv->tv_usec = timeBuffer.millitm * 1000;
+
+    return (0);
+}
+
+int inet_pton (int af, const char *src, void *dst)
+{
+    *((unsigned long int *) dst) = inet_addr (src);
+    return (1);
+}
+
+VOID CALLBACK timerExpirationCallback (HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
+{
+    cout << "Timer Expiration ..." << endl;
+}
+
+namespace WaveNs
+{
+
+static PrismMutex s_timerMutex;
+
+unsigned int prismSleep (unsigned int numberOfSecondsToSleep)
+{
+    Sleep (numberOfSecondsToSleep * 1000);
+    return (0);
+}
+
+void prismSysLog (char *pStringToLog)
+{
+}
+
+void initializePrismSocketLayer ()
+{
+    static int initializeSocketLayer = 0;
+
+    if (0 != initializeSocketLayer)
+    {
+        return;
+    }
+
+    WORD    wVersionRequested;
+    WSADATA wsaData;
+    int     err;
+
+    wVersionRequested = MAKEWORD(1, 1);
+
+    err = WSAStartup (wVersionRequested, &wsaData);
+
+    if ( err != 0 )
+    {
+        cerr << "Could not intialize windows socket layer." << endl;
+        exit (-1);
+    }
+
+    initializeSocketLayer = 1;
+}
+
+void getIpAddressesForThisHost (vector<string> &ipAddressesForThisHost)
+{
+    char hostName[512];
+
+    gethostname (hostName, 512);
+
+    struct hostent  *pHostEntries     = gethostbyname (hostName);
+    char           **pHostAddressList = pHostEntries->h_addr_list;
+
+    while (NULL != *pHostAddressList)
+    {
+        struct in_addr tempAddr;
+
+        tempAddr.s_addr = *((unsigned long *) (*pHostAddressList));
+        ipAddressesForThisHost.push_back (inet_ntoa (tempAddr));
+        pHostAddressList++;
+    }
+}
+
+int prismCloseSocket (int fd)
+{
+    return (closesocket (fd));
+}
+
+void prismBlockSignals ()
+{
+}
+
+char *prismGetCwd (char *buf, size_t size)
+{
+    return (_getcwd (buf, size));
+}
+
+void prismCreateWaitableTimer ()
+{
+    hTimer = CreateWaitableTimer (NULL, FALSE, NULL); // Synchronization Timer
+
+    if (NULL == hTimer)
+    {
+        trace (TRACE_LEVEL_FATAL, string ("CreateWaitableTimer failed ") + GetLastError ());
+        prismAssert (false, __FILE__, __LINE__);
+    }
+}
+
+void prismWaitForAlarmSignal ()
+{
+    BOOL bRet;
+    MSG  msg;
+
+    HANDLE pHandle = getPrismTimerHandle ();
+
+    if (WAIT_OBJECT_0 != (WaitForSingleObject (pHandle, INFINITE)))
+    {
+        trace (TRACE_LEVEL_FATAL, "WaitForSingleObject failed");
+        prismAssert (false, __FILE__, __LINE__);
+    }
+    else
+    {
+        //trace (TRACE_LEVEL_INFO, "Timer was signaled.");
+    }
+}
+
+int prismSetITimer (struct itimerval *pItimerValue)
+{
+    s_timerMutex.lock ();
+
+    if ((0 == pItimerValue->it_value.tv_sec) && (0 == pItimerValue->it_value.tv_usec))
+    {
+        if (NULL != hTimer)
+        {
+            BOOL result = CancelWaitableTimer (hTimer);
+
+            if (0 == result)
+            {
+                trace (TRACE_LEVEL_WARN, string ("ERROR !!! COULD NOT CANCEL WAITABLE TIMER. Last Error =") + GetLastError ());
+            }
+        }
+
+        s_timerMutex.unlock ();
+        return (0);
+    }
+
+    LARGE_INTEGER liDueTime;
+
+    liDueTime.QuadPart= -1 * (pItimerValue->it_value.tv_sec * 1000 * 1000 * 10 + pItimerValue->it_value.tv_usec * 10);
+
+    if (!SetWaitableTimer(hTimer, &liDueTime, 0, NULL, NULL, 0))
+    {
+        trace (TRACE_LEVEL_FATAL, string ("SetWaitableTimer failed") + GetLastError ());
+        prismAssert (false, __FILE__, __LINE__);
+
+        s_timerMutex.unlock ();
+        return 2;
+    }
+
+    s_timerMutex.unlock ();
+
+    return (0);
+}
+
+HANDLE getPrismTimerHandle ()
+{
+    HANDLE pHandle;
+
+    s_timerMutex.lock ();
+    pHandle = hTimer;
+
+    s_timerMutex.unlock ();
+
+    return (pHandle);
+}
+
+void prismSetConsoleTextColor (TraceLevel requestedTraceLevel)
+{
+    static HANDLE hStdOut = GetStdHandle (STD_OUTPUT_HANDLE);
+
+    if (FALSE == (GetConsoleScreenBufferInfo (hStdOut, &s_consoleScreenBufferInfo)))
+    {
+        cerr << "Could not get Console Screen Buffer Info. Last Error " << GetLastError () << endl;
+    }
+
+    switch (requestedTraceLevel)
+    {
+        case TRACE_LEVEL_UNKNOWN:
+            SetConsoleTextAttribute (hStdOut, FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+            break;
+        case TRACE_LEVEL_DEVEL:
+            SetConsoleTextAttribute (hStdOut, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+            break;
+        case TRACE_LEVEL_DEBUG:
+            SetConsoleTextAttribute (hStdOut, FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+            break;
+        case TRACE_LEVEL_INFO:
+            SetConsoleTextAttribute (hStdOut, FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+            break;
+        case TRACE_LEVEL_SUCCESS:
+            SetConsoleTextAttribute (hStdOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+            break;
+        case TRACE_LEVEL_WARN:
+            SetConsoleTextAttribute (hStdOut, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+            break;
+        case TRACE_LEVEL_ERROR:
+            SetConsoleTextAttribute (hStdOut, FOREGROUND_RED | FOREGROUND_INTENSITY);
+            break;
+        case TRACE_LEVEL_FATAL:
+            SetConsoleTextAttribute (hStdOut, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY | BACKGROUND_RED);
+            break;
+    }
+}
+
+void prismResetConsoleTextColor ()
+{
+    static HANDLE hStdOut = GetStdHandle (STD_OUTPUT_HANDLE);
+
+    SetConsoleTextAttribute (hStdOut, s_consoleScreenBufferInfo.wAttributes);
+}
+
+}
+

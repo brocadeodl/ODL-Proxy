@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<WavePlugin name="FspfService" nameSpace="DcmNs">
+<Local name="FspfService">
+	<Message name="GetBroadcastInfo" sequencerType="SYNC" allowPreemption="FALSE">
+		<Member name="domain_id" dataType="UI32"></Member>
+		<Member name="port_isl" dataType="vector/UI32/"></Member>
+		<Member name="bcast_route_avail" dataType="vector/UI32/"></Member>
+		<Member name="bcastRootDomain" dataType="UI32"> </Member>
+		<Member name="bcastRootPriority" dataType="UI32"> </Member>
+		<Member name="bcastRootMacAddr" dataType="MacAddress"> </Member>
+		<Member name="bcastRootIPAddr" dataType="UI32"> </Member>
+		<Member name="bcastRootWwn" dataType="string"> </Member>
+		<Member name="bcastRootSwitchName" dataType="string"> </Member>
+		<Member name="bcastLocalPriority" dataType="UI32"> </Member>
+		<Member name="srcBlade" dataType="vector/SI32/"> </Member>
+		<Member name="srcPort" dataType="vector/SI32/"> </Member>
+		<Member name="srcIndex" dataType="vector/SI32/"> </Member>
+		<Member name="srcDispType" dataType="vector/SI32/"> </Member>
+		<Member name="nbrDomain" dataType="vector/SI32/"> </Member>
+		<Member name="nbrBlade" dataType="vector/SI32/"> </Member>
+		<Member name="nbrPort" dataType="vector/SI32/"> </Member>
+		<Member name="nbrIndex" dataType="vector/SI32/"> </Member>
+		<Member name="nbrDispType" dataType="vector/SI32/"> </Member>
+		<Member name="interfaceType" dataType="vector/SI32/"> </Member>
+		<Member name="trunkPort" dataType="vector/UI32/"> </Member>
+		<Member name="bandwidth" dataType="vector/UI32/"> </Member>
+	</Message>
+	<Message name="GetTopologyInfo" sequencerType="SYNC" allowPreemption="FALSE">
+		<Member name="domainCount" dataType="SI16"> </Member>
+		<Member name="srcDomainId" dataType="UI32"> </Member>
+		<Member name="destDomainId" dataType="vector/UI32/"> </Member>
+		<Member name="lowestPathCost" dataType="vector/UI32/"> </Member>
+		<Member name="destDomainName" dataType="vector/string/"> </Member>
+		<Member name="noOfHopsFromSrc" dataType="vector/UI32/"> </Member>
+		<Member name="pathCount" dataType="vector/UI32/"> </Member>
+		<Member name="bitsPerSec" dataType="vector/UI32/"> </Member>
+		<Member name="pathFlags" dataType="vector/UI32/"> </Member>
+		<Member name="pathIngressPortCount" dataType="vector/UI32/"> </Member>
+		<Member name="pathIngressPortBM" dataType="vector/UI32/"> </Member>
+		<Member name="pathCost" dataType="vector/UI32/"> </Member>
+		<Member name="pathCurrentBWAlloc" dataType="vector/UI32/"> </Member>
+		<Member name="pathBWUtilization" dataType="vector/UI32/"> </Member>
+		<Member name="pathTotalBW" dataType="vector/UI32/"> </Member>
+		<Member name="srcBlade" dataType="vector/SI32/"> </Member>
+		<Member name="srcPort" dataType="vector/SI32/"> </Member>
+		<Member name="srcIndex" dataType="vector/SI32/"> </Member>
+		<Member name="srcDispType" dataType="vector/SI32/"> </Member>
+		<Member name="nbrDomain" dataType="vector/SI32/"> </Member>
+		<Member name="nbrBlade" dataType="vector/SI32/"> </Member>
+		<Member name="nbrPort" dataType="vector/SI32/"> </Member>
+		<Member name="nbrIndex" dataType="vector/SI32/"> </Member>
+		<Member name="nbrDispType" dataType="vector/SI32/"> </Member>
+		<Member name="interfaceType" dataType="vector/SI32/"> </Member>
+		<Member name="trunkPort" dataType="vector/UI32/"> </Member>
+	</Message>
+	<ManagedObject name="BcastPriority">
+		<Member name="switchId" dataType="UI32"> </Member>
+		<Member name="bcastPriority" dataType="UI32"> </Member>
+	</ManagedObject>
+
+	<Message name="UpdateBcastPriorityInfo" sequencerType="SYNC" allowPreemption="FALSE">
+		<Member name="switchId" dataType="UI32"> </Member>
+		<Member name="bcastPriority" dataType="UI32"> </Member>
+	</Message>
+	<Message name="GetNeighborStateinfoInfo" sequencerType="SYNC" allowPreemption="FALSE">
+		<Member name="input_port" dataType="UI32"> </Member>
+		<Member name="isl_portcount" dataType="UI32"> </Member>
+		<Member name="src_port" dataType="vector/SI32/"> </Member>
+		<Member name="src_blade" dataType="vector/SI32/"> </Member>
+		<Member name="src_index" dataType="vector/SI32/"> </Member>
+		<Member name="src_dispType" dataType="vector/SI32/"> </Member>
+		<Member name="domain_id" dataType="vector/SI32/"> </Member>
+		<Member name="dest_blade" dataType="vector/SI32/"> </Member>
+		<Member name="dest_port" dataType="vector/SI32/"> </Member>
+		<Member name="dest_index" dataType="vector/SI32/"> </Member>
+		<Member name="nbr_dispType" dataType="vector/SI32/"> </Member>
+		<Member name="interfaceType" dataType="vector/SI32/"> </Member>
+		<Member name="nbr_state" dataType="vector/SI32/"> </Member>
+		<Member name="nbr_state_str" dataType="vector/string/"> </Member>
+	</Message>
+
+</Local>
+</WavePlugin>

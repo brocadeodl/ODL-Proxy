@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<WavePlugin name="Ssm" nameSpace="DcmNs"> 
+<Global name="SsmGlobal">
+	<Worker name="SsmMacAcl">
+		<ManagedObject name="MacAclPolicyManagedObject">
+			<Member name="policyName" dataType="string">
+			</Member>
+			<Member name="policyType" dataType="UI32">
+			</Member>
+			<Member name="interfaces" dataType="vector/ObjectId/" umlType="ASSOCIATION" referredObject="poPhyIntfManagedObject">
+			</Member>
+		</ManagedObject>
+		<ManagedObject name="StdMacAclPolicyManagedObject" derivedClass="MacAclPolicyManagedObject">
+			<Member name="rules" dataType="vector/WaveManagedObjectPointer"
+					umlType="COMPOSITION" referredObject="StdMacAclRuleManagedObject">
+			</Member>
+		</ManagedObject>
+		<ManagedObject name="ExtMacAclPolicyManagedObject" derivedClass="MacAclPolicyManagedObject">
+			<Member name="extRules" dataType="vector/WaveManagedObjectPointer" umlType="COMPOSITION" referredObject="ExtMacAclRuleManagedObject">
+			</Member>
+		</ManagedObject>
+		<ManagedObject name="MacAclRuleManagedObject">
+			<Member name="ruleid" dataType="UI64">
+			</Member>
+			<Member name="action" dataType="AclAction">
+			</Member>
+			<Member name="srcMac" dataType="string">
+			</Member>
+			<Member name="srcType" dataType="AddrType">
+			</Member>
+			<Member name="srcUnion" dataType="WaveUnion">
+			</Member>
+			<Member name="isCount" dataType="bool">
+			</Member>
+	     </ManagedObject>
+		 <ManagedObject name="StdMacAclRuleManagedObject" derivedClass="MacAclRuleManagedObject">
+		 </ManagedObject>
+		 <ManagedObject name="ExtMacAclRuleManagedObject" derivedClass="MacAclRuleManagedObject">
+		 	<Member name="srcMask" dataType="bool">
+		 	</Member>
+			<Member name="dstMask" dataType="bool">
+			</Member>
+			<Member name="dstMac" dataType="string">
+			</Member>
+			<Member name="srcHost" dataType="string">
+			</Member>
+			<Member name="dstHost" dataType="string">
+			</Member>
+			<Member name="dstType" dataType="AddrType">
+			</Member>
+			<Member name="dstUnion" dataType="WaveUnion">
+			</Member>
+			<Member name="appTypeInt"  dataType="UI16">
+			</Member>
+			<Member name="appType" dataType="EtherType">
+			</Member>
+			<Member name="appTypeUnion" dataType="WaveUnion">
+			</Member>
+		  </ManagedObject>
+	
+	</Worker>
+</Global>
+<Local name="Ssm">
+</Local>
+</WavePlugin>

@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-fcoe"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:fcoe="urn:brocade.com:mgmt:brocade-fcoe"
+        xmlns:rbridge="urn:brocade.com:mgmt:brocade-rbridge"
+        xmlns:ietfyang="urn:ietf:params:xml:ns:yang:ietf-yang-types"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface">
+  <namespace uri="urn:brocade.com:mgmt:brocade-fcoe"/>
+  <prefix value="fcoe"/>
+  <import module="brocade-rbridge">
+    <prefix value="rbridge"/>
+  </import>
+  <import module="ietf-yang-types">
+    <prefix value="ietfyang"/>
+  </import>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+        San Jose, CA 95134
+         U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com 
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This management module is an instrumentation to manage fcoe  
+feature.
+
+Fiber Channel over Ethernet (FCoE) is an
+encapsulation of Fiber Channel frames over Ethernet networks. 
+This allows Fiber Channel to use 10 Gigabit Ethernet networks
+(or higher speeds) while preserving the Fiber Channel protocol.
+
+The FCoE interface can be managed using this module.
+
+This module provides a mechanism to configure FCoE maps and
+FCoE interface.
+ 
+Glossary of the terms used
+--------------------------  
+FIP -      FCoE Initialization Protocol is the standard for
+           initialization of FCoE network.   
+VFID -     Virtual Fabric Identifier</text>
+  </description>
+  <reference>
+    <text>The FC-BB-5 standard ANSI/INCITS 462-2010.</text>
+  </reference>
+  <revision date="2011-07-22">
+    <description>
+      <text>Initial version of the management module brocade-fcoe.</text>
+    </description>
+  </revision>
+  <typedef name="fcoe-fcmap-type">
+    <type name="string">
+      <pattern value="[0][Ee]:[Ff][Cc]:[0-9a-fA-F]{2}"/>
+      <length value="1..9">
+        <description>
+          <text>This indicates the minimum and maximum length of
+characters that can be specified for FC map.</text>
+        </description>
+      </length>
+    </type>
+    <description>
+      <text>The definition for specifying FCoE FC map.</text>
+    </description>
+  </typedef>
+  <typedef name="fcoe-vlan-type">
+    <type name="uint32">
+      <range value="2..4090">
+        <description>
+          <text>The indicates the range of values that can be 
+specified for FCoE VLAN.</text>
+        </description>
+      </range>
+    </type>
+    <description>
+      <text>The definition for specifying FCoE VLAN.</text>
+    </description>
+  </typedef>
+  <typedef name="fcoe-vfid-type">
+    <type name="int32">
+      <range value="1..4096">
+        <description>
+          <text>This indicates the range of values that can be
+specified for  Virtual Fabric ID.</text>
+        </description>
+      </range>
+    </type>
+    <description>
+      <text>The definition for specifying virtual fabric ID.</text>
+    </description>
+  </typedef>
+  <typedef name="fcoe-fabric-map-name-type">
+    <type name="string">
+      <pattern value="default"/>
+      <length value="1..32">
+        <description>
+          <text>This indicates the minimum and maximum number of
+characters that can be specified for 
+FCoE Fabric map name.</text>
+        </description>
+      </length>
+    </type>
+    <description>
+      <text>The definition for specifying FCoE Fabric name.</text>
+    </description>
+  </typedef>
+  <typedef name="fcoe-enode-fabric-map-name-type">
+    <type name="string">
+      <pattern value="default"/>
+      <length value="1..32">
+        <description>
+          <text>This indicates the minimum and maximum number of
+characters that can be specified for 
+FCoE Fabric map name.</text>
+        </description>
+      </length>
+    </type>
+    <description>
+      <text>The definition for specifying FCoE Enodes Fabric name.</text>
+    </description>
+  </typedef>
+  <typedef name="fcoe-map-name-type">
+    <type name="string">
+      <pattern value="default"/>
+      <length value="1..32">
+        <description>
+          <text>This indicates the minimum and maximum number of 
+characters that can be specified for FCoE Map 
+name.</text>
+        </description>
+      </length>
+    </type>
+    <description>
+      <text>The definition for specifying FCoE Map name.</text>
+    </description>
+  </typedef>
+  <typedef name="fcoe-cee-map-name-type">
+    <type name="string">
+      <length value="1..32">
+        <description>
+          <text>This indicates the minimum and maximum number of 
+characters that can be specified for CEE map
+name.</text>
+        </description>
+      </length>
+    </type>
+    <description>
+      <text>The definition for specifying CEE map name.</text>
+    </description>
+  </typedef>
+  <typedef name="fcoe-priority-type">
+    <type name="int32">
+      <range value="0..6">
+        <description>
+          <text>This indicates the range of values that can be
+specified for FCoE priority.</text>
+        </description>
+      </range>
+    </type>
+    <description>
+      <text>The definition for specifying the FCoE priority.</text>
+    </description>
+  </typedef>
+  <typedef name="interface-fcoe-type">
+    <type name="string">
+      <length value="3..32">
+        <description>
+          <text>This indicates the maximum and minimum length of
+characters that can be specified for 
+FCoE interface.</text>
+        </description>
+      </length>
+    </type>
+    <description>
+      <text>The definition for FCoE interface.The FCoE 
+interface can be specified in the 'VN-Num/Rbridge/port' 
+format.</text>
+    </description>
+  </typedef>
+  <typedef name="fcoe-max-enodes-type">
+    <type name="uint32">
+      <range value="256..1000">
+        <description>
+          <text>NUMBER:256-1000;;Enter the max-enodes count</text>
+        </description>
+      </range>
+    </type>
+  </typedef>
+  <typedef name="fcoe-max-enodes-per-rbridge-type">
+    <type name="uint32">
+      <range value="0..1000">
+        <description>
+          <text>NUMBER:0-1000;;Enter fcoe max-enodes </text>
+        </description>
+      </range>
+    </type>
+  </typedef>
+  <typedef name="fcoe-enodes-cfg-type">
+    <type name="string">
+      <pattern value="global|local"/>
+      <length value="1..6">
+        <description>
+          <text>This indicates the mode of Enodes configuration.</text>
+        </description>
+      </length>
+    </type>
+    <description>
+      <text>The definition for specifying FCoE Enodes config mode.</text>
+    </description>
+  </typedef>
+  <grouping name="fcoe-fip-config-cmd-set">
+    <container name="fcoe-fip-advertisement">
+      <description>
+        <text>This provides the grouping of all FIP configuration
+elements.</text>
+      </description>
+      <leaf name="fcoe-fip-advertisement-interval">
+        <type name="int32">
+          <range value="250..90000">
+            <description>
+              <text>This indicates the range of values that can 
+be specified for FIP advertisement 
+interval.</text>
+            </description>
+          </range>
+        </type>
+        <description>
+          <text>This specifies the FCoE advertisement interval.</text>
+        </description>
+      </leaf>
+    </container>
+    <container name="fcoe-fip-keep-alive">
+      <description>
+        <text>This provides the grouping of FCoE keep alive
+configuration elements.</text>
+      </description>
+      <leaf name="fcoe-fip-keep-alive-timeout">
+        <type name="empty"/>
+        <description>
+          <text>This specifies if the keep alive timeout should
+be enabled.
+
+The presence of this leaf specifies that FIP
+keep-alive timeout is enabled.</text>
+        </description>
+      </leaf>
+    </container>
+  </grouping>
+  <container name="fcoe-fsb">
+    <description>
+      <text>This CLI will disable/enable fsb mode</text>
+    </description>
+    <leaf name="fcoe-fsb-enable">
+      <type name="empty"/>
+      <description>
+        <text>The presence of this leaf specifies that fsb
+mode is enabled.</text>
+      </description>
+    </leaf>
+  </container>
+  <container name="fcoe">
+    <description>
+      <text>This provides the grouping of all FCoE map configuration
+elements.</text>
+    </description>
+    <list name="fcoe-fabric-map">
+      <key value="fcoe-fabric-map-name"/>
+      <description>
+        <text>List of FCoE fabric map parameters.</text>
+      </description>
+      <leaf name="fcoe-fabric-map-name">
+        <type name="fcoe-fabric-map-name-type"/>
+        <description>
+          <text>This specifies the name for the FCoE fabric map.</text>
+        </description>
+      </leaf>
+      <leaf name="fcoe-fabric-map-vlan">
+        <type name="fcoe-vlan-type"/>
+        <description>
+          <text>This specifies the VLAN for the FCoE Fabric Map.</text>
+        </description>
+      </leaf>
+      <leaf name="fcoe-fabric-map-priority">
+        <type name="fcoe-priority-type"/>
+        <description>
+          <text>This specifies the priority for the FCoE
+Fabric-map.</text>
+        </description>
+      </leaf>
+      <leaf name="fcoe-fabric-map-virtual-fabric">
+        <type name="fcoe-vfid-type"/>
+        <description>
+          <text>This specifies the Virtual Fabric ID for the 
+Fabric-map.</text>
+        </description>
+      </leaf>
+      <leaf name="fcoe-fabric-map-fcmap">
+        <type name="fcoe-fcmap-type"/>
+        <description>
+          <text>This specifies the FCMAP value for a FCoE
+Fabric-map.</text>
+        </description>
+      </leaf>
+      <leaf name="fcoe-fabric-map-max-enodes">
+        <description>
+          <text>Configure the MAX Enodes for a FCOE Fabric-map</text>
+        </description>
+        <type name="fcoe-max-enodes-type"/>
+      </leaf>
+      <leaf name="fcoe-fabric-map-enodes-cfg">
+        <type name="fcoe-enodes-cfg-type"/>
+        <description>
+          <text>This specifies the Enodes configuration mode.</text>
+        </description>
+      </leaf>
+      <uses name="fcoe-fip-config-cmd-set"/>
+    </list>
+    <list name="fcoe-map">
+      <key value="fcoe-map-name"/>
+      <description>
+        <text>The list of FCoE maps.Each row contains the FCoE map
+name and the list of FCoE fabric maps and CEE maps.</text>
+      </description>
+      <leaf name="fcoe-map-name">
+        <type name="fcoe-map-name-type"/>
+        <description>
+          <text>This specifies the FCoE map name.</text>
+        </description>
+      </leaf>
+      <list name="fcoe-map-fabric-map">
+        <key value="fcoe-map-fabric-map-name"/>
+        <description>
+          <text>List of FCoE Fabric map in the FCoE map. Each row 
+represents Fabric Map name.</text>
+        </description>
+        <leaf name="fcoe-map-fabric-map-name">
+          <type name="fcoe-fabric-map-name-type"/>
+          <description>
+            <text>This specifies the FCoE fabric map name.</text>
+          </description>
+        </leaf>
+      </list>
+      <container name="fcoe-map-cee-map">
+        <description>
+          <text>This provides the grouping for FCoE CEE map
+configuration elements.</text>
+        </description>
+        <leaf name="fcoe-map-cee-map-leaf">
+          <type name="fcoe-cee-map-name-type"/>
+          <description>
+            <text>This specifies the CEE Map in the FCoE map.</text>
+          </description>
+        </leaf>
+      </container>
+    </list>
+  </container>
+  <augment target-node="/interface:interface">
+    <list name="fcoe">
+      <key value="fcoe-interface-name"/>
+      <description>
+        <text>The list of FCoE interfaces. Each row contains FCoE
+interface name and its status.</text>
+      </description>
+      <leaf name="fcoe-interface-name">
+        <type name="interface-fcoe-type"/>
+        <description>
+          <text>This specifies the FCoE interface name.</text>
+        </description>
+      </leaf>
+      <leaf name="fcoe-interface-shutdown">
+        <type name="empty"/>
+        <description>
+          <text>This specifies, if the FCoE interface is enabled
+or not. 
+The presence of this leaf indicates the 
+interface is shutdown.</text>
+        </description>
+      </leaf>
+      <container name="fcoe-interface-bind">
+        <description>
+          <text>Bind the FCoE interface to a Physical Ethernet Port.</text>
+        </description>
+        <leaf name="fcoe-interface-bind-type">
+          <description>
+            <text>Physical Ethernet Port type</text>
+          </description>
+          <type name="enumeration">
+            <enum name="TenGigabitEthernet">
+              <value value="1"/>
+              <description>
+                <text>Bind to TenGigabitEthernet port</text>
+              </description>
+            </enum>
+            <enum name="FortyGigabitEthernet">
+              <value value="2"/>
+              <description>
+                <text>Bind to FortyGigabitEthernet port</text>
+              </description>
+            </enum>
+            <enum name="Port-channel">
+              <value value="3"/>
+              <description>
+                <text>Bind to a Port-channel</text>
+              </description>
+            </enum>
+            <enum name="mac-address">
+              <value value="4"/>
+              <description>
+                <text>Bind to an Enode Mac-address</text>
+              </description>
+            </enum>
+          </type>
+        </leaf>
+        <leaf name="fcoe-interface-bind-name">
+          <description>
+            <text>Interface name or Enode mac address</text>
+          </description>
+          <type name="string">
+            <length value="0..32">
+              <description>
+                <text>This indicates the interface bind value.
+Bind value can be a Physical or Logical 
+Ethernet interface or a Mac-Address.</text>
+              </description>
+            </length>
+          </type>
+          <default value=""/>
+        </leaf>
+      </container>
+    </list>
+  </augment>
+  <grouping name="fcoeport-lag-commands">
+    <container name="fcoeport">
+      <leaf name="fcoeport-map">
+        <type name="fcoe-map-name-type"/>
+      </leaf>
+    </container>
+  </grouping>
+  <grouping name="fcoeport-commands">
+    <container name="fcoeport">
+      <description>
+        <text>This provides the grouping for FCoE configuration
+elements on a port.</text>
+      </description>
+      <leaf name="fcoeport-map">
+        <type name="fcoe-map-name-type"/>
+        <description>
+          <text>This specifies the name of the FCoE map.</text>
+        </description>
+      </leaf>
+    </container>
+  </grouping>
+  <augment target-node="/interface:interface/interface:port-channel">
+    <uses name="fcoeport-lag-commands"/>
+  </augment>
+  <grouping name="fabric-commands">
+    <container name="fabric">
+      <description>
+        <text>Configure the Fabric Protocol parameters</text>
+      </description>
+      <container name="fabric-isl">
+        <description>
+          <text>Configure the Fabric Protocol ISL parameters</text>
+        </description>
+        <leaf name="fabric-isl-enable">
+          <description>
+            <text>Configure the Fabric Protocol ISL status</text>
+          </description>
+          <type name="empty"/>
+        </leaf>
+      </container>
+      <container name="fabric-trunk">
+        <description>
+          <text>Configure the Fabric Protocol Trunk parameters</text>
+        </description>
+        <leaf name="fabric-trunk-enable">
+          <description>
+            <text>Configure the Fabric Protocol Trunk status</text>
+          </description>
+          <type name="empty"/>
+        </leaf>
+      </container>
+      <container name="neighbor-discovery">
+        <description>
+          <text>Neighbor discovery at this port</text>
+        </description>
+        <leaf name="disable">
+          <description>
+            <text>Disable neighbor discovery at this port</text>
+          </description>
+          <type name="empty"/>
+        </leaf>
+      </container>
+    </container>
+  </grouping>
+  <grouping name="fcoe-rbridge-commands">
+    <container name="fcoe-config">
+      <description>
+        <text>This provides the grouping of all FCoE map configuration
+elements.</text>
+      </description>
+      <list name="fcoe-enode-fabric-map">
+        <key value="fcoe-enode-fabric-map-name"/>
+        <description>
+          <text>List of FCoE fabric map parameters.</text>
+        </description>
+        <leaf name="fcoe-enode-fabric-map-name">
+          <type name="fcoe-enode-fabric-map-name-type"/>
+          <description>
+            <text>This specifies the name for the FCoE fabric map.</text>
+          </description>
+        </leaf>
+        <leaf name="fcoe-max-enode">
+          <type name="fcoe-max-enodes-per-rbridge-type"/>
+          <description>
+            <text>This specifies the Number of the FCoE Enodes.</text>
+          </description>
+        </leaf>
+      </list>
+    </container>
+  </grouping>
+  <augment target-node="/interface:interface/interface:fortygigabitethernet">
+    <uses name="fabric-commands">
+      <refine target-node="fabric/neighbor-discovery"/>
+    </uses>
+    <uses name="fcoeport-commands"/>
+  </augment>
+  <augment target-node="/interface:interface/interface:tengigabitethernet">
+    <uses name="fabric-commands">
+      <refine target-node="fabric/neighbor-discovery"/>
+    </uses>
+    <uses name="fcoeport-commands"/>
+  </augment>
+  <augment target-node="/interface:interface/interface:gigabitethernet">
+    <container name="fabric">
+      <container name="neighbor-discovery">
+        <description>
+          <text>Neighbor discovery at this port</text>
+        </description>
+        <leaf name="disable">
+          <description>
+            <text>Disable neighbor discovery at this port</text>
+          </description>
+          <type name="empty"/>
+        </leaf>
+      </container>
+    </container>
+  </augment>
+  <augment target-node="/rbridge:rbridge-id">
+    <uses name="fcoe-rbridge-commands"/>
+  </augment>
+</module>

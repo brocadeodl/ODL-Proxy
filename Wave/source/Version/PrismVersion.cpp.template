@@ -1,0 +1,105 @@
+/***************************************************************************
+ *   Copyright (C) 2005-2006 Brocade Communications Systems, Inc.          *
+ *   All rights reserved.                                                  *
+ *   Author : Vidyasagara Reddy Guntaka                                    *
+ ***************************************************************************/
+
+#include "Version/PrismVersion.h"
+
+namespace WaveNs
+{
+
+PrismVersion::PrismVersion ()
+    : m_major       ("WAVE_VERSION_MAJOR"),
+      m_minor       ("WAVE_VERSION_MINOR"),
+      m_patch       ("WAVE_VERSION_PATCH"),
+      m_revision    ("WAVE_VERSION_REVISION"),
+      m_buildType   ("WAVE_BUILD_TYPE"),
+      m_buildNumber ("WAVE_BUILD_NUMBER"),
+      m_date        ("WAVE_VERSION_DATE"),
+      m_user        ("WAVE_VERSION_USER"),
+      m_host        ("WAVE_VERSION_HOST"),
+      m_domain      ("WAVE_VERSION_DOMAIN")
+{
+}
+
+PrismVersion::~PrismVersion ()
+{
+}
+
+string PrismVersion::getMajor () const
+{
+    return (m_major);
+}
+
+string PrismVersion::getMinor () const
+{
+    return (m_minor);
+}
+
+string PrismVersion::getPatch () const
+{
+    return (m_patch);
+}
+
+string PrismVersion::getRevision () const
+{
+    return (m_revision);
+}
+
+string PrismVersion::getBuildType () const
+{
+    return (m_buildType);
+}
+
+string PrismVersion::getBuildNumber () const
+{
+    return (m_buildNumber);
+}
+
+string PrismVersion::getDate () const
+{
+    return (m_date);
+}
+
+string PrismVersion::getUser () const
+{
+    return (m_user);
+}
+
+string PrismVersion::getHost () const
+{
+    return (m_host);
+}
+
+string PrismVersion::getDomain () const
+{
+    return (m_domain);
+}
+
+const PrismVersion *PrismVersion::getInstance ()
+{
+    static PrismVersion *pPrismVersion = NULL;
+
+    if (NULL == pPrismVersion)
+    {
+        pPrismVersion = new PrismVersion ();
+    }
+
+    return (pPrismVersion);
+}
+
+string PrismVersion::getVersionString ()
+{
+    const PrismVersion *pPrismVersion       = getInstance ();
+          string        prismVersionString;
+
+    if (NULL != pPrismVersion)
+    {
+        prismVersionString = string ("") + pPrismVersion->getMajor () + "." + pPrismVersion->getMinor () + "." + pPrismVersion->getPatch () + "." + pPrismVersion->getRevision () + "-" + pPrismVersion->getBuildType () + "." + pPrismVersion->getBuildNumber ();
+    }
+
+    return (prismVersionString);
+}
+
+}

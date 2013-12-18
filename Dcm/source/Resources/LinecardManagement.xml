@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for VcsNodeSlotManagementWorker. -->
+
+<ModuleResources ModuleName = "LinecardManagement" ComponentName = "Dcm">
+    
+   <ResourceEnum Name = "LinecardManagementResourceId">
+        <Resource Name = "LINECARD_MANAGEMENT_REMOVE_SUCCESSFUL">Linecard configuration removal was successful. Please persist the change with copy running-config startup-config command before next reboot for linecard type change.</Resource>
+        <Resource Name = "LINECARD_MANAGEMENT_CREATE_SUCCESSFUL">Creating new linecard configuration was successful.</Resource>
+        <Resource Name = "LINECARD_MANAGEMENT_FAILED_REMOVE">%% Error: Failed to remove linecard configuration. Please verify that linecard is powered off.</Resource>
+        <Resource Name = "LINECARD_MANAGEMENT_FAILED_CREATE">%% Error: Failed to create linecard configuration.</Resource>
+        <Resource Name = "LINECARD_MANAGEMENT_FAILED_UPDATE">%% Error: Failed to update existing linecard configuration.  Please remove existing configuration to insert a new configuration.</Resource>
+        <Resource Name = "LINECARD_MANAGEMENT_FAILED_RBRIDGEID_ERROR">%% Error: Node not found for rbridgeId.</Resource>
+        <Resource Name = "LINECARD_MANAGEMENT_FAILED_MISSING_RBRIDGEID_ERROR">%% Error: RbridgeId is required for vcs mode.</Resource>
+        <Resource Name = "LINECARD_MANAGEMENT_FAILED_SLOT_NUM_ERROR">%% Error: Invalid slot number.  Check the valid range of slot numbers.</Resource>
+        <Resource Name = "LINECARD_MANAGEMENT_FAILED_MISSING_SLOT_ERROR">%% Error: Slot is missing.  Failed to remove slot.</Resource>
+        <Resource Name = "LINECARD_MANAGEMENT_FAILED_WRONG_STATE_ERROR">%% Error: Linecard is not in the offline state.  Failed to remove slot.</Resource>
+        <Resource Name = "LINECARD_MANAGEMENT_FAILED_PLATFORM_NOT_SUPPORTED">%% Error: Command not supported on this platform.</Resource>
+        <Resource Name = "LINECARD_IS_NOT_INSERTED">%% Error: Linecard is not inserted.</Resource>
+        <Resource Name = "LINECARD_SHOULD_BE_IN_OFFLINE_STATE">%% Error: Linecard should be in offline state.</Resource>
+        <Resource Name = "LINECARD_MANAGEMENT_FAILED_CREATE_MESSAGING_ERROR">%% Error: Failed to create linecard configuration due to messaging failure.</Resource>
+        <Resource Name = "LINECARD_MANAGEMENT_FAILED_REMOVE_MESSAGING_ERROR">%% Error: Failed to remove linecard configuration due to messaging failure.</Resource>
+    </ResourceEnum>
+</ModuleResources>
+

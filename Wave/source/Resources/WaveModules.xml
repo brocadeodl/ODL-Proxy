@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file describes the various modules that contain Wave Resources. -->
+
+<Modules ComponentName = "Wave">
+    <Module Name = "FrameworkCore"                               Source = "WaveFrameworkCore.xml"                             ></Module>
+    <Module Name = "FrameworkMessaging"                          Source = "WaveFrameworkMessaging.xml"                        ></Module>
+    <Module Name = "FrameworkLocationManagement"                 Source = "WaveFrameworkLocationManagement.xml"               ></Module>
+    <Module Name = "FrameworkMultiThreading"                     Source = "WaveFrameworkMultiThreading.xml"                   ></Module>
+    <Module Name = "FrameworkObjectModel"                        Source = "WaveFrameworkObjectModel.xml"                      ></Module>
+    <Module Name = "FrameworkPersistence"                        Source = "WaveFrameworkPersistence.xml"                      ></Module>
+    <Module Name = "Timer"                                       Source = "WaveFrameworkTimer.xml"                            ></Module>
+    <Module Name = "Trace"                                       Source = "WaveFrameworkTrace.xml"                            ></Module>
+    <Module Name = "Cluster"                                     Source = "WaveCluster.xml"                                   ></Module>
+    <Module Name = "ManagementInterface"                         Source = "WaveManagementInterface.xml"                       ></Module>
+    <Module Name = "ManagementInterfaceClientInterface"          Source = "WaveManagementClientInterface.xml"                 ></Module>
+    <Module Name = "Alarm"                                       Source = "WaveAlarm.xml"                                     ></Module>
+    <Module Name = "FrameworkBoot"                               Source = "WaveFrameworkBoot.xml"                             ></Module>
+    <Module Name = "ClusterLocal"                                Source = "WaveClusterLocal.xml"                              ></Module>
+    <Module Name = "FrameworkShutDown"                           Source = "WaveFrameworkShutDown.xml"                         ></Module>
+    <Module Name = "File"                                        Source = "WaveFrameworkFile.xml"                             ></Module>
+    <Module Name = "DistributedLog"                              Source = "WaveFrameworkDistributedLog.xml"                   ></Module>
+    <Module Name = "StatusLog"                                   Source = "WaveFrameworkConsoleLogs.xml"                      ></Module>
+    <Module Name = "Database"                                    Source = "WaveFrameworkDatabase.xml"                         ></Module>
+    <Module Name = "HttpInterface"                               Source = "WaveHttpInterface.xml"                             ></Module>
+    <Module Name = "AttributeSqlOperators"                       Source = "WaveAttributeSqlOperators.xml"                     ></Module>
+    <Module Name = "Attributes"                                  Source = "WaveFrameworkAttributes.xml"                       ></Module>
+    <Module Name = "WaveSystemManagement"                        Source = "WaveSystemManagement.xml"                          ></Module>
+    <Module Name = "WaveCommandLineInterface"                    Source = "WaveCommandLineInterface.xml"                      ></Module>
+    <Module Name = "SystemInitialization"                        Source = "WaveFrameworkSystemInitialization.xml"             ></Module>
+    <Module Name = "FrameworkState"                              Source = "WaveFrameworkState.xml"                            ></Module>
+    <Module Name = "FrameworkMessagingBrokerBasedMessagignBus"   Source = "WaveFrameworkMessagingBrokerBasedMessagingBus.xml" ></Module>
+</Modules>

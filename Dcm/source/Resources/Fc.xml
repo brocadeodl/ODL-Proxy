@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for FC Module. -->
+
+<ModuleResources ModuleName = "Fc" ComponentName = "Wave">
+    <ResourceEnum Name = "FcInterfaceConfigStatusCodes">
+        <Resource Name = "FC_IF_ERR_NOT_FOUND">%%Error: FC interface not found.</Resource>
+		<Resource Name = "FC_IF_ERR_NO_ARGS">%%Error: Error in No. of Arguments.</Resource>
+        <Resource Name = "FC_IF_TransMsg_Null">%%Error: Fc TransMsg is NULL.</Resource>
+        <Resource Name = "FC_Distance_NotSupported">%%Error: Supported for LS and LD.</Resource>
+		<Resource Name = "FC_Distance_LD_1Gb">%%Error:distance should be less than=3000Km when speed is 1Gbps.</Resource>
+		<Resource Name = "FC_Distance_LD_2Gb">%%Error:distance should be less than=1500Km when speed is 2Gbps.</Resource>
+		<Resource Name = "FC_Distance_LD_4and8Gb">%%Error:distance should be less than=750Km when speed is 4 and 8 Gbps.</Resource>
+		<Resource Name = "FC_Distance_LS">%%Error:distance should be greater than= 10Km.</Resource>
+		<Resource Name = "FC_vc_NotSupported">%%Error:Not allowed with longdistance(L0) normal link.</Resource>
+		<Resource Name = "FC_Noavail_buf">%%Failed: configuration not allowed due to insufficient buffers. Try a shorter distance.</Resource>
+		<Resource Name = "FC_NO_CFG_DESIRED_DIST">%%Failed: In LD mode, port speed should not be Auto.</Resource>
+		<Resource Name = "FC_ERR_DISABLE_ISL">%%Error: Need to disable ISL R_RDY mode before enabling Trunk. </Resource>
+		<Resource Name = "FC_ERR_DISABLE_TRUNK">%%Error: Need to disable Trunk before enabling ISL R_RDY mode.</Resource>
+		<Resource Name = "FC_ERR_AG_MODE_NOT_SUPPORTED">%%Error: AG Mode not supported.</Resource>
+	</ResourceEnum>
+	<ResourceEnum Name = "FcLicenseCheckStatusCode">
+		<Resource Name = "FC_BASE_FCOE_LICENSE_MISSING">%%Error: FCOE License Missing. Need FCOE BASE License to Configure FC ports.</Resource>
+	</ResourceEnum>
+		
+</ModuleResources>

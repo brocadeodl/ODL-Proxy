@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?> 
+<WavePlugin name="Sflow" nameSpace="DcmNs">
+	<Global name="SflowGlobal">
+	<Worker name="SflowGlobal">
+		<ManagedObject name="SflowGlobalConfig">
+			<Member name="enable" dataType="bool" >
+			</Member>
+			<Member name="collector" dataType="IpV4Address" >
+			</Member>
+			<Member name="pollingInterval" dataType="UI32" >
+			</Member>
+			<Member name="sampleRate" dataType="UI32" >
+			</Member>
+		</ManagedObject>
+		<Message name="CreateSflowGlobalConfig" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="enable" dataType="bool" >
+			</Member>
+			<Member name="collector" dataType="IpV4Address" >
+			</Member>
+			<Member name="pollingInterval" dataType="UI32" >
+			</Member>
+			<Member name="sampleRate" dataType="UI32" >
+			</Member>
+			<Member name="opCode" dataType="UI32" >
+			</Member>
+        </Message>
+		<Message name="DeleteSflowGlobalConfig" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="enable" dataType="bool" >
+			</Member>
+			<Member name="collector" dataType="IpV4Address" >
+			</Member>
+			<Member name="pollingInterval" dataType="UI32" >
+			</Member>
+			<Member name="sampleRate" dataType="UI32" >
+			</Member>
+			<Member name="opCode" dataType="UI32" >
+			</Member>
+		</Message>
+	</Worker>
+	</Global>
+	<Local name="Sflow">
+	<Worker name="SflowLocalConfig">
+		<Message name="CreateSflowGlobalConfigSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="enable" dataType="bool" >
+			</Member>
+			<Member name="collector" dataType="IpV4Address" >
+			</Member>
+			<Member name="pollingInterval" dataType="UI32" >
+			</Member>
+			<Member name="sampleRate" dataType="UI32" >
+			</Member>
+			<Member name="opCode" dataType="UI32" >
+			</Member>
+        </Message>
+		<Message name="DeleteSflowGlobalConfigSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="enable" dataType="bool" >
+			</Member>
+			<Member name="collector" dataType="IpV4Address" >
+			</Member>
+			<Member name="pollingInterval" dataType="UI32" >
+			</Member>
+			<Member name="sampleRate" dataType="UI32" >
+			</Member>
+			<Member name="opCode" dataType="UI32" >
+			</Member>
+		</Message>
+	</Worker>
+</Local>
+</WavePlugin>

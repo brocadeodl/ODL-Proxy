@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Framework Core Module. -->
+
+<ModuleResources ModuleName = "ValClientInterface" ComponentName = "Val">
+    <ResourceEnum Name = "ValCscStartStatus">
+        <Resource Name = "VAL_CLIENT_SYNC_START_SUCCEEDED">Starting VAL Succeeded</Resource>
+        <Resource Name = "VAL_CLIENT_SYNC_START_FAILED"   >Starting VAL Failed</Resource>
+    </ResourceEnum>
+    
+    <ResourceEnum Name = "ValCStyleClientInterfaceStatus">
+        <Resource Name = "VAL_CLIENT_SWITCH_WWN_NOT_FOUND">Switch WWN could not be found</Resource>
+        <Resource Name = "VAL_CLIENT_RBRIDGE_ID_NOT_FOUND">RBridge-Id could not be found</Resource>
+        <Resource Name = "VAL_CLIENT_SWITCH_IP_NOT_FOUND">Switch IP could not be found</Resource>
+        <Resource Name = "VAL_ALL_RBRIDGE_ID_IN_USE">All rbridge-Ids are in use</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "DcmCStyleClientIntefaceStatus">
+        <Resource Name = "DCM_C_STYLE_CLIENT_MESSAGE_TYPE_NOT_SUPPORTED">This type of message is not supported</Resource>
+        <Resource Name = "DCM_C_STYLE_CLIENT_MESSAGE_HANDLER_NOT_SET">The Handler for operation code was not set by the C Style Client</Resource>
+        <Resource Name = "DCM_C_STYLE_CLIENT_MESSAGE_HANDLER_FAILED_TO_POST_TO_MAIN_THREAD">Client message handler failed to post to DCM main thread</Resource>
+    </ResourceEnum>
+</ModuleResources>

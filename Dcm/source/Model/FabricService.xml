@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<WavePlugin name="FabricService" namespace="DcmNs">
+	<Local name="FabricService">
+		<Message name="GetFabricInfo" sequencerType="SYNC" allowPreemption="FALSE">
+			<Member name="domain_count" dataType="UI32"> </Member>
+			<Member name="domain_id" dataType="vector/UI32/"> </Member>
+			<Member name="domain_wwn" dataType="vector/WorldWideName/"> </Member>
+			<Member name="domain_eth_ip_addr" dataType="vector/IpV4Address/"> </Member>
+			<Member name="domain_fc_ip_addr" dataType="vector/IpV4Address/"> </Member>
+			<Member name="domain_ipv6_addr" dataType="vector/IpV6Address/"> </Member>
+			<Member name="domain_name" dataType="vector/string/"> </Member>
+ 			<Member name="domain_hw_model" dataType="vector/UI32/"> </Member>
+			<Member name="domain_fw_version" dataType="vector/string/"> </Member>
+			<Member name="principal_domain" dataType="vector/bool/"> </Member>
+		</Message>
+        <Message name="Getislshow" sequencerType="SYNC" allowPreemption="FALSE">
+            <Member name="domain_id" dataType="UI32"> </Member>
+			<Member name="serialport" dataType="vector/UI32/"> </Member>
+            <Member name="src_blade" dataType="vector/SI32/"> </Member>
+            <Member name="src_port" dataType="vector/SI32/"> </Member>
+            <Member name="src_index" dataType="vector/UI32/"> </Member>
+            <Member name="src_disp_type" dataType="vector/SI32/"> </Member>
+            <Member name="dest_blade" dataType="vector/SI32/"> </Member>
+            <Member name="dest_port" dataType="vector/SI32/"> </Member>
+            <Member name="dest_index" dataType="vector/UI32/"> </Member>
+            <Member name="dest_disp_type" dataType="vector/SI32/"> </Member>
+            <Member name="interface_type" dataType="vector/SI32/"> </Member>
+            <Member name="dom_wwn" dataType="vector/WorldWideName/"> </Member>
+            <Member name="dom_id" dataType="vector/UI32/"> </Member>
+            <Member name="switch_name" dataType="vector/string/"> </Member>
+			<Member name="type" dataType="vector/string/"> </Member>
+			<Member name="speed" dataType="vector/UI32/"> </Member>
+            <Member name="bandwidth" dataType="vector/UI32/"> </Member>
+		</Message>
+		<Message name="GetTrunkShow" sequencerType="SYNC" allowPreemption="FALSE">
+			<Member name="group_num" dataType="vector/UI32/"> </Member>
+			<Member name="src_blade" dataType="vector/SI32/"> </Member>
+			<Member name="src_port" dataType="vector/SI32/"> </Member>
+			<Member name="src_index" dataType="vector/UI32/"> </Member>
+			<Member name="src_disp_type" dataType="vector/SI32/"> </Member>
+			<Member name="dest_blade" dataType="vector/SI32/"> </Member>
+			<Member name="dest_port" dataType="vector/SI32/"> </Member>
+			<Member name="dest_index" dataType="vector/UI32/"> </Member>
+			<Member name="dest_disp_type" dataType="vector/SI32/"> </Member>
+			<Member name="interface_type" dataType="vector/SI32/"> </Member>
+			<Member name="switch_wwn" dataType="vector/WorldWideName/"> </Member>
+			<Member name="deskew" dataType="vector/UI32/"> </Member>
+			<Member name="domain_id" dataType="vector/UI32/"> </Member>
+			<Member name="type" dataType="vector/UI32/"> </Member>
+			<Member name="port_type" dataType="vector/bool/"> </Member>
+			<Member name="tx_bandwidth" dataType="vector/UI64/"> </Member>
+			<Member name="tx_throughput" dataType="vector/UI64/"> </Member>
+			<Member name="tx_percent" dataType="vector/UI64/"> </Member>
+			<Member name="rx_bandwidth" dataType="vector/UI64/"> </Member>
+			<Member name="rx_throughput" dataType="vector/UI64/"> </Member>
+			<Member name="rx_percent" dataType="vector/UI64/"> </Member>
+		</Message>
+		<Message name="GetlinkInfo" sequencerType="SYNC" allowPreemption="FALSE">
+			<Member name="domain_id" dataType="vector/UI32/"> </Member>
+			<Member name="domainreachable" dataType="vector/UI32/"> </Member>
+			<Member name="version" dataType="vector/UI32/"> </Member>
+			<Member name="domainwwn" dataType="vector/WorldWideName/"> </Member>
+			<Member name="links_count" dataType="vector/UI32/"> </Member>
+			<Member name="link_id" dataType="vector/UI32/"> </Member>
+			<Member name="remote_port" dataType="vector/UI32/"> </Member>
+			<Member name="costCount" dataType="vector/UI32/"> </Member>
+			<Member name="pathCost" dataType="vector/UI32/"> </Member>
+			<Member name="pathOutPort" dataType="vector/UI32/"> </Member>
+			<Member name="link_type" dataType="vector/UI32/"> </Member>
+			<Member name="trunked" dataType="vector/UI32/"> </Member>
+			<Member name="pathOutPort_dispType" dataType="vector/SI32/"> </Member>
+			<Member name="pathOutPort_tupleBlade" dataType="vector/SI32/"> </Member>
+			<Member name="pathOutPort_tuplePort" dataType="vector/SI32/"> </Member>
+			<Member name="pathRemPort_dispType" dataType="vector/SI32/"> </Member>
+			<Member name="pathRemPort_tupleBlade" dataType="vector/SI32/"> </Member>
+			<Member name="pathRemPort_tuplePort" dataType="vector/SI32/"> </Member>
+		</Message>
+		<Message name="SetLocalDomainId" sequencerType="SYNC" allowPreemption="FALSE">
+			<Member name="domain_id" dataType="SI32"> </Member>
+		</Message>
+		<Message name="SwitchShow" sequencerType="SYNC" allowPreemption="FALSE">
+			<Member name="switch_details" dataType="vector/string/"> </Member>
+		</Message>
+		<Message name="PortLogClear" sequencerType="SYNC" allowPreemption="FALSE">
+			<Member name="status" dataType="string"> </Member>
+		</Message>
+		<Message name="PortLog" sequencerType="SYNC" allowPreemption="FALSE">
+			<Member name="log_entries" dataType="vector/string/"> </Member>
+		</Message>
+		<Message name="SetInsistentDomainId" sequencerType="SYNC" allowPreemption="FALSE">
+			<Member name="insistent_domainId" dataType="UI32"> </Member>
+		</Message>
+		<Message name="DisableIslsToNeighbor" sequencerType="SYNC" allowPreemption="FALSE">
+			<Member name="switch_wwn" dataType="WorldWideName"> </Member>
+			<Member name="reason_code" dataType="SI32"> </Member>
+		</Message>
+	</Local>
+</WavePlugin>

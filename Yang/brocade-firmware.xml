@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-firmware"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:firmware="urn:brocade.com:mgmt:brocade-firmware"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def">
+  <namespace uri="urn:brocade.com:mgmt:brocade-firmware"/>
+  <prefix value="firmware"/>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+        San Jose, CA 95134
+         U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This management module is an instrumentation to firmware level
+level commands</text>
+  </description>
+  <revision date="2011-04-11">
+    <description>
+      <text>Initial version of this management module.</text>
+    </description>
+  </revision>
+  <typedef name="rbridge-ids-all-type">
+    <description>
+      <text>The unique identifier for a switch.  The usage of `all'
+refers to `all' rbridge-id's in the cluster.</text>
+    </description>
+    <type name="union">
+      <type name="common-def:ui32-range"/>
+      <type name="string">
+        <pattern value="all"/>
+      </type>
+    </type>
+  </typedef>
+  <grouping name="fwdl-parameters">
+    <leaf name="user">
+      <type name="string"/>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="password">
+      <type name="string"/>
+      <mandatory value="false"/>
+    </leaf>
+    <leaf name="host">
+      <type name="string"/>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="directory">
+      <type name="string"/>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="file">
+      <type name="string"/>
+      <mandatory value="false"/>
+    </leaf>
+  </grouping>
+  <grouping name="fwdl-local-options">
+    <choice name="options">
+      <case name="manual">
+        <leaf name="manual">
+          <type name="empty"/>
+          <mandatory value="false"/>
+        </leaf>
+        <leaf name="noreboot">
+          <type name="empty"/>
+          <mandatory value="false"/>
+        </leaf>
+        <leaf name="nocommit">
+          <type name="empty"/>
+          <mandatory value="false"/>
+        </leaf>
+      </case>
+      <case name="noactivate">
+        <leaf name="noactivate">
+          <type name="empty"/>
+          <mandatory value="false"/>
+        </leaf>
+      </case>
+    </choice>
+  </grouping>
+  <grouping name="fwdl-cluster-options">
+    <leaf name="rbridge-id">
+      <type name="rbridge-ids-all-type"/>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="auto-activate">
+      <type name="empty"/>
+      <mandatory value="false"/>
+    </leaf>
+  </grouping>
+  <grouping name="fwdl-output">
+    <leaf name="fwdl-tid">
+      <type name="int32"/>
+    </leaf>
+    <leaf name="fwdl-status">
+      <type name="int32"/>
+    </leaf>
+    <leaf name="fwdl-msg">
+      <type name="string"/>
+    </leaf>
+  </grouping>
+  <grouping name="fwdl-cluster-output">
+    <leaf name="fwdl-cmd-status">
+      <type name="int32"/>
+    </leaf>
+    <leaf name="fwdl-cmd-msg">
+      <type name="string"/>
+    </leaf>
+    <list name="cluster-output">
+      <leaf name="rbridge-id">
+        <type name="uint32"/>
+      </leaf>
+      <leaf name="fwdl-status">
+        <type name="int32"/>
+      </leaf>
+      <leaf name="fwdl-msg">
+        <type name="string"/>
+      </leaf>
+    </list>
+  </grouping>
+  <container name="firmware">
+    <container name="download">
+      <container name="logical-chassis"/>
+    </container>
+    <container name="auto-sync"/>
+    <container name="autoupgrade">
+      <leaf name="enable">
+        <type name="empty"/>
+      </leaf>
+    </container>
+    <container name="autoupgrade-params">
+      <leaf name="path">
+        <type name="string"/>
+      </leaf>
+      <leaf name="protocol">
+        <type name="enumeration">
+          <enum name="ftp">
+            <value value="1"/>
+          </enum>
+          <enum name="scp">
+            <value value="2"/>
+          </enum>
+          <enum name="sftp">
+            <value value="3"/>
+          </enum>
+        </type>
+      </leaf>
+      <leaf name="ipaddress">
+        <type name="string"/>
+      </leaf>
+      <leaf name="username">
+        <type name="string"/>
+      </leaf>
+      <leaf name="pass">
+        <type name="string"/>
+      </leaf>
+    </container>
+  </container>
+  <rpc name="fwdl-status">
+    <input>
+      <leaf name="fwdl-tid">
+        <type name="int32"/>
+      </leaf>
+    </input>
+    <output>
+      <leaf name="number-of-entries">
+        <type name="uint32"/>
+      </leaf>
+      <leaf name="fwdl-state">
+        <type name="enumeration">
+          <enum name="in-progress">
+            <value value="1"/>
+          </enum>
+          <enum name="downloaded">
+            <value value="2"/>
+          </enum>
+          <enum name="failed">
+            <value value="3"/>
+          </enum>
+          <enum name="completed">
+            <value value="4"/>
+          </enum>
+        </type>
+      </leaf>
+      <list name="fwdl-entries">
+        <leaf name="index">
+          <type name="uint32"/>
+        </leaf>
+        <leaf name="message-id">
+          <type name="int32"/>
+        </leaf>
+        <leaf name="date-and-time-info">
+          <type name="string"/>
+        </leaf>
+        <leaf name="message">
+          <type name="string"/>
+        </leaf>
+        <leaf name="blade-slot">
+          <type name="int32"/>
+        </leaf>
+        <leaf name="blade-swbd">
+          <type name="int32"/>
+        </leaf>
+        <leaf name="blade-name">
+          <type name="string"/>
+        </leaf>
+        <leaf name="blade-state">
+          <type name="enumeration">
+            <enum name="active">
+              <value value="0"/>
+            </enum>
+            <enum name="standby">
+              <value value="1"/>
+            </enum>
+          </type>
+        </leaf>
+        <leaf name="blade-app">
+          <type name="string"/>
+        </leaf>
+      </list>
+    </output>
+  </rpc>
+  <rpc name="activate-status">
+    <input>
+      <leaf name="rbridge-id">
+        <type name="rbridge-ids-all-type"/>
+        <mandatory value="false"/>
+      </leaf>
+    </input>
+    <output>
+      <leaf name="overall-status">
+        <type name="int32"/>
+      </leaf>
+      <leaf name="overall-error-msg">
+        <type name="string"/>
+      </leaf>
+      <list name="activate-entries">
+        <leaf name="rbridge-id">
+          <type name="common-def:rbridge-id-type"/>
+          <mandatory value="false"/>
+        </leaf>
+        <leaf name="status">
+          <type name="int32"/>
+        </leaf>
+      </list>
+    </output>
+  </rpc>
+  <rpc name="logical-chassis-fwdl-sanity">
+    <input>
+      <uses name="fwdl-parameters"/>
+      <uses name="fwdl-cluster-options"/>
+      <leaf name="protocol">
+        <mandatory value="true"/>
+        <type name="enumeration">
+          <enum name="ftp">
+            <value value="1"/>
+          </enum>
+          <enum name="scp">
+            <value value="2"/>
+          </enum>
+          <enum name="sftp">
+            <value value="3"/>
+          </enum>
+        </type>
+      </leaf>
+    </input>
+    <output>
+      <uses name="fwdl-cluster-output"/>
+    </output>
+  </rpc>
+  <rpc name="logical-chassis-fwdl-status">
+    <input>
+      <leaf name="rbridge-id">
+        <type name="rbridge-ids-all-type"/>
+        <mandatory value="false"/>
+      </leaf>
+    </input>
+    <output>
+      <leaf name="overall-status">
+        <type name="int32"/>
+      </leaf>
+      <list name="cluster-fwdl-entries">
+        <leaf name="rbridge-id">
+          <type name="uint32"/>
+          <mandatory value="false"/>
+        </leaf>
+        <leaf name="fwdl-state">
+          <type name="enumeration">
+            <enum name="completed">
+              <value value="0"/>
+            </enum>
+            <enum name="in-progress">
+              <value value="1"/>
+            </enum>
+            <enum name="complete-no-reboot">
+              <value value="2"/>
+            </enum>
+            <enum name="complete-no-activate">
+              <value value="3"/>
+            </enum>
+            <enum name="commit-in-progress">
+              <value value="4"/>
+            </enum>
+          </type>
+        </leaf>
+        <list name="fwdl-entries">
+          <leaf name="index">
+            <type name="uint32"/>
+          </leaf>
+          <leaf name="message-id">
+            <type name="int32"/>
+          </leaf>
+          <leaf name="date-and-time-info">
+            <type name="string"/>
+          </leaf>
+          <leaf name="message">
+            <type name="string"/>
+          </leaf>
+          <leaf name="blade-slot">
+            <type name="int32"/>
+          </leaf>
+          <leaf name="blade-swbd">
+            <type name="int32"/>
+          </leaf>
+          <leaf name="blade-name">
+            <type name="string"/>
+          </leaf>
+          <leaf name="blade-state">
+            <type name="enumeration">
+              <enum name="active">
+                <value value="0"/>
+              </enum>
+              <enum name="standby">
+                <value value="1"/>
+              </enum>
+            </type>
+          </leaf>
+          <leaf name="blade-app">
+            <type name="string"/>
+          </leaf>
+        </list>
+      </list>
+    </output>
+  </rpc>
+  <container name="reboot"/>
+  <container name="dhcp">
+    <container name="auto-deployment"/>
+  </container>
+  <augment target-node="/common-def:show">
+    <container name="dhcp-auto-deployment"/>
+  </augment>
+</module>

@@ -1,0 +1,140 @@
+/* Copyright (c) 2005-2013 Brocade Communications Systems, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at:
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#ifndef BROCADE_FABRIC_SERVICE_H
+#define BROCADE_FABRIC_SERVICE_H
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+#define fabric_service__ns 722043493
+
+#define fabric_service_all 2031982792
+#define fabric_service_dest_rbridge_id 1391650231
+#define fabric_service_dst_mac_vid 1
+#define fabric_service_ecmp 1540952674
+#define fabric_service_ecmp_load_balance 1356163693
+#define fabric_service_fabric 76530483
+#define fabric_service_fabric_is_principalswitch 732706611
+#define fabric_service_fabric_showall_cluster 1095794150
+#define fabric_service_fabric_showall_ipaddress 1116537482
+#define fabric_service_fabric_showall_ipv6address 1458238211
+#define fabric_service_fabric_showall_name 872948976
+#define fabric_service_fabric_showall_rbridge_id 907603189
+#define fabric_service_fabric_showall_swbd_number 1264333700
+#define fabric_service_fabric_showall_version 688976125
+#define fabric_service_fabric_showall_wwn 595029139
+#define fabric_service__wysereaoperationid_show_fabric "show_fabric"
+#define fabric_service__wysereaoperationid_show_fabric_isl "show_fabric_isl"
+#define fabric_service__wysereaoperationid_show_fabric_multicast "show_fabric_multicast"
+#define fabric_service__wysereaoperationid_show_fabric_neighbor_state "show_fabric_neighbor_state"
+#define fabric_service__wysereaoperationid_show_fabric_pathinfo "show_fabric_pathinfo"
+#define fabric_service__wysereaoperationid_show_fabric_topology "show_fabric_topology"
+#define fabric_service__wysereaoperationid_show_fabric_trunk "show_fabric_trunk"
+#define fabric_service__wysereaoperationid_show_fi_interface_info "show_fi_interface_info"
+#define fabric_service__wysereaoperationid_show_linkinfo_all "show_linkinfo_all"
+#define fabric_service__wysereaoperationid_show_portindex_interface_all "show_portindex_interface_all"
+#define fabric_service__wysereaoperationid_show_switch_details "show_switch_details"
+#define fabric_service__wysereaconfigurationid_Ecmp_loadbalance "Ecmp_loadbalance"
+#define fabric_service__wysereaconfigurationid_bcastPriority_cp "bcastPriority_cp"
+#define fabric_service__wysereaconfigurationid_mcastPriority_nodespecific "mcastPriority_nodespecific"
+#define fabric_service__wysereaconfigurationid_node_vlag_cp "node_vlag_cp"
+#define fabric_service_isl 1850447314
+#define fabric_service_islports 1277659967
+#define fabric_service_linkinfo 1407622909
+#define fabric_service_linkinfo_domain_reachable 284761712
+#define fabric_service_linkinfo_isl 641343615
+#define fabric_service_linkinfo_isl_linkcost 401940270
+#define fabric_service_linkinfo_isl_linknumber 664858687
+#define fabric_service_linkinfo_isllink_costcount 2069065830
+#define fabric_service_linkinfo_isllink_destdomain 226689233
+#define fabric_service_linkinfo_isllink_destport 100583910
+#define fabric_service_linkinfo_isllink_destport_interface 1180302427
+#define fabric_service_linkinfo_isllink_destport_type 1827337377
+#define fabric_service_linkinfo_isllink_srcport 1658977527
+#define fabric_service_linkinfo_isllink_srcport_interface 242198246
+#define fabric_service_linkinfo_isllink_srcport_type 2081070971
+#define fabric_service_linkinfo_isllink_type 5132940
+#define fabric_service_linkinfo_rbridgeid 158512460
+#define fabric_service_linkinfo_trunked 597115842
+#define fabric_service_linkinfo_version 838068137
+#define fabric_service_linkinfo_wwn 1287970645
+#define fabric_service_load_balance_hash_swap 1365860849
+#define fabric_service_mcast 1391833368
+#define fabric_service_multicast 1213561005
+#define fabric_service_neighbor_state 393193907
+#define fabric_service_pathinfo 971108703
+#define fabric_service_po_id 1196517082
+#define fabric_service_port_actual_distance 1541617043
+#define fabric_service_port_address 1475942164
+#define fabric_service_port_buffer_allocated 784924486
+#define fabric_service_port_channel 763837956
+#define fabric_service_port_desired_credit 169109857
+#define fabric_service_port_health 1957287724
+#define fabric_service_port_index 702039104
+#define fabric_service_port_interface 305987572
+#define fabric_service_port_licensed 1008681953
+#define fabric_service_port_state 620517993
+#define fabric_service_port_status 1763120112
+#define fabric_service_port_status_message 1891763848
+#define fabric_service_port_trunk_master 787947813
+#define fabric_service_port_trunked 16856257
+#define fabric_service_port_type 1594150477
+#define fabric_service_port_wwn 47114284
+#define fabric_service_portsgroup_rbridgeid 1192962814
+#define fabric_service_priority 1346277862
+#define fabric_service_rbridge_id 23403572
+#define fabric_service_rbridge_id_or_all 1001501666
+#define fabric_service_remote_node_wwn 1236625106
+#define fabric_service_remote_port_wwn 1460580062
+#define fabric_service_route 2058743578
+#define fabric_service_show_fibrechannel_info 1511536731
+#define fabric_service_show_fibrechannel_interface 255054412
+#define fabric_service_show_fibrechannel_interface_info 638521205
+#define fabric_service_show_link_info 1086543524
+#define fabric_service_show_linkinfo 1222339887
+#define fabric_service_show_portindex 356261035
+#define fabric_service_show_portindex_interface 737236136
+#define fabric_service_show_portindex_interface_info 2005872728
+#define fabric_service_show_trunk_list 2096607086
+#define fabric_service_src_dst_ip 4
+#define fabric_service_src_dst_ip_mac_vid 5
+#define fabric_service_src_dst_ip_mac_vid_port 7
+#define fabric_service_src_dst_ip_port 6
+#define fabric_service_src_dst_mac_vid 3
+#define fabric_service_src_mac_vid 2
+#define fabric_service_src_rbridge_id 1321331050
+#define fabric_service_topology 333175635
+#define fabric_service_trunk 797138583
+#define fabric_service_trunk_list_group 1282098351
+#define fabric_service_trunk_list_groups 1769559885
+#define fabric_service_trunk_list_interface_type 611042991
+#define fabric_service_trunk_list_is_primary 407093645
+#define fabric_service_trunk_list_member 997475470
+#define fabric_service_trunk_list_nbr_port 1378056925
+#define fabric_service_trunk_list_nbr_rbridge_id 1442996588
+#define fabric_service_trunk_list_nbr_wwn 1195570883
+#define fabric_service_trunk_list_src_interface 579704419
+#define fabric_service_trunk_list_src_port 552457239
+#define fabric_service_vlag_load_balance 2119771239
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
+

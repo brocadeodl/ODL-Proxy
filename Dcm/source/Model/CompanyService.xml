@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<WavePlugin name="CompanyService" nameSpace="DcmNs" yangModule="CompanyService" yangPrefix="companyservice" >
+   <Global name="CompanyService" >
+      <Worker name="company" >
+         <ManagedObject name="City" sequenceForBackendUpdate="false" updateBackendFirstOnCreate="false" updateBackendFirstOnUpdate="false" updateBackendFirstOnDelete="false" backendName="employee_management">
+            <Group id="city_cityname" backendName="employee_management">
+            <Member name="cityname" dataType="WAVE_ATTRIBUTE_TYPE_STRING" isKey="true" userTag="companyservice_cityname" ></Member>
+            </Group>
+            <Group id="city_citycode" backendName="employee_management">
+            <Member name="citycode" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="companyservice_citycode" ></Member>
+            </Group>
+            <Group id="city_population" backendName="employee_management">
+            <Member name="population" dataType="WAVE_ATTRIBUTE_TYPE_UI64" userTag="companyservice_population" ></Member>
+            </Group>
+            <Group id="city_ismetro" backendName="employee_management">
+            <Member name="ismetro" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="companyservice_ismetro" updateBackendFirstOnUpdate="true" ></Member>
+            </Group>
+            <Group id="city_cityIpV4Address" backendName="employee_management">
+            <Member name="cityIpV4Address" dataType="WAVE_ATTRIBUTE_TYPE_IPV4ADDRESS" userTag="companyservice_cityIpV4Address" ></Member>
+            </Group>
+            <Group id="city_cityIpV4AddressNetworkMask" backendName="employee_management">
+            <Member name="cityIpV4AddressNetworkMask" dataType="WAVE_ATTRIBUTE_TYPE_IPV4ADDRESS_NETWORK_MASK" userTag="companyservice_cityIpV4AddressNetworkMask" ></Member>
+            </Group>
+            <Group id="city_cityIpV6Address" backendName="employee_management">
+            <Member name="cityIpV6Address" dataType="WAVE_ATTRIBUTE_TYPE_IPVXADDRESS" userTag="companyservice_cityIpV6Address" ></Member>
+            </Group>
+            <Group id="city_cityIpV6AddressNetworkMask" backendName="employee_management">
+            <Member name="cityIpV6AddressNetworkMask" dataType="WAVE_ATTRIBUTE_TYPE_IPV6ADDRESS_NETWORK_MASK" userTag="companyservice_cityIpV6AddressNetworkMask" ></Member>
+            </Group>
+            <Group id="city_cityIpVxAddress" backendName="employee_management">
+            <Member name="cityIpVxAddress" dataType="WAVE_ATTRIBUTE_TYPE_IPVXADDRESS" userTag="companyservice_cityIpVxAddress" ></Member>
+            </Group>
+         </ManagedObject>
+         <ManagedObject name="Company" sequenceForBackendUpdate="false" updateBackendFirstOnCreate="false" updateBackendFirstOnUpdate="false" updateBackendFirstOnDelete="false" backendName="employee_management">
+            <Group id="Company_companyname" backendName="employee_management">
+            <Member name="companyname" dataType="WAVE_ATTRIBUTE_TYPE_STRING" isKey="true" userTag="companyservice_companyname" ></Member>
+            </Group>
+            <Group id="Company_employee" backendName="employee_management">
+            <Member name="employee" dataType="WAVE_ATTRIBUTE_TYPE_COMPOSITION_VECTOR" referredObject="Employee" umlType="COMPOSITION" userTag="companyservice_employee" ></Member>
+            </Group>
+            <Group id="Company_location" backendName="employee_management">
+            <Member name="location" dataType="WAVE_ATTRIBUTE_TYPE_OBJECTID" referredObject="City" umlType="ASSOCIATION" userTag="companyservice_location" ></Member>
+            </Group>
+            <Group id="choice_region" type="choice" backendName="employee_management">
+            <Member name="region" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="companyservice_region" />
+            </Group>
+            <Group id="region_EMEA" type="case" choiceGroupId="choice_region" userTag="companyservice_EMEA" backendName="employee_management">
+            <Member name="region_EMEA_country" dataType="WAVE_ATTRIBUTE_TYPE_STRING" userTag="companyservice_EMEA_country" />
+            </Group>
+            <Group id="region_AsiaPac" type="case" choiceGroupId="choice_region" userTag="companyservice_AsiaPac" backendName="employee_management">
+            <Member name="region_AsiaPac_country" dataType="WAVE_ATTRIBUTE_TYPE_STRING" userTag="companyservice_AsiaPac_country" />
+            </Group>
+            <Group id="region_Americas" type="case" choiceGroupId="choice_region" userTag="companyservice_Americas" backendName="employee_management">
+            <Member name="region_Americas_country" dataType="WAVE_ATTRIBUTE_TYPE_STRING" userTag="companyservice_Americas_country" />
+            </Group>
+            <Group id="Company_group" backendName="employee_management">
+            <Member name="group" dataType="WAVE_ATTRIBUTE_TYPE_COMPOSITION_VECTOR" referredObject="Group" umlType="COMPOSITION" userTag="companyservice_group" ></Member>
+            </Group>
+            <Group id="Company_stockExchange" backendName="employee_management">
+            <Member name="stockExchange" dataType="WAVE_ATTRIBUTE_TYPE_OBJECTID" referredObject="StockExchange" umlType="ASSOCIATION" userTag="companyservice_stockExchange" ></Member>
+            </Group>
+            <Group id="Company_boardOfDirector" backendName="employee_management">
+            <Member name="boardOfDirector" dataType="WAVE_ATTRIBUTE_TYPE_COMPOSITION_VECTOR" referredObject="BoardOfDirector" umlType="COMPOSITION" userTag="companyservice_boardOfDirector" ></Member>
+            </Group>
+            <ConfigDistribute serviceName="CompanyServiceLocalObjectManager" needSurrogateFlag="false" partialSuccessFlag="true" />
+         </ManagedObject>
+         <ManagedObject name="StockExchange" sequenceForBackendUpdate="false" updateBackendFirstOnCreate="false" updateBackendFirstOnUpdate="false" updateBackendFirstOnDelete="false" backendName="employee_management">
+            <Group id="StockExchange_stockExchangename" backendName="employee_management">
+            <Member name="stockExchangename" denotesPresence="false" dataType="WAVE_ATTRIBUTE_TYPE_STRING" isKey="true" userTag="companyservice_stockExchangename" ></Member>
+            </Group>
+            <Group id="StockExchange_stockOption" backendName="employee_management">
+            <Member name="stockOption" dataType="WAVE_ATTRIBUTE_TYPE_OBJECTID" referredObject="StockOption" umlType="ASSOCIATION" userTag="companyservice_stockOption" ></Member>
+            </Group>
+            <ConfigDistribute serviceName="CompanyServiceLocalObjectManager" needSurrogateFlag="false" partialSuccessFlag="true" />
+         </ManagedObject>
+         <ManagedObject name="BoardOfDirector" sequenceForBackendUpdate="false" updateBackendFirstOnCreate="false" updateBackendFirstOnUpdate="false" updateBackendFirstOnDelete="false" backendName="employee_management">
+            <Group id="BoardOfDirector_boardOfDirectorname" backendName="employee_management">
+            <Member name="boardOfDirectorname" dataType="WAVE_ATTRIBUTE_TYPE_STRING" isKey="true" userTag="companyservice_boardOfDirectorname" ></Member>
+            </Group>
+            <Group id="BoardOfDirector_boardOfDirectorlocation" backendName="employee_management">
+            <Member name="boardOfDirectorlocation" dataType="WAVE_ATTRIBUTE_TYPE_OBJECTID" referredObject="City" umlType="ASSOCIATION" userTag="companyservice_boardOfDirectorlocation" ></Member>
+            </Group>
+         </ManagedObject>
+      </Worker>
+   </Global>
+   <Local name="CompanyService" globalName="CompanyService">
+      <Worker name="company" >
+         <ManagedObject name="Employee" sequenceForBackendUpdate="false" updateBackendFirstOnCreate="false" updateBackendFirstOnUpdate="false" updateBackendFirstOnDelete="false" backendName="employee_management">
+            <Group id="Employee_employeelocation" backendName="employee_management">
+            <Member name="employeelocation" dataType="WAVE_ATTRIBUTE_TYPE_OBJECTID" referredObject="City" umlType="ASSOCIATION" userTag="companyservice_employeelocation" ></Member>
+            </Group>
+            <Group id="Employee_employeegroup" backendName="employee_management">
+            <Member name="employeegroup" dataType="WAVE_ATTRIBUTE_TYPE_OBJECTID" referredObject="Group" umlType="ASSOCIATION" userTag="companyservice_employeegroup" updateBackendFirstOnDelete="true" ></Member>
+            </Group>
+            <Group id="Employee_employeeStockOption" backendName="employee_management">
+            <Member name="employeeStockOption" dataType="WAVE_ATTRIBUTE_TYPE_OBJECTID" referredObject="StockOption" umlType="ASSOCIATION" userTag="companyservice_employeeStockOption" ></Member>
+            </Group>
+            <Group id="Employee_employeename" backendName="employee_management">
+            <Member name="employeename" dataType="WAVE_ATTRIBUTE_TYPE_STRING" isKey="true" userTag="companyservice_employeename" ></Member>
+            </Group>
+         </ManagedObject>
+         <ManagedObject name="Group" sequenceForBackendUpdate="false" updateBackendFirstOnCreate="false" updateBackendFirstOnUpdate="false" updateBackendFirstOnDelete="false" backendName="employee_management">
+            <Inheritance derivedFrom="groupbase" accessSpecifier="virtual public" isPersistable="false" ></Inheritance>
+            <Group id="Group_subgroup" backendName="employee_management">
+            <Member name="subgroup" dataType="WAVE_ATTRIBUTE_TYPE_COMPOSITION_VECTOR" referredObject="Subgroup" umlType="COMPOSITION" userTag="companyservice_subgroup" ></Member>
+            </Group>
+            <Group id="Group_groupname" backendName="employee_management">
+            <Member name="groupname" dataType="WAVE_ATTRIBUTE_TYPE_STRING" isKey="true" userTag="companyservice_groupname" ></Member>
+            </Group>
+            <Group id="Group_groupmanager" backendName="employee_management">
+            <Member name="groupmanager" dataType="WAVE_ATTRIBUTE_TYPE_COMPOSITION" referredObject="Groupmanager" umlType="COMPOSITION" userTag="companyservice_groupmanager" ></Member>
+            </Group>
+         </ManagedObject>
+         <ManagedObject name="Subgroup" sequenceForBackendUpdate="false" updateBackendFirstOnCreate="false" updateBackendFirstOnUpdate="false" updateBackendFirstOnDelete="false" backendName="employee_management">
+            <Inheritance derivedFrom="groupbase" accessSpecifier="virtual public" isPersistable="false" ></Inheritance>
+            <Group id="Subgroup_subgroupname" backendName="employee_management">
+            <Member name="subgroupname" dataType="WAVE_ATTRIBUTE_TYPE_STRING" isKey="true" userTag="companyservice_subgroupname" ></Member>
+            </Group>
+            <Group id="Subgroup_subgroupmanager" backendName="employee_management">
+            <Member name="subgroupmanager" dataType="WAVE_ATTRIBUTE_TYPE_COMPOSITION" referredObject="Subgroupmanager" umlType="COMPOSITION" userTag="companyservice_subgroupmanager" ></Member>
+            </Group>
+         </ManagedObject>
+         <ManagedObject name="StockOption" sequenceForBackendUpdate="false" updateBackendFirstOnCreate="false" updateBackendFirstOnUpdate="false" updateBackendFirstOnDelete="false" singletonMoUserTag="companyservice_isStockOption" >
+            <Group id="StockOption_isStockOption" backendName="employee_management">
+            <Member name="isStockOption" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="companyservice_isStockOption" ></Member>
+            </Group>
+            <Group id="StockOption_stockshare" backendName="employee_management">
+            <Member name="stockshare" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="companyservice_stockshare" ></Member>
+            </Group>
+         </ManagedObject>
+         <ManagedObject name="Groupmanager" sequenceForBackendUpdate="false" updateBackendFirstOnCreate="false" updateBackendFirstOnUpdate="false" updateBackendFirstOnDelete="false" backendName="employee_management">
+         <Group id="Groupmanager_groupmanagername" backendName="employee_management">
+            <Member name="groupmanagername" dataType="WAVE_ATTRIBUTE_TYPE_STRING" isKey="true" userTag="companyservice_groupmanagername" ></Member>
+            </Group>
+         </ManagedObject>
+         <ManagedObject name="Subgroupmanager" sequenceForBackendUpdate="false" updateBackendFirstOnCreate="false" updateBackendFirstOnUpdate="false" updateBackendFirstOnDelete="false" backendName="employee_management">
+         <Group id="Subgroupmanager_subgroupmanagername" backendName="employee_management">
+            <Member name="subgroupmanagername" dataType="WAVE_ATTRIBUTE_TYPE_STRING" isKey="true" userTag="companyservice_subgroupmanagername" ></Member>
+            </Group>
+         </ManagedObject>
+         <CommonManagedObjectBase name="groupbase" >
+            <Group id="groupbase_groupEmployee" backendName="employee_management">
+            <Member name="groupEmployee" dataType="WAVE_ATTRIBUTE_TYPE_OBJECTID" referredObject="Employee" umlType="ASSOCIATION" userTag="companyservice_groupEmployee" ></Member>
+            </Group>
+            <Group id="groupbase_groupLocation" backendName="employee_management">
+            <Member name="groupLocation" dataType="WAVE_ATTRIBUTE_TYPE_OBJECTID" referredObject="City" umlType="ASSOCIATION" userTag="companyservice_groupLocation" ></Member>
+            </Group>
+         </CommonManagedObjectBase>
+      </Worker>
+   </Local>
+</WavePlugin>

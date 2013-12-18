@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="DcmInterface"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:dcminterface="http://brocade.com/ns/dcminterface"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types"
+        xmlns:yang="urn:ietf:params:xml:ns:yang:ietf-yang-types">
+  <namespace uri="http://brocade.com/ns/dcminterface"/>
+  <prefix value="dcminterface"/>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <import module="ietf-yang-types">
+    <prefix value="yang"/>
+  </import>
+  <typedef name="interfaceType">
+    <type name="string"/>
+    <description>
+      <text>mappedId/slot/port</text>
+    </description>
+  </typedef>
+  <container name="interface_priority">
+    <leaf name="vlanPriority">
+      <type name="int32"/>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="ethernetPriority">
+      <type name="int32"/>
+      <mandatory value="true"/>
+    </leaf>
+    <container name="interface_class">
+      <leaf name="vlanClass">
+        <type name="int32"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="ethernetClass">
+        <type name="int32"/>
+        <mandatory value="true"/>
+      </leaf>
+    </container>
+  </container>
+  <container name="dcminterfaces">
+    <list name="dcminterface">
+      <key value="name"/>
+      <max-elements value="1024"/>
+      <leaf name="name">
+        <type name="string"/>
+      </leaf>
+      <leaf name="demostring">
+        <type name="string"/>
+      </leaf>
+      <leaf name="ip">
+        <type name="inet:ipv4-address"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="ipdef">
+        <type name="inet:ipv4-address"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf-list name="ipV4Vector">
+        <type name="inet:ipv4-address"/>
+      </leaf-list>
+      <leaf name="ip6">
+        <type name="inet:ipv6-address"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf-list name="ipV6Vector">
+        <type name="inet:ipv6-address"/>
+      </leaf-list>
+      <leaf name="ipVx">
+        <type name="inet:ip-address"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="mac">
+        <type name="yang:mac-address"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="mac2">
+        <type name="string">
+          <pattern value="[0-9a-fA-F]{4}((\.)[0-9a-fA-F]{4}){2}"/>
+        </type>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="wwn">
+        <type name="string"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="mtu8">
+        <type name="int8"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="mtu16">
+        <type name="int16"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="mtu32">
+        <type name="int32"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="mtu32def">
+        <type name="int32"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf-list name="mtu32Vector">
+        <type name="int32"/>
+      </leaf-list>
+      <leaf name="mtu8u">
+        <type name="uint8"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="mtu16u">
+        <type name="uint16"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="mtu32u">
+        <type name="uint32"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="mtu32udef">
+        <type name="uint32"/>
+      </leaf>
+      <leaf name="mtu64u">
+        <type name="uint64"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="enumtype">
+        <type name="enumeration">
+          <enum name="TCP"/>
+          <enum name="UDP"/>
+          <enum name="SMTP"/>
+          <enum name="IP"/>
+          <enum name="ETHERNET"/>
+        </type>
+      </leaf>
+      <leaf name="enumtype2">
+        <type name="enumeration">
+          <enum name="DCM_DEBUG"/>
+          <enum name="DCM_INFO"/>
+          <enum name="DCM_WARNING"/>
+          <enum name="DCM_ERROR"/>
+        </type>
+      </leaf>
+      <leaf name="isEthernet">
+        <type name="boolean"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="interfaceTuple">
+        <type name="interfaceType"/>
+      </leaf>
+      <leaf name="operationalsi8">
+        <type name="int8"/>
+        <mandatory value="true"/>
+        <config value="false"/>
+      </leaf>
+      <leaf name="operationalsi16">
+        <type name="int16"/>
+        <mandatory value="true"/>
+        <config value="false"/>
+      </leaf>
+      <leaf name="operationalsi32">
+        <type name="int32"/>
+        <mandatory value="true"/>
+        <config value="false"/>
+      </leaf>
+      <leaf-list name="operationalsi32Vector">
+        <type name="int32"/>
+        <config value="false"/>
+      </leaf-list>
+      <leaf name="operationalsi64">
+        <type name="int64"/>
+        <mandatory value="true"/>
+        <config value="false"/>
+      </leaf>
+      <leaf name="operationalui8">
+        <type name="uint8"/>
+        <mandatory value="true"/>
+        <config value="false"/>
+      </leaf>
+      <leaf name="operationalui16">
+        <type name="uint16"/>
+        <mandatory value="true"/>
+        <config value="false"/>
+      </leaf>
+      <leaf name="operationalui32">
+        <type name="uint32"/>
+        <mandatory value="true"/>
+        <config value="false"/>
+      </leaf>
+      <leaf-list name="operationalui32Vector">
+        <type name="uint32"/>
+        <config value="false"/>
+      </leaf-list>
+      <leaf name="operationalui64">
+        <type name="uint64"/>
+        <mandatory value="true"/>
+        <config value="false"/>
+      </leaf>
+      <leaf name="operationalIsEthernet">
+        <type name="boolean"/>
+        <mandatory value="true"/>
+        <config value="false"/>
+      </leaf>
+      <leaf name="operationalIp">
+        <type name="inet:ipv4-address"/>
+        <mandatory value="true"/>
+        <config value="false"/>
+      </leaf>
+      <leaf name="operationalIp6">
+        <type name="inet:ipv6-address"/>
+        <mandatory value="true"/>
+        <config value="false"/>
+      </leaf>
+      <leaf name="operationalMac">
+        <type name="yang:mac-address"/>
+        <mandatory value="true"/>
+        <config value="false"/>
+      </leaf>
+      <leaf-list name="operationalMacVector">
+        <type name="yang:mac-address"/>
+        <config value="false"/>
+      </leaf-list>
+      <leaf name="operationalWwn">
+        <type name="string"/>
+        <mandatory value="true"/>
+        <config value="false"/>
+      </leaf>
+      <leaf name="shutdown">
+        <type name="empty"/>
+      </leaf>
+    </list>
+  </container>
+</module>

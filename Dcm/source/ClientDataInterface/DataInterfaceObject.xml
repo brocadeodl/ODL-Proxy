@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ClientDataInterface nameSpace="DcmNs">
+    <Show plugin="Employee"  cliCommand="show operational-data employee" netconfCommand=""  commandCode="1001"  operationalObject="Employee" />
+    <Show plugin="Employee"  cliCommand="show operational-data employee rbridge-id" netconfCommand=""  commandCode="1001"  operationalObject="Employee" />
+    <Show plugin="Employee"  cliCommand="show operational-data employee param_one" netconfCommand=""  commandCode="1002"  operationalObject="Employee" />
+    <Show plugin="Employee"  cliCommand="show operational-data employee param_one rbridge-id" netconfCommand=""  commandCode="1002"  operationalObject="Employee" />
+    <Show plugin="Employee"  cliCommand="show operational-data employee param_one param_two" netconfCommand=""  commandCode="1003"  operationalObject="Employee" />
+    <Show plugin="Employee"  cliCommand="show operational-data employee param_one param_two rbridge-id" netconfCommand=""  commandCode="1003"  operationalObject="Employee" />
+    <Show plugin="Employee"  cliCommand="show operational-data employee param_two" netconfCommand=""  commandCode="1004"  operationalObject="Employee" />
+    <Show plugin="Employee"  cliCommand="show operational-data employee param_two rbridge-id" netconfCommand=""  commandCode="1004"  operationalObject="Employee" />
+    <Show plugin="Employee"  cliCommand="show operational-data employee param_two param_one" netconfCommand=""  commandCode="1005"  operationalObject="Employee" />
+    <Show plugin="Employee"  cliCommand="show operational-data employee param_two param_one rbridge-id" netconfCommand=""  commandCode="1005"  operationalObject="Employee" />
+
+    <!-- ============================================================================================================================-->
+                                              <!-- Clear Op-data employee -->
+    <!-- ============================================================================================================================-->
+    <Clear plugin="Employee"  cliCommand="clear operational-data employee" netconfCommand=""  commandCode="1001"  operationalObject="Employee" />
+    <Clear plugin="Employee"  cliCommand="clear operational-data employee rbridge-id" netconfCommand=""  commandCode="1001"  operationalObject="Employee" />
+    <Clear plugin="Employee"  cliCommand="clear operational-data employee param_one" netconfCommand=""  commandCode="1002"  operationalObject="Employee" />
+    <Clear plugin="Employee"  cliCommand="clear operational-data employee param_one rbridge-id" netconfCommand=""  commandCode="1002"  operationalObject="Employee" />
+    <Clear plugin="Employee"  cliCommand="clear operational-data employee param_one param_two" netconfCommand=""  commandCode="1003"  operationalObject="Employee" />
+    <Clear plugin="Employee"  cliCommand="clear operational-data employee param_one param_two rbridge-id" netconfCommand=""  commandCode="1003"  operationalObject="Employee" />
+    <Clear plugin="Employee"  cliCommand="clear operational-data employee param_two" netconfCommand=""  commandCode="1004"  operationalObject="Employee" />
+    <Clear plugin="Employee"  cliCommand="clear operational-data employee param_two rbridge-id" netconfCommand=""  commandCode="1004"  operationalObject="Employee" />
+    <Clear plugin="Employee"  cliCommand="clear operational-data employee param_two param_one" netconfCommand=""  commandCode="1005"  operationalObject="Employee" />
+    <Clear plugin="Employee"  cliCommand="clear operational-data employee param_two param_one rbridge-id" netconfCommand=""  commandCode="1005"  operationalObject="Employee" />
+
+    <!-- ============================================================================================================================-->
+                                              <!-- Debug Op-data employee -->
+    <!-- ============================================================================================================================-->
+    <Debug plugin="Employee"  cliCommand="debug operational-data employee" netconfCommand=""  commandCode="1001"  operationalObject="Employee" />
+    <Debug plugin="Employee"  cliCommand="debug operational-data employee rbridge-id" netconfCommand=""  commandCode="1001"  operationalObject="Employee" />
+    <Debug plugin="Employee"  cliCommand="debug operational-data employee param_one" netconfCommand=""  commandCode="1002"  operationalObject="Employee" />
+    <Debug plugin="Employee"  cliCommand="debug operational-data employee param_one rbridge-id" netconfCommand=""  commandCode="1002"  operationalObject="Employee" />
+    <Debug plugin="Employee"  cliCommand="debug operational-data employee param_one param_two" netconfCommand=""  commandCode="1003"  operationalObject="Employee" />
+    <Debug plugin="Employee"  cliCommand="debug operational-data employee param_one param_two rbridge-id" netconfCommand=""  commandCode="1003"  operationalObject="Employee" />
+    <Debug plugin="Employee"  cliCommand="debug operational-data employee param_two" netconfCommand=""  commandCode="1004"  operationalObject="Employee" />
+    <Debug plugin="Employee"  cliCommand="debug operational-data employee param_two rbridge-id" netconfCommand=""  commandCode="1004"  operationalObject="Employee" />
+    <Debug plugin="Employee"  cliCommand="debug operational-data employee param_two param_one" netconfCommand=""  commandCode="1005"  operationalObject="Employee" />
+    <Debug plugin="Employee"  cliCommand="debug operational-data employee param_two param_one rbridge-id" netconfCommand=""  commandCode="1005"  operationalObject="Employee" />
+
+	<!-- ============================================================================================================================-->
+										      <!-- show ip bgp -->
+	<!-- ============================================================================================================================-->
+	<Show plugin="Bgp"  cliCommand="show ip bgp" netconfCommand=""  commandCode="ip"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp ipv4-prefix" netconfCommand=""  commandCode="ip_ipv4_prefix"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp ipv4-prefix longer-prefixes" netconfCommand=""  commandCode="ip_ipv4_prefix_longer_prefixes"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp attribute-entries" netconfCommand=""  commandCode="ip_attribute_entries"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp dampened-paths" netconfCommand=""  commandCode="ip_dampened_paths"  operationalObject="Bgp" />
+	<!-- ============================================================================================================================-->
+										<!-- show ip bgp filtered-routes -->
+	<!-- ============================================================================================================================-->
+	<Show plugin="Bgp"  cliCommand="show ip bgp filtered-routes" netconfCommand=""  commandCode="ip_filtered_routes"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp filtered-routes ipv4-prefix" netconfCommand=""  commandCode="ip_filtered_routes_ipv4_prefix"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp filtered-routes ipv4-prefix longer-prefixes" netconfCommand=""  commandCode="ip_filtered_routes_ipv4_prefix_longer_prefixes"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp filtered-routes as-path-access-list as-path-access-list-name" netconfCommand=""  commandCode="ip_filtered_routes_as_path_access_list_name"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp filtered-routes detail" netconfCommand=""  commandCode="ip_filtered_routes_detail"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp filtered-routes detail ipv4-prefix" netconfCommand=""  commandCode="ip_filtered_routes_detail_ipv4_prefix"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp filtered-routes detail ipv4-prefix longer-prefixes" netconfCommand=""  commandCode="ip_filtered_routes_detail_ipv4_prefix_ipv4_prefix_longer_prefixes"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp filtered-routes detail as-path-access-list as-path-access-list-name" netconfCommand=""  commandCode="ip_filtered_routes_detail_as_path_access_list_name"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp filtered-routes detail prefix-list prefix-list-name" netconfCommand=""  commandCode="ip_filtered_routes_detail_prefix_list_name"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp filtered-routes prefix-list prefix-list-name" netconfCommand=""  commandCode="ip_filtered_routes_prefix_list_name"  operationalObject="Bgp" />
+	<!-- ============================================================================================================================-->
+										<!-- show ip bgp flap-statistics -->
+	<!-- ============================================================================================================================-->
+	<Show plugin="Bgp"  cliCommand="show ip bgp flap-statistics" netconfCommand=""  commandCode="ip_flap_statistics"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp flap-statistics ipv4-prefix" netconfCommand=""  commandCode="ip_flap_statistics_ipv4_prefix"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp flap-statistics ipv4-prefix longer-prefixes" netconfCommand=""  commandCode="ip_flap_statistics_ipv4_prefix_longer_prefixes"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp flap-statistics as-path-filter as-path-filter-name" netconfCommand=""  commandCode="ip_flap_statistics_as_path_filter_name"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp flap-statistics neighbor ipv4-address" netconfCommand=""  commandCode="ip_flap_statistics_neighbor_ipv4_address"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp flap-statistics regular-expression regular-expression-value" netconfCommand=""  commandCode="ip_flap_statistics_regular_expression_value"  operationalObject="Bgp" />
+	<!-- ============================================================================================================================-->
+										<!-- show ip bgp neighbors -->
+	<!-- ============================================================================================================================-->
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors" netconfCommand=""  commandCode="ip_neighbors"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address" netconfCommand=""  commandCode="ip_neighbors_ipv4_address"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address advertised-routes" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_advertised_routes"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address advertised-routes ipv4-prefix" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_advertised_routes_ipv4_prefix"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address advertised-routes detail" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_advertised_routes_detail"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address advertised-routes detail ipv4-prefix" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_advertised_routes_detail_ipv4_prefix"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address flap-statistics" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_flap_statistics"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address last-packet-with-error" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_last_packet_with_error"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address last-packet-with-error decode" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_last_packet_with_error_decode"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address received extended-community" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_received_extended_community"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address received prefix-filter" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_received_prefix_filter"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address received-routes" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_received_routes"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address received-routes detail" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_received_routes_detail"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address rib-out-routes" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_rib_out_routes"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address rib-out-routes ipv4-prefix" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_rib_out_routes_ipv4_prefix"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address rib-out-routes detail" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_rib_out_routes_detail"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address rib-out-routes detail ipv4-prefix" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_rib_out_routes_detail_ipv4_prefix"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address routes" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_routes"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address routes best" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_routes_best"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address routes detail" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_routes_detail"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address routes detail best" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_routes_detail_best"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address routes detail not-installed-best" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_routes_detail_not_installed_best"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address routes detail unreachable" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_routes_detail_unreachable"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address routes not-installed-best" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_routes_not_installed_best"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address routes unreachable" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_routes_unreachable"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address routes-summary" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_routes_summary"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors last-packet-with-error" netconfCommand=""  commandCode="ip_neighbors_last_packet_with_error"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors routes-summary" netconfCommand=""  commandCode="ip_neighbors_routes_summary"  operationalObject="Bgp" />
+	<!-- ============================================================================================================================-->
+										<!-- show ip bgp peer-group -->
+	<!-- ============================================================================================================================-->
+	<Show plugin="Bgp"  cliCommand="show ip bgp peer-group" netconfCommand=""  commandCode="ip_peer_group"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp peer-group peer-group-name" netconfCommand=""  commandCode="ip_peer_group_name"  operationalObject="Bgp" />
+	<!-- ============================================================================================================================-->
+										<!-- show ip bgp routes -->
+	<!-- ============================================================================================================================-->
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes" netconfCommand=""  commandCode="ip_routes"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes index" netconfCommand=""  commandCode="ip_routes_index"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes ipv4-prefix" netconfCommand=""  commandCode="ip_routes_ipv4_prefix"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes ipv4-prefix longer-prefixes" netconfCommand=""  commandCode="ip_routes_ipv4_prefix_longer_prefixes"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes age seconds" netconfCommand=""  commandCode="ip_routes_age"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes as-path-access-list as-path-access-list-name" netconfCommand=""  commandCode="ip_routes_ipv4_prefix_as_path_access_list_name"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes as-path-filter as-path-filter-name" netconfCommand=""  commandCode="ip_routes_ipv4_prefix_as_path_filter_name"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes best" netconfCommand=""  commandCode="ip_routes_best"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes cidr-only" netconfCommand=""  commandCode="ip_routes_cidr_only"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes community number" netconfCommand=""  commandCode="ip_routes_community_number"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes community string" netconfCommand=""  commandCode="ip_routes_community_string"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes community internet" netconfCommand=""  commandCode="ip_routes_community_internet"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes community local-as" netconfCommand=""  commandCode="ip_routes_community_local_as"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes community no-advertise" netconfCommand=""  commandCode="ip_routes_community_no_advertise"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes community no-export" netconfCommand=""  commandCode="ip_routes_community_no_export"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes community-access-list community-access-list-name" netconfCommand=""  commandCode="ip_routes_community_access_list_name"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes community-reg-expression value" netconfCommand=""  commandCode="ip_routes_community_reg_exp_value"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes local" netconfCommand=""  commandCode="ip_routes_local"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes neighbor ipv4-address" netconfCommand=""  commandCode="ip_routes_neighbor_ipv4_address"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes nexthop ipv4-address" netconfCommand=""  commandCode="ip_routes_nexthop_ipv4_address"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes no-best" netconfCommand=""  commandCode="ip_routes_no_best"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes not-installed-best" netconfCommand=""  commandCode="ip_routes_not_installed_best"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes prefix-list prefix-list-name" netconfCommand=""  commandCode="ip_routes_prefix_list_name"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes regular-expression value" netconfCommand=""  commandCode="ip_routes_reg_exp_value"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes route-map route-map-name" netconfCommand=""  commandCode="ip_routes_route_map_name"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes summary" netconfCommand=""  commandCode="ip_routes_summary"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes unreachable" netconfCommand=""  commandCode="ip_routes_unreachable"  operationalObject="Bgp" />
+
+
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail" netconfCommand=""  commandCode="ip_routes_detail"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail index" netconfCommand=""  commandCode="ip_routes_detail_index"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail ipv4-prefix" netconfCommand=""  commandCode="ip_routes_detail_ipv4_prefix"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail ipv4-prefix longer-prefixes" netconfCommand=""  commandCode="ip_routes_detail_ipv4_prefix_longer_prefixes"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail age seconds" netconfCommand=""  commandCode="ip_routes_detail_age"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail as-path-access-list as-path-access-list-name" netconfCommand=""  commandCode="ip_routes_detail_as_path_access_list_name"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail as-path-filter as-path-filter-name" netconfCommand=""  commandCode="ip_routes_detail_as_path_filter_name"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail best" netconfCommand=""  commandCode="ip_routes_detail_best"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail cidr-only" netconfCommand=""  commandCode="ip_routes_detail_cidr_only"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail community number" netconfCommand=""  commandCode="ip_routes_detail_community_number"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail community string" netconfCommand=""  commandCode="ip_routes_detail_community_string"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail community internet" netconfCommand=""  commandCode="ip_routes_detail_community_internet"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail community local-as" netconfCommand=""  commandCode="ip_routes_detail_community_local_as"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail community no-advertise" netconfCommand=""  commandCode="ip_routes_detail_community_no_advertise"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail community no-export" netconfCommand=""  commandCode="ip_routes_detail_community_no_export"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail community-access-list community-access-list-name" netconfCommand=""  commandCode="ip_routes_detail_community_access_list_name"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail community-reg-expression value" netconfCommand=""  commandCode="ip_routes_detail_community_reg_exp_value"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail local" netconfCommand=""  commandCode="ip_routes_detail_local"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail neighbor ipv4-address" netconfCommand=""  commandCode="ip_routes_detail_neighbor_ipv4_address"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail nexthop ipv4-address" netconfCommand=""  commandCode="ip_routes_detail_nexthop_ipv4_address"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail no-best" netconfCommand=""  commandCode="ip_routes_detail_no_best"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail not-installed-best" netconfCommand=""  commandCode="ip_routes_detail_not_installed_best"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail prefix-list prefix-list-name" netconfCommand=""  commandCode="ip_routes_detail_prefix_list_name"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail regular-expression value" netconfCommand=""  commandCode="ip_routes_detail_reg_exp_value"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail route-map route-map-name" netconfCommand=""  commandCode="ip_routes_detail_route_map_name"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail summary" netconfCommand=""  commandCode="ip_routes_detail_summary"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail unreachable" netconfCommand=""  commandCode="ip_routes_detail_unreachable"  operationalObject="Bgp" />
+	<!-- ============================================================================================================================-->
+										<!-- show ip bgp summary -->
+	<!-- ============================================================================================================================-->
+
+	<Show plugin="Bgp"  cliCommand="show ip bgp summary" netconfCommand=""  commandCode="ip_summary"  operationalObject="Bgp" />
+	
+	
+	<!-- ============================================================================================================================-->
+										<!-- Bgp debug commands -->
+	<!-- ============================================================================================================================-->
+	<Debug plugin="Bgp"  cliCommand="debug ip bgp address-family ipv4 unicast" netconfCommand=""  commandCode="address_family_ipv4_unicast"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="debug ip bgp dampening" netconfCommand=""  commandCode="dampening"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="debug ip bgp events" netconfCommand=""  commandCode="events"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="debug ip bgp general" netconfCommand=""  commandCode="general"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="debug ip bgp graceful-restart" netconfCommand=""  commandCode="graceful_restart"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="debug ip bgp ip-prefix ipv4-prefix" netconfCommand=""  commandCode="ipv4_prefix"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="debug ip bgp ip-prefix-list" netconfCommand=""  commandCode="ip_prefix_list"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="debug ip bgp ip-prefix-list prefix-list-name" netconfCommand=""  commandCode="ip_prefix_list_name"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="debug ip bgp keepalives" netconfCommand=""  commandCode="keepalives"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="debug ip bgp neighbor ipv4-address" netconfCommand=""  commandCode="neighbor_ipv4_address"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="debug ip bgp route-map route-map-name" netconfCommand=""  commandCode="route_map_name"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="debug ip bgp route-selection" netconfCommand=""  commandCode="route_selection"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="debug ip bgp updates" netconfCommand=""  commandCode="updates"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="debug ip bgp updates tx" netconfCommand=""  commandCode="updates_tx"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="debug ip bgp updates rx" netconfCommand=""  commandCode="updates_rx"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="debug ip bgp packet" netconfCommand=""  commandCode="packet"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="debug ip bgp packet tx" netconfCommand=""  commandCode="packet_tx"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="debug ip bgp packet rx" netconfCommand=""  commandCode="packet_rx"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="debug ip bgp" netconfCommand=""  commandCode="ip"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="debug ip bgp cli" netconfCommand=""  commandCode="ip_cli"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="debug ip bgp traces" netconfCommand=""  commandCode="ip_traces"  operationalObject="Bgp" />
+
+	<Debug plugin="Bgp"  cliCommand="no debug ip bgp address-family ipv4 unicast" netconfCommand=""  commandCode="address_family_ipv4_unicast_no"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="no debug ip bgp dampening" netconfCommand=""  commandCode="dampening_no"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="no debug ip bgp events" netconfCommand=""  commandCode="events_no"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="no debug ip bgp general" netconfCommand=""  commandCode="general_no"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="no debug ip bgp graceful-restart" netconfCommand=""  commandCode="graceful_restart_no"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="no debug ip bgp ip-prefix ipv4-prefix" netconfCommand=""  commandCode="ipv4_prefix_no"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="no debug ip bgp ip-prefix-list" netconfCommand=""  commandCode="ip_prefix_list_no"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="no debug ip bgp ip-prefix-list prefix-list-name" netconfCommand=""  commandCode="ip_prefix_list_name_no"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="no debug ip bgp keepalives" netconfCommand=""  commandCode="keepalives_no"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="no debug ip bgp neighbor ipv4-address" netconfCommand=""  commandCode="neighbor_ipv4_address_no"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="no debug ip bgp route-map route-map-name" netconfCommand=""  commandCode="route_map_name_no"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="no debug ip bgp route-selection" netconfCommand=""  commandCode="route_selection_no"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="no debug ip bgp updates" netconfCommand=""  commandCode="updates_no"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="no debug ip bgp updates tx" netconfCommand=""  commandCode="updates_tx_no"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="no debug ip bgp updates rx" netconfCommand=""  commandCode="updates_rx_no"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="no debug ip bgp packet" netconfCommand=""  commandCode="packet_no"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="no debug ip bgp packet tx" netconfCommand=""  commandCode="packet_tx_no"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="no debug ip bgp packet rx" netconfCommand=""  commandCode="packet_rx_no"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="no debug ip bgp" netconfCommand=""  commandCode="ip_no"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="no debug ip bgp cli" netconfCommand=""  commandCode="ip_cli_no"  operationalObject="Bgp" />
+	<Debug plugin="Bgp"  cliCommand="no debug ip bgp traces" netconfCommand=""  commandCode="ip_traces_no"  operationalObject="Bgp" />
+
+	<!-- ============================================================================================================================-->
+										<!-- Bgp clear commands -->
+	<!-- ============================================================================================================================-->
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp dampening" netconfCommand=""  commandCode="ip_dampening"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp dampening ipv4-prefix" netconfCommand=""  commandCode="ip_dampening_ipv4_prefix"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp flap-statistics" netconfCommand=""  commandCode="ip_flap_statistics"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp flap-statistics ipv4-prefix" netconfCommand=""  commandCode="ip_flap_statistics_ipv4_prefix"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp flap-statistics regular-expression regular-expression-value" netconfCommand=""  commandCode="ip_flap_statistics_ipv4_prefix_reg_exp_val"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp flap-statistics neighbor ipv4-address" netconfCommand=""  commandCode="ip_flap_statistics_ipv4_prefix_neighbor_ipv4_prefix"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp local routes" netconfCommand=""  commandCode="ip_local_routes"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor as-number" netconfCommand=""  commandCode="ip_neighbor_as_no"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor as-number last-packet-with-error" netconfCommand=""  commandCode="ip_neighbor_as_no_last_packet_with_error"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor as-number notification-errors" netconfCommand=""  commandCode="ip_neighbor_as_no_notification_errors"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor as-number soft" netconfCommand=""  commandCode="ip_neighbor_as_no_soft"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor as-number soft in" netconfCommand=""  commandCode="ip_neighbor_as_no_soft_in"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor as-number soft out" netconfCommand=""  commandCode="ip_neighbor_as_no_soft_out"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor as-number soft-outbound" netconfCommand=""  commandCode="ip_neighbor_as_no_soft_outbound"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor as-number traffic" netconfCommand=""  commandCode="ip_neighbor_as_no_traffic"  operationalObject="Bgp" />
+
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor peer-group-name" netconfCommand=""  commandCode="ip_peer_group_name"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor peer-group-name last-packet-with-error" netconfCommand=""  commandCode="ip_peer_group_name_last_packet_with_error"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor peer-group-name notification-errors" netconfCommand=""  commandCode="ip_peer_group_name_notification_errors"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor peer-group-name soft" netconfCommand=""  commandCode="ip_peer_group_name_soft"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor peer-group-name soft in" netconfCommand=""  commandCode="ip_peer_group_name_soft_in"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor peer-group-name soft in prefix-filter" netconfCommand=""  commandCode="ip_peer_group_name_soft_in_prefix_filter"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor peer-group-name soft out" netconfCommand=""  commandCode="ip_peer_group_name_soft_out"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor peer-group-name soft-outbound" netconfCommand=""  commandCode="ip_peer_group_name_soft_out_bound"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor peer-group-name traffic" netconfCommand=""  commandCode="ip_peer_group_name_traffic"  operationalObject="Bgp" />
+
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor ipv4-address" netconfCommand=""  commandCode="ip_neighbor_address"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor ipv4-address last-packet-with-error" netconfCommand=""  commandCode="ip_neighbor_address_last_packet_with_error"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor ipv4-address notification-errors" netconfCommand=""  commandCode="ip_neighbor_address_notification_errors"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor ipv4-address soft" netconfCommand=""  commandCode="ip_neighbor_address_soft"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor ipv4-address soft in" netconfCommand=""  commandCode="ip_neighbor_address_soft_in"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor ipv4-address soft in prefix-filter" netconfCommand=""  commandCode="ip_neighbor_address_soft_in_prefix_filter"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor ipv4-address soft out" netconfCommand=""  commandCode="ip_neighbor_address_soft_out"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor ipv4-address soft-outbound" netconfCommand=""  commandCode="ip_neighbor_address_soft_out_bound"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor ipv4-address traffic" netconfCommand=""  commandCode="ip_neighbor_address_traffic"  operationalObject="Bgp" />
+
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor all" netconfCommand=""  commandCode="ip_neighbor_all"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor all last-packet-with-error" netconfCommand=""  commandCode="ip_neighbor_all_last_packet_with_error"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor all notification-errors" netconfCommand=""  commandCode="ip_neighbor_all_notification_errors"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor all soft" netconfCommand=""  commandCode="ip_neighbor_all_soft"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor all soft in" netconfCommand=""  commandCode="ip_neighbor_all_soft_in"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor all soft in prefix-filter" netconfCommand=""  commandCode="ip_neighbor_all_soft_in_prefix_filter"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor all soft out" netconfCommand=""  commandCode="ip_neighbor_all_soft_out"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor all soft-outbound" netconfCommand=""  commandCode="ip_neighbor_all_soft_out_bound"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor all traffic" netconfCommand=""  commandCode="ip_neighbor_all_traffic"  operationalObject="Bgp" />
+
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp routes" netconfCommand=""  commandCode="ip_bgp_routes"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp routes ipv4-address" netconfCommand=""  commandCode="ip_routes_ipv4_address"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp routes ipv4-prefix" netconfCommand=""  commandCode="ip_bgp_routes_ipv4_prefix"  operationalObject="Bgp" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp traffic" netconfCommand=""  commandCode="ip_traffic"  operationalObject="Bgp" />
+
+	<!-- ============================================================================================================================-->
+										<!-- Bgp show debug commands -->
+	<!-- ============================================================================================================================-->
+	<Show plugin="Bgp"  cliCommand="show debug ip bgp" netconfCommand=""  commandCode="debug_ip"  operationalObject="Bgp" />
+	<Show plugin="Bgp"  cliCommand="show debug ip bgp config" netconfCommand=""  commandCode="debug_ip_config"  operationalObject="Bgp" />
+
+	<!-- ============================================================================================================================-->
+										      <!-- show ip bgp rbridge-id rbridge-id-value -->
+	<!-- ============================================================================================================================-->
+	<Show plugin="Bgp"  cliCommand="show ip bgp rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp ipv4-prefix rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_ipv4_prefix"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp ipv4-prefix longer-prefixes rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_ipv4_prefix_longer_prefixes"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp attribute-entries rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_attribute_entries"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp dampened-paths rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_dampened_paths"  operationalObject="BgpMc" />
+	<!-- ============================================================================================================================-->
+										<!-- show ip bgp filtered-routes rbridge-id rbridge-id-value -->
+	<!-- ============================================================================================================================-->
+	<Show plugin="Bgp"  cliCommand="show ip bgp filtered-routes rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_filtered_routes"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp filtered-routes ipv4-prefix rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_filtered_routes_ipv4_prefix"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp filtered-routes ipv4-prefix longer-prefixes rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_filtered_routes_ipv4_prefix_longer_prefixes"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp filtered-routes as-path-access-list as-path-access-list-name rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_filtered_routes_as_path_access_list_name"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp filtered-routes detail rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_filtered_routes_detail"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp filtered-routes detail ipv4-prefix rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_filtered_routes_detail_ipv4_prefix"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp filtered-routes detail ipv4-prefix longer-prefixes rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_filtered_routes_detail_ipv4_prefix_ipv4_prefix_longer_prefixes"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp filtered-routes detail as-path-access-list as-path-access-list-name rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_filtered_routes_detail_as_path_access_list_name"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp filtered-routes detail prefix-list prefix-list-name rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_filtered_routes_detail_prefix_list_name"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp filtered-routes prefix-list prefix-list-name rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_filtered_routes_prefix_list_name"  operationalObject="BgpMc" />
+	<!-- ============================================================================================================================-->
+										<!-- show ip bgp flap-statistics rbridge-id rbridge-id-value -->
+	<!-- ============================================================================================================================-->
+	<Show plugin="Bgp"  cliCommand="show ip bgp flap-statistics rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_flap_statistics"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp flap-statistics ipv4-prefix rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_flap_statistics_ipv4_prefix"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp flap-statistics ipv4-prefix longer-prefixes rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_flap_statistics_ipv4_prefix_longer_prefixes"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp flap-statistics as-path-filter as-path-filter-name rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_flap_statistics_as_path_filter_name"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp flap-statistics neighbor ipv4-address rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_flap_statistics_neighbor_ipv4_address"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp flap-statistics regular-expression regular-expression-value rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_flap_statistics_regular_expression_value"  operationalObject="BgpMc" />
+	<!-- ============================================================================================================================-->
+										<!-- show ip bgp neighbors rbridge-id rbridge-id-value -->
+	<!-- ============================================================================================================================-->
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors_ipv4_address"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address advertised-routes rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_advertised_routes"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address advertised-routes ipv4-prefix rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_advertised_routes_ipv4_prefix"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address advertised-routes detail rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_advertised_routes_detail"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address advertised-routes detail ipv4-prefix rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_advertised_routes_detail_ipv4_prefix"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address flap-statistics rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_flap_statistics"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address last-packet-with-error rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_last_packet_with_error"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address last-packet-with-error decode rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_last_packet_with_error_decode"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address received extended-community rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_received_extended_community"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address received prefix-filter rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_received_prefix_filter"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address received-routes rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_received_routes"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address received-routes detail rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_received_routes_detail"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address rib-out-routes rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_rib_out_routes"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address rib-out-routes ipv4-prefix rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_rib_out_routes_ipv4_prefix"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address rib-out-routes detail rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_rib_out_routes_detail"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address rib-out-routes detail ipv4-prefix rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_rib_out_routes_detail_ipv4_prefix"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address routes rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_routes"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address routes best rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_routes_best"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address routes detail rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_routes_detail"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address routes detail best rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_routes_detail_best"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address routes detail not-installed-best rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_routes_detail_not_installed_best"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address routes detail unreachable rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_routes_detail_unreachable"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address routes not-installed-best rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_routes_not_installed_best"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address routes unreachable rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_routes_unreachable"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors ipv4-address routes-summary rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors_ipv4_address_routes_summary"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors last-packet-with-error rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors_last_packet_with_error"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp neighbors routes-summary rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbors_routes_summary"  operationalObject="BgpMc" />
+	<!-- ============================================================================================================================-->
+										<!-- show ip bgp peer-group rbridge-id rbridge-id-value -->
+	<!-- ============================================================================================================================-->
+	<Show plugin="Bgp"  cliCommand="show ip bgp peer-group rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_peer_group"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp peer-group peer-group-name rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_peer_group_name"  operationalObject="BgpMc" />
+	<!-- ============================================================================================================================-->
+										<!-- show ip bgp routes rbridge-id rbridge-id-value -->
+	<!-- ============================================================================================================================-->
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes index rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_index"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes ipv4-prefix rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_ipv4_prefix"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes ipv4-prefix longer-prefixes rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_ipv4_prefix_longer_prefixes"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes age seconds rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_age"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes as-path-access-list as-path-access-list-name rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_ipv4_prefix_as_path_access_list_name"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes as-path-filter as-path-filter-name rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_ipv4_prefix_as_path_filter_name"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes best rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_best"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes cidr-only rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_cidr_only"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes community number rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_community_number"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes community string rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_community_string"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes community internet rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_community_internet"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes community local-as rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_community_local_as"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes community no-advertise rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_community_no_advertise"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes community no-export rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_community_no_export"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes community-access-list community-access-list-name rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_community_access_list_name"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes community-reg-expression value rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_community_reg_exp_value"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes local rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_local"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes neighbor ipv4-address rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_neighbor_ipv4_address"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes nexthop ipv4-address rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_nexthop_ipv4_address"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes no-best rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_no_best"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes not-installed-best rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_not_installed_best"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes prefix-list prefix-list-name rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_prefix_list_name"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes regular-expression value rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_reg_exp_value"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes route-map route-map-name rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_route_map_name"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes summary rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_summary"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes unreachable rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_unreachable"  operationalObject="BgpMc" />
+
+
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_detail"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail index rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_detail_index"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail ipv4-prefix rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_detail_ipv4_prefix"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail ipv4-prefix longer-prefixes rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_detail_ipv4_prefix_longer_prefixes"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail age seconds rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_detail_age"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail as-path-access-list as-path-access-list-name rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_detail_as_path_access_list_name"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail as-path-filter as-path-filter-name rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_detail_as_path_filter_name"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail best rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_detail_best"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail cidr-only rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_detail_cidr_only"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail community number rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_detail_community_number"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail community string rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_detail_community_string"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail community internet rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_detail_community_internet"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail community local-as rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_detail_community_local_as"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail community no-advertise rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_detail_community_no_advertise"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail community no-export rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_detail_community_no_export"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail community-access-list community-access-list-name rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_detail_community_access_list_name"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail community-reg-expression value rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_detail_community_reg_exp_value"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail local rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_detail_local"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail neighbor ipv4-address rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_detail_neighbor_ipv4_address"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail nexthop ipv4-address rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_detail_nexthop_ipv4_address"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail no-best rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_detail_no_best"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail not-installed-best rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_detail_not_installed_best"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail prefix-list prefix-list-name rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_detail_prefix_list_name"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail regular-expression value rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_detail_reg_exp_value"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail route-map route-map-name rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_detail_route_map_name"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail summary rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_detail_summary"  operationalObject="BgpMc" />
+	<Show plugin="Bgp"  cliCommand="show ip bgp routes detail unreachable rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_detail_unreachable"  operationalObject="BgpMc" />
+	<!-- ============================================================================================================================-->
+										<!-- show ip bgp summary rbridge-id rbridge-id-value -->
+	<!-- ============================================================================================================================-->
+
+	<Show plugin="Bgp"  cliCommand="show ip bgp summary rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_summary"  operationalObject="BgpMc" />
+
+	<!-- ============================================================================================================================-->
+										<!-- Bgp clear commands rbridge-id rbridge-id-value -->
+	<!-- ============================================================================================================================-->
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp dampening rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_dampening"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp dampening ipv4-prefix rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_dampening_ipv4_prefix"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp flap-statistics rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_flap_statistics"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp flap-statistics ipv4-prefix rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_flap_statistics_ipv4_prefix"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp flap-statistics regular-expression regular-expression-value rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_flap_statistics_ipv4_prefix_reg_exp_val"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp flap-statistics neighbor ipv4-address rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_flap_statistics_ipv4_prefix_neighbor_ipv4_prefix"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp local routes rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_local_routes"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor as-number rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbor_as_no"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor as-number last-packet-with-error rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbor_as_no_last_packet_with_error"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor as-number notification-errors rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbor_as_no_notification_errors"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor as-number soft rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbor_as_no_soft"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor as-number soft in rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbor_as_no_soft_in"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor as-number soft out rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbor_as_no_soft_out"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor as-number soft-outbound rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbor_as_no_soft_outbound"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor as-number traffic rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbor_as_no_traffic"  operationalObject="BgpMc" />
+
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor peer-group-name rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_peer_group_name"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor peer-group-name last-packet-with-error rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_peer_group_name_last_packet_with_error"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor peer-group-name notification-errors rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_peer_group_name_notification_errors"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor peer-group-name soft rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_peer_group_name_soft"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor peer-group-name soft in rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_peer_group_name_soft_in"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor peer-group-name soft in prefix-filter rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_peer_group_name_soft_in_prefix_filter"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor peer-group-name soft out rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_peer_group_name_soft_out"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor peer-group-name soft-outbound rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_peer_group_name_soft_out_bound"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor peer-group-name traffic rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_peer_group_name_traffic"  operationalObject="BgpMc" />
+
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor ipv4-address rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbor_address"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor ipv4-address last-packet-with-error rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbor_address_last_packet_with_error"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor ipv4-address notification-errors rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbor_address_notification_errors"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor ipv4-address soft rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbor_address_soft"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor ipv4-address soft in rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbor_address_soft_in"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor ipv4-address soft in prefix-filter rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbor_address_soft_in_prefix_filter"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor ipv4-address soft out rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbor_address_soft_out"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor ipv4-address soft-outbound rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbor_address_soft_out_bound"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor ipv4-address traffic rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbor_address_traffic"  operationalObject="BgpMc" />
+
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor all rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbor_all"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor all last-packet-with-error rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbor_all_last_packet_with_error"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor all notification-errors rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbor_all_notification_errors"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor all soft rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbor_all_soft"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor all soft in rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbor_all_soft_in"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor all soft in prefix-filter rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbor_all_soft_in_prefix_filter"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor all soft out rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbor_all_soft_out"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor all soft-outbound rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbor_all_soft_out_bound"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp neighbor all traffic rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_neighbor_all_traffic"  operationalObject="BgpMc" />
+
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp routes rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_bgp_routes"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp routes ipv4-address rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_routes_ipv4_address"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp routes ipv4-prefix rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_bgp_routes_ipv4_prefix"  operationalObject="BgpMc" />
+	<Clear plugin="Bgp"  cliCommand="clear ip bgp traffic rbridge-id rbridge-id-value" netconfCommand=""  commandCode="ip_traffic"  operationalObject="BgpMc" />
+
+    <!-- PIM Commands  BEGIN -->
+    <!-- <command codes 3001 to 3100 reserved for PIM> -->
+    <!-- ============================================================================================================================ -->
+    <Show plugin="Pim" cliCommand="show ip pim mcache" netconfCommand="" commandCode="pim_mcache" operationalObject="Pim" />
+    <Show plugin="Pim" cliCommand="show ip pim mcache ipv4-prefix" netconfCommand="" commandCode="pim_mcache_ipv4_prefix" operationalObject="Pim" />
+    <Show plugin="Pim" cliCommand="show ip pim mcache ipv4-prefix ipv4-prefix2" netconfCommand="" commandCode="pim_mcache_ipv4_prefix_ipv4_prefix2" operationalObject="Pim" />
+
+    <Show plugin="Pim" cliCommand="show ip pim-sparse" netconfCommand="" commandCode="pim_sparse" operationalObject="Pim" />
+    <Show plugin="Pim" cliCommand="show ip pim-sparse interface tengig tengig-value" netconfCommand="" commandCode="pim_sparse_interface_tengig_tengig_value" operationalObject="Pim" />
+    <Show plugin="Pim" cliCommand="show ip pim-sparse interface fortygig fortygig-value" netconfCommand="" commandCode="pim_sparse_interface_fortygig_fortygig_value" operationalObject="Pim" />
+    <Show plugin="Pim" cliCommand="show ip pim-sparse interface gig gig-value" netconfCommand="" commandCode="pim_sparse_interface_gig_gig_value" operationalObject="Pim" />
+    <Show plugin="Pim" cliCommand="show ip pim-sparse interface port-channel channel-value" netconfCommand="" commandCode="pim_sparse_interface_port_channel_channel_value" operationalObject="Pim" />
+    <Show plugin="Pim" cliCommand="show ip pim-sparse interface ve ve-value" netconfCommand="" commandCode="pim_sparse_interface_ve_ve_value" operationalObject="Pim" />
+    <Show plugin="Pim" cliCommand="show ip pim rp-map" netconfCommand="" commandCode="pim_rp_map" operationalObject="Pim" />
+    <Show plugin="Pim" cliCommand="show ip pim rp-hash ipv4-prefix" netconfCommand="" commandCode="pim_rp_hash" operationalObject="Pim" />
+    <Show plugin="Pim" cliCommand="show ip pim rp-set" netconfCommand="" commandCode="pim_rp_set" operationalObject="Pim" />
+    <Show plugin="Pim" cliCommand="show ip pim rpf ipv4-prefix" netconfCommand="" commandCode="pim_rpf" operationalObject="Pim" />
+    <Show plugin="Pim" cliCommand="show ip pim group" netconfCommand="" commandCode="pim_group" operationalObject="Pim" />
+    <Show plugin="Pim" cliCommand="show ip pim bsr" netconfCommand="" commandCode="pim_bsr" operationalObject="Pim" />
+    <Show plugin="Pim" cliCommand="show ip pim neighbor" netconfCommand="" commandCode="pim_neighbor" operationalObject="Pim" />
+    <Show plugin="Pim" cliCommand="show ip pim traffic" netconfCommand="" commandCode="pim_traffic" operationalObject="Pim" />
+	<Show plugin="Pim" cliCommand="show ip pim rp-candidate" netconfCommand="" commandCode="pim_rp_candidate" operationalObject="Pim" />
+    <Show plugin="Pim" cliCommand="show pim port all" netconfCommand="" commandCode="pim_port_all" operationalObject="Pim" />
+    <Show plugin="Pim" cliCommand="show pim vlan all" netconfCommand="" commandCode="pim_vlan_all" operationalObject="Pim" />
+
+
+    <!-- ============================================================================================================================-->
+                                              <!-- pim clear commands-->
+    <!-- ============================================================================================================================-->
+
+	<Clear plugin="Pim" cliCommand="clear ip pim rp-map" netconfCommand="" commandCode="clear_rp_map" operationalObject="Pim" />
+	<Clear plugin="Pim" cliCommand="clear ip pim mcache" netconfCommand="" commandCode="clear_mcache" operationalObject="Pim" />
+	<Clear plugin="Pim" cliCommand="clear ip pim mcache ipv4-prefix" netconfCommand="" commandCode="clear_mcache_ipv4_prefix" operationalObject="Pim" />
+	<Clear plugin="Pim" cliCommand="clear ip pim mcache ipv4-prefix ipv4-prefix2" netconfCommand="" commandCode="clear_mcache_ipv4_prefix_ipv4_prefix2" operationalObject="Pim" />
+	<Clear plugin="Pim" cliCommand="clear ip pim traffic" netconfCommand="" commandCode="clear_traffic" operationalObject="Pim" />
+
+
+    <!-- ============================================================================================================================-->
+                                              <!-- pim show debug commands-->
+    <!-- ============================================================================================================================-->
+
+	<Show plugin="Pim" cliCommand="show debug ip pim" netconfCommand=""  commandCode="debug_pim" operationalObject="Pim" />
+
+
+    <!-- ============================================================================================================================-->
+                                              <!-- pim debug commands-->
+    <!-- ============================================================================================================================-->
+
+	<Debug plugin="Pim" cliCommand="debug ip pim debug-all" netconfCommand=""  commandCode="debug_pim_all" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="debug ip pim debug-rp" netconfCommand=""  commandCode="debug_pim_rp" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="debug ip pim debug-rp ipv4-prefix" netconfCommand=""  commandCode="debug_pim_rp_addr" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="debug ip pim debug-state" netconfCommand=""  commandCode="debug_pim_state" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="debug ip pim debug-group" netconfCommand=""  commandCode="debug_pim_group" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="debug ip pim debug-group ipv4-prefix" netconfCommand=""  commandCode="debug_pim_group_addr" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="debug ip pim debug-source" netconfCommand=""  commandCode="debug_pim_source" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="debug ip pim debug-source ipv4-prefix" netconfCommand=""  commandCode="debug_pim_source_addr" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="debug ip pim debug-packet" netconfCommand=""  commandCode="debug_pim_packet" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="debug ip pim debug-join-prune" netconfCommand=""  commandCode="debug_pim_join_prune" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="debug ip pim debug-parent-change" netconfCommand=""  commandCode="debug_pim_parent_change" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="debug ip pim debug-monitor-route" netconfCommand=""  commandCode="debug_pim_monitor_route" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="debug ip pim debug-monitor-neighbor" netconfCommand=""  commandCode="debug_pim_monitor_neighbor" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="debug ip pim debug-monitor-neighbor ipv4-prefix" netconfCommand=""  commandCode="debug_pim_monitor_neighbor_addr" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="debug ip pim debug-bootstrap" netconfCommand=""  commandCode="debug_pim_bootstrap" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="debug ip pim debug-monitor-register" netconfCommand=""  commandCode="debug_pim_monitor_register" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="debug ip pim debug-monitor-oif" netconfCommand=""  commandCode="debug_pim_monitor_oif" operationalObject="Pim" />
+
+    <!-- ============================================================================================================================-->
+                                              <!-- pim no debug commands-->
+    <!-- ============================================================================================================================-->
+
+	<Debug plugin="Pim" cliCommand="no debug ip pim no-debug-all" netconfCommand=""  commandCode="no_debug_pim_all" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="no debug ip pim no-debug-rp" netconfCommand=""  commandCode="no_debug_pim_rp" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="no debug ip pim no-debug-state" netconfCommand=""  commandCode="no_debug_pim_state" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="no debug ip pim no-debug-group" netconfCommand=""  commandCode="no_debug_pim_group" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="no debug ip pim no-debug-source" netconfCommand=""  commandCode="no_debug_pim_source" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="no debug ip pim no-debug-packet" netconfCommand=""  commandCode="no_debug_pim_packet" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="no debug ip pim no-debug-join-prune" netconfCommand=""  commandCode="no_debug_pim_join_prune" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="no debug ip pim no-debug-parent-change" netconfCommand=""  commandCode="no_debug_pim_parent_change" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="no debug ip pim no-debug-monitor-route" netconfCommand=""  commandCode="no_debug_pim_monitor_route" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="no debug ip pim no-debug-monitor-neighbor" netconfCommand=""  commandCode="no_debug_pim_monitor_neighbor" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="no debug ip pim no-debug-bootstrap" netconfCommand=""  commandCode="no_debug_pim_bootstrap" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="no debug ip pim no-debug-monitor-oif" netconfCommand=""  commandCode="no_debug_pim_monitor_oif" operationalObject="Pim" />
+	<Debug plugin="Pim" cliCommand="no debug ip pim no-debug-monitor-register" netconfCommand=""  commandCode="no_debug_pim_monitor_register" operationalObject="Pim" />
+
+    <!-- ============================================================================================================================-->
+                                              <!-- pim show commands with rbridge-id-->
+    <!-- ============================================================================================================================-->
+
+    <Show plugin="Pim" cliCommand="show ip pim mcache rbridge-id rbridge-id-value" netconfCommand="" commandCode="pim_mcache" operationalObject="PimMc" />
+    <Show plugin="Pim" cliCommand="show ip pim mcache ipv4-prefix rbridge-id rbridge-id-value" netconfCommand="" commandCode="pim_mcache_ipv4_prefix" operationalObject="PimMc" />
+    <Show plugin="Pim" cliCommand="show ip pim mcache ipv4-prefix ipv4-prefix2 rbridge-id rbridge-id-value" netconfCommand="" commandCode="pim_mcache_ipv4_prefix_ipv4_prefix2" operationalObject="PimMc" />
+
+    <Show plugin="Pim" cliCommand="show ip pim-sparse rbridge-id rbridge-id-value" netconfCommand="" commandCode="pim_sparse" operationalObject="PimMc" />
+    <Show plugin="Pim" cliCommand="show ip pim-sparse interface ve ve-value rbridge-id rbridge-id-value" netconfCommand="" commandCode="pim_sparse_interface_ve_ve_value" operationalObject="PimMc" />
+    <Show plugin="Pim" cliCommand="show ip pim rp-map rbridge-id rbridge-id-value" netconfCommand="" commandCode="pim_rp_map" operationalObject="PimMc" />
+    <Show plugin="Pim" cliCommand="show ip pim rp-hash ipv4-prefix rbridge-id rbridge-id-value" netconfCommand="" commandCode="pim_rp_hash" operationalObject="PimMc" />
+    <Show plugin="Pim" cliCommand="show ip pim rp-set rbridge-id rbridge-id-value" netconfCommand="" commandCode="pim_rp_set" operationalObject="PimMc" />
+    <Show plugin="Pim" cliCommand="show ip pim rpf ipv4-prefix rbridge-id rbridge-id-value" netconfCommand="" commandCode="pim_rpf" operationalObject="PimMc" />
+    <Show plugin="Pim" cliCommand="show ip pim group rbridge-id rbridge-id-value" netconfCommand="" commandCode="pim_group" operationalObject="PimMc" />
+    <Show plugin="Pim" cliCommand="show ip pim bsr rbridge-id rbridge-id-value" netconfCommand="" commandCode="pim_bsr" operationalObject="PimMc" />
+    <Show plugin="Pim" cliCommand="show ip pim neighbor rbridge-id rbridge-id-value" netconfCommand="" commandCode="pim_neighbor" operationalObject="PimMc" />
+    <Show plugin="Pim" cliCommand="show ip pim traffic rbridge-id rbridge-id-value" netconfCommand="" commandCode="pim_traffic" operationalObject="PimMc" />
+	<Show plugin="Pim" cliCommand="show ip pim rp-candidate rbridge-id rbridge-id-value" netconfCommand="" commandCode="pim_rp_candidate" operationalObject="Pim" />
+    <Show plugin="Pim" cliCommand="show pim port all rbridge-id rbridge-id-value" netconfCommand="" commandCode="pim_port_all" operationalObject="PimMc" />
+    <Show plugin="Pim" cliCommand="show pim vlan all rbridge-id rbridge-id-value" netconfCommand="" commandCode="pim_vlan_all" operationalObject="PimMc" />
+
+    <!-- ============================================================================================================================-->
+                                              <!-- pim clear commands with rbridge-id-->
+    <!-- ============================================================================================================================-->
+
+    <Clear plugin="Pim" cliCommand="clear ip pim rp-map rbridge-id rbridge-id-value" netconfCommand="" commandCode="clear_rp_map" operationalObject="PimMc" />
+    <Clear plugin="Pim" cliCommand="clear ip pim mcache rbridge-id rbridge-id-value" netconfCommand="" commandCode="clear_mcache" operationalObject="PimMc" />
+    <Clear plugin="Pim" cliCommand="clear ip pim mcache ipv4-prefix rbridge-id rbridge-id-value" netconfCommand="" commandCode="clear_mcache_ipv4_prefix" operationalObject="PimMc" />
+    <Clear plugin="Pim" cliCommand="clear ip pim mcache ipv4-prefix ipv4-prefix2 rbridge-id rbridge-id-value" netconfCommand="" commandCode="clear_mcache_ipv4_prefix_ipv4_prefix2" operationalObject="PimMc" />
+    <Clear plugin="Pim" cliCommand="clear ip pim traffic rbridge-id rbridge-id-value" netconfCommand="" commandCode="clear_traffic" operationalObject="PimMc" />
+
+    <!-- ============================================================================================================================-->
+                                              <!-- pim show debug commands with rbridge-Id-->
+    <!-- ============================================================================================================================-->
+
+    <Show plugin="Pim" cliCommand="show debug ip pim rbridge-id rbridge-id-value" netconfCommand=""  commandCode="debug_pim" operationalObject="PimMc" />
+
+    <!-- ============================================================================================================================-->
+                                              <!-- pim debug commands with rbridge-Id-->
+    <!-- ============================================================================================================================-->
+
+    <Debug plugin="Pim" cliCommand="debug ip pim debug-all rbridge-id rbridge-id-value" netconfCommand=""  commandCode="debug_pim_all" operationalObject="PimMc" />
+    <Debug plugin="Pim" cliCommand="debug ip pim debug-rp rbridge-id rbridge-id-value" netconfCommand=""  commandCode="debug_pim_rp" operationalObject="PimMc" />
+    <Debug plugin="Pim" cliCommand="debug ip pim debug-rp ipv4-prefix rbridge-id rbridge-id-value" netconfCommand=""  commandCode="debug_pim_rp_addr" operationalObject="PimMc" />
+    <Debug plugin="Pim" cliCommand="debug ip pim debug-state rbridge-id rbridge-id-value" netconfCommand=""  commandCode="debug_pim_state" operationalObject="PimMc" />
+    <Debug plugin="Pim" cliCommand="debug ip pim debug-group rbridge-id rbridge-id-value" netconfCommand=""  commandCode="debug_pim_group" operationalObject="PimMc" />
+	<Debug plugin="Pim" cliCommand="debug ip pim debug-group ipv4-prefix rbridge-id rbridge-id-value" netconfCommand=""  commandCode="debug_pim_group_addr" operationalObject="PimMc" />
+    <Debug plugin="Pim" cliCommand="debug ip pim debug-source rbridge-id rbridge-id-value" netconfCommand=""  commandCode="debug_pim_source" operationalObject="PimMc" />
+    <Debug plugin="Pim" cliCommand="debug ip pim debug-source ipv4-prefix rbridge-id rbridge-id-value" netconfCommand=""  commandCode="debug_pim_source_addr" operationalObject="PimMc" />
+    <Debug plugin="Pim" cliCommand="debug ip pim debug-packet rbridge-id rbridge-id-value" netconfCommand=""  commandCode="debug_pim_packet" operationalObject="PimMc" />
+    <Debug plugin="Pim" cliCommand="debug ip pim debug-join-prune rbridge-id rbridge-id-value" netconfCommand=""  commandCode="debug_pim_join_prune" operationalObject="PimMc" />
+    <Debug plugin="Pim" cliCommand="debug ip pim debug-parent-change rbridge-id rbridge-id-value" netconfCommand=""  commandCode="debug_pim_parent_change" operationalObject="PimMc" />
+    <Debug plugin="Pim" cliCommand="debug ip pim debug-monitor-route rbridge-id rbridge-id-value" netconfCommand=""  commandCode="debug_pim_monitor_route" operationalObject="PimMc" />
+    <Debug plugin="Pim" cliCommand="debug ip pim debug-monitor-neighbor rbridge-id rbridge-id-value" netconfCommand=""  commandCode="debug_pim_monitor_neighbor" operationalObject="PimMc" />
+    <Debug plugin="Pim" cliCommand="debug ip pim debug-monitor-neighbor ipv4-prefix rbridge-id-value" netconfCommand=""  commandCode="debug_pim_monitor_neighbor_addr" operationalObject="PimMc" />
+    <Debug plugin="Pim" cliCommand="debug ip pim debug-bootstrap rbridge-id rbridge-id-value" netconfCommand=""  commandCode="debug_pim_bootstrap" operationalObject="PimMc" />
+    <Debug plugin="Pim" cliCommand="debug ip pim debug-monitor-register rbridge-id rbridge-id-value" netconfCommand=""  commandCode="debug_pim_monitor_register" operationalObject="PimMc" />
+    <Debug plugin="Pim" cliCommand="debug ip pim debug-monitor-oif rbridge-id rbridge-id-value" netconfCommand=""  commandCode="debug_pim_monitor_oif" operationalObject="PimMc" />
+
+    <!-- ============================================================================================================================-->
+                                              <!-- pim no debug commands with rbridge-Id-->
+    <!-- ============================================================================================================================-->
+
+    <Debug plugin="Pim" cliCommand="no debug ip pim no-debug-all rbridge-id rbridge-id-value" netconfCommand=""  commandCode="no_debug_pim_all" operationalObject="PimMc" />
+    <Debug plugin="Pim" cliCommand="no debug ip pim no-debug-rp rbridge-id rbridge-id-value" netconfCommand=""  commandCode="no_debug_pim_rp" operationalObject="PimMc" />
+    <Debug plugin="Pim" cliCommand="no debug ip pim no-debug-state rbridge-id rbridge-id-value" netconfCommand=""  commandCode="no_debug_pim_state" operationalObject="PimMc" />
+    <Debug plugin="Pim" cliCommand="no debug ip pim no-debug-group rbridge-id rbridge-id-value" netconfCommand=""  commandCode="no_debug_pim_group" operationalObject="PimMc" />
+    <Debug plugin="Pim" cliCommand="no debug ip pim no-debug-source rbridge-id rbridge-id-value" netconfCommand=""  commandCode="no_debug_pim_source" operationalObject="PimMc" />
+    <Debug plugin="Pim" cliCommand="no debug ip pim no-debug-packet rbridge-id rbridge-id-value" netconfCommand=""  commandCode="no_debug_pim_packet" operationalObject="PimMc" />
+    <Debug plugin="Pim" cliCommand="no debug ip pim no-debug-join-prune rbridge-id rbridge-id-value" netconfCommand=""  commandCode="no_debug_pim_join_prune" operationalObject="PimMc" />
+    <Debug plugin="Pim" cliCommand="no debug ip pim no-debug-parent-change rbridge-id rbridge-id-value" netconfCommand=""  commandCode="no_debug_pim_parent_change" operationalObject="PimMc" />
+    <Debug plugin="Pim" cliCommand="no debug ip pim no-debug-monitor-route rbridge-id rbridge-id-value" netconfCommand=""  commandCode="no_debug_pim_monitor_route" operationalObject="PimMc" />
+    <Debug plugin="Pim" cliCommand="no debug ip pim no-debug-monitor-neighbor rbridge-id rbridge-id-value" netconfCommand=""  commandCode="no_debug_pim_monitor_neighbor" operationalObject="PimMc" />
+    <Debug plugin="Pim" cliCommand="no debug ip pim no-debug-bootstrap rbridge-id rbridge-id-value" netconfCommand=""  commandCode="no_debug_pim_bootstrap" operationalObject="PimMc" />
+    <Debug plugin="Pim" cliCommand="no debug ip pim no-debug-monitor-oif rbridge-id rbridge-id-value" netconfCommand=""  commandCode="no_debug_pim_monitor_oif" operationalObject="PimMc" />
+    <Debug plugin="Pim" cliCommand="no debug ip pim no-debug-monitor-register rbridge-id rbridge-id-value" netconfCommand=""  commandCode="no_debug_pim_monitor_register" operationalObject="PimMc" />
+
+
+	<!-- UDLD Commands  BEGIN -->
+	<!-- <command codes 3001 to 3100 reserved for UDLD> -->
+	<!-- ============================================================================================================================ -->
+	<!-- clear udld statistics -->
+	<!-- ============================================================================================================================ -->
+	<Clear plugin="Udld" cliCommand="clear udld statistics"
+		netconfCommand="" commandCode="statistics" operationalObject="Udld" />
+	<Clear plugin="Udld"
+		cliCommand="clear udld statistics interface interface-type interface-index"
+		netconfCommand="" commandCode="statistics_interface" operationalObject="Udld" />
+	<!-- ============================================================================================================================ -->
+
+	<!-- ============================================================================================================================ -->
+	<!-- show udld -->
+	<!-- ============================================================================================================================ -->
+	<Show plugin="Udld" cliCommand="show udld" netconfCommand=""
+		commandCode="global" operationalObject="Udld" />
+	<Show plugin="Udld" cliCommand="show udld interface"
+		netconfCommand="" commandCode="all_interfaces" operationalObject="Udld" />
+	<Show plugin="Udld" cliCommand="show udld interface interface-type interface-index"
+		netconfCommand="" commandCode="interface" operationalObject="Udld" />
+
+	<!-- ============================================================================================================================ -->
+	<!-- show udld statistics -->
+	<!-- ============================================================================================================================ -->
+	<Show plugin="Udld" cliCommand="show udld statistics"
+		netconfCommand="" commandCode="statistics" operationalObject="Udld" />
+	<Show plugin="Udld"
+		cliCommand="show udld statistics interface interface-type interface-index"
+		netconfCommand="" commandCode="statistics_interface" operationalObject="Udld" />
+
+	<!-- ============================================================================================================================ -->
+	<!-- debug udld -->
+	<!-- ============================================================================================================================ -->
+	<Debug plugin="Udld" cliCommand="debug udld packet all flow-direction"
+		netconfCommand="" commandCode="packet_all" operationalObject="Udld" />
+	<Debug plugin="Udld"
+		cliCommand="debug udld packet interface interface-type interface-index flow-direction"
+		netconfCommand="" commandCode="packet_interface" operationalObject="Udld" />
+	<!-- ============================================================================================================================ -->
+
+	<!-- no debug udld -->
+	<!-- ============================================================================================================================ -->
+	<Debug plugin="Udld" cliCommand="no debug udld packet all"
+		netconfCommand="" commandCode="no_packet_all" operationalObject="Udld" />
+	<Debug plugin="Udld"
+		cliCommand="no debug udld packet interface interface-type interface-index"
+		netconfCommand="" commandCode="no_packet_interface" operationalObject="Udld" />
+	<!-- ============================================================================================================================ -->
+
+	<!-- show debug udld -->
+	<!-- ============================================================================================================================ -->
+	<Show plugin="Udld" cliCommand="show debug udld" netconfCommand=""
+		commandCode="debug" operationalObject="Udld" />
+	<!-- ============================================================================================================================ -->
+
+	<!-- UDLD Commands <command codes 3001 to 3100 reserved for UDLD> END -->
+
+    <!-- ============================================================================================================================-->
+    <!-- debug show gvlan -->
+    <!-- ============================================================================================================================-->
+    <Debug plugin="Nsm" cliCommand="show system internal nsm gvlan" netconfCommand="" commandCode="show_gvlan" operationalObject="NsmDebug" />
+    <Debug plugin="Nsm" cliCommand="show system internal nsm gvlan vlan-id" netconfCommand="" commandCode="show_gvlan_vlanid" operationalObject="NsmDebug" />
+    <Debug plugin="Nsm" cliCommand="show system internal nsm ivid" netconfCommand="" commandCode="show_ivid" operationalObject="NsmDebug" />
+    <Debug plugin="Nsm" cliCommand="show system internal nsm ivid vlan-id" netconfCommand="" commandCode="show_ivid_vlanid" operationalObject="NsmDebug" />
+</ClientDataInterface>

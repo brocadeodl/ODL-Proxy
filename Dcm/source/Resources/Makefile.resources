@@ -1,0 +1,39 @@
+TOPDIR := ../../../../../..
+
+include $(WAVE_HOME)/source/Makefile.tools
+
+
+XML_SOURCES             := $(wildcard *.xml)
+WAVE_RESOURCE_GENERATOR := $(WAVE_HOME)/resourcegenerator/WaveResourceGenerator.$(OS).$(ARCH_HOST)
+
+vpath %.h $(BUILD_DIR_DYNAMIC_SRC)
+
+SENTINEL := $(BUILD_DIR_DYNAMIC_SRC)/resources
+
+.PHONY: all phony
+all: $(SENTINEL)
+
+.SECONDEXPANSION:
+
+# the strange stuff with WAVE_RESOURCES GENERATOR and the variable $(BUILD_DIR_DYNAMIC_SRC)/.
+# is to avoid parallelism bugs with the recursive makes
+# see the manual for explanation
+$(SENTINEL): $(WAVE_RESOURCES) $(RESOURCE_GENERATOR) $(XML_SOURCES) $(MKFS) | \
+	$($(BUILD_DIR_DYNAMIC_SRC)/.) $($(WAVE_BUILD_DIR_DYNAMIC_SRC)/.)
+	@$(ECHOCMD) "Generating Dcm Resources ..."
+	@$(ECHOCMD) ""
+	$(WAVE_RESOURCE_GENERATOR) DcmComponents.xml $(BUILD_DIR_DYNAMIC_SRC) Dcm
+	@$(ECHOCMD) ""
+	@$(ECHOCMD) "Completed generating Dcm Resources."
+	@$(ECHOCMD) "";
+	@$(ECHOCMD) "Generating resource properties files.";
+	@$(ECHOCMD) "";
+	cat $(WAVE_BUILD_DIR_DYNAMIC_SRC_ARCH_KIND_INDEP)/*.properties $(BUILD_DIR_DYNAMIC_SRC)/$(PROJECT)*.properties \
+		> $(BUILD_DIR_DYNAMIC_SRC)/DCMdResources_en.properties 
+	@$(ECHOCMD) "";
+	touch $@
+
+# this target is obsolete, better make all
+DcmResources.h: $(SENTINEL)
+
+include $(WAVE_SRC)/commonMakefileEnd

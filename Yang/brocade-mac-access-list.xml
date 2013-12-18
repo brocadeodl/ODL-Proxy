@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-mac-access-list"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:mac-access-list="urn:brocade.com:mgmt:brocade-mac-access-list"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface">
+  <namespace uri="urn:brocade.com:mgmt:brocade-mac-access-list"/>
+  <prefix value="mac-access-list"/>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+       San Jose, CA 95134
+       U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com
+Web: www.brocade.com</text>
+  </contact>
+  <description>
+    <text>This management sub-module contains the configuration
+and rpc implementaion for MAC Access-list.</text>
+  </description>
+  <revision date="2011-02-28">
+    <description>
+      <text>Initial Version with rpc</text>
+    </description>
+  </revision>
+  <typedef name="mac-address-type">
+    <type name="string"/>
+  </typedef>
+  <typedef name="src-dst-mac-address-mask-type">
+    <type name="string"/>
+  </typedef>
+  <typedef name="mac-acl-name">
+    <type name="string">
+      <pattern value="[a-zA-Z0-9]{1}([-a-zA-Z0-9_]{0,62})"/>
+    </type>
+    <description>
+      <text>The definition for the mac access-list name.</text>
+    </description>
+  </typedef>
+  <typedef name="mac-acl-seq-id-t">
+    <type name="uint64">
+      <range value="0 .. 4294967290"/>
+    </type>
+  </typedef>
+  <typedef name="app-type">
+    <type name="uint16">
+      <range value="1536 .. 65535"/>
+    </type>
+  </typedef>
+  <typedef name="mac-resequence-starting-seq-id">
+    <type name="uint64">
+      <range value="0 .. 4294967290"/>
+    </type>
+  </typedef>
+  <typedef name="mac-resequence-increment-seq-id">
+    <type name="uint64">
+      <range value="1 .. 4294967290"/>
+    </type>
+  </typedef>
+  <grouping name="ext-access-list-rule">
+    <leaf name="action">
+      <type name="enumeration">
+        <enum name="permit">
+          <value value="1"/>
+        </enum>
+        <enum name="deny">
+          <value value="2"/>
+        </enum>
+        <enum name="hard-drop">
+          <value value="3"/>
+        </enum>
+      </type>
+    </leaf>
+    <leaf name="source">
+      <type name="union">
+        <type name="mac-address-type"/>
+        <type name="enumeration">
+          <enum name="any">
+            <value value="1"/>
+          </enum>
+          <enum name="host">
+            <value value="2"/>
+          </enum>
+        </type>
+      </type>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="srchost">
+      <when condition="(../source='host')"/>
+      <type name="mac-address-type"/>
+    </leaf>
+    <leaf name="src-mac-addr-mask">
+      <when condition="((../source !='any') and (../source !='host'))"/>
+      <type name="src-dst-mac-address-mask-type"/>
+    </leaf>
+    <leaf name="dst">
+      <type name="union">
+        <type name="mac-address-type"/>
+        <type name="enumeration">
+          <enum name="any">
+            <value value="1"/>
+          </enum>
+          <enum name="host">
+            <value value="2"/>
+          </enum>
+        </type>
+      </type>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="dsthost">
+      <when condition="(../dst='host')"/>
+      <type name="mac-address-type"/>
+    </leaf>
+    <leaf name="dst-mac-addr-mask">
+      <when condition="((../dst !='any') and (../dst !='host'))"/>
+      <type name="src-dst-mac-address-mask-type"/>
+    </leaf>
+    <leaf name="ethertype">
+      <type name="union">
+        <type name="enumeration">
+          <enum name="arp">
+            <value value="2054"/>
+          </enum>
+          <enum name="fcoe">
+            <value value="35078"/>
+          </enum>
+          <enum name="ipv4">
+            <value value="2048"/>
+          </enum>
+        </type>
+        <type name="app-type"/>
+      </type>
+    </leaf>
+    <leaf name="count">
+      <type name="empty"/>
+    </leaf>
+    <leaf name="log">
+      <type name="empty"/>
+    </leaf>
+  </grouping>
+  <grouping name="std-access-list-rule">
+    <leaf name="action">
+      <type name="enumeration">
+        <enum name="permit">
+          <value value="1"/>
+        </enum>
+        <enum name="deny">
+          <value value="2"/>
+        </enum>
+        <enum name="hard-drop">
+          <value value="3"/>
+        </enum>
+      </type>
+    </leaf>
+    <leaf name="source">
+      <type name="union">
+        <type name="mac-address-type"/>
+        <type name="enumeration">
+          <enum name="any">
+            <value value="1"/>
+          </enum>
+          <enum name="host">
+            <value value="2"/>
+          </enum>
+        </type>
+      </type>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="srchost">
+      <when condition="(../source='host')"/>
+      <type name="mac-address-type"/>
+    </leaf>
+    <leaf name="src-mac-addr-mask">
+      <when condition="((../source !='any') and (../source !='host'))"/>
+      <type name="src-dst-mac-address-mask-type"/>
+    </leaf>
+    <leaf name="count">
+      <type name="empty"/>
+    </leaf>
+    <leaf name="log">
+      <type name="empty"/>
+    </leaf>
+  </grouping>
+  <grouping name="access-list-cmds">
+    <container name="mac">
+      <container name="access-list">
+        <list name="standard">
+          <key value="name"/>
+          <leaf name="name">
+            <type name="mac-acl-name"/>
+          </leaf>
+          <container name="hide-mac-acl-std">
+            <list name="seq">
+              <key value="seq-id"/>
+              <leaf name="seq-id">
+                <type name="uint64">
+                  <range value="0 .. 4294967290"/>
+                </type>
+              </leaf>
+              <uses name="std-access-list-rule"/>
+            </list>
+          </container>
+        </list>
+        <list name="extended">
+          <key value="name"/>
+          <leaf name="name">
+            <type name="mac-acl-name"/>
+          </leaf>
+          <container name="hide-mac-acl-ext">
+            <list name="seq">
+              <key value="seq-id"/>
+              <leaf name="seq-id">
+                <type name="uint64">
+                  <range value="0 .. 4294967290"/>
+                </type>
+              </leaf>
+              <uses name="ext-access-list-rule"/>
+            </list>
+          </container>
+        </list>
+      </container>
+    </container>
+  </grouping>
+  <uses name="access-list-cmds"/>
+  <grouping name="l2_access_group">
+    <list name="access-group">
+      <key value="mac-access-list mac-direction"/>
+      <leaf name="mac-access-list">
+        <type name="mac-acl-name"/>
+      </leaf>
+      <leaf name="mac-direction">
+        <type name="enumeration">
+          <enum name="in">
+            <value value="1"/>
+          </enum>
+          <enum name="out">
+            <value value="2"/>
+          </enum>
+        </type>
+      </leaf>
+    </list>
+  </grouping>
+  <augment target-node="/interface:interface/interface:tengigabitethernet">
+    <container name="mac">
+      <uses name="l2_access_group"/>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface/interface:gigabitethernet">
+    <container name="mac">
+      <uses name="l2_access_group"/>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface/interface:fortygigabitethernet">
+    <container name="mac">
+      <uses name="l2_access_group"/>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface/interface:port-channel">
+    <container name="mac">
+      <uses name="l2_access_group"/>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface-vlan/interface:interface/interface:vlan">
+    <container name="mac">
+      <uses name="l2_access_group"/>
+    </container>
+  </augment>
+  <rpc name="get-mac-acl-for-intf">
+    <description>
+      <text>Function to query the MAC ACL applied on the
+interface(s).</text>
+    </description>
+    <input>
+      <uses name="interface:interface-name-info">
+        <description>
+          <text>Name of the interface to query. Returns ACL details
+of all the ports only for the Ingress direction, 
+when name is not specified.</text>
+        </description>
+      </uses>
+      <leaf name="direction">
+        <type name="enumeration">
+          <enum name="in">
+            <value value="1"/>
+            <description>
+              <text>Ingress direction.</text>
+            </description>
+          </enum>
+          <enum name="out">
+            <value value="2"/>
+            <description>
+              <text>Egress direction.</text>
+            </description>
+          </enum>
+          <enum name="all">
+            <value value="3"/>
+            <description>
+              <text>Ingress and Egress direction.</text>
+            </description>
+          </enum>
+        </type>
+        <mandatory value="false"/>
+        <description>
+          <text>To mention the direction in which ACLs are applied
+on the interface. Returns ACL detail only for the 
+Ingress direction, when direction is not specified</text>
+        </description>
+      </leaf>
+    </input>
+    <output>
+      <list name="interface">
+        <key value="interface-type interface-name"/>
+        <uses name="interface:interface-name-info">
+          <description>
+            <text>Interface name.</text>
+          </description>
+        </uses>
+        <list name="ingress-policy">
+          <description>
+            <text>Ingress policy details applied on this
+interface.</text>
+          </description>
+          <leaf name="policy-name">
+            <type name="string"/>
+            <description>
+              <text>MAC ACL policy name.</text>
+            </description>
+          </leaf>
+        </list>
+        <list name="egress-policy">
+          <description>
+            <text>Egress policy details applied on this
+interface.</text>
+          </description>
+          <leaf name="policy-name">
+            <type name="string"/>
+            <description>
+              <text>MAC ACL policy name.</text>
+            </description>
+          </leaf>
+        </list>
+      </list>
+    </output>
+  </rpc>
+</module>

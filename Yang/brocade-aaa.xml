@@ -1,0 +1,883 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-aaa"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:brcd-aaa="urn:brocade.com:mgmt:brocade-aaa"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def">
+  <namespace uri="urn:brocade.com:mgmt:brocade-aaa"/>
+  <prefix value="brcd-aaa"/>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Address :    120 Holger Way
+           San Jose, CA 95134
+           U.S.A
+Phone     :    +1-408-333-8000
+E-mail     :  support@brocade.com
+Website     :  www.brocade.com</text>
+  </contact>
+  <description>
+    <text>Data Model for AAA CLIs</text>
+  </description>
+  <revision date="2010-10-21">
+    <description>
+      <text>Removed the max-elements attribute for list</text>
+    </description>
+  </revision>
+  <typedef name="auth-protocols">
+    <type name="enumeration">
+      <enum name="chap">
+        <value value="0"/>
+      </enum>
+      <enum name="pap">
+        <value value="1"/>
+      </enum>
+      <enum name="peap-mschap">
+        <value value="2"/>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="rad-auth-protocols">
+    <type name="auth-protocols"/>
+  </typedef>
+  <typedef name="tac-protocols">
+    <type name="enumeration">
+      <enum name="chap">
+        <value value="0"/>
+      </enum>
+      <enum name="pap">
+        <value value="1"/>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="tac-auth-protocols">
+    <type name="tac-protocols"/>
+  </typedef>
+  <typedef name="tac-auth-port">
+    <type name="uint16">
+      <range value="1 .. 65535"/>
+    </type>
+  </typedef>
+  <typedef name="rad-auth-port">
+    <type name="uint16">
+      <range value="1 .. 65535"/>
+    </type>
+  </typedef>
+  <typedef name="ldap-auth-port">
+    <type name="uint16">
+      <range value="1 .. 65535"/>
+    </type>
+  </typedef>
+  <typedef name="user-passwd">
+    <type name="string">
+      <length value="1..40"/>
+    </type>
+  </typedef>
+  <typedef name="username-enable">
+    <type name="boolean"/>
+  </typedef>
+  <typedef name="action">
+    <type name="enumeration">
+      <enum name="accept"/>
+      <enum name="reject"/>
+    </type>
+  </typedef>
+  <typedef name="rule-action">
+    <type name="action"/>
+  </typedef>
+  <typedef name="operation">
+    <type name="enumeration">
+      <enum name="read-only"/>
+      <enum name="read-write"/>
+    </type>
+  </typedef>
+  <typedef name="rule-operation">
+    <type name="operation"/>
+  </typedef>
+  <typedef name="acc_srv_type">
+    <type name="enumeration">
+      <enum name="none">
+        <value value="1"/>
+      </enum>
+      <enum name="tacacs+">
+        <value value="2"/>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="ipv4-addr">
+    <type name="string">
+      <pattern value="((0|(1[0-9]{0,2})|(2(([0-4][0-9]?)|(5[0-5]?)|([6-9]?)))|([3-9][0-9]?))\.){3}(0|(1[0-9]{0,2})|(2(([0-4][0-9]?)|(5[0-5]?)|([6-9]?)))|([3-9][0-9]?))"/>
+    </type>
+  </typedef>
+  <container name="aaa-config">
+    <container name="aaa">
+      <container name="authentication">
+        <container name="login">
+          <leaf name="first">
+            <type name="enumeration">
+              <enum name="default">
+                <value value="0"/>
+              </enum>
+              <enum name="radius">
+                <value value="1"/>
+              </enum>
+              <enum name="tacacs+">
+                <value value="2"/>
+              </enum>
+              <enum name="ldap">
+                <value value="3"/>
+              </enum>
+              <enum name="local">
+                <value value="4"/>
+              </enum>
+            </type>
+          </leaf>
+          <leaf name="second">
+            <type name="enumeration">
+              <enum name="local">
+                <value value="4"/>
+              </enum>
+              <enum name="local-auth-fallback">
+                <value value="5"/>
+              </enum>
+            </type>
+          </leaf>
+        </container>
+      </container>
+      <container name="accounting">
+        <container name="exec">
+          <container name="defaultacc">
+            <container name="start-stop">
+              <leaf name="server-type">
+                <type name="acc_srv_type"/>
+              </leaf>
+            </container>
+          </container>
+        </container>
+        <container name="commands">
+          <container name="defaultacc">
+            <container name="start-stop">
+              <leaf name="server-type">
+                <type name="acc_srv_type"/>
+              </leaf>
+            </container>
+          </container>
+        </container>
+      </container>
+    </container>
+  </container>
+  <list name="username">
+    <key value="name"/>
+    <leaf name="name">
+      <type name="string">
+        <length value="1 .. 40">
+          <error-message>
+            <value>User name length should be in the
+range 1-40</value>
+          </error-message>
+        </length>
+      </type>
+    </leaf>
+    <leaf name="user-password">
+      <type name="user-passwd"/>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="encryption-level">
+      <type name="enumeration">
+        <enum name="0">
+          <value value="0"/>
+        </enum>
+        <enum name="7">
+          <value value="7"/>
+        </enum>
+      </type>
+    </leaf>
+    <leaf name="role">
+      <type name="string">
+        <length value="4 .. 32">
+          <error-message>
+            <value>Role name length should be in the
+range 4-32</value>
+          </error-message>
+        </length>
+      </type>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="desc">
+      <type name="string">
+        <length value="0 .. 64">
+          <error-message>
+            <value>Account description length should be
+in the range 0-64</value>
+          </error-message>
+        </length>
+      </type>
+      <default value=""/>
+    </leaf>
+    <leaf name="enable">
+      <type name="username-enable"/>
+      <default value="true"/>
+    </leaf>
+  </list>
+  <container name="service">
+    <leaf name="password-encryption">
+      <type name="empty"/>
+    </leaf>
+  </container>
+  <container name="user"/>
+  <container name="role">
+    <list name="name">
+      <key value="name"/>
+      <leaf name="name">
+        <type name="string">
+          <length value="4 .. 32">
+            <error-message>
+              <value>Role name should be in the range
+4-32</value>
+            </error-message>
+          </length>
+        </type>
+      </leaf>
+      <leaf name="desc">
+        <type name="string">
+          <length value="0 .. 64">
+            <error-message>
+              <value>Role description should be in the
+range 0-64</value>
+            </error-message>
+          </length>
+        </type>
+        <default value=""/>
+      </leaf>
+    </list>
+  </container>
+  <container name="radius-server">
+    <list name="host">
+      <key value="hostname"/>
+      <leaf name="hostname">
+        <type name="string">
+          <length value="0..max"/>
+          <pattern value="\p{IsBasicLatin}{0,255}"/>
+        </type>
+      </leaf>
+      <leaf name="auth-port">
+        <type name="rad-auth-port"/>
+        <default value="1812"/>
+      </leaf>
+      <leaf name="protocol">
+        <type name="rad-auth-protocols"/>
+        <default value="chap"/>
+      </leaf>
+      <leaf name="key">
+        <type name="string">
+          <length value="8 .. 40">
+            <error-message>
+              <value>Key length should be in the range
+8-40</value>
+            </error-message>
+          </length>
+        </type>
+        <default value="sharedsecret"/>
+      </leaf>
+      <leaf name="retries">
+        <type name="uint32">
+          <range value="0 .. 100">
+            <error-message>
+              <value>Retries must be in the
+range 0 - 100</value>
+            </error-message>
+          </range>
+        </type>
+        <default value="5"/>
+      </leaf>
+      <leaf name="timeout">
+        <type name="uint32">
+          <range value="1 .. 60">
+            <error-message>
+              <value>Timeout must be in the range
+1 - 60</value>
+            </error-message>
+          </range>
+        </type>
+        <default value="5"/>
+      </leaf>
+    </list>
+  </container>
+  <container name="tacacs-server">
+    <list name="host">
+      <key value="hostname"/>
+      <leaf name="hostname">
+        <type name="string">
+          <length value="0..max"/>
+          <pattern value="\p{IsBasicLatin}{0,255}"/>
+        </type>
+      </leaf>
+      <leaf name="port">
+        <type name="tac-auth-port"/>
+        <default value="49"/>
+      </leaf>
+      <leaf name="protocol">
+        <type name="tac-auth-protocols"/>
+        <default value="chap"/>
+      </leaf>
+      <leaf name="key">
+        <type name="string">
+          <length value="1 .. 40">
+            <error-message>
+              <value>Key length must be in the range
+1-40</value>
+            </error-message>
+          </length>
+        </type>
+        <default value="sharedsecret"/>
+      </leaf>
+      <leaf name="retries">
+        <type name="uint8">
+          <range value="0 .. 100">
+            <error-message>
+              <value>Retries must be in the range
+0 - 100</value>
+            </error-message>
+          </range>
+        </type>
+        <default value="5"/>
+      </leaf>
+      <leaf name="timeout">
+        <type name="uint8">
+          <range value="1 .. 60">
+            <error-message>
+              <value>Timeout must be in the range
+1 - 60</value>
+            </error-message>
+          </range>
+        </type>
+        <default value="5"/>
+      </leaf>
+    </list>
+  </container>
+  <container name="ldap-server">
+    <list name="host">
+      <key value="hostname"/>
+      <leaf name="hostname">
+        <type name="string">
+          <length value="1..max"/>
+          <pattern value="\p{IsBasicLatin}{0,255}"/>
+        </type>
+      </leaf>
+      <leaf name="port">
+        <type name="ldap-auth-port"/>
+        <default value="389"/>
+      </leaf>
+      <leaf name="retries">
+        <type name="uint8">
+          <range value="0 .. 100">
+            <error-message>
+              <value>Retries must be in the range
+0 - 100</value>
+            </error-message>
+          </range>
+        </type>
+        <default value="5"/>
+      </leaf>
+      <leaf name="timeout">
+        <type name="uint8">
+          <range value="1 .. 60">
+            <error-message>
+              <value>Timeout must be in the range
+1 - 60</value>
+            </error-message>
+          </range>
+        </type>
+        <default value="5"/>
+      </leaf>
+      <leaf name="basedn">
+        <type name="string">
+          <length value="1..255"/>
+        </type>
+        <default value="local"/>
+      </leaf>
+    </list>
+    <container name="maprole">
+      <list name="group">
+        <key value="ad-group"/>
+        <leaf name="ad-group">
+          <type name="string">
+            <length value="1..max"/>
+          </type>
+        </leaf>
+        <leaf name="switch-role">
+          <type name="string">
+            <length value="4 .. 32">
+              <error-message>
+                <value>Role name should be in the range
+4-32</value>
+              </error-message>
+            </length>
+          </type>
+          <mandatory value="true"/>
+        </leaf>
+      </list>
+    </container>
+  </container>
+  <container name="password-attributes">
+    <leaf name="min-length">
+      <type name="uint32">
+        <range value="8 .. 32">
+          <error-message>
+            <value>Password minimum length should be in
+the range 8-32</value>
+          </error-message>
+        </range>
+      </type>
+      <default value="8"/>
+    </leaf>
+    <leaf name="max-retry">
+      <type name="uint32">
+        <range value="0 .. 16">
+          <error-message>
+            <value>Maximum login retries value should
+be in the range 0-16</value>
+          </error-message>
+        </range>
+      </type>
+      <default value="0"/>
+    </leaf>
+    <container name="character-restriction">
+      <leaf name="upper">
+        <type name="uint32">
+          <range value="0 .. 32">
+            <error-message>
+              <value>Minimum number of upper-case
+alphabets should be in the range 0-32</value>
+            </error-message>
+          </range>
+        </type>
+        <default value="0"/>
+      </leaf>
+      <leaf name="lower">
+        <type name="uint32">
+          <range value="0 .. 32">
+            <error-message>
+              <value>Minimum number of lower-case
+alphabets should be in the range 0-32</value>
+            </error-message>
+          </range>
+        </type>
+        <default value="0"/>
+      </leaf>
+      <leaf name="numeric">
+        <type name="uint32">
+          <range value="0 .. 32">
+            <error-message>
+              <value>Minimum number of numeric
+characters should be in the range 0-32</value>
+            </error-message>
+          </range>
+        </type>
+        <default value="0"/>
+      </leaf>
+      <leaf name="special-char">
+        <type name="uint32">
+          <range value="0 .. 32">
+            <error-message>
+              <value>Minimum number of special
+characters should be in the range 0-32</value>
+            </error-message>
+          </range>
+        </type>
+        <default value="0"/>
+      </leaf>
+    </container>
+    <leaf name="admin-lockout-enable">
+      <type name="empty"/>
+    </leaf>
+  </container>
+  <container name="banner">
+    <leaf name="login">
+      <type name="string">
+        <length value="0..2048"/>
+      </type>
+      <default value=""/>
+    </leaf>
+    <leaf name="motd">
+      <type name="string">
+        <length value="0..2048"/>
+      </type>
+      <default value=""/>
+    </leaf>
+    <leaf name="incoming">
+      <type name="string">
+        <length value="0..2048"/>
+      </type>
+      <default value=""/>
+    </leaf>
+  </container>
+  <grouping name="cmdstructure">
+    <container name="command">
+      <choice name="cmdlist">
+        <case name="container-cmds">
+          <leaf name="enumList">
+            <type name="enumeration">
+              <enum name="dot1x"/>
+              <enum name="mac-address-table"/>
+              <enum name="mac-rebalance"/>
+              <enum name="cidrecov"/>
+              <enum name="debug1"/>
+              <enum name="lccli"/>
+              <enum name="oscmd"/>
+              <enum name="vlan"/>
+              <enum name="qos"/>
+              <enum name="mac"/>
+              <enum name="sflow"/>
+              <enum name="monitor"/>
+              <enum name="system-monitor"/>
+              <enum name="telnet"/>
+              <enum name="ssh"/>
+              <enum name="port-profile"/>
+              <enum name="fcoe"/>
+              <enum name="aaa"/>
+              <enum name="radius-server"/>
+              <enum name="tacacs-server"/>
+              <enum name="ldap-server"/>
+              <enum name="password-attributes"/>
+              <enum name="username"/>
+              <enum name="role"/>
+              <enum name="banner"/>
+              <enum name="rule"/>
+              <enum name="alias-config"/>
+              <enum name="snmp-server"/>
+              <enum name="clock"/>
+              <enum name="ntp"/>
+              <enum name="fabric"/>
+              <enum name="filter-change-update-delay"/>
+              <enum name="license"/>
+              <enum name="configure"/>
+              <enum name="support"/>
+              <enum name="logging"/>
+              <enum name="firmware"/>
+              <enum name="dir"/>
+              <enum name="df"/>
+              <enum name="prompt1"/>
+              <enum name="prompt2"/>
+              <enum name="delete"/>
+              <enum name="rename"/>
+              <enum name="diag"/>
+              <enum name="vcs"/>
+              <enum name="terminal"/>
+              <enum name="cee-map"/>
+              <enum name="interface"/>
+              <enum name="ip"/>
+              <enum name="ipv6"/>
+              <enum name="management"/>
+              <enum name="protocol"/>
+              <enum name="lacp"/>
+              <enum name="router"/>
+              <enum name="switch-attributes"/>
+              <enum name="vrf"/>
+              <enum name="reload"/>
+              <enum name="usb"/>
+              <enum name="rmon"/>
+              <enum name="fastboot"/>
+              <enum name="unlock"/>
+              <enum name="debug"/>
+              <enum name="service"/>
+              <enum name="bp-rate-limit"/>
+              <enum name="no-operation"/>
+              <enum name="vnetwork"/>
+              <enum name="vCenter"/>
+            </type>
+          </leaf>
+        </case>
+        <case name="interface-a">
+          <container name="interface-int">
+            <container name="interface-cont">
+              <presence value="true"/>
+            </container>
+          </container>
+        </case>
+        <case name="interface-b">
+          <container name="interface-fcoe">
+            <container name="interface">
+              <container name="fcoe-cont">
+                <presence value="true"/>
+              </container>
+            </container>
+          </container>
+        </case>
+        <case name="interface-c">
+          <container name="interface-te">
+            <container name="interface">
+              <container name="tengigabitethernet-cont">
+                <presence value="true"/>
+              </container>
+            </container>
+          </container>
+        </case>
+        <case name="interface-d">
+          <container name="interface-fcoe-leaf">
+            <container name="interface">
+              <leaf name="fcoe-leaf">
+                <type name="string"/>
+              </leaf>
+            </container>
+          </container>
+        </case>
+        <case name="interface-e">
+          <container name="interface-te-leaf">
+            <container name="interface">
+              <leaf name="tengigabitethernet-leaf">
+                <type name="string"/>
+              </leaf>
+            </container>
+          </container>
+        </case>
+        <case name="interface-f">
+          <container name="interface-mgmt">
+            <container name="interface">
+              <container name="management-cont">
+                <presence value="true"/>
+              </container>
+            </container>
+          </container>
+        </case>
+        <case name="interface-g">
+          <container name="interface-ge">
+            <container name="interface">
+              <container name="gigabitethernet-cont">
+                <presence value="true"/>
+              </container>
+            </container>
+          </container>
+        </case>
+        <case name="interface-h">
+          <container name="interface-ge-leaf">
+            <container name="interface">
+              <leaf name="gigabitethernet-leaf">
+                <type name="string"/>
+              </leaf>
+            </container>
+          </container>
+        </case>
+        <case name="interface-i">
+          <container name="interface-pc">
+            <container name="interface">
+              <container name="port-channel-cont">
+                <presence value="true"/>
+              </container>
+            </container>
+          </container>
+        </case>
+        <case name="interface-j">
+          <container name="interface-pc-leaf">
+            <container name="interface">
+              <leaf name="port-channel-leaf">
+                <type name="string"/>
+              </leaf>
+            </container>
+          </container>
+        </case>
+        <case name="interface-k">
+          <container name="interface-vlan">
+            <container name="interface">
+              <container name="vlan-cont">
+                <presence value="true"/>
+              </container>
+            </container>
+          </container>
+        </case>
+        <case name="interface-l">
+          <container name="interface-vlan-leaf">
+            <container name="interface">
+              <leaf name="vlan-leaf">
+                <type name="string"/>
+              </leaf>
+            </container>
+          </container>
+        </case>
+        <case name="copy-a">
+          <container name="copy-cp">
+            <container name="copy-cont">
+              <presence value="true"/>
+            </container>
+          </container>
+        </case>
+        <case name="copy-b">
+          <container name="copy-running">
+            <container name="copy">
+              <container name="running-config-cont">
+                <presence value="true"/>
+              </container>
+            </container>
+          </container>
+        </case>
+        <case name="copy-c">
+          <container name="copy-support">
+            <container name="copy">
+              <container name="support-cp">
+                <presence value="true"/>
+              </container>
+            </container>
+          </container>
+        </case>
+        <case name="clear-a">
+          <container name="clear-cl">
+            <container name="clear-cont">
+              <presence value="true"/>
+            </container>
+          </container>
+        </case>
+        <case name="clear-b">
+          <container name="clear-logging">
+            <container name="clear">
+              <container name="logging-cont">
+                <presence value="true"/>
+              </container>
+            </container>
+          </container>
+        </case>
+        <case name="clear-c">
+          <container name="clear-support">
+            <container name="clear">
+              <container name="support-cl">
+                <presence value="true"/>
+              </container>
+            </container>
+          </container>
+        </case>
+        <case name="protocol-a">
+          <container name="protocol-pr">
+            <container name="protocol-cont">
+              <presence value="true"/>
+            </container>
+          </container>
+        </case>
+        <case name="protocol-b">
+          <container name="protocol-spanning">
+            <container name="protocol">
+              <container name="spanning-tree-cont">
+                <presence value="true"/>
+              </container>
+            </container>
+          </container>
+        </case>
+        <case name="protocol-c">
+          <container name="protocol-lldp">
+            <container name="protocol">
+              <container name="lldp-cont">
+                <presence value="true"/>
+              </container>
+            </container>
+          </container>
+        </case>
+      </choice>
+    </container>
+  </grouping>
+  <list name="rule">
+    <key value="index"/>
+    <leaf name="index">
+      <type name="uint32">
+        <range value="1 .. 512"/>
+      </type>
+    </leaf>
+    <leaf name="action">
+      <type name="rule-action"/>
+    </leaf>
+    <leaf name="operation">
+      <type name="rule-operation"/>
+    </leaf>
+    <leaf name="role">
+      <type name="string">
+        <length value="4 .. 32">
+          <error-message>
+            <value>Role name length should be in the
+range 4-32</value>
+          </error-message>
+        </length>
+      </type>
+    </leaf>
+    <uses name="cmdstructure"/>
+  </list>
+  <typedef name="alias-name-type">
+    <type name="string">
+      <length value="1..255"/>
+    </type>
+  </typedef>
+  <typedef name="alias-expansion-type">
+    <type name="string">
+      <length value="1..1023"/>
+    </type>
+  </typedef>
+  <container name="alias-config">
+    <list name="alias">
+      <key value="name"/>
+      <leaf name="name">
+        <type name="string">
+          <length value="1..255">
+            <error-message>
+              <value>Alias name length should be
+in the range 1-255</value>
+            </error-message>
+          </length>
+        </type>
+      </leaf>
+      <leaf name="expansion">
+        <type name="string">
+          <length value="1..1023">
+            <error-message>
+              <value>Alias expansion length should be
+in the range 1-1023</value>
+            </error-message>
+          </length>
+        </type>
+        <mandatory value="true"/>
+      </leaf>
+    </list>
+    <list name="user">
+      <key value="name"/>
+      <leaf name="name">
+        <type name="string">
+          <length value="1..40">
+            <error-message>
+              <value>User name length should be
+in the range 1-40</value>
+            </error-message>
+          </length>
+        </type>
+      </leaf>
+      <list name="alias">
+        <key value="name"/>
+        <leaf name="name">
+          <type name="string">
+            <length value="1..255">
+              <error-message>
+                <value>Alias name length should be
+in the range 1-255</value>
+              </error-message>
+            </length>
+          </type>
+        </leaf>
+        <leaf name="expansion">
+          <type name="string">
+            <length value="1..1023">
+              <error-message>
+                <value>Alias expansion length should be
+in the range 1-1023</value>
+              </error-message>
+            </length>
+          </type>
+          <mandatory value="true"/>
+        </leaf>
+      </list>
+    </list>
+  </container>
+  <augment target-node="/common-def:clear">
+    <container name="login"/>
+  </augment>
+</module>

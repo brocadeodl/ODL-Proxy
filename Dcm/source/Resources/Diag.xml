@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Framework Core Module. -->
+
+<ModuleResources ModuleName = "Diag" ComponentName = "DiagResourceIds">
+    <ResourceEnum Name = "DiagPost">
+    <Resource Name = "DIAG_POST_SET_ERROR">Failed to change DiagPost</Resource>
+    <Resource Name = "DIAG_POST_NO_ENABLE_ERROR">Invalid syntax. enable option not specified</Resource>
+    </ResourceEnum>
+</ModuleResources>

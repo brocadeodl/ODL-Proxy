@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<WavePlugin name="APPM" nameSpace="DcmNs"> 
+<Global name="APPMGlobal">
+	<Worker name="APPMGlobalConf">
+
+        <ManagedObject name="AppmEnable">
+             <Member name="status" dataType="bool">
+			 </Member>
+		</ManagedObject>
+
+        <ManagedObject name="SubProfile">
+			<Member name="description" dataType="string">
+			</Member>
+		</ManagedObject>
+
+        <ManagedObject name="CeeMap">
+		</ManagedObject>
+		
+        <ManagedObject name="CosToCosMutationMap">
+		</ManagedObject>
+		
+        <ManagedObject name="CosToTrafficClassMap">
+		</ManagedObject>
+		
+        <ManagedObject name="Profile">
+            <Member name="profileName" dataType="string">
+            </Member>
+            <Member name="profileId" dataType="UI32">
+            </Member>
+            <Member name="isActivated" dataType="bool">
+            </Member>
+            <Member name="assocMacs" dataType="vector/WaveManagedObjectPointer/" umlType="COMPOSITION" referredObject="ProfileMac">
+			</Member>
+            <Member name="subProfileCfg" dataType="vector/WaveManagedObjectPointer/" umlType="COMPOSITION" referredObject="SubProfile">
+			</Member>
+		</ManagedObject>
+
+        <ManagedObject name="VlanProfileCfg" derivedClass="SubProfile">
+            <Member name="swModeFlag" dataType="bool">
+			</Member>
+            <Member name="swMode" dataType="UI8">
+            </Member>
+            <Member name="isAllowedVlanAll" dataType="bool">
+            </Member>
+            <Member name="vlanInfo" dataType="vector/WaveManagedObjectPointer/" umlType="COMPOSITION" referredObject="APPMVlan">
+	        </Member>
+            <Member name="vlanClassifierInfo" dataType="vector/WaveManagedObjectPointer/" umlType="COMPOSITION" referredObject="APPMVlanClassifier">
+            </Member>
+        </ManagedObject>
+
+        <ManagedObject name="ProfileMac">
+			<Member name="mac" dataType="string">
+			</Member>
+		</ManagedObject>
+ 
+        <ManagedObject name="APPMVlanClassifier">
+            <Member name="grpId" dataType="UI32">
+            </Member>
+            <Member name="vlanId" dataType="UI32">
+            </Member>
+        </ManagedObject>
+
+        <ManagedObject name="APPMVlan">
+            <Member name="vlanId" dataType="UI32">
+            </Member>
+            <Member name="modeTag" dataType="UI32">
+            </Member>
+        </ManagedObject>
+
+        <ManagedObject name="FcoeProfileCfg" derivedClass="SubProfile">
+             <Member name="fcoePort" dataType="bool">
+			 </Member>
+		</ManagedObject>
+
+        <ManagedObject name="PfcRxTxMap">
+             <Member name="pfcValue" dataType="SI32">
+			 </Member>
+             <Member name="txValue" dataType="bool">
+			 </Member>
+             <Member name="rxValue" dataType="bool">
+			 </Member>
+		</ManagedObject>
+		
+        <ManagedObject name="QosProfileCfg" derivedClass="SubProfile">
+            <Member name="ceeMapId" dataType="ObjectId" umlType="ASSOCIATION" referredObject="CeeMap">
+            </Member>
+			<Member name="defaultCosValue" dataType="SI32">
+			</Member>
+			<Member name="qosTrust" dataType="bool">
+			</Member>
+			<Member name="flowControlTxEnable" dataType="SI32" >
+			</Member>
+			<Member name="flowControlRxEnable" dataType="SI32" >
+			</Member>
+			<Member name="flowControlPfcRxTxMap" dataType="vector/WaveManagedObjectPointer/" umlType="COMPOSITION" referredObject="PfcRxTxMap">
+			</Member>
+            <Member name="cosTrafficClass" dataType="ObjectId" umlType="ASSOCIATION" referredObject="CosToTrafficClassMap">
+            </Member>
+            <Member name="cosMutation" dataType="ObjectId" umlType="ASSOCIATION" referredObject="CosToCosMutationMap">
+            </Member>
+		</ManagedObject>
+
+        <ManagedObject name="SecProfileCfg" derivedClass="SubProfile">
+            <Member name="accessGroup" dataType="string">
+            </Member>
+		</ManagedObject>
+
+        <Message name="APPMProfile" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="opCode" dataType="UI8">
+            </Member>
+            <Member name="cmdCode" dataType="UI8">
+            </Member>
+            <Member name="profileName" dataType="string">
+            </Member>
+            <Member name="profileId" dataType="UI32">
+            </Member>
+            <Member name="isActivated" dataType="bool">
+            </Member>
+            <Member name="profileMac" dataType="MacAddress">
+			</Member>
+        </Message>
+
+        <Message name="APPMVlan" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage"> 
+            <Member name="opCode" dataType="UI8" >
+            </Member>
+            <Member name="cmdCode" dataType="UI8" >
+            </Member>
+            <Member name="profileName" dataType="string">
+            </Member>
+            <Member name="profileId" dataType="UI32">
+            </Member>
+            <Member name="swModeFlag" dataType="bool">
+			</Member>
+            <Member name="swMode" dataType="UI8">
+			</Member>
+            <Member name="isAllowedVlanAll" dataType="bool">
+            </Member>
+            <Member name="vlanRangeStr" dataType="string">
+	        </Member>
+            <Member name="vlanClassifierGroupId" dataType="UI32">
+            </Member>
+            <Member name="vlanClassifierVlan" dataType="UI32">
+            </Member>
+		</Message>
+
+        <Message name="APPMQos" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="opCode" dataType="UI8" >
+            </Member>
+            <Member name="cmdCode" dataType="UI8" >
+            </Member>
+            <Member name="profileName" dataType="string">
+            </Member>
+            <Member name="profileId" dataType="UI32">
+            </Member>
+			<Member name="defaultCosValue" dataType="SI32">
+			</Member>
+			<Member name="qosTrust" dataType="bool">
+			</Member>
+			<Member name="flowControlTxEnable" dataType="SI32" >
+			</Member>
+			<Member name="flowControlRxEnable" dataType="SI32" >
+			</Member>
+			<Member name="pfcValue" dataType="SI32" >
+			</Member>
+			<Member name="txValue" dataType="bool" >
+			</Member>
+			<Member name="rxValue" dataType="bool" >
+			</Member>
+			<Member name="ceeMapName" dataType="string">
+			</Member>
+            <Member name="cosToCosMutationMap" dataType="string">
+            </Member>
+            <Member name="cosToTrafficClassMap" dataType="string">
+            </Member>
+		</Message>
+
+        <Message name="APPMFcoe" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="opCode" dataType="UI8" >
+            </Member>
+            <Member name="cmdCode" dataType="UI8" >
+            </Member>
+            <Member name="profileName" dataType="string">
+            </Member>
+            <Member name="profileId" dataType="UI32">
+            </Member>
+            <Member name="enable" dataType="bool" >
+            </Member>
+		</Message>
+		
+        <Message name="APPMSecurity" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="opCode" dataType="UI8" >
+            </Member>
+            <Member name="cmdCode" dataType="UI8" >
+            </Member>
+            <Member name="profileName" dataType="string">
+            </Member>
+            <Member name="profileId" dataType="UI32">
+            </Member>
+			<Member name="accessGroup" dataType="string">
+			</Member>
+		</Message>
+	</Worker>
+</Global>
+<Local name="APPM">
+    <Worker name="APPMLocalConf">
+        <Message name="LocalAPPMProfile" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="opCode" dataType="UI8">
+            </Member>
+            <Member name="cmdCode" dataType="UI8">
+            </Member>
+            <Member name="profileName" dataType="string">
+            </Member>
+            <Member name="profileId" dataType="UI32">
+            </Member>
+            <Member name="isActivated" dataType="bool">
+            </Member>
+            <Member name="profileMac" dataType="MacAddress">
+			</Member>
+        </Message>
+
+        <Message name="LocalAPPMVlan" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage"> 
+            <Member name="opCode" dataType="UI8" >
+            </Member>
+            <Member name="cmdCode" dataType="UI8" >
+            </Member>
+            <Member name="profileName" dataType="string">
+            </Member>
+            <Member name="profileId" dataType="UI32">
+            </Member>
+            <Member name="swModeFlag" dataType="bool">
+			</Member>
+            <Member name="swMode" dataType="UI8">
+			</Member>
+            <Member name="isAllowedVlanAll" dataType="bool">
+            </Member>
+            <Member name="vlanRangeStr" dataType="string">
+	        </Member>
+            <Member name="vlanClassifierGroupId" dataType="UI32">
+            </Member>
+            <Member name="vlanClassifierVlan" dataType="UI32">
+            </Member>
+		</Message>
+
+        <Message name="LocalAPPMQos" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="opCode" dataType="UI8" >
+            </Member>
+            <Member name="cmdCode" dataType="UI8" >
+            </Member>
+            <Member name="profileName" dataType="string">
+            </Member>
+            <Member name="profileId" dataType="UI32">
+            </Member>
+			<Member name="defaultCosValue" dataType="SI32">
+			</Member>
+			<Member name="qosTrust" dataType="bool">
+			</Member>
+			<Member name="flowControlTxEnable" dataType="SI32" >
+			</Member>
+			<Member name="flowControlRxEnable" dataType="SI32" >
+			</Member>
+			<Member name="pfcValue" dataType="SI32" >
+			</Member>
+			<Member name="txValue" dataType="bool" >
+			</Member>
+			<Member name="rxValue" dataType="bool" >
+			</Member>
+			<Member name="ceeMapName" dataType="string">
+			</Member>
+            <Member name="cosToCosMutationMap" dataType="string">
+            </Member>
+            <Member name="cosToTrafficClassMap" dataType="string">
+            </Member>
+		</Message>
+
+        <Message name="LocalAPPMFcoe" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="opCode" dataType="UI8" >
+            </Member>
+            <Member name="cmdCode" dataType="UI8" >
+            </Member>
+            <Member name="profileName" dataType="string">
+            </Member>
+            <Member name="profileId" dataType="UI32">
+            </Member>
+            <Member name="enable" dataType="bool" >
+            </Member>
+		</Message>
+		
+        <Message name="LocalAPPMSecurity" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="opCode" dataType="UI8" >
+            </Member>
+            <Member name="cmdCode" dataType="UI8" >
+            </Member>
+            <Member name="profileName" dataType="string">
+            </Member>
+            <Member name="profileId" dataType="UI32">
+            </Member>
+			<Member name="accessGroup" dataType="string">
+			</Member>
+		</Message>
+	</Worker>
+</Local>

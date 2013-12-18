@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-trilloam"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:trilloam="urn:brocade.com:mgmt:brocade-trilloam"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface"
+        xmlns:mac="urn:brocade.com:mgmt:brocade-mac-access-list"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def">
+  <namespace uri="urn:brocade.com:mgmt:brocade-trilloam"/>
+  <prefix value="trilloam"/>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <import module="brocade-mac-access-list">
+    <prefix value="mac"/>
+  </import>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+        San Jose, CA 95134
+         U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This management submodule is an instrumentation to manage  
+trilloam commands</text>
+  </description>
+  <revision date="2011-04-18">
+    <description>
+      <text>Initial version of the management submodule trilloam-cmd.</text>
+    </description>
+  </revision>
+  <rpc name="l2traceroute">
+    <description>
+      <text>Trace a TRILL route from the provided host-source-mac to host-dest-mac</text>
+    </description>
+    <input>
+      <leaf name="src-mac">
+        <description>
+          <text>Source mac address of the host</text>
+        </description>
+        <type name="mac:mac-address-type"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="dest-mac">
+        <description>
+          <text>Destination mac address of the host</text>
+        </description>
+        <type name="mac:mac-address-type"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="vlan-id">
+        <description>
+          <text>VLAN Id</text>
+        </description>
+        <type name="interface:vlan-type"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="rbridge-id">
+        <type name="common-def:rbridge-id-type"/>
+        <description>
+          <text>rbridge-id</text>
+        </description>
+        <mandatory value="true"/>
+      </leaf>
+      <choice name="protocolType">
+        <description>
+          <text>IP or FCoE protocol</text>
+        </description>
+        <mandatory value="false"/>
+        <case name="IP">
+          <leaf name="src-ip">
+            <description>
+              <text>Source IP address</text>
+            </description>
+            <type name="inet:ipv4-address"/>
+            <mandatory value="true"/>
+          </leaf>
+          <leaf name="dest-ip">
+            <description>
+              <text>Destination IP address</text>
+            </description>
+            <type name="inet:ipv4-address"/>
+            <mandatory value="true"/>
+          </leaf>
+          <leaf name="l4protocol">
+            <description>
+              <text>Layer 4 protocol, TCP or UDP</text>
+            </description>
+            <type name="enumeration">
+              <enum name="TCP">
+                <value value="1"/>
+              </enum>
+              <enum name="UDP">
+                <value value="2"/>
+              </enum>
+            </type>
+            <mandatory value="true"/>
+          </leaf>
+          <leaf name="l4-src-port">
+            <description>
+              <text>Source port number for the l4protocol</text>
+            </description>
+            <type name="inet:port-number"/>
+            <mandatory value="true"/>
+          </leaf>
+          <leaf name="l4-dest-port">
+            <description>
+              <text>Destination port number for l4protocol</text>
+            </description>
+            <type name="inet:port-number"/>
+            <mandatory value="true"/>
+          </leaf>
+        </case>
+        <case name="FCoE"/>
+      </choice>
+    </input>
+    <output>
+      <leaf name="session-id">
+        <description>
+          <text>Session Id given to client, zero in case of error</text>
+        </description>
+        <type name="uint32"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="reason">
+        <description>
+          <text>Reason for this return, error string or success</text>
+        </description>
+        <type name="string"/>
+        <mandatory value="true"/>
+      </leaf>
+    </output>
+  </rpc>
+  <rpc name="l2traceroute-result">
+    <description>
+      <text> l2traceroute command result</text>
+    </description>
+    <input>
+      <leaf name="session-id">
+        <description>
+          <text>Session Id previously given by client to identify this session</text>
+        </description>
+        <type name="uint32"/>
+        <mandatory value="true"/>
+      </leaf>
+    </input>
+    <output>
+      <list name="l2-hop-results">
+        <container name="l2-hop">
+          <leaf name="rbridge-id">
+            <description>
+              <text>rbridge-id of a responding switch</text>
+            </description>
+            <type name="common-def:rbridge-id-type"/>
+            <mandatory value="false"/>
+          </leaf>
+          <container name="ingress">
+            <description>
+              <text>ingress port</text>
+            </description>
+            <uses name="interface:interface-name-info"/>
+          </container>
+          <container name="egress">
+            <description>
+              <text>egress port</text>
+            </description>
+            <uses name="interface:interface-name-info"/>
+          </container>
+          <leaf name="roundtriptime">
+            <description>
+              <text>Round trip time from the initiator to responder in nanoseconds</text>
+            </description>
+            <type name="common-def:time-interval-musec"/>
+            <mandatory value="false"/>
+          </leaf>
+        </container>
+      </list>
+      <leaf name="l2traceroutedone">
+        <description>
+          <text>Indicates that this is the final response</text>
+        </description>
+        <type name="boolean"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="reason">
+        <description>
+          <text>Reason for this return, error string or success</text>
+        </description>
+        <type name="string"/>
+        <mandatory value="true"/>
+      </leaf>
+    </output>
+  </rpc>
+  <container name="trilloam"/>
+</module>

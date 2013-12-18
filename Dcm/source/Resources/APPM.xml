@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ModuleResources ModuleName = "APPM" ComponentName = "Wave">
+    <ResourceEnum Name = "APPMPluginReturnCode">
+        <Resource Name = "APPM_ERR_PROFILE_STATE_ACTIVE">%%Error: Can not modify an activated profile.</Resource>
+        <Resource Name = "APPM_ERR_DEFAULT_PROFILE_REMOVE">%%Error: Default port-profile can not removed.</Resource>
+        <Resource Name = "APPM_ERR_DEFAULT_PROFILE_ACTIVATE">%%Error: Activating default port-profile is not allowed.</Resource>
+        <Resource Name = "APPM_ERR_DEFAULT_PROFILE_DEACTIVATE">%%Error: De-activating default port-profile is not allowed.</Resource>
+        <Resource Name = "APPM_ERR_DEFAULT_PROFILE_ASSOCIATE">%%Error: Associating default port-profile to a mac is not allowed.</Resource>
+        <Resource Name = "APPM_ERR_DEFAULT_PROFILE_DEASSOCIATE">%%Error: De-associating default port-profile to a mac is not allowed.</Resource>
+        <Resource Name = "APPM_ERR_DEFAULT_VLAN_PROFILE_MODIFY">%%Error: Default vlan sub-profile can't be modified.</Resource>
+        <Resource Name = "APPM_ERR_DEFAULT_SEC_PROFILE_MODIFY">%%Error: Default security sub-profile can't be modified.</Resource>
+        <Resource Name = "APPM_ERR_DEFAULT_QOS_PROFILE_MODIFY">%%Error: Default qos sub-profile can't be modified.</Resource>
+        <Resource Name = "APPM_ERR_PROFILE_ACTIVE">%%Error: Profile is activated. Modification is not allowed.</Resource>
+        <Resource Name = "APPM_ERR_PROFILE_ACTIVATE_NOT_ALLOWED">%%Error: Activation not allowed.vlan subprofile not configured.</Resource>
+		<Resource Name = "APPM_ERR_ACTIVE_PROFILES_PRESENT">%% Error: Active profiles are present in the system.</Resource>
+		<Resource Name = "APPM_ERR_FCOE_PROFILE_REMOVE">%% Error: Deletion of a sub-profile is not allowed.</Resource>
+        <Resource Name = "APPM_ERR_PORT_PROFILE_EXIST">%%Error: Port Profile does not exist</Resource>
+        <Resource Name = "APPM_ERR_PORT_PROFILE_IN_ACTIVE">%%Error: Port Profile is not activated</Resource>
+        <Resource Name = "APPM_ERR_MAC_NO_ASSOC">%% Error: Mac is not associated to the profile</Resource>
+        <Resource Name = "APPM_ERR_FCOE_PROFILE_MODIFY">%% Error: Fcoe sub-profile is not modifiable, as FCoE configured on some profiled ports</Resource>
+        <Resource Name = "AMPP_ERR_CLUSTER_VALIDATE_VERSION_MISMATCH">%% Error: Cluster Validation failed - Version Mismatch.</Resource>
+        <Resource Name = "AMPP_ERR_PROFILE_ALREADY_CREATED">%% Error: port-profile is already created.</Resource>
+        <Resource Name = "AMPP_ERR_PROFILE_ALREADY_DELETED">%% Error: port-profile is already deleted.</Resource>
+
+        <Resource Name = "SSM_DCM_ERR_APPM_PORT_PROFILE_NUMBER">%%Error: Number of Port Profile can not exceed 256</Resource>
+        <Resource Name = "SSM_DCM_ERR_APPM_PORT_PROFILE_CREATE_STATUS">%%Error: Port Profile creation failed</Resource>
+        <Resource Name = "SSM_DCM_ERR_APPM_PORT_PROFILE_EXIST">%%Error: Port Profile does not exist</Resource>
+        <Resource Name = "SSM_DCM_ERR_APPM_PORT_PROFILE_STATE">%%Error: Port Profile is not inactive</Resource>
+        <Resource Name = "SSM_DCM_ERR_APPM_PORT_PROFILE_DELETE_STATUS">%%Error: Port Profile deletion failed</Resource>
+        <Resource Name = "SSM_DCM_ERR_APPM_SEC_PROFILE_DUP_ACL">%%Error: An ACL is already configured on this Profile.</Resource>
+        <Resource Name = "SSM_DCM_ERR_ACL_APPM_PROFILED_PORT">%%Error: ACL config not allowed on profiled port.</Resource>
+        <Resource Name = "SSM_DCM_ERR_APPM_SEC_PROFILE_PROFILE_STATE">%%Error: ACL attached to a activated profile.</Resource>
+        <Resource Name = "SSM_DCM_ERR_APPM_SEC_PROFILE_COMMIT_VALIDATION">%%Error: Commit Validation Failed.</Resource>
+        <Resource Name = "SSM_DCM_ERR_APPM_SEC_PROFILE_APPLIED">%%Error: Vlan attached to an applied profile.</Resource>
+        <Resource Name = "SSM_DCM_ERR_APPM_SEC_PROFILE_ACL_PRESENT">%%Error: Vlan attached to a activated profile already having an ACL applied.</Resource>
+        <Resource Name = "SSM_DCM_ERR_APPM_PROFILED_PORT">%%Error: Port is Profiled, configuration not allowed.</Resource>
+        <Resource Name = "SSM_DCM_ERR_APPM_QOS_PROFILE_CEE_MAP_EXIST">%%Error: A CEE map is already applied to the Profile.</Resource>
+        <Resource Name = "SSM_DCM_ERR_APPM_QOS_PROFILE_COS_MUT_MAP_EXIST">%%Error: A Cos-Mutation map is already applied to the Profile.</Resource>
+        <Resource Name = "SSM_DCM_ERR_APPM_QOS_PROFILE_COS_TC_MAP_EXIST">%%Error: A Cos to Tc Map is already applied to the Profile.</Resource>
+        <Resource Name = "SSM_DCM_ERR_APPM_QOS_PROFILE_MAP_NOT_APPLIED">%%Error: Map not applied on the specified interface</Resource>
+        <Resource Name = "SSM_DCM_ERR_APPM_QOS_PROFILE_QOS_MODE">%%Error: QoS is not in non-CEE Provisioning mode.</Resource>
+        <Resource Name = "SSM_DCM_ERR_APPM_QOS_PROFILE_PFC">%%Error: Priority-based Flow Control (PFC) is already applied to the Profile.</Resource>
+        <Resource Name = "SSM_DCM_ERR_APPM_QOS_PROFILE_PAUSE">%%Error: 802.3x Pause already applied to the Profile.</Resource>
+        <Resource Name = "SSM_DCM_ERR_APPM_QOS_PROFILE_SET_MAP">%%Error: Applying the map on profile failed.</Resource>
+        <Resource Name = "SSM_DCM_ERR_APPM_PROFILED_PORT_CONFIG">%%Error: Interface has non default Qos Configuration.</Resource>
+        <Resource Name = "SSM_DCM_ERR_APPM_FCOE_PORT_CONFIG">%%Error: Interface is FCOE enabled.</Resource>
+        <Resource Name = "SSM_DCM_ERR_APPM_FCOE_PORT_CONFIG_ON_PO">%%Error: LAG is FCOE enabled.</Resource>
+        <Resource Name = "SSM_DCM_ERR_SEC_PROFILE_ACL_NOT_APPLIED">%%Error: Acl is not applied on the Profile.</Resource>
+        <Resource Name = "SSM_DCM_ERR_APPM_QOS_TRUST_COS_IN_VCS_NON_CEE">%%Error: Command not supported in VCS,'QoS Trust CoS' will be automatically applied if QoS CoS-Mutation map is applied on Profile</Resource>
+        <Resource Name = "SSM_DCM_ERR_APPM_REMOVE_QOS_TRUST_COS_IN_VCS_NON_CEE">%%Error: Command not supported in VCS,'QoS Trust CoS' will be automatically removed if QoS CoS-Mutation map is removed from the profile.</Resource>
+        <Resource Name = "SSM_DCM_ERR_APPM_QOS_FLOWCONTROL_ENABLE_IN_VCS">%%Error: Command not supported in VCS Mode.</Resource>
+
+    </ResourceEnum>
+	<Resource Name = "APPM_ERR_INVALID_FCOEMAP_NAME">%%Error: Only default fcoemap name is allowed.</Resource>
+        <Resource Name = "APPM_ERR_SUB_PROFILE_DELETE">%%Error: Command not supported.</Resource>
+        <Resource Name = "APPM_ERR_PROFILE_ACTIVATION_SEC">%%Error: Port-profile Activation Failed, reason Security Profile Conflict</Resource>
+        <Resource Name = "APPM_ERR_PROFILE_ACTIVATION_QOS">%%Error: Port-profile Activation Failed, reason Qos Profile Conflict</Resource>
+
+        <!-- port-profile-domain error codes begin -->
+        <Resource Name = "APPM_DEFAULT_PORT_PROFILE_DOMAIN_CANNOT_BE_DELETED">%%Error : default port-profile-domain cannot be deleted.</Resource>
+        <Resource Name = "APPM_DEFAULT_PORT_PROFILE_DOMAIN_CANNOT_BE_EDITED">%%Error : default port-profile-domain cannot be edited when the virtual fabric is disabled.</Resource>
+        <Resource Name = "APPM_PP_DOMAINS_CANNOT_BE_CREATED_WHEN_VF_IS_DISABLED">%%Error : port-profile-domain cannot be created when the virtual fabric is disabled. </Resource>
+        <Resource Name = "APPM_SWITCHPORT_VLAN_CLASSIFICATIONS_NOT_SUPPORTED_WHEN_VF_DISABLED">%%Error : switchport vlan classifications are not supported when the virtual fabric is disabled. </Resource>
+        <Resource Name = "APPM_INTERFACE_CANNOT_BE_ASSOCIATED_WITH_PORT_PROFILE_OR_DOMAIN_WHEN_VF_IS_DISABLED">%%Error : interface cannot be associated with port-profile/port-profile-domain when the virtual fabric is disabled. </Resource>
+        <Resource Name = "APPM_NOT_DOT1Q_VLANS_CANNOT_BE_USED_WHEN_VF_IS_DISABLED">%%Error : not-dot1q vlans cannot be used on the switchport when the virtual fabric is disabled. </Resource>
+        <Resource Name = "APPM_PORT_PROFILE_CONFLICTS_WITH_OTHER_PROFILES_OF_THE_DOMAIN">%%Error : port-profile conflicts with other port-profiles of the domain.</Resource>
+        <Resource Name = "APPM_PORT_PROFILE_DOMAIN_IS_ASSOCIATED_WITH_AN_INTERFACE">%%Error : port-profile-domain is associated with an interface.</Resource>
+        <Resource Name = "APPM_PORT_PROFILE_IS_ASSOCIATED_WITH_AN_INTERFACE">%%Error : port-profile is associated with an interface.</Resource>
+        <Resource Name = "APPM_PORT_PROFILE_DOMAIN_IS_ASSOCIATED_WITH_A_DOMAIN">%%Error : port-profile is associated with a domain.</Resource>
+        <Resource Name = "APPM_PORT_PROFILE_DOESNT_EXIST">%%Error : port-profile does not exist.</Resource>
+        <Resource Name = "APPM_PORT_PROFILE_DOMAIN_DOESNT_EXIST">%%Error : port-profile-domain does not exist.</Resource>
+        <Resource Name = "APPM_PORT_PROFILE_PORT_MODES_CONFLICT_WITH_EACH_OTHER">%%Error : Conflicting port-profile-port config is already applied on an interface.</Resource>
+        <Resource Name = "APPM_INTERFACE_ALREADY_BELONGS_TO_A_PORT_PROFILE_DOMAIN">%%Error : Interface already belongs to a port-profile-domain.</Resource>
+        <Resource Name = "APPM_VLAN_NEEDS_CLASSIFICATION">%%Error : non-dot1q vlan should have a classification.</Resource>
+        <Resource Name = "APPM_VLAN_CANNOT_HAVE_CLASSIFICATION">%%Error: dot1q vlan cannot have a classification.</Resource>
+        <Resource Name = "APPM_SYSTEM_HAS_PORT_PROFILE_DOMAINS_ASSOCIATED_WITH_INTERFACES">%%Error : system has port-profile-domains which are associated with atleast an interface.</Resource>
+        <Resource Name = "APPM_SYSTEM_HAS_PORT_PROFILES_ASSOCIATED_WITH_INTERFACES">%%Error : system has port-profiles which are associated with atleast an interface.</Resource>
+        <Resource Name = "APPM_SYSTEM_HAS_USER_CREATED_PORT_PROFILE_DOMAINS">%%Error : system has user created port-profile-domains.</Resource>
+        <Resource Name = "APPM_SYSTEM_HAS_USER_CREATED_PORT_PROFILES_BELONGING_TO_NO_DOMAIN">%%Error : system has port-profiles belonging to no domain. Please add the same to default domain and disable virtual fabric. </Resource>
+        <Resource Name = "APPM_SYSTEM_HAS_VLAN_PROFILE_WITH_MAC_BASED_VLAN_CLASSIFICATIONS">%%Error : system has port-profiles containing mac based vlan classifications.</Resource>
+        <Resource Name = "APPM_SYSTEM_HAS_VLAN_PROFILE_WITH_MAC_GROUP_BASED_VLAN_CLASSIFICATIONS">%%Error : system has port-profiles containing mac-group based vlan classifications.</Resource>
+        <Resource Name = "APPM_CTAG_VLAN_MAPPING_SHOULD_BE_ONE_TO_ONE">%%Error : vlan to ctag mapping should be one to one in a given vlan profile.</Resource>
+
+        <!-- port-profile-domain error codes end -->
+
+</ModuleResources>

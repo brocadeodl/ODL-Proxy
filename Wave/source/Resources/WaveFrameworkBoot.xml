@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Framework Core Module. -->
+
+<ModuleResources ModuleName = "FrameworkBoot" ComponentName = "Wave">
+    <ResourceEnum Name = "WaveBootReason">
+        <Resource Name = "WAVE_BOOT_FIRST_TIME_BOOT">First Time Boot</Resource>
+        <Resource Name = "WAVE_BOOT_PERSISTENT_BOOT">Persistent Boot</Resource>
+        <Resource Name = "WAVE_BOOT_SECONDARY_NODE_CONFIGURE_BOOT">Secondary Node Configure Boot</Resource>
+        <Resource Name = "WAVE_BOOT_SECONDARY_NODE_UNCONFIGURE_BOOT">Secondary Node Unconfigure Boot</Resource>
+        <Resource Name = "WAVE_BOOT_PRIMARY_CONTROLLED_FAILOVER_BOOT">Primary Controlled Failover Boot</Resource>
+        <Resource Name = "WAVE_BOOT_PRIMARY_UNCONTROLLED_FAILOVER_BOOT">Primary Un Controlled Failover Boot</Resource>
+        <Resource Name = "WAVE_BOOT_SECONDARY_CONTROLLED_FAILOVER_BOOT">Secondary Controlled Failover Boot</Resource>
+        <Resource Name = "WAVE_BOOT_SECONDARY_UNCONTROLLED_FAILOVER_BOOT">Secondary Un Controlled Failover Boot</Resource>
+        <Resource Name = "WAVE_BOOT_SECONDARY_NODE_REJOIN_BOOT">Secondary Node Rejoin Boot</Resource>
+        <Resource Name = "WAVE_BOOT_PERSISTENT_WITH_DEFAULT_BOOT">Persistent Boot</Resource>
+        <Resource Name = "WAVE_BOOT_HASTANDBY_BOOT">Ha Standby Boot</Resource>
+    </ResourceEnum>
+</ModuleResources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Framework Trace Module. -->
+
+<ModuleResources ModuleName = "FrameworkTrace" ComponentName = "Wave">
+    <ResourceEnum Name = "TraceLevel">
+        <Resource Name = "TRACE_LEVEL_UNKNOWN">Unknown Trace Level</Resource>
+        <Resource Name = "TRACE_LEVEL_DEVEL">Developer Trace Level</Resource>
+        <Resource Name = "TRACE_LEVEL_DEBUG">Debug Trace Level</Resource>
+        <Resource Name = "TRACE_LEVEL_INFO">Information Trace Level</Resource>
+        <Resource Name = "TRACE_LEVEL_PERF_START">Performance Start Trace Level</Resource>
+        <Resource Name = "TRACE_LEVEL_PERF_END">Performance End Trace Level</Resource>
+        <Resource Name = "TRACE_LEVEL_SUCCESS">Information Trace Level</Resource>
+        <Resource Name = "TRACE_LEVEL_WARN">Warning Trace Level</Resource>
+        <Resource Name = "TRACE_LEVEL_ERROR">Error Trace Level</Resource>
+        <Resource Name = "TRACE_LEVEL_FATAL">FATAL Trace Level</Resource>
+    </ResourceEnum>
+</ModuleResources>

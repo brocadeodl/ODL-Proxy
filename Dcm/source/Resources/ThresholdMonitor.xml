@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Framework Core Module. -->
+
+<ModuleResources ModuleName = "thresholdmonitor" ComponentName = "ThresholdMonitorResourceIds">
+	<ResourceEnum Name = "ThresholdMonitorretCode">
+		<Resource Name = "POLICY_MODIFY_ERROR">%% Error: Default policy cannot be modified </Resource>
+		<Resource Name = "INVALID_POLICY_NAME">%% Error: Predefined policy custom can be provided </Resource>
+		<Resource Name = "ALERT_CONFIG_ERROR">%% Error: Above alert for Low Threshold value cannot be configured. </Resource>
+		<Resource Name = "INVALID_THRESH_VALUE">%% Error: High Threshold value less than configured Low Threshold value </Resource>
+		<Resource Name = "INVALID_BUFFER_VAL">%% Error: Invalid Buffer Value</Resource>
+		<Resource Name = "FW_SET_THRESHOLD_BACKEND_ERROR">%% Error: Error in setting backend with threshold configuration </Resource>
+		<Resource Name = "FW_SET_ALERT_BACKEND_ERROR">%% Error: Error in setting backend with alert configuration </Resource>
+		<Resource Name = "FW_SET_BUFFER_BACKEND_ERROR">%% Error: Error in setting backend with Buffer value, please try configuring buffer separately </Resource>
+		<Resource Name = "FW_INVALID_THRESH_VALUE">%% Error: Error in setting backend with threshold configuration, please try configuring high threshold and low threshold separately </Resource>
+		<Resource Name = "FW_APPLY_BACKEND_ERROR">%% Error: Error in setting backend with apply value </Resource>
+		<Resource Name = "FW_PAUSE_BACKEND_ERROR">%% Error: Error in setting backend with pause sfp monitoring </Resource>
+		<Resource Name = "FW_CONTINUE_BACKEND_ERROR">%% Error: Error in setting backend with continue sfp monitoring </Resource>
+		<Resource Name = "INVALID_FENCE_VALUE">%% Error: Fence action is only applicable to IFG error </Resource>
+	 </ResourceEnum>
+</ModuleResources>

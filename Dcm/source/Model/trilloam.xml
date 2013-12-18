@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<WavePlugin name="TrillOam" nameSpace="DcmNs"> 
+<Local name="TrillOam">
+	<Worker name="TrillOamLocal">
+	
+        <Message name="TrillOamPingRequest" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="srcmac" dataType="MacAddress">
+			</Member>
+			<Member name="destmac" dataType="MacAddress">
+			</Member>
+			<Member name="vlanid" dataType="UI32">
+			</Member>
+		</Message>
+
+        <Message name="TrillOamTracerouteRequest" sequencerType="ASYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="srcmac" dataType="MacAddress">
+			</Member>
+			<Member name="destmac" dataType="MacAddress">
+			</Member>
+			<Member name="vlanid" dataType="UI32">
+			</Member>
+			<Member name="protocol" dataType="string">
+			</Member>
+			<Member name="srcip" dataType="IpV4Address">
+			</Member>
+			<Member name="destip" dataType="IpV4Address">
+			</Member>
+			<Member name="srcport" dataType="UI32">
+			</Member>
+			<Member name="destport" dataType="UI32">
+			</Member>
+		</Message>
+
+	</Worker>
+</Local>
+</WavePlugin> 
+

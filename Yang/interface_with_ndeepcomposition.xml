@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="interface_with_ndeepcomposition"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:interface_ndeepcomposition="http://brocade.com/ns/interface_ndeepcomposition">
+  <namespace uri="http://brocade.com/ns/interface_ndeepcomposition"/>
+  <prefix value="interface_ndeepcomposition"/>
+  <container name="interfaces_with_ndeepcomposition">
+    <list name="interface">
+      <key value="name"/>
+      <max-elements value="1024"/>
+      <leaf name="name">
+        <type name="string"/>
+      </leaf>
+      <list name="interface_rule">
+        <key value="rule_id"/>
+        <leaf name="rule_id">
+          <type name="int32"/>
+          <mandatory value="true"/>
+        </leaf>
+        <leaf name="isAllowed">
+          <type name="boolean"/>
+          <mandatory value="true"/>
+        </leaf>
+        <list name="interface_rule_vlan">
+          <key value="vlan_id"/>
+          <leaf name="vlan_id">
+            <type name="int32"/>
+            <mandatory value="true"/>
+          </leaf>
+          <leaf name="x_id">
+            <type name="int32"/>
+            <mandatory value="true"/>
+          </leaf>
+        </list>
+      </list>
+    </list>
+  </container>
+</module>

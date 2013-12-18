@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-cee-map"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:brocade-cee-map="urn:brocade.com:mgmt:brocade-cee-map"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def">
+  <namespace uri="urn:brocade.com:mgmt:brocade-cee-map"/>
+  <prefix value="brocade-cee-map"/>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+        San Jose, CA 95134
+         U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This management submodule is an instrumentation to 
+manage cee-map feature.</text>
+  </description>
+  <revision date="2011-04-18">
+    <description>
+      <text>Initial version of the management module cee-map.</text>
+    </description>
+  </revision>
+  <typedef name="qos-type-PGID">
+    <type name="string">
+      <pattern value="[0-7]|15.[0-7]"/>
+    </type>
+  </typedef>
+  <list name="cee-map">
+    <key value="name"/>
+    <leaf name="name">
+      <type name="common-def:name-string32"/>
+    </leaf>
+    <leaf name="precedence">
+      <description>
+        <text>CEE map precedence value</text>
+      </description>
+      <type name="int32">
+        <range value="1 .. 100"/>
+      </type>
+    </leaf>
+    <list name="priority-group-table">
+      <key value="PGID"/>
+      <leaf name="PGID">
+        <type name="qos-type-PGID"/>
+      </leaf>
+      <leaf name="weight">
+        <type name="int32">
+          <range value="1 .. 100"/>
+        </type>
+      </leaf>
+      <leaf name="pfc">
+        <mandatory value="true"/>
+        <type name="enumeration">
+          <enum name="on">
+            <value value="1"/>
+          </enum>
+          <enum name="off">
+            <value value="0"/>
+          </enum>
+        </type>
+      </leaf>
+    </list>
+    <container name="priority-table">
+      <description>
+        <text>Configure Priority Table</text>
+      </description>
+      <leaf name="map-cos0-pgid">
+        <type name="string">
+          <pattern value="[0-7]|15.[0-7]"/>
+          <length value="1..32"/>
+        </type>
+      </leaf>
+      <leaf name="map-cos1-pgid">
+        <type name="string">
+          <pattern value="[0-7]|15.[0-7]"/>
+          <length value="1..32"/>
+        </type>
+      </leaf>
+      <leaf name="map-cos2-pgid">
+        <type name="string">
+          <pattern value="[0-7]|15.[0-7]"/>
+          <length value="1..32"/>
+        </type>
+      </leaf>
+      <leaf name="map-cos3-pgid">
+        <type name="string">
+          <pattern value="[0-7]|15.[0-7]"/>
+          <length value="1..32"/>
+        </type>
+      </leaf>
+      <leaf name="map-cos4-pgid">
+        <type name="string">
+          <pattern value="[0-7]|15.[0-7]"/>
+          <length value="1..32"/>
+        </type>
+      </leaf>
+      <leaf name="map-cos5-pgid">
+        <type name="string">
+          <pattern value="[0-7]|15.[0-7]"/>
+          <length value="1..32"/>
+        </type>
+      </leaf>
+      <leaf name="map-cos6-pgid">
+        <type name="string">
+          <pattern value="[0-7]|15.[0-7]"/>
+          <length value="1..32"/>
+        </type>
+      </leaf>
+      <leaf name="map-cos7-pgid">
+        <type name="string">
+          <pattern value="[0-7]|15.[0-7]"/>
+          <length value="1..32"/>
+        </type>
+      </leaf>
+    </container>
+    <container name="remap">
+      <container name="fabric-priority">
+        <leaf name="fabric-remapped-priority">
+          <type name="int32">
+            <range value="0 .. 6"/>
+          </type>
+        </leaf>
+      </container>
+      <container name="lossless-priority">
+        <leaf name="lossless-remapped-priority">
+          <type name="int32">
+            <range value="0 .. 6"/>
+          </type>
+        </leaf>
+      </container>
+    </container>
+  </list>
+</module>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="CompanyService"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:companyservice="http://brocade.com/ns/CompanyService"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types">
+  <namespace uri="http://brocade.com/ns/CompanyService"/>
+  <prefix value="companyservice"/>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <list name="company">
+    <key value="companyname"/>
+    <leaf name="companyname">
+      <type name="string"/>
+    </leaf>
+    <list name="employee">
+      <key value="employeename"/>
+      <leaf name="employeename">
+        <type name="string"/>
+      </leaf>
+      <leaf name="employeegroup">
+        <type name="string"/>
+      </leaf>
+      <leaf name="employeelocation">
+        <type name="string"/>
+      </leaf>
+    </list>
+    <list name="group">
+      <key value="groupname"/>
+      <leaf name="groupname">
+        <type name="string"/>
+      </leaf>
+      <uses name="groupbase"/>
+      <list name="subgroup">
+        <key value="subgroupname"/>
+        <leaf name="subgroupname">
+          <type name="string"/>
+        </leaf>
+        <uses name="groupbase"/>
+        <list name="subgroupmanager">
+          <key value="subgroupmanagername"/>
+          <leaf name="subgroupmanagername">
+            <type name="string"/>
+          </leaf>
+        </list>
+      </list>
+      <list name="groupmanager">
+        <key value="groupmanagername"/>
+        <leaf name="groupmanagername">
+          <type name="string"/>
+        </leaf>
+      </list>
+    </list>
+    <leaf name="location">
+      <type name="string"/>
+    </leaf>
+    <container name="company_region">
+      <choice name="region">
+        <case name="EMEA">
+          <leaf name="EMEA_country">
+            <type name="string"/>
+          </leaf>
+        </case>
+        <case name="AsiaPac">
+          <leaf name="AsiaPac_country">
+            <type name="string"/>
+          </leaf>
+        </case>
+        <case name="Americas">
+          <leaf name="Americas_country">
+            <type name="string"/>
+          </leaf>
+        </case>
+      </choice>
+    </container>
+    <list name="boardOfDirector">
+      <key value="boardOfDirectorname"/>
+      <leaf name="boardOfDirectorname">
+        <type name="string"/>
+      </leaf>
+      <leaf name="boardOfDirectorlocation">
+        <type name="string"/>
+      </leaf>
+    </list>
+  </list>
+  <container name="stockOption">
+    <presence value="true"/>
+    <leaf name="isStockOption">
+      <type name="boolean"/>
+    </leaf>
+    <leaf name="stockshare">
+      <type name="uint32"/>
+    </leaf>
+  </container>
+  <list name="city">
+    <key value="cityname"/>
+    <leaf name="cityname">
+      <type name="string"/>
+    </leaf>
+    <leaf name="citycode">
+      <type name="uint32"/>
+    </leaf>
+    <leaf name="population">
+      <type name="uint64"/>
+    </leaf>
+    <leaf name="ismetro">
+      <type name="boolean"/>
+    </leaf>
+    <leaf name="cityIpV4Address">
+      <type name="inet:ipv4-address"/>
+    </leaf>
+    <leaf name="cityIpV4AddressNetworkMask">
+      <type name="inet:ipv4-prefix"/>
+    </leaf>
+    <leaf name="cityIpV6Address">
+      <type name="inet:ipv6-address"/>
+    </leaf>
+    <leaf name="cityIpV6AddressNetworkMask">
+      <type name="inet:ipv6-prefix"/>
+    </leaf>
+    <leaf name="cityIpVxAddress">
+      <type name="inet:ip-address"/>
+    </leaf>
+  </list>
+  <grouping name="groupbase">
+    <leaf name="groupEmployee">
+      <type name="string"/>
+    </leaf>
+    <leaf name="groupLocation">
+      <type name="string"/>
+    </leaf>
+  </grouping>
+</module>

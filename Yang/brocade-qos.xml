@@ -1,0 +1,848 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-qos"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:qos="urn:brocade.com:mgmt:brocade-qos"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface">
+  <namespace uri="urn:brocade.com:mgmt:brocade-qos"/>
+  <prefix value="qos"/>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+        San Jose, CA 95134
+        U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com 
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This module manages Quality Of Service (QOS)</text>
+  </description>
+  <revision date="2010-04-28">
+    <description>
+      <text>Initial version of this management module.</text>
+    </description>
+  </revision>
+  <typedef name="UI32DscpMutationRange">
+    <type name="string">
+      <pattern value="(([0-9])|([1-5][0-9])|(6[0-3]))(-(([0-9])|([1-5][0-9])|(6[0-3])))?((,(([0-9])|([1-5][0-9])|(6[0-3]))(-(([0-9])|([1-5][0-9])|(6[0-3])))?)?)*">
+        <description>
+          <text>NUMBER:0-63;;DSCP Value/DSCP Range; Example: 0,1,2,4-7,8,9-22,55-63.</text>
+        </description>
+      </pattern>
+    </type>
+  </typedef>
+  <typedef name="RedProfileType">
+    <type name="int32">
+      <range value="0 .. 383">
+        <description>
+          <text>0-383;Profile id</text>
+        </description>
+      </range>
+    </type>
+  </typedef>
+  <typedef name="TMCChipNumber">
+    <type name="int8">
+      <range value="0 .. 47">
+        <description>
+          <text>0-47;TMC chip id</text>
+        </description>
+      </range>
+    </type>
+  </typedef>
+  <typedef name="map-name-type">
+    <type name="string">
+      <pattern value="[a-zA-Z]{1}([-a-zA-Z0-9_]{0,63})"/>
+    </type>
+  </typedef>
+  <grouping name="dscp-grp">
+    <leaf name="dscp-in-values">
+      <type name="UI32DscpMutationRange"/>
+    </leaf>
+    <leaf name="to">
+      <mandatory value="true"/>
+      <type name="int32">
+        <range value="0 .. 63">
+          <description>
+            <text>0-63;;Dscp Mutation Out</text>
+          </description>
+        </range>
+      </type>
+      <description>
+        <text>0-63;;Dscp Mutation Out</text>
+      </description>
+    </leaf>
+  </grouping>
+  <typedef name="nas-ipv4-prefix">
+    <type name="inet:ipv4-prefix"/>
+  </typedef>
+  <container name="qos">
+    <container name="map">
+      <list name="dscp-mutation">
+        <key value="dscp-mutation-map-name"/>
+        <leaf name="dscp-mutation-map-name">
+          <type name="map-name-type"/>
+        </leaf>
+        <list name="mark">
+          <key value="dscp-in-values"/>
+          <uses name="dscp-grp"/>
+        </list>
+      </list>
+      <list name="dscp-traffic-class">
+        <key value="dscp-traffic-class-map-name"/>
+        <leaf name="dscp-traffic-class-map-name">
+          <type name="map-name-type"/>
+        </leaf>
+        <list name="mark">
+          <key value="dscp-in-values"/>
+          <leaf name="dscp-in-values">
+            <type name="UI32DscpMutationRange"/>
+          </leaf>
+          <leaf name="to">
+            <mandatory value="true"/>
+            <type name="int32">
+              <range value="0 .. 7">
+                <description>
+                  <text>0-7;;Dscp Traffic Class value</text>
+                </description>
+              </range>
+            </type>
+          </leaf>
+        </list>
+      </list>
+      <list name="dscp-cos">
+        <key value="dscp-cos-map-name"/>
+        <leaf name="dscp-cos-map-name">
+          <type name="map-name-type"/>
+        </leaf>
+        <list name="mark">
+          <key value="dscp-in-values"/>
+          <leaf name="dscp-in-values">
+            <type name="UI32DscpMutationRange"/>
+          </leaf>
+          <leaf name="to">
+            <mandatory value="true"/>
+            <type name="int32">
+              <range value="0 .. 7">
+                <description>
+                  <text>0-7;;COS Mutation Out</text>
+                </description>
+              </range>
+            </type>
+          </leaf>
+        </list>
+      </list>
+      <list name="cos-mutation">
+        <key value="name"/>
+        <leaf name="name">
+          <type name="map-name-type"/>
+        </leaf>
+        <leaf name="cos0">
+          <type name="int32">
+            <range value="0 .. 7"/>
+          </type>
+        </leaf>
+        <leaf name="cos1">
+          <type name="int32">
+            <range value="0 .. 7"/>
+          </type>
+        </leaf>
+        <leaf name="cos2">
+          <type name="int32">
+            <range value="0 .. 7"/>
+          </type>
+        </leaf>
+        <leaf name="cos3">
+          <type name="int32">
+            <range value="0 .. 7"/>
+          </type>
+        </leaf>
+        <leaf name="cos4">
+          <type name="int32">
+            <range value="0 .. 7"/>
+          </type>
+        </leaf>
+        <leaf name="cos5">
+          <type name="int32">
+            <range value="0 .. 7"/>
+          </type>
+        </leaf>
+        <leaf name="cos6">
+          <type name="int32">
+            <range value="0 .. 7"/>
+          </type>
+        </leaf>
+        <leaf name="cos7">
+          <mandatory value="true"/>
+          <type name="int32">
+            <range value="0 .. 7"/>
+          </type>
+        </leaf>
+      </list>
+      <list name="cos-traffic-class">
+        <key value="name"/>
+        <leaf name="name">
+          <type name="map-name-type"/>
+        </leaf>
+        <leaf name="cos0">
+          <type name="int32">
+            <range value="0 .. 7"/>
+          </type>
+        </leaf>
+        <leaf name="cos1">
+          <type name="int32">
+            <range value="0 .. 7"/>
+          </type>
+        </leaf>
+        <leaf name="cos2">
+          <type name="int32">
+            <range value="0 .. 7"/>
+          </type>
+        </leaf>
+        <leaf name="cos3">
+          <type name="int32">
+            <range value="0 .. 7"/>
+          </type>
+        </leaf>
+        <leaf name="cos4">
+          <type name="int32">
+            <range value="0 .. 7"/>
+          </type>
+        </leaf>
+        <leaf name="cos5">
+          <type name="int32">
+            <range value="0 .. 7"/>
+          </type>
+        </leaf>
+        <leaf name="cos6">
+          <type name="int32">
+            <range value="0 .. 7"/>
+          </type>
+        </leaf>
+        <leaf name="cos7">
+          <mandatory value="true"/>
+          <type name="int32">
+            <range value="0 .. 7"/>
+          </type>
+        </leaf>
+      </list>
+    </container>
+    <list name="red-profile">
+      <key value="profile-id"/>
+      <leaf name="profile-id">
+        <type name="RedProfileType"/>
+      </leaf>
+      <leaf name="min-threshold">
+        <mandatory value="true"/>
+        <type name="int32">
+          <range value="0 .. 100">
+            <description>
+              <text>0-100;;Minimum threshold in percentage</text>
+            </description>
+          </range>
+        </type>
+      </leaf>
+      <leaf name="max-threshold">
+        <mandatory value="true"/>
+        <type name="int32">
+          <range value="0 .. 100">
+            <description>
+              <text>0-100;;Maximum threshold in percentage</text>
+            </description>
+          </range>
+        </type>
+      </leaf>
+      <leaf name="drop-probability">
+        <mandatory value="true"/>
+        <type name="int32">
+          <range value="0 .. 100">
+            <description>
+              <text>0-100;;Drop Probability in percentage</text>
+            </description>
+          </range>
+        </type>
+      </leaf>
+    </list>
+    <container name="queue">
+      <container name="multicast">
+        <container name="scheduler">
+          <container name="dwrr">
+            <leaf name="dwrr-traffic-class0">
+              <type name="int32">
+                <range value="0 .. 100"/>
+              </type>
+            </leaf>
+            <leaf name="dwrr-traffic-class1">
+              <type name="int32">
+                <range value="0 .. 100"/>
+              </type>
+            </leaf>
+            <leaf name="dwrr-traffic-class2">
+              <type name="int32">
+                <range value="0 .. 100"/>
+              </type>
+            </leaf>
+            <leaf name="dwrr-traffic-class3">
+              <type name="int32">
+                <range value="0 .. 100"/>
+              </type>
+            </leaf>
+            <leaf name="dwrr-traffic-class4">
+              <type name="int32">
+                <range value="0 .. 100"/>
+              </type>
+            </leaf>
+            <leaf name="dwrr-traffic-class5">
+              <type name="int32">
+                <range value="0 .. 100"/>
+              </type>
+            </leaf>
+            <leaf name="dwrr-traffic-class6">
+              <type name="int32">
+                <range value="0 .. 100"/>
+              </type>
+            </leaf>
+            <leaf name="dwrr-traffic-class7">
+              <type name="int32">
+                <range value="0 .. 100"/>
+              </type>
+            </leaf>
+          </container>
+        </container>
+      </container>
+      <container name="scheduler">
+        <container name="strict-priority">
+          <leaf name="priority-number">
+            <type name="int32">
+              <range value="0 .. 7"/>
+            </type>
+          </leaf>
+          <leaf name="scheduler-type">
+            <type name="enumeration">
+              <enum name="dwrr">
+                <value value="0"/>
+              </enum>
+            </type>
+          </leaf>
+          <leaf name="dwrr-traffic-class0">
+            <type name="int32">
+              <range value="0 .. 100"/>
+            </type>
+          </leaf>
+          <leaf name="dwrr-traffic-class1">
+            <type name="int32">
+              <range value="0 .. 100"/>
+            </type>
+          </leaf>
+          <leaf name="dwrr-traffic-class2">
+            <type name="int32">
+              <range value="0 .. 100"/>
+            </type>
+          </leaf>
+          <leaf name="dwrr-traffic-class3">
+            <type name="int32">
+              <range value="0 .. 100"/>
+            </type>
+          </leaf>
+          <leaf name="dwrr-traffic-class4">
+            <type name="int32">
+              <range value="0 .. 100"/>
+            </type>
+          </leaf>
+          <leaf name="dwrr-traffic-class5">
+            <type name="int32">
+              <range value="0 .. 100"/>
+            </type>
+          </leaf>
+          <leaf name="dwrr-traffic-class6">
+            <type name="int32">
+              <range value="0 .. 100"/>
+            </type>
+          </leaf>
+          <leaf name="dwrr-traffic-class-last">
+            <type name="int32">
+              <range value="0 .. 100"/>
+            </type>
+          </leaf>
+        </container>
+      </container>
+    </container>
+    <container name="rcv-queue">
+      <container name="multicast">
+        <container name="threshold">
+          <leaf name="traffic-class0">
+            <type name="int32">
+              <range value="1 .. 16383"/>
+            </type>
+          </leaf>
+          <leaf name="traffic-class1">
+            <type name="int32">
+              <range value="1 .. 16383"/>
+            </type>
+          </leaf>
+          <leaf name="traffic-class2">
+            <type name="int32">
+              <range value="1 .. 16383"/>
+            </type>
+          </leaf>
+          <leaf name="traffic-class3">
+            <type name="int32">
+              <range value="1 .. 16383"/>
+            </type>
+          </leaf>
+          <leaf name="traffic-class4">
+            <type name="int32">
+              <range value="1 .. 16383"/>
+            </type>
+          </leaf>
+          <leaf name="traffic-class5">
+            <type name="int32">
+              <range value="1 .. 16383"/>
+            </type>
+          </leaf>
+          <leaf name="traffic-class6">
+            <type name="int32">
+              <range value="1 .. 16383"/>
+            </type>
+          </leaf>
+          <leaf name="traffic-class7">
+            <type name="int32">
+              <range value="1 .. 16383"/>
+            </type>
+          </leaf>
+        </container>
+        <container name="rate-limit">
+          <leaf name="limit">
+            <type name="int32">
+              <range value="6500 .. 20000000"/>
+            </type>
+          </leaf>
+          <leaf name="burst">
+            <type name="int32">
+              <range value="50 .. 65535"/>
+            </type>
+          </leaf>
+        </container>
+      </container>
+    </container>
+  </container>
+  <grouping name="interface-qos-config-group">
+    <leaf name="default-cos">
+      <type name="int32">
+        <range value="0 .. 7"/>
+      </type>
+      <default value="0"/>
+    </leaf>
+    <container name="trust">
+      <leaf name="trust-cos">
+        <type name="empty"/>
+      </leaf>
+      <leaf name="trust-dscp">
+        <type name="empty"/>
+      </leaf>
+    </container>
+    <leaf name="cos-mutation">
+      <type name="map-name-type"/>
+    </leaf>
+    <leaf name="cos-traffic-class">
+      <type name="map-name-type"/>
+    </leaf>
+    <leaf name="dscp-mutation">
+      <type name="map-name-type"/>
+    </leaf>
+    <leaf name="dscp-traffic-class">
+      <type name="map-name-type"/>
+    </leaf>
+    <leaf name="dscp-cos">
+      <type name="map-name-type"/>
+    </leaf>
+    <container name="random-detect">
+      <list name="cos">
+        <key value="red-cos-value"/>
+        <leaf name="red-cos-value">
+          <type name="uint32">
+            <range value="0 .. 7"/>
+          </type>
+        </leaf>
+        <leaf name="red-profile-id">
+          <type name="uint32">
+            <range value="0 .. 383"/>
+          </type>
+        </leaf>
+      </list>
+    </container>
+  </grouping>
+  <grouping name="link-level-flowcontrol-group">
+    <container name="link-level-flowcontrol">
+      <leaf name="flowcontrol-tx">
+        <type name="enumeration">
+          <enum name="on">
+            <value value="1"/>
+          </enum>
+          <enum name="off">
+            <value value="0"/>
+          </enum>
+        </type>
+      </leaf>
+      <leaf name="flowcontrol-rx">
+        <type name="enumeration">
+          <enum name="on">
+            <value value="1"/>
+          </enum>
+          <enum name="off">
+            <value value="0"/>
+          </enum>
+        </type>
+      </leaf>
+    </container>
+  </grouping>
+  <grouping name="pfc-flowcontrol-group">
+    <list name="pfc">
+      <key value="pfc-cos"/>
+      <leaf name="pfc-cos">
+        <type name="int32">
+          <range value="0 .. 7"/>
+        </type>
+      </leaf>
+      <leaf name="pfc-flowcontrol-tx">
+        <mandatory value="true"/>
+        <type name="enumeration">
+          <enum name="on">
+            <value value="1"/>
+          </enum>
+          <enum name="off">
+            <value value="0"/>
+          </enum>
+        </type>
+      </leaf>
+      <leaf name="pfc-flowcontrol-rx">
+        <mandatory value="true"/>
+        <type name="enumeration">
+          <enum name="on">
+            <value value="1"/>
+          </enum>
+          <enum name="off">
+            <value value="0"/>
+          </enum>
+        </type>
+      </leaf>
+    </list>
+  </grouping>
+  <augment target-node="/interface:interface/interface:tengigabitethernet">
+    <leaf name="priority-tag-enable">
+      <type name="empty"/>
+    </leaf>
+    <container name="qos">
+      <uses name="interface-qos-config-group"/>
+      <container name="rcv-queue">
+        <description>
+          <text>Configure Queue Parameters</text>
+        </description>
+        <container name="cos-threshold">
+          <description>
+            <text>Configure CoS Thresholds</text>
+          </description>
+          <leaf name="cos0-threshold">
+            <description>
+              <text>CoS 0 tail drop threshold</text>
+            </description>
+            <type name="uint32">
+              <range value="0 .. 100">
+                <description>
+                  <text>0-100;;CoS 0 Threshold(%)</text>
+                </description>
+              </range>
+            </type>
+          </leaf>
+          <leaf name="cos1-threshold">
+            <description>
+              <text>CoS 1 tail drop threshold</text>
+            </description>
+            <type name="uint32">
+              <range value="0 .. 100">
+                <description>
+                  <text>0-100;;CoS 1 Threshold(%)</text>
+                </description>
+              </range>
+            </type>
+          </leaf>
+          <leaf name="cos2-threshold">
+            <description>
+              <text>CoS 2 tail drop threshold</text>
+            </description>
+            <type name="uint32">
+              <range value="0 .. 100">
+                <description>
+                  <text>0-100;;CoS 2 Threshold(%)</text>
+                </description>
+              </range>
+            </type>
+          </leaf>
+          <leaf name="cos3-threshold">
+            <description>
+              <text>CoS 3 tail drop threshold</text>
+            </description>
+            <type name="uint32">
+              <range value="0 .. 100">
+                <description>
+                  <text>0-100;;CoS 3 Threshold(%)</text>
+                </description>
+              </range>
+            </type>
+          </leaf>
+          <leaf name="cos4-threshold">
+            <description>
+              <text>CoS 4 tail drop threshold</text>
+            </description>
+            <type name="uint32">
+              <range value="0 .. 100">
+                <description>
+                  <text>0-100;;CoS 4 Threshold(%)</text>
+                </description>
+              </range>
+            </type>
+          </leaf>
+          <leaf name="cos5-threshold">
+            <description>
+              <text>CoS 5 tail drop threshold</text>
+            </description>
+            <type name="uint32">
+              <range value="0 .. 100">
+                <description>
+                  <text>0-100;;CoS 5 Threshold(%)</text>
+                </description>
+              </range>
+            </type>
+          </leaf>
+          <leaf name="cos6-threshold">
+            <description>
+              <text>CoS 6 tail drop threshold</text>
+            </description>
+            <type name="uint32">
+              <range value="0 .. 100">
+                <description>
+                  <text>0-100;;CoS 6 Threshold(%)</text>
+                </description>
+              </range>
+            </type>
+          </leaf>
+          <leaf name="cos7-threshold">
+            <description>
+              <text>CoS 7 tail drop threshold</text>
+            </description>
+            <type name="uint32">
+              <range value="0 .. 100">
+                <description>
+                  <text>0-100;;CoS 7 Threshold(%)</text>
+                </description>
+              </range>
+            </type>
+          </leaf>
+        </container>
+      </container>
+      <container name="flowcontrol">
+        <uses name="link-level-flowcontrol-group"/>
+        <uses name="pfc-flowcontrol-group">
+          <refine target-node="pfc"/>
+        </uses>
+      </container>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface/interface:gigabitethernet">
+    <leaf name="priority-tag-enable">
+      <type name="empty"/>
+    </leaf>
+    <container name="qos">
+      <uses name="interface-qos-config-group"/>
+      <container name="rcv-queue">
+        <description>
+          <text>Configure Queue Parameters</text>
+        </description>
+        <container name="cos-threshold">
+          <description>
+            <text>Configure CoS Thresholds</text>
+          </description>
+          <leaf name="cos0-threshold">
+            <description>
+              <text>CoS 0 tail drop threshold</text>
+            </description>
+            <type name="uint32">
+              <range value="0 .. 100">
+                <description>
+                  <text>0-100;;CoS 0 Threshold(%)</text>
+                </description>
+              </range>
+            </type>
+          </leaf>
+          <leaf name="cos1-threshold">
+            <description>
+              <text>CoS 1 tail drop threshold</text>
+            </description>
+            <type name="uint32">
+              <range value="0 .. 100">
+                <description>
+                  <text>0-100;;CoS 1 Threshold(%)</text>
+                </description>
+              </range>
+            </type>
+          </leaf>
+          <leaf name="cos2-threshold">
+            <description>
+              <text>CoS 2 tail drop threshold</text>
+            </description>
+            <type name="uint32">
+              <range value="0 .. 100">
+                <description>
+                  <text>0-100;;CoS 2 Threshold(%)</text>
+                </description>
+              </range>
+            </type>
+          </leaf>
+          <leaf name="cos3-threshold">
+            <description>
+              <text>CoS 3 tail drop threshold</text>
+            </description>
+            <type name="uint32">
+              <range value="0 .. 100">
+                <description>
+                  <text>0-100;;CoS 3 Threshold(%)</text>
+                </description>
+              </range>
+            </type>
+          </leaf>
+          <leaf name="cos4-threshold">
+            <description>
+              <text>CoS 4 tail drop threshold</text>
+            </description>
+            <type name="uint32">
+              <range value="0 .. 100">
+                <description>
+                  <text>0-100;;CoS 4 Threshold(%)</text>
+                </description>
+              </range>
+            </type>
+          </leaf>
+          <leaf name="cos5-threshold">
+            <description>
+              <text>CoS 5 tail drop threshold</text>
+            </description>
+            <type name="uint32">
+              <range value="0 .. 100">
+                <description>
+                  <text>0-100;;CoS 5 Threshold(%)</text>
+                </description>
+              </range>
+            </type>
+          </leaf>
+          <leaf name="cos6-threshold">
+            <description>
+              <text>CoS 6 tail drop threshold</text>
+            </description>
+            <type name="uint32">
+              <range value="0 .. 100">
+                <description>
+                  <text>0-100;;CoS 6 Threshold(%)</text>
+                </description>
+              </range>
+            </type>
+          </leaf>
+          <leaf name="cos7-threshold">
+            <description>
+              <text>CoS 7 tail drop threshold</text>
+            </description>
+            <type name="uint32">
+              <range value="0 .. 100">
+                <description>
+                  <text>0-100;;CoS 7 Threshold(%)</text>
+                </description>
+              </range>
+            </type>
+          </leaf>
+        </container>
+      </container>
+      <container name="flowcontrol">
+        <uses name="link-level-flowcontrol-group"/>
+      </container>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface/interface:fortygigabitethernet">
+    <leaf name="priority-tag-enable">
+      <type name="empty"/>
+    </leaf>
+    <container name="qos">
+      <uses name="interface-qos-config-group"/>
+      <container name="flowcontrol">
+        <uses name="link-level-flowcontrol-group"/>
+        <uses name="pfc-flowcontrol-group">
+          <refine target-node="pfc"/>
+        </uses>
+      </container>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface/interface:port-channel">
+    <leaf name="priority-tag-enable">
+      <type name="empty"/>
+    </leaf>
+    <container name="qos">
+      <uses name="interface-qos-config-group">
+        <refine target-node="random-detect"/>
+      </uses>
+      <container name="flowcontrol">
+        <uses name="link-level-flowcontrol-group"/>
+        <uses name="pfc-flowcontrol-group">
+          <refine target-node="pfc"/>
+        </uses>
+      </container>
+    </container>
+  </augment>
+  <container name="nas">
+    <container name="auto-qos">
+      <presence value="true"/>
+      <container name="set">
+        <leaf name="cos">
+          <type name="uint32">
+            <range value="0 .. 7"/>
+          </type>
+        </leaf>
+        <leaf name="dscp">
+          <type name="uint32">
+            <range value="0 .. 63"/>
+          </type>
+        </leaf>
+      </container>
+    </container>
+    <list name="server-ip">
+      <key value="server-ip"/>
+      <leaf name="server-ip">
+        <type name="nas-ipv4-prefix"/>
+      </leaf>
+      <list name="vrf">
+        <key value="vrf-name"/>
+        <leaf name="vrf-name">
+          <type name="string">
+            <length value="1..255"/>
+          </type>
+        </leaf>
+      </list>
+      <list name="vlan">
+        <key value="vlan-number"/>
+        <leaf name="vlan-number">
+          <type name="interface:vlan-type"/>
+        </leaf>
+      </list>
+    </list>
+  </container>
+</module>

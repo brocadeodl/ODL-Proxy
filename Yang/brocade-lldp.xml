@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-lldp"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:lldp="urn:brocade.com:mgmt:brocade-lldp"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface"
+        xmlns:vcs="urn:brocade.com:mgmt:brocade-vcs">
+  <namespace uri="urn:brocade.com:mgmt:brocade-lldp"/>
+  <prefix value="lldp"/>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <import module="brocade-vcs">
+    <prefix value="vcs"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 1745 Technology Drive,
+        San Jose, CA 95110 
+         U.S.A
+Tel: +1-408-392-6061
+E-mail: support@Brocade.com 
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This management module is an instrumentation to manage the 
+'Link Layer Discovery Protocol (LLDP)'. LLDP is a data-link 
+layer protocol, operating above the MAC service layer, that
+performs basic neighbor discovery. The discovering process 
+involves advertising of network device identity, capabilities,
+and interconnections on a IEEE 802 LAN network.
+        
+The protocol is formally referred to by the IEEE as Station and 
+Media Access Control Connectivity Discovery specified in 
+standards document 802.1AB.
+        
+Glossary of the terms used:
+--------------------------- 
+FCoE - Fibre Channel over Ethernet.
+DCBX - Data Center Bridging Exchange Protocol.
+CEE - Converged Enhanced Ethernet.
+TLV - Type Length Value.</text>
+  </description>
+  <reference>
+    <text>Tony Jeffree, 'Station and Media Access Control Connectivity 
+Discovery', IEEE 802.1AB-REV, Sept 2009.</text>
+  </reference>
+  <revision date="2010-04-28">
+    <description>
+      <text>Initial version of this management module.</text>
+    </description>
+  </revision>
+  <grouping name="lldp-common-config">
+    <leaf name="description">
+      <type name="string">
+        <length value="1 .. 50"/>
+      </type>
+    </leaf>
+    <leaf name="hello">
+      <type name="uint32">
+        <range value="4..180"/>
+      </type>
+      <units name="Seconds."/>
+      <default value="30"/>
+    </leaf>
+    <leaf name="mode">
+      <type name="enumeration">
+        <enum name="tx">
+          <value value="1"/>
+        </enum>
+        <enum name="rx">
+          <value value="2"/>
+        </enum>
+      </type>
+    </leaf>
+    <leaf name="multiplier">
+      <type name="uint32">
+        <range value="2..10"/>
+      </type>
+      <default value="4"/>
+    </leaf>
+    <container name="advertise">
+      <leaf name="dcbx-fcoe-app-tlv">
+        <when condition="/vcs:vcsmode/vcs:vcs-mode = 'true'"/>
+        <type name="empty"/>
+      </leaf>
+      <leaf name="dcbx-fcoe-logical-link-tlv">
+        <when condition="/vcs:vcsmode/vcs:vcs-mode = 'true'"/>
+        <type name="empty"/>
+      </leaf>
+      <leaf name="dcbx-iscsi-app-tlv">
+        <type name="empty"/>
+      </leaf>
+      <leaf name="dcbx-tlv">
+        <type name="empty"/>
+      </leaf>
+      <leaf name="dot1-tlv">
+        <type name="empty"/>
+      </leaf>
+      <leaf name="dot3-tlv">
+        <type name="empty"/>
+      </leaf>
+      <container name="optional-tlv">
+        <leaf name="management-address">
+          <type name="empty"/>
+        </leaf>
+        <leaf name="port-description">
+          <type name="empty"/>
+        </leaf>
+        <leaf name="system-capabilities">
+          <type name="empty"/>
+        </leaf>
+        <leaf name="adv-tlv-system-description">
+          <type name="empty"/>
+        </leaf>
+        <leaf name="adv-tlv-system-name">
+          <type name="empty"/>
+        </leaf>
+      </container>
+    </container>
+  </grouping>
+  <grouping name="lldp-common-profile-config">
+    <leaf name="description">
+      <type name="string">
+        <length value="1 .. 50"/>
+      </type>
+    </leaf>
+    <leaf name="hello">
+      <type name="uint32">
+        <range value="4..180"/>
+      </type>
+      <units name="Seconds."/>
+    </leaf>
+    <leaf name="mode">
+      <type name="enumeration">
+        <enum name="tx">
+          <value value="1"/>
+        </enum>
+        <enum name="rx">
+          <value value="2"/>
+        </enum>
+      </type>
+    </leaf>
+    <leaf name="multiplier">
+      <type name="uint32">
+        <range value="2..10"/>
+      </type>
+    </leaf>
+    <container name="advertise">
+      <leaf name="dcbx-fcoe-app-tlv">
+        <when condition="/vcs:vcsmode/vcs:vcs-mode = 'true'"/>
+        <type name="empty"/>
+      </leaf>
+      <leaf name="dcbx-fcoe-logical-link-tlv">
+        <when condition="/vcs:vcsmode/vcs:vcs-mode = 'true'"/>
+        <type name="empty"/>
+      </leaf>
+      <leaf name="dcbx-iscsi-app-tlv">
+        <type name="empty"/>
+      </leaf>
+      <leaf name="dcbx-tlv">
+        <type name="empty"/>
+      </leaf>
+      <leaf name="dot1-tlv">
+        <type name="empty"/>
+      </leaf>
+      <leaf name="dot3-tlv">
+        <type name="empty"/>
+      </leaf>
+      <container name="optional-tlv">
+        <leaf name="management-address">
+          <type name="empty"/>
+        </leaf>
+        <leaf name="port-description">
+          <type name="empty"/>
+        </leaf>
+        <leaf name="system-capabilities">
+          <type name="empty"/>
+        </leaf>
+        <leaf name="adv-tlv-system-description">
+          <type name="empty"/>
+        </leaf>
+        <leaf name="adv-tlv-system-name">
+          <type name="empty"/>
+        </leaf>
+      </container>
+    </container>
+  </grouping>
+  <grouping name="common-phy-lldp-cmds">
+    <container name="lldp">
+      <container name="cee">
+        <description>
+          <text>Generate CEE capable event</text>
+        </description>
+        <leaf name="lldp-cee-on-off">
+          <type name="enumeration">
+            <enum name="off">
+              <value value="0"/>
+              <description>
+                <text>CEE incapable</text>
+              </description>
+            </enum>
+            <enum name="on">
+              <value value="1"/>
+              <description>
+                <text>CEE capable</text>
+              </description>
+            </enum>
+          </type>
+        </leaf>
+      </container>
+      <leaf name="dcbx-version">
+        <type name="enumeration">
+          <enum name="auto">
+            <value value="0"/>
+          </enum>
+          <enum name="cee">
+            <value value="1"/>
+          </enum>
+        </type>
+        <default value="auto"/>
+      </leaf>
+      <leaf name="disable">
+        <type name="empty"/>
+      </leaf>
+      <leaf name="iscsi-priority">
+        <type name="uint32">
+          <range value="0..7"/>
+        </type>
+        <default value="4"/>
+      </leaf>
+      <leaf name="profile">
+        <type name="string">
+          <pattern value="(\S)+"/>
+          <length value="1..32"/>
+        </type>
+        <mandatory value="false"/>
+      </leaf>
+    </container>
+  </grouping>
+  <augment target-node="/interface:protocol">
+    <container name="lldp">
+      <presence value="true"/>
+      <uses name="lldp-common-config"/>
+      <leaf name="system-name">
+        <type name="string">
+          <pattern value="(([a-zA-Z]{1}([-a-zA-Z0-9\s\.\\\\@#\+\*\(\)=\{~\}%&lt;&gt;=$_\[\]\|]{0,31}))|(\s)*)"/>
+          <length value="0..32"/>
+        </type>
+        <default value=""/>
+      </leaf>
+      <leaf name="system-description">
+        <type name="string">
+          <length value="1..50"/>
+        </type>
+      </leaf>
+      <leaf name="iscsi-priority">
+        <type name="uint32">
+          <range value="0..7"/>
+        </type>
+        <default value="4"/>
+      </leaf>
+      <leaf name="disable">
+        <type name="empty"/>
+      </leaf>
+      <list name="profile">
+        <key value="profile-name"/>
+        <leaf name="profile-name">
+          <type name="string">
+            <pattern value="(\S)+"/>
+            <length value="1..32"/>
+          </type>
+        </leaf>
+        <uses name="lldp-common-profile-config"/>
+      </list>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface/interface:tengigabitethernet">
+    <uses name="common-phy-lldp-cmds"/>
+  </augment>
+  <augment target-node="/interface:interface/interface:gigabitethernet">
+    <uses name="common-phy-lldp-cmds"/>
+  </augment>
+  <augment target-node="/interface:interface/interface:fortygigabitethernet">
+    <uses name="common-phy-lldp-cmds"/>
+  </augment>
+</module>

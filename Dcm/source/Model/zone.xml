@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<WavePlugin name="Zone" nameSpace="DcmNs">
+<Global name="Zone">
+    <ManagedObject name="DBAttributes">
+        <Member name="effectiveCfgName" dataType="string">
+        </Member>
+        <Member name="effectiveCfgAction" dataType="UI32">
+        </Member>
+        <Member name="dbTransToken" dataType="UI32">
+        </Member>
+        <Member name="dbTransFlag" dataType="UI32">
+        </Member>
+        <Member name="dbMaxSize" dataType="UI32">
+        </Member>
+        <Member name="dbAvailableSize" dataType="UI32">
+        </Member>
+        <Member name="dbCommittedSize" dataType="UI32">
+        </Member>
+        <Member name="dbTransactionSize" dataType="UI32">
+        </Member>
+        <Member name="defaultZoneAccess" dataType="UI32">
+        </Member>
+        <Member name="effectiveCfgNameCurrent" dataType="string">
+        </Member>
+        <Member name="bootUpType" dataType="UI32">
+        </Member>
+    </ManagedObject>
+    <ManagedObject name="AliasMember">
+        <Member name="aliasEntry" dataType="string">
+        </Member>
+        <Member name="listIndex" dataType="UI32">
+        </Member>
+    </ManagedObject>
+    <ManagedObject name="Alias">
+        <Member name="aliasName" dataType="string">
+        </Member>
+        <Member name="aliasMembers" dataType="vector/WaveManagedObjectPointer/" umlType="COMPOSITION" referredObject="AliasMember">
+        </Member>
+    </ManagedObject>
+    <ManagedObject name="ZoneMember">
+        <Member name="zoneEntry" dataType="string">
+        </Member>
+        <Member name="listIndex" dataType="UI32">
+        </Member>
+    </ManagedObject>
+    <ManagedObject name="Zone">
+        <Member name="zoneName" dataType="string">
+        </Member>
+        <Member name="zoneMembers" dataType="vector/WaveManagedObjectPointer/" umlType="COMPOSITION" referredObject="ZoneMember">
+        </Member>
+    </ManagedObject>
+    <ManagedObject name="CfgMember">
+        <Member name="cfgEntry" dataType="string">
+        </Member>
+        <Member name="listIndex" dataType="UI32">
+        </Member>
+    </ManagedObject>
+    <ManagedObject name="Cfg">
+        <Member name="cfgName" dataType="string">
+        </Member>
+        <Member name="cfgMembers" dataType="vector/WaveManagedObjectPointer/" umlType="COMPOSITION" referredObject="CfgMember">
+        </Member>
+    </ManagedObject>
+
+    <Message name="dbCreate" sequencerType="SYNC" allowPreemption="FALSE">
+        <Member name="dbEntryType" dataType="UI32">
+        </Member>
+        <Member name="dbEntryName" dataType="string">
+        </Member>
+        <Member name="dbEntryList" dataType="string">
+        </Member>
+        <Member name="respCode" dataType="UI32">
+        </Member>
+    </Message>
+    <Message name="dbAdd" sequencerType="SYNC" allowPreemption="FALSE">
+        <Member name="dbEntryType" dataType="UI32">
+        </Member>
+        <Member name="dbEntryName" dataType="string">
+        </Member>
+        <Member name="dbEntryList" dataType="string">
+        </Member>
+        <Member name="respCode" dataType="UI32">
+        </Member>
+    </Message>
+    <Message name="dbRemove" sequencerType="SYNC" allowPreemption="FALSE">
+        <Member name="dbEntryType" dataType="UI32">
+        </Member>
+        <Member name="dbEntryName" dataType="string">
+        </Member>
+        <Member name="dbEntryList" dataType="string">
+        </Member>
+        <Member name="respCode" dataType="UI32">
+        </Member>
+    </Message>
+    <Message name="dbDelete" sequencerType="SYNC" allowPreemption="FALSE">
+        <Member name="dbEntryType" dataType="UI32">
+        </Member>
+        <Member name="dbEntryName" dataType="string">
+        </Member>
+        <Member name="respCode" dataType="UI32">
+        </Member>
+    </Message>
+    <Message name="dbSave" sequencerType="SYNC" allowPreemption="FALSE">
+        <Member name="dbEntryType" dataType="UI32">
+        </Member>
+        <Member name="respCode" dataType="UI32">
+        </Member>
+    </Message>
+    <Message name="dbClear" sequencerType="SYNC" allowPreemption="FALSE">
+        <Member name="dbEntryType" dataType="UI32">
+        </Member>
+        <Member name="respCode" dataType="UI32">
+        </Member>
+    </Message>
+    <Message name="dbEnable" sequencerType="SYNC" allowPreemption="FALSE">
+        <Member name="dbEntryType" dataType="UI32">
+        </Member>
+        <Member name="dbEntryName" dataType="string">
+        </Member>
+        <Member name="respCode" dataType="UI32">
+        </Member>
+    </Message>
+    <Message name="dbDisable" sequencerType="SYNC" allowPreemption="FALSE">
+        <Member name="dbEntryType" dataType="UI32">
+        </Member>
+        <Member name="respCode" dataType="UI32">
+        </Member>
+    </Message>
+    <Message name="dbTransAbort" sequencerType="SYNC" allowPreemption="FALSE">
+        <Member name="dbEntryType" dataType="UI32">
+        </Member>
+        <Member name="dbTransToken" dataType="UI32">
+        </Member>
+        <Member name="respCode" dataType="UI32">
+        </Member>
+    </Message>
+    <Message name="operationInfo" sequencerType="SYNC" allowPreemption="FALSE">
+        <Member name="dbTransToken" dataType="UI32">
+        </Member>
+        <Member name="dbTransFlag" dataType="UI32">
+        </Member>
+        <Member name="dbMaxSize" dataType="UI32">
+        </Member>
+        <Member name="dbAvailableSize" dataType="UI32">
+        </Member>
+        <Member name="dbCommittedSize" dataType="UI32">
+        </Member>
+        <Member name="dbTransactionSize" dataType="UI32">
+        </Member>
+        <Member name="lastZoneChangedTimestamp" dataType="string">
+        </Member>
+        <Member name="lastZoneCommittedTimestamp" dataType="string">
+        </Member>
+    </Message>
+</Global>
+</WavePlugin>

@@ -1,0 +1,740 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-vswitch"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:vswitch="urn:brocade.com:mgmt:brocade-vswitch"
+        xmlns:yang="urn:ietf:params:xml:ns:yang:ietf-yang-types"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface">
+  <namespace uri="urn:brocade.com:mgmt:brocade-vswitch"/>
+  <prefix value="vswitch"/>
+  <import module="ietf-yang-types">
+    <prefix value="yang"/>
+  </import>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+        San Jose, CA 95134
+         U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This management submodule is an instrumentation to 
+manage Virtual switch features.</text>
+  </description>
+  <revision date="2011-04-18">
+    <description>
+      <text>Initial version of the management submodule vswitch.</text>
+    </description>
+  </revision>
+  <typedef name="vinterface-type">
+    <type name="enumeration">
+      <enum name="vm-interface">
+        <value value="11"/>
+      </enum>
+      <enum name="console-interface">
+        <value value="12"/>
+      </enum>
+      <enum name="vmkernel-interface">
+        <value value="13"/>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="vcenter-url">
+    <type name="string">
+      <pattern value="[h][t][t][p]([s]{0,1})[:][/][/]([-a-zA-Z0-9\.\\\\@#\+\*\(\)=\{~\}%&lt;&gt;=$_:\[\]\|]{1,57})"/>
+      <length value="1 .. 64">
+        <error-message>
+          <value>URL length should be in the range 1-64</value>
+        </error-message>
+      </length>
+    </type>
+  </typedef>
+  <typedef name="vnetwork-log-size">
+    <type name="uint8">
+      <range value="1..10"/>
+    </type>
+    <units name="Megabyte"/>
+  </typedef>
+  <typedef name="vnetwork-log-count">
+    <type name="uint8">
+      <range value="1..10"/>
+    </type>
+  </typedef>
+  <grouping name="last-rcvd-record-info">
+    <leaf name="last-rcvd-instance">
+      <type name="uint32"/>
+      <mandatory value="false"/>
+      <description>
+        <text>Last received record. 0 means this is the first request</text>
+      </description>
+    </leaf>
+  </grouping>
+  <grouping name="records-info">
+    <leaf name="has-more">
+      <type name="boolean"/>
+    </leaf>
+    <leaf name="instance-id">
+      <type name="uint32"/>
+    </leaf>
+  </grouping>
+  <rpc name="get-vnetwork-hosts">
+    <description>
+      <text>Shows discovered hosts</text>
+    </description>
+    <input>
+      <leaf name="vcenter">
+        <type name="string">
+          <length value="1..80"/>
+        </type>
+        <mandatory value="true"/>
+        <description>
+          <text>vCenter name</text>
+        </description>
+      </leaf>
+      <leaf name="datacenter">
+        <type name="string">
+          <length value="1..80"/>
+        </type>
+        <mandatory value="false"/>
+        <description>
+          <text>datacenter name</text>
+        </description>
+      </leaf>
+      <leaf name="name">
+        <type name="string">
+          <length value="1..80"/>
+        </type>
+        <mandatory value="false"/>
+        <description>
+          <text>Host name</text>
+        </description>
+      </leaf>
+      <leaf name="last-rcvd-instance">
+        <type name="uint32"/>
+        <mandatory value="false"/>
+        <description>
+          <text>Last received record. 0 means this is the first request</text>
+        </description>
+      </leaf>
+    </input>
+    <output>
+      <list name="vnetwork-hosts">
+        <leaf name="name">
+          <type name="string"/>
+          <description>
+            <text>host name</text>
+          </description>
+        </leaf>
+        <leaf name="vmnic">
+          <type name="string"/>
+          <description>
+            <text>host NIC</text>
+          </description>
+        </leaf>
+        <leaf name="datacenter">
+          <type name="string"/>
+          <description>
+            <text>host datacenter</text>
+          </description>
+        </leaf>
+        <leaf name="mac">
+          <type name="yang:mac-address"/>
+          <description>
+            <text>vmnic Mac address in HH:HH:HH:HH:HH:HH format</text>
+          </description>
+        </leaf>
+        <leaf name="vswitch">
+          <type name="string"/>
+          <description>
+            <text>regular or distributed virtual switch</text>
+          </description>
+        </leaf>
+        <uses name="interface:interface-name-info"/>
+      </list>
+      <uses name="records-info">
+        <description>
+          <text>Indicates if there are more instances; client
+can retrieve them by invoking the rpc again with
+the last record information.</text>
+        </description>
+      </uses>
+    </output>
+  </rpc>
+  <rpc name="get-vnetwork-vms">
+    <description>
+      <text>Shows discovered VMs</text>
+    </description>
+    <input>
+      <leaf name="name">
+        <type name="string">
+          <length value="1..80"/>
+        </type>
+        <mandatory value="false"/>
+        <description>
+          <text>Virtual machine name</text>
+        </description>
+      </leaf>
+      <leaf name="vcenter">
+        <type name="string">
+          <length value="1..80"/>
+        </type>
+        <mandatory value="true"/>
+        <description>
+          <text>vCenter name</text>
+        </description>
+      </leaf>
+      <leaf name="datacenter">
+        <type name="string">
+          <length value="1..80"/>
+        </type>
+        <mandatory value="false"/>
+        <description>
+          <text>datacenter name</text>
+        </description>
+      </leaf>
+      <leaf name="last-rcvd-instance">
+        <type name="uint32"/>
+        <mandatory value="false"/>
+        <description>
+          <text>Last received record. 0 means this is the first request</text>
+        </description>
+      </leaf>
+    </input>
+    <output>
+      <list name="vnetwork-vms">
+        <leaf name="name">
+          <type name="string"/>
+          <description>
+            <text>virtual machine name</text>
+          </description>
+        </leaf>
+        <leaf name="mac">
+          <type name="yang:mac-address"/>
+          <description>
+            <text>vnic Mac address in HH:HH:HH:HH:HH:HH format</text>
+          </description>
+        </leaf>
+        <leaf name="datacenter">
+          <type name="string"/>
+          <description>
+            <text>host datacenter</text>
+          </description>
+        </leaf>
+        <leaf name="ip">
+          <type name="inet:ip-address"/>
+          <description>
+            <text>vnic IP address</text>
+          </description>
+        </leaf>
+        <leaf name="host-nn">
+          <type name="string"/>
+          <description>
+            <text>host name</text>
+          </description>
+        </leaf>
+      </list>
+      <uses name="records-info">
+        <description>
+          <text>Indicates if there are more instances; client
+can retrieve them by invoking the rpc again with
+the last record information.</text>
+        </description>
+      </uses>
+    </output>
+  </rpc>
+  <rpc name="get-vnetwork-dvpgs">
+    <description>
+      <text>Shows discovered distributed virtual port-groups</text>
+    </description>
+    <input>
+      <leaf name="name">
+        <type name="string">
+          <length value="1..80"/>
+        </type>
+        <mandatory value="false"/>
+        <description>
+          <text>Distributed virtual port-group name</text>
+        </description>
+      </leaf>
+      <leaf name="vcenter">
+        <type name="string">
+          <length value="1..80"/>
+        </type>
+        <mandatory value="true"/>
+        <description>
+          <text>vCenter name</text>
+        </description>
+      </leaf>
+      <leaf name="datacenter">
+        <type name="string">
+          <length value="1..80"/>
+        </type>
+        <mandatory value="false"/>
+        <description>
+          <text>datacenter name</text>
+        </description>
+      </leaf>
+      <leaf name="last-rcvd-instance">
+        <type name="uint32"/>
+        <mandatory value="false"/>
+        <description>
+          <text>Last received record. 0 means this is the first request</text>
+        </description>
+      </leaf>
+    </input>
+    <output>
+      <list name="vnetwork-dvpgs">
+        <leaf name="name">
+          <type name="string"/>
+          <description>
+            <text>port group name</text>
+          </description>
+        </leaf>
+        <leaf name="datacenter">
+          <type name="string"/>
+          <description>
+            <text>host datacenter</text>
+          </description>
+        </leaf>
+        <leaf name="dvs-nn">
+          <type name="string"/>
+          <description>
+            <text>distributed virtual switch</text>
+          </description>
+        </leaf>
+        <leaf name="vlan">
+          <type name="string"/>
+          <description>
+            <text>allowed vlans</text>
+          </description>
+        </leaf>
+      </list>
+      <uses name="records-info">
+        <description>
+          <text>Indicates if there are more instances; client
+can retrieve them by invoking the rpc again with
+the last record information.</text>
+        </description>
+      </uses>
+    </output>
+  </rpc>
+  <rpc name="get-vnetwork-dvs">
+    <description>
+      <text>Shows discovered Distributed Virtual Switches</text>
+    </description>
+    <input>
+      <leaf name="name">
+        <type name="string">
+          <length value="1..80"/>
+        </type>
+        <mandatory value="false"/>
+        <description>
+          <text>Distributed virutal switch name</text>
+        </description>
+      </leaf>
+      <leaf name="vcenter">
+        <type name="string">
+          <length value="1..80"/>
+        </type>
+        <mandatory value="true"/>
+        <description>
+          <text>vCenter name</text>
+        </description>
+      </leaf>
+      <leaf name="datacenter">
+        <type name="string">
+          <length value="1..80"/>
+        </type>
+        <mandatory value="false"/>
+        <description>
+          <text>datacenter name</text>
+        </description>
+      </leaf>
+      <leaf name="last-rcvd-instance">
+        <type name="uint32"/>
+        <mandatory value="false"/>
+        <description>
+          <text>Last received record. 0 means this is the first request</text>
+        </description>
+      </leaf>
+    </input>
+    <output>
+      <list name="vnetwork-dvs">
+        <leaf name="name">
+          <type name="string"/>
+          <description>
+            <text>distributed virtual switch name</text>
+          </description>
+        </leaf>
+        <leaf name="host">
+          <type name="string"/>
+          <description>
+            <text>host name</text>
+          </description>
+        </leaf>
+        <leaf name="datacenter">
+          <type name="string"/>
+          <description>
+            <text>host datacenter</text>
+          </description>
+        </leaf>
+        <leaf name="pnic">
+          <type name="string"/>
+          <description>
+            <text>host NIC</text>
+          </description>
+        </leaf>
+        <uses name="interface:interface-name-info"/>
+      </list>
+      <uses name="records-info">
+        <description>
+          <text>Indicates if there are more instances; client
+can retrieve them by invoking the rpc again with
+the last record information.</text>
+        </description>
+      </uses>
+    </output>
+  </rpc>
+  <rpc name="get-vnetwork-vswitches">
+    <description>
+      <text>Shows discovered Virtual Switches</text>
+    </description>
+    <input>
+      <leaf name="name">
+        <type name="string">
+          <length value="1..80"/>
+        </type>
+        <mandatory value="false"/>
+        <description>
+          <text>Virtual switch name</text>
+        </description>
+      </leaf>
+      <leaf name="vcenter">
+        <type name="string">
+          <length value="1..80"/>
+        </type>
+        <mandatory value="true"/>
+        <description>
+          <text>vCenter name</text>
+        </description>
+      </leaf>
+      <leaf name="datacenter">
+        <type name="string">
+          <length value="1..80"/>
+        </type>
+        <mandatory value="false"/>
+        <description>
+          <text>datacenter name</text>
+        </description>
+      </leaf>
+      <leaf name="last-rcvd-instance">
+        <type name="uint32"/>
+        <mandatory value="false"/>
+        <description>
+          <text>Last received record. 0 means this is the first request</text>
+        </description>
+      </leaf>
+    </input>
+    <output>
+      <list name="vnetwork-vswitches">
+        <leaf name="name">
+          <type name="string"/>
+          <description>
+            <text>virtual switch name</text>
+          </description>
+        </leaf>
+        <leaf name="host">
+          <type name="string"/>
+          <description>
+            <text>host name</text>
+          </description>
+        </leaf>
+        <leaf name="datacenter">
+          <type name="string"/>
+          <description>
+            <text>host datacenter</text>
+          </description>
+        </leaf>
+        <leaf name="pnic">
+          <type name="string"/>
+          <description>
+            <text>host NIC</text>
+          </description>
+        </leaf>
+        <uses name="interface:interface-name-info"/>
+      </list>
+      <uses name="records-info">
+        <description>
+          <text>Indicates if there are more instances; client
+can retrieve them by invoking the rpc again with
+the last record information.</text>
+        </description>
+      </uses>
+    </output>
+  </rpc>
+  <rpc name="get-vnetwork-portgroups">
+    <description>
+      <text>Shows discovered PortGroups</text>
+    </description>
+    <input>
+      <leaf name="name">
+        <type name="string">
+          <length value="1..80"/>
+        </type>
+        <mandatory value="false"/>
+        <description>
+          <text>Port group name</text>
+        </description>
+      </leaf>
+      <leaf name="vcenter">
+        <type name="string">
+          <length value="1..80"/>
+        </type>
+        <mandatory value="true"/>
+        <description>
+          <text>vCenter name</text>
+        </description>
+      </leaf>
+      <leaf name="datacenter">
+        <type name="string">
+          <length value="1..80"/>
+        </type>
+        <mandatory value="false"/>
+        <description>
+          <text>datacenter name</text>
+        </description>
+      </leaf>
+      <leaf name="last-rcvd-instance">
+        <type name="uint32"/>
+        <mandatory value="false"/>
+        <description>
+          <text>Last received record. 0 means this is the first request</text>
+        </description>
+      </leaf>
+    </input>
+    <output>
+      <list name="vnetwork-pgs">
+        <leaf name="name">
+          <type name="string"/>
+          <description>
+            <text>port group name</text>
+          </description>
+        </leaf>
+        <leaf name="datacenter">
+          <type name="string"/>
+          <description>
+            <text>host datacenter</text>
+          </description>
+        </leaf>
+        <leaf name="vs-nn">
+          <type name="string"/>
+          <description>
+            <text>virtual switch name</text>
+          </description>
+        </leaf>
+        <leaf name="vlan">
+          <type name="string"/>
+          <description>
+            <text>allowed vlans</text>
+          </description>
+        </leaf>
+        <leaf name="host-nn">
+          <type name="string"/>
+          <description>
+            <text>host name</text>
+          </description>
+        </leaf>
+      </list>
+      <uses name="records-info">
+        <description>
+          <text>Indicates if there are more instances; client
+can retrieve them by invoking the rpc again with
+the last record information.</text>
+        </description>
+      </uses>
+    </output>
+  </rpc>
+  <rpc name="get-vmpolicy-macaddr">
+    <description>
+      <text>Shows vnics/vmknics to portgroup to port-profile association</text>
+    </description>
+    <input>
+      <leaf name="mac">
+        <type name="yang:mac-address"/>
+        <description>
+          <text>Mac address in HH:HH:HH:HH:HH:HH format</text>
+        </description>
+      </leaf>
+      <leaf name="vcenter">
+        <type name="string">
+          <length value="1..80"/>
+        </type>
+        <mandatory value="true"/>
+        <description>
+          <text>vCenter name</text>
+        </description>
+      </leaf>
+      <leaf name="datacenter">
+        <type name="string">
+          <length value="1..80"/>
+        </type>
+        <mandatory value="false"/>
+        <description>
+          <text>datacenter name</text>
+        </description>
+      </leaf>
+      <leaf name="last-rcvd-instance">
+        <type name="uint32"/>
+        <mandatory value="false"/>
+        <description>
+          <text>Last received record. 0 means this is the first request</text>
+        </description>
+      </leaf>
+    </input>
+    <output>
+      <list name="vmpolicy-macaddr">
+        <leaf name="mac">
+          <type name="yang:mac-address"/>
+          <description>
+            <text>vnic Mac address in HH:HH:HH:HH:HH:HH format</text>
+          </description>
+        </leaf>
+        <leaf name="name">
+          <type name="string"/>
+          <description>
+            <text>virutal machine name</text>
+          </description>
+        </leaf>
+        <leaf name="datacenter">
+          <type name="string"/>
+          <description>
+            <text>host datacenter</text>
+          </description>
+        </leaf>
+        <leaf name="dvpg-nn">
+          <type name="string"/>
+          <description>
+            <text>distributed virtual port group</text>
+          </description>
+        </leaf>
+        <leaf name="port-nn">
+          <type name="string"/>
+          <description>
+            <text>vm port ID</text>
+          </description>
+        </leaf>
+        <leaf name="port-prof">
+          <type name="string"/>
+          <description>
+            <text>port profile</text>
+          </description>
+        </leaf>
+      </list>
+      <uses name="records-info">
+        <description>
+          <text>Indicates if there are more instances; client
+can retrieve them by invoking the rpc again with
+the last record information.</text>
+        </description>
+      </uses>
+    </output>
+  </rpc>
+  <augment target-node="/common-def:show">
+    <container name="vnetwork">
+      <description>
+        <text>Shows virtual infrastructure information</text>
+      </description>
+      <container name="vmpolicy">
+        <description>
+          <text>Shows vnics/vmknics to portgroup to port-profile association</text>
+        </description>
+      </container>
+    </container>
+  </augment>
+  <list name="vcenter">
+    <key value="id"/>
+    <description>
+      <text>vCenter</text>
+    </description>
+    <leaf name="id">
+      <type name="common-def:name-string32"/>
+      <description>
+        <text>NAME;;vCenter name (Max Size - 32)</text>
+      </description>
+    </leaf>
+    <container name="credentials">
+      <leaf name="url">
+        <type name="vcenter-url"/>
+        <description>
+          <text>URL</text>
+        </description>
+      </leaf>
+      <leaf name="username">
+        <type name="string">
+          <length value="1 .. 16">
+            <error-message>
+              <value>Username length should be in the range 1-16</value>
+            </error-message>
+          </length>
+        </type>
+        <description>
+          <text>User name</text>
+        </description>
+      </leaf>
+      <leaf name="password">
+        <type name="string"/>
+        <description>
+          <text>Password</text>
+        </description>
+      </leaf>
+    </container>
+    <leaf name="activate">
+      <type name="empty"/>
+      <description>
+        <text>Activate the vCenter discovery</text>
+      </description>
+    </leaf>
+    <leaf name="interval">
+      <type name="uint32">
+        <range value="0..1440"/>
+      </type>
+      <units name="Minutes"/>
+      <description>
+        <text>Discovery Timer Interval</text>
+      </description>
+    </leaf>
+    <container name="discovery">
+      <container name="ignore-delete-all-response">
+        <leaf name="ignore-value">
+          <type name="uint32">
+            <range value="0..9999"/>
+          </type>
+        </leaf>
+        <leaf name="always">
+          <type name="empty"/>
+          <description>
+            <text>Always ignore delete-all from vCenter</text>
+          </description>
+        </leaf>
+        <description>
+          <text>Ignore delete-all from vCenter</text>
+        </description>
+      </container>
+    </container>
+  </list>
+</module>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<WavePlugin name="L2sys" nameSpace="DcmNs"> 
+<Global name="L2sysGlobal">
+	<ManagedObject name="L2sysAgingTimeout">
+		<Member name="AgingTimeout" dataType="UI32">
+		</Member>
+	</ManagedObject>
+	<Message name="UpdateL2sysAgingTimeout" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+    	<Member name="AgingTimeout" dataType="UI32">
+        </Member>
+    </Message>
+	<ManagedObject name="L2sysGlobalStaticMac">
+		<Member name="Mac" dataType="string">
+		</Member>
+		<Member name="forward" dataType="boolean">
+		</Member>
+		<Member name="interface_type" dataType="UI32">
+		</Member>
+		<Member name="ifname" dataType="string">
+		</Member>
+		<Member name="vlan" dataType="boolean">
+		</Member>
+		<Member name="vlanid" dataType="UI32">
+		</Member>
+	</ManagedObject>
+	<Message name="UpdateL2sysGlobalStaticMac" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+		<Member name="Mac" dataType="string">
+		</Member>
+		<Member name="forward" dataType="boolean">
+		</Member>
+		<Member name="interface_type" dataType="UI32">
+		</Member>
+		<Member name="ifname" dataType="string">
+		</Member>
+		<Member name="vlan" dataType="boolean">
+		</Member>
+		<Member name="vlanid" dataType="UI32">
+		</Member>
+		<Member name="opcode" dataType="UI32">
+		</Member>
+    </Message>
+</Global>
+<Local name="L2sys">
+	<Message name="UpdateL2sysGlobalStaticMacSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+		<Member name="Mac" dataType="string">
+		</Member>
+		<Member name="forward" dataType="boolean">
+		</Member>
+		<Member name="interface_type" dataType="UI32">
+		</Member>
+		<Member name="ifname" dataType="string">
+		</Member>
+		<Member name="vlan" dataType="boolean">
+		</Member>
+		<Member name="vlanid" dataType="UI32">
+		</Member>
+		<Member name="opcode" dataType="UI32">
+		</Member>
+    </Message>
+	<Message name="UpdateL2sysAgingTimeoutSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+    	<Member name="AgingTimeout" dataType="UI32">
+        </Member>
+    </Message>
+</Local>
+</WavePlugin>

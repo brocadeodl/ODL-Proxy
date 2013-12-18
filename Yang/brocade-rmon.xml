@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-rmon"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:rmon="urn:brocade.com:mgmt:brocade-rmon"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface">
+  <namespace uri="urn:brocade.com:mgmt:brocade-rmon"/>
+  <prefix value="rmon"/>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <revision date="2011-02-28">
+    <description>
+      <text>Initial version</text>
+    </description>
+  </revision>
+  <container name="rmon">
+    <list name="event-entry">
+      <key value="event-index"/>
+      <leaf name="event-index">
+        <type name="event-index-type"/>
+      </leaf>
+      <leaf name="event-description">
+        <type name="event-description-type"/>
+        <default value="__default_description"/>
+      </leaf>
+      <leaf name="log">
+        <type name="empty"/>
+      </leaf>
+      <leaf name="event-community">
+        <type name="string">
+          <length value="1 .. 127"/>
+        </type>
+        <default value="__default_community"/>
+      </leaf>
+      <leaf name="event-owner">
+        <type name="owner-string"/>
+      </leaf>
+    </list>
+    <list name="alarm-entry">
+      <key value="alarm-index"/>
+      <leaf name="alarm-index">
+        <type name="alarm-index-type"/>
+      </leaf>
+      <leaf name="snmp-oid">
+        <mandatory value="true"/>
+        <type name="snmp-oid-type"/>
+      </leaf>
+      <leaf name="alarm-interval">
+        <mandatory value="true"/>
+        <type name="uint32">
+          <range value="1 .. 2147483648"/>
+        </type>
+      </leaf>
+      <leaf name="alarm-sample">
+        <mandatory value="true"/>
+        <type name="alarm-sample-type"/>
+      </leaf>
+      <leaf name="alarm-rising-threshold">
+        <mandatory value="true"/>
+        <type name="uint32">
+          <range value="0 .. 4294967295"/>
+        </type>
+      </leaf>
+      <leaf name="alarm-rising-event-index">
+        <mandatory value="true"/>
+        <type name="alarm-rising-event-index-type"/>
+      </leaf>
+      <leaf name="alarm-falling-threshold">
+        <type name="uint32">
+          <range value="0 .. 4294967295"/>
+        </type>
+        <default value="0"/>
+      </leaf>
+      <leaf name="alarm-falling-event-index">
+        <type name="alarm-falling-event-index-type"/>
+      </leaf>
+      <leaf name="alarm-owner">
+        <type name="owner-string"/>
+      </leaf>
+    </list>
+  </container>
+  <grouping name="common-rmon-cmds">
+    <container name="rmon">
+      <container name="collection">
+        <list name="ether-stats-entry">
+          <key value="ether-stats-index"/>
+          <leaf name="ether-stats-index">
+            <type name="ether-stats-index-type"/>
+          </leaf>
+          <leaf name="ether-stats-owner">
+            <type name="owner-string"/>
+          </leaf>
+        </list>
+        <list name="history-control-entry">
+          <key value="history-control-index"/>
+          <leaf name="history-control-index">
+            <type name="history-control-index-type"/>
+          </leaf>
+          <leaf name="history-control-buckets-requested">
+            <type name="history-control-buckets-requested-type"/>
+            <default value="50"/>
+          </leaf>
+          <leaf name="history-control-interval">
+            <type name="history-control-interval-type"/>
+            <default value="1800"/>
+          </leaf>
+          <leaf name="history-control-owner">
+            <type name="owner-string"/>
+          </leaf>
+        </list>
+      </container>
+    </container>
+  </grouping>
+  <augment target-node="/interface:interface/interface:tengigabitethernet">
+    <uses name="common-rmon-cmds"/>
+  </augment>
+  <augment target-node="/interface:interface/interface:gigabitethernet">
+    <uses name="common-rmon-cmds"/>
+  </augment>
+  <augment target-node="/interface:interface/interface:fortygigabitethernet">
+    <uses name="common-rmon-cmds"/>
+  </augment>
+  <typedef name="owner-string">
+    <type name="string">
+      <pattern value="[a-zA-Z]{1}([-a-zA-Z0-9\.\\\\@#\+\*\(\)=\{~\}%&lt;&gt;=$_\[\]\|]{0,14})"/>
+      <length value="1 .. 15"/>
+    </type>
+  </typedef>
+  <typedef name="ether-stats-index-type">
+    <type name="int32">
+      <range value="1 .. 65535"/>
+    </type>
+  </typedef>
+  <typedef name="history-control-index-type">
+    <type name="int32">
+      <range value="1 .. 65535"/>
+    </type>
+  </typedef>
+  <typedef name="history-control-buckets-requested-type">
+    <type name="int32">
+      <range value="1 .. 65535"/>
+    </type>
+  </typedef>
+  <typedef name="history-control-interval-type">
+    <type name="int32">
+      <range value="1 .. 3600"/>
+    </type>
+  </typedef>
+  <typedef name="alarm-index-type">
+    <type name="int32">
+      <range value="1 .. 65535"/>
+    </type>
+  </typedef>
+  <typedef name="alarm-sample-type">
+    <type name="enumeration">
+      <enum name="absolute">
+        <value value="1"/>
+      </enum>
+      <enum name="delta">
+        <value value="2"/>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="alarm-rising-event-index-type">
+    <type name="int32">
+      <range value="1 .. 65535"/>
+    </type>
+  </typedef>
+  <typedef name="alarm-falling-event-index-type">
+    <type name="int32">
+      <range value="1 .. 65535"/>
+    </type>
+  </typedef>
+  <typedef name="event-index-type">
+    <type name="int32">
+      <range value="1 .. 65535"/>
+    </type>
+  </typedef>
+  <typedef name="event-description-type">
+    <type name="string">
+      <length value="min .. 127"/>
+    </type>
+  </typedef>
+  <typedef name="snmp-oid-type">
+    <type name="string">
+      <length value="min .. 35"/>
+    </type>
+  </typedef>
+</module>

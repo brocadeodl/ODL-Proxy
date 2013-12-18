@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-lag"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:lag="urn:brocade.com:mgmt:brocade-lag"
+        xmlns:yang="urn:ietf:params:xml:ns:yang:ietf-yang-types"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface">
+  <namespace uri="urn:brocade.com:mgmt:brocade-lag"/>
+  <prefix value="lag"/>
+  <import module="ietf-yang-types">
+    <prefix value="yang"/>
+  </import>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+       San Jose, CA 95134
+       U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com
+Web: www.brocade.com</text>
+  </contact>
+  <description>
+    <text>This management sub-module is an instrumentation to manage Link
+aggregation or IEEE 802.1AX-2008 feature.
+
+Glossary of the terms used:
+--------------------------
+LAG - Link Aggregation.
+LACP - Link Aggregation Control Protocol</text>
+  </description>
+  <revision date="2011-02-20">
+    <description>
+      <text>Initial version of this management module</text>
+    </description>
+  </revision>
+  <revision date="2012-02-20">
+    <description>
+      <text>Added pagination support</text>
+    </description>
+  </revision>
+  <typedef name="lacp-key">
+    <type name="uint32">
+      <range value="0..65535"/>
+    </type>
+  </typedef>
+  <typedef name="lacp-state">
+    <type name="bits">
+      <bit name="activity">
+        <position value="0"/>
+      </bit>
+      <bit name="timeout">
+        <position value="1"/>
+      </bit>
+      <bit name="aggregation">
+        <position value="2"/>
+      </bit>
+      <bit name="synchronization">
+        <position value="3"/>
+      </bit>
+      <bit name="collecting">
+        <position value="4"/>
+      </bit>
+      <bit name="distributing">
+        <position value="5"/>
+      </bit>
+      <bit name="defaulted">
+        <position value="6"/>
+      </bit>
+      <bit name="expired">
+        <position value="7"/>
+      </bit>
+    </type>
+  </typedef>
+  <typedef name="brcd-trunk-states">
+    <type name="bits">
+      <bit name="marker-generated">
+        <position value="0"/>
+      </bit>
+      <bit name="deskew-calculation-completed">
+        <position value="1"/>
+      </bit>
+      <bit name="deskew-ok">
+        <position value="2"/>
+      </bit>
+      <bit name="deskew-not-ok">
+        <position value="3"/>
+      </bit>
+      <bit name="port-attached">
+        <position value="4"/>
+      </bit>
+    </type>
+  </typedef>
+  <grouping name="lacp-common-actor-partner-detail">
+    <leaf name="admin-key">
+      <type name="lacp-key"/>
+      <description>
+        <text>The Admin key</text>
+      </description>
+    </leaf>
+    <leaf name="oper-key">
+      <type name="lacp-key"/>
+      <description>
+        <text>The Opertional key</text>
+      </description>
+    </leaf>
+    <leaf name="actor-system-id">
+      <type name="yang:mac-address"/>
+      <description>
+        <text>The Actor system id</text>
+      </description>
+    </leaf>
+    <leaf name="partner-system-id">
+      <type name="yang:mac-address"/>
+      <description>
+        <text>The Partner system id</text>
+      </description>
+    </leaf>
+    <leaf name="system-priority">
+      <type name="uint32">
+        <range value="1..65535"/>
+      </type>
+      <description>
+        <text>The System Priority</text>
+      </description>
+    </leaf>
+    <leaf name="partner-oper-priority">
+      <type name="uint32">
+        <range value="1..65535"/>
+      </type>
+      <description>
+        <text>The partner operational priority</text>
+      </description>
+    </leaf>
+  </grouping>
+  <grouping name="dynamic-lacp-aggr">
+    <uses name="lacp-common-actor-partner-detail"/>
+    <leaf name="rx-link-count">
+      <type name="uint64"/>
+      <description>
+        <text>The RX link counter</text>
+      </description>
+    </leaf>
+    <leaf name="tx-link-count">
+      <type name="uint64"/>
+      <description>
+        <text>The RX link counter</text>
+      </description>
+    </leaf>
+    <leaf name="individual-agg">
+      <type name="uint32"/>
+      <description>
+        <text>Individual aggregator</text>
+      </description>
+    </leaf>
+    <leaf name="ready-agg">
+      <type name="uint32"/>
+      <description>
+        <text>Individual aggregator</text>
+      </description>
+    </leaf>
+    <leaf name="partner-oper-key">
+      <type name="lacp-key"/>
+      <description>
+        <text>The Partner Opertional key</text>
+      </description>
+    </leaf>
+  </grouping>
+  <rpc name="get-port-channel-detail">
+    <description>
+      <text>A function that returns Link Aggregation Control
+configuration parameters for all the port channels in
+the system.</text>
+    </description>
+    <input>
+      <leaf name="last-aggregator-id">
+        <type name="interface:portchannel-type"/>
+        <description>
+          <text>Agreegator-id value should be given only when previous
+response indicates that more records exists. This value
+will be the Id of last aggregator received in previous
+response.</text>
+        </description>
+        <mandatory value="false"/>
+      </leaf>
+    </input>
+    <output>
+      <list name="lacp">
+        <leaf name="aggregator-id">
+          <type name="interface:portchannel-type"/>
+          <description>
+            <text>Agreegator id</text>
+          </description>
+        </leaf>
+        <leaf name="aggregator-type">
+          <type name="enumeration">
+            <enum name="standard">
+              <value value="1"/>
+              <description>
+                <text> Aggregator type is standard.</text>
+              </description>
+            </enum>
+            <enum name="brcd">
+              <value value="2"/>
+              <description>
+                <text> Aggregator type is brocade.</text>
+              </description>
+            </enum>
+            <enum name="hybrid">
+              <value value="3"/>
+              <description>
+                <text> Aggregator type is hybrid.</text>
+              </description>
+            </enum>
+            <enum name="internal">
+              <value value="4"/>
+              <description>
+                <text> Aggregator type is internal.</text>
+              </description>
+            </enum>
+          </type>
+        </leaf>
+        <leaf name="isvlag">
+          <type name="boolean"/>
+          <description>
+            <text> Specifies if Agreegator is vlag.</text>
+          </description>
+        </leaf>
+        <leaf name="aggregator-mode">
+          <type name="enumeration">
+            <enum name="none">
+              <value value="0"/>
+              <description>
+                <text> Aggregator mode  is passive.</text>
+              </description>
+            </enum>
+            <enum name="dynamic">
+              <value value="1"/>
+              <description>
+                <text> Aggregator mode  is active.</text>
+              </description>
+            </enum>
+            <enum name="static">
+              <value value="2"/>
+              <description>
+                <text> Aggregator mode  is on.</text>
+              </description>
+            </enum>
+          </type>
+        </leaf>
+        <uses name="dynamic-lacp-aggr"/>
+        <list name="aggr-member">
+          <description>
+            <text>Describes the aggregator member
+details.</text>
+          </description>
+          <leaf name="rbridge-id">
+            <type name="uint32"/>
+            <description>
+              <text>VCS domiain-id.</text>
+            </description>
+          </leaf>
+          <uses name="interface:interface-name-info">
+            <description>
+              <text>Aggregated port.</text>
+            </description>
+          </uses>
+          <leaf name="actor-port">
+            <type name="uint64"/>
+            <description>
+              <text>The actor port number.
+This is valid only in active mode only.</text>
+            </description>
+          </leaf>
+          <leaf name="sync">
+            <type name="uint64"/>
+            <description>
+              <text>sync-info.
+This is valid in active mode only.</text>
+            </description>
+          </leaf>
+        </list>
+      </list>
+      <leaf name="has-more">
+        <type name="boolean"/>
+        <description>
+          <text>This indicates that there are more Aggregators details
+available. New request has to be sent with id of last
+aggregator to get more details.</text>
+        </description>
+      </leaf>
+    </output>
+  </rpc>
+  <rpc name="get-portchannel-info-by-intf">
+    <description>
+      <text>A function that returns Link Aggregation Control
+configuration parameters for a given 'Aggregation Port' in
+the system.</text>
+    </description>
+    <input>
+      <uses name="interface:interface-name-info"/>
+    </input>
+    <output>
+      <container name="lacp">
+        <uses name="interface:interface-name-info"/>
+        <leaf name="actor-port">
+          <type name="uint64"/>
+          <description>
+            <text>The actor port number</text>
+          </description>
+        </leaf>
+        <uses name="lacp-common-actor-partner-detail"/>
+        <leaf name="actor-priority">
+          <type name="uint32">
+            <range value="1..65535"/>
+          </type>
+          <description>
+            <text>The Actor Priority</text>
+          </description>
+        </leaf>
+        <leaf name="receive-machine-state">
+          <type name="enumeration">
+            <enum name="unknown">
+              <value value="1"/>
+            </enum>
+            <enum name="invalid">
+              <value value="2"/>
+              <description>
+                <text>Invalid state</text>
+              </description>
+            </enum>
+            <enum name="initialize">
+              <value value="3"/>
+              <description>
+                <text>When the physical connectivity of a
+link changes or a Begin event occurs,
+the state machine enters the Initialize
+state</text>
+              </description>
+            </enum>
+            <enum name="port-disabled">
+              <value value="4"/>
+              <description>
+                <text>If the port becomes inoperable and a
+'begin' event has not occurred, the
+state machine enters the Port Disabled
+state</text>
+              </description>
+            </enum>
+            <enum name="lacp-disabled">
+              <value value="5"/>
+              <description>
+                <text>If the port is operating in half
+duplex, the operation of LACP is
+disabled on the port, forcing the state
+to LACP Disabled. This state is similar
+to the Defaulted state, except that the
+port is forced to operate as an
+individual port</text>
+              </description>
+            </enum>
+            <enum name="expired">
+              <value value="6"/>
+              <description>
+                <text>If no LACP PDU is received before the
+timer for the Current state expires
+once, the state machine enters the
+Expired state</text>
+              </description>
+            </enum>
+            <enum name="defaulted">
+              <value value="7"/>
+              <description>
+                <text>If no LACP PDU is received before the
+timer for the Current state expires a
+second time, the state machine enters
+the Defaulted state</text>
+              </description>
+            </enum>
+            <enum name="current">
+              <value value="8"/>
+              <description>
+                <text>The state machine receives an LACP PDU
+and enters the Current state</text>
+              </description>
+            </enum>
+          </type>
+          <description>
+            <text>The state of the 'Receive Machine'</text>
+          </description>
+        </leaf>
+        <leaf name="periodic-transmission-machine-state">
+          <type name="enumeration">
+            <enum name="unknown">
+              <value value="1"/>
+            </enum>
+            <enum name="invalid">
+              <value value="2"/>
+              <description>
+                <text>Invalid state</text>
+              </description>
+            </enum>
+            <enum name="no-periodic">
+              <value value="3"/>
+              <description>
+                <text>Periodic transmissions are disabled</text>
+              </description>
+            </enum>
+            <enum name="fast-periodic">
+              <value value="4"/>
+              <description>
+                <text>Periodic transmissions are enabled at a
+fast transmission rate</text>
+              </description>
+            </enum>
+            <enum name="slow-periodic">
+              <value value="5"/>
+              <description>
+                <text>Periodic transmissions are enabled at a
+slow transmission rate</text>
+              </description>
+            </enum>
+            <enum name="periodic">
+              <value value="6"/>
+              <description>
+                <text>Transitory state entered when the
+periodic timer expires</text>
+              </description>
+            </enum>
+          </type>
+          <description>
+            <text>The state of the 'Periodic Transmission
+machine'</text>
+          </description>
+        </leaf>
+        <leaf name="mux-machine-state">
+          <type name="enumeration">
+            <enum name="unknown">
+              <value value="1"/>
+            </enum>
+            <enum name="detached">
+              <value value="2"/>
+              <description>
+                <text>Process of detaching the port from the
+aggregator is in progress</text>
+              </description>
+            </enum>
+            <enum name="waiting">
+              <value value="3"/>
+              <description>
+                <text>Mux state machine is in a holding
+process, awaiting an outcome</text>
+              </description>
+            </enum>
+            <enum name="attached">
+              <value value="4"/>
+              <description>
+                <text>Mux machine initiates the process of
+attaching the port to the selected
+aggregator</text>
+              </description>
+            </enum>
+            <enum name="collecting">
+              <value value="5"/>
+              <description>
+                <text>The receive function of this link is
+enabled with respect to its
+participation in an aggregation</text>
+              </description>
+            </enum>
+            <enum name="distributing">
+              <value value="6"/>
+              <description>
+                <text>The transmit function of this link is
+enabled with respect to its
+participation in an aggregation. Frames
+may be passed down from the aggregator's
+distribution function for transmission</text>
+              </description>
+            </enum>
+            <enum name="collecting-distributing">
+              <value value="7"/>
+              <description>
+                <text>Collecting and distributing states are
+merged together to form a combined state
+(coupled control). Because independent
+control is not possible, the coupled
+control state machine does not wait for
+the partner to signal that collection
+has started before enabling both
+collection and distribution</text>
+              </description>
+            </enum>
+            <enum name="generated-mark">
+              <value value="8"/>
+            </enum>
+            <enum name="calculate-deskew">
+              <value value="9"/>
+            </enum>
+            <enum name="waiting-remote-deskew">
+              <value value="10"/>
+            </enum>
+            <enum name="deskew-ok">
+              <value value="11"/>
+            </enum>
+            <enum name="deskew-not-ok">
+              <value value="12"/>
+            </enum>
+          </type>
+          <description>
+            <text>The state of the 'Mux machine'</text>
+          </description>
+        </leaf>
+        <leaf name="admin-state">
+          <type name="lacp-state"/>
+          <description>
+            <text>The Admin state</text>
+          </description>
+        </leaf>
+        <leaf name="oper-state">
+          <type name="lacp-state"/>
+          <description>
+            <text>The Operational state</text>
+          </description>
+        </leaf>
+        <leaf name="partner-oper-state">
+          <type name="lacp-state"/>
+          <description>
+            <text>The Partner Operational state</text>
+          </description>
+        </leaf>
+        <leaf name="partner-oper-port">
+          <type name="uint64"/>
+          <description>
+            <text>The Partner Operational port</text>
+          </description>
+        </leaf>
+        <leaf name="actor-chip-number">
+          <type name="uint32"/>
+          <description>
+            <text>The actor chip number</text>
+          </description>
+        </leaf>
+        <leaf name="actor-max-deskew">
+          <type name="uint32"/>
+          <description>
+            <text>The actor maximum deskew</text>
+          </description>
+        </leaf>
+        <leaf name="partner-chip-number">
+          <type name="uint32"/>
+          <description>
+            <text>The actor chip number</text>
+          </description>
+        </leaf>
+        <leaf name="partner-max-deskew">
+          <type name="uint32"/>
+          <description>
+            <text>The partner maximum deskew</text>
+          </description>
+        </leaf>
+        <leaf name="actor-brcd-state">
+          <type name="brcd-trunk-states"/>
+          <description>
+            <text>Actor brcd trunk state</text>
+          </description>
+        </leaf>
+        <leaf name="partner-brcd-state">
+          <type name="brcd-trunk-states"/>
+          <description>
+            <text>partner brcd trunk state</text>
+          </description>
+        </leaf>
+      </container>
+    </output>
+  </rpc>
+</module>

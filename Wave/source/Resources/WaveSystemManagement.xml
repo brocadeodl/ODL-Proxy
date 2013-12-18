@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave System Management Module. -->
+
+<ModuleResources ModuleName = "WaveSystemManagement" ComponentName = "Wave">
+    <ResourceEnum Name = "WaveSystemManagementReadConfigErrors">
+        <Resource Name = "WAVE_SYSTEM_MANAGEMENT_READ_CONFIG_NO_ENTRIES_FOUND">%% No entries found.</Resource>
+    </ResourceEnum>
+</ModuleResources>

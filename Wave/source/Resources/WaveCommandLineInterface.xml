@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Command Line Interface Module. -->
+
+<ModuleResources ModuleName = "WaveCommandLineInterface" ComponentName = "Wave">
+    <ResourceEnum Name = "WaveCommandLineInterfaceConnectionStatus">
+        <Resource Name = "WAVE_CLI_CONNECTION_NOT_ATTEMPTED">Connection Not Attempted</Resource>
+        <Resource Name = "WAVE_CLI_CONNECTION_ESTABLISHED">Connection Established</Resource>
+        <Resource Name = "WAVE_CLI_CONNECTION_NOT_ESTABLISHED">Connection Not Established</Resource>
+        <Resource Name = "WAVE_CLI_CONNECTION_LOST">Connection Lost</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "WaveCommandLineInterfaceOperation">
+        <Resource Name = "WAVE_CLI_OPERATION_REQUEST">Request</Resource>
+        <Resource Name = "WAVE_CLI_OPERATION_RESPONSE">Response</Resource>
+        <Resource Name = "WAVE_CLI_OPERATION_INSTRUCTION">Instruction</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "WaveCommandLineInterfaceOperationStatus">
+        <Resource Name = "WAVE_CLI_OPERATION_SUCCESS">Success</Resource>
+        <Resource Name = "WAVE_CLI_OPERATION_ERROR">Error</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "WaveCommandLineInterfaceClientOpCode">
+        <Resource Name = "WAVE_CLI_CLIENT_OPERATION_GET_YANG_USER_INTERFACE">Get YANG User Interface</Resource>
+        <Resource Name = "WAVE_CLI_CLIENT_OPERATION_SHOW_RUNNING_CONFIGURATION">Display Running Configuration</Resource>
+        <Resource Name = "WAVE_CLI_CLIENT_OPERATION_SHOW_STARTUP_CONFIGURATION">Display Startup Configuration</Resource>
+        <Resource Name = "WAVE_CLI_CLIENT_OPERATION_CONFIGURE">Configure</Resource>
+        <Resource Name = "WAVE_CLI_CLIENT_OPERATION_ACT">Act</Resource>
+        <Resource Name = "WAVE_CLI_CLIENT_OPERATION_WRITE_REQUEST">Handle Write Requests</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "WaveCommandLineInterfaceServerOpCode">
+        <Resource Name = "WAVE_CLI_SERVER_OPERATION_PRINT_MESSAGE">Print Message</Resource>
+        <Resource Name = "WAVE_CLI_SERVER_OPERATION_LOGOUT">Logout</Resource>
+        <Resource Name = "WAVE_CLI_SERVER_OPERATION_Reconnect">Reconnect</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "WaveCommandLineInterfaceWorkerOperation">
+        <Resource Name = "WAVE_CLI_WORKER_OPERATION_USER_REQUEST">User Request</Resource>
+        <Resource Name = "WAVE_CLIWORKER__OPERATION_ADMINISTRATIVE_REQUEST">Administrative Request</Resource>
+        <Resource Name = "WAVE_CLI_WORKER_OPERATION_SEND_CALLBACK">Send Callback</Resource>
+    </ResourceEnum>
+</ModuleResources>

@@ -1,0 +1,29 @@
+all:
+
+include $(WAVE_HOME)/source/Makefile.tools
+
+XML_SOURCES             := DcmPostBootProgrammingTable.xml
+POSTBOOT_PARSER         := $(WAVE_HOME)/postboot/PostBoot.$(OS).$(ARCH_HOST)
+
+SENTINEL := $(BUILD_DIR_DYNAMIC_SRC)/Dcm_postboot
+.PHONY: all
+
+all: $(SENTINEL)
+
+$(POSTBOOT_PARSER):
+	$(MAKE) -C $(WAVE_HOME)/postboot
+
+MKFS := $(MAKEFILE_LIST)
+$(SENTINEL): $(POSTBOOT_PARSER) $(XML_SOURCES) $(MKFS) | $($(BUILD_DIR_DYNAMIC_SRC)/.)
+	@$(ECHOCMD) "Generating DcmPostBootProgrammingTable..."
+	@$(ECHOCMD) ""
+	$(POSTBOOT_PARSER) DcmPostBootProgrammingTable.xml $(BUILD_DIR_DYNAMIC_SRC) Dcm
+	@$(ECHOCMD) ""
+	@$(ECHOCMD) "Completed generating DcmPostBootProgrammingTable files"
+	@$(ECHOCMD) ""
+	touch $@
+
+# this target is obsolete, better make all
+$(BUILD_DIR_DYNAMIC_SRC)/DcmPostBootProgrammingTable.cpp: $(SENTINEL)
+
+include $(WAVE_SRC)/commonMakefileEnd

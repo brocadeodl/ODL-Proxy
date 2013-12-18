@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<WavePlugin name= "Rtm" nameSpace="DcmNs">
+    <Local name="Rtm">
+        <ManagedObject name="RtmConfig">
+            <Member name="nhDefault" dataType="bool">
+            </Member>
+            <Member name="nhRecur" dataType="UI32UC">
+            </Member>
+            <Member name="loadSharing" dataType="UI32UC">
+            </Member>
+            <Member name="routerID" dataType="IpV4Address">
+            </Member>
+        </ManagedObject>    
+
+        <ManagedObject name="RtmNhProto">
+            <Member name="nhProto" dataType="UI32">
+            </Member>
+        </ManagedObject>    
+
+        <Message name="UpdateRtmConfig" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="nhProto" dataType="UI32">
+            </Member>
+            <Member name="nhDefault" dataType="bool">
+            </Member>
+            <Member name="nhRecurr" dataType="UI32">
+            </Member>
+            <Member name="loadSharing" dataType="UI32">
+            </Member>
+            <Member name="routerID" dataType="IpV4Address">
+            </Member>
+            <Member name="opCode" dataType="UI32">
+            </Member>
+        </Message>
+        
+        <ManagedObject name="nhStaticRoute">
+            <Member name="dest" dataType="IpV4AddressNetworkMask">
+            </Member>
+            <Member name="nhIp" dataType="IpV4Address">
+            </Member>
+            <Member name="interfaceType" dataType="UI32">
+            </Member>
+            <Member name="ifName" dataType="string">
+            </Member>
+            <Member name="cost" dataType="UI32UC">
+            </Member>
+            <Member name="distance" dataType="UI32UC">
+            </Member>
+            <Member name="tag" dataType="UI32UC">
+            </Member>
+        </ManagedObject>        
+
+        <ManagedObject name="ifStaticRoute">
+            <Member name="dest" dataType="IpV4AddressNetworkMask">
+            </Member>
+            <Member name="ifType" dataType="UI32">
+            </Member>
+            <Member name="ifName" dataType="string">
+            </Member>
+            <Member name="cost" dataType="UI32UC">
+            </Member>
+            <Member name="distance" dataType="UI32UC">
+            </Member>
+            <Member name="tag" dataType="UI32UC">
+            </Member>
+        </ManagedObject>        
+
+        <Message name="UpdateStaticRoute" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+            <Member name="dest" dataType="IpV4Address">
+            </Member>
+            <Member name="nhIp" dataType="IpV4Address">
+            </Member>
+            <Member name="ifType" dataType="UI32">
+            </Member>
+            <Member name="ifName" dataType="string">
+            </Member>
+            <Member name="cost" dataType="UI32UC">
+            </Member>
+            <Member name="distance" dataType="UI32UC">
+            </Member>
+            <Member name="tag" dataType="UI32UC">
+            </Member>
+            <Member name="opCode" dataType="UI32">
+            </Member>
+        </Message>      
+    </Local>
+</WavePlugin>
+

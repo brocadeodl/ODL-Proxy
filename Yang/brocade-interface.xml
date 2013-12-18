@@ -1,0 +1,2147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-interface"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:brocade-interface="urn:brocade.com:mgmt:brocade-interface"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def"
+        xmlns:rbridge="urn:brocade.com:mgmt:brocade-rbridge"
+        xmlns:yang="urn:ietf:params:xml:ns:yang:ietf-yang-types">
+  <namespace uri="urn:brocade.com:mgmt:brocade-interface"/>
+  <prefix value="brocade-interface"/>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <import module="brocade-rbridge">
+    <prefix value="rbridge"/>
+  </import>
+  <import module="ietf-yang-types">
+    <prefix value="yang"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+        San Jose, CA 95134
+         U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com 
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This management module is an instrumentation to manage  
+ethernet network interfaces sub-layers.
+        
+The following ethernet interfaces can be managed using this 
+management module:
+        
++--------------------------------------------------------------+
+| List name                  Description                       |
++--------------------------------------------------------------+
+| gigabitethernet            1G  Physical Ethernet interfaces  |
+| tengigabitethernet         10G Physical Ethernet interfaces  |
+| port-channel               Port-channel/LAG interfaces       |
+| management                 Management port/interfaces        |
+| vlan                       L2 Vlan interface.                |
++--------------------------------------------------------------+
+        
+This module provides mechanism:
+   - to discover and characterize the interface sub-layers.
+   - to configure various attributes of these interfaces.
+   - to structure the interfaces such that various L2/L3 
+   access/security policies, network discovery policies, QoS 
+   policies and Link aggregation policies can be applied using 
+   other modules supported by the managed entity.
+        
+Glossary of the terms used:
+--------------------------- 
+TRILL   - Transparent Interconnection of Lots of Links.
+VLAN    - Virtual Local Area Network.
+Rbridge - Routing Bridge.
+ISL     - Inter switch Link.
+MTU     - Maximum transmission unit. The size of the largest 
+         packet which can be sent/received on an interface.
+LAG     - IEEE Link Aggregation (IEEE 802.1AX).
+vLAG    - virtual LAG.</text>
+  </description>
+  <reference>
+    <text>K. McCloghrie, 'The Interfaces Group MIB', RFC 2863, 
+June 2000.</text>
+  </reference>
+  <revision date="2011-07-05">
+    <description>
+      <text>Initial version of this management module.</text>
+    </description>
+  </revision>
+  <revision date="2012-04-24">
+    <description>
+      <text>Deprecated .../switchport/trunk/allowed/vlanoper.</text>
+    </description>
+  </revision>
+  <revision date="2013-04-08">
+    <description>
+      <text>Added openflow support</text>
+    </description>
+  </revision>
+  <typedef name="openflow-mode">
+    <type name="enumeration">
+      <enum name="mode-native">
+        <value value="0"/>
+      </enum>
+      <enum name="mode-hybrid">
+        <value value="1"/>
+      </enum>
+    </type>
+    <default value="mode-native"/>
+  </typedef>
+  <typedef name="ui32-vlan-range">
+    <type name="string">
+      <pattern value="(([1-9][0-9]{0,2})|([1-3][0-9]{3})|(40[0-8][0-9])|(4090))(-((1[0-9]{1,2})|([2-9][0-9]{0,2})|([1-3][0-9]{3})|(40[0-8][0-9])|(4090)))?((,((1[0-9]{1,2})|([2-9][0-9]{0,2})|([1-3][0-9]{3})|(40[0-8][0-9])|(4090))(-((1[0-9]{1,2})|([2-9][0-9]{0,2})|([1-3][0-9]{3})|(40[0-8][0-9])|(4090)))?)?)*"/>
+      <length value="1..253"/>
+    </type>
+    <description>
+      <text>The definition for specifying the vlan range.</text>
+    </description>
+  </typedef>
+  <typedef name="ui32-eldvlan-range">
+    <type name="string">
+      <pattern value="(([1-9][0-9]{0,2})|([1-7][0-9]{3})|(80[0-9]{2})|(81[0-8][0-9])|(819[01]))(-(([2-9])|([1-9][0-9]{1,2})|([1-7][0-9]{3})|(80[0-9]{2})|(81[0-8][0-9])|(819[01])))?((,(([2-9])|([1-9][0-9]{1,2})|([1-7][0-9]{3})|(80[0-9]{2})|(81[0-8][0-9])|(819[01]))(-(([3-9])|([1-9][0-9]{1,2})|([1-7][0-9]{3})|(80[0-9]{2})|(81[0-8][0-9])|(819[01])))?)?)*"/>
+      <length value="1..253"/>
+    </type>
+    <description>
+      <text>The definition for specifying the vlan range.</text>
+    </description>
+  </typedef>
+  <typedef name="ui32-range-8091">
+    <type name="string">
+      <pattern value="(([1-9][0-9]{0,2})|([1-7][0-9]{3})|(80[0-9]{2})|(81[0-8][0-9])|(819[01]))(-(([2-9])|([1-9][0-9]{1,2})|([1-7][0-9]{3})|(80[0-9]{2})|(81[0-8][0-9])|(819[01])))?((,(([2-9])|([1-9][0-9]{1,2})|([1-7][0-9]{3})|(80[0-9]{2})|(81[0-8][0-9])|(819[01]))(-(([3-9])|([1-9][0-9]{1,2})|([1-7][0-9]{3})|(80[0-9]{2})|(81[0-8][0-9])|(819[01])))?)?)*"/>
+      <length value="1..253"/>
+    </type>
+    <description>
+      <text>The definition for specifying the vlan range.</text>
+    </description>
+  </typedef>
+  <typedef name="interface-type">
+    <type name="string">
+      <pattern value="((([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-3][0-9])/)?(([0-9]|[1][0-6]))/([1-9]|[1-9][0-9])(:[1-4])?)"/>
+      <length value="3..16"/>
+    </type>
+    <description>
+      <text>The definition for specifying a network interface name in
+a VCS environment. It is in 3-tuple canonical format:
+[rbridge-id]/slot/port.</text>
+    </description>
+  </typedef>
+  <typedef name="man-interface-type">
+    <type name="string">
+      <pattern value="([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-3][0-9])/([0-9]|[1-9][0-9])"/>
+      <length value="3..16"/>
+    </type>
+    <description>
+      <text>The definition for specifying a management network 
+interface name. It is in 2-tuple format: 
+rbridge-id/port.</text>
+    </description>
+  </typedef>
+  <typedef name="vlan-type">
+    <type name="uint32">
+      <range value="1..8191"/>
+    </type>
+    <description>
+      <text>The definition for specifying a vlan identifier. This 
+represents it represents an IEEE 802.1Q VLAN-ID.</text>
+    </description>
+    <reference>
+      <text>IEEE Std 802.1Q 2003 Edition, Virtual Bridged Local Area 
+Networks.</text>
+    </reference>
+  </typedef>
+  <typedef name="dot1q-vlan-type">
+    <type name="uint32">
+      <range value="1..4092"/>
+    </type>
+    <description>
+      <text>The definition for specifying a dot1q vlan identifier. 
+This represents an IEEE 802.1Q VLAN-ID.</text>
+    </description>
+    <reference>
+      <text>IEEE Std 802.1Q 2003 Edition, Virtual Bridged Local Area
+Networks.</text>
+    </reference>
+  </typedef>
+  <typedef name="non-dot1q-vlan-type">
+    <type name="uint32">
+      <range value="4097..8191"/>
+    </type>
+    <description>
+      <text>The definition for specifying a non dot1q vlan identifier.</text>
+    </description>
+  </typedef>
+  <typedef name="ve-type">
+    <type name="uint32">
+      <range value="1..8191"/>
+    </type>
+    <description>
+      <text>The definition for specifying a ve identifier.</text>
+    </description>
+  </typedef>
+  <typedef name="portchannel-type">
+    <type name="uint32">
+      <range value="1..6144"/>
+    </type>
+    <description>
+      <text>The definition for specifying a port-channel.</text>
+    </description>
+  </typedef>
+  <typedef name="mtu-type">
+    <type name="uint32">
+      <range value="1522..9216"/>
+    </type>
+    <units name="Bytes"/>
+    <description>
+      <text>The definition for specifying the MTU in octets.</text>
+    </description>
+  </typedef>
+  <typedef name="channel-group-type">
+    <type name="uint32">
+      <range value="1..6144"/>
+    </type>
+    <description>
+      <text>The definition for specifying the LACP channel group on 
+an interface .</text>
+    </description>
+  </typedef>
+  <typedef name="port-sec-violation">
+    <type name="enumeration">
+      <enum name="no-action">
+        <value value="0"/>
+        <description>
+          <text>No action</text>
+        </description>
+      </enum>
+      <enum name="restrict">
+        <value value="1"/>
+        <description>
+          <text>Set the action as restrict</text>
+        </description>
+      </enum>
+      <enum name="shutdown">
+        <value value="2"/>
+        <description>
+          <text>Set the action as Shutdown.</text>
+        </description>
+      </enum>
+    </type>
+    <description>
+      <text>The definition for specifying the violation of a 
+port-security.</text>
+    </description>
+    <default value="no-action"/>
+  </typedef>
+  <typedef name="po-mode">
+    <type name="enumeration">
+      <enum name="active">
+        <value value="1"/>
+        <description>
+          <text>LACP negotiation enabled on a port.</text>
+        </description>
+      </enum>
+      <enum name="passive">
+        <value value="2"/>
+        <description>
+          <text>LACP negotiation disabled on a port.</text>
+        </description>
+      </enum>
+      <enum name="on">
+        <value value="3"/>
+        <description>
+          <text>LACP static link aggregation enabled on a port.</text>
+        </description>
+      </enum>
+    </type>
+    <description>
+      <text>The definition for specifying the mode of a 
+port-channel.</text>
+    </description>
+  </typedef>
+  <typedef name="po-type">
+    <type name="enumeration">
+      <enum name="standard">
+        <value value="1"/>
+        <description>
+          <text>Standards (IEEE 802.3ad) based LAG.</text>
+        </description>
+      </enum>
+      <enum name="brocade">
+        <value value="2"/>
+        <description>
+          <text>Brocade LAG.</text>
+        </description>
+      </enum>
+    </type>
+    <description>
+      <text>The definition for specifying the type of a port-channel.</text>
+    </description>
+  </typedef>
+  <typedef name="switchport-mode-type">
+    <type name="enumeration">
+      <enum name="unknown">
+        <value value="0"/>
+        <description>
+          <text>Switchport in Unknown mode.</text>
+        </description>
+      </enum>
+      <enum name="access">
+        <value value="1"/>
+        <description>
+          <text>Switchport in Access mode.</text>
+        </description>
+      </enum>
+      <enum name="trunk">
+        <value value="2"/>
+        <description>
+          <text>Switchport in Trunk mode.</text>
+        </description>
+      </enum>
+      <enum name="converged">
+        <value value="3"/>
+        <description>
+          <text>Switchport in Converged mode.</text>
+        </description>
+      </enum>
+      <enum name="pvlan-promiscuous">
+        <value value="4"/>
+        <description>
+          <text>Switchport in PVLAN promiscuous mode.</text>
+        </description>
+      </enum>
+      <enum name="pvlan-trunk-promiscuous">
+        <value value="5"/>
+        <description>
+          <text>Switchport in PVLAN trunk promiscuous mode.</text>
+        </description>
+      </enum>
+      <enum name="pvlan-host">
+        <value value="6"/>
+        <description>
+          <text>Switchport in PVLAN host mode.</text>
+        </description>
+      </enum>
+      <enum name="pvlan-trunk-host">
+        <value value="7"/>
+        <description>
+          <text>Switchport in PVLAN trunk host mode.</text>
+        </description>
+      </enum>
+      <enum name="pvlan-trunk">
+        <value value="8"/>
+        <description>
+          <text>Switchport in PVLAN trunk mode.</text>
+        </description>
+      </enum>
+    </type>
+    <description>
+      <text>The definition for specifying the mode of operation of the 
+Layer2 ethernet port.</text>
+    </description>
+  </typedef>
+  <typedef name="l2-mode-type">
+    <type name="enumeration">
+      <enum name="access">
+        <value value="1"/>
+        <description>
+          <text>Layer2 port in 'access' mode.</text>
+        </description>
+      </enum>
+      <enum name="trunk">
+        <value value="2"/>
+        <description>
+          <text>Layer2 port in 'trunking' mode.</text>
+        </description>
+      </enum>
+    </type>
+    <description>
+      <text>The definition for specifying the mode of operation of the 
+Layer2 ethernet port.
+            
+The ports are assigned to a single VLAN. These ports are 
+referred to as access ports and provide a connection for 
+end users or node devices.
+            
+The trunk links are required to pass VLAN information 
+between switches.</text>
+    </description>
+  </typedef>
+  <typedef name="allowed-vlan-oper-type">
+    <type name="enumeration">
+      <enum name="add">
+        <value value="1"/>
+      </enum>
+      <enum name="remove">
+        <value value="2"/>
+      </enum>
+      <enum name="except">
+        <value value="3"/>
+      </enum>
+    </type>
+    <description>
+      <text>The definition to specify allowed vlan  on a ethernet 
+port.</text>
+    </description>
+  </typedef>
+  <typedef name="fc-speed-cfg-type">
+    <type name="enumeration">
+      <enum name="auto">
+        <value value="0"/>
+      </enum>
+      <enum name="1gbps">
+        <value value="1"/>
+      </enum>
+      <enum name="2gbps">
+        <value value="2"/>
+      </enum>
+      <enum name="4gbps">
+        <value value="4"/>
+      </enum>
+      <enum name="8gbps">
+        <value value="5"/>
+      </enum>
+    </type>
+    <default value="auto"/>
+  </typedef>
+  <typedef name="fc-fillword-cfg-type">
+    <type name="enumeration">
+      <enum name="idle-idle">
+        <value value="0"/>
+      </enum>
+      <enum name="arbff-arbff">
+        <value value="1"/>
+      </enum>
+      <enum name="idle-arbff">
+        <value value="2"/>
+      </enum>
+      <enum name="aa-then-ia">
+        <value value="3"/>
+      </enum>
+    </type>
+    <default value="idle-idle"/>
+  </typedef>
+  <typedef name="desire-distance-type">
+    <type name="uint32"/>
+    <description>
+      <text>To configure the desired distance.</text>
+    </description>
+  </typedef>
+  <typedef name="interface-fc-config-mode-type">
+    <type name="enumeration">
+      <enum name="auto">
+        <value value="1"/>
+        <description>
+          <text>Configures the port as a G-Port (locked).</text>
+        </description>
+      </enum>
+      <enum name="eport">
+        <value value="2"/>
+        <description>
+          <text>Configures the port as a E-Port (locked).</text>
+        </description>
+      </enum>
+      <enum name="nport">
+        <value value="3"/>
+        <description>
+          <text>Configures the port as a N-Port (locked).</text>
+        </description>
+      </enum>
+      <enum name="fport">
+        <value value="4"/>
+        <description>
+          <text>Configures the port as a F-Port (locked).</text>
+        </description>
+      </enum>
+    </type>
+    <default value="auto"/>
+  </typedef>
+  <typedef name="fc-long-distance-cfg-type">
+    <type name="enumeration">
+      <enum name="l0">
+        <value value="0"/>
+      </enum>
+      <enum name="le">
+        <value value="3"/>
+      </enum>
+      <enum name="ld">
+        <value value="5"/>
+      </enum>
+      <enum name="ls">
+        <value value="6"/>
+      </enum>
+    </type>
+    <default value="l0"/>
+  </typedef>
+  <typedef name="fc-vc-link-init-cfg-type">
+    <type name="enumeration">
+      <enum name="idle">
+        <value value="0"/>
+      </enum>
+      <enum name="arb">
+        <value value="1"/>
+      </enum>
+    </type>
+    <default value="idle"/>
+  </typedef>
+  <typedef name="vlan-range-cli-pattern">
+    <type name="string">
+      <pattern value="(((([1-9][0-9]{0,2})|([1-7][0-9]{3})|(80[0-9]{2})|(81[0-8][0-9])|(819[01]))(,((([2-9])|([1-9][0-9]{1,2})|([1-7][0-9]{3})|(80[0-9]{2})|(81[0-8][0-9])|(819[01]))(-(([3-9])|([1-9][0-9]{1,2})|([1-7][0-9]{3})|(80[0-9]{2})|(81[0-8][0-9])|(819[01])))?)+))|(((([1-9][0-9]{0,2})|([1-7][0-9]{3})|(80[0-9]{2})|(81[0-8][0-9])|(819[01]))-(([2-9])|([1-9][0-9]{1,2})|([1-7][0-9]{3})|(80[0-9]{2})|(81[0-8][0-9])|(819[01])))(,(([3-9])|([1-9][0-9]{1,2})|([1-7][0-9]{3})|(80[0-9]{2})|(81[0-8][0-9])|(819[01]))(-(([4-9])|([1-9][0-9]{1,2})|([1-7][0-9]{3})|(80[0-9]{2})|(81[0-8][0-9])|(819[01])))?)*))"/>
+      <length value="1..253"/>
+    </type>
+  </typedef>
+  <typedef name="port-channel-range-cli-pattern">
+    <type name="string">
+      <pattern value="((([1-9][0-9]{0,2})|([1-5][0-9]{3})|(60[0-9][0-9])|(61[0-3][0-9])|(614[0-4]))(-(([1-9][0-9]{0,2})|([1-5][0-9]{3})|(60[0-9][0-9])|(61[0-3][0-9])|(614[0-4]))){1})|((([1-9][0-9]{0,2})|([1-5][0-9]{3})|(60[0-9][0-9])|(61[0-3][0-9])|(614[0-4]))(-(([1-9][0-9]{0,2})|([1-5][0-9]{3})|(60[0-9][0-9])|(61[0-3][0-9])|(614[0-4])))?)((,(([1-9][0-9]{0,2})|([1-5][0-9]{3})|(60[0-9][0-9])|(61[0-3][0-9])|(614[0-4]))(-(([1-9][0-9]{0,2})|([1-5][0-9]{3})|(60[0-9][0-9])|(61[0-3][0-9])|(614[0-4])))?){1})+"/>
+      <length value="1..253"/>
+    </type>
+    <description>
+      <text>The definition for specifying the port-channel range.</text>
+    </description>
+  </typedef>
+  <typedef name="phy-interface-range-cli-pattern">
+    <type name="string">
+      <pattern value="((([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-3][0-9])/)?(([0-9]|[1][0-6]))/([1-9]|[1-9][0-9]))(-([1-9]|[1-9][0-9])){1}|((([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-3][0-9])/)?(([0-9]|[1][0-6]))/([1-9]|[1-9][0-9]))((-([1-9]|[1-9][0-9]))?)((,([1-9]|[1-9][0-9])(-([1-9]|[1-9][0-9]))?){1})+"/>
+      <length value="1..253"/>
+    </type>
+    <description>
+      <text>The definition for specifying the Physical Interface range.</text>
+    </description>
+  </typedef>
+  <typedef name="fcoe-interface-range">
+    <type name="string">
+      <pattern value="(([1-9][0-9]{0,2}|[1-7][0-9]{3}|80[0-9]{2}|81[0-8][0-9]|819[0-2])/([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-3][0-9])/([1-9][0-9]{0,2}|1000))(-([1-9][0-9]{0,2}|1000)){1}|(([1-9][0-9]{0,2}|[1-7][0-9]{3}|80[0-9]{2}|81[0-8][0-9]|819[0-2])/([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-3][0-9])/([1-9][0-9]{0,2}|1000))((-([1-9][0-9]{0,2}|1000))?)((,([1-9][0-9]{0,2}|1000)(-([1-9][0-9]{0,2}|1000))?){1})+"/>
+      <length value="1..253"/>
+    </type>
+    <description>
+      <text>The definition for specifying the FCoE Interface range.</text>
+    </description>
+  </typedef>
+  <typedef name="fc-interface-range-cli-pattern">
+    <type name="string">
+      <pattern value="((([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-3][0-9])/)?(([0-9]|[1][0-6]))/([1-9]|[1-9][0-9]))(-(([2-9])|([1-9][0-9]))){1}|((([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-3][0-9])/)?(([0-9]|[1][0-6]))/([1-9]|[1-9][0-9]))((-(([2-9])|([1-9][0-9])))?)((,(([2-9])|([1-9][0-9]))(-(([2-9])|([1-9][0-9])))?){1})+"/>
+      <length value="1..253"/>
+    </type>
+    <description>
+      <text>The definition for specifying the fibrechannel Interface range.</text>
+    </description>
+  </typedef>
+  <typedef name="mac-address-type">
+    <type name="string"/>
+  </typedef>
+  <typedef name="mac-group-id-type">
+    <type name="uint32">
+      <range value="1..500"/>
+    </type>
+    <description>
+      <text>The definition for specifying a mac-group-id.</text>
+    </description>
+  </typedef>
+  <container name="interface">
+    <description>
+      <text>All the interface related elements of this managed device
+grouped under this container.</text>
+    </description>
+  </container>
+  <container name="interface-vlan">
+    <description>
+      <text>An intermediary node that separates the vlan related 
+elements of this managed device.</text>
+    </description>
+    <container name="interface">
+      <description>
+        <text>The vlan interface configurations/data of this managed
+device.</text>
+      </description>
+    </container>
+  </container>
+  <container name="protocol"/>
+  <container name="reserved-vlan">
+    <leaf name="reserved-vlan-start">
+      <type name="uint32">
+        <range value="1..4090"/>
+      </type>
+    </leaf>
+    <leaf name="reserved-vlan-end">
+      <type name="uint32">
+        <range value="1..4090"/>
+      </type>
+    </leaf>
+  </container>
+  <grouping name="interface-name-info">
+    <description>
+      <text>This denotes an interface name qualified with the type of 
+the interface. This grouping can be used to indicate 
+physical or logical interfaces.</text>
+    </description>
+    <leaf name="interface-type">
+      <type name="enumeration">
+        <enum name="unknown">
+          <value value="1"/>
+        </enum>
+        <enum name="gigabitethernet">
+          <value value="2"/>
+        </enum>
+        <enum name="tengigabitethernet">
+          <value value="3"/>
+        </enum>
+        <enum name="fortygigabitethernet">
+          <value value="4"/>
+        </enum>
+        <enum name="port-channel">
+          <value value="5"/>
+        </enum>
+        <enum name="l2vlan">
+          <value value="6"/>
+        </enum>
+        <enum name="loopback">
+          <value value="7"/>
+        </enum>
+        <enum name="fibrechannel">
+          <value value="8"/>
+        </enum>
+      </type>
+      <description>
+        <text>The type of the interface. An 'unknown' type 
+represents error scenario and should not be used.</text>
+      </description>
+    </leaf>
+    <leaf name="interface-name">
+      <type name="union">
+        <type name="brocade-interface:interface-type"/>
+        <type name="brocade-interface:portchannel-type"/>
+        <type name="brocade-interface:vlan-type"/>
+      </type>
+      <description>
+        <text>The Interface value. The interface value is always 
+interpreted within the context of the value of 
+'interface-type' leaf:
+
+interface-type         interface-name
+-----------------      --------------------
+gigabitethernet        [mapped-id]/slot/port
+tengigabitethernet     [mapped-id]/slot/port
+fortygigabitethernet   [mapped-id]/slot/port
+port-channel           Port channel ID
+l2vlan                 Vlan ID
+unknown                Zero-length string.
+
+The value of an 'interface-name' must always be 
+consistent with the value of the associated 
+'interface-type'.  Attempts to set an interface-name
+to a value inconsistent with the associated 
+'interface-type' must fail with an error.</text>
+      </description>
+    </leaf>
+  </grouping>
+  <augment target-node="/interface-vlan/interface">
+    <list name="vlan">
+      <key value="name"/>
+      <description>
+        <text>The list of vlans in the managed device. Each row 
+represents a vlan. User can create/delete an entry in 
+to this list.</text>
+      </description>
+      <leaf name="name">
+        <type name="vlan-type"/>
+        <description>
+          <text>The vlan identifier.</text>
+        </description>
+      </leaf>
+    </list>
+    <list name="ve">
+      <key value="name"/>
+      <description>
+        <text>The list of ve interfaces in the managed device. Each row 
+represents a ve interface. User can create/delete an entry in 
+to this list.</text>
+      </description>
+      <leaf name="name">
+        <type name="ve-type"/>
+      </leaf>
+    </list>
+  </augment>
+  <grouping name="interface-vrf-config">
+    <container name="vrf">
+      <leaf name="forwarding">
+        <type name="common-def:vrf-name"/>
+        <description>
+          <text>This specifies the VRF that needs to be associated
+with interface.</text>
+        </description>
+      </leaf>
+    </container>
+  </grouping>
+  <grouping name="phy-interface-parameters">
+    <leaf name="cee">
+      <type name="common-def:name-string32"/>
+      <description>
+        <text>The CEE map associated with this physical 
+interface.</text>
+      </description>
+    </leaf>
+    <leaf name="speed">
+      <type name="enumeration">
+        <enum name="auto">
+          <value value="0"/>
+          <description>
+            <text>Auto negotiated.</text>
+          </description>
+        </enum>
+        <enum name="1000">
+          <value value="1"/>
+          <description>
+            <text>1 Gigabit per second.</text>
+          </description>
+        </enum>
+        <enum name="10000">
+          <value value="2"/>
+          <description>
+            <text>10 Gigabit per second.</text>
+          </description>
+        </enum>
+      </type>
+      <default value="auto"/>
+      <description>
+        <text>This leaf specifies the administratively configured
+bandwidth for this physical interface.</text>
+      </description>
+    </leaf>
+  </grouping>
+  <grouping name="fortygig-interface-parameters">
+    <leaf name="cee">
+      <type name="common-def:name-string32"/>
+      <description>
+        <text>The CEE map associated with this physical
+interface.</text>
+      </description>
+    </leaf>
+  </grouping>
+  <augment target-node="/interface">
+    <list name="gigabitethernet">
+      <ordered-by value="user"/>
+      <key value="name"/>
+      <description>
+        <text>The list of 1 GigabitEthernet interfaces in the 
+managed device. Each row represents a 1 GigabitEthernet 
+interface. The list provides a way to discover all the 
+1G physical interfaces in a managed device.
+                
+In case of logical-switch (VCS cluster), this list 
+comprises of all the 1G physical interfaces across 
+all the rbridges in the cluster.</text>
+      </description>
+      <leaf name="name">
+        <type name="interface-type"/>
+        <description>
+          <text>The name of the 1G ethernet interface.</text>
+        </description>
+      </leaf>
+    </list>
+    <list name="tengigabitethernet">
+      <ordered-by value="user"/>
+      <key value="name"/>
+      <description>
+        <text>The list of 10 GigabitEthernet interfaces in the 
+managed device. Each row represents a 10 GigabitEthernet 
+interface. The list provides a way to discover all the 
+1G physical interfaces in a managed device.
+                
+In case of logical-switch (VCS cluster), this list 
+comprises of all the 10G physical interfaces across 
+all the rbridges in the cluster.</text>
+      </description>
+      <leaf name="name">
+        <type name="interface-type"/>
+      </leaf>
+      <leaf name="long-distance-isl">
+        <type name="enumeration">
+          <enum name="2000">
+            <value value="2000"/>
+            <description>
+              <text>2000 meter distance link (Warning: It May disable other ISLs in the port group)</text>
+            </description>
+          </enum>
+          <enum name="5000">
+            <value value="5000"/>
+            <description>
+              <text>5000 meter distance link (Warning: It May disable other ISLs in the port group)</text>
+            </description>
+          </enum>
+          <enum name="10000">
+            <value value="10000"/>
+            <description>
+              <text>10,000 meter distance link (Warning: It May disable other ISLs in the port group)</text>
+            </description>
+          </enum>
+          <enum name="30000">
+            <value value="30000"/>
+            <description>
+              <text>30,000 meter distance link (Warning: It May disable other ISLs in the port group and DCB/FCoE capabilities will no longer be supported)</text>
+            </description>
+          </enum>
+        </type>
+        <description>
+          <text>Configure the link as long-distance-link</text>
+        </description>
+      </leaf>
+      <uses name="phy-interface-parameters"/>
+    </list>
+    <list name="fortygigabitethernet">
+      <ordered-by value="user"/>
+      <key value="name"/>
+      <description>
+        <text>The list of 40 GigabitEthernet interfaces in the 
+managed device. Each row represents a 40 GigabitEthernet 
+interface. The list provides a way to discover all the 
+1G physical interfaces in a managed device.
+                
+In case of logical-switch (VCS cluster), this list 
+comprises of all the 40G physical interfaces across 
+all the rbridges in the cluster.</text>
+      </description>
+      <leaf name="name">
+        <type name="interface-type"/>
+      </leaf>
+      <uses name="fortygig-interface-parameters"/>
+    </list>
+    <list name="port-channel">
+      <ordered-by value="user"/>
+      <key value="name"/>
+      <description>
+        <text>The list of port-channels in the managed device. Each
+entry represents a port-channel.</text>
+      </description>
+      <leaf name="name">
+        <type name="portchannel-type"/>
+        <description>
+          <text>The port-channel identifier.</text>
+        </description>
+      </leaf>
+      <leaf name="cee">
+        <type name="common-def:name-string32"/>
+        <description>
+          <text>The CEE map associated with this port-channel 
+interface.</text>
+        </description>
+      </leaf>
+      <container name="vlag">
+        <description>
+          <text>The vLAG properties for this port-channel.</text>
+        </description>
+        <leaf name="ignore-split">
+          <type name="empty"/>
+        </leaf>
+      </container>
+      <leaf name="po-speed">
+        <type name="enumeration">
+          <enum name="1000">
+            <value value="1"/>
+            <description>
+              <text>1Gbps.</text>
+            </description>
+          </enum>
+          <enum name="10000">
+            <value value="2"/>
+            <description>
+              <text>10Gbps.</text>
+            </description>
+          </enum>
+          <enum name="40000">
+            <value value="3"/>
+            <description>
+              <text>40Gbps.</text>
+            </description>
+          </enum>
+        </type>
+        <default value="10000"/>
+        <description>
+          <text>This specifies the administratively configured
+bandwidth for this physical interface.</text>
+        </description>
+      </leaf>
+    </list>
+    <list name="management">
+      <max-elements value="1024"/>
+      <key value="name"/>
+      <description>
+        <text>The list of management interfaces in the managed 
+device. Each row represents a management interface.</text>
+      </description>
+      <leaf name="name">
+        <type name="man-interface-type"/>
+        <description>
+          <text>The name of the management interface.</text>
+        </description>
+      </leaf>
+      <container name="ip">
+        <description>
+          <text>The IPv4 configurations for this management 
+interface.</text>
+        </description>
+        <container name="icmp">
+          <description>
+            <text>The ICMP control for this management interface.</text>
+          </description>
+          <leaf name="unreachable">
+            <type name="empty"/>
+            <description>
+              <text>To enable generating ICMP Destination Unreachable message.</text>
+            </description>
+          </leaf>
+          <leaf name="echo_reply">
+            <type name="empty"/>
+            <description>
+              <text>To enable sending ICMP Echo Reply in response Echo Request.</text>
+            </description>
+          </leaf>
+          <leaf name="rate_limiting">
+            <type name="uint32"/>
+            <default value="1000"/>
+            <description>
+              <text>To enable ICMP incoming packet response rate limiting</text>
+            </description>
+          </leaf>
+        </container>
+        <container name="address">
+          <description>
+            <text>The IPv4 address configuration for this 
+management interface.</text>
+          </description>
+          <leaf name="dhcp">
+            <type name="empty"/>
+            <description>
+              <text>This specifies if DHCP is enabled or not.
+The presence of this leaf indicates that 
+this interface is configured for DHCP.</text>
+            </description>
+          </leaf>
+          <leaf name="ip-address">
+            <type name="common-def:ipv4-address-prefix-type"/>
+            <description>
+              <text>This specifies the IP address for this 
+management interface.</text>
+            </description>
+          </leaf>
+        </container>
+        <container name="gateway">
+          <description>
+            <text>The IP gateway configurations for this 
+management interface.</text>
+          </description>
+          <leaf name="gateway-address">
+            <type name="inet:ipv4-address"/>
+            <description>
+              <text>The gateway IP address for this management
+interface.</text>
+            </description>
+          </leaf>
+        </container>
+        <container name="oper-address">
+          <leaf name="oper-ip-address">
+            <type name="common-def:ipv4-address-prefix-type"/>
+            <config value="false"/>
+            <description>
+              <text>The assigned IPv4 address.</text>
+            </description>
+          </leaf>
+        </container>
+        <container name="oper-gateway-con">
+          <leaf name="oper-gateway">
+            <type name="inet:ipv4-address"/>
+            <config value="false"/>
+            <description>
+              <text>The assigned gateway address.</text>
+            </description>
+          </leaf>
+        </container>
+      </container>
+      <container name="ipv6">
+        <description>
+          <text>The IPv6 configurations for this management 
+interface.</text>
+        </description>
+        <container name="icmpv6">
+          <description>
+            <text>The ICMPv6 control for this management interface.</text>
+          </description>
+          <leaf name="v6_unreachable">
+            <type name="empty"/>
+            <description>
+              <text>To enable generating ICMPv6 Destination Unreachable message.</text>
+            </description>
+          </leaf>
+          <leaf name="v6_echo_reply">
+            <type name="empty"/>
+            <description>
+              <text>To enable sending ICMPv6 Echo Reply in response Echo Request.</text>
+            </description>
+          </leaf>
+          <leaf name="v6_rate_limiting">
+            <type name="uint32"/>
+            <default value="1000"/>
+            <description>
+              <text>To enable ICMPv6 incoming rate limiting</text>
+            </description>
+          </leaf>
+        </container>
+        <container name="ipv6-address-cont">
+          <description>
+            <text>The IPv6 address configuration for this 
+management interface.</text>
+          </description>
+          <leaf name="ipv6-global-address">
+            <type name="common-def:ipv6-address-prefix"/>
+            <description>
+              <text>IPv6 global address for this management 
+interface.</text>
+            </description>
+          </leaf>
+          <leaf name="autoconfig">
+            <type name="empty"/>
+            <description>
+              <text>This specifies if this auto-configuration 
+for IP address allocation is enabled or not.
+The presence of this leaf indicates that 
+the auto-configuration is enabled.</text>
+            </description>
+          </leaf>
+          <leaf name="dhcpv6">
+            <type name="empty"/>
+            <description>
+              <text>This specifies if this ipv6 dhcp is enabled 
+or not. The presence of this leaf indicates that 
+the ipv6 dhcp is enabled.</text>
+            </description>
+          </leaf>
+        </container>
+        <leaf-list name="ipv6-address">
+          <type name="string"/>
+          <config value="false"/>
+          <description>
+            <text>The list of IPv6 addresses assigned for this 
+management interface.</text>
+          </description>
+        </leaf-list>
+        <leaf-list name="ipv6-gateways">
+          <type name="string"/>
+          <config value="false"/>
+          <description>
+            <text>The list of IPv6 gateways assigned for this 
+management interface.</text>
+          </description>
+        </leaf-list>
+      </container>
+      <leaf name="speed">
+        <type name="enumeration">
+          <enum name="auto">
+            <value value="0"/>
+            <description>
+              <text>Auto-negotiation.</text>
+            </description>
+          </enum>
+          <enum name="10">
+            <value value="1"/>
+            <description>
+              <text>10 Mbps Full Duplex</text>
+            </description>
+          </enum>
+          <enum name="100">
+            <value value="2"/>
+            <description>
+              <text>100 Mbps Full Duplex</text>
+            </description>
+          </enum>
+        </type>
+        <default value="auto"/>
+        <description>
+          <text>This specifies the administratively configured
+bandwidth for this management interface.</text>
+        </description>
+      </leaf>
+      <container name="line-speed">
+        <description>
+          <text>The line-speed characteristics for this management 
+interface.</text>
+        </description>
+        <leaf name="actual">
+          <config value="false"/>
+          <type name="string"/>
+          <description>
+            <text>The actual line-speed for this management 
+interface.</text>
+          </description>
+        </leaf>
+        <leaf name="configured">
+          <config value="false"/>
+          <type name="string"/>
+          <description>
+            <text>The configured line-speed for this management 
+interface.</text>
+          </description>
+        </leaf>
+      </container>
+    </list>
+    <list name="fc-port">
+      <ordered-by value="user"/>
+      <key value="name"/>
+      <description>
+        <text>The list of fibrechannel interfaces in the managed
+device. Each row represents a fibrechannel interface.
+The list provides a way to discover all the fibrechannel interfaces
+in a managed device.</text>
+      </description>
+      <leaf name="name">
+        <type name="interface-type"/>
+        <description>
+          <text>The name of the fibrechannel interface.</text>
+        </description>
+      </leaf>
+    </list>
+  </augment>
+  <grouping name="po-minimum-links-group">
+    <description>
+      <text>This specifies the minimum link group.</text>
+    </description>
+    <leaf name="minimum-links">
+      <type name="uint32"/>
+      <default value="1"/>
+      <description>
+        <text>The least number of operationally 'UP' links to 
+indicate port-channel being UP.</text>
+      </description>
+    </leaf>
+  </grouping>
+  <grouping name="interface-po-group">
+    <description>
+      <text>The interface level configurations to setup a 
+port-channel.</text>
+    </description>
+    <container name="channel-group">
+      <description>
+        <text>A container of configuration leaf elements for managing
+the channel-group membership.</text>
+      </description>
+      <leaf name="port-int">
+        <type name="portchannel-type"/>
+        <description>
+          <text>The port channel number.</text>
+        </description>
+      </leaf>
+      <leaf name="mode">
+        <type name="po-mode"/>
+        <description>
+          <text>The mode of the port channel.</text>
+        </description>
+      </leaf>
+      <leaf name="type">
+        <type name="po-type"/>
+        <description>
+          <text>The type of the port-channel.</text>
+        </description>
+      </leaf>
+    </container>
+  </grouping>
+  <grouping name="allowed-vlan-add-group">
+    <description>
+      <text>A set of elements defining the vlan access policy.</text>
+    </description>
+    <container name="allowed">
+      <description>
+        <text>Set the VLANs that will Xmit/Rx through the Layer2
+interface</text>
+      </description>
+      <container name="vlan">
+        <leaf name="all">
+          <type name="empty"/>
+          <description>
+            <text>This is to specify all vlans or not.
+Presence of this leaf indicates all
+vlans are allowed.</text>
+          </description>
+        </leaf>
+        <leaf name="none">
+          <type name="empty"/>
+          <description>
+            <text>This is to specify 'no vlans' or not. 
+Presence of this leaf indicates no
+vlans are allowed.</text>
+          </description>
+        </leaf>
+        <leaf name="add">
+          <type name="ui32-vlan-range"/>
+          <description>
+            <text>This specifies list of vlans to 
+be added.</text>
+          </description>
+        </leaf>
+        <leaf name="except">
+          <type name="ui32-vlan-range"/>
+          <description>
+            <text>This specifies exception list of 
+vlans.</text>
+          </description>
+        </leaf>
+        <leaf name="remove">
+          <type name="ui32-vlan-range"/>
+          <description>
+            <text>This specifies the list of vlans 
+to be removed.</text>
+          </description>
+        </leaf>
+      </container>
+      <container name="vlanoper">
+        <status value="deprecated"/>
+        <description>
+          <text>DEPRECATED
+NOS2.1.0 style data model for allowed vlans.
+Do not use in edit-config.</text>
+        </description>
+        <container name="vlan">
+          <leaf name="add">
+            <type name="ui32-vlan-range"/>
+          </leaf>
+          <leaf name="remove">
+            <type name="ui32-vlan-range"/>
+          </leaf>
+        </container>
+      </container>
+    </container>
+  </grouping>
+  <grouping name="gvlan-allowed-vlan-add-group">
+    <description>
+      <text>A set of elements defining the vlan access policy.</text>
+    </description>
+    <container name="gvlan">
+      <container name="allowed">
+        <description>
+          <text>Set the VLANs that will Xmit/Rx through the Layer2
+interface</text>
+        </description>
+        <container name="vlan">
+          <list name="add">
+            <key value="gvlan-trunk-vlan-id gvlan-trunk-ctag-id"/>
+            <leaf name="gvlan-trunk-vlan-id">
+              <type name="non-dot1q-vlan-type"/>
+            </leaf>
+            <leaf name="gvlan-trunk-ctag-id">
+              <type name="dot1q-vlan-type"/>
+            </leaf>
+          </list>
+          <list name="remove">
+            <key value="gvlan-trunk-vlan-id gvlan-trunk-ctag-id"/>
+            <leaf name="gvlan-trunk-vlan-id">
+              <type name="non-dot1q-vlan-type"/>
+            </leaf>
+            <leaf name="gvlan-trunk-ctag-id">
+              <type name="dot1q-vlan-type"/>
+            </leaf>
+          </list>
+        </container>
+      </container>
+    </container>
+  </grouping>
+  <grouping name="interface-sw-trunk-rspan-group">
+    <description>
+      <text>Common grouping for the switchport trunk rspan commands</text>
+    </description>
+    <container name="rspan-vlan">
+      <description>
+        <text>configure a rspan-vlan</text>
+      </description>
+      <leaf name="add-rspan-trunk-vlan">
+        <type name="ui32-vlan-range"/>
+        <description>
+          <text>Specify rspan-vlan id</text>
+        </description>
+      </leaf>
+      <leaf name="remove-rspan-trunk-vlan">
+        <type name="ui32-vlan-range"/>
+        <description>
+          <text>This specifies the list of rspan vlans to be removed.</text>
+        </description>
+      </leaf>
+    </container>
+  </grouping>
+  <grouping name="interface-sw-access-rspan-group">
+    <description>
+      <text>Common grouping for the switchport access rspan commands</text>
+    </description>
+    <container name="rspan-access">
+      <description>
+        <text>The access layer characteristics of this 
+interface.</text>
+      </description>
+      <leaf name="rspan-access-vlan">
+        <type name="vlan-type"/>
+        <default value="1"/>
+        <description>
+          <text>Specify rspan-vlan id to set as access vlan</text>
+        </description>
+      </leaf>
+    </container>
+  </grouping>
+  <grouping name="interface-sw-trunk-rspan-gvlan-group">
+    <description>
+      <text>A set of elements defining the vlan access policy.</text>
+    </description>
+    <container name="gvlan">
+      <container name="rspan-vlan">
+        <list name="add">
+          <key value="rspan-gvlan-trunk-vlan-id rspan-gvlan-trunk-ctag-id"/>
+          <leaf name="rspan-gvlan-trunk-vlan-id">
+            <type name="non-dot1q-vlan-type"/>
+          </leaf>
+          <leaf name="rspan-gvlan-trunk-ctag-id">
+            <type name="dot1q-vlan-type"/>
+          </leaf>
+        </list>
+        <list name="remove">
+          <key value="rspan-gvlan-trunk-remove-vlan-id rspan-gvlan-trunk-remove-ctag-id"/>
+          <leaf name="rspan-gvlan-trunk-remove-vlan-id">
+            <type name="non-dot1q-vlan-type"/>
+          </leaf>
+          <leaf name="rspan-gvlan-trunk-remove-ctag-id">
+            <type name="dot1q-vlan-type"/>
+          </leaf>
+        </list>
+      </container>
+    </container>
+  </grouping>
+  <grouping name="interface-sw-access-rspan-gvlan-group">
+    <description>
+      <text>Common grouping for the switchport access rspan commands</text>
+    </description>
+    <container name="rspan-gvlan-mac-address">
+      <container name="access">
+        <description>
+          <text>The access layer characteristics of this interface.</text>
+        </description>
+        <list name="mac-addr-rspan-vlan">
+          <key value="rspan-mac-address-classification-vlan rspan-mac-address-classification-address"/>
+          <leaf name="rspan-mac-address-classification-vlan">
+            <type name="vlan-type"/>
+            <description>
+              <text>Set the default VLAN for the interface</text>
+            </description>
+          </leaf>
+          <leaf name="rspan-mac-address-classification-address">
+            <type name="mac-address-type"/>
+            <description>
+              <text>Associate the Mac address with a vlan</text>
+            </description>
+          </leaf>
+        </list>
+      </container>
+    </container>
+    <container name="rspan-gvlan-mac-group">
+      <container name="access">
+        <description>
+          <text>The access layer characteristics of this interface.</text>
+        </description>
+        <list name="mac-group-rspan-vlan">
+          <key value="rspan-mac-group-classification-vlan rspan-mac-group-classification-group"/>
+          <leaf name="rspan-mac-group-classification-vlan">
+            <type name="vlan-type"/>
+            <description>
+              <text>Set the default VLAN for the interface</text>
+            </description>
+          </leaf>
+          <leaf name="rspan-mac-group-classification-group">
+            <type name="mac-group-id-type"/>
+            <description>
+              <text>Associate a Mac group with a vlan</text>
+            </description>
+          </leaf>
+        </list>
+      </container>
+    </container>
+  </grouping>
+  <grouping name="secure-macs">
+    <description>
+      <text>List of secure MACs</text>
+    </description>
+    <list name="port-secutiry-mac-address">
+      <description>
+        <text>Mac Address commands</text>
+      </description>
+      <key value="mac-address port-sec-vlan"/>
+      <leaf name="mac-address">
+        <description>
+          <text>MAC address</text>
+        </description>
+        <type name="mac-address-type"/>
+      </leaf>
+      <leaf name="port-sec-vlan">
+        <type name="vlan-type"/>
+        <description>
+          <text>Vlan is for MAC address</text>
+        </description>
+      </leaf>
+    </list>
+  </grouping>
+  <grouping name="interface-eth-po-group">
+    <description>
+      <text>The common grouping to characterize a physical/logical
+interface.</text>
+    </description>
+    <leaf name="mtu">
+      <type name="mtu-type"/>
+      <default value="2500"/>
+      <description>
+        <text>The size of the largest packet which can be sent/
+received on the interface, specified in bytes.  
+For interfaces that are used for transmitting network
+datagrams, this is the size of the largest network 
+datagram that can be sent on the interface.</text>
+      </description>
+    </leaf>
+    <container name="openflow">
+      <leaf name="openflow-enable">
+        <type name="empty"/>
+      </leaf>
+    </container>
+    <container name="switchport">
+      <description>
+        <text>The L2 switching characteristics of an interface.</text>
+      </description>
+      <leaf name="basic">
+        <type name="empty"/>
+      </leaf>
+      <container name="port-security">
+        <presence value="true"/>
+        <description>
+          <text>Enable port-security feature</text>
+        </description>
+        <leaf name="port-sec-max">
+          <description>
+            <text>Maximum number of allowed MACs</text>
+          </description>
+          <type name="uint32"/>
+        </leaf>
+        <leaf name="port-sec-violation">
+          <type name="port-sec-violation"/>
+          <description>
+            <text>Set the action on violation</text>
+          </description>
+        </leaf>
+        <uses name="secure-macs"/>
+        <container name="sticky">
+          <presence value="true"/>
+          <description>
+            <text>Sticky MAC</text>
+          </description>
+          <uses name="secure-macs"/>
+        </container>
+        <list name="allowed-ouis">
+          <description>
+            <text>List of allowed OUIs</text>
+          </description>
+          <key value="oui"/>
+          <leaf name="oui">
+            <description>
+              <text>OUI, only from this vendor traffic will be allowed</text>
+            </description>
+            <type name="mac-address-type"/>
+          </leaf>
+        </list>
+        <leaf name="shutdown-time">
+          <type name="uint32"/>
+          <description>
+            <text>Shutdown time for port</text>
+          </description>
+        </leaf>
+      </container>
+      <container name="mode">
+        <description>
+          <text>The mode of the Layer2 interface.</text>
+        </description>
+        <leaf name="vlan-mode">
+          <type name="l2-mode-type"/>
+          <description>
+            <text>The access/trunk mode of this interface.</text>
+          </description>
+        </leaf>
+        <container name="private-vlan">
+          <container name="private-vlan-trunk">
+            <leaf name="trunk-basic">
+              <type name="empty"/>
+            </leaf>
+            <leaf name="trunk-promiscuous">
+              <type name="empty"/>
+            </leaf>
+            <leaf name="trunk-host">
+              <type name="empty"/>
+            </leaf>
+          </container>
+          <leaf name="promiscuous">
+            <type name="empty"/>
+          </leaf>
+          <leaf name="host">
+            <type name="empty"/>
+          </leaf>
+        </container>
+      </container>
+      <container name="access">
+        <description>
+          <text>The access layer characteristics of this 
+interface.</text>
+        </description>
+        <leaf name="accessvlan">
+          <type name="vlan-type"/>
+          <description>
+            <text>This specifies the access vlan for this 
+interface.</text>
+          </description>
+        </leaf>
+      </container>
+      <container name="gvlan">
+        <container name="access">
+          <description>
+            <text>The access layer characteristics of this 
+interface.</text>
+          </description>
+          <list name="vlan">
+            <key value="access-gvlan index-address"/>
+            <leaf name="access-gvlan">
+              <type name="vlan-type"/>
+              <description>
+                <text>Set the default VLAN for the interface</text>
+              </description>
+            </leaf>
+            <leaf name="index-address">
+              <type name="mac-address-type"/>
+              <description>
+                <text>Associate the Mac address with a vlan</text>
+              </description>
+            </leaf>
+          </list>
+        </container>
+        <container name="private-vlan">
+          <container name="trunk">
+            <container name="allowed">
+              <description>
+                <text>Set the VLANs that will Xmit/Rx through the Layer2 interface</text>
+              </description>
+              <container name="vlan">
+                <list name="add">
+                  <key value="gvlan-trunk-vlan-id gvlan-trunk-ctag-id"/>
+                  <leaf name="gvlan-trunk-vlan-id">
+                    <type name="non-dot1q-vlan-type"/>
+                  </leaf>
+                  <leaf name="gvlan-trunk-ctag-id">
+                    <type name="dot1q-vlan-type"/>
+                  </leaf>
+                </list>
+                <list name="remove">
+                  <key value="gvlan-trunk-vlan-id gvlan-trunk-ctag-id"/>
+                  <leaf name="gvlan-trunk-vlan-id">
+                    <type name="non-dot1q-vlan-type"/>
+                  </leaf>
+                  <leaf name="gvlan-trunk-ctag-id">
+                    <type name="dot1q-vlan-type"/>
+                  </leaf>
+                </list>
+              </container>
+            </container>
+          </container>
+        </container>
+      </container>
+      <container name="mac-group">
+        <container name="access">
+          <description>
+            <text>The access layer characteristics of this 
+interface.</text>
+          </description>
+          <list name="mac-group-vlan">
+            <key value="mac-group-classification-vlan mac-group-classification-group"/>
+            <leaf name="mac-group-classification-vlan">
+              <type name="vlan-type"/>
+              <description>
+                <text>Set the default VLAN for the interface</text>
+              </description>
+            </leaf>
+            <leaf name="mac-group-classification-group">
+              <type name="mac-group-id-type"/>
+              <description>
+                <text>Associate a Mac group with a vlan</text>
+              </description>
+            </leaf>
+          </list>
+        </container>
+      </container>
+      <container name="trunk">
+        <description>
+          <text>The trunking characteristics of this interface.</text>
+        </description>
+        <uses name="allowed-vlan-add-group"/>
+        <uses name="gvlan-allowed-vlan-add-group"/>
+      </container>
+      <container name="private-vlan">
+        <description>
+          <text>Set Private-Vlan Configuration</text>
+        </description>
+        <container name="trunk">
+          <description>
+            <text>trunk</text>
+          </description>
+          <container name="native">
+            <description>
+              <text>Set the native VLAN characteristics of the
+Layer2 trunk interface</text>
+            </description>
+            <leaf name="pvlanNativevlan">
+              <type name="vlan-type"/>
+            </leaf>
+          </container>
+          <uses name="allowed-pvlan-trunk-cmds"/>
+        </container>
+        <container name="host-association">
+          <description>
+            <text>Host-association</text>
+          </description>
+          <leaf name="host-pri-pvlan">
+            <type name="vlan-type"/>
+          </leaf>
+          <leaf name="host-sec-pvlan">
+            <type name="vlan-type"/>
+          </leaf>
+        </container>
+        <container name="association">
+          <description>
+            <text>Association</text>
+          </description>
+          <list name="trunk">
+            <key value="trunk-pri-pvlan trunk-sec-pvlan"/>
+            <leaf name="trunk-pri-pvlan">
+              <type name="vlan-type"/>
+            </leaf>
+            <leaf name="trunk-sec-pvlan">
+              <type name="vlan-type"/>
+            </leaf>
+          </list>
+        </container>
+        <list name="mapping">
+          <description>
+            <text>Promiscuous mapping</text>
+          </description>
+          <key value="promis-pri-pvlan"/>
+          <leaf name="promis-pri-pvlan">
+            <type name="vlan-type"/>
+          </leaf>
+          <leaf name="oper">
+            <type name="secVlan-opp-type"/>
+          </leaf>
+          <leaf name="promis-sec-pvlan-range">
+            <type name="ui32-range-8091"/>
+          </leaf>
+        </list>
+      </container>
+    </container>
+  </grouping>
+  <typedef name="secVlan-opp-type">
+    <type name="enumeration">
+      <enum name="add">
+        <value value="1"/>
+      </enum>
+      <enum name="delete">
+        <value value="2"/>
+      </enum>
+    </type>
+    <description>
+      <text>Add/Remove secondary vlan ids</text>
+    </description>
+  </typedef>
+  <grouping name="common-interface-group">
+    <leaf name="ifindex">
+      <config value="false"/>
+      <type name="uint64"/>
+    </leaf>
+    <leaf name="description">
+      <type name="string">
+        <length value="1 .. 63"/>
+      </type>
+    </leaf>
+    <leaf name="shutdown">
+      <type name="empty"/>
+    </leaf>
+  </grouping>
+  <grouping name="common-interface-group-vlan">
+    <leaf name="ifindex">
+      <config value="false"/>
+      <type name="uint64"/>
+    </leaf>
+    <leaf name="description">
+      <type name="string">
+        <length value="1 .. 63"/>
+      </type>
+    </leaf>
+  </grouping>
+  <grouping name="interface-ipv6">
+    <container name="ipv6">
+      <description>
+        <text>The IPv6 configurations for an interface.</text>
+      </description>
+    </container>
+  </grouping>
+  <grouping name="interface-ipv6-phy-cfg">
+    <leaf name="ra-guard">
+      <type name="empty"/>
+    </leaf>
+  </grouping>
+  <grouping name="interface-ip">
+    <container name="ip">
+      <description>
+        <text>The IP configurations for an interface.</text>
+      </description>
+    </container>
+  </grouping>
+  <grouping name="interface-ip-standalone">
+    <container name="ip">
+      <description>
+        <text>The IP configurations for an interface.</text>
+      </description>
+    </container>
+  </grouping>
+  <typedef name="pvlan-type">
+    <type name="enumeration">
+      <enum name="primary">
+        <value value="1"/>
+      </enum>
+      <enum name="isolated">
+        <value value="2"/>
+      </enum>
+      <enum name="community">
+        <value value="3"/>
+      </enum>
+    </type>
+  </typedef>
+  <grouping name="interface-vlan-pvlan-cmds">
+    <container name="private-vlan">
+      <description>
+        <text>Configure a Private Vlan</text>
+      </description>
+      <leaf name="pvlan-type-leaf">
+        <description>
+          <text>Set the PVLAN type of the VLAN interface</text>
+        </description>
+        <type name="pvlan-type"/>
+      </leaf>
+      <container name="association">
+        <leaf name="sec-assoc-add">
+          <type name="ui32-range-8091"/>
+        </leaf>
+        <leaf name="sec-assoc-remove">
+          <type name="ui32-range-8091"/>
+        </leaf>
+      </container>
+    </container>
+  </grouping>
+  <grouping name="allowed-pvlan-trunk-cmds">
+    <container name="allowed">
+      <description>
+        <text>Set the VLANs that will Xmit/Rx through the Layer2 interface</text>
+      </description>
+      <container name="vlan">
+        <description>
+          <text>VLAN(s) that will be added/removed</text>
+        </description>
+        <leaf name="pvlan_all">
+          <type name="empty"/>
+        </leaf>
+        <leaf name="pvlan_none">
+          <type name="empty"/>
+        </leaf>
+        <leaf name="pvlan_add">
+          <type name="ui32-vlan-range"/>
+        </leaf>
+        <leaf name="pvlan_except">
+          <type name="ui32-vlan-range"/>
+        </leaf>
+        <leaf name="pvlan_remove">
+          <type name="ui32-vlan-range"/>
+        </leaf>
+      </container>
+    </container>
+  </grouping>
+  <grouping name="interface-fc-port">
+    <leaf name="fc-speed-cfg">
+      <type name="fc-speed-cfg-type"/>
+    </leaf>
+    <leaf name="fill-word">
+      <type name="fc-fillword-cfg-type"/>
+    </leaf>
+    <leaf name="long-distance">
+      <type name="fc-long-distance-cfg-type"/>
+    </leaf>
+    <leaf name="vc-link-init">
+      <type name="fc-vc-link-init-cfg-type"/>
+    </leaf>
+    <leaf name="desire-distance">
+      <type name="desire-distance-type"/>
+    </leaf>
+    <leaf name="isl-r_rdy-mode">
+      <type name="empty"/>
+    </leaf>
+    <leaf name="trunk-enable">
+      <type name="empty"/>
+    </leaf>
+    <leaf name="shutdown">
+      <type name="empty"/>
+    </leaf>
+    <leaf name="config-mode">
+      <description>
+        <text>Port Mode Configuration</text>
+      </description>
+      <type name="interface-fc-config-mode-type"/>
+    </leaf>
+  </grouping>
+  <augment target-node="/interface/fc-port">
+    <uses name="interface-fc-port"/>
+  </augment>
+  <grouping name="portcfg-fabric">
+    <container name="fabric">
+      <description>
+        <text>This specifies configurations that affects the 
+ethernet fabric (in VCS environment).</text>
+      </description>
+      <container name="isl">
+        <description>
+          <text>The ISL characteristics for an interface.</text>
+        </description>
+        <leaf name="isl-enable">
+          <type name="empty"/>
+          <description>
+            <text>This specifies if the ISL capability is 
+enabled or not. The presence of this leaf 
+indicates that the ISL is enabled.</text>
+          </description>
+        </leaf>
+      </container>
+      <container name="trunk">
+        <description>
+          <text>The trunking characteristics.</text>
+        </description>
+        <leaf name="trunk-enable">
+          <type name="empty"/>
+          <description>
+            <text>This specifies if the trunk is enabled or 
+not.  The presence of this leaf indicates  that 
+the trunk is enabled.</text>
+          </description>
+        </leaf>
+      </container>
+    </container>
+  </grouping>
+  <augment target-node="/interface/tengigabitethernet">
+    <uses name="common-interface-group"/>
+    <uses name="interface-po-group"/>
+    <uses name="interface-eth-po-group">
+      <refine target-node="switchport/port-security"/>
+      <refine target-node="switchport/port-security/sticky"/>
+      <refine target-node="switchport/port-security/port-secutiry-mac-address"/>
+      <refine target-node="switchport/port-security/sticky/port-secutiry-mac-address"/>
+      <refine target-node="switchport/port-security/allowed-ouis"/>
+      <refine target-node="switchport/private-vlan/association/trunk"/>
+      <refine target-node="switchport/private-vlan/mapping"/>
+    </uses>
+    <uses name="interface-ip"/>
+    <uses name="interface-vrf-config"/>
+    <uses name="interface-ipv6"/>
+    <container name="vepa">
+      <leaf name="vepa-enable">
+        <type name="empty"/>
+      </leaf>
+    </container>
+    <container name="edge-loop-detection">
+      <leaf name="eldprio">
+        <type name="uint32">
+          <range value="0..256"/>
+        </type>
+        <default value="128"/>
+      </leaf>
+      <leaf name="eldvlan">
+        <type name="ui32-eldvlan-range"/>
+      </leaf>
+    </container>
+  </augment>
+  <augment target-node="/interface/gigabitethernet">
+    <uses name="common-interface-group"/>
+    <uses name="interface-po-group"/>
+    <uses name="interface-eth-po-group">
+      <refine target-node="switchport/port-security"/>
+      <refine target-node="switchport/port-security/sticky"/>
+      <refine target-node="switchport/port-security/port-secutiry-mac-address"/>
+      <refine target-node="switchport/port-security/sticky/port-secutiry-mac-address"/>
+      <refine target-node="switchport/port-security/allowed-ouis"/>
+      <refine target-node="switchport/private-vlan/association/trunk"/>
+      <refine target-node="switchport/private-vlan/mapping"/>
+    </uses>
+    <uses name="interface-ip"/>
+    <uses name="interface-vrf-config"/>
+    <uses name="interface-ipv6"/>
+    <container name="edge-loop-detection">
+      <leaf name="eldprio">
+        <type name="uint32">
+          <range value="0..256"/>
+        </type>
+        <default value="128"/>
+      </leaf>
+      <leaf name="eldvlan">
+        <type name="ui32-eldvlan-range"/>
+      </leaf>
+    </container>
+  </augment>
+  <augment target-node="/interface/fortygigabitethernet">
+    <uses name="common-interface-group"/>
+    <uses name="interface-po-group"/>
+    <uses name="interface-eth-po-group">
+      <refine target-node="switchport/port-security"/>
+      <refine target-node="switchport/port-security/sticky"/>
+      <refine target-node="switchport/port-security/port-secutiry-mac-address"/>
+      <refine target-node="switchport/port-security/sticky/port-secutiry-mac-address"/>
+      <refine target-node="switchport/port-security/allowed-ouis"/>
+      <refine target-node="switchport/private-vlan/association/trunk"/>
+      <refine target-node="switchport/private-vlan/mapping"/>
+    </uses>
+    <uses name="interface-ip"/>
+    <uses name="interface-vrf-config"/>
+    <uses name="interface-ipv6"/>
+    <container name="edge-loop-detection">
+      <leaf name="eldprio">
+        <type name="uint32">
+          <range value="0..256"/>
+        </type>
+        <default value="128"/>
+      </leaf>
+      <leaf name="eldvlan">
+        <type name="ui32-eldvlan-range"/>
+      </leaf>
+    </container>
+  </augment>
+  <augment target-node="/interface-vlan/interface/vlan">
+    <uses name="common-interface-group-vlan"/>
+    <uses name="interface-vlan-pvlan-cmds"/>
+    <container name="ip">
+      <description>
+        <text>The IP configurations for an interface.</text>
+      </description>
+    </container>
+  </augment>
+  <augment target-node="/interface-vlan/interface/ve">
+    <uses name="interface-ip"/>
+  </augment>
+  <augment target-node="/interface/port-channel">
+    <uses name="common-interface-group"/>
+    <uses name="po-minimum-links-group"/>
+    <uses name="interface-eth-po-group">
+      <refine target-node="switchport/port-security"/>
+      <refine target-node="switchport/port-security/sticky"/>
+      <refine target-node="switchport/port-security/port-secutiry-mac-address"/>
+      <refine target-node="switchport/port-security/sticky/port-secutiry-mac-address"/>
+      <refine target-node="switchport/port-security/allowed-ouis"/>
+      <refine target-node="switchport/private-vlan/association/trunk"/>
+      <refine target-node="switchport/private-vlan/mapping"/>
+      <refine target-node="switchport/gvlan"/>
+      <refine target-node="switchport/mac-group"/>
+      <refine target-node="switchport/trunk/gvlan/allowed/vlan/add"/>
+      <refine target-node="switchport/trunk/gvlan/allowed/vlan/remove"/>
+      <refine target-node="switchport/gvlan/private-vlan/trunk/allowed/vlan/add"/>
+      <refine target-node="switchport/gvlan/private-vlan/trunk/allowed/vlan/remove"/>
+    </uses>
+    <uses name="interface-ip"/>
+    <uses name="interface-ipv6"/>
+    <container name="edge-loop-detection">
+      <description>
+        <text>Enable edge-loop-detection on the selected interface</text>
+      </description>
+      <leaf name="eldprio">
+        <description>
+          <text>Set eld-priority value to interface</text>
+        </description>
+        <type name="uint32">
+          <range value="0..256"/>
+        </type>
+        <default value="128"/>
+      </leaf>
+      <leaf name="eldvlan">
+        <description>
+          <text>Enable for specific VLAN on selected interface</text>
+        </description>
+        <type name="ui32-eldvlan-range"/>
+      </leaf>
+    </container>
+    <leaf name="load-balance">
+      <type name="enumeration">
+        <enum name="dst-mac-vid">
+          <value value="1"/>
+        </enum>
+        <enum name="src-mac-vid">
+          <value value="2"/>
+        </enum>
+        <enum name="src-dst-mac-vid">
+          <value value="3"/>
+        </enum>
+        <enum name="src-dst-ip">
+          <value value="4"/>
+        </enum>
+        <enum name="src-dst-ip-mac-vid">
+          <value value="5"/>
+        </enum>
+        <enum name="src-dst-ip-port">
+          <value value="6"/>
+        </enum>
+        <enum name="src-dst-ip-mac-vid-port">
+          <value value="7"/>
+        </enum>
+      </type>
+      <default value="src-dst-ip-mac-vid-port"/>
+    </leaf>
+  </augment>
+  <augment target-node="/interface/tengigabitethernet/switchport/trunk">
+    <container name="tag">
+      <presence value="tag"/>
+      <description>
+        <text>This specifies vlan tagging characteristics for a 
+trunk port.</text>
+      </description>
+      <leaf name="native-vlan">
+        <type name="empty"/>
+        <description>
+          <text>This specifies if the native vlan should be used 
+for classifying the un-tagged traffic.</text>
+        </description>
+      </leaf>
+    </container>
+    <leaf name="nativevlanid">
+      <type name="uint32">
+        <range value="2..8191"/>
+      </type>
+      <description>
+        <text>The native vlan for an interface.</text>
+      </description>
+    </leaf>
+  </augment>
+  <augment target-node="/interface/tengigabitethernet/switchport/trunk/allowed">
+    <uses name="interface-sw-trunk-rspan-group"/>
+    <uses name="interface-sw-trunk-rspan-gvlan-group"/>
+  </augment>
+  <augment target-node="/interface/tengigabitethernet/switchport/access">
+    <uses name="interface-sw-access-rspan-group"/>
+  </augment>
+  <augment target-node="/interface/tengigabitethernet/switchport">
+    <uses name="interface-sw-access-rspan-gvlan-group"/>
+  </augment>
+  <augment target-node="/interface/gigabitethernet/switchport/trunk">
+    <container name="tag">
+      <presence value="tag"/>
+      <leaf name="native-vlan">
+        <type name="empty"/>
+      </leaf>
+    </container>
+    <leaf name="nativevlanid">
+      <type name="uint32">
+        <range value="2..8191"/>
+      </type>
+      <description>
+        <text>The native vlan for an interface.</text>
+      </description>
+    </leaf>
+  </augment>
+  <augment target-node="/interface/gigabitethernet/switchport/trunk/allowed">
+    <uses name="interface-sw-trunk-rspan-group"/>
+    <uses name="interface-sw-trunk-rspan-gvlan-group"/>
+  </augment>
+  <augment target-node="/interface/gigabitethernet/switchport/access">
+    <uses name="interface-sw-access-rspan-group"/>
+  </augment>
+  <augment target-node="/interface/gigabitethernet/switchport">
+    <uses name="interface-sw-access-rspan-gvlan-group"/>
+  </augment>
+  <augment target-node="/interface/fortygigabitethernet/switchport/trunk">
+    <container name="tag">
+      <presence value="tag"/>
+      <description>
+        <text>This specifies vlan tagging characteristics for a
+trunk port.</text>
+      </description>
+      <leaf name="native-vlan">
+        <type name="empty"/>
+        <description>
+          <text>This specifies if the native vlan should be used
+for classifying the un-tagged traffic.</text>
+        </description>
+      </leaf>
+    </container>
+    <leaf name="nativevlanid">
+      <type name="uint32">
+        <range value="2..8191"/>
+      </type>
+      <description>
+        <text>The native vlan for an interface.</text>
+      </description>
+    </leaf>
+  </augment>
+  <augment target-node="/interface/fortygigabitethernet/switchport/trunk/allowed">
+    <uses name="interface-sw-trunk-rspan-group"/>
+    <uses name="interface-sw-trunk-rspan-gvlan-group"/>
+  </augment>
+  <augment target-node="/interface/fortygigabitethernet/switchport/access">
+    <uses name="interface-sw-access-rspan-group"/>
+  </augment>
+  <augment target-node="/interface/fortygigabitethernet/switchport">
+    <uses name="interface-sw-access-rspan-gvlan-group"/>
+  </augment>
+  <augment target-node="/interface/port-channel/switchport/trunk">
+    <container name="tag">
+      <presence value="tag"/>
+      <leaf name="native-vlan">
+        <type name="empty"/>
+      </leaf>
+    </container>
+    <leaf name="nativevlanid">
+      <type name="uint32">
+        <range value="2..8191"/>
+      </type>
+      <description>
+        <text>The native vlan for an interface.</text>
+      </description>
+    </leaf>
+  </augment>
+  <augment target-node="/interface/tengigabitethernet/ipv6">
+    <uses name="interface-ipv6-phy-cfg"/>
+  </augment>
+  <augment target-node="/interface/gigabitethernet/ipv6">
+    <uses name="interface-ipv6-phy-cfg"/>
+  </augment>
+  <augment target-node="/interface/fortygigabitethernet/ipv6">
+    <uses name="interface-ipv6-phy-cfg"/>
+  </augment>
+  <augment target-node="/interface/port-channel/ipv6">
+    <uses name="interface-ipv6-phy-cfg"/>
+  </augment>
+  <augment target-node="/rbridge:rbridge-id">
+    <container name="protocol">
+      <description>
+        <text>Protocol configuration.</text>
+      </description>
+    </container>
+    <container name="interface">
+      <list name="ve">
+        <key value="name"/>
+        <leaf name="name">
+          <type name="ve-type"/>
+        </leaf>
+      </list>
+    </container>
+  </augment>
+</module>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ModuleResources ModuleName = "Rmon" ComponentName = "Wave">
+    <ResourceEnum Name = "RmonReturnCode">
+
+		<Resource Name = "RMON_CLUSTER_VERSION_MISMATCH">%%Error: Cluster Validation failed - Version Mismatch.</Resource>
+		<!-- Event -->
+        <Resource Name = "RMON_EVENT_ALREADY_EXISTS">%% Error: Event already exists</Resource>
+        <Resource Name = "RMON_CANT_SET_EVENT_COMMUNITY_WORD">%% Error: Can't set rmon event community word</Resource>
+        <Resource Name = "RMON_CANT_SET_EVENT_DESCRIPTION">%% Error: Can't set rmon event description</Resource>
+        <Resource Name = "RMON_CANT_SET_EVENT_OWNER_NAME">%% Error: Can't set rmon event owner name</Resource>
+        <Resource Name = "RMON_CANT_SET_EVENT_TYPE">%% Error: Can't set rmon event type</Resource>
+        <Resource Name = "RMON_EVENT_ACTIVATION_FAILED">%% Error: Event Activation Failed</Resource>
+        <Resource Name = "RMON_CANT_REMOVE_EVENT">%% Error: Can't remove rmon event Entry</Resource>
+        <Resource Name = "RMON_CANT_REMOVE_EVENT_REF_ALARM">%% Error: Can't remove rmon event as its being used in rmon alarm configuration</Resource>
+
+		<!-- Stats -->
+        <Resource Name = "RMON_DCM_CANT_ENABLE_STATS_ON_MIRROR_PORT">%% Error: Statistics cannot be enabled on a destination mirror port</Resource>
+        <Resource Name = "RMON_DCM_INTERFACE_NOT_FOUND">%% Error: Interface not found</Resource>
+        <Resource Name = "RMON_DCM_FAILED_TO_ADD_STATISTICS">%% Error: Failed to add statistics</Resource>
+        <Resource Name = "RMON_DCM_CANT_REMOVE_COLLECTION_STATS">%% Error: Can't remove rmon collection stat entry</Resource>
+        <Resource Name = "RMON_DCM_STATS_INDEX_ALREADY_ENABLED">%% Error: Statistics already enabled on same interface with the same index</Resource>
+        <Resource Name = "RMON_DCM_STATS_INDEX_ALREADY_ENABLED_MC">%% Error: Statistics index already enabled on another interface</Resource>
+		<Resource Name = "RMON_DCM_STATS_INDEX_NOT_CONFIGURED">%% Error: Statistics index does not exists</Resource>
+		<Resource Name = "RMON_DCM_CANT_REMOVE_ALARM_CONFIGURED_COLLECTION_STATS">%% Error:Can't remove rmon collection stats entry on which an alarm is configured</Resource>
+
+		<!-- History -->
+        <Resource Name = "RMON_DCM_CANT_ENABLE_HISTORY_ON_MIRROR_PORT">%% Error: History cannot be enabled on a destination mirror port</Resource>
+        <Resource Name = "RMON_DCM_CANT_SET_HISTORY_ENTRY">%% Error: Can't set rmon collection history Entry</Resource>
+        <Resource Name = "RMON_DCM_CANT_SET_HISTORY_BUCKET">%% Error: Can't set rmon collection history bucket</Resource>
+        <Resource Name = "RMON_DCM_CANT_SET_HISTORY_INTERVAL">%% Error: Can't set rmon collection history interval</Resource>
+        <Resource Name = "RMON_DCM_CANT_SET_HISTORY_OWNER">%% Error: Can't set rmon collection history owner name</Resource>
+        <Resource Name = "RMON_DCM_CANT_REMOVE_HISTORY_ENTRY">%% Error: Can't remove rmon collection history Entry</Resource>
+        <Resource Name = "RMON_DCM_HISTORY_INDEX_ALREADY_ENABLED">%% Error: History is  already enabled on same interface with the same index</Resource>
+		<Resource Name = "RMON_DCM_HISTORY_INDEX_ALREADY_ENABLED_MC">%% Error: History index already enabled on another interface</Resource>
+		<!-- Alarm-->
+        <Resource Name = "RMON_INVALID_ALARM_VARIABLE">%% Error: Can't set rmon alarm - Invalid alarm variable value (Variable should be counter32). Enter OID in NumericString format</Resource>
+        <Resource Name = "RMON_INVALID_ALARM_INPUT">%% Error: Can't set rmon alarm - Invalid input</Resource>
+        <Resource Name = "RMON_INVALID_ALARM_VARIABLE_INDEX">%% Error: Can't set rmon alarm - Invalid alarm variable index value</Resource>
+        <Resource Name = "RMON_CANT_REMOVE_RMON_ALARM">%% Error: Can't remove rmon alarm Entry</Resource>
+        <Resource Name = "RMON_ALARM_ALREADY_EXISTS">%% Error: Same alarm already exists with different parameters</Resource>
+        <Resource Name = "RMON_ANOTHER_ALARM_ALREADY_EXISTS">%% Error: Another alarm already exists with the same parameters</Resource>
+		<Resource Name = "RMON_DCM_STATS_OID_NOT_CORRECT">%% Error: Ether Stats OID not correct</Resource>
+    </ResourceEnum>
+</ModuleResources>

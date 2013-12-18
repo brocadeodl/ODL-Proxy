@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for AG Plugin -->
+
+<ModuleResources ModuleName = "AG" ComponentName = "AGResourceIds">
+	<ResourceEnum Name = "AGGeneric">
+		<Resource Name = "AG_VALIDATION_SUCCESS">AG validation successful</Resource>
+		<Resource Name = "AG_INVALID_NPORT">Error: Invalid N-Port(s).</Resource>
+		<Resource Name = "AG_INVALID_FPORT">Error: Invalid F-Port(s).</Resource>
+		<Resource Name = "AG_FPORT_ALREADY_MAPPED">Error: F-Port(s) already mapped.</Resource>
+		<Resource Name = "AG_FPORT_NOT_MAPPED">Error: F-Port(s) not mapped.</Resource>
+		<Resource Name = "AG_TRANSLATION_FROM_INTER_TO_SWPORT_FAILED">Error: Translation from interface to switch port failed</Resource>
+		<Resource Name = "AG_INVALID_PGID">Error: PGId Invalid</Resource>
+		<Resource Name = "AG_INVALID_PGMODES">Error: Invalid PG modes</Resource>
+		<Resource Name = "AG_PGID_IN_USE">PGId is in use.</Resource>
+		<Resource Name = "AG_NPORT_ALREADY_IN_PG">N-Port(s) is already in a PG.</Resource>
+		<Resource Name = "AG_MODE_ALREADY_SET">Mode(s) already set.</Resource>
+		<Resource Name = "AG_MODE_NOT_SET">Mode(s) not set.</Resource>
+		<Resource Name = "AG_ADS_POLICY_NOT_ENABLED">ADS Policy is not Enabled.</Resource>
+		<Resource Name = "AG_ADS_INVALID_WWN">Invalid WWN(s).</Resource>
+		<Resource Name = "AG_ADS_CONFIG_INCONSISTENCY">Please set the WWN List to ANY/NONE before setting to a new List.</Resource>
+        <Resource Name = "AG_INVALID_POLICY">Error:Not a valid policy</Resource>
+        <Resource Name = "AG_POLICY_NOCHANGE">Error:No change in Policy</Resource>
+        <Resource Name = "AG_POLICY_CANT_CHANGE">Error:Not allowed to enable/disable PG Policy</Resource>
+        <Resource Name = "AG_AGMODE_ESWONLINE">Error:Switch is online. Please disable the switch using chassis disable CLI before using agenable or no agenable CLIs.</Resource>
+        <Resource Name = "AG_AGMODE_ENOCHG">Error:AG mode is already set to requested value.</Resource>
+        <Resource Name = "AG_AGMODE_EFAILED">Error:AG mode change failed due to unknown error.</Resource>
+        <Resource Name = "AG_AGMODE_ESECMODE">Error:AG mode change failed since switch is in secure mode.</Resource>
+        <Resource Name = "AG_AGMODE_ENOSYS">Error:AG mode change failed since switch hardware doesn't support AG mode.</Resource>
+        <Resource Name = "AG_AGMODE_EMSPLDB">Error:AG mode change failed since Management Server platform service is not disabled.</Resource>
+        <Resource Name = "AG_GENERIC_ERROR">Error:AG Error - Could not enable/disable AG mode.</Resource>
+        <Resource Name = "AG_AGMODE_ENOVCS">Error:AG mode enable failed since VCS mode is not enabled on the switch.</Resource>
+        <Resource Name = "AG_NO_FCOE_LICENSE">Error:AG mode enable failed since FCOE_BASE license is not present on the switch.</Resource>
+        <Resource Name = "AG_DUP_WWN">Error:Duplicate WWN</Resource>
+        <Resource Name = "AG_CHECK_WWN">Error:Check WWN list</Resource>
+        <Resource Name = "AG_INVALID_PGID_CREATE_NUMBER">Error:Check PGID. Allowed range is 1 to max N port - 1.</Resource>
+	<Resource Name = "AG_UNSUPPORTED_PLATFORM">Error:AG mode is not supported on this platform</Resource>
+	<Resource Name = "AG_POLICY_SUCCESS">Policy change successful</Resource>
+	<Resource Name = "AG_FNMTOV_SUCCESS">Fabric Name monitoring time out value change successful</Resource>
+	<Resource Name = "AG_RELCOUNTER_SUCCESS">Reliability counter value change successful</Resource>
+	<Resource Name = "AG_PGCREATE_SUCCESS">PG creation successful</Resource>
+	<Resource Name = "AG_PGADD_SUCCESS">N ports addition to the PG was successful</Resource>
+	<Resource Name = "AG_PGDEL_SUCCESS">N ports deletion from the PG was successful</Resource>
+	<Resource Name = "AG_PGADDMODES_SUCCESS">PG modes addition to the PG was sucessful</Resource>
+	<Resource Name = "AG_PGDELMODES_SUCCESS">PG modes deletion from the PG was sucessful</Resource>
+	<Resource Name = "AG_PGRENAME_SUCCESS">PG rename was successful</Resource>
+	<Resource Name = "AG_PGREMOVE_SUCCESS">PG removal was successful</Resource>
+	<Resource Name = "AG_FO_SUCCESS">N port failover was changed successfully</Resource>
+	<Resource Name = "AG_FB_SUCCESS">N port failback was changed successfully</Resource>
+	<Resource Name = "AG_STATICMAPADD_SUCCESS">Static map addition was successful</Resource>
+	<Resource Name = "AG_STATICMAPDEL_SUCCESS">Static map deletion was successful</Resource>
+	<Resource Name = "AG_MAPPING_SUCCESS">Mapping operation was successful</Resource>
+	<Resource Name = "AG_NPORT_REMOVAL">N port cannot be removed</Resource>
+	</ResourceEnum>
+</ModuleResources>

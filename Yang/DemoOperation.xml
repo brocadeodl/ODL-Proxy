@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="DemoOperation"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:brocade-demo-wysereaoperation="http://brocade.com/demowysereaoperation/"
+        xmlns:yang="urn:ietf:params:xml:ns:yang:ietf-yang-types"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types">
+  <namespace uri="http://brocade.com/demowysereaoperation/"/>
+  <prefix value="brocade-demo-wysereaoperation"/>
+  <import module="ietf-yang-types">
+    <prefix value="yang"/>
+  </import>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Inc.</text>
+  </organization>
+  <description>
+    <text>Demo action point</text>
+  </description>
+  <revision date="2011-01-18"/>
+  <container name="demoaction_container"/>
+</module>

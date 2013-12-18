@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Framework Core Module. -->
+
+<ModuleResources ModuleName = "snmp-server" ComponentName = "SNMPResourceIds">
+    <ResourceEnum Name = "SNMPCommunity">
+        <Resource Name = "SNMP_INVALID_COMMUNITY_STR_ERROR">%%Error: Invalid community string</Resource>
+        <Resource Name = "SNMP_INVALID_ACCESS_ERROR">%%Error: Invalid access for community string</Resource>
+        <Resource Name = "SNMP_GET_COMMUNITY_FAILED">%%Error: Backend Get community failed</Resource>
+        <Resource Name = "SNMP_SET_COMMUNITY_FAILED">%%Error: Backend Set community failed</Resource>
+        <Resource Name = "SNMP_COMMUNITY_CHANGE_SUCCESS">%%Info: Changing access of community successful.</Resource>
+        <Resource Name = "SNMP_COMMUNITY_CHANGE_ERROR">%%Error: Changing access of community failed.</Resource>
+        <Resource Name = "SNMP_COMMUNITY_ADD_SUCCESS">%%Info: Adding SNMP community successful.</Resource>
+        <Resource Name = "SNMP_COMMUNITY_ADD_ERROR">%%Error: Adding SNMP community failed.</Resource>
+        <Resource Name = "SNMP_COMMUNITY_DEL_SUCCESS">%%Info: Deleting community successful.</Resource>
+        <Resource Name = "SNMP_COMMUNITY_DEL_ERROR">%%Error: Deleting SNMP community failed.</Resource>
+        <Resource Name = "SNMP_NUM_COMMUNITY_EXCEEDED_ERROR">%%Error: Number of communities in this access group exceeded.</Resource>
+        <Resource Name = "SNMP_INVALID_COMMUNITY_LENGTH">%%Error: Invalid community string length.String size must be between 2 and 16</Resource>
+		<Resource Name = "SNMP_COMMUNITY_ASSOCIATED_ERROR">%%Error: Deleting SNMP community failed. This Community is associated with the Host Entry.</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "SNMPUser">
+        <Resource Name = "SNMP_INVALID_USER_ERROR">%%Error: Invalid username</Resource>
+        <Resource Name = "SNMP_INVALID_GROUP_ERROR">%%Error: Invalid groupname.</Resource>
+        <Resource Name = "SNMP_INVALID_PSWD_LEN_ERROR">%%Error: Invalid password length. String size must be between 1 and 32 and cannot be a pre-defined string</Resource>
+        <Resource Name = "SNMP_INVALID_PSWD_ERROR">%%Error: Invalid password.</Resource>
+        <Resource Name = "SNMP_INVALID_SECURITYLEVEL">%%Error: Invalid security level. Security level can be noAuthnoPriv, AuthOnly or AuthPriv</Resource>
+        <Resource Name = "SNMP_GET_USER_FAILED">%%Error: Backend Get User failed</Resource>
+        <Resource Name = "SNMP_SET_USER_FAILED">%%Error: Backend Set User failed</Resource>
+        <Resource Name = "SNMP_INVALID_NOTIFY_ERROR">%%Error: Invalid Version.</Resource>
+        <Resource Name = "SNMP_NUM_USER_EXCEEDED_ERROR">%%Error: Maximum limit of users in this access group reached.</Resource>
+		<Resource Name = "SNMP_USER_ASSOCIATED_ERROR">%%Error: Deleting SNMP user failed. This user is associated with the v3host Entry.</Resource>
+    </ResourceEnum>
+
+ 
+    <ResourceEnum Name = "SNMPHost">
+        <Resource Name = "SNMP_INVALID_PORT_NUMBER">%%Error: Invalid port Number.</Resource>
+        <Resource Name = "SNMP_INVALID_VERSION_ERROR">%%Error: Invalid Version.</Resource>
+        <Resource Name = "SNMP_INVALID_HOSTNAME_ERROR">%%Error: Invalid IP address.</Resource>
+		<Resource Name = "SNMP_GET_HOST_FAILED">%%Error: Backend Get host failed</Resource>
+        <Resource Name = "SNMP_SET_HOST_FAILED">%%Error: Backend Set host failed</Resource>
+        <Resource Name = "SNMP_HOST_CHANGE_SUCCESS">%%Info: Changing access of host successful.</Resource>
+        <Resource Name = "SNMP_HOST_CHANGE_ERROR">%%Error: Changing access of host failed.</Resource>
+        <Resource Name = "SNMP_HOST_ADD_SUCCESS">%%Info: Adding SNMP host successful.</Resource>
+        <Resource Name = "SNMP_HOST_ADD_ERROR">%%Error: Adding SNMP host failed.</Resource>
+        <Resource Name = "SNMP_HOST_DEL_SUCCESS">%%Info: Deleting host successful.</Resource>
+        <Resource Name = "SNMP_HOST_DEL_ERROR">%%Error: Deleting SNMP host failed.</Resource>
+        <Resource Name = "SNMP_NUM_HOST_EXCEEDED_ERROR">%%Error: Maximum number of hosts in this version group reached.</Resource>
+    </ResourceEnum>
+    <ResourceEnum Name = "SNMPV3Host">
+        <Resource Name = "SNMP_V3_INVALID_PORT_NUMBER">%%Error: Invalid port number.</Resource>
+        <Resource Name = "SNMP_V3_INVALID_HOSTNAME_ERROR">%%Error: Invalid IP address.</Resource>
+        <Resource Name = "SNMP_V3_INVALID_USERNAME_ERROR">%%Error: Non-existing username</Resource>
+        <Resource Name = "SNMP_V3_INVALID_ENGINEID_ERROR">%%Error: Invalid EngineId. String size must be between 10 and 65</Resource>
+        <Resource Name = "SNMP_V3_GET_HOST_FAILED">%%Error: Backend Get V3 host failed</Resource>
+        <Resource Name = "SNMP_V3_SET_HOST_FAILED">%%Error: Backend Set V3 host failed</Resource>
+        <Resource Name = "SNMP_V3_NUM_HOST_EXCEEDED_ERROR">%%Error: Maximum number of V3 hosts in this version group reached</Resource>
+    </ResourceEnum>
+
+
+    <ResourceEnum Name = "SNMPSystemGroup">
+        <Resource Name = "SNMP_SYSTEMGROUP_DOESNT_EXIST">%%Error: System group object doesnt exist.</Resource>
+        <Resource Name = "SNMP_INVALID_CONTACT_LENGTH">%%Error: Invalid Contact String length.string size must be between 4 and 255</Resource>
+        <Resource Name = "SNMP_INVALID_LOCATION_LENGTH">%%Error: Invalid Location String length.string size must be between 4 and 255</Resource>
+        <Resource Name = "SNMP_INVALID_SYSDESCR_LENGTH">%%Error: Invalid System Description String length.string size must be between 4 and 255</Resource>
+		<Resource Name = "SNMP_GET_SYSGROUP_FAILED">%%Error: Backend Get system group failed</Resource>
+        <Resource Name = "SNMP_SET_SYSGROUP_FAILED">%%Error: Backend Set system group failed</Resource>
+    </ResourceEnum>
+  <ResourceEnum Name = "SNMPContext">
+       <Resource Name = "SNMP_INVALID_CONTEXT_NAME_STR_ERROR">%%Error:Invalid Context Name </Resource>
+        <Resource Name = "SNMP_INVALID_CONTEXT_LENGTH">%%Error: Invalid Context Name String length.string size must be between 2 and 32</Resource>
+        <Resource Name = "SNMP_INVALID_VRFNAME_LENGTH">%%Error: Invalid Vrf Name String length.string size must be between 2 and 32</Resource>
+       <Resource Name = "SNMP_GET_CONTEXT_MAPPING_FAILED">%%Error:Get ContextMapping failed </Resource>
+       <Resource Name = "SNMP_SET_CONTEXT_MAPPING_FAILED">%%Error:Set Context Mapping failed </Resource>
+       <Resource Name = "SNMP_CONTEXT_MAPPING_FAILED">%%Error:Context Mapping failed </Resource>
+       <Resource Name = "SNMP_NUM_CONTEXT_MAPPING_EXCEEDED_ERROR">%%Error:Maximum context Mapping Entries reached </Resource>
+ </ResourceEnum>
+</ModuleResources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-logical-chassis"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:brocade-logical-chassis="http://brocade.com/ns/brocade-logical-chassis"
+        xmlns:brocade-vcs="urn:brocade.com:mgmt:brocade-vcs"
+        xmlns:rbridge="urn:brocade.com:mgmt:brocade-rbridge">
+  <namespace uri="http://brocade.com/ns/brocade-logical-chassis"/>
+  <prefix value="brocade-logical-chassis"/>
+  <import module="brocade-vcs">
+    <prefix value="brocade-vcs"/>
+  </import>
+  <import module="brocade-rbridge">
+    <prefix value="rbridge"/>
+  </import>
+  <grouping name="logical-chassis-cmds">
+    <container name="logical-chassis">
+      <leaf name="principal-priority">
+        <type name="uint32">
+          <range value="1..128"/>
+        </type>
+      </leaf>
+    </container>
+  </grouping>
+  <augment target-node="/rbridge:rbridge-id">
+    <uses name="logical-chassis-cmds"/>
+  </augment>
+</module>

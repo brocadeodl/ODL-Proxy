@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-sec-services"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:brcd-sec-services="urn:brocade.com:mgmt:brocade-sec-services"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def"
+        xmlns:rbridge="urn:brocade.com:mgmt:brocade-rbridge">
+  <namespace uri="urn:brocade.com:mgmt:brocade-sec-services"/>
+  <prefix value="brcd-sec-services"/>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <import module="brocade-rbridge">
+    <prefix value="rbridge"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+        San Jose, CA 95134
+         U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>Instrument to configure Telnet Server and SSH Server</text>
+  </description>
+  <revision date="2012-07-28">
+    <description>
+      <text>Initial version of this module.</text>
+    </description>
+  </revision>
+  <grouping name="telnet-group">
+    <container name="telnet">
+      <container name="server">
+        <leaf name="shutdown">
+          <type name="empty"/>
+        </leaf>
+      </container>
+    </container>
+  </grouping>
+  <augment target-node="/common-def:show">
+    <container name="telnet">
+      <container name="server"/>
+    </container>
+  </augment>
+  <augment target-node="/rbridge:rbridge-id">
+    <uses name="telnet-group"/>
+  </augment>
+  <container name="telnet-sa">
+    <uses name="telnet-group"/>
+  </container>
+  <typedef name="key-exchange-type">
+    <type name="enumeration">
+      <enum name="dh-group-14">
+        <value value="2"/>
+      </enum>
+    </type>
+  </typedef>
+  <grouping name="ssh-group">
+    <container name="ssh">
+      <container name="server">
+        <leaf name="shutdown">
+          <type name="empty"/>
+        </leaf>
+        <list name="key-exchange">
+          <key value="protocol"/>
+          <leaf name="protocol">
+            <type name="key-exchange-type"/>
+          </leaf>
+        </list>
+      </container>
+    </container>
+  </grouping>
+  <augment target-node="/rbridge:rbridge-id">
+    <uses name="ssh-group"/>
+  </augment>
+  <container name="ssh-sa">
+    <uses name="ssh-group"/>
+  </container>
+  <augment target-node="/common-def:show">
+    <container name="ssh">
+      <container name="server"/>
+    </container>
+  </augment>
+</module>

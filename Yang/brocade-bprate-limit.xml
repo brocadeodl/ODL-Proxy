@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-bprate-limit"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:bprate-limit="urn:brocade.com:mgmt:brocade-bprate-limit"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types">
+  <namespace uri="urn:brocade.com:mgmt:brocade-bprate-limit"/>
+  <prefix value="bprate-limit"/>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger way,
+San Jose, CA 95134,
+U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This management module is an instrumentation to manage
+Bp Ratelimit module</text>
+  </description>
+  <revision date="2011-10-31">
+    <description>
+      <text>Initial version of this management module.</text>
+    </description>
+  </revision>
+  <typedef name="slotnumber">
+    <type name="uint32">
+      <range value="0..16">
+        <error-message>
+          <value>Invalid slot number.</value>
+        </error-message>
+      </range>
+    </type>
+  </typedef>
+  <container name="bp-rate-limit">
+    <container name="heavy">
+      <list name="bp-rate-limit-slot">
+        <key value="bp-rate-limit-slot-num"/>
+        <leaf name="bp-rate-limit-slot-num">
+          <type name="slotnumber"/>
+        </leaf>
+      </list>
+    </container>
+  </container>
+</module>

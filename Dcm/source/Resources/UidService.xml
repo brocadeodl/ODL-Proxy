@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ModuleResources ModuleName="UidService" ComponentName="Wave">
+
+    <ResourceEnum Name="UidServiceErrorCodes">
+        <Resource Name="UIDSVC_INVALID_ARGS_ERROR">%% Error: Invalid arguments!</Resource>
+        <Resource Name="UIDSVC_ID_EXHAUSTED_ERROR">%% Error: No more unique ID can be allocated</Resource>
+        <Resource Name="UIDSVC_DUPLICATE_ID_ERROR">%% Error: Duplicate ID</Resource>
+     </ResourceEnum>
+
+</ModuleResources>

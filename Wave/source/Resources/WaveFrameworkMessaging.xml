@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Framework Core Module. -->
+
+<ModuleResources ModuleName = "FrameworkMessaging" ComponentName = "Wave">
+    <ResourceEnum Name = "WaveMessageStatus">
+        <Resource Name = "WAVE_MESSAGE_SUCCESS">Succeeded</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR">Message Generic Error</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_UNKNOWN_MESSAGE">Unknown Wave Message</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_OPERATION_NOT_SUPPORTED">Operation Not Supported</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_SUBMIT_TO_INVALID_THREAD">Submitting message to invalid thread</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_NO_OM_TO_ACCEPT_MESSAGE">No Object Manager to accept the message</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_SERVICE_NOT_ENABLED">Service not enabled</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_SERVICE_DISABLING">Service is being disabled</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_UNKNOWN_PRIORITY">Message with unknown priority</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_SUBMIT_RESPONSE_TO_INVALID_THREAD">Submitting message response to invalid thread</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_RESPONSE_UNKNOWN_PRIORITY">Message Response with unknown priority</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_ADDING_NULL_BUFFER">Trying to add a NULL buffer to message</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_BUFFER_WITH_TAG_EXISTS">Buffer with this tag already exists on the message</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_BUFFER_WITH_TAG_DOES_NOT_EXIST">Buffer with this tag does not exist on the message</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_POST_TO_REMOTE_LOCATION">Error in posting the message to remote location</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_NULL_MESSAGE">NULL Message</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_NULL_CALLBACK">NULL callback</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_NO_SERVICE_TO_ACCEPT_MESSAGE">No service registered to accept the message</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_NO_OMS_FOR_SERVICE">No Object Managers are active for the service</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_DUPLICATE_MESSAGE_SEND">This message has already beens ent out once</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_NO_SERVICE_TO_ACCEPT_MESSAGE_RESPONSE">No service to accept message resources</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_MESSAGE_ALREADY_EXISTS_IN_MAP">Trying to resend a remote message: Message is recorded as already sent out by the Remote Message Transporter</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_UNKNOWN_TYPE">Unknown Message Type</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_REMOTE_LOCATION_UNAVAILABLE">Remote Location is not available</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_MEMORY_EXHAUSTED">All memory exhausted</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_NODE_NOT_IN_CLUSTER">The requested node is not in the cluster</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_CLUSTER_VALIDATION_FAILED">Cluster validation failed</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_NO_CLUSTER_VALIDATION_FUNCTION">There is no cluster validation function registered</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_INCOMPLETE_BUFFER_READ_FROM_REMOTE_LOCATION">A Buffer was incompletely read from the remote location before the location became unavailable</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_RECALLED_DUE_TO_TIME_OUT">Message recalled due to timeout</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_DESTINATION_IP_ADDR_DOES_NOT_EXIST">Destination Ip Address does not exist</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_FAILED_ON_ALL_NODES">Sending To Cluster Nodes Failed For All Nodes</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_FAILED_ON_SOME_NODES">Sending To Cluster Nodes Failed For Some Nodes</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_ROLLBACK_SUCCEEDED">Rolling back during a cluster Send Succeeded</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_ROLLBACK_FAILED">Rolling back during a cluster Send Failed</Resource>
+        <Resource Name = "WAVE_EVENT_ERROR_SUBMIT_TO_INVALID_THREAD">Submitting event to invalid thread</Resource>
+        <Resource Name = "WAVE_EVENT_ERROR_NO_OM_TO_ACCEPT_MESSAGE">No Object Manager to accept the event</Resource>
+        <Resource Name = "WAVE_EVENT_ERROR_NO_SERVICE_TO_ACCEPT_MESSAGE">No service registered to accept the event</Resource>
+        <Resource Name = "WAVE_EVENT_ERROR_NO_OMS_FOR_SERVICE">No Object Managers are active for the service - to deliver event</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_POST_TO_REMOTE_LOCATION_DUE_TO_PRINCIPAL_FAILOVER">Error in posting the message to remote location due to Principal Failover</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_REMOTE_LOCATION_UNAVAILABLE_DUE_TO_PRINCIPAL_FAILOVER">Remote Location is not available due to Principal Failover</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_DB_RESTORE_FAILED">Restoring DB from the file has failed</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_SCHEMA_MISMATCH">There is schema mismatch</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_FAILED_TO_START_HEART_BEAT">Failed to start heart beat</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_CLUSTER_OPERATION_IN_PROGRESS">Cluster operation in progress</Resource>
+        <Resource Name = "WAVE_MESSAGE_SENT_STATUS_TO_LOCATION_IS_UNKONWN">Message sent status is not initialized</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_SEND_MULTICAST_FAILED">SendMulticastFailed, Please Check Specific Location Status</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_HAPEER_MESSAGE_FAILED">Failed to send sync message to HA peer</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_STANDBY_SYNC_FAILED">Standby MM failed on HA sync</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_SCHEMA_CONVERSION_FAILED">Schema conversion failed in HA sync</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_FIRMWARE_VERSION_MISMATCH">There is firmware version mismatch</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_SEND_TIMEDOUT">Timeout occured while sending the message</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_CONFIGURATION_MISMATCH">Node Can not be added to Cluster because of configuration mismatch</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_DATABASE_INCONSISTENT">The Database is inconsistent.</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_LIVE_CONFIG_HASYNC_FAILED">Running config sync update failed on standby MM</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_CONFIG_UPDATE_FAILED">Running config update failed on one MM</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_LIVE_CONFIG_HASYNC_NOT_SUPPORTED">Running config live sync is not supported</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_CLUSTER_DB_HASYNC_FAILED">CLuster event triggered DB HA sync failed</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_CLUSTER_STATUS_HASYNC_FAILED">CLuster status update HA sync failed</Resource>
+        <Resource Name = "WAVE_MESSAGE_SKIP_POSTBOOT">Skip Postboot for this service</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_CLUSTER_STATUS_HASYNC_NOT_SUPPORTED">CLuster status update HA sync not supported</Resource>
+        <Resource Name = "WAVE_MESSAGE_ERROR_CLUSTER_DB_HASYNC_NOT_SUPPORTED">CLuster event triggered DB HA sync not supported</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "WaveMessagePriority">
+        <Resource Name = "WAVE_MESSAGE_PRIORITY_NORMAL">Normal Wave Message Priority</Resource>
+        <Resource Name = "WAVE_MESSAGE_PRIORITY_HIGH">High Wave Message Priority</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "WaveMessageType">
+        <Resource Name = "WAVE_MESSAGE_TYPE_REQUEST">Wave Message Request</Resource>
+        <Resource Name = "WAVE_MESSAGE_TYPE_RESPONSE">Wave Message Response</Resource>
+        <Resource Name = "WAVE_MESSAGE_TYPE_EVENT">Wave Event</Resource>
+    </ResourceEnum>
+</ModuleResources>

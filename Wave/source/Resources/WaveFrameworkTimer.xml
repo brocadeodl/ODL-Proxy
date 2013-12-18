@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Timer Module. -->
+
+<ModuleResources ModuleName = "Timer" ComponentName = "Wave">
+    <ResourceEnum Name = "TimerMessageStatus">
+        <Resource Name = "TIMER_SUCCESS">Succeeded</Resource>
+        <Resource Name = "TIMER_ERROR_CAN_NOT_CANCEL_SYS_TIMER">Cannot cancel system timer</Resource>
+        <Resource Name = "TIMER_ERROR_CAN_NOT_START_SYS_TIMER">Cannot start system timer</Resource>
+        <Resource Name = "TIMER_ERROR_CAN_NOT_ALLOC_MEMORY">Cannot allocate memory</Resource>
+        <Resource Name = "TIMER_ERROR_INVALID_HANDLE">Invalid timer handle</Resource>
+        <Resource Name = "TIMER_ERROR_TIMER_SHUTDOWN">Timer shutdown</Resource>
+    </ResourceEnum>
+
+</ModuleResources>

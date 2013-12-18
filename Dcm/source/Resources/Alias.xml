@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ModuleResources ModuleName = "Alias" ComponentName = "AliasResourceIds">
+
+    <ResourceEnum Name = "AliasConfigurations">
+        <Resource Name = "ALIAS_CREATE_ALIAS">%% create alias </Resource>
+        <Resource Name = "ALIAS_UPDATE_ALIAS">%% update alias</Resource>
+        <Resource Name = "ALIAS_REMOVE_ALIAS">%% remove alias</Resource>
+        <Resource Name = "ALIAS_CREATE_USER">%% create user</Resource>
+        <Resource Name = "ALIAS_REMOVE_USER">%% remove user</Resource>
+        <Resource Name = "ALIAS_FROM_OPERATIONAL_MODE">%% operational mode command</Resource>
+        <Resource Name = "ALIAS_FROM_CONFIGURE_MODE">%% configure mode command</Resource>
+        <Resource Name = "ALIAS_IS_GLOBAL_OPERATION">%% global alias</Resource>
+        <Resource Name = "ALIAS_IS_USER_OPERATION">%% user level alias</Resource>
+        <Resource Name = "WYSEREA_AAA_CACHE_BOOT_RELOAD">%% Alias boot reload</Resource>
+    </ResourceEnum>
+
+</ModuleResources>

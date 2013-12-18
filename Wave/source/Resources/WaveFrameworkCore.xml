@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Framework Core Module. -->
+
+<ModuleResources ModuleName = "FrameworkCore" ComponentName = "Wave">
+    <ResourceEnum Name = "FrameworkStatus">
+        <Resource Name = "FRAMEWORK_SUCCESS">Succeeded</Resource>
+        <Resource Name = "FRAMEWORK_ERROR">Failed</Resource>
+        <Resource Name = "FRAMEWORK_TIME_OUT">Timed Out</Resource>
+        <Resource Name = "FRAMEWORK_TIMER_ERROR">Timer Generic Error</Resource>
+        <Resource Name = "FRAMEWORK_TIMER_INVALID_CALLBACK">Invalid Timer Callback</Resource>
+        <Resource Name = "FRAMEWORK_TIMER_INVALID_START_INTERVAL">Invalid Start Interval for timer</Resource>
+        <Resource Name = "FRAMEWORK_TIMER_INVALID_PERIODIC_INTERVAL">Invalid periodic interval for timer</Resource>
+        <Resource Name = "FRAMEWORK_TIMER_NO_MEMORY">Out of Memory</Resource>
+        <Resource Name = "FRAMEWORK_TIMER_CAN_NOT_START">Timer Could not be started</Resource>
+        <Resource Name = "FRAMEWORK_TIMER_CAN_NOT_DELETE">Timer could not be deleted</Resource>
+        <Resource Name = "FRAMEWORK_TIMER_INVALID_HANDLE">Invalid Timer Handle</Resource>
+        <Resource Name = "FRAMEWORK_UNKNOWN_LOCATION">Unknown Location</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "FrameworkObjectManagerFailoverReason">
+        <Resource Name = "FRAMEWORK_OBJECT_MANAGER_FAILOVER_REASON_UNCONTROLLED">Uncontrolled Framework Failover</Resource>
+        <Resource Name = "FRAMEWORK_OBJECT_MANAGER_FAILOVER_REASON_CONTROLLED">Controlled Framework Failover</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "FrameworkFailoverInformSecondaryLocationsToChangePrimaryStatus">
+        <Resource Name = "FRAMEWORK_ERROR_FAILOVER_INFORM_SECONDARY_LOCATIONS_TIMED_OUT">Informing Secondary to change Primary timed out during failover</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_FAILOVER_INFORM_SECONDARY_LOCATIONS_PHASE1_TIMED_OUT">Informing Secondary to change Primary Phase1 timed out during failover</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_FAILOVER_INFORM_SECONDARY_LOCATIONS_PHASE2_TIMED_OUT">Informing Secondary to change Primary Phase2 timed out during failover</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_FAILOVER_INFORM_SECONDARY_LOCATIONS_PHASE1_UNKNOWN">Informing Secondary to change Primary Phase1 during failover - Unknown</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_FAILOVER_INFORM_SECONDARY_LOCATIONS_PHASE2_UNKNOWN">Informing Secondary to change Primary Phase2 during failover - Unknown</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "FrameworkClusterOperationStatus">
+        <Resource Name = "FRAMEWORK_ERROR_LOCATION_NOT_CONFIGURED">Location Not Configured</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_SUB_LOCATION_CANNOT_CREATE_CLUSTER">Could not create Cluster</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CANNOT_CONFIGURE_SECONDARY_LOCATION">Could not configure Secondary Location</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CANNOT_CREATE_HA_WITH_SELF">Cannot create Cluster with Self Node</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_NULL_IPADDRESS">Null Ip Address</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_INVALID_IPADDRESS">Invalid IpAddress</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_NO_UNUSED_LOCATION_IDS_AVAILABLE">No unused Location Ids available</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CANNOT_CREATE_CLUSTER_NO_VALID_RESOURCES">Could not create cluster sin all supplied resources are invalid</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CREATE_CLUSTER_CONFIGURE_SECONDARY_TIMED_OUT">Configuring Secondary Timed Out while creating a Cluster</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CREATE_CLUSTER_CONFIGURE_SECONDARY_PHASE1_UNKNOWN">Configuring Secondary Phase 1 while creating a Cluster - Unknown</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CREATE_CLUSTER_CONFIGURE_SECONDARY_PHASE1_TIMED_OUT">Configuring Secondary Phase 1 Timed Out while creating a Cluster</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CREATE_CLUSTER_CONFIGURE_SECONDARY_PHASE2_UNKNOWN">Configuring Secondary Phase 2 while creating a Cluster - Unknown</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CREATE_CLUSTER_CONFIGURE_SECONDARY_PHASE2_TIMED_OUT">Configuring Secondary Phase 2 Timed Out while creating a Cluster</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_SUB_LOCATION_CANNOT_ADD_NODES_TO_CLUSTER">A Sub Location cannot add nodes to cluster</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_SECONDARY_LOCATION_CANNOT_ADD_NODES_TO_CLUSTER">A Secondary Location Cannot add nodes to cluster</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CANNOT_ADD_SELF_TO_CLUSTER">Cannot Add Self Node to cluster</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CANNOT_ADD_NODES_TO_CLUSTER_NO_VALID_RESOURCES">Could not add nodes to cluster because all supplied resources are invalid</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_IPADDRESS_ALREADY_MEMBER_OF_CLUSTER">Supplied IP Address is already a member of the Cluster</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_FAILED_TO_CONECT_TO_ALL_NEW_LOCATIONS">Failed to connect to all new locations</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_FAILED_TO_CONFIGURE_ALL_NEW_LOCATIONS">Failed to configure all new locations</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CANNOT_DELETE_NODES_FROM_CLUSTER_ON_SECONDARY">Cannot delete nodes from cluster on the Secondary node</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CANNOT_DELETE_NODES_FROM_CLUSTER_NO_VALID_RESOURCES">Could not delete nodes from cluster because all of the supplied resources are invalid</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CANNOT_DELETE_NODES_FROM_CLUSTER_NOT_A_KNOWN_LOCATION">Cannot delet node from cluster vbecause it is not a known location</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_DELETE_NODES_FROM_CLUSTER_UNCONFIGURE_SECONDARY_TIMED_OUT">Unconfiguring a secondary timed out while deleting it from Cluster</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CANNOT_UNCONFIGURE_STAND_ALONE_NODE">Cannot Unconfigure a stand alone node</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CANNOT_UNCONFIGURE_SUB_LOCATION">Cannot unconfigure a sub location</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CANNOT_UNCONFIGURE_LOCATION_WITH_UNKNOWN_ROLE">Cannot unconfigure a location with an unknown role.</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CANNOT_UNCONFIGURE_LOCATION_WITH_IN_CLUSTER_PHASES_ROLE">Cannot unconfigure a location which is in the middle of cluster operation.</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_LOCATION_ALREADY_CONFIGURED">Location is already configured</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_SUB_LOCATION_CANNOT_BECOME_MEMBER_OF_A_CLUSTER">Sub Location cannot become member of a cluster</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CANNOT_BECOME_SECONDARY_REQUESTING_LOCATION_UNAVAILABLE">This location cannot be mede secondary since the requesting location is not reachable any more</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CANNOT_BECOME_SECONDARY_NOT_A_VALID_IPADDRESS_FOR_THIS_LOCATION">This location cannot be mede secondary since the requesting location specified an invalid IP Address for this location</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CANNOT_BECOME_SECONDARY_WAVE_VERSION_MISMATCH">This location cannot be mede secondary since the Wave Version of this location does not match with that of the requesting Location</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CANNOT_REJOIN_NODE_TO_CLUSTER_NOT_A_KNOWN_LOCATION">Cannot rejoin location since it is not a known location</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CANNOT_REJOIN_NODES_TO_CLUSTER_NO_VALID_RESOURCES">Could not rejoin nodes to CLuster since all the given nodes are invalid</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_FAILED_TO_CONECT_TO_ALL_LOCATIONS">Failed to connect to all locations</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_FAILED_TO_REJOIN_ALL_LOCATIONS">Failed to rejoin all locations</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_REJOIN_NODES_TO_CLUSTER_REJOIN_SECONDARY_TIMED_OUT">Trying to rejoin a secondary timed out</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CANNOT_JOIN_CLUSTER_LOCATION_CONFIGURED_AS_PRIMARY">Cannot rejoin a location that is configured as a Primary location</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CANNOT_JOIN_CLUSTER_LOCATION_STAND_ALONE">Cannot rejoin a location that is configured as a Stand Alone location</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CANNOT_JOIN_CLUSTER_LOCATION_SUB_LOCATION">Cannot rejoin a location that is configured as a Sub location</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CANNOT_JOIN_CLUSTER_LOCATION_UNKNOWN_ROLE">Cannot rejoin a location that is configured with an unknown role</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CANNOT_JOIN_CLUSTER_LOCATIONID_MISMATCH">Could not join cluster since the Location Id does not match the location Id sent by the Primary</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CANNOT_JOIN_CLUSTER_PRIMARY_LOCATIONID_MISMATCH">Could not rejoin cluster since the expected Primary Location Id does not match</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CANNOT_JOIN_CLUSTER_PRIMARY_IPADDRESS_MISMATCH">Could not rejoin cluster since the expected Primary IP Address does not match</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_CANNOT_JOIN_CLUSTER_LOCATION_CONFIGURATION_INVALID">Cannot rejoin the Cluster since this location configuration is invalid</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_ONLY_PRIMARY_LOCATION_CAN_DESTROY_CLUSTER">Only Primary Location can destroy a cluster</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_ONLY_SECONDARY_CAN_DETACH_ITSELF_FROM_CLUSTER">Only Secondary Location can detach itself from cluster</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_COULD_NOT_COLLECT_VALIDATION_DATA">Could not collect validation data</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_SERVICE_VALIDATION_FAILED">Service Validation Failed</Resource>
+        <Resource Name = "FRAMEWORK_ERROR_FORMATTED_ERROR_TEST">This is to test integer %1 output, string %2 and ip %3 </Resource>
+        <Resource Name = "FRAMEWORK_CLUSTER_NETCONF_BNA_OPERATION_CONTEXT">Operation context %1</Resource>
+        <Resource Name = "FRAMEWORK_CLUSTER_PARTIAL_SUCCESS">Warning: %1Cluster wide operation failed on Rbridge-id(s): %2.  Succeeded on Rbridge-id(s): %3.%4</Resource>
+        <Resource Name = "FRAMEWORK_CLUSTER_DIFFERENT_FAILURE">Error: %1Cluster wide operation failed on all Rbridge-id(s): %2.%3</Resource>
+        <Resource Name = "FRAMEWORK_PRIMARY_NODE_IS_GOING_OFFLINE">Primary node is going offline.</Resource>
+        <Resource Name = "FRAMEWORK_LINECARD_POSTBOOT_IN_PROGRESS">Linecard postboot in progress. Retry later.</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "FrameworkFailoverOperationStatus">
+        <Resource Name = "FRAMEWORK_INVALID_LOCATION_ROLE_FOR_FAILOVER">Current Location Role is Invalid for Framework Failover.  Only Primary and Secondary locations are allowed to run any kind of failover</Resource>
+        <Resource Name = "FRAMEWORK_INVALID_FAILOVER_REASON_ON_PRIMARY">Invalid Failover Reason on Primary Node</Resource>
+        <Resource Name = "FRAMEWORK_INVALID_FAILOVER_REASON_ON_SECONDARY">Invalid Failover Reason on Secondary Node</Resource>
+   </ResourceEnum>
+
+    <ResourceEnum Name = "FrameworkDatabaseSchemaConversionStatus">
+        <Resource Name = "FRAMEWORK_STATUS_UNHANDLED_MANAGEDOBJECTS">Cannot handle addition or removal of Managed Objects</Resource>
+        <Resource Name = "FRAMEWORK_STATUS_UNHANDLED_RELATIONS">Cannot handle addition, removal or changes to relationship attributes</Resource>
+        <Resource Name = "FRAMEWORK_STATUS_UNHANDLED_TABLEID_CHANGE">Cannot handle change in tbale-ids of existing Managed Objects</Resource>
+        <Resource Name = "FRAMEWORK_STATUS_CONVERSION_FAILURE">Failed to execute SQL command to alter the database</Resource>
+        <Resource Name = "FRAMEWORK_STATUS_INCONSISTENT_MANAGED_OBJECTS">Failure because of inconsistent comparision of Managed Objects</Resource>
+        <Resource Name = "FRAMEWORK_STATUS_FIELD_CHANGE_NOT_SUPPORTED">Simple Field Change is not supported</Resource>
+        <Resource Name = "FRAMEWORK_STATUS_RELATION_FIELD_CHANGE_NOT_SUPPORTED">Relation Field Change is not supported</Resource>
+        <Resource Name = "FRAMEWORK_STATUS_PARENT_TABLE_CHANGE_NOT_SUPPORTED">Changing Parent of a Managed Object is not supported</Resource>
+        <Resource Name = "FRAMEWORK_STATUS_NO_CHANGES">No Changes found in Differences</Resource>
+        <Resource Name = "FRAMEWORK_STATUS_USER_DEFINED_KEY_COMBINATION_CHANGES_NOT_SUPPORTED">User Defined Key Combination changes are not supported</Resource>
+        <Resource Name = "FRAMEWORK_STATUS_SCHEMA_UPGRADE_FOR_FW_DOWNGRADE_NOT_SUPPORTED">Schema Upgrade is not supported for firmware downgrade case</Resource>
+        <Resource Name = "FRAMEWORK_STATUS_LOCAL_GLOBAL_CHANGE_NOT_SUPPORTED">Schema Upgrade is not supported for local to global or global to local MO change</Resource>
+        <Resource Name = "FRAMEWORK_STATUS_DERIVED_FROM_TABLE_CHANGED">Derived From Class Name change is detected</Resource>
+   </ResourceEnum>
+
+   <ResourceEnum Name = "WaveManagedObjectSpecificStatus">
+        <Resource Name = "WAVE_MANAGED_OBJECT_SPECIFIC_STATUS_STAND_ALONE">StandAlone</Resource>
+        <Resource Name = "WAVE_MANAGED_OBJECT_SPECIFIC_STATUS_PRIMARY">Primary</Resource>
+        <Resource Name = "WAVE_MANAGED_OBJECT_SPECIFIC_STATUS_SECONDARY_ADD_PHASE2_STARTED">Secondary Add Phase2 Start</Resource>
+        <Resource Name = "WAVE_MANAGED_OBJECT_SPECIFIC_STATUS_SECONDARY_ADD_PHASE2_COMPLETED">Secondary Add Phase2 Complete</Resource>
+        <Resource Name = "WAVE_MANAGED_OBJECT_SPECIFIC_STATUS_SECONDARY_REJOIN_PHASE2_STARTED">Secondary Rejoin Phase2 Start</Resource>
+        <Resource Name = "WAVE_MANAGED_OBJECT_SPECIFIC_STATUS_SECONDARY_REJOIN_PHASE2_COMPLETED">Secondary Rejoin Phase2 Complete</Resource>
+        <Resource Name = "WAVE_MANAGED_OBJECT_SPECIFIC_STATUS_SECONDARY_ADD_PHASE3_STARTED">Secondary Add Phase3 Start</Resource>
+        <Resource Name = "WAVE_MANAGED_OBJECT_SPECIFIC_STATUS_SECONDARY_REJOIN_PHASE3_STARTED">Secondary Rejoin Phase3 Start</Resource>
+        <Resource Name = "WAVE_MANAGED_OBJECT_SPECIFIC_STATUS_SECONDARY_CONNECTED_TO_CLUSTER">Secondary Connected To Cluster</Resource>
+        <Resource Name = "WAVE_MANAGED_OBJECT_SPECIFIC_STATUS_SECONDARY_NOT_CONNECTED_TO_CLUSTER">Secondary Not Connected To Cluster</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "WaveManagedObjectShowType">
+        <Resource Name = "WAVE_MANAGED_OBJECT_SHOW_ALL"          >Show All Properties</Resource>
+        <Resource Name = "WAVE_MANAGED_OBJECT_SHOW_CONFIGURATION">Show Configuration Properties</Resource>
+        <Resource Name = "WAVE_MANAGED_OBJECT_SHOW_OPERATIONAL"  >Show Operational  Properties</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "FrameworkStatusPropagationType">
+        <Resource Name = "FRAMEWORK_STATUS_PROPAGATION_PARTIAL_SUCCESS">Propagated status types are mixed success and failures</Resource>
+        <Resource Name = "FRAMEWORK_STATUS_PROPAGATION_DIFFERENT_FAILURE">Propagated status types are different failures</Resource>
+        <Resource Name = "FRAMEWORK_STATUS_PROPAGATION_SAME_FAILURE">Propagated status type are the same failure</Resource>
+        <Resource Name = "FRAMEWORK_STATUS_PROPAGATION_SAME_SUCCESS">Propagated status type are the same success</Resource>
+        <Resource Name = "FRAMEWORK_STATUS_PROPAGATION_NONE">No propagated status exists</Resource>
+        <Resource Name = "FRAMEWORK_STATUS_PROPAGATION_LOCATIONID_NOT_FOUND">No propagated status found for location</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "WaveNodeHardwareSynchronizationState">
+        <Resource Name = "WAVE_NODE_HARDWARE_SYNCHRONIZATION_STATE_UNKNOWN">Unknown</Resource>
+        <Resource Name = "WAVE_NODE_HARDWARE_SYNCHRONIZATION_STATE_UNINITIALIZED">Uninitialized</Resource>
+        <Resource Name = "WAVE_NODE_HARDWARE_SYNCHRONIZATION_STATE_SYNCHRONIZING">Synchronizing</Resource>
+        <Resource Name = "WAVE_NODE_HARDWARE_SYNCHRONIZATION_STATE_IN_SYNC">In sync</Resource>
+        <Resource Name = "WAVE_NODE_HARDWARE_SYNCHRONIZATION_STATE_OUT_OF_SYNC">Out of sync</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "WaveServiceMode">
+        <Resource Name = "WAVE_SERVICE_INACTIVE">Service is in Inactive Mode</Resource>
+        <Resource Name = "WAVE_SERVICE_ACTIVE">Service is in active Mode</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "WaveManagedObjectListenOperation">
+        <Resource Name = "WAVE_MANAGED_OBJECT_LISTEN_FOR_CREATE" >Listen for Wave Managed Object Creation</Resource>
+        <Resource Name = "WAVE_MANAGED_OBJECT_LISTEN_FOR_UPDATE" >Listen for Wave Managed Object Updation</Resource>
+        <Resource Name = "WAVE_MANAGED_OBJECT_LISTEN_FOR_DELETE" >Listen for Wave Managed Object Deletion</Resource>
+        <Resource Name = "WAVE_MANAGED_OBJECT_LISTEN_FOR_DEFAULT">Listen for Wave Managed Object Default</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "PrismSynchronousLinearSequencerContextStatus">
+        <Resource Name = "WAVE_SEQUENCER_SKIP_TO_SUCCESS_STEP">Skip to success step</Resource>
+    </ResourceEnum>
+</ModuleResources>

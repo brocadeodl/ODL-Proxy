@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-lacp"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:lacp="urn:brocade.com:mgmt:brocade-lacp"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface">
+  <namespace uri="urn:brocade.com:mgmt:brocade-lacp"/>
+  <prefix value="lacp"/>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 1745 Technology Drive,
+        San Jose, CA 95110 
+         U.S.A
+Tel: +1-408-392-6061
+E-mail: support@Brocade.com 
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This module describes the data model for Link Aggregation 
+Control Protocol</text>
+  </description>
+  <revision date="2010-01-25">
+    <description>
+      <text>Initial Version</text>
+    </description>
+  </revision>
+  <container name="lacp">
+    <leaf name="system-priority">
+      <type name="uint32">
+        <range value="1 .. 65535"/>
+      </type>
+      <default value="32768"/>
+    </leaf>
+  </container>
+  <grouping name="common-phy-lacp-cmds">
+    <container name="lacp">
+      <leaf name="timeout">
+        <type name="enumeration">
+          <enum name="short">
+            <value value="1"/>
+          </enum>
+          <enum name="long">
+            <value value="2"/>
+          </enum>
+        </type>
+      </leaf>
+      <leaf name="std_port-priority">
+        <description>
+          <text>This command is used to configure port priority</text>
+        </description>
+        <type name="uint32">
+          <range value="1 .. 65535"/>
+        </type>
+        <default value="32768"/>
+      </leaf>
+      <leaf name="default-up">
+        <type name="empty"/>
+      </leaf>
+    </container>
+  </grouping>
+  <augment target-node="/interface:interface/interface:tengigabitethernet">
+    <uses name="common-phy-lacp-cmds"/>
+  </augment>
+  <augment target-node="/interface:interface/interface:gigabitethernet">
+    <uses name="common-phy-lacp-cmds"/>
+  </augment>
+  <augment target-node="/interface:interface/interface:fortygigabitethernet">
+    <uses name="common-phy-lacp-cmds"/>
+  </augment>
+</module>

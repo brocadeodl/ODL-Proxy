@@ -1,0 +1,1062 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-ip-policy"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:ip-policy="urn:brocade.com:mgmt:brocade-ip-policy"
+        xmlns:rbridge="urn:brocade.com:mgmt:brocade-rbridge"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface"
+        xmlns:loopback-intf="urn:brocade.com:mgmt:brocade-intf-loopback"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types"
+        xmlns:ip-access-list="urn:brocade.com:mgmt:brocade-ip-access-list">
+  <namespace uri="urn:brocade.com:mgmt:brocade-ip-policy"/>
+  <prefix value="ip-policy"/>
+  <import module="brocade-rbridge">
+    <prefix value="rbridge"/>
+  </import>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <import module="brocade-intf-loopback">
+    <prefix value="loopback-intf"/>
+  </import>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <import module="brocade-ip-access-list">
+    <prefix value="ip-access-list"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 1745 Technology Drive,
+        San Jose, CA 95110 
+         U.S.A
+Tel: +1-408-392-6061
+E-mail: support@Brocade.com 
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This management module is an instrumentation to manage 
+different IP routing protocols.</text>
+  </description>
+  <revision date="2011-03-19">
+    <description>
+      <text>Initial version of this IP policy sub-module.</text>
+    </description>
+  </revision>
+  <typedef name="metric-t">
+    <type name="uint32">
+      <range value="0..4294967295">
+        <description>
+          <text>Number:0-4294967295;;Route metric value</text>
+        </description>
+      </range>
+    </type>
+  </typedef>
+  <typedef name="tag-t">
+    <type name="uint32">
+      <range value="0..4294967295">
+        <description>
+          <text>Number:0-4294967295;;Route tag value</text>
+        </description>
+      </range>
+    </type>
+  </typedef>
+  <typedef name="distance-t">
+    <type name="uint32">
+      <range value="1..254">
+        <description>
+          <text>Number:1-254;;Route distance value</text>
+        </description>
+      </range>
+    </type>
+  </typedef>
+  <typedef name="action-t">
+    <type name="enumeration">
+      <enum name="permit">
+        <value value="1"/>
+        <description>
+          <text>Allow matching pattern</text>
+        </description>
+      </enum>
+      <enum name="deny">
+        <value value="2"/>
+        <description>
+          <text>Disallow matching pattern</text>
+        </description>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="instance-id-t">
+    <type name="uint16">
+      <range value="1..65535">
+        <description>
+          <text>1-65535;;Instance number</text>
+        </description>
+      </range>
+    </type>
+  </typedef>
+  <typedef name="prefix-len-t">
+    <type name="uint32">
+      <range value="1..32">
+        <description>
+          <text>1-32;;IP Prefix length</text>
+        </description>
+      </range>
+    </type>
+  </typedef>
+  <typedef name="set-route-type-t">
+    <type name="enumeration">
+      <enum name="internal">
+        <value value="1"/>
+        <description>
+          <text>Internal route type</text>
+        </description>
+      </enum>
+      <enum name="type-1">
+        <value value="2"/>
+        <description>
+          <text>OSPF external route type 1</text>
+        </description>
+      </enum>
+      <enum name="type-2">
+        <value value="3"/>
+        <description>
+          <text>OSPF external route type 2</text>
+        </description>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="match-route-type-t">
+    <type name="enumeration">
+      <enum name="internal">
+        <value value="1"/>
+        <description>
+          <text>Internal route type</text>
+        </description>
+      </enum>
+      <enum name="type-1">
+        <value value="2"/>
+        <description>
+          <text>OSPF external route type 1</text>
+        </description>
+      </enum>
+      <enum name="type-2">
+        <value value="3"/>
+        <description>
+          <text>OSPF external route type 2</text>
+        </description>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="ext-community-rt-expr-t">
+    <type name="string">
+      <pattern value="((\s*(\d+:\d+))*)(( (additive))?)"/>
+    </type>
+  </typedef>
+  <typedef name="ext-rt-not-interface-expr-t">
+    <type name="string">
+      <pattern value="([^i].*)|(i[^n].*)|(in[^t].*)(int[^e].*)|(inte[^r].*)|(inter[^f].*)|(interf[^a].*)|(interfa[^c].*)|(interface..*)"/>
+    </type>
+  </typedef>
+  <typedef name="set-community-expr-t">
+    <type name="string">
+      <pattern value="((\s*)|(\s*((local\-as)|(internet)|(no\-export)|(no\-advertise)|((([0-9][0-9]{0,3})|([1-5][0-9]{4})|(6[0-4][0-9]{3})|(65[0-4][0-9]{2})|(655[0-2][0-9])|(6553[0-5])):(([0-9][0-9]{0,3})|([1-5][0-9]{4})|(6[0-4][0-9]{3})|(65[0-4][0-9]{2})|(655[0-2][0-9])|(6553[0-5])))|([1-9][0-9]{0,8})|([1-3][0-9]{9})|(4[0-1][0-9]{8})|(42[0-8][0-9]{7})|(429[0-3][0-9]{6})|(4294[0-8][0-9]{5})|(42949[0-5][0-9]{4})|(429496[0-6][0-9]{3})|(4294967[0-1][0-9]{2})|(42949672[0-8][0-9])|(429496729[0-5])))((\s+((local\-as)|(internet)|(no\-export)|(no\-advertise)|((([0-9][0-9]{0,3})|([1-5][0-9]{4})|(6[0-4][0-9]{3})|(65[0-4][0-9]{2})|(655[0-2][0-9])|(6553[0-5])):(([0-9][0-9]{0,3})|([1-5][0-9]{4})|(6[0-4][0-9]{3})|(65[0-4][0-9]{2})|(655[0-2][0-9])|(6553[0-5])))|([1-9][0-9]{0,8})|([1-3][0-9]{9})|(4[0-1][0-9]{8})|(42[0-8][0-9]{7})|(429[0-3][0-9]{6})|(4294[0-8][0-9]{5})|(42949[0-5][0-9]{4})|(429496[0-6][0-9]{3})|(4294967[0-1][0-9]{2})|(42949672[0-8][0-9])|(429496729[0-5])))*)(( (additive))?))|(none)"/>
+    </type>
+  </typedef>
+  <typedef name="match-community-expr-t">
+    <type name="string">
+      <pattern value="((\s*([a-zA-Z0-9_]+))*)(( (exact-match))?)"/>
+    </type>
+  </typedef>
+  <typedef name="ip-std-community-expr-t">
+    <type name="string">
+      <pattern value="(\s*)|(\s*((local\-as)|(internet)|(no\-export)|(no\-advertise)|((([0-9][0-9]{0,3})|([1-5][0-9]{4})|(6[0-4][0-9]{3})|(65[0-4][0-9]{2})|(655[0-2][0-9])|(6553[0-5])):(([0-9][0-9]{0,3})|([1-5][0-9]{4})|(6[0-4][0-9]{3})|(65[0-4][0-9]{2})|(655[0-2][0-9])|(6553[0-5])))|([1-9][0-9]{0,8})|([1-3][0-9]{9})|(4[0-1][0-9]{8})|(42[0-8][0-9]{7})|(429[0-3][0-9]{6})|(4294[0-8][0-9]{5})|(42949[0-5][0-9]{4})|(429496[0-6][0-9]{3})|(4294967[0-1][0-9]{2})|(42949672[0-8][0-9])|(429496729[0-5])))((\s+((local\-as)|(internet)|(no\-export)|(no\-advertise)|((([0-9][0-9]{0,3})|([1-5][0-9]{4})|(6[0-4][0-9]{3})|(65[0-4][0-9]{2})|(655[0-2][0-9])|(6553[0-5])):(([0-9][0-9]{0,3})|([1-5][0-9]{4})|(6[0-4][0-9]{3})|(65[0-4][0-9]{2})|(655[0-2][0-9])|(6553[0-5])))|([1-9][0-9]{0,8})|([1-3][0-9]{9})|(4[0-1][0-9]{8})|(42[0-8][0-9]{7})|(429[0-3][0-9]{6})|(4294[0-8][0-9]{5})|(42949[0-5][0-9]{4})|(429496[0-6][0-9]{3})|(4294967[0-1][0-9]{2})|(42949672[0-8][0-9])|(429496729[0-5])))*)"/>
+    </type>
+  </typedef>
+  <typedef name="ip-prefix-name-t">
+    <type name="common-def:name-string32"/>
+    <description>
+      <text>Word:1-32;;IP prefix-list name</text>
+    </description>
+  </typedef>
+  <typedef name="ip-prefix-open-bracket-t">
+    <type name="string">
+      <pattern value="\["/>
+    </type>
+  </typedef>
+  <typedef name="ip-prefix-close-bracket-t">
+    <type name="string">
+      <pattern value="\]"/>
+    </type>
+  </typedef>
+  <typedef name="dscp-precedence">
+    <type name="enumeration">
+      <enum name="CS0">
+        <value value="0"/>
+      </enum>
+      <enum name="CS1">
+        <value value="8"/>
+      </enum>
+      <enum name="CS2">
+        <value value="16"/>
+      </enum>
+      <enum name="CS3">
+        <value value="24"/>
+      </enum>
+      <enum name="CS4">
+        <value value="32"/>
+      </enum>
+      <enum name="CS5">
+        <value value="40"/>
+      </enum>
+      <enum name="CS6">
+        <value value="48"/>
+      </enum>
+      <enum name="CS7">
+        <value value="56"/>
+      </enum>
+      <enum name="AF11">
+        <value value="10"/>
+      </enum>
+      <enum name="AF12">
+        <value value="12"/>
+      </enum>
+      <enum name="AF13">
+        <value value="14"/>
+      </enum>
+      <enum name="AF21">
+        <value value="18"/>
+      </enum>
+      <enum name="AF22">
+        <value value="20"/>
+      </enum>
+      <enum name="AF23">
+        <value value="22"/>
+      </enum>
+      <enum name="AF31">
+        <value value="26"/>
+      </enum>
+      <enum name="AF32">
+        <value value="28"/>
+      </enum>
+      <enum name="AF33">
+        <value value="30"/>
+      </enum>
+      <enum name="AF41">
+        <value value="34"/>
+      </enum>
+      <enum name="AF42">
+        <value value="36"/>
+      </enum>
+      <enum name="AF43">
+        <value value="38"/>
+      </enum>
+      <enum name="EF">
+        <value value="46"/>
+      </enum>
+      <enum name="default">
+        <value value="99"/>
+      </enum>
+    </type>
+  </typedef>
+  <grouping name="ip_policy_group">
+    <container name="route-map">
+      <description>
+        <text>Enable PBR</text>
+      </description>
+      <leaf name="route-map-name">
+        <type name="common-def:name-string63"/>
+        <description>
+          <text>Word:1-63;;Route map name</text>
+        </description>
+      </leaf>
+    </container>
+  </grouping>
+  <typedef name="ip-as-path-name-t">
+    <type name="string">
+      <length value="1..32"/>
+    </type>
+    <description>
+      <text>Word:1-32;;AS Path Access List Name</text>
+    </description>
+  </typedef>
+  <typedef name="ip-match-as-path-name-t">
+    <type name="string"/>
+    <description>
+      <text>Word:1-32;;AS Path Access List Name, values inside " " with spaces</text>
+    </description>
+  </typedef>
+  <typedef name="ip-as-path-reg-expr-t">
+    <type name="string"/>
+    <description>
+      <text>Word;;A regular expression to match BGP AS Paths</text>
+    </description>
+  </typedef>
+  <typedef name="ip-community-reg-expr-t">
+    <type name="string"/>
+    <description>
+      <text>Regular expression string;;A ordered community list regular expression</text>
+    </description>
+  </typedef>
+  <typedef name="aspath-number-t">
+    <type name="string"/>
+    <description>
+      <text>0-4294967295;;AS numbers, values inside " " with spaces</text>
+    </description>
+  </typedef>
+  <typedef name="ip-community-list-name-t">
+    <type name="string"/>
+    <description>
+      <text>Word:1-32;;Community List Name</text>
+    </description>
+  </typedef>
+  <typedef name="match-community-list-name-t">
+    <type name="string"/>
+    <description>
+      <text>Word:1-32;;BGP Community Access List Name, values inside " " with spaces</text>
+    </description>
+  </typedef>
+  <typedef name="AA-NN-community-number-t">
+    <type name="string">
+      <pattern value="(\d+:\d+)"/>
+    </type>
+  </typedef>
+  <typedef name="DECIMAL-community-number-t">
+    <type name="string">
+      <pattern value="(\d+)"/>
+    </type>
+  </typedef>
+  <grouping name="route-map-rules">
+    <container name="match">
+      <description>
+        <text>Matches conditions.</text>
+      </description>
+      <container name="interface">
+        <description>
+          <text>Interface name, maxinum 3 values in '[]'</text>
+        </description>
+        <leaf-list name="tengigabitethernet-rmm">
+          <description>
+            <text>TengigabitEthernet</text>
+          </description>
+          <type name="interface:interface-type"/>
+          <max-elements value="3"/>
+        </leaf-list>
+        <leaf-list name="gigabitethernet-rmm">
+          <description>
+            <text>GigabitEthernet</text>
+          </description>
+          <type name="interface:interface-type"/>
+          <max-elements value="3"/>
+        </leaf-list>
+        <leaf-list name="fortygigabitethernet-rmm">
+          <description>
+            <text>FortygigabitEthernet</text>
+          </description>
+          <type name="interface:interface-type"/>
+          <max-elements value="3"/>
+        </leaf-list>
+        <leaf-list name="port-channel-rmm">
+          <description>
+            <text>Port_channel</text>
+          </description>
+          <type name="interface:channel-group-type"/>
+          <max-elements value="3"/>
+        </leaf-list>
+        <leaf-list name="vlan-rmm">
+          <description>
+            <text>Vlan</text>
+          </description>
+          <type name="interface:vlan-type"/>
+          <max-elements value="3"/>
+        </leaf-list>
+        <leaf-list name="loopback">
+          <description>
+            <text>Loopback port</text>
+          </description>
+          <type name="loopback-intf:intf-loopback-port-type"/>
+        </leaf-list>
+        <leaf-list name="ve">
+          <description>
+            <text>Virtual port</text>
+          </description>
+          <type name="interface:ve-type"/>
+        </leaf-list>
+      </container>
+      <container name="ip">
+        <description>
+          <text>Internet Protocol (IP).</text>
+        </description>
+        <container name="address">
+          <description>
+            <text>Route address</text>
+          </description>
+          <leaf name="prefix-list-rmm">
+            <description>
+              <text>IP prefix-list</text>
+            </description>
+            <type name="ip-prefix-name-t"/>
+          </leaf>
+          <leaf name="acl-rmm">
+            <description>
+              <text>Standard IP ACL</text>
+            </description>
+            <type name="ip-access-list:l3-acl-policy-name"/>
+          </leaf>
+        </container>
+        <container name="next-hop">
+          <description>
+            <text>Route next hop address</text>
+          </description>
+          <leaf name="prefix-list-rmm-n">
+            <description>
+              <text>IP prefix-list</text>
+            </description>
+            <type name="ip-prefix-name-t"/>
+          </leaf>
+        </container>
+        <container name="route-source">
+          <description>
+            <text>Source address of route</text>
+          </description>
+          <leaf name="prefix-list-rmrs">
+            <description>
+              <text>IP prefix-list</text>
+            </description>
+            <type name="string">
+              <pattern value="(\s*([a-zA-Z0-9_-]+))*"/>
+            </type>
+          </leaf>
+        </container>
+      </container>
+      <container name="metric">
+        <description>
+          <text>metric, maximum 5 metric values in '[]'</text>
+        </description>
+        <leaf name="metric-rmm">
+          <type name="metric-t"/>
+        </leaf>
+      </container>
+      <container name="route-type">
+        <description>
+          <text>Route type.</text>
+        </description>
+        <leaf name="route-type-rmm">
+          <type name="match-route-type-t"/>
+        </leaf>
+      </container>
+      <container name="tag">
+        <description>
+          <text>Route tag.</text>
+        </description>
+        <leaf-list name="tag-rmm">
+          <max-elements value="5"/>
+          <type name="tag-t"/>
+        </leaf-list>
+      </container>
+      <container name="as-path">
+        <description>
+          <text>IP AS Path Access Lists.</text>
+        </description>
+        <leaf name="as-path-access-list-name">
+          <type name="string">
+            <pattern value="(\s*)|(\s*(([a-zA-Z0-9_]{1,30})))((\s+(([a-zA-Z0-9_]{1,30})))*)"/>
+          </type>
+        </leaf>
+      </container>
+      <container name="community">
+        <description>
+          <text>Community Access List Name.</text>
+        </description>
+        <leaf name="community-access-list-name">
+          <type name="match-community-expr-t"/>
+        </leaf>
+      </container>
+      <container name="next-hop">
+        <description>
+          <text>Next hop address filter</text>
+        </description>
+        <leaf name="next-hop-filter-val">
+          <type name="uint32"/>
+        </leaf>
+      </container>
+      <container name="protocol">
+        <description>
+          <text>Match route on protocol type and sub-type.</text>
+        </description>
+        <leaf name="protocol-bgp">
+          <description>
+            <text>BGP protocol.</text>
+          </description>
+          <type name="empty"/>
+        </leaf>
+        <leaf name="bgp-route-type">
+          <type name="enumeration">
+            <enum name="external">
+              <value value="1"/>
+            </enum>
+            <enum name="static-network">
+              <value value="2"/>
+            </enum>
+            <enum name="internal">
+              <value value="3"/>
+            </enum>
+          </type>
+        </leaf>
+      </container>
+    </container>
+    <container name="set">
+      <when condition="(../../action-rm!='deny')"/>
+      <description>
+        <text>Set values.</text>
+      </description>
+      <container name="ip">
+        <description>
+          <text>Internet Protocol (IP).</text>
+        </description>
+        <container name="dscp">
+          <description>
+            <text>Dscp</text>
+          </description>
+          <leaf name="dscp-rms">
+            <type name="dscp-precedence"/>
+          </leaf>
+        </container>
+        <container name="interface">
+          <description>
+            <text>Interface</text>
+          </description>
+          <leaf name="null0">
+            <type name="empty"/>
+          </leaf>
+        </container>
+        <container name="next-hop">
+          <leaf name="peer-address">
+            <description>
+              <text>BGP peer IP address</text>
+            </description>
+            <type name="empty"/>
+          </leaf>
+        </container>
+        <container name="global">
+          <list name="next-global-hop">
+            <key value="next-hop"/>
+            <leaf name="next-hop">
+              <type name="inet:ipv4-address"/>
+            </leaf>
+          </list>
+        </container>
+        <container name="next-ip">
+          <list name="next-hop">
+            <key value="next-hop"/>
+            <leaf name="next-hop">
+              <type name="inet:ipv4-address"/>
+            </leaf>
+          </list>
+        </container>
+        <container name="next-vrf">
+          <list name="next-vrf-list">
+            <key value="vrf  next-hop"/>
+            <leaf name="vrf">
+              <type name="string"/>
+            </leaf>
+            <leaf name="next-hop">
+              <type name="inet:ipv4-address"/>
+            </leaf>
+          </list>
+        </container>
+      </container>
+      <container name="community">
+        <leaf name="set-community-expr">
+          <type name="set-community-expr-t"/>
+        </leaf>
+      </container>
+      <container name="metric">
+        <description>
+          <text>Route metric.</text>
+        </description>
+        <leaf name="delta-rms">
+          <type name="enumeration">
+            <enum name="assign">
+              <value value="3"/>
+              <description>
+                <text>Replace current metric value with</text>
+              </description>
+            </enum>
+            <enum name="add">
+              <value value="1"/>
+              <description>
+                <text>Add to current metric value</text>
+              </description>
+            </enum>
+            <enum name="sub">
+              <value value="2"/>
+              <description>
+                <text>Subtract from current metric value</text>
+              </description>
+            </enum>
+            <enum name="none">
+              <value value="4"/>
+              <description>
+                <text>Remove metric value</text>
+              </description>
+            </enum>
+          </type>
+        </leaf>
+        <leaf name="metric-rms">
+          <when condition="((../delta-rms ='assign') or 
+(../delta-rms ='add') or 
+(../delta-rms ='sub'))"/>
+          <type name="metric-t"/>
+        </leaf>
+      </container>
+      <container name="distance">
+        <description>
+          <text>Distance</text>
+        </description>
+        <leaf name="dist-rms">
+          <type name="distance-t"/>
+        </leaf>
+      </container>
+      <container name="route-type">
+        <description>
+          <text>Route type</text>
+        </description>
+        <leaf name="route-type-rms">
+          <type name="set-route-type-t"/>
+        </leaf>
+      </container>
+      <container name="tag">
+        <description>
+          <text>Route tag</text>
+        </description>
+        <leaf name="tag-rms">
+          <type name="tag-t"/>
+        </leaf>
+      </container>
+      <container name="weight">
+        <description>
+          <text>BGP weight for routing table</text>
+        </description>
+        <leaf name="weight-value">
+          <type name="uint32">
+            <range value="0..65535">
+              <description>
+                <text>0-65535;;Weight value</text>
+              </description>
+            </range>
+          </type>
+        </leaf>
+      </container>
+      <container name="as-path">
+        <description>
+          <text>Prepend string for a BGP AS-path attribute</text>
+        </description>
+        <leaf name="aspath-tag">
+          <description>
+            <text>Tag as an AS-path attribute</text>
+          </description>
+          <type name="empty"/>
+        </leaf>
+        <leaf name="prepend">
+          <type name="string">
+            <pattern value="(\s*(\d+))*"/>
+          </type>
+        </leaf>
+      </container>
+      <container name="automatic-tag">
+        <description>
+          <text>Automatically compute TAG value</text>
+        </description>
+        <leaf name="tag-empty">
+          <type name="empty"/>
+        </leaf>
+      </container>
+      <container name="comm-list">
+        <description>
+          <text>BGP community list for deletion</text>
+        </description>
+        <leaf name="comm-list-name">
+          <type name="ip-community-list-name-t"/>
+        </leaf>
+        <leaf name="match-comm-delete">
+          <type name="empty"/>
+        </leaf>
+      </container>
+      <container name="dampening">
+        <leaf name="half-life">
+          <type name="uint32">
+            <range value="1 .. 45"/>
+          </type>
+        </leaf>
+        <leaf name="reuse">
+          <type name="uint32">
+            <range value="1 .. 20000"/>
+          </type>
+        </leaf>
+        <leaf name="suppress">
+          <type name="uint32">
+            <range value="1 .. 20000"/>
+          </type>
+        </leaf>
+        <leaf name="max-suppress-time">
+          <type name="uint32">
+            <range value="1 .. 255"/>
+          </type>
+        </leaf>
+      </container>
+      <container name="local-preference">
+        <description>
+          <text>BGP local preference path attribute</text>
+        </description>
+        <leaf name="local-preference-value">
+          <type name="uint32">
+            <range value="0 .. 4294967295"/>
+          </type>
+        </leaf>
+      </container>
+      <container name="origin">
+        <description>
+          <text>BGP origin code</text>
+        </description>
+        <leaf name="origin-igp">
+          <type name="empty"/>
+        </leaf>
+        <leaf name="origin-incomplete">
+          <type name="empty"/>
+        </leaf>
+      </container>
+      <container name="metric-type">
+        <description>
+          <text>Type of metric for destination routing protocol</text>
+        </description>
+        <leaf name="external">
+          <description>
+            <text>IS-IS external metric</text>
+          </description>
+          <type name="empty"/>
+        </leaf>
+        <leaf name="internal">
+          <description>
+            <text>IGP internal metric to BGP MED</text>
+          </description>
+          <type name="empty"/>
+        </leaf>
+        <leaf name="type-1">
+          <description>
+            <text>OSPF external type 1 metric</text>
+          </description>
+          <type name="empty"/>
+        </leaf>
+        <leaf name="type-2">
+          <description>
+            <text>OSPF external type 2 metric</text>
+          </description>
+          <type name="empty"/>
+        </leaf>
+      </container>
+    </container>
+    <container name="continue-holder">
+      <leaf name="continue">
+        <type name="empty"/>
+      </leaf>
+      <leaf name="continue-val">
+        <type name="uint32">
+          <range value="0..4294967295"/>
+        </type>
+      </leaf>
+    </container>
+  </grouping>
+  <grouping name="route_map_cmds">
+    <list name="route-map">
+      <description>
+        <text>Configure a route-map instance</text>
+      </description>
+      <key value="name action-rm instance"/>
+      <leaf name="name">
+        <type name="common-def:name-string63"/>
+        <description>
+          <text>Word:1-63;;Route map name</text>
+        </description>
+      </leaf>
+      <leaf name="action-rm">
+        <type name="action-t"/>
+      </leaf>
+      <leaf name="instance">
+        <type name="instance-id-t"/>
+      </leaf>
+      <container name="content">
+        <uses name="route-map-rules"/>
+      </container>
+    </list>
+  </grouping>
+  <augment target-node="/rbridge:rbridge-id">
+    <uses name="route_map_cmds"/>
+  </augment>
+  <container name="hide-routemap-holder">
+    <uses name="route_map_cmds"/>
+  </container>
+  <grouping name="ip-prefix-rule">
+    <leaf name="action-ipp">
+      <type name="action-t"/>
+    </leaf>
+    <leaf name="prefix-ipp">
+      <type name="inet:ipv4-prefix"/>
+    </leaf>
+    <leaf name="ge-ipp">
+      <description>
+        <text>Minimum IP prefix length.</text>
+      </description>
+      <type name="prefix-len-t"/>
+    </leaf>
+    <leaf name="le-ipp">
+      <description>
+        <text>Maximum IP prefix length.</text>
+      </description>
+      <type name="prefix-len-t"/>
+    </leaf>
+  </grouping>
+  <grouping name="ip_prefix_cmds">
+    <list name="prefix-list">
+      <description>
+        <text>IP address prefix list.</text>
+      </description>
+      <key value="name seq-keyword instance"/>
+      <leaf name="name">
+        <type name="ip-prefix-name-t"/>
+      </leaf>
+      <leaf name="seq-keyword">
+        <type name="enumeration">
+          <enum name="seq">
+            <value value="1"/>
+          </enum>
+        </type>
+      </leaf>
+      <leaf name="instance">
+        <type name="instance-id-t"/>
+      </leaf>
+      <uses name="ip-prefix-rule"/>
+    </list>
+  </grouping>
+  <augment target-node="/rbridge:rbridge-id/rbridge:ip">
+    <uses name="ip_prefix_cmds"/>
+  </augment>
+  <augment target-node="/common-def:ip">
+    <container name="hide-prefix-holder">
+      <uses name="ip_prefix_cmds"/>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface/interface:tengigabitethernet">
+    <container name="ip-pbr-interface">
+      <container name="ip">
+        <description>
+          <text>Internet Protocol (IP).</text>
+        </description>
+        <container name="policy">
+          <description>
+            <text>Configure PBR</text>
+          </description>
+          <uses name="ip_policy_group"/>
+        </container>
+      </container>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface/interface:gigabitethernet">
+    <container name="ip-pbr-interface">
+      <container name="ip">
+        <description>
+          <text>Internet Protocol (IP).</text>
+        </description>
+        <container name="policy">
+          <description>
+            <text>Configure PBR</text>
+          </description>
+          <uses name="ip_policy_group"/>
+        </container>
+      </container>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface/interface:fortygigabitethernet">
+    <container name="ip-pbr-interface">
+      <container name="ip">
+        <description>
+          <text>Internet Protocol (IP).</text>
+        </description>
+        <container name="policy">
+          <description>
+            <text>Configure PBR</text>
+          </description>
+          <uses name="ip_policy_group"/>
+        </container>
+      </container>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface/interface:port-channel">
+    <container name="ip-pbr-interface">
+      <container name="ip">
+        <description>
+          <text>Internet Protocol (IP).</text>
+        </description>
+        <container name="policy">
+          <description>
+            <text>Configure PBR</text>
+          </description>
+          <uses name="ip_policy_group"/>
+        </container>
+      </container>
+    </container>
+  </augment>
+  <augment target-node="/rbridge:rbridge-id/interface:interface/interface:ve">
+    <container name="ip-pbr-interface">
+      <container name="ip">
+        <description>
+          <text>Internet Protocol (IP).</text>
+        </description>
+        <container name="policy">
+          <description>
+            <text>Configure PBR</text>
+          </description>
+          <uses name="ip_policy_group"/>
+        </container>
+      </container>
+    </container>
+  </augment>
+  <grouping name="ip_as_path_cmds">
+    <container name="as-path">
+      <list name="access-list">
+        <description>
+          <text>BGP AS Path Access List</text>
+        </description>
+        <key value="name seq-keyword instance"/>
+        <leaf name="name">
+          <type name="ip-as-path-name-t"/>
+        </leaf>
+        <leaf name="seq-keyword">
+          <type name="enumeration">
+            <enum name="seq">
+              <value value="1"/>
+            </enum>
+          </type>
+        </leaf>
+        <leaf name="instance">
+          <type name="instance-id-t"/>
+        </leaf>
+        <uses name="ip-aspath-rule"/>
+      </list>
+    </container>
+  </grouping>
+  <grouping name="ip-aspath-rule">
+    <leaf name="ip-action">
+      <type name="action-t"/>
+    </leaf>
+    <leaf name="ip-reg-expr">
+      <type name="ip-as-path-reg-expr-t"/>
+    </leaf>
+  </grouping>
+  <augment target-node="/rbridge:rbridge-id/rbridge:ip">
+    <uses name="ip_as_path_cmds"/>
+  </augment>
+  <augment target-node="/common-def:ip">
+    <container name="hide-as-path-holder">
+      <uses name="ip_as_path_cmds"/>
+    </container>
+  </augment>
+  <grouping name="ip_community_list_cmds">
+    <container name="community-list">
+      <list name="standard">
+        <description>
+          <text>Standard community list.</text>
+        </description>
+        <key value="name seq-keyword instance"/>
+        <leaf name="name">
+          <type name="ip-community-list-name-t"/>
+        </leaf>
+        <leaf name="seq-keyword">
+          <type name="enumeration">
+            <enum name="seq">
+              <value value="1"/>
+            </enum>
+          </type>
+        </leaf>
+        <leaf name="instance">
+          <type name="instance-id-t"/>
+        </leaf>
+        <uses name="ip-community-std-rule"/>
+      </list>
+      <list name="extended">
+        <description>
+          <text>Extended community list.</text>
+        </description>
+        <key value="name seq-keyword instance"/>
+        <leaf name="name">
+          <type name="ip-community-list-name-t"/>
+        </leaf>
+        <leaf name="seq-keyword">
+          <type name="enumeration">
+            <enum name="seq">
+              <value value="1"/>
+            </enum>
+          </type>
+        </leaf>
+        <leaf name="instance">
+          <type name="instance-id-t"/>
+        </leaf>
+        <uses name="ip-community-ext-rule"/>
+      </list>
+    </container>
+  </grouping>
+  <grouping name="ip-community-std-rule">
+    <leaf name="ip-action">
+      <type name="action-t"/>
+    </leaf>
+    <leaf name="std-community-expr">
+      <type name="ip-std-community-expr-t"/>
+      <default value=""/>
+    </leaf>
+  </grouping>
+  <grouping name="ip-community-ext-rule">
+    <leaf name="ip-action">
+      <type name="action-t"/>
+    </leaf>
+    <leaf name="ip-community-reg-expr">
+      <type name="ip-community-reg-expr-t"/>
+    </leaf>
+  </grouping>
+  <augment target-node="/rbridge:rbridge-id/rbridge:ip">
+    <uses name="ip_community_list_cmds"/>
+  </augment>
+  <augment target-node="/common-def:ip">
+    <container name="hide-community-list-holder">
+      <uses name="ip_community_list_cmds"/>
+    </container>
+  </augment>
+  <grouping name="filter_change_update_delay_cmds">
+    <list name="filter-change-update-delay">
+      <description>
+        <text>Change filter change update delay timer</text>
+      </description>
+      <key value="filter-delay-value"/>
+      <leaf name="filter-delay-value">
+        <type name="uint32">
+          <range value="0..600">
+            <description>
+              <text>0-600;;Delay time (0-600 secs; default-10 secs, 0-disable)</text>
+            </description>
+          </range>
+        </type>
+      </leaf>
+    </list>
+  </grouping>
+  <augment target-node="/rbridge:rbridge-id">
+    <uses name="filter_change_update_delay_cmds"/>
+  </augment>
+  <container name="hide-filter-change-update-delay-holder">
+    <uses name="filter_change_update_delay_cmds"/>
+  </container>
+</module>

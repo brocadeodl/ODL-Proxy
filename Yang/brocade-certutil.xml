@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-certutil"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:certutil="urn:brocade.com:mgmt:certutil"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def">
+  <namespace uri="urn:brocade.com:mgmt:certutil"/>
+  <prefix value="certutil"/>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+        San Jose, CA 95134
+         U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This module is used to support certificate management operations</text>
+  </description>
+  <revision date="2011-06-13">
+    <description>
+      <text>Initial version of this module.</text>
+    </description>
+  </revision>
+  <grouping name="import_cert_parameters">
+    <leaf name="protocol">
+      <description>
+        <text>Protocol</text>
+      </description>
+      <type name="enumeration">
+        <enum name="SCP"/>
+        <enum name="FTP"/>
+      </type>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="user">
+      <description>
+        <text>Username</text>
+      </description>
+      <type name="string"/>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="password">
+      <description>
+        <text>Password</text>
+      </description>
+      <type name="string"/>
+    </leaf>
+    <leaf name="host">
+      <description>
+        <text>Host IPv4 address</text>
+      </description>
+      <type name="string"/>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="directory">
+      <description>
+        <text>Remote Directory</text>
+      </description>
+      <type name="string"/>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="file">
+      <description>
+        <text>Certificate file in PEM format</text>
+      </description>
+      <type name="string"/>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="rbridge-id">
+      <mandatory value="false"/>
+      <type name="common-def:rbridge-id-all-type"/>
+    </leaf>
+  </grouping>
+  <grouping name="export_cert_parameters">
+    <leaf name="protocol">
+      <description>
+        <text>Protocol</text>
+      </description>
+      <type name="enumeration">
+        <enum name="SCP"/>
+        <enum name="FTP"/>
+      </type>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="user">
+      <description>
+        <text>Username</text>
+      </description>
+      <type name="string"/>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="password">
+      <description>
+        <text>Password</text>
+      </description>
+      <type name="string"/>
+    </leaf>
+    <leaf name="host">
+      <description>
+        <text>Host ipv4 address</text>
+      </description>
+      <type name="string"/>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="directory">
+      <description>
+        <text>Directory</text>
+      </description>
+      <type name="string"/>
+      <mandatory value="true"/>
+    </leaf>
+  </grouping>
+  <grouping name="import_sshkey_parameters">
+    <leaf name="user">
+      <description>
+        <text>Username</text>
+      </description>
+      <type name="string"/>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="host">
+      <description>
+        <text>Host IPv4 address</text>
+      </description>
+      <type name="string"/>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="directory">
+      <description>
+        <text>Remote Directory</text>
+      </description>
+      <type name="string"/>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="file">
+      <description>
+        <text>SSH public key with .pub extension</text>
+      </description>
+      <type name="string"/>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="login">
+      <description>
+        <text>Login name in the remote host</text>
+      </description>
+      <type name="string"/>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="password">
+      <description>
+        <text>User password in the remote host</text>
+      </description>
+      <type name="string"/>
+    </leaf>
+    <leaf name="rbridge-id">
+      <mandatory value="false"/>
+      <type name="common-def:rbridge-id-all-type"/>
+    </leaf>
+  </grouping>
+  <container name="certutil">
+    <description>
+      <text>Security Certificate Management Operations</text>
+    </description>
+    <container name="import">
+      <description>
+        <text>Certificate import operation</text>
+      </description>
+    </container>
+  </container>
+  <augment target-node="/common-def:no">
+    <container name="certutil"/>
+  </augment>
+  <augment target-node="/common-def:show">
+    <container name="cert-util"/>
+  </augment>
+</module>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for NSP Module. -->
+
+<ModuleResources ModuleName = "OpenFlowController" ComponentName = "Slm">
+    <ResourceEnum Name = "OpenFlowControllerRole">
+        <Resource Name = "OPEN_FLOW_CONTROLLER_ROLE_MASTER">Master</Resource>
+        <Resource Name = "OPEN_FLOW_CONTROLLER_ROLE_SLAVE" >Slave</Resource>
+        <Resource Name = "OPEN_FLOW_CONTROLLER_ROLE_EQUAL" >Equal</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "OpenFlowChannelConnectionProtocol">
+        <Resource Name = "OPEN_FLOW_CHANNEL_CONNECTION_PROTOCOL_TCP">TCP</Resource>
+        <Resource Name = "OPEN_FLOW_CHANNEL_CONNECTION_PROTOCOL_TLS">TLS</Resource>
+    </ResourceEnum>
+</ModuleResources>

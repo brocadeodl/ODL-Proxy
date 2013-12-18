@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Framework File Service Module. -->
+
+<ModuleResources ModuleName = "FrameworkFileService" ComponentName = "Wave">
+     <ResourceEnum Name = "FileServiceStatus">
+          <Resource Name = "WAVE_FILE_INVALID_FILENAME">Invalid Filename specified</Resource>
+          <Resource Name = "WAVE_FILE_INVALID_FILESIZE">Bad File size encountered</Resource>
+          <Resource Name = "WAVE_FILE_INVALID_DESTINATION_NODE">Invalid destination node specified for File transfer</Resource>
+          <Resource Name = "WAVE_FILE_INVALID_SOURCE_NODE">Invalid Source node specified for File transfer</Resource>
+          <Resource Name = "WAVE_FILE_FILE_ALREADY_EXISTS_AT_DESTINATION">File already exists at destination</Resource>
+          <Resource Name = "WAVE_FILE_DESTINATION_FILE_BUSY_IN_ANOTHER_TRANSFER">Destination file already busy in another transfer</Resource>
+          <Resource Name = "WAVE_FILE_INVALID_TRANSFER_CONTEXT_OBJECT">Invalid transfer context object</Resource>
+          <Resource Name = "WAVE_FILE_INVALID_FILE_FRAGMENT_INDEX">Invalid file fragment index</Resource>
+          <Resource Name = "WAVE_FILE_MEMORY_MAP_OPERATION_FAILED">Memory map operation failed</Resource>
+          <Resource Name = "WAVE_FILE_STAT_OPERATION_FAILED">File stat operation failed</Resource>          
+          <Resource Name = "WAVE_FILE_INSUFFICIENT_SPACE_AT_DESTINATION">Insufficient storage space at destination to receive file</Resource>          
+          <Resource Name = "WAVE_FILE_INVALID_FILE_TRANSFER_FLAG_SPECIFIED">Invalid file transfer flag specified</Resource>
+          <Resource Name = "WAVE_FILE_ABORT_TRANSFER_FAILED">Abort file transfer failed</Resource>
+     </ResourceEnum>
+</ModuleResources>

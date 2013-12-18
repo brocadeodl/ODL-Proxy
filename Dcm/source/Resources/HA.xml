@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for HA Module. -->
+
+<ModuleResources ModuleName = "HA" ComponentName = "Wave">
+    <ResourceEnum Name = "HAReturnCodes">
+    <Resource Name = "HA_FAILOVER_NOTALLOWED">Error: haFailover not allowed. HA state is not synchronized.</Resource>
+    <Resource Name = "HA_ENABLE">Error: haFailover not allowed. HA state is not synchronized.</Resource>
+    <Resource Name = "HA_NOT_ENABLE">Error: HA not enabled. Please enable HA first.</Resource>
+    </ResourceEnum>
+</ModuleResources>

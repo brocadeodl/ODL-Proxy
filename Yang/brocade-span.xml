@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-span"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:span="urn:brocade.com:mgmt:brocade-span"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface">
+  <namespace uri="urn:brocade.com:mgmt:brocade-span"/>
+  <prefix value="span"/>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+        San Jose, CA 95134
+        U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This module manages Port Mirroring (SPAN)</text>
+  </description>
+  <revision date="2010-04-28">
+    <description>
+      <text>Initial version of this management module.</text>
+    </description>
+  </revision>
+  <typedef name="session-type">
+    <type name="uint32">
+      <range value="0..511">
+        <description>
+          <text>0-511;;Description Session_Id</text>
+        </description>
+      </range>
+    </type>
+  </typedef>
+  <typedef name="span-if-type">
+    <type name="string">
+      <length value="3..16"/>
+    </type>
+  </typedef>
+  <augment target-node="/interface:interface-vlan/interface:interface/interface:vlan">
+    <leaf name="remote-span">
+      <type name="empty"/>
+    </leaf>
+  </augment>
+  <container name="monitor">
+    <list name="session">
+      <key value="session-number"/>
+      <leaf name="session-number">
+        <type name="session-type"/>
+      </leaf>
+      <leaf name="description">
+        <type name="string">
+          <length value="1..64">
+            <error-message>
+              <value>The length of the description should be in the range 1-64</value>
+            </error-message>
+          </length>
+        </type>
+      </leaf>
+      <container name="span-command">
+        <leaf name="source">
+          <type name="enumeration">
+            <enum name="source">
+              <value value="0"/>
+            </enum>
+          </type>
+        </leaf>
+        <leaf name="src-tengigabitethernet">
+          <type name="enumeration">
+            <enum name="gigabitethernet">
+              <value value="0"/>
+            </enum>
+            <enum name="tengigabitethernet">
+              <value value="1"/>
+            </enum>
+            <enum name="fortygigabitethernet">
+              <value value="2"/>
+            </enum>
+          </type>
+        </leaf>
+        <leaf name="src-tengigabitethernet-val">
+          <type name="span-if-type"/>
+        </leaf>
+        <leaf name="destination">
+          <type name="enumeration">
+            <enum name="destination">
+              <value value="0"/>
+            </enum>
+          </type>
+        </leaf>
+        <leaf name="dest-tengigabitethernet">
+          <type name="enumeration">
+            <enum name="gigabitethernet">
+              <value value="0"/>
+            </enum>
+            <enum name="tengigabitethernet">
+              <value value="1"/>
+            </enum>
+            <enum name="fortygigabitethernet">
+              <value value="2"/>
+            </enum>
+            <enum name="rspan-vlan">
+              <value value="3"/>
+            </enum>
+          </type>
+        </leaf>
+        <leaf name="dest-tengigabitethernet-val">
+          <type name="span-if-type"/>
+        </leaf>
+        <leaf name="dest-vlan-val">
+          <default value="1"/>
+          <type name="interface:vlan-type"/>
+        </leaf>
+        <leaf name="direction">
+          <type name="enumeration">
+            <enum name="tx">
+              <value value="0"/>
+            </enum>
+            <enum name="rx">
+              <value value="1"/>
+            </enum>
+            <enum name="both">
+              <value value="2"/>
+            </enum>
+          </type>
+        </leaf>
+      </container>
+    </list>
+  </container>
+</module>

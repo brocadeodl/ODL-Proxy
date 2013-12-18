@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="InterfaceDataType"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:interfacedatatype="http://brocade.com/ns/interfacedatatype"
+        xmlns:yang="urn:ietf:params:xml:ns:yang:ietf-yang-types"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types">
+  <namespace uri="http://brocade.com/ns/interfacedatatype"/>
+  <prefix value="interfacedatatype"/>
+  <import module="ietf-yang-types">
+    <prefix value="yang"/>
+  </import>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <typedef name="UI32Range">
+    <type name="string">
+      <pattern value="[0-9]+(-[0-9]+)?(,[0-9]+(-[0-9]+)?)*"/>
+    </type>
+  </typedef>
+  <typedef name="MACRange">
+    <type name="string">
+      <pattern value="[0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F].[0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F].[0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F](-[0-9a-fA-F][0-9a-fA-F])?(,[0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F].[0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F].[0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F](-[0-9a-fA-F][0-9a-fA-F])?)*"/>
+    </type>
+  </typedef>
+  <container name="DataType">
+    <leaf name="bitmap">
+      <type name="bits">
+        <bit name="pos0">
+          <position value="0"/>
+        </bit>
+        <bit name="pos3">
+          <position value="3"/>
+        </bit>
+      </type>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="datetime">
+      <type name="yang:date-and-time"/>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="decimal64">
+      <type name="decimal64">
+        <fraction-digits value="2"/>
+      </type>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="utype">
+      <type name="union">
+        <type name="int32"/>
+        <type name="string"/>
+      </type>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="ipv4prefix">
+      <type name="inet:ipv4-prefix"/>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="ipv6prefix">
+      <type name="inet:ipv6-prefix"/>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="snmpobjectid">
+      <type name="yang:object-identifier"/>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="rangeintegers">
+      <type name="UI32Range"/>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="rangeintegers2">
+      <type name="UI32Range"/>
+    </leaf>
+    <leaf name="rangemac">
+      <type name="MACRange"/>
+    </leaf>
+    <leaf name="ui8default">
+      <type name="uint8"/>
+    </leaf>
+    <leaf name="ui16default">
+      <type name="uint16"/>
+    </leaf>
+    <leaf name="ui64default">
+      <type name="uint64"/>
+    </leaf>
+    <leaf name="stringuc">
+      <type name="string"/>
+      <default value="d-e-f-a-u-l-t"/>
+    </leaf>
+    <leaf name="ui32uc">
+      <type name="uint32"/>
+      <default value="99"/>
+    </leaf>
+    <leaf name="booluc">
+      <type name="empty"/>
+    </leaf>
+    <leaf name="enumuc">
+      <type name="enumeration">
+        <enum name="WAVE"/>
+        <enum name="DCM"/>
+        <enum name="PLATFORM"/>
+        <enum name="PLUGIN"/>
+      </type>
+    </leaf>
+    <leaf name="ipv4addressuc">
+      <type name="inet:ipv4-address"/>
+    </leaf>
+    <leaf-list name="stringvectoruc">
+      <type name="string"/>
+    </leaf-list>
+    <leaf-list name="ui32vectoruc">
+      <type name="uint32"/>
+    </leaf-list>
+    <leaf name="hostuc">
+      <type name="inet:host"/>
+    </leaf>
+    <leaf name="ui64uc">
+      <type name="uint64"/>
+      <default value="64"/>
+    </leaf>
+    <leaf name="uuid">
+      <type name="string"/>
+    </leaf>
+  </container>
+</module>

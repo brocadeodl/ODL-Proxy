@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Framework Core Module. -->
+
+<ModuleResources ModuleName = "DcmFssServices" ComponentName = "DcmFssServices">
+    <ResourceEnum Name = "DcmFssServices">
+        <Resource Name = "CHASSIS">Chassis switch service</Resource>
+        <Resource Name = "FCSW"   >Fibre Channel switch service</Resource>
+        <Resource Name = "ETHSW"   >Ethernet switch service</Resource>
+    </ResourceEnum>
+</ModuleResources>

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ModuleResources ModuleName = "FCOE" ComponentName = "Wave">
+
+    <ResourceEnum Name = "FcoeFabMapConfigStatusCodes">
+        <Resource Name = "FCOE_FAB_MAP_ERR_DEFAULT_DEL_NOT_ALLOWED">%%Error: Fabric-map 'default' cannot be deleted.</Resource>
+        <Resource Name = "FCOE_FAB_MAP_ERR_NOT_FOUND_IN_DB">%%Error: Fabric-Map does not exist.</Resource>
+        <Resource Name = "FCOE_FAB_MAP_ERR_NAME_EMPTY">%%Error: Fabric-map name is empty.</Resource>
+        <Resource Name = "FCOE_FAB_MAP_ERR_FAILED_TO_CREATE_OBJ">%%Error: Failed to create new Fabric-map in the DB</Resource>
+        <Resource Name = "FCOE_FAB_MAP_ERR_VLAN_IS_A_REGULAR_VLAN">%%Error: VLAN is a regular VLAN</Resource>
+        <Resource Name = "FCOE_FAB_MAP_ERR_FAILED_TO_SET_FKA_INTERVAL">%%Error: Failed to set advertisement interval</Resource>
+        <Resource Name = "FCOE_FAB_MAP_ERR_FAILED_TO_SET_FKA_TIMEOUT">%%Error: Failed to set keep-alive timeout</Resource>
+        <Resource Name = "FCOE_PORT_ERR_NSM_API_ERR_IS_VLAG">%%Error:FCOE config cannot be applied on a VLAG spanning across Rbridges</Resource>
+		<Resource Name = "FCOE_FAB_MAP_ERR_FAILED_TO_SET_MTU">%%Error: Failed to set mtu</Resource>
+        <Resource Name = "FCOE_FAB_MAP_ERR_FAILED_TO_ALLOC_SHOW_RESP">%%Error: Failed to allocate FCOE FAB MAP response.</Resource>
+        <Resource Name = "FCOE_FAB_MAP_ERR_FAILED_TO_GET_ONMD_MASTER">%%Error: LLDP Daemon failed to get master.</Resource>
+        <Resource Name = "FCOE_FAB_MAP_ERR_LLDP_NULL_MSG_RCVD">%%Error: LLDP Daemon recieved a NULL message.</Resource>
+        <Resource Name = "FCOE_FAB_MAP_ERR_LLDP_INTF_DOES_NOT_EXIST">%%Error: LLDP Daemon failed to find interface.</Resource>
+        <Resource Name = "FCOE_FAB_MAP_NSM_API_ERR_FCOE_VLAN_IN_USE">%%Error: The FCoE VLAN cannot be changed as the 'fcoeport' config is already applied on some interface(s).</Resource>
+        <Resource Name = "FCOE_FAB_MAP_NSM_API_ERR_NOT_FCOE_VLAN">%%Error: The given VLAN is not an FCOE VLAN.</Resource>
+        <Resource Name = "FCOE_FAB_MAP_NSM_API_FAILED_TO_UPD_FCOE_VLAN">%%Error: Failed to update FCOE VLAN.</Resource>
+        <Resource Name = "FCOE_FAB_MAP_NSM_API_ERR_MAP_NOT_FOUND">%%Error: Failed to update FCOE VLAN, Map not found.</Resource>
+        <Resource Name = "FCOE_FAB_MAP_ERR_VFID_NOT_FOUND">%%Error: Failed to update VFID, virtual-fabric not found.</Resource>
+        <Resource Name = "FCOE_FAB_MAP_ERR_FCOE_VLAN_IN_USE">%%Error: The FCoE VLAN cannot be changed as the 'fcoeport' config is already applied on some interface(s).</Resource>
+        <Resource Name = "FCOE_FAB_MAP_ERR_FAILED_TO_ALLOC_GET_FCF_MAC_ADDR_RESP">%%Error: Failed to allocate get FCF mac-address response.</Resource>
+        <Resource Name = "FCOE_FAB_MAP_ERR_PRIORTY_MATCHES_REMAP_PRIORITY">%%Error: Priority cannot be same as remapped Fabric priority in CEE Map.</Resource>
+        <Resource Name = "FCOE_FAB_MAP_ERR_FAILED_TO_ALLOC_VLAN_MSG_TO_NSM_LOCAL">%%Error: Failed to allocate a message to NSM local service.</Resource>
+        <Resource Name = "FCOE_FAB_MAP_ERR_FAILED_TO_ALLOC_RBK_VLAN_MSG_TO_NSM_LOCAL">%%Error: Failed to allocate rollback message to NSM local service.</Resource>
+        <Resource Name = "FCOE_FAB_MAP_ERR_PRIORTY_MATCHES_REMAP_LOSSLESS_PRIORITY">%%Error: Priority cannot be same as remapped loss-less priority in CEE Map.</Resource>
+		<Resource Name = "FCOE_FAB_MAP_ERR_FAILED_TO_GET_FCF_MAC">%%Error: Failed to get FCF mac-address.</Resource>
+		<Resource Name = "FCOE_FAB_MAP_ERR_FAILED_TO_SET_FCMAP">%%Error: Failed to set FCMAP</Resource>
+		<Resource Name = "FCOE_FAB_MAP_ERR_FAILED_TO_SET_VLAN">%%Error: Failed to set VLAN</Resource>
+		<Resource Name = "FCOE_PORT_ERR_NSM_API_ERR_MEM_IS_FCOE">%%Error:FCOE config cannot be applied on a LAG having fcoe configured member ports</Resource>
+		<Resource Name = "FCOE_FAB_MAP_ERR_FAILED_TO_SET_PRIORITY">%%Error: Failed to set Priority</Resource>
+		<Resource Name = "FCOE_FAB_MAP_ERR_FAILED_TO_SET_VFID">%%Error:Failed to set VFID</Resource>
+        <Resource Name = "FCOE_FAB_MAP_ERR_FAILED_TO_PROCESS_MAX_ENODES">%%Error:Failed to process max-enodes config.</Resource>
+		<Resource Name = "FCOE_FAB_MAP_ERR_FAILED_MAX_ENODES_NOT_ENOUGH_PORTS">%%Error: Failed to process max-enodes config. Insufficient unbound ports.</Resource>
+        <Resource Name = "FCOE_FAB_MAP_ERR_FAILED_MAX_ENODES_RBRIDGE_ID_NOT_SET">%%Error: Failed to process max-enodes config. Rbridge Id is zero.</Resource>
+		<Resource Name = "FCOE_FAB_MAP_ERR_FAILED_TO_ALLOC_SEND_TO_STDBY">%%Error: Failed to allocate FABRIC MAP message to send to STANDBY</Resource>
+		<Resource Name = "FCOE_FAB_MAP_ERR_FAILED_TO_SEND_TO_STDBY">%%Error: Failed to send FABRIC MAP message to STANDBY</Resource>
+        <Resource Name = "FCOE_FAB_MAP_ERR_FAILED_TO_SET_PRIORITY_RETRY">%%Error: Failed to set Priority. Please reconfigure</Resource>
+        <Resource Name = "FCOE_FAB_MAP_ERR_VLAN_CTAG_FOUND">%%Error: The FCoE VLAN cannot be changed as the given VLAN is C-tagged.</Resource>
+		</ResourceEnum>
+
+    <ResourceEnum Name = "FcoeMapConfigStatusCodes">
+        <Resource Name = "FCOE_MAP_ERR_DEFAULT_DEL_NOT_ALLOWED">%%Error: Map 'default' cannot be deleted.</Resource>
+        <Resource Name = "FCOE_MAP_ERR_ONLY_ONE_FAB_MAP_ALLOWED">%%Error: Only one fabric-map can be added to the Map.</Resource>
+        <Resource Name = "FCOE_MAP_ERR_CEE_MAP_NAME_EMPTY">%%Error: Cee-Map name is empty.</Resource>
+        <Resource Name = "FCOE_MAP_ERR_FAILED_TO_CREATE_OBJ">%%Error: Failed to create new Map in the DB.</Resource>
+        <Resource Name = "FCOE_MAP_ERR_CREATE_NOT_ALLOWED">%%Error: Creation of Map not allowed.</Resource>
+        <Resource Name = "FCOE_MAP_ERR_FAILED_TO_ALLOC_SHOW_RESP">%%Error: Failed to allocate FCOE MAP response.</Resource>
+        <Resource Name = "FCOE_MAP_ERR_DEFAULT_CEE_MAP_DEL_NOT_ALLOWED">%%Error: CEE-Map cannot be deleted from default Fcoe-Map.</Resource>
+        <Resource Name = "FCOE_MAP_ERR_DEFAULT_FAB_MAP_DEL_NOT_ALLOWED">%%Error: 'default' Fabric-map cannot be deleted from 'default' Fcoe-Map.</Resource>
+        <Resource Name = "FCOE_MAP_ERR_FAB_MAP_NAME_NOT_ENTERED">%%Error: Fabric-map name not entered.</Resource>
+        <Resource Name = "FCOE_MAP_ERR_CEE_MAP_NOT_FOUND_IN_DB">%%Error: CEE-Map does not exist.</Resource>
+        <Resource Name = "FCOE_MAP_ERR_FCOE_MAP_NOT_FOUND_IN_DB">%%Error: Fcoe map does not exist.</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "FcoeFipConfigStatusCodes">
+        <Resource Name = "FCOE_FIP_ERR_DEFAULT_DEL_NOT_ALLOWED">%%Error: Fip config cannot be deleted or added.</Resource>
+        <Resource Name = "FCOE_FIP_ERR_NOT_FOUND_IN_DB">%%Error: Fip config not found in the DB.</Resource>
+        <Resource Name = "FCOE_FIP_ERR_FAILED_TO_ALLOC_SHOW_RESP">%%Error: Failed to allocate FIP CONFIG response.</Resource>
+        <Resource Name = "FCOE_FIP_ERR_FAILED_TO_ALLOC_SEND_TO_STDBY">%%Error: Failed to allocate FIP CONFIG message to send to STANDBY.</Resource>
+        <Resource Name = "FCOE_FIP_ERR_FAILED_TO_SEND_TO_STDBY">%%Error: Failed to send FIP CONFIG message to STANDBY.</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "FcoeIntfConfigStatusCodes">
+        <Resource Name = "FCOE_IF_ERR_NOT_FOUND">%%Error: FCOE interface not found.</Resource>
+        <Resource Name = "FCOE_IF_ERR_DEL_NOT_ALLOWED">%%Error: FCOE interface deletion not allowed.</Resource>
+        <Resource Name = "FCOE_IF_ERR_NOT_FOUND_IN_DB">%%Error: FCOE interface not found in database.</Resource>
+        <Resource Name = "FCOE_IF_ERR_FAILED_TO_ALLOC_GET_IF_LIST_RESP">%%Error: FCOE interface handler failed to allocate get interface list response.</Resource>
+        <Resource Name = "FCOE_IF_ERR_FAILED_TO_ALLOC_LOGIN_RESP">%%Error: FCOE interface failed to allocate LOGIN response.</Resource>
+        <Resource Name = "FCOE_IF_ERR_LOGIN_IOCTL_FAILED">%%Error: FCOE Driver IOCTL failed to get LOGIN entries.</Resource>
+        <Resource Name = "FCOE_IF_ERR_FAILED_TO_LOOKUP_FCOE_PORT_ENTRY">%%Error: FCOE Daemon failed to lookup port entry in the DB.</Resource>
+        <Resource Name = "FCOE_IF_ERR_FAILED_TO_ALLOC_INTF_RESP">%%Error: FCOE Daemon failed to alloc interface response.</Resource>
+        <Resource Name = "FCOE_IF_ERR_GET_PORT_INFO_IOCTL_FAILED">%%Error: FCOE Driver IOCTL failed to get port info.</Resource>
+        <Resource Name = "FCOE_IF_ERR_FAILED_TO_GET_PORT_COUNT">%%Error: FCOE Daemon failed to get the port count.</Resource>
+        <Resource Name = "FCOE_IF_ERR_DRV_FAILURE_INVALID_DEVICE_COUNT">%%Error: Invalid device count on FCOE Interface.</Resource>
+        <Resource Name = "FCOE_IF_ERR_ALLOC_CLIENT_MSG">%%Error: Failed to alloc client message.</Resource>
+        <Resource Name = "FCOE_IF_ERR_FAILED_ALLOC_MESSAGE_BUFFER">%%Error: Failed to allocate message buffer.</Resource>
+        <Resource Name = "FCOE_IF_ERR_BIND_UPDATE_NOT_ALLOWED">%%Error: Updating the binding is not supported.</Resource>
+        <Resource Name = "FCOE_IF_ERR_CREATE_BULK_NULL_MSG_RCVD"> %%Error: Null payload recieved for create bulk message.</Resource>
+        <Resource Name = "FCOE_IF_ERR_PORT_NOT_READY">%%Error: Interface is currently not ready to accept configuration.</Resource>
+        <Resource Name = "FCOE_IF_ERR_FAILED_SLOT_FAILOVER_MESSAGE">%%Error: Failed to allocate slot-failover message.</Resource>
+        <Resource Name = "FCOE_IF_ERR_ETH_PORT_NOT_FOUND">%%Error: Ethernet interface not found.</Resource>
+        <Resource Name = "FCOE_IF_ERR_LAG_PORT_NOT_FOUND">%%Error: LAG interface not found or not FCOE enabled.</Resource>
+        <Resource Name = "FCOE_IF_ERR_ENODE_ALREADY_LOGGED_IN">%%Error: Enode is currently logged in on another port.</Resource>
+        <Resource Name = "FCOE_IF_ERR_ENODE_BIND_CFG_ERROR">%%Error: Failed to process Enode bind config.</Resource>
+        <Resource Name = "FCOE_IF_ERR_ENODE_ALREADY_BOUND">%%Error: Enode is already static-bound to another port.</Resource>
+        <Resource Name = "FCOE_IF_ERR_ETH_PORT_CFG_ALREADY_BOUND">%%Error: FCoE port is already bound to another Ethernet port.</Resource>
+        <Resource Name = "FCOE_IF_ERR_BIND_INVALID_MAC_ADDRESS">%%Error: Invalid Mac Address (Expected Format hh:hh:hh:hh:hh:hh).</Resource>
+        <Resource Name = "FCOE_IF_ERR_ALREADY_BOUND_TO_ETH_PORT">%%Error: FCoE interface is already bound to ethernet port.</Resource>
+        <Resource Name = "FCOE_IF_ERR_ETH_PORT_BOUND_TO_VX">%%Error: FCoE interface Static binding exits on this ethernet port.</Resource>
+        <Resource Name = "FCOE_IF_ERR_FAILED_TO_ALLOC_SEND_TO_STDBY">%%Error: Failed to allocate send to STANDBY message for VF port.</Resource>
+        <Resource Name = "FCOE_IF_ERR_FAILED_TO_SEND_TO_STDBY">%%Error: Failed to send VF port config change message to STANDBY.</Resource>
+        <Resource Name = "FCOE_IF_ERR_BIND_INTERFACE_SPEED_MISMATCH">%%Error: Interface name does not match the interface type.</Resource>
+        <Resource Name = "FCOE_IF_ERR_BIND_NOT_SUPPORTED_FOR_MAC_RANGE">%%Error: Mac address Binding not supported for the range. Use command for single interface context eg: 1/10/1 .</Resource>
+        <Resource Name = "FCOE_COMMON_ERR_FAILED_TO_PROCESS_INTERFACE_IN_RANGE">%%Error: Command failed for one or more interfaces .</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "FcoeETIntfConfigStatusCodes">
+        <Resource Name = "FCOE_IF_ET_ERR_FAILED_ALLOC_MO">%%Error: Failed to allocate MO for ISL interface.</Resource>
+        <Resource Name = "FCOE_IF_ET_ERR_NOT_FOUND_IN_DB">%%Error: ISL interface not found in database.</Resource>
+        <Resource Name = "FCOE_IF_ET_ERR_PARSE_IF_NAME">%%Error: Failed to parse ISL interface name.</Resource>
+        <Resource Name = "FCOE_IF_ET_ERR_ALLOC_CLIENT_MSG">%%Error: Failed to allocate ET client message.</Resource>
+        <Resource Name = "FCOE_IF_ET_ERR_FAILED_TO_ALLOC_GET_IF_LIST_RESP">%%Error: FCOE interface handler failed to allocate get ET interface list response.</Resource>
+        <Resource Name = "FCOE_IF_ET_PORT_NOT_READY">%%Error: Interface is currently not ready to accept configuration.</Resource>
+        <Resource Name = "FCOE_IF_ET_ERR_FAILED_TO_ALLOC_SEND_TO_STDBY">%%Error: Failed to allocate send to STANDBY message for ET status update.</Resource>
+        <Resource Name = "FCOE_IF_ET_ERR_FAILED_TO_SEND_TO_STDBY">%%Error: Failed to send ET status update config change message to STANDBY.</Resource>
+        <Resource Name = "FCOE_IF_ET_ERR_NO_CONFIG_BREAKOUT_PORTS">%%Error: ISL configuration is not allowed on breakout interface.</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "FcoeportAttrConfigStatusCodes">
+        <Resource Name = "FCOE_PORT_ERR_FAILED_TO_GET_TE_INTF_NAME">%%Error: Failed to get TE interface name.</Resource>
+        <Resource Name = "FCOE_PORT_ERR_NSM_FAILED_TO_FIND_INTF">%%Error: Failed to find interface in the bridge.</Resource>
+        <Resource Name = "FCOE_PORT_ERR_NSM_API_ERR_PORT_IS_DEST_MIRROR">%%Error: Failed to configure interface as fcoeport, because interface is a destination mirror port.</Resource>
+        <Resource Name = "FCOE_PORT_ERR_NSM_API_SET_ERR_CANNOT_ENA_FCOE_INVAL_MTU">%%Error: Cannot enable FCOE on this port, MTU configured is less than 2500.</Resource>
+        <Resource Name = "FCOE_PORT_ERR_NSM_API_ERR_INTF_IS_LAG_MEMBER">%%Error: Interface is a member of LAG.</Resource>
+        <Resource Name = "FCOE_PORT_ERR_NSM_API_ERR_INTF_IS_ROUTER_PORT">%%Error: Router port can't be made fcoeport.</Resource>
+        <Resource Name = "FCOE_PORT_ERR_NSM_API_ERR_CEE_MAP_APPLIED">%%Error: FCoE map cannot be applied on this interface because a CEE map is already applied on it.</Resource>
+        <Resource Name = "FCOE_PORT_ERR_POSTBOOT_NO_PHY_INTFS_FOUND">%%Error: Failed to find physical interfaces during post-boot.</Resource>
+        <Resource Name = "FCOE_PORT_ERR_POSTBOOT_MAP_NOT_FOUND">%%Error: Failed to find FCOE map for physical interface during post-boot.</Resource>
+        <Resource Name = "FCOE_PORT_ERR_POSTBOOT_FCOEPORT_MO_NOT_FOUND">%%Error: Failed to find FCOE port MO for physical interface during post-boot.</Resource>
+        <Resource Name = "FCOE_PORT_ERR_POSTBOOT_CEE_MAP_NOT_FOUND">%%Error: Failed to find CEE map for physical interface during post-boot.</Resource>
+        <Resource Name = "FCOE_PORT_ERR_POSTBOOT_FAB_MAP_NOT_FOUND">%%Error: Failed to find Fabric-map for physical interface during post-boot.</Resource>
+        <Resource Name = "FCOE_PORT_ERR_POSTBOOT_FAILED_TO_ALLOC_CLIENT_MESSAGE">%%Error: Failed to allocate client message during post-boot.</Resource>
+        <Resource Name = "FCOE_PORT_ERR_POSTBOOT_INTF_MO_NOT_FOUND">%%Error: Failed to find Intf MO during post-boot.</Resource> 
+        <Resource Name = "FCOE_PORT_ERR_NO_PHY_INTFS_FOUND">%%Error: Failed to find physical interfaces.</Resource>
+        <Resource Name = "FCOE_PORT_ERR_MAP_NOT_FOUND">%%Error: Failed to find FCOE map for physical interface.</Resource>
+        <Resource Name = "FCOE_PORT_ERR_FCOEPORT_MO_NOT_FOUND">%%Error: Failed to find FCOE port MO for physical interface.</Resource>
+        <Resource Name = "FCOE_PORT_ERR_CEE_MAP_NOT_FOUND">%%Error: Failed to find CEE map for physical interface.</Resource>
+        <Resource Name = "FCOE_PORT_ERR_FAB_MAP_NOT_FOUND">%%Error: Failed to find Fabric-map for physical interface.</Resource>
+        <Resource Name = "FCOE_PORT_ERR_FAILED_TO_ALLOC_CLIENT_MESSAGE">%%Error: Failed to allocate client message.</Resource>
+        <Resource Name = "FCOE_PORT_ERR_FAILED_TO_ALLOC_LOCAL_MESSAGE">%%Error: Failed to allocate local message.</Resource>
+        <Resource Name = "FCOE_PORT_ERR_INTF_MO_NOT_FOUND">%%Error: Failed to find Intf MO.</Resource> 
+        <Resource Name = "FCOE_PORT_ERR_PORT_PROFILE_PORT">%%Error: Port profile is enabled on interface.</Resource>
+        <Resource Name = "FCOE_PORT_ERR_LAG_PROFILE_PORT">%%Error: Port profile is enabled on LAG.</Resource>
+        <Resource Name = "FCOE_PORT_ERR_FCOE_PROV_ON_PORT">%%Error: FCOE configuration is already applied on this port.</Resource>
+        <Resource Name = "FCOE_PORT_ERR_FCOE_PROV_ON_PORT_VLAN_CHANGE">%%Error: The FCoE VLAN cannot be changed as the 'fcoeport' config is already applied on some interface(s).</Resource>
+        <Resource Name = "FCOE_PORT_ERR_PORT_IS_ISL"> %%Error: FCoE config cannot be applied on ISL ports.</Resource>
+        <Resource Name = "FCOE_PORT_ERR_NSM_ERR_LAG_BRCD_FCOEPORT"> %%Error: FCoE config cannot be applied on Brocade trunk.</Resource>
+        <Resource Name = "FCOE_PORT_ERR_NSM_ERR_LAG_BRCD_FCOEPORT_MBR"> %%Error: FCoE config cannot be applied on Brocade trunk member.</Resource>
+        <Resource Name = "FCOE_PORT_ERR_QOS_CONFIG_CONFLICT">%%Error: Conflicting QoS config applied on this port.</Resource>
+		<Resource Name = "FCOE_PORT_ERR_LAG_MBR_FCOE_ENABLED">%%Error: One of the LAG members is FCoE enabled.</Resource>
+        <Resource Name = "FCOE_PORT_ERR_LAG_FCOE_ENABLED">%%Error: LAG interface is FCoE enabled.</Resource> 
+        <Resource Name = "FCOE_PORT_ERR_FAILED_TO_ALLOC_SEND_TO_STDBY">%%Error: Failed to allocate send to STANDBY message for fcoeport update.</Resource> 
+        <Resource Name = "FCOE_PORT_ERR_FAILED_TO_SEND_TO_STDBY">%%Error: Failed to send fcoeport status update config change message to STANDBY.</Resource> 
+    </ResourceEnum>
+
+    <ResourceEnum Name = "FcoeCommonStatusCodes">
+        <Resource Name = "FCOE_COMMON_ERR_VCS_DISABLED">%%Error: FCOE commands are not allowed when VCS is disabled.</Resource>
+        <Resource Name = "FCOE_COMMON_ERR_FAILED_TO_ALLOC_LOCAL_MESSAGE">%%Error: Failed to allocate local message.</Resource>
+        <Resource Name = "FCOE_COMMON_ERR_FAILED_TO_ALLOC_ROLLBACK_MESSAGE">%%Error: Failed to allocate rollback message.</Resource>
+        <Resource Name = "FCOE_COMMON_ERR_IOCTL_FAILED">%%Error: Fcoe Driver IOCTL failed.</Resource>
+        <Resource Name = "FCOE_COMMON_ERR_INVALID_VLAN">%%Error: VLAN is invalid.</Resource>
+        <Resource Name = "FCOE_COMMON_ERR_INVALID_VFID">%%Error: VFID is invalid.</Resource>
+        <Resource Name = "FCOE_COMMON_ERR_CEE_MAP_ENABLED">%%Error: FCoE map cannot be applied on this interface because a CEE map is already applied on it.</Resource>
+        <Resource Name = "FCOE_COMMON_ERR_LICENSE_NOT_PRESENT">%%Error: FCoE license not present.</Resource>
+        <Resource Name = "FCOE_COMMON_ERR_FAILED_TO_ALLOC_RESPONSE">%%Error: Failed to allocate the response.</Resource>
+        <Resource Name = "FCOE_COMMON_ERR_FAILED_TO_ALLOC_CLUSTER_CONTEXT">%%Error: Failed to allocate cluster context.</Resource>
+        <Resource Name = "FCOE_COMMON_ERR_CLUSTER_VALIDATE_VERSION_MISMATCH">%%Error: Cluster Validation failed - Version Mismatch.</Resource>
+        <Resource Name = "FCOE_COMMON_ERR_GENERIC_ERROR">%%Error: Generic error.</Resource>
+        <Resource Name = "FCOE_COMMON_ERR_INVALID_ARG">%%Error: Invalid Argument.</Resource>
+        <Resource Name = "FCOE_COMMON_ERR_MALLOC_FAILED">%%Error: Malloc Failed.</Resource>
+        <Resource Name = "FCOE_COMMON_ERR_AVL_INSERT_FAILED">%%Error: Failed to add to DB.</Resource>
+        <Resource Name = "FCOE_COMMON_ERR_IOCTL_ERROR">%%Error: IOCTL Failed.</Resource>
+        <Resource Name = "FCOE_COMMON_ERR_VLAN_ROLLBACK_DUE_TO_PROVISION">%%Error: The FCoE VLAN rolled back as the 'fcoeport' config is applied on some interface(s).</Resource>
+        <Resource Name = "FCOE_COMMON_ERR_CONFIG_RESVD_VLAN">%%Error:specified vlan is a reserved vlan.</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "FcoeClearStatusCodes">
+        <Resource Name = "FCOE_CLEAR_LOGIN_ERR_NPORT_NOT_FOUND">%%Error: N-port not found.</Resource>
+        <Resource Name = "FCOE_CLEAR_LOGIN_ERR_DRIVER_FAILURE">%%Error: Failed to clear logins, driver failure.</Resource>
+        <Resource Name = "FCOE_CLEAR_LOGIN_ERR_INVALID_IFINDEX">%%Error: Invalid interface index recieved.</Resource>
+        <Resource Name = "FCOE_CLEAR_COUNTERS_FAILED">%%Error: Failed to clear FCOE interface(s) counters.</Resource>
+    </ResourceEnum>
+
+
+    <ResourceEnum Name = "FcoeInternalStatusCodes">
+        <Resource Name = "FCOE_INTERNAL_FAILED_TO_ALLOC_RESPONSE">%%Error: Failed to alloc response</Resource>
+        <Resource Name = "FCOE_INTERNAL_SW_NULL">%%Error: Failed to get fcoe_db_sw_t structure</Resource>
+        <Resource Name = "FCOE_NOT_ALLOWED_WHEN_AG">%%Error: Not allowed when AG mode enabled</Resource>
+    </ResourceEnum>
+
+	<ResourceEnum Name = "FcoeFsbStatusCodes">
+        <Resource Name = "FCOE_FSB_FAILED_TO_GET_ONMD_MASTER">%%Error: Failed to get onmd master</Resource>
+        <Resource Name = "FCOE_FSB_ERR_LLDP_NULL_MSG_RCVD">%%Error: LLDP Daemon recieved a NULL message</Resource>
+		<Resource Name = "FCOE_FSB_ERR_NOT_FOUND_IN_DB">%%Error: Fcoe FSB Mo is NULL</Resource>
+		<Resource Name = "FCOE_FSB_ERR_FCOE_PORT_CONFIG_PRESENT">%%Error: Fcoe FSB mode is not possible as fcoeport config present on port</Resource>
+		<Resource Name = "FCOE_FSB_ERR_FCOE_PORT_PROFILE_CONFIG_PRESENT">%%Error: Fcoe FSB mode is not possible as fcoeport profile config present on port</Resource>
+    </ResourceEnum>
+
+ <ResourceEnum Name = "FcoeEnodeConfigStatusCodes">
+        <Resource Name = "FCOE_ENODE_MSG_FAILED">%%Error: Failed to process message</Resource>
+        <Resource Name = "FCOE_ENODE_FABRIC_MAP_MO_NOT_FOUND">%%Error: Global fabric map MO not found.</Resource>
+        <Resource Name = "FCOE_ENODE_MO_NOT_FOUND">%%Error: FCoE enodes MO not found.</Resource>
+        <Resource Name = "FCOE_ENODE_UPGRADE_SANITY_CHECK_FAIL">%%Error: FCoE enodes upgrade sanity check failed.</Resource>
+        <Resource Name = "FCOE_ENODE_FABRIC_MAP_MAX_ENODE_NOT_ALLOWED">%%Error: This command is not allowed to configure max enodes. Please use fcoe-enodes command under rbridge mode.</Resource>
+        <Resource Name = "FCOE_ENODE_CONFIG_MODE_NOT_MATCH">%%Error: This command is not allowed global enodes-config mode. Please change the mode to local under fcoe fabric-map.</Resource>
+    </ResourceEnum>
+
+
+</ModuleResources>

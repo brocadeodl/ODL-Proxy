@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-zone"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:brocade-zone="urn:brocade.com:mgmt:brocade-zone"
+        xmlns:ietfyang="urn:ietf:params:xml:ns:yang:ietf-yang-types"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def">
+  <namespace uri="urn:brocade.com:mgmt:brocade-zone"/>
+  <prefix value="brocade-zone"/>
+  <import module="ietf-yang-types">
+    <prefix value="ietfyang"/>
+  </import>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <revision date="2010-12-01">
+    <description>
+      <text>Initial release.
+
+Contains Zone display &amp; configuration implementations</text>
+    </description>
+  </revision>
+  <typedef name="cfg-action-type">
+    <type name="enumeration">
+      <enum name="cfg-none">
+        <value value="0"/>
+      </enum>
+      <enum name="cfg-save">
+        <value value="1"/>
+      </enum>
+      <enum name="cfg-disable">
+        <value value="2"/>
+      </enum>
+      <enum name="cfg-clear">
+        <value value="3"/>
+      </enum>
+      <enum name="cfg-transaction-abort">
+        <value value="4"/>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="default-zone-access-type">
+    <type name="enumeration">
+      <enum name="noaccess">
+        <value value="0"/>
+      </enum>
+      <enum name="allaccess">
+        <value value="1"/>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="cfg-memberzone-zonename-type">
+    <type name="string">
+      <pattern value="([0-9a-zA-Z_]{1,64})(;([0-9a-zA-Z_]{1,64}))*">
+        <description>
+          <text>Cfg Member-zones can only consist of
+alphanumeric strings of max length of
+64 characters.  WWNs are not valid
+cfg members.  The pattern checking
+verifies that the string consists or
+alphanumeric characters and underline
+characters only.</text>
+        </description>
+      </pattern>
+    </type>
+    <description>
+      <text>Use the member-zone command to add one
+or more members to a cfg. Users
+can specify multiple entries in a single
+command by separating members with a
+semi-colon. However when using
+the [no] option, only one member-zone
+can be removed at a time.</text>
+    </description>
+  </typedef>
+  <typedef name="zone-memberentry-entryname-type">
+    <type name="string">
+      <pattern value="(([0-9a-zA-Z_]{1,64})|([0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){7}))(;(([0-9a-zA-Z_]{1,64})|([0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){7})))*">
+        <description>
+          <text>Zone Member-entries can consist of
+WWNs and alphanumeric Alias strings
+of max length 64 characters. The
+pattern checking verifies that WWNs
+are of valid syntax and that the
+strings consists or alphanumeric
+characters and underline characters
+only.</text>
+        </description>
+      </pattern>
+    </type>
+    <description>
+      <text>Use the member-entry command to add one
+or more members to a zone. Member
+entries can consist of WWNs and/or
+Alias-Names. Users can specify multiple
+entries in a single command by
+separating members with a semi-colon.
+However when using the [no] option to
+remove zone members, only one member-
+entry can be removed at a time.</text>
+    </description>
+  </typedef>
+  <typedef name="alias-memberentry-entryname-type">
+    <type name="string">
+      <pattern value="([0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){7})(;[0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){7})*">
+        <description>
+          <text>Alias Member-entries can consist of
+WWNs only. The pattern checking
+verifies that WWNs are of valid
+syntax.</text>
+        </description>
+      </pattern>
+    </type>
+    <description>
+      <text>Use the member-entry command to add one
+or more WWN members to an alias. Users
+can specify multiple entries in a single
+command by separating members with a
+semi-colon. However when using the [no]
+option to remove alias members, only
+one member-entry can be removed at a
+time.</text>
+    </description>
+  </typedef>
+  <container name="zoning">
+    <container name="defined-configuration">
+      <list name="cfg">
+        <key value="cfg-name"/>
+        <leaf name="cfg-name">
+          <type name="string">
+            <length value="1..64"/>
+            <pattern value="[0-9a-zA-Z_]{1,64}">
+              <description>
+                <text>Cfgs can consist of alphanumeric
+and underline characters of max length
+of 64 characters. The pattern checking
+verifies that the specified name
+consists or alphanumeric
+characters and underline characters
+only.</text>
+              </description>
+            </pattern>
+          </type>
+        </leaf>
+        <list name="member-zone">
+          <key value="zone-name"/>
+          <leaf name="zone-name">
+            <type name="string">
+              <pattern value="([0-9a-zA-Z_]{1,64})(;([0-9a-zA-Z_]{1,64}))*">
+                <description>
+                  <text>Cfg Member-zones can only consist of
+alphanumeric strings of max length of
+64 characters.  WWNs are not valid
+cfg members.  The pattern checking
+verifies that the string consists or
+alphanumeric characters and underline
+characters only.</text>
+                </description>
+              </pattern>
+            </type>
+            <description>
+              <text>Use the member-zone command to add one
+or more members to a cfg. Users
+can specify multiple entries in a single
+command by separating members with a
+semi-colon. However when using
+the [no] option, only one member-zone
+can be removed at a time.</text>
+            </description>
+          </leaf>
+        </list>
+      </list>
+      <list name="zone">
+        <key value="zone-name"/>
+        <leaf name="zone-name">
+          <type name="string">
+            <length value="1..64"/>
+            <pattern value="[0-9a-zA-Z_]{1,64}">
+              <description>
+                <text>Zones can consist of alphanumeric
+and underline characters of max length
+of 64 characters. The pattern checking
+verifies that the specified name
+consists or alphanumeric
+characters and underline characters
+only.</text>
+              </description>
+            </pattern>
+          </type>
+        </leaf>
+        <list name="member-entry">
+          <key value="entry-name"/>
+          <leaf name="entry-name">
+            <type name="string">
+              <pattern value="(([0-9a-zA-Z_]{1,64})|([0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){7}))(;(([0-9a-zA-Z_]{1,64})|([0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){7})))*">
+                <description>
+                  <text>Zone Member-entries can consist of
+WWNs and alphanumeric Alias strings
+of max length 64 characters. The
+pattern checking verifies that WWNs
+are of valid syntax and that the
+strings consists or alphanumeric
+characters and underline characters
+only.</text>
+                </description>
+              </pattern>
+            </type>
+            <description>
+              <text>Use the member-entry command to add one
+or more members to a zone. Member
+entries can consist of WWNs and/or
+Alias-Names. Users can specify multiple
+entries in a single command by
+separating members with a semi-colon.
+However when using the [no] option to
+remove zone members, only one member-
+entry can be removed at a time.</text>
+            </description>
+          </leaf>
+        </list>
+      </list>
+      <list name="alias">
+        <key value="alias-name"/>
+        <leaf name="alias-name">
+          <type name="string">
+            <length value="1..64"/>
+            <pattern value="[0-9a-zA-Z_]{1,64}">
+              <description>
+                <text>Aliases can consist of alphanumeric
+and underline characters of max length
+of 64 characters. The pattern checking
+verifies that the specified name
+consists or alphanumeric
+characters and underline characters
+only.</text>
+              </description>
+            </pattern>
+          </type>
+        </leaf>
+        <list name="member-entry">
+          <key value="alias-entry-name"/>
+          <leaf name="alias-entry-name">
+            <type name="string">
+              <pattern value="([0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){7})(;[0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){7})*">
+                <description>
+                  <text>Alias Member-entries can consist of
+WWNs only. The pattern checking
+verifies that WWNs are of valid
+syntax.</text>
+                </description>
+              </pattern>
+            </type>
+            <description>
+              <text>Use the member-entry command to add one
+or more WWN members to an alias. Users
+can specify multiple entries in a single
+command by separating members with a
+semi-colon. However when using the [no]
+option to remove alias members, only
+one member-entry can be removed at a
+time.</text>
+            </description>
+          </leaf>
+        </list>
+      </list>
+    </container>
+    <container name="enabled-configuration">
+      <leaf name="cfg-name">
+        <type name="string"/>
+      </leaf>
+      <leaf name="default-zone-access">
+        <type name="default-zone-access-type"/>
+      </leaf>
+      <leaf name="cfg-action">
+        <type name="cfg-action-type"/>
+      </leaf>
+    </container>
+  </container>
+  <augment target-node="/common-def:show">
+    <container name="zoning"/>
+  </augment>
+  <rpc name="show-zoning-enabled-configuration">
+    <description>
+      <text>This will display the Zoning Enabled-Configuration
+database.</text>
+    </description>
+    <input>
+      <choice name="request-type">
+        <case name="get-request">
+          <leaf name="zone-name-pattern">
+            <mandatory value="false"/>
+            <type name="string"/>
+            <description>
+              <text>This specifies the enabled-zone for which
+this function is invoked. This is 
+optional input, when not specified means
+to get the entire enabled-zone database.</text>
+            </description>
+          </leaf>
+        </case>
+        <case name="get-next-request">
+          <leaf name="last-rcvd-zone-name">
+            <mandatory value="false"/>
+            <type name="string"/>
+            <description>
+              <text>This specifies the last enabled-zone
+received in the preceeding request.
+Is an optional field for the first
+request. For subsequent requests
+this must be filled with the last 
+enabled-zone received in the
+preceeding request.</text>
+            </description>
+          </leaf>
+        </case>
+      </choice>
+    </input>
+    <output>
+      <container name="enabled-configuration">
+        <leaf name="cfg-name">
+          <type name="string"/>
+        </leaf>
+        <list name="enabled-zone">
+          <key value="zone-name"/>
+          <leaf name="zone-name">
+            <type name="string"/>
+          </leaf>
+          <list name="member-entry">
+            <key value="entry-name"/>
+            <leaf name="entry-name">
+              <type name="string"/>
+            </leaf>
+          </list>
+        </list>
+        <leaf name="has-more">
+          <type name="boolean"/>
+          <description>
+            <text>Informs whether backend has more
+zoning output that is not part of 
+the current response. Based on this
+flag remaining enabled-zones can be 
+fetched with another request</text>
+          </description>
+        </leaf>
+      </container>
+    </output>
+  </rpc>
+</module>

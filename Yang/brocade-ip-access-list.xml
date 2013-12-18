@@ -1,0 +1,882 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-ip-access-list"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:ip-access-list="urn:brocade.com:mgmt:brocade-ip-access-list"
+        xmlns:rbridge="urn:brocade.com:mgmt:brocade-rbridge"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types">
+  <namespace uri="urn:brocade.com:mgmt:brocade-ip-access-list"/>
+  <prefix value="ip-access-list"/>
+  <import module="brocade-rbridge">
+    <prefix value="rbridge"/>
+  </import>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+       San Jose, CA 95134
+       U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com
+Web: www.brocade.com</text>
+  </contact>
+  <description>
+    <text>This management sub-module contains the configuration
+and rpc implementaion for IP Access-list.</text>
+  </description>
+  <revision date="2011-03-01">
+    <description>
+      <text>Initial version</text>
+    </description>
+  </revision>
+  <typedef name="l3-acl-policy-name">
+    <type name="string">
+      <pattern value="[a-zA-Z0-9]{1}([-a-zA-Z0-9_]{0,62})"/>
+      <length value="1..63"/>
+    </type>
+  </typedef>
+  <typedef name="ip-acl-ext-action-t">
+    <type name="enumeration">
+      <enum name="permit">
+        <value value="1"/>
+      </enum>
+      <enum name="deny">
+        <value value="2"/>
+      </enum>
+      <enum name="hard-drop">
+        <value value="3"/>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="seq-id-std-ext">
+    <type name="uint64">
+      <range value="0 .. 4294967290"/>
+    </type>
+  </typedef>
+  <typedef name="resequence-starting-seq-id">
+    <type name="uint64">
+      <range value="0 .. 4294967290"/>
+    </type>
+  </typedef>
+  <typedef name="resequence-increment-seq-id">
+    <type name="uint64">
+      <range value="1 .. 4294967290"/>
+    </type>
+  </typedef>
+  <typedef name="precedence-uint">
+    <type name="uint32">
+      <range value="0..7"/>
+    </type>
+  </typedef>
+  <typedef name="tos-uint">
+    <type name="uint32">
+      <range value="0..63"/>
+    </type>
+  </typedef>
+  <typedef name="dscp-uint">
+    <type name="uint32">
+      <range value="0..63"/>
+    </type>
+  </typedef>
+  <typedef name="sip">
+    <type name="inet:ipv4-address"/>
+  </typedef>
+  <typedef name="sip-cidr">
+    <type name="inet:ipv4-prefix"/>
+  </typedef>
+  <typedef name="dip">
+    <type name="inet:ipv4-address"/>
+  </typedef>
+  <typedef name="dip-cidr">
+    <type name="inet:ipv4-prefix"/>
+  </typedef>
+  <typedef name="dip-mask">
+    <type name="inet:ipv4-address"/>
+  </typedef>
+  <typedef name="sip-mask">
+    <type name="inet:ipv4-address"/>
+  </typedef>
+  <typedef name="sport-number-eq-neq-tcp-udp">
+    <type name="uint32">
+      <range value="0 .. 65535"/>
+    </type>
+  </typedef>
+  <typedef name="sport-number-lt-tcp-udp">
+    <type name="uint32">
+      <range value="1 .. 65535"/>
+    </type>
+  </typedef>
+  <typedef name="sport-number-gt-tcp-udp">
+    <type name="uint32">
+      <range value="0 .. 65535"/>
+    </type>
+  </typedef>
+  <typedef name="sport-range-lower-tcp-udp">
+    <type name="uint32">
+      <range value="0 .. 65535"/>
+    </type>
+  </typedef>
+  <typedef name="sport-range-higher-tcp-udp">
+    <type name="uint32">
+      <range value="1 .. 65535"/>
+    </type>
+  </typedef>
+  <typedef name="dport-number-lt-tcp-udp">
+    <type name="uint32">
+      <range value="1 .. 65535"/>
+    </type>
+  </typedef>
+  <typedef name="dport-number-gt-tcp-udp">
+    <type name="uint32">
+      <range value="0 .. 65535"/>
+    </type>
+  </typedef>
+  <typedef name="dport-number-eq-neq-tcp-udp">
+    <type name="uint32">
+      <range value="0 .. 65535"/>
+    </type>
+  </typedef>
+  <typedef name="dport-range-lower-tcp-udp">
+    <type name="uint32">
+      <range value="0 .. 65535"/>
+    </type>
+  </typedef>
+  <typedef name="dport-range-higher-tcp-udp">
+    <type name="uint32">
+      <range value="1 .. 65535"/>
+    </type>
+  </typedef>
+  <typedef name="proto-type">
+    <type name="uint32">
+      <range value="0..255"/>
+    </type>
+  </typedef>
+  <typedef name="wellknown-port-tcp">
+    <type name="enumeration">
+      <enum name="echo">
+        <value value="7"/>
+      </enum>
+      <enum name="daytime">
+        <value value="13"/>
+      </enum>
+      <enum name="ftp-data">
+        <value value="20"/>
+      </enum>
+      <enum name="ftp">
+        <value value="21"/>
+      </enum>
+      <enum name="smtp">
+        <value value="25"/>
+      </enum>
+      <enum name="telnet">
+        <value value="23"/>
+      </enum>
+      <enum name="time">
+        <value value="37"/>
+      </enum>
+      <enum name="tacacs">
+        <value value="49"/>
+      </enum>
+      <enum name="domain">
+        <value value="53"/>
+      </enum>
+      <enum name="www">
+        <value value="80"/>
+      </enum>
+      <enum name="hostname">
+        <value value="101"/>
+      </enum>
+      <enum name="bgp">
+        <value value="179"/>
+      </enum>
+      <enum name="pim-auto-rp">
+        <value value="496"/>
+      </enum>
+      <enum name="login">
+        <value value="513"/>
+      </enum>
+      <enum name="syslog">
+        <value value="514"/>
+      </enum>
+      <enum name="talk">
+        <value value="517"/>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="wellknown-precedence">
+    <type name="enumeration">
+      <enum name="critical">
+        <value value="5"/>
+      </enum>
+      <enum name="flash">
+        <value value="3"/>
+      </enum>
+      <enum name="flash-override">
+        <value value="4"/>
+      </enum>
+      <enum name="immediate">
+        <value value="2"/>
+      </enum>
+      <enum name="internet">
+        <value value="6"/>
+      </enum>
+      <enum name="network">
+        <value value="7"/>
+      </enum>
+      <enum name="priority">
+        <value value="1"/>
+      </enum>
+      <enum name="routine">
+        <value value="0"/>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="wellknown-dscp">
+    <type name="enumeration">
+      <enum name="af11">
+        <value value="10"/>
+      </enum>
+      <enum name="af12">
+        <value value="12"/>
+      </enum>
+      <enum name="af13">
+        <value value="14"/>
+      </enum>
+      <enum name="af21">
+        <value value="18"/>
+      </enum>
+      <enum name="af22">
+        <value value="20"/>
+      </enum>
+      <enum name="af23">
+        <value value="22"/>
+      </enum>
+      <enum name="af31">
+        <value value="26"/>
+      </enum>
+      <enum name="af32">
+        <value value="28"/>
+      </enum>
+      <enum name="af33">
+        <value value="30"/>
+      </enum>
+      <enum name="af41">
+        <value value="34"/>
+      </enum>
+      <enum name="af42">
+        <value value="36"/>
+      </enum>
+      <enum name="af43">
+        <value value="38"/>
+      </enum>
+      <enum name="cs1">
+        <value value="8"/>
+      </enum>
+      <enum name="cs2">
+        <value value="16"/>
+      </enum>
+      <enum name="cs3">
+        <value value="24"/>
+      </enum>
+      <enum name="cs4">
+        <value value="32"/>
+      </enum>
+      <enum name="cs5">
+        <value value="40"/>
+      </enum>
+      <enum name="cs6">
+        <value value="48"/>
+      </enum>
+      <enum name="cs7">
+        <value value="56"/>
+      </enum>
+      <enum name="default">
+        <value value="0"/>
+      </enum>
+      <enum name="ef">
+        <value value="46"/>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="wellknown-tos">
+    <type name="enumeration">
+      <enum name="max-reliability">
+        <value value="1"/>
+      </enum>
+      <enum name="max-throughput">
+        <value value="2"/>
+      </enum>
+      <enum name="min-delay">
+        <value value="4"/>
+      </enum>
+      <enum name="normal">
+        <value value="0"/>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="wellknown-port-udp">
+    <type name="enumeration">
+      <enum name="echo">
+        <value value="7"/>
+      </enum>
+      <enum name="tacacs">
+        <value value="49"/>
+      </enum>
+      <enum name="domain">
+        <value value="53"/>
+      </enum>
+      <enum name="bootps">
+        <value value="67"/>
+      </enum>
+      <enum name="bootpc">
+        <value value="68"/>
+      </enum>
+      <enum name="tftp">
+        <value value="69"/>
+      </enum>
+      <enum name="ntp">
+        <value value="123"/>
+      </enum>
+      <enum name="snmp">
+        <value value="161"/>
+      </enum>
+      <enum name="pim-auto-rp">
+        <value value="496"/>
+      </enum>
+      <enum name="syslog">
+        <value value="514"/>
+      </enum>
+      <enum name="rip">
+        <value value="520"/>
+      </enum>
+    </type>
+  </typedef>
+  <grouping name="ip-ext-access-list-rule">
+    <leaf name="action">
+      <type name="enumeration">
+        <enum name="permit">
+          <value value="1"/>
+        </enum>
+        <enum name="deny">
+          <value value="2"/>
+        </enum>
+        <enum name="hard-drop">
+          <value value="3"/>
+        </enum>
+      </type>
+    </leaf>
+    <leaf name="protocol-type">
+      <type name="union">
+        <type name="enumeration">
+          <enum name="icmp">
+            <value value="1"/>
+          </enum>
+          <enum name="ip">
+            <value value="4"/>
+          </enum>
+          <enum name="tcp">
+            <value value="6"/>
+          </enum>
+          <enum name="udp">
+            <value value="17"/>
+          </enum>
+        </type>
+        <type name="proto-type"/>
+      </type>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="src-host-any-sip">
+      <type name="union">
+        <type name="enumeration">
+          <enum name="any">
+            <value value="1"/>
+          </enum>
+          <enum name="host">
+            <value value="2"/>
+          </enum>
+        </type>
+        <type name="sip"/>
+        <type name="sip-cidr"/>
+      </type>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="src-host-ip">
+      <when condition="../src-host-any-sip ='host'"/>
+      <type name="sip"/>
+    </leaf>
+    <leaf name="src-mask">
+      <when condition="((../src-host-any-sip !='any') and 
+(../src-host-any-sip !='host') and 
+((not(contains((../src-host-any-sip),'/')))))"/>
+      <type name="sip-mask"/>
+    </leaf>
+    <leaf name="sport">
+      <when condition="((../protocol-type ='tcp') or 
+(../protocol-type ='udp') or 
+(../protocol-type ='6') or 
+(../protocol-type ='17'))"/>
+      <type name="enumeration">
+        <enum name="eq">
+          <value value="1"/>
+        </enum>
+        <enum name="gt">
+          <value value="2"/>
+        </enum>
+        <enum name="lt">
+          <value value="3"/>
+        </enum>
+        <enum name="neq">
+          <value value="4"/>
+        </enum>
+        <enum name="range">
+          <value value="5"/>
+        </enum>
+      </type>
+    </leaf>
+    <leaf name="sport-number-eq-neq-tcp">
+      <when condition="(((../protocol-type ='tcp') or 
+(../protocol-type ='6')) and 
+((../sport ='eq') or
+(../sport ='neq')))"/>
+      <type name="union">
+        <type name="wellknown-port-tcp"/>
+        <type name="sport-number-eq-neq-tcp-udp"/>
+      </type>
+    </leaf>
+    <leaf name="sport-number-lt-tcp">
+      <when condition="(((../protocol-type ='tcp') or 
+(../protocol-type ='6')) and 
+(../sport ='lt'))"/>
+      <type name="union">
+        <type name="wellknown-port-tcp"/>
+        <type name="sport-number-lt-tcp-udp"/>
+      </type>
+    </leaf>
+    <leaf name="sport-number-gt-tcp">
+      <when condition="(((../protocol-type ='tcp') or
+(../protocol-type ='6')) and 
+(../sport ='gt'))"/>
+      <type name="union">
+        <type name="wellknown-port-tcp"/>
+        <type name="sport-number-gt-tcp-udp"/>
+      </type>
+    </leaf>
+    <leaf name="sport-number-eq-neq-udp">
+      <when condition="(((../protocol-type ='udp')
+or (../protocol-type ='17')) 
+and ((../sport ='eq') or 
+(../sport ='neq')))"/>
+      <type name="union">
+        <type name="wellknown-port-udp"/>
+        <type name="sport-number-eq-neq-tcp-udp"/>
+      </type>
+    </leaf>
+    <leaf name="sport-number-lt-udp">
+      <when condition="(((../protocol-type ='udp') 
+or (../protocol-type ='17')) 
+and (../sport ='lt'))"/>
+      <type name="union">
+        <type name="wellknown-port-udp"/>
+        <type name="sport-number-lt-tcp-udp"/>
+      </type>
+    </leaf>
+    <leaf name="sport-number-gt-udp">
+      <when condition="(((../protocol-type ='udp') 
+or (../protocol-type ='17')) 
+and (../sport ='gt'))"/>
+      <type name="union">
+        <type name="wellknown-port-udp"/>
+        <type name="sport-number-gt-tcp-udp"/>
+      </type>
+    </leaf>
+    <leaf name="sport-number-range-lower-tcp">
+      <when condition="(((../protocol-type ='tcp') 
+or (../protocol-type ='6')) 
+and (../sport ='range'))"/>
+      <type name="union">
+        <type name="wellknown-port-tcp"/>
+        <type name="sport-range-lower-tcp-udp"/>
+      </type>
+    </leaf>
+    <leaf name="sport-number-range-lower-udp">
+      <when condition="(((../protocol-type ='udp') 
+or (../protocol-type ='17')) 
+and (../sport ='range'))"/>
+      <type name="union">
+        <type name="wellknown-port-udp"/>
+        <type name="sport-range-lower-tcp-udp"/>
+      </type>
+    </leaf>
+    <leaf name="sport-number-range-higher-tcp">
+      <when condition="(((../protocol-type ='tcp') 
+or (../protocol-type ='6')) 
+and (../sport ='range') 
+and (../sport-number-range-lower-tcp))"/>
+      <type name="union">
+        <type name="wellknown-port-tcp"/>
+        <type name="sport-range-higher-tcp-udp"/>
+      </type>
+    </leaf>
+    <leaf name="sport-number-range-higher-udp">
+      <when condition="(((../protocol-type ='udp') 
+or (../protocol-type ='17')) 
+and (../sport ='range') 
+and (../sport-number-range-lower-udp))"/>
+      <type name="union">
+        <type name="wellknown-port-udp"/>
+        <type name="sport-range-higher-tcp-udp"/>
+      </type>
+    </leaf>
+    <leaf name="dst-host-any-dip">
+      <type name="union">
+        <type name="enumeration">
+          <enum name="any">
+            <value value="1"/>
+          </enum>
+          <enum name="host">
+            <value value="2"/>
+          </enum>
+        </type>
+        <type name="dip"/>
+        <type name="dip-cidr"/>
+      </type>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="dst-host-ip">
+      <when condition="../dst-host-any-dip ='host'"/>
+      <type name="dip"/>
+    </leaf>
+    <leaf name="dst-mask">
+      <when condition="((../dst-host-any-dip !='any') 
+and (../dst-host-any-dip !='host') 
+and ((not(contains((../dst-host-any-dip),'/')))))"/>
+      <type name="dip-mask"/>
+    </leaf>
+    <leaf name="dport">
+      <when condition="((../protocol-type ='tcp') 
+or (../protocol-type ='17')
+or (../protocol-type ='udp') 
+or (../protocol-type ='6'))"/>
+      <type name="enumeration">
+        <enum name="eq">
+          <value value="1"/>
+        </enum>
+        <enum name="gt">
+          <value value="2"/>
+        </enum>
+        <enum name="lt">
+          <value value="3"/>
+        </enum>
+        <enum name="neq">
+          <value value="4"/>
+        </enum>
+        <enum name="range">
+          <value value="5"/>
+        </enum>
+      </type>
+    </leaf>
+    <leaf name="dport-number-eq-neq-tcp">
+      <when condition="(((../protocol-type ='tcp') 
+or (../protocol-type ='6')) 
+and ((../dport ='eq') 
+or (../dport ='neq')))"/>
+      <type name="union">
+        <type name="wellknown-port-tcp"/>
+        <type name="dport-number-eq-neq-tcp-udp"/>
+      </type>
+    </leaf>
+    <leaf name="dport-number-lt-tcp">
+      <when condition="(((../protocol-type ='tcp') 
+or (../protocol-type ='6')) 
+and (../dport ='lt'))"/>
+      <type name="union">
+        <type name="wellknown-port-tcp"/>
+        <type name="dport-number-lt-tcp-udp"/>
+      </type>
+    </leaf>
+    <leaf name="dport-number-gt-tcp">
+      <when condition="(((../protocol-type ='tcp') 
+or (../protocol-type ='6')) 
+and (../dport ='gt'))"/>
+      <type name="union">
+        <type name="wellknown-port-tcp"/>
+        <type name="dport-number-gt-tcp-udp"/>
+      </type>
+    </leaf>
+    <leaf name="dport-number-eq-neq-udp">
+      <when condition="(((../protocol-type ='udp') 
+or (../protocol-type ='17')) 
+and ((../dport ='eq') 
+or (../dport ='neq')))"/>
+      <type name="union">
+        <type name="wellknown-port-udp"/>
+        <type name="dport-number-eq-neq-tcp-udp"/>
+      </type>
+    </leaf>
+    <leaf name="dport-number-lt-udp">
+      <when condition="(((../protocol-type ='udp') 
+or (../protocol-type ='17')) 
+and (../dport ='lt'))"/>
+      <type name="union">
+        <type name="wellknown-port-udp"/>
+        <type name="dport-number-lt-tcp-udp"/>
+      </type>
+    </leaf>
+    <leaf name="dport-number-gt-udp">
+      <when condition="(((../protocol-type ='udp') 
+or (../protocol-type ='17')) 
+and (../dport ='gt'))"/>
+      <type name="union">
+        <type name="wellknown-port-udp"/>
+        <type name="dport-number-gt-tcp-udp"/>
+      </type>
+    </leaf>
+    <leaf name="dport-number-range-lower-tcp">
+      <when condition="(((../protocol-type ='tcp')
+or (../protocol-type ='17'))
+and ((../dport ='range')))"/>
+      <type name="union">
+        <type name="wellknown-port-tcp"/>
+        <type name="dport-range-lower-tcp-udp"/>
+      </type>
+    </leaf>
+    <leaf name="dport-number-range-lower-udp">
+      <when condition="(((../protocol-type ='udp') 
+or (../protocol-type ='6')) 
+and ((../dport ='range')))"/>
+      <type name="union">
+        <type name="wellknown-port-udp"/>
+        <type name="dport-range-lower-tcp-udp"/>
+      </type>
+    </leaf>
+    <leaf name="dport-number-range-higher-tcp">
+      <when condition="(((../protocol-type ='tcp') or 
+(../protocol-type ='6')) and 
+(../dport ='range') and 
+(../dport-number-range-lower-tcp))"/>
+      <type name="union">
+        <type name="wellknown-port-tcp"/>
+        <type name="dport-range-higher-tcp-udp"/>
+      </type>
+    </leaf>
+    <leaf name="dport-number-range-higher-udp">
+      <when condition="(((../protocol-type ='udp') or 
+(../protocol-type ='17')) and 
+(../dport ='range') and 
+(../dport-number-range-lower-udp))"/>
+      <type name="union">
+        <type name="wellknown-port-udp"/>
+        <type name="dport-range-lower-tcp-udp"/>
+      </type>
+    </leaf>
+    <leaf name="dscp">
+      <type name="union">
+        <type name="wellknown-dscp"/>
+        <type name="dscp-uint"/>
+      </type>
+    </leaf>
+    <leaf name="urg">
+      <when condition="(../protocol-type ='tcp') or 
+(../protocol-type ='6')"/>
+      <type name="empty"/>
+    </leaf>
+    <leaf name="ack">
+      <when condition="(../protocol-type ='tcp') or
+(../protocol-type ='6')"/>
+      <type name="empty"/>
+    </leaf>
+    <leaf name="push">
+      <when condition="(../protocol-type ='tcp') or
+(../protocol-type ='6')"/>
+      <type name="empty"/>
+    </leaf>
+    <leaf name="fin">
+      <when condition="(../protocol-type ='tcp') or 
+(../protocol-type ='6')"/>
+      <type name="empty"/>
+    </leaf>
+    <leaf name="rst">
+      <when condition="(../protocol-type ='tcp') or
+(../protocol-type ='6')"/>
+      <type name="empty"/>
+    </leaf>
+    <leaf name="sync">
+      <when condition="(../protocol-type ='tcp') or
+(../protocol-type ='6')"/>
+      <type name="empty"/>
+    </leaf>
+    <leaf name="count">
+      <type name="empty"/>
+    </leaf>
+    <leaf name="log">
+      <type name="empty"/>
+    </leaf>
+  </grouping>
+  <grouping name="ip-std-access-list-rule">
+    <leaf name="action">
+      <type name="enumeration">
+        <enum name="permit">
+          <value value="1"/>
+        </enum>
+        <enum name="deny">
+          <value value="2"/>
+        </enum>
+        <enum name="hard-drop">
+          <value value="3"/>
+        </enum>
+      </type>
+    </leaf>
+    <leaf name="src-host-any-sip">
+      <type name="union">
+        <type name="enumeration">
+          <enum name="any">
+            <value value="1"/>
+          </enum>
+          <enum name="host">
+            <value value="2"/>
+          </enum>
+        </type>
+        <type name="sip"/>
+        <type name="sip-cidr"/>
+      </type>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="src-host-ip">
+      <when condition="../src-host-any-sip ='host'"/>
+      <type name="sip"/>
+    </leaf>
+    <leaf name="src-mask">
+      <when condition="((../src-host-any-sip !='any') and
+(../src-host-any-sip !='host') and
+((not(contains((../src-host-any-sip),'/')))))"/>
+      <type name="sip-mask"/>
+    </leaf>
+    <leaf name="count">
+      <type name="empty"/>
+    </leaf>
+    <leaf name="log">
+      <type name="empty"/>
+    </leaf>
+  </grouping>
+  <grouping name="l3_access_list_cmds">
+    <container name="access-list">
+      <list name="standard">
+        <key value="name"/>
+        <leaf name="name">
+          <type name="l3-acl-policy-name"/>
+        </leaf>
+        <container name="hide-ip-acl-std">
+          <list name="seq">
+            <key value="seq-id"/>
+            <leaf name="seq-id">
+              <type name="seq-id-std-ext"/>
+            </leaf>
+            <uses name="ip-std-access-list-rule"/>
+          </list>
+        </container>
+      </list>
+      <list name="extended">
+        <key value="name"/>
+        <leaf name="name">
+          <type name="l3-acl-policy-name"/>
+        </leaf>
+        <container name="hide-ip-acl-ext">
+          <list name="seq">
+            <key value="seq-id"/>
+            <leaf name="seq-id">
+              <type name="seq-id-std-ext"/>
+            </leaf>
+            <uses name="ip-ext-access-list-rule"/>
+          </list>
+        </container>
+      </list>
+    </container>
+  </grouping>
+  <grouping name="l3_access_group">
+    <list name="access-group">
+      <key value="ip-access-list ip-direction"/>
+      <leaf name="ip-access-list">
+        <type name="l3-acl-policy-name"/>
+      </leaf>
+      <leaf name="ip-direction">
+        <type name="enumeration">
+          <enum name="in">
+            <value value="1"/>
+          </enum>
+          <enum name="out">
+            <value value="2"/>
+          </enum>
+        </type>
+      </leaf>
+    </list>
+  </grouping>
+  <container name="ip-acl">
+    <container name="ip">
+      <uses name="l3_access_list_cmds"/>
+    </container>
+  </container>
+  <augment target-node="/interface:interface/interface:tengigabitethernet">
+    <container name="ip-acl-interface">
+      <container name="ip">
+        <uses name="l3_access_group"/>
+      </container>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface/interface:gigabitethernet">
+    <container name="ip-acl-interface">
+      <container name="ip">
+        <uses name="l3_access_group"/>
+      </container>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface/interface:fortygigabitethernet">
+    <container name="ip-acl-interface">
+      <container name="ip">
+        <uses name="l3_access_group"/>
+      </container>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface/interface:port-channel">
+    <container name="ip-acl-interface">
+      <container name="ip">
+        <uses name="l3_access_group"/>
+      </container>
+    </container>
+  </augment>
+  <augment target-node="/rbridge:rbridge-id/interface:interface/interface:ve">
+    <container name="ip-acl-interface">
+      <container name="ip">
+        <uses name="l3_access_group"/>
+      </container>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface-vlan/interface:interface/interface:ve">
+    <container name="ip-acl-interface">
+      <container name="ip">
+        <uses name="l3_access_group"/>
+      </container>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface/interface:management/interface:ip">
+    <container name="access-group">
+      <leaf name="mgmt-ip-access-list">
+        <type name="l3-acl-policy-name"/>
+      </leaf>
+      <leaf name="mgmt-ip-direction">
+        <type name="enumeration">
+          <enum name="in">
+            <value value="1"/>
+          </enum>
+        </type>
+      </leaf>
+    </container>
+  </augment>
+</module>

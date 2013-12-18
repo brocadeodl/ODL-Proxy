@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?> 
+<WavePlugin name="Qos" nameSpace="DcmNs">
+	<Global name="QosGlobal">
+	<Worker name="QosGlobal">
+		<ManagedObject name="CosToCosMutationMap">
+			<Member name="cosToCosMutationMapName" dataType="string">
+			</Member>
+			<Member name="cos0MutatedCosValue" dataType="SI32">
+			</Member>
+			<Member name="cos1MutatedCosValue" dataType="SI32">
+			</Member>
+			<Member name="cos2MutatedCosValue" dataType="SI32">
+			</Member>
+			<Member name="cos3MutatedCosValue" dataType="SI32">
+			</Member>
+			<Member name="cos4MutatedCosValue" dataType="SI32">
+			</Member>
+			<Member name="cos5MutatedCosValue" dataType="SI32">
+			</Member>
+			<Member name="cos6MutatedCosValue" dataType="SI32">
+			</Member>
+			<Member name="cos7MutatedCosValue" dataType="SI32">
+			</Member>
+		</ManagedObject>
+		<ManagedObject name="CosToTrafficClassMap">
+			<Member name="CosToTrafficClassMapName" dataType="string">
+			</Member>
+			<Member name="cos0MappedTrafficClassValue" dataType="SI32">
+			</Member>
+			<Member name="cos1MappedTrafficClassValue" dataType="SI32">
+			</Member>
+			<Member name="cos2MappedTrafficClassValue" dataType="SI32">
+			</Member>
+			<Member name="cos3MappedTrafficClassValue" dataType="SI32">
+			</Member>
+			<Member name="cos4MappedTrafficClassValue" dataType="SI32">
+			</Member>
+			<Member name="cos5MappedTrafficClassValue" dataType="SI32">
+			</Member>
+			<Member name="cos6MappedTrafficClassValue" dataType="SI32">
+			</Member>
+			<Member name="cos7MappedTrafficClassValue" dataType="SI32">
+			</Member>
+		</ManagedObject>
+		<ManagedObject name="QosRcvQueueMulticastSetting">
+			<Member name="rateLimit" dataType="SI32" >
+			</Member>
+			<Member name="burst" dataType="SI32" >
+			</Member>
+			<Member name="thresholdTrafficClass0" dataType="SI32" >
+			</Member>
+			<Member name="thresholdTrafficClass1" dataType="SI32" >
+			</Member>
+			<Member name="thresholdTrafficClass2" dataType="SI32" >
+			</Member>
+			<Member name="thresholdTrafficClass3" dataType="SI32" >
+			</Member>
+			<Member name="thresholdTrafficClass4" dataType="SI32" >
+			</Member>
+			<Member name="thresholdTrafficClass5" dataType="SI32" >
+			</Member>
+			<Member name="thresholdTrafficClass6" dataType="SI32" >
+			</Member>
+			<Member name="thresholdTrafficClass7" dataType="SI32" >
+			</Member>
+		</ManagedObject>
+		<ManagedObject name="QosQueueScheduler">
+			<Member name="strictPriority" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass0" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass1" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass2" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass3" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass4" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass5" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass6" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass7" dataType="SI32" >
+			</Member>
+		</ManagedObject>
+		<ManagedObject name="QosQueueMulticastScheduler">
+			<Member name="dwrrTrafficClass0" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass1" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass2" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass3" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass4" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass5" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass6" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass7" dataType="SI32" >
+			</Member>
+		</ManagedObject>
+		<Message name="CreateCosToCosMutationMap" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="cosToCosMutationMapName" dataType="string" >
+			</Member>
+			<Member name="cos0MutatedCosValue" dataType="SI32" >
+			</Member>
+			<Member name="cos1MutatedCosValue" dataType="SI32" >
+			</Member>
+			<Member name="cos2MutatedCosValue" dataType="SI32" >
+			</Member>
+			<Member name="cos3MutatedCosValue" dataType="SI32" >
+			</Member>
+			<Member name="cos4MutatedCosValue" dataType="SI32" >
+			</Member>
+			<Member name="cos5MutatedCosValue" dataType="SI32" >
+			</Member>
+			<Member name="cos6MutatedCosValue" dataType="SI32" >
+			</Member>
+			<Member name="cos7MutatedCosValue" dataType="SI32" >
+			</Member>
+        </Message>
+		<Message name="DeleteCosToCosMutationMap" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="cosToCosMutationMapName" dataType="string" >
+			</Member>
+        </Message>
+		<Message name="CreateCosToTrafficClassMap" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="CosToTrafficClassMapName" dataType="string" >
+			</Member>
+			<Member name="cos0MappedTrafficClassValue" dataType="SI32" >
+			</Member>
+			<Member name="cos1MappedTrafficClassValue" dataType="SI32" >
+			</Member>
+			<Member name="cos2MappedTrafficClassValue" dataType="SI32" >
+			</Member>
+			<Member name="cos3MappedTrafficClassValue" dataType="SI32" >
+			</Member>
+			<Member name="cos4MappedTrafficClassValue" dataType="SI32" >
+			</Member>
+			<Member name="cos5MappedTrafficClassValue" dataType="SI32" >
+			</Member>
+			<Member name="cos6MappedTrafficClassValue" dataType="SI32" >
+			</Member>
+			<Member name="cos7MappedTrafficClassValue" dataType="SI32" >
+			</Member>
+        </Message>
+		<Message name="DeleteCosToTrafficClassMap" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="CosToTrafficClassMapName" dataType="string" >
+			</Member>
+        </Message>
+		<Message name="CreateQosQueueScheduler" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="strictPriority" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass0" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass1" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass2" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass3" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass4" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass5" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass6" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass7" dataType="SI32" >
+			</Member>
+        </Message>
+		<Message name="DeleteQosQueueScheduler" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+        </Message>
+		<Message name="CreateQosQueueMulticastScheduler" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="dwrrTrafficClass0" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass1" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass2" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass3" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass4" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass5" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass6" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass7" dataType="SI32" >
+			</Member>
+        </Message>
+		<Message name="DeleteQosQueueMulticastScheduler" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+        </Message>
+		<Message name="CreateQosRcvQueueMulticastSetting" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="rateLimit" dataType="SI32" >
+			</Member>
+			<Member name="burst" dataType="SI32" >
+			</Member>
+			<Member name="thresholdTrafficClass0" dataType="SI32" >
+			</Member>
+			<Member name="thresholdTrafficClass1" dataType="SI32" >
+			</Member>
+			<Member name="thresholdTrafficClass2" dataType="SI32" >
+			</Member>
+			<Member name="thresholdTrafficClass3" dataType="SI32" >
+			</Member>
+			<Member name="thresholdTrafficClass4" dataType="SI32" >
+			</Member>
+			<Member name="thresholdTrafficClass5" dataType="SI32" >
+			</Member>
+			<Member name="thresholdTrafficClass6" dataType="SI32" >
+			</Member>
+			<Member name="thresholdTrafficClass7" dataType="SI32" >
+			</Member>
+			<Member name="opCode" dataType="SI32" >
+			</Member>
+        </Message>
+		<Message name="DeleteQosRcvQueueMulticastSetting" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="opCode" dataType="SI32" >
+			</Member>
+        </Message>
+	</Worker>
+	<Worker name="CeeGlobal">
+		<ManagedObject name="PriorityGroup">
+			<Member name="pgId" dataType="SI32">
+			</Member>
+			<Member name="weight" dataType="SI32" >
+			</Member>
+			<Member name="pfc" dataType="bool" >
+			</Member>
+		</ManagedObject>
+		<ManagedObject name="CeeMap">
+			<Member name="ceeMapName" dataType="string" >
+			</Member>
+			<Member name="precedence" dataType="SI32" >
+			</Member>
+            <Member name="priorityGroup" dataType="vector/WaveManagedObjectPointer/" umlType="COMPOSITION" referredObject="PriorityGroup">
+			</Member>
+            <Member name="priorityMap" dataType="WaveManagedObjectPointer" umlType="COMPOSITION" referredObject="PriorityMap">
+			</Member>
+		</ManagedObject>
+		<ManagedObject name="PriorityMap">
+			<Member name="cos0ToPriorityGrouMap" dataType="ObjectId" umlType="ASSOCIATION" referredObject="PriorityGroup">
+			</Member>
+			<Member name="cos1ToPriorityGrouMap" dataType="ObjectId" umlType="ASSOCIATION" referredObject="PriorityGroup">
+			</Member>
+			<Member name="cos2ToPriorityGrouMap" dataType="ObjectId" umlType="ASSOCIATION" referredObject="PriorityGroup">
+			</Member>
+			<Member name="cos3ToPriorityGrouMap" dataType="ObjectId" umlType="ASSOCIATION" referredObject="PriorityGroup">
+			</Member>
+			<Member name="cos4ToPriorityGrouMap" dataType="ObjectId" umlType="ASSOCIATION" referredObject="PriorityGroup">
+			</Member>
+			<Member name="cos5ToPriorityGrouMap" dataType="ObjectId" umlType="ASSOCIATION" referredObject="PriorityGroup">
+			</Member>
+			<Member name="cos6ToPriorityGrouMap" dataType="ObjectId" umlType="ASSOCIATION" referredObject="PriorityGroup">
+			</Member>
+			<Member name="cos7ToPriorityGrouMap" dataType="ObjectId" umlType="ASSOCIATION" referredObject="PriorityGroup">
+			</Member>
+		</ManagedObject>
+		<Message name="CreateCeeMap" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ceeMapName" dataType="string" >
+			</Member>
+			<Member name="precedence" dataType="SI32" >
+			</Member>
+        </Message>
+		<Message name="DeleteCeeMap" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ceeMapName" dataType="string" >
+			</Member>
+        </Message>
+		<Message name="CreatePriorityGroup" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ceeMapName" dataType="string" >
+			</Member>
+			<Member name="pgId" dataType="bool" >
+			</Member>
+			<Member name="weight" dataType="SI32" >
+			</Member>
+			<Member name="pfc" dataType="bool" >
+			</Member>
+        </Message>
+		<Message name="DeletePriorityGroup" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ceeMapName" dataType="string" >
+			</Member>
+			<Member name="pgId" dataType="bool" >
+			</Member>
+        </Message>
+		<Message name="CreatePriorityMap" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ceeMapName" dataType="string" >
+			</Member>
+			<Member name="cos0ToPriorityGrouMap" dataType="SI32" >
+			</Member>
+			<Member name="cos1ToPriorityGrouMap" dataType="SI32" >
+			</Member>
+			<Member name="cos2ToPriorityGrouMap" dataType="SI32" >
+			</Member>
+			<Member name="cos3ToPriorityGrouMap" dataType="SI32" >
+			</Member>
+			<Member name="cos4ToPriorityGrouMap" dataType="SI32" >
+			</Member>
+			<Member name="cos5ToPriorityGrouMap" dataType="SI32" >
+			</Member>
+			<Member name="cos6ToPriorityGrouMap" dataType="SI32" >
+			</Member>
+			<Member name="cos7ToPriorityGrouMap" dataType="SI32" >
+			</Member>
+        </Message>
+		<Message name="DeletePriorityMap" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ceeMapName" dataType="string" >
+			</Member>
+        </Message>
+	</Worker>
+	</Global>
+	<Local name="Qos">
+	<Worker name="QosLocal">
+		<ManagedObject name="PhyIntf">
+			<Member name="qosTrust" dataType="string" >
+			</Member>
+		</ManagedObject>
+		<ManagedObject name="QosPhyIntfConfig">
+            <Member name="physicalInterface" dataType="ObjectId" umlType="ASSOCIATION" referredObject="PhyIntf">
+            </Member>
+            <Member name="cosMutation" dataType="ObjectId" umlType="ASSOCIATION" referredObject="CosToCosMutationMap">
+            </Member>
+            <Member name="cosTrafficClass" dataType="ObjectId" umlType="ASSOCIATION" referredObject="CosToTrafficClassMap">
+            </Member>
+            <Member name="ceeMap" dataType="ObjectId" umlType="ASSOCIATION" referredObject="CeeMap">
+            </Member>
+			<Member name="flowControlTxEnable" dataType="SI32" >
+			</Member>
+			<Member name="flowControlRxEnable" dataType="SI32" >
+			</Member>
+			<Member name="flowControlPfcCosValue" dataType="SI32" >
+			</Member>
+			<Member name="defaultCosValue" dataType="SI32" >
+			</Member>
+			<Member name="qosTrust" dataType="string" >
+			</Member>
+		</ManagedObject>
+		<Message name="CreateQosPhyIntfConfig" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ifName" dataType="string" >
+			</Member>
+			<Member name="ifIndex" dataType="UI64" >
+			</Member>
+			<Member name="id" dataType="string" >
+			</Member>
+			<Member name="cosToCosMutationMapName" dataType="string" >
+			</Member>
+			<Member name="CosToTrafficClassMapName" dataType="string" >
+			</Member>
+			<Member name="ceeMapName" dataType="string" >
+			</Member>
+			<Member name="flowControlTxEnable" dataType="SI32" >
+			</Member>
+			<Member name="flowControlRxEnable" dataType="SI32" >
+			</Member>
+			<Member name="flowControlPfcCosValue" dataType="SI32" >
+			</Member>
+			<Member name="defaultCosValue" dataType="SI32" >
+			</Member>
+			<Member name="qosTrust" dataType="string" >
+			</Member>
+			<Member name="opCode" dataType="SI32" >
+			</Member>
+        </Message>
+		<Message name="DeleteQosPhyIntfConfig" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ifName" dataType="string" >
+			</Member>
+			<Member name="ifIndex" dataType="UI64" >
+			</Member>
+			<Member name="id" dataType="string" >
+			</Member>
+			<Member name="cosToCosMutationMapName" dataType="string" >
+			</Member>
+			<Member name="CosToTrafficClassMapName" dataType="string" >
+			</Member>
+			<Member name="ceeMapName" dataType="string" >
+			</Member>
+			<Member name="flowControlTxEnable" dataType="SI32" >
+			</Member>
+			<Member name="flowControlRxEnable" dataType="SI32" >
+			</Member>
+			<Member name="flowControlPfcCosValue" dataType="SI32" >
+			</Member>
+			<Member name="defaultCosValue" dataType="SI32" >
+			</Member>
+			<Member name="qosTrust" dataType="string" >
+			</Member>
+			<Member name="opCode" dataType="SI32" >
+			</Member>
+        </Message>
+		<Message name="CreateCeeMapSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ceeMapName" dataType="string" >
+			</Member>
+			<Member name="precedence" dataType="SI32" >
+			</Member>
+        </Message>
+		<Message name="DeleteCeeMapSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ceeMapName" dataType="string" >
+			</Member>
+        </Message>
+		<Message name="CreatePriorityGroupSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ceeMapName" dataType="string" >
+			</Member>
+			<Member name="pgId" dataType="bool" >
+			</Member>
+			<Member name="weight" dataType="SI32" >
+			</Member>
+			<Member name="pfc" dataType="bool" >
+			</Member>
+        </Message>
+		<Message name="DeletePriorityGroupSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ceeMapName" dataType="string" >
+			</Member>
+			<Member name="pgId" dataType="bool" >
+			</Member>
+        </Message>
+		<Message name="CreatePriorityMapSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ceeMapName" dataType="string" >
+			</Member>
+			<Member name="cos0ToPriorityGrouMap" dataType="SI32" >
+			</Member>
+			<Member name="cos1ToPriorityGrouMap" dataType="SI32" >
+			</Member>
+			<Member name="cos2ToPriorityGrouMap" dataType="SI32" >
+			</Member>
+			<Member name="cos3ToPriorityGrouMap" dataType="SI32" >
+			</Member>
+			<Member name="cos4ToPriorityGrouMap" dataType="SI32" >
+			</Member>
+			<Member name="cos5ToPriorityGrouMap" dataType="SI32" >
+			</Member>
+			<Member name="cos6ToPriorityGrouMap" dataType="SI32" >
+			</Member>
+			<Member name="cos7ToPriorityGrouMap" dataType="SI32" >
+			</Member>
+        </Message>
+		<Message name="DeletePriorityMapSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="ceeMapName" dataType="string" >
+			</Member>
+        </Message>
+		<Message name="CreateQosQueueSchedulerSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="strictPriority" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass0" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass1" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass2" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass3" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass4" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass5" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass6" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass7" dataType="SI32" >
+			</Member>
+        </Message>
+		<Message name="DeleteQosQueueSchedulerSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+        </Message>
+		<Message name="CreateQosQueueMulticastSchedulerSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="dwrrTrafficClass0" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass1" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass2" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass3" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass4" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass5" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass6" dataType="SI32" >
+			</Member>
+			<Member name="dwrrTrafficClass7" dataType="SI32" >
+			</Member>
+        </Message>
+		<Message name="DeleteQosQueueMulticastSchedulerSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+        </Message>
+		<Message name="CreateCosToCosMutationMap" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="cosToCosMutationMapName" dataType="string" >
+			</Member>
+			<Member name="cos0MutatedCosValue" dataType="SI32" >
+			</Member>
+			<Member name="cos1MutatedCosValue" dataType="SI32" >
+			</Member>
+			<Member name="cos2MutatedCosValue" dataType="SI32" >
+			</Member>
+			<Member name="cos3MutatedCosValue" dataType="SI32" >
+			</Member>
+			<Member name="cos4MutatedCosValue" dataType="SI32" >
+			</Member>
+			<Member name="cos5MutatedCosValue" dataType="SI32" >
+			</Member>
+			<Member name="cos6MutatedCosValue" dataType="SI32" >
+			</Member>
+			<Member name="cos7MutatedCosValue" dataType="SI32" >
+			</Member>
+        </Message>
+		<Message name="DeleteCosToCosMutationMapSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="cosToCosMutationMapName" dataType="string" >
+			</Member>
+        </Message>
+		<Message name="CreateCosToTrafficClassMapSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="CosToTrafficClassMapName" dataType="string" >
+			</Member>
+			<Member name="cos0MappedTrafficClassValue" dataType="SI32" >
+			</Member>
+			<Member name="cos1MappedTrafficClassValue" dataType="SI32" >
+			</Member>
+			<Member name="cos2MappedTrafficClassValue" dataType="SI32" >
+			</Member>
+			<Member name="cos3MappedTrafficClassValue" dataType="SI32" >
+			</Member>
+			<Member name="cos4MappedTrafficClassValue" dataType="SI32" >
+			</Member>
+			<Member name="cos5MappedTrafficClassValue" dataType="SI32" >
+			</Member>
+			<Member name="cos6MappedTrafficClassValue" dataType="SI32" >
+			</Member>
+			<Member name="cos7MappedTrafficClassValue" dataType="SI32" >
+			</Member>
+        </Message>
+		<Message name="DeleteCosToTrafficClassMapSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="CosToTrafficClassMapName" dataType="string" >
+			</Member>
+        </Message>
+		<Message name="CreateQosRcvQueueMulticastSettingSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="rateLimit" dataType="SI32" >
+			</Member>
+			<Member name="burst" dataType="SI32" >
+			</Member>
+			<Member name="thresholdTrafficClass0" dataType="SI32" >
+			</Member>
+			<Member name="thresholdTrafficClass1" dataType="SI32" >
+			</Member>
+			<Member name="thresholdTrafficClass2" dataType="SI32" >
+			</Member>
+			<Member name="thresholdTrafficClass3" dataType="SI32" >
+			</Member>
+			<Member name="thresholdTrafficClass4" dataType="SI32" >
+			</Member>
+			<Member name="thresholdTrafficClass5" dataType="SI32" >
+			</Member>
+			<Member name="thresholdTrafficClass6" dataType="SI32" >
+			</Member>
+			<Member name="thresholdTrafficClass7" dataType="SI32" >
+			</Member>
+			<Member name="opCode" dataType="SI32" >
+			</Member>
+        </Message>
+		<Message name="DeleteQosRcvQueueMulticastSettingSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="opCode" dataType="SI32" >
+			</Member>
+        </Message>
+	</Worker>
+	</Local>

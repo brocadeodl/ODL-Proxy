@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-distributedlog"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:distributedlog="urn:brocade.com:mgmt:brocade-distributedlog"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def">
+  <namespace uri="urn:brocade.com:mgmt:brocade-distributedlog"/>
+  <prefix value="distributedlog"/>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way,
+San Jose, CA 95134
+U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>Vcs log related information</text>
+  </description>
+  <reference>
+    <text>&lt;Author Name&gt;, '&lt;Title&gt;', &lt;RFC XXXX&gt;, &lt;Month&gt; &lt;YEAR&gt;.</text>
+  </reference>
+  <revision date="2010-12-02">
+    <description>
+      <text>Initial version</text>
+    </description>
+  </revision>
+  <augment target-node="/common-def:show">
+    <container name="log"/>
+  </augment>
+</module>

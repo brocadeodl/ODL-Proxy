@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for NSP Module. -->
+
+<ModuleResources ModuleName = "OpenFlowLogicalSwitch" ComponentName = "Slm">
+    <ResourceEnum Name = "OpenFlowLogicalSwitchCreationStatus">
+        <Resource Name = "OPEN_FLOW_LOGICAL_SWITCH_ERROR_ALREADY_EXISTS">An Open Flow Logical Switch with the given parameters already exists</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "AddOpenFlowControllerToOpenFlowLogicalSwitchStatus">
+        <Resource Name = "OPEN_FLOW_LOGICAL_SWITCH_ERROR_INVALID_IDENTIFIERS"           >Invalid input identifiers given to identiry the Open Flow Logical Switch</Resource>
+        <Resource Name = "OPEN_FLOW_LOGICAL_SWITCH_ERROR_DOES_NOT_EXIST"                >An Open Flow Logical Switch with the given parameters does not exist</Resource>
+        <Resource Name = "OPEN_FLOW_LOGICAL_SWITCH_ERROR_OPEN_CONTROLLER_ALREADY_EXISTS">The Open Flow Controller Already Exists for this Open Flow Logical Switch</Resource>
+        <Resource Name = "OPEN_FLOW_LOGICAL_SWITCH_ERROR_OPEN_CONTROLLER_DOES_NOT_EXIST">The Open Flow Controller does not exist for this Open Flow Logical Switch</Resource>
+    </ResourceEnum>
+</ModuleResources>

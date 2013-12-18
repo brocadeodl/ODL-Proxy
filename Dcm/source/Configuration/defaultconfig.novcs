@@ -1,0 +1,30 @@
+!
+no protocol spanning-tree
+!
+vlan dot1q tag native     
+!
+cee-map default
+remap fabric-priority priority 0
+remap lossless-priority priority 0
+priority-group-table 15.0 pfc off
+priority-group-table 1 weight 40 pfc on 
+priority-group-table 2 weight 60 pfc off
+priority-table 2 2 2 1 2 2 2 15.0
+!
+interface Vlan 1
+shutdown
+!
+port-profile default
+vlan-profile
+  switchport
+  switchport mode trunk
+  switchport trunk allowed vlan all
+!
+protocol lldp
+!
+logging auditlog class CONFIGURATION
+logging auditlog class FIRMWARE
+logging auditlog class SECURITY
+!
+end
+!

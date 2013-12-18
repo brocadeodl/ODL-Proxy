@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for the DcmToolKit Module. -->
+
+<ModuleResources ModuleName = "DcmToolKit" ComponentName = "Dcm">
+
+    <ResourceEnum Name = "DcmToolKitStatus">
+        <Resource Name = "DCMTOOLKIT_SUCCESS">Succeeded</Resource>
+        <Resource Name = "DCMTOOLKIT_ERROR">Failed</Resource>
+        <Resource Name = "DCMTOOLKIT_QUERY_FAILED">Query to database failed</Resource>
+        <Resource Name = "DCMTOOLKIT_QUERY_NUM_RESULTS_UNEXPECTED">Query to database returned an unexpected number of results</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "DcmStatusTriggers">
+        <Resource Name = "DCM_ENABLE_STATUS_PROPAGATION">Status propagation trigger</Resource>
+    </ResourceEnum>
+
+
+</ModuleResources>

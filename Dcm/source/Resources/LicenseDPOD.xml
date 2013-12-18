@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave License DPOD Module. -->
+
+<ModuleResources ModuleName = "LicenseDPOD" ComponentName = "Dcm">
+    <ResourceEnum Name = "LicenseDPODPluginErrorStatus">
+        <Resource Name = "LICENSE_DPOD_INVALID_CLI_PORT_INPUT_ERROR">Invalid Port Number in InterfaceId.</Resource>
+        <Resource Name = "LICENSE_DPOD_INVALID_CLI_SLOT_INPUT_ERROR">Invalid Slot Number in InterfaceId.</Resource>
+        <Resource Name = "LICENSE_DPOD_INVALID_CLI_INPUT_ERROR">Invalid InterfaceId.</Resource>
+        <Resource Name = "LICENSE_DPOD_INVALID_CLI_OPERATION_INPUT_ERROR">Invalid parameter. Valid parameters are reserve or release.</Resource>
+        <Resource Name = "LICENSE_DPOD_PORT_CONFIGURATION_ERROR">Failed to configure port</Resource>
+        <Resource Name = "LICENSE_DPOD_UPDATE_DB_ERROR">Failed to Update DB.</Resource>
+        <Resource Name = "LICENSE_DPOD_NO_ENTRY_DB_ERROR">Failed to find an entry DPOD DB.</Resource> 
+        <Resource Name = "LICENSE_DPOD_SYSMOD_INIT_ERROR"> Failed to open sysMod.</Resource>
+        <Resource Name = "LICENSE_DPOD_GET_POD_DATA_ERROR">Failed to get POD data.</Resource>
+        <Resource Name = "LICENSE_DPOD_NOT_SUPPORTED_ERROR">This command is not supported on this product.</Resource>
+        <Resource Name = "LICENSE_DPOD_POD_INACTIVE_ERROR">The Ports-on-Demand (POD) feature is not active.</Resource>
+        <Resource Name = "LICENSE_DPOD_RELEASE_PORT_ERROR">Failed to release POD port.</Resource>
+        <Resource Name = "LICENSE_DPOD_PORT_ALREADY_LICENSED_ERROR">Port is already assigned a POD license.</Resource>
+        <Resource Name = "LICENSE_DPOD_NO_LICENSE_ERROR">No more license available to assign to port.</Resource>
+        <Resource Name = "LICENSE_DPOD_RESERVE_PORT_ERROR">Failed to reserve POD port.</Resource>
+        <Resource Name = "LICENSE_DPOD_PORT_ONLINE_ERROR">Port should be Offline to change POD assignment.</Resource>
+        <Resource Name = "LICENSE_DPOD_MISC_ERROR">Error Occurred.</Resource>
+        <Resource Name = "LICENSE_DPOD_READ_MAX_PORT_ERROR"> Error determining the maximum ports.</Resource>
+   </ResourceEnum>
+</ModuleResources>

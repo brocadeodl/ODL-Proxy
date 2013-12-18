@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ModuleResources ModuleName = "Lacp" ComponentName = "LacpResourceIds">
+
+    <ResourceEnum Name = "LacpUserConfigurations">
+        <Resource Name = "LACP_UNABLE_TO_SET_TIMEOUT"> %%Error: Unable to set port timeout - not a dynamic trunk port </Resource>
+		<Resource Name = "LACP_UNABLE_TO_FIND_LINK"> %%Error: Unable to find lacp link </Resource>
+		<Resource Name = "LACP_UNABLE_TO_SET_SYSTEM_PRIORITY"> %%Error: Unable to set system priority </Resource>
+        <Resource Name = "LACP_GLOBAL_CMD_NULL_MSG_RCVD"> %%Error: Lacp backend received NULL Global Message </Resource>
+        <Resource Name = "LACP_PHY_INTF_CMD_NULL_MSG_RCVD"> %%Error: Lacp backend received NULL Physical Interface Message </Resource>
+		<Resource Name = "LACP_UNABLE_TO_SET_PORT_PRIORITY"> %%Error: Unable to set port priority - not a dynamic trunk port </Resource>
+		<Resource Name = "LACP_UNABLE_TO_SET_DEFAULT_UP_MODE"> %%Error: Configuration allowed only for dynamic trunk port </Resource>
+		<Resource Name = "LACP_UNABLE_TO_SET_DEFAULT_UP_TYPE"> %%Error: Configuration allowed only for standard trunk port </Resource>
+		<Resource Name = "LACP_UNABLE_TO_SET_40G_BROCADE_TRUNK"> %%Error: Configuration of Brocade Trunk port not allowed on 40G Physical Interface </Resource>
+    </ResourceEnum>
+
+</ModuleResources>

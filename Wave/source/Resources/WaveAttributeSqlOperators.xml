@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Attribute SQL WHERE clause condition operators. -->
+
+<ModuleResources ModuleName = "AttributeSqlOperators" ComponentName = "Wave">
+    <ResourceEnum Name = "AttributeConditionOperator">
+        <Resource Name = "WAVE_ATTRIBUTE_CONDITION_OPERATOR_EQUAL"> = </Resource>
+        <Resource Name = "WAVE_ATTRIBUTE_CONDITION_OPERATOR_NOT_EQUAL"> &lt;&gt; </Resource>
+        <Resource Name = "WAVE_ATTRIBUTE_CONDITION_OPERATOR_GREATER_THAN"> &gt; </Resource>
+        <Resource Name = "WAVE_ATTRIBUTE_CONDITION_OPERATOR_GREATER_THAN_OR_EQUAL_TO"> &gt;= </Resource>
+        <Resource Name = "WAVE_ATTRIBUTE_CONDITION_OPERATOR_LESS_THAN"> &lt; </Resource>
+        <Resource Name = "WAVE_ATTRIBUTE_CONDITION_OPERATOR_LESS_THAN_OR_EQUAL_TO"> &lt;= </Resource>
+        <Resource Name = "WAVE_ATTRIBUTE_CONDITION_OPERATOR_LIKE"> LIKE </Resource>
+        <Resource Name = "WAVE_ATTRIBUTE_CONDITION_OPERATOR_NOT_LIKE"> NOT LIKE </Resource>
+        <Resource Name = "WAVE_ATTRIBUTE_CONDITION_OPERATOR_ILIKE"> ILIKE </Resource>
+        <Resource Name = "WAVE_ATTRIBUTE_CONDITION_OPERATOR_NOT_ILIKE"> NOT ILIKE </Resource>
+        <Resource Name = "WAVE_ATTRIBUTE_CONDITION_OPERATOR_BETWEEN"> BETWEEN </Resource>
+        <Resource Name = "WAVE_ATTRIBUTE_CONDITION_OPERATOR_NOT_BETWEEN"> NOT BETWEEN </Resource>
+        <Resource Name = "WAVE_ATTRIBUTE_CONDITION_OPERATOR_IN"> IN </Resource>
+        <Resource Name = "WAVE_ATTRIBUTE_CONDITION_OPERATOR_NOT_IN"> NOT IN </Resource>
+        <Resource Name = "WAVE_ATTRIBUTE_CONDITION_OPERATOR_IS_NULL"> IS NULL </Resource>
+        <Resource Name = "WAVE_ATTRIBUTE_CONDITION_OPERATOR_IS_NOT_NULL"> IS NOT NULL </Resource>
+        <Resource Name = "WAVE_ATTRIBUTE_CONDITION_OPERATOR_SIMILAR_TO"> SIMILAR TO </Resource>
+        <Resource Name = "WAVE_ATTRIBUTE_CONDITION_OPERATOR_NOT_SIMILAR_TO"> NOT SIMILAR TO </Resource>
+        <Resource Name = "WAVE_ATTRIBUTE_CONDITION_OPERATOR_EXISTS"> EXISTS </Resource>
+        <Resource Name = "WAVE_ATTRIBUTE_CONDITION_OPERATOR_NOT_EXISTS"> NOT EXISTS </Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "AttributeConcatenationOperator">
+        <Resource Name = "WAVE_ATTRIBUTE_CONCATENATION_OPERATOR_AND"> AND </Resource>
+        <Resource Name = "WAVE_ATTRIBUTE_CONCATENATION_OPERATOR_OR"> OR </Resource>
+    </ResourceEnum>
+</ModuleResources>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-cdp"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:cdp="urn:brocade.com:mgmt:brocade-cdp"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface"
+        xmlns:vcs="urn:brocade.com:mgmt:brocade-vcs">
+  <namespace uri="urn:brocade.com:mgmt:brocade-cdp"/>
+  <prefix value="cdp"/>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <import module="brocade-vcs">
+    <prefix value="vcs"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 1745 Technology Drive,
+        San Jose, CA 95110 
+         U.S.A
+Tel: +1-408-392-6061
+E-mail: support@Brocade.com 
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This management module is an instrumentation to manage the 
+'Cisco Discovery Protocol (CDP)'.</text>
+  </description>
+  <revision date="2010-08-17">
+    <description>
+      <text>Initial version of this management module.</text>
+    </description>
+  </revision>
+  <augment target-node="/interface:protocol">
+    <container name="cdp">
+      <presence value="true"/>
+    </container>
+  </augment>
+</module>

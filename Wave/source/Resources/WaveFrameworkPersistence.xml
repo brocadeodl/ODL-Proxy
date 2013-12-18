@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Framework Persistence Module. -->
+
+<ModuleResources ModuleName = "FrameworkPersistence" ComponentName = "Wave">
+    <ResourceEnum Name = "CommitTransactionStatus">
+        <Resource Name = "WAVE_COMMIT_TRANSACTION_FAILED">Commiting to Underlying Data Store failed</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "StartupFileType">
+        <Resource Name = "WAVE_PERSISTENCE_DEFAULT_FILE">Default Startup file</Resource>
+        <Resource Name = "WAVE_PERSISTENCE_DEFAULT_FILE_AT_LOCAL_NODE">Default Startup file at local node only</Resource>
+        <Resource Name = "WAVE_PERSISTENCE_REGULAR_FILE">Regular Startup file</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "ClusterEnabledFlag">
+        <Resource Name = "WAVE_PERSISTENCE_CLUSTER_ENABLED">Cluster enabled flag</Resource>
+        <Resource Name = "WAVE_PERSISTENCE_CLUSTER_DISABLED">Cluster disabled flag</Resource>
+    </ResourceEnum>
+    
+    <ResourceEnum Name = "SchemaUpgradeStatus">
+        <Resource Name = "WAVE_SCHEMA_UPGRADE_NOT_REQUIRED">Schema Upgrade Not Required</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "XPathRegistrationStatus">
+        <Resource Name = "WAVE_PERSISTENCE_UNKNOWN_XPATHS">Unknown XPath string received.</Resource>
+        <Resource Name = "WAVE_PERSISTENCE_XPATHS_REGISTRATION_TABLE_IS_EMPTY">XPath registration table is empty.</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "PersistenceToolKitStatus">
+        <Resource Name = "WAVE_PERSISTENCE_CONFIGURATION_MANAGED_OBJECT_QUERY_FAILED">Query for the configuration managed object failed.</Resource>
+        <Resource Name = "WAVE_PERSISTENCE_CONFIGURATION_MANAGED_OBJECT_NOT_FOUND">Query for the configuration managed object returned an empty result.</Resource>
+        <Resource Name = "WAVE_PERSISTENCE_IN_MEMORY_CONFIGURATION_MANAGED_OBJECT_NOT_FOUND">In memory configuration managed object not found.</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "ConfigFileManagementToolKitStatus">
+        <Resource Name = "WAVE_CONFIGURATION_COPY_RUNNING_TO_STARTUP_FAILED">Copy running to startup failed.</Resource>
+        <Resource Name = "WAVE_CONFIGURATION_COPY_RUNNING_TO_STARTUP_FILE_FAILED">Copy running to startup file failed.</Resource>
+    </ResourceEnum>
+</ModuleResources>

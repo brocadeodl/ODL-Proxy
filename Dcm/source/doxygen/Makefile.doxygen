@@ -1,0 +1,51 @@
+TOPDIR := ../../../../../..
+
+include ../Makefile.tools
+
+DOXYGEN := /usr/bin/doxygen
+DCM_DOXYGEN_DIR := ${SRC_ROOT}/doxygen
+DOXYGEN_REMOVE_FILES_CMD := ${DCM_DOXYGEN_DIR}/removeFiles.sh
+WAVE_DOX_FILE := ${DCM_DOXYGEN_DIR}/wave.dox
+DCM_DOX_FILE := ${DCM_DOXYGEN_DIR}/dcm.dox
+DOX_CONFIG_FILE := ${DCM_DOXYGEN_DIR}/doxygen.dox
+DCM_DOXYGEN_OUT_DIR_S := $(shell echo "$(BUILD_DIR_DYNAMIC_SRC)/dcmdox" | sed 's/\//\\\//g')
+WAVE_DOXYGEN_OUT_DIR_S := $(shell echo "${WAVE_BUILD_DIR_DYNAMIC_SRC}/wavedox" | sed 's/\//\\\//g')
+DCM_DOXYGEN_OUT_DIR := $(BUILD_DIR_DYNAMIC_SRC)/dcmdox
+WAVE_DOXYGEN_OUT_DIR := ${WAVE_BUILD_DIR_DYNAMIC_SRC}/wavedox
+DOXY_FOOTER_PATH := $(shell echo "${DCM_DOXYGEN_DIR}/Brocade_footer.html" | sed 's/\//\\\//g')
+
+.PHONY: all
+all: dcmdoxy wavedoxy
+
+wavedoxgen: ${DOX_CONFIG_FILE}
+	sed 's/OUTPUT_DIRECTORY.*/OUTPUT_DIRECTORY = ${WAVE_DOXYGEN_OUT_DIR_S}/g' ${DOX_CONFIG_FILE} > ${WAVE_DOX_FILE}.tmp
+	sed 's/PROJECT_NAME.*/PROJECT_NAME = ${WAVE_PROJECT_NAME}/g' ${WAVE_DOX_FILE}.tmp > ${WAVE_DOX_FILE}.tmp1
+	sed 's/HTML_FOOTER.*/HTML_FOOTER = ${DOXY_FOOTER_PATH}/g' ${WAVE_DOX_FILE}.tmp1 > ${WAVE_DOX_FILE}
+	rm ${WAVE_DOX_FILE}.tmp  ${WAVE_DOX_FILE}.tmp1;
+	
+dcmdoxgen: ${DOX_CONFIG_FILE}
+	sed 's/.*OUTPUT_DIRECTORY.*/OUTPUT_DIRECTORY = ${DCM_DOXYGEN_OUT_DIR_S}/g' ${DOX_CONFIG_FILE} > ${DCM_DOX_FILE}.tmp
+	sed 's/PROJECT_NAME.*/PROJECT_NAME = ${DCM_PROJECT_NAME}/g' ${DCM_DOX_FILE}.tmp > ${DCM_DOX_FILE}.tmp1
+	sed 's/HTML_FOOTER.*/HTML_FOOTER = ${DOXY_FOOTER_PATH}/g' ${DCM_DOX_FILE}.tmp1 > ${DCM_DOX_FILE}
+	rm ${DCM_DOX_FILE}.tmp ${DCM_DOX_FILE}.tmp1;
+
+wavedoxy:wavedoxgen $(DOXYGEN_REMOVE_FILES_CMD)
+	echo "Generating Doxygen doc for Wave..";\
+	echo "";\
+	cd ${WAVE_SRC};\
+	${DOXYGEN} ${WAVE_DOX_FILE};\
+	sh $(DOXYGEN_REMOVE_FILES_CMD) $(WAVE_DOXYGEN_OUT_DIR);\
+	rm -f ${WAVE_DOX_FILE};
+
+dcmdoxy: dcmdoxgen $(DOXYGEN_REMOVE_FILES_CMD)
+	echo "Generating Doxygen doc for DCM..";\
+	echo "";\
+	cd $(SRC_ROOT) ;\
+	${DOXYGEN} ${DCM_DOX_FILE};\
+	sh ${DOXYGEN_REMOVE_FILES_CMD} ${DCM_DOXYGEN_OUT_DIR};\
+	rm -f ${DCM_DOX_FILE};
+
+clean:
+	rm -rf ${DCM_DOXYGEN_OUT} ${WAVE_DOXYGEN_OUT}
+
+	 

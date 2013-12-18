@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?> 
+<WavePlugin name="RMON" nameSpace="DcmNs">
+	<Global name="RmonGlobal">
+		<ManagedObject name="RmonEvent">
+			<Member name="eventIndex" dataType="UI16" >
+			</Member>
+			<Member name="eventType" dataType="UI8" >
+			</Member>
+			<Member name="communityName" dataType="string" >
+			</Member>
+			<Member name="description" dataType="string" >
+			</Member>
+			<Member name="owner" dataType="string" >
+			</Member>
+		</ManagedObject>
+		<Message name="CreateRmonEvent" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="eventIndex" dataType="UI16" >
+			</Member>
+			<Member name="eventType" dataType="UI8" >
+			</Member>
+			<Member name="communityName" dataType="string" >
+			</Member>
+			<Member name="description" dataType="string" >
+			</Member>
+			<Member name="owner" dataType="string" >
+			</Member>
+        </Message>
+		<Message name="DeleteRmonEvent" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="eventIndex" dataType="UI16" >
+			</Member>
+        </Message>
+	</Global>
+	<Local name="Rmon">
+		<ManagedObject name="RmonCollectionStatistics">
+			<Member name="collectionIndex" dataType="UI16" >
+			</Member>
+			<Member name="ifIndex" dataType="UI64" >
+			</Member>
+			<Member name="owner" dataType="string" >
+			</Member>
+		</ManagedObject>
+		<ManagedObject name="RmonCollectionHistory">
+			<Member name="historyIndex" dataType="UI16" >
+			</Member>
+			<Member name="ifIndex" dataType="UI64" >
+			</Member>
+			<Member name="buckets" dataType="UI16" >
+			</Member>
+			<Member name="interval" dataType="UI16" >
+			</Member>
+			<Member name="owner" dataType="string" >
+			</Member>
+		</ManagedObject>
+		<ManagedObject name="RmonAlarm">
+			<Member name="alarmIndex" dataType="UI16" >
+			</Member>
+			<Member name="snmpOid" dataType="string" >
+			</Member>
+			<Member name="interval" dataType="UI32" >
+			</Member>
+			<Member name="sampleType" dataType="UI8" >
+			</Member>
+			<Member name="thresholdConfigured" dataType="UI8" >
+			</Member>
+			<Member name="risingThreshold" dataType="UI32" >
+			</Member>
+			<Member name="risingThresholdEventId" dataType="UI16" >
+			</Member>
+			<Member name="fallingThreshold" dataType="UI32" >
+			</Member>
+			<Member name="fallingThresholdEventId" dataType="UI16" >
+			</Member>
+			<Member name="owner" dataType="string" >
+			</Member>
+		</ManagedObject>
+		<Message name="CreateRmonCollectionStatistics" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="collectionIndex" dataType="UI16" >
+			</Member>
+			<Member name="ifIndex" dataType="UI64" >
+			</Member>
+			<Member name="owner" dataType="string" >
+			</Member>
+        </Message>
+		<Message name="CreateRmonCollectionHistory" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="historyIndex" dataType="UI16" >
+			</Member>
+			<Member name="ifIndex" dataType="UI64" >
+			</Member>
+			<Member name="buckets" dataType="UI16" >
+			</Member>
+			<Member name="interval" dataType="UI16" >
+			</Member>
+			<Member name="owner" dataType="string" >
+			</Member>
+        </Message>
+		<Message name="CreateRmonAlarm" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="alarmIndex" dataType="UI16" >
+			</Member>
+			<Member name="snmpOid" dataType="string" >
+			</Member>
+			<Member name="interval" dataType="UI32" >
+			</Member>
+			<Member name="sampleType" dataType="UI8" >
+			</Member>
+			<Member name="thresholdConfigured" dataType="UI8" >
+			</Member>
+			<Member name="risingThreshold" dataType="UI32" >
+			</Member>
+			<Member name="risingThresholdEventId" dataType="UI16" >
+			</Member>
+			<Member name="fallingThreshold" dataType="UI32" >
+			</Member>
+			<Member name="fallingThresholdEventId" dataType="UI16" >
+			</Member>
+			<Member name="owner" dataType="string" >
+			</Member>
+        </Message>
+		<Message name="DeleteRmonCollectionStatistics" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="collectionIndex" dataType="UI16" >
+			</Member>
+        </Message>
+		<Message name="DeleteRmonCollectionHistory" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="historyIndex" dataType="UI16" >
+			</Member>
+        </Message>
+		<Message name="DeleteRmonAlarm" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="alarmIndex" dataType="UI16" >
+			</Member>
+        </Message>
+		<Message name="CreateRmonEventSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="eventIndex" dataType="UI16" >
+			</Member>
+			<Member name="eventType" dataType="UI8" >
+			</Member>
+			<Member name="communityName" dataType="string" >
+			</Member>
+			<Member name="description" dataType="string" >
+			</Member>
+			<Member name="owner" dataType="string" >
+			</Member>
+        </Message>
+		<Message name="DeleteRmonEventSP" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="eventIndex" dataType="UI16" >
+			</Member>
+        </Message>
+	</Local>

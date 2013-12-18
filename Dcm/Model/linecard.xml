@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<WavePlugin name="Em" namespace="DcmNs">
+	<Local name="Linecard">
+		<Message name="PowerSet" sequencerType="SYNC" allowPreemption="FALSE">
+			<Member name="slotnum" dataType="UI32"> </Member>
+			<Member name="mode" dataType="UI32"> </Member>
+			<Member name="result" dataType="SI32"> </Member>
+		</Message>
+	</Local>
+</WavePlugin>

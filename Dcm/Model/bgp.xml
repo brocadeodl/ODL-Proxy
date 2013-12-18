@@ -1,0 +1,942 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WavePlugin name="Bgp" nameSpace="DcmNs" yangPrefix="bgp" yangModule="brocade-bgp">
+  <Local name="Bgp">
+    <Worker name="BasicConfig">
+
+	  <!-- ====================================================================================================== -->
+      							<!-- BasicConfig ManagedObject-->
+	  <!-- ====================================================================================================== -->
+
+      <ManagedObject name="BasicConfig" validateForCreate="true" backendName="bgp">
+	  <Postboot passName= "DCM_POSTBOOT_GLOBAL_STAGE5"/>
+	  <!-- LEO : NOT SUPPORTED
+        <Inheritance derivedFrom="Bfd" accessSpecifier="virtual public" />
+		-->
+		<Group id="vrf_name" backendName="bgp">
+          <Member name="vrfName" dataType="WAVE_ATTRIBUTE_TYPE_STRING" isKey="true" userTag="bgp_vrf_name">
+          </Member>
+	    </Group>
+		<Group id="local_as" backendName="bgp">
+          <Member name="localAs"  defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_local_as"> 
+          </Member>
+	    </Group>
+		<Group id="always_compare_med" backendName="bgp">
+          <Member name="alwaysCompareMedFlag"  defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_always_compare_med">
+          </Member>
+	    </Group>
+		<Group id="as_path_ignore" backendName="bgp">
+          <Member name="asPathIgnoreFlag"  defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_as_path_ignore">
+          </Member>
+	    </Group>
+		<!-- LEO : NOT SUPPORTED
+		<Group id="auto_shutdown_nei" backendName="bgp">
+          <Member name="autoShutDownNewNeighbors"  defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_auto_shutdown_new_neighbors">
+          </Member>
+	    </Group>
+		-->
+		<Group id="capability_as4" backendName="bgp">
+          <Member name="capabilityAs4Flag"  defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_as4_enable">
+          </Member>
+	    </Group>
+		<!-- LEO : NOT SUPPORTED
+		<Group id="bfd_enable" backendName="bgp">
+          <Member name="bfdEnableFlag"  defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_bfd_enable">
+          </Member>
+	    </Group>
+		-->
+		<Group id="choice_cluster_id" type="choice" backendName="bgp">
+        <Member name="choiceClusterId" defaultValueForMo="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_ch_cluster_id">
+              </Member>
+	    </Group>
+		<Group id="cluster_id"  type="case" choiceGroupId="choice_cluster_id" userTag="bgp_ca_cluster_id" backendName="bgp">
+        <Member name="clusterId" defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_cluster_id_value"> 
+              </Member>
+	    </Group>
+		<Group id="cluster_ip_addr" type="case" choiceGroupId="choice_cluster_id" userTag="bgp_ca_cluster_id_ipv4_address" backendName="bgp">
+        <Member name="clusterIdIpAddress" dataType="WAVE_ATTRIBUTE_TYPE_IPV4ADDRESS" userTag="bgp_cluster_id_ipv4_address"> 
+              </Member>
+	    </Group>
+		<Group id="compare_med_aspath" backendName="bgp">
+          <Member name="compareMedEmptyAsPathFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_compare_med_empty_aspath">
+          </Member>
+	    </Group>
+		<Group id="compare_routerid" backendName="bgp">
+          <Member name="compareRouterIdFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_compare_routerid">
+          </Member>
+	    </Group>
+		<!-- LEO: NOT SUPPORTED
+		<Group id="confederation_identifier" backendName="bgp">
+          <Member name="confederationIdentifier"  defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_identifier"> 
+          </Member>
+	    </Group>
+		<Group id="confederation_peers" backendName="bgp">
+          <Member name="confederationPeers" dataType="WAVE_ATTRIBUTE_TYPE_UI32_VECTOR" userTag="bgp_peers">
+          </Member>
+	    </Group>
+		-->
+		<Group id="default_local_preference" backendName="bgp">
+          <Member name="defaultLocalPreference"  defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32"
+		  userTag="bgp_default_local_preference"> 
+          </Member>
+	    </Group>
+		<Group id="distance" backendName="bgp">
+          <Member name="extRoutedistance"  defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32"
+		  userTag="bgp_ext_route_distance"> 
+          </Member>
+          <Member name="intRouteDistance"  defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32"
+		  userTag="bgp_int_route_distance"> 
+          </Member>
+          <Member name="lclRouteDistance"  defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32"
+		  userTag="bgp_lcl_route_distance"> 
+          </Member>
+	    </Group>
+		<Group id="enforce_first_as" backendName="bgp">
+          <Member name="enforceFirstAsFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_enforce_first_as">
+          </Member>
+	    </Group>
+		<Group id="fast_external_fallover" backendName="bgp">
+          <Member name="fastExternalFallOverFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_fast_external_fallover">
+          </Member>
+	    </Group>
+		<Group id="install_igp_cost" backendName="bgp">
+          <Member name="installIgpCostFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_install_igp_cost">
+          </Member>
+	    </Group>
+		<Group id="log_dampening_debug" backendName="bgp">
+          <Member name="logDampeningDebug" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_log_dampening_debug"> 
+          </Member>
+	    </Group>
+		<Group id="max_as_limit" backendName="bgp">
+          <Member name="maxAsLimit" defaultValueForMo="301" defaultValueForAttribute="301" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_num_as_in_path"> 
+          </Member>
+	    </Group>
+		<Group id="med_missing_as_worst" backendName="bgp">
+          <Member name="medMissingAsWorstFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_med_missing_as_worst">
+          </Member>
+	    </Group>
+		<!-- LEO : NOT SUPPORTED
+		<Group id="next_hop_mpls" backendName="bgp">
+          <Member name="nextHopMplsStausFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_next_hop_mpls_status">
+          </Member>
+	    </Group>
+		<Group id="next_hop_mpls_compare_lsp" backendName="bgp">
+          <Member name="nextHopMplsCompareLspMetricFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_compare_lsp_metric">
+          </Member>
+	    </Group>
+		-->
+		<Group id="timers" backendName="bgp">
+          <Member name="routerBgpModeTimersKeepAliveTime" defaultValueForMo="65536" defaultValueForAttribute="65536" dataType="WAVE_ATTRIBUTE_TYPE_UI32_UC"
+		  userTag="bgp_keep_alive"> 
+          </Member>
+          <Member name="routerBgpModeTimerHoldTime" defaultValueForMo="65536" defaultValueForAttribute="65536" dataType="WAVE_ATTRIBUTE_TYPE_UI32_UC"
+		  userTag="bgp_hold_time"> 
+          </Member>
+	    </Group>
+		<Group id="router_bgp_neighbor_peer_grp" backendName="bgp">
+          <Member name="routerBgpNeighborPeerGrp" userTag="bgp_neighbor_peer_grp" dataType="WAVE_ATTRIBUTE_TYPE_COMPOSITION_VECTOR" umlType="COMPOSITION"
+		  referredObject="NeighborPeerGrp"> 
+          </Member>
+	    </Group>
+		<Group id="router_bgp_neighbor_ipx_addr" backendName="bgp">
+          <Member name="routerBgpNeighborIpxAddr" userTag="bgp_neighbor_addr" dataType="WAVE_ATTRIBUTE_TYPE_COMPOSITION_VECTOR" umlType="COMPOSITION"
+		  referredObject="NeighborIpxAddr">  
+          </Member>
+	    </Group>
+		<Group id="router_bgp_ipv4_ucast" backendName="bgp">
+        <Member name="routerBgpAddressIpv4Uc" userTag="bgp_ipv4_unicast" dataType="WAVE_ATTRIBUTE_TYPE_COMPOSITION" umlType="COMPOSITION"
+		referredObject="AfIpv4Ucast"> 
+              </Member>
+	    </Group>
+      </ManagedObject>
+
+
+	  <!-- ====================================================================================================== -->
+      							<!-- NeighborIpxAddr   ManagedObject -->
+	  <!-- ====================================================================================================== -->
+	  
+      <ManagedObject name="NeighborIpxAddr" validateForUpdate="true">
+	  
+        <!-- Derive From router bgp neighbor attributes -->
+        <Inheritance derivedFrom="NeighborAttributes" accessSpecifier="virtual public" />
+		<Group id="nei_ipvx_address" backendName="bgp">
+          <Member name="neighborIpvXAddress" dataType="WAVE_ATTRIBUTE_TYPE_IPVXADDRESS" isKey="true" userTag="bgp_router_bgp_neighbor_address">
+          </Member>
+	    </Group>
+		<Group id="nei_ip_peer_group" backendName="bgp">
+          <Member name="associatePeerGroup" dataType="WAVE_ATTRIBUTE_TYPE_OBJECTID" umlType="ASSOCIATION" referredObject="NeighborPeerGrp"
+		  userTag="bgp_associate_peer_group">
+          </Member>
+	    </Group>
+      </ManagedObject>
+
+
+	  <!-- ====================================================================================================== -->
+      							<!-- NeighborPeerGrp  ManagedObject-->
+	  <!-- ====================================================================================================== -->
+
+      <ManagedObject name="NeighborPeerGrp" validateForUpdate="true">
+        <!-- Derive From router bgp neighbor attributes -->
+        <Inheritance derivedFrom="NeighborAttributes" accessSpecifier="virtual public" />
+		<Group id="nei_peer_group_name_key"  backendName="bgp">
+          <Member name="neighborPeerGrpName" defaultValueForMo="" dataType="WAVE_ATTRIBUTE_TYPE_STRING" isKey="true"
+		  userTag="bgp_router_bgp_neighbor_peer_grp">
+          </Member>
+	    </Group>
+		<Group id="nei_peer_group_name" backendName="bgp">
+          <Member name="peerGrpFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_peer_group_name">
+          </Member>
+	    </Group>
+      </ManagedObject>
+
+	  
+	  <!-- ====================================================================================================== -->
+      							<!-- NeighborAttributes CommonManagedObjectBase -->
+	  <!-- ====================================================================================================== -->
+
+      <CommonManagedObjectBase name="NeighborAttributes">
+		<Group id="nei_remote_as" backendName="bgp">
+          <Member name="remoteAs" defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_remote_as">
+          </Member>
+	    </Group>
+		<Group id="nei_description" backendName="bgp">
+          <Member name="description" defaultValueForMo="" dataType="WAVE_ATTRIBUTE_TYPE_STRING" userTag="bgp_description">
+          </Member>
+	    </Group>
+		<Group id="nei_shutdown" backendName="bgp">
+          <Member name="shutdownFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_shutdown_status">
+          </Member>
+	    </Group>
+		<Group id="nei_shutdown_generate_rib_out" backendName="bgp">
+          <Member name="shutdownGenerateRibOutFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_generate_rib_out">
+          </Member>
+	    </Group>
+		<Group id="nei_local_as_no_prepend" backendName="bgp">
+          <Member name="localAs" defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_local_as_value">
+          </Member>
+          <Member name="localAsNoPrependFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_no_prepend">
+          </Member>
+	    </Group>
+		<Group id="nei_choice_nexthop_self" type="choice" backendName="bgp">
+        <Member name="choiceNextHopSelfType" defaultValueForMo="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_ch_next_hop_self_type">
+              </Member>
+	    </Group>
+		<Group id="nei_next_hop_self"  type="case" choiceGroupId="nei_choice_nexthop_self" userTag="bgp_ca_next_hop_self_status" backendName="bgp">
+          <Member name="nextHopSelfStatusFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_next_hop_self_status"> 
+          </Member>
+	    </Group>
+		<Group id="nei_next_hop_self_always" type="case" choiceGroupId="nei_choice_nexthop_self" userTag="bgp_ca_next_hop_self_always" backendName="bgp">
+          <Member name="nextHopSelfAlwaysFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_next_hop_self_always">
+          </Member>
+	    </Group>
+		<Group id="nei_advertisement_interval" backendName="bgp">
+          <Member name="advertisementInterval" defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_value">
+          </Member>
+	    </Group>
+		<Group id="nei_choice_ebpg_multi_hop_type" type="choice" backendName="bgp">
+        <Member name="choiceEbgpMultiHopType" defaultValueForMo="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_ch_ebgp_multihop_type"> 
+              </Member>
+	    </Group>
+		<Group id="nei_ebgp_multihop" type="case" choiceGroupId="nei_choice_ebpg_multi_hop_type" userTag="bgp_ca_ebgp_multihop_flag" backendName="bgp">
+          <Member name="ebgpMultiHopFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_ebgp_multihop_flag"> 
+          </Member>
+	    </Group>
+		<Group id="nei_ebgp_multihop_count" type="case" choiceGroupId="nei_choice_ebpg_multi_hop_type" userTag="bgp_ca_ebgp_multihop_count" backendName="bgp">
+          <Member name="ebgpMultiHopCount" defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32"
+		  userTag="bgp_ebgp_multihop_count">
+          </Member>
+	    </Group>
+		<Group id="nei_choice_maxas_limit" type="choice" backendName="bgp">
+        <Member name="choiceMaxasLimit" defaultValueForMo="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_ch_maxas_limit">
+              </Member>
+	    </Group>
+		<Group id="nei_max_as_in_path" type="case" choiceGroupId="nei_choice_maxas_limit" userTag="bgp_ca_maxas_limit_enable" backendName="bgp">
+          <Member name="asPathNum" defaultValueForMo="301" defaultValueForAttribute="301" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_num_as_in_as_path">
+          </Member>
+	    </Group>
+		<Group id="nei_max_as_disable" type="case" choiceGroupId="nei_choice_maxas_limit" userTag="bgp_ca_maxas_limit_disable" backendName="bgp">
+        <Member name="maxasDisableFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_maxas_limit_disable">
+              </Member>
+	    </Group>
+		<Group id="nei_password" backendName="bgp">
+          <Member name="bgpPassword" defaultValueForMo="" dataType="WAVE_ATTRIBUTE_TYPE_STRING" userTag="bgp_password">
+          </Member>
+	    </Group>
+		<Group id="nei_enforce_first_as" backendName="bgp">
+          <Member name="enforceFirstAsFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_nei_enforce_first_as"> 
+          </Member>
+	    </Group>
+		<Group id="nei_enforce_first_as_disable" backendName="bgp">
+          <Member name="enforceFirstAsDisableFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_nei_enforce_first_as_disable"> 
+          </Member>
+	    </Group>
+		<Group id="nei_as4_enable" backendName="bgp">
+          <Member name="as4EnableFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_neighbor_as4_enable">
+          </Member>
+	    </Group>
+		<Group id="nei_as4_disable" backendName="bgp">
+          <Member name="as4DisableFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_neighbor_as4_disable">
+          </Member>
+	    </Group>
+		<Group id="nei_timers" backendName="bgp">
+          <Member name="NeikeepAliveTime" defaultValueForMo="65536" defaultValueForAttribute="65536" dataType="WAVE_ATTRIBUTE_TYPE_UI32_UC"
+		  userTag="bgp_nei_keep_alive">
+          </Member>
+          <Member name="NeiHoldTime" defaultValueForMo="65536" defaultValueForAttribute="65536" dataType="WAVE_ATTRIBUTE_TYPE_UI32_UC" userTag="bgp_nei_hold_time">
+          </Member>
+	    </Group>
+		<Group id="nei_choice_update_source" type="choice" backendName="bgp">
+        <Member name="choiceUpdateSource" defaultValueForMo="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_ch_update_source">
+              </Member>
+	    </Group>
+		<Group id="nei_update_source_ipv4" type="case" choiceGroupId="nei_choice_update_source" userTag="bgp_ca_ipv4" backendName="bgp">
+          <Member name="sipIpv4Address" dataType="WAVE_ATTRIBUTE_TYPE_IPV4ADDRESS" userTag="bgp_sip_ipv4_address"> 
+          </Member>
+	    </Group>
+		<Group id="nei_update_source_eth" type="case" choiceGroupId="nei_choice_update_source" userTag="bgp_ca_eth" backendName="bgp">
+          <Member name="ethInterfaceType" defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_ENUM" userTag="bgp_interface_type">
+          </Member>
+          <Member name="ethInterface" defaultValueForMo="" dataType="WAVE_ATTRIBUTE_TYPE_STRING" userTag="bgp_ethernet">
+          </Member>
+	    </Group>
+		<Group id="nei_update_source_loop" type="case" choiceGroupId="nei_choice_update_source" userTag="bgp_ca_loopback" backendName="bgp">
+          <Member name="loopInterface" defaultValueForMo="" dataType="WAVE_ATTRIBUTE_TYPE_STRING" userTag="bgp_loopback">
+          </Member>
+	    </Group>
+		<Group id="nei_update_source_vi" type="case" choiceGroupId="nei_choice_update_source" userTag="bgp_ca_ve" backendName="bgp">
+          <Member name="virtualInterface" defaultValueForMo="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_ve_interface">
+          </Member>
+	    </Group>
+		<Group id="nei_remote_private_as" backendName="bgp">
+          <Member name="removePrivateAsFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_remove_private_as">
+          </Member>
+	    </Group>
+		<Group id="nei_as_override" backendName="bgp">
+          <Member name="asOverRideFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_as_override">
+          </Member>
+	    </Group>
+		<Group id="nei_soft_reconfiguration_inbound" backendName="bgp">
+          <Member name="softReconfigurationInboundFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_inbound">
+          </Member>
+	    </Group>
+
+
+
+	  <!-- LEO : NOT SUPPORTED
+        <Inheritance derivedFrom="Bfd" accessSpecifier="virtual public" />
+		-->
+		<!-- LEO:NOT SUPPORTED
+		<Group id="nei_static_network_edge" backendName="bgp">
+          <Member name="staticNetworkEdgeFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_static_network_edge">
+          </Member>
+	    </Group>
+		-->
+		<!-- LEO : NOT SUPPORTED
+		<Group id="nei_ebgp_btsh" backendName="bgp">
+          <Member name="ebgpBtshFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_ebgp_btsh">
+          </Member>
+	    </Group>
+		-->
+		<!-- LEO : NOT SUPPORTED
+		<Group id="nei_failover_bfd_enable" backendName="bgp">
+          <Member name="failOverBfdEnableFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_bfd_enable">
+          </Member>
+	    </Group>
+		-->
+      </CommonManagedObjectBase>
+
+
+	  <!-- ====================================================================================================== -->
+      							<!-- Bfd CommonManagedObjectBase -->
+	  <!-- ====================================================================================================== -->
+	  <!-- LEO : NOT SUPPORTED
+
+      <CommonManagedObjectBase name="Bfd">
+		<Group id="bfd_hold_interval" backendName="bgp"> 
+          <Member name="bfdHoldInterval"  defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32"
+		  userTag="bgp_bfd_holdover_interval">
+          </Member>
+		</Group>
+		<Group id="bfd_min_tx_rx_multiplier" backendName="bgp">
+          <Member name="bfdMintx"  defaultValueForMo="0" defaultValueForAttribute="0"  dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_bfd_min_tx">
+          </Member>
+          <Member name="bfdMinrx"  defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_bfd_min_rx">
+          </Member>
+          <Member name="bfdMultiplier"  defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_bfd_multiplier">
+          </Member>
+		</Group>
+      </CommonManagedObjectBase>
+	  -->
+
+    </Worker>
+
+
+    <Worker name="Ipv4">
+
+	  <!-- ====================================================================================================== -->
+      							<!-- AfIpv4Ucast ManagedObject -->
+	  <!-- ====================================================================================================== -->
+
+      <ManagedObject name="AfIpv4Ucast" singletonMoUserTag="bgp_ipv4_unicast">
+        <Inheritance derivedFrom="AfIpv4CommonAttributes" accessSpecifier="virtual public" />
+        <Inheritance derivedFrom="AfIpv4UnicastAndVrf" accessSpecifier="virtual public" />
+        <Inheritance derivedFrom="AfIpv4UcastAndMcastAttributes" accessSpecifier="virtual public" />
+		<Group id="af_ipv4_ucast_presence" backendName="bgp">
+          <Member name="presenceFlag" defaultValueForMo="false" denotesPresence="true" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_ipv4_unicast"> 
+          </Member>
+		</Group>
+		<Group id="af_ipv4_ucast_next_hop_recursion" backendName="bgp">
+          <Member name="nextHopRecursionFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_next_hop_recursion">
+          </Member>
+		</Group>
+      </ManagedObject>
+
+	  <!-- ====================================================================================================== -->
+      							<!-- AfIpv4CommonAttributes CommonManagedObjectBase-->
+	  <!-- ====================================================================================================== -->
+
+      <CommonManagedObjectBase name="AfIpv4CommonAttributes">
+		<Group id="af_ipv4_aggregate_address" backendName="bgp">
+          <Member name="aggregateAddress" userTag="bgp_aggregate_address" dataType="WAVE_ATTRIBUTE_TYPE_COMPOSITION_VECTOR" umlType="COMPOSITION"
+			referredObject="AggregateIpv4Address">
+          </Member>
+		</Group>
+		<Group id="af_ipv4_network" backendName="bgp">
+          <Member name="network" userTag="bgp_network" dataType="WAVE_ATTRIBUTE_TYPE_COMPOSITION_VECTOR" umlType="COMPOSITION" referredObject="AfIpv4Network">
+          </Member>
+		</Group>
+      </CommonManagedObjectBase>
+
+	  <!-- ====================================================================================================== -->
+      							<!-- AfIpv4UnicastAndVrf CommonManagedObjectBase-->
+	  <!-- ====================================================================================================== -->
+
+      <CommonManagedObjectBase name="AfIpv4UnicastAndVrf">
+        <Inheritance derivedFrom="Redistribute" accessSpecifier="virtual public" />
+		<Group id="af_ipv4_redistribute_internal" backendName="bgp">
+          <Member name="bgpRedistributeInternalFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_bgp_redistribute_internal"> 
+          </Member>
+		</Group>
+		<Group id="af_ipv4_static_network" backendName="bgp">
+          <Member name="staticNetwork" userTag="bgp_static_network" dataType="WAVE_ATTRIBUTE_TYPE_COMPOSITION_VECTOR" umlType="COMPOSITION"
+		  referredObject="Ipv4StaticNetwork">
+          </Member>
+		</Group>
+		<!-- LEO : NOT SUPPORTED
+		<Group id="af_ipv4_graceful_restart" backendName="bgp">
+          <Member name="gracefulRestartFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_graceful_restart">
+          </Member>
+		</Group>
+		-->
+      </CommonManagedObjectBase>
+
+	  <!-- ====================================================================================================== -->
+      							<!-- AfIpv4NeighborIpAddr  ManagedObject-->
+	  <!-- ====================================================================================================== -->
+
+      <ManagedObject name="AfIpv4NeighborIpAddr">
+        <Inheritance derivedFrom="AfNeighborAttributes" accessSpecifier="virtual public" />
+		<Group id="af_ipv4_neighbor_ip_address" backendName="bgp">
+        <Member name="afIpv4NeighborIpAddress" dataType="WAVE_ATTRIBUTE_TYPE_OBJECTID" isKey="true" umlType="ASSOCIATION"
+		referredObject="NeighborIpxAddr" userTag="bgp_af_ipv4_neighbor_address">   
+              </Member>
+		</Group>
+      </ManagedObject>
+
+	  <!-- ====================================================================================================== -->
+      							<!-- AfIpv4NeighborPeerGrp  ManagedObject-->
+	  <!-- ====================================================================================================== -->
+	  
+      <ManagedObject name="AfIpv4NeighborPeerGrp">
+        <Inheritance derivedFrom="AfNeighborAttributes" accessSpecifier="virtual public" />
+		<Group id="af_ipv4_neighbor_peer_grp_name" backendName="bgp">
+        <Member name="afIpv4NeighborPeerGrpName" dataType="WAVE_ATTRIBUTE_TYPE_OBJECTID" isKey="true" umlType="ASSOCIATION"
+		referredObject="NeighborPeerGrp" userTag="bgp_af_ipv4_neighbor_peergroup_name">   
+              </Member>
+		</Group>
+      </ManagedObject>
+
+	  <!-- ====================================================================================================== -->
+      							<!-- AfNeighborAttributes CommonManagedObjectBase-->
+	  <!-- ====================================================================================================== -->
+
+      <CommonManagedObjectBase name="AfNeighborAttributes">
+
+		<Group id="af_nei_activate" backendName="bgp">
+          <Member name="activateFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_activate">
+          </Member>
+		</Group>
+		 <Group id="af_nei_filter_list_in_acl_name"  userTag="bgp_ca_filter_list_direction_in_acl_name" backendName="bgp">
+          <Member name="filterListDirectionInAclName" defaultValueForMo="" dataType="WAVE_ATTRIBUTE_TYPE_STRING"
+          userTag="bgp_filter_list_direction_in_acl_name">
+          </Member>
+          <Member name="filterListdirectionInAclNameFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_filter_list_name_direction_in">
+          </Member>
+        </Group>
+
+        <Group id="af_nei_filter_list_out_acl_name" userTag="bgp_ca_filter_list_direction_out_acl_name" backendName="bgp">
+          <Member name="filterListDirectionOutAclName" defaultValueForMo="" dataType="WAVE_ATTRIBUTE_TYPE_STRING"
+          userTag="bgp_filter_list_direction_out_acl_name">
+          </Member>
+          <Member name="filterListdirectionOutAclNameFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_filter_list_name_direction_out">
+          </Member>
+        </Group>
+
+		<Group id="af_nei_max_prefix_limit" backendName="bgp">
+          <Member name="maxiumPrefixLimit" defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32"
+		  userTag="bgp_max_prefix_limit">
+          </Member>
+          <Member name="maxiumPrefixthreshold" defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32"
+		  userTag="bgp_threshold">
+          </Member>
+          <Member name="maxiumPrefixTeardownFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_teardown">
+          </Member>
+		</Group>
+
+		<Group id="af_nei_default_originate" backendName="bgp">
+        <Member name="defaultOriginateStatus" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_default_originate_status">
+              </Member>
+		</Group>
+		<Group id="af_nei_default_originate_route_map" backendName="bgp">
+        <Member name="defaultOriginateRouteMapName" defaultValueForMo="" dataType="WAVE_ATTRIBUTE_TYPE_STRING" userTag="bgp_default_originate_route_map"> 
+              </Member>
+		</Group>
+
+		<Group id="af_prefix_list_in" backendName="bgp">
+        <Member name="prefixListInName" defaultValueForMo="" dataType="WAVE_ATTRIBUTE_TYPE_STRING" userTag="bgp_prefix_list_direction_in_prefix_name">
+              </Member>
+        <Member name="prefixListInFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_prefix_list_direction_in">
+              </Member>
+		</Group>
+		<Group id="af_prefix_list_out" backendName="bgp">
+        <Member name="prefixListOutName" defaultValueForMo="" dataType="WAVE_ATTRIBUTE_TYPE_STRING" userTag="bgp_prefix_list_direction_out_prefix_name">
+              </Member>
+        <Member name="prefixListOutFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_prefix_list_direction_out">
+              </Member>
+		</Group>
+
+		<Group id="af_route_map_in" backendName="bgp">
+          <Member name="routeMapNameIn" defaultValueForMo="" dataType="WAVE_ATTRIBUTE_TYPE_STRING" userTag="bgp_neighbor_route_map_name_direction_in">
+          </Member>
+		</Group>
+		<Group id="af_route_map_out" backendName="bgp">
+          <Member name="routeMapNameOut" defaultValueForMo="" dataType="WAVE_ATTRIBUTE_TYPE_STRING" userTag="bgp_neighbor_route_map_name_direction_out">
+          </Member>
+		</Group>
+		<Group id="af_route_reflector_client" backendName="bgp">
+          <Member name="routeReflectorClientFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_route_reflector_client">
+          </Member>
+		</Group>
+		<Group id="af_send_community" backendName="bgp">
+          <Member name="sendCommunityBoth" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_both">
+          </Member>
+          <Member name="sendCommunityExtended" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_extended">
+          </Member>
+          <Member name="sendCommunityStandard" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_standard">
+          </Member>
+          <Member name="sendCommunityStatus" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_send_community_status">
+          </Member>
+		</Group>
+		<Group id="af_unsuppress_route_map" backendName="bgp">
+          <Member name="unSuppressRouteMapName" defaultValueForMo="" dataType="WAVE_ATTRIBUTE_TYPE_STRING" userTag="bgp_map_name">
+          </Member>
+		</Group>
+		<Group id="af_weight" backendName="bgp">
+          <Member name="weight" defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_af_nei_weight">
+          </Member>
+		</Group>
+	  	<!--
+		<Include fileSpec="IpPolicy/Framework/IpPolicyLocalManagedObjects.h"/>
+		-->
+		<!-- For RouteMapLocalManagedObject -->
+	  	<!-- LEO : NOT SUPPORTED
+        <Inheritance derivedFrom="Bfd" accessSpecifier="virtual public" />
+		-->
+		<!-- LEO : NOT SUPPORTED
+		<Group id="af_nei_allowas_in" backendName="bgp">
+          <Member name="allowAsInValue" defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_allowas_in">
+          </Member>
+		</Group>
+		-->
+		<!-- LEO : NOT SUPPORTED
+		<Group id="af_nei_orf_prefix_list" backendName="bgp">
+          <Member name="orfPrefixListStatusFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_prefixlist_status"> 
+          </Member>
+		</Group>
+		<Group id="af_nei_orf_prefix_list_action" backendName="bgp">
+          <Member name="orfPrefixAction" defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_ENUM"
+		userTag="bgp_prefixlist_action">
+          </Member>
+		</Group>
+		-->
+      </CommonManagedObjectBase>
+
+	  <!-- ====================================================================================================== -->
+      							<!-- MaxiumPath CommonManagedObjectBase-->
+	  <!-- ====================================================================================================== -->
+
+      <CommonManagedObjectBase name="MaxiumPath">
+		<Group id="af_max_path_load_sharing_value" backendName="bgp">
+          <Member name="loadSharingValue" defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32"
+		  userTag="bgp_load_sharing_value"> 
+          </Member>
+		</Group>
+		<Group id="af_max_path_ebgp" backendName="bgp">
+          <Member name="ebgpLoadSharingValue" defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_ebgp"> 
+          </Member>
+		</Group>
+		<Group id="af_max_path_ibgp" backendName="bgp">
+          <Member name="ibgpLoadSharingValue" defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_ibgp"> 
+          </Member>
+		</Group>
+		<Group id="af_max_path_use_load_sharing" backendName="bgp">
+          <Member name="useLoadSharingFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_use_load_sharing"> 
+          </Member>
+		</Group>
+      </CommonManagedObjectBase>
+	  
+	  <!-- ====================================================================================================== -->
+      							<!-- MultiPath CommonManagedObjectBase -->
+	  <!-- ====================================================================================================== -->
+
+      <CommonManagedObjectBase name="MultiPath">
+		<Group id="af_multi_path_ebgp" backendName="bgp">
+        <Member name="multiPathEbgp" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_multipath_ebgp"> 
+              </Member>
+		</Group>
+		<Group id="af_multi_path_ibgp" backendName="bgp">
+        <Member name="multiPathIbgp" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_multipath_ibgp"> 
+              </Member>
+		</Group>
+		<Group id="af_multi_path_as" backendName="bgp">
+        <Member name="multiPathMultiAs" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_multi_as"> 
+              </Member>
+		</Group>
+      </CommonManagedObjectBase>
+
+	  <!-- ====================================================================================================== -->
+      							<!-- AfIpv4Network ManagedObject-->
+	  <!-- ====================================================================================================== -->
+
+      <ManagedObject name="AfIpv4Network">
+		<Include fileSpec="IpPolicy/Framework/IpPolicyLocalManagedObjects.h"/>
+		<!-- Include header for RouteMapLocalManagedObject -->
+
+		<Group id="af_network_addr_prefix" backendName="bgp">
+          <Member name="networkIpv4AddressPrefixMask" defaultValueForMo="" dataType="WAVE_ATTRIBUTE_TYPE_IPV4ADDRESS_NETWORK_MASK" isKey="true"
+		  userTag="bgp_network_ipv4_address"> 
+          </Member>
+		</Group>
+		<Group id="af_network_weight" backendName="bgp">
+          <Member name="networkWeight" defaultValueForMo="65536" defaultValueForAttribute="65536" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_network_weight"> 
+          </Member>
+		</Group>
+		<Group id="af_network_backdoor" backendName="bgp">
+          <Member name="networkbackDoorFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_backdoor"> 
+          </Member>
+		</Group>
+		<Group id="af_network_route_map" backendName="bgp">
+          <Member name="networkRouteMapName" defaultValueForMo="" dataType="WAVE_ATTRIBUTE_TYPE_STRING" userTag="bgp_network_route_map">
+          </Member>
+		</Group>
+      </ManagedObject>
+
+	  <!-- ====================================================================================================== -->
+      							<!-- AfBasicAttributes CommonManagedObjectBase-->
+	  <!-- ====================================================================================================== -->
+
+      <CommonManagedObjectBase name="AfBasicAttributes">
+        <Inheritance derivedFrom="MaxiumPath" accessSpecifier="virtual public" />
+        <Inheritance derivedFrom="MultiPath" accessSpecifier="virtual public" />
+		<Group id="af_always_propagate" backendName="bgp">
+          <Member name="alwaysPropogateFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_always_propagate">
+          </Member>
+		</Group>
+		<Group id="af_default_info_originate" backendName="bgp">
+          <Member name="defaultInformationOriginateFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL"
+		  userTag="bgp_default_information_originate">
+          </Member>
+		</Group>
+		<Group id="af_rib_route_limit" backendName="bgp">
+          <Member name="ribRouteLimit"  defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32"
+		  userTag="bgp_rib_route_limit"> 
+          </Member>
+		</Group>
+      </CommonManagedObjectBase>
+	  
+	  <!-- ====================================================================================================== -->
+      							<!-- AfIpv4UcastAndMcastAttributes CommonManagedObjectBase-->
+	  <!-- ====================================================================================================== -->
+
+      <CommonManagedObjectBase name="AfIpv4UcastAndMcastAttributes">
+		<Group id="af_neighbor_ipaddr" backendName="bgp">
+          <Member name="addressFamilyNeighborIpAddr" userTag="bgp_af_ipv4_neighbor_address" dataType="WAVE_ATTRIBUTE_TYPE_COMPOSITION_VECTOR"
+		  umlType="COMPOSITION" referredObject="AfIpv4NeighborIpAddr">
+          </Member>
+		</Group>
+		<Group id="af_neighbor_peer_grp" backendName="bgp">
+          <Member name="addressFamilyNeighborPeerGrp" userTag="bgp_af_ipv4_neighbor_peergroup" dataType="WAVE_ATTRIBUTE_TYPE_COMPOSITION_VECTOR"
+		  umlType="COMPOSITION" referredObject="AfIpv4NeighborPeerGrp">
+          </Member>
+		</Group>
+        <Inheritance derivedFrom="AfCommonAttributes" accessSpecifier="virtual public" />
+      </CommonManagedObjectBase>
+
+	  <!-- ====================================================================================================== -->
+      							<!-- AfCommonAttributes CommonManagedObjectBase-->
+	  <!-- ====================================================================================================== -->
+
+      <CommonManagedObjectBase name="AfCommonAttributes">
+		<Include fileSpec="IpPolicy/Framework/IpPolicyLocalManagedObjects.h"/>
+		<!-- Include header for RouteMapLocalManagedObject -->
+
+        <Inheritance derivedFrom="AfBasicAttributes" accessSpecifier="virtual public" />
+		<Group id="af_client_to_client_reflection" backendName="bgp">
+          <Member name="clientToClientReflectionFlag" defaultValueForMo="true" defaultValueForAttribute="true" dataType="WAVE_ATTRIBUTE_TYPE_BOOL"
+		  userTag="bgp_client_to_client_reflection">
+          </Member>
+		</Group>
+		<Group id="af_choice_dampening" type="choice" backendName="bgp">
+        <Member name="choiceDampening" defaultValueForMo="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_ch_dampening_source"> 
+        </Member>
+		</Group>
+		<Group id="af_dampening" type="case" choiceGroupId="af_choice_dampening" userTag="bgp_ca_dampening_flag" backendName="bgp">
+          <Member name="dampeningFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_dampening_flag">
+          </Member>
+		</Group>
+		<Group id="af_dampening_time" type="case" choiceGroupId="af_choice_dampening" userTag="bgp_ca_dampening_specify_values"  backendName="bgp">
+          <Member name="dampeningHalfTime" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_half_time"> 
+          </Member>
+          <Member name="dampeningReuseValue" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_reuse_value"> 
+          </Member>
+          <Member name="dampeningStartSuppressTime" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_start_suppress_time"> 
+          </Member>
+          <Member name="dampeningMaxSuppressTime" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_max_suppress_time"> 
+          </Member>
+		</Group>
+		<Group id="af_dampening_route_map" type="case" choiceGroupId="af_choice_dampening" userTag="bgp_ca_dampening_route_map" backendName="bgp">
+          <Member name="dampeningRouteMapName" defaultValueForMo="" dataType="WAVE_ATTRIBUTE_TYPE_STRING" userTag="bgp_dampening_route_map">
+          </Member>
+		</Group>
+		<Group id="af_default_metric" backendName="bgp">
+          <Member name="defaultMetric" defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_default_metric"> 
+          </Member>
+		</Group>
+		<Group id="af_next_hop_enable_default" backendName="bgp">
+          <Member name="nextHopEnableDefault" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_next_hop_enable_default"> 
+          </Member>
+		</Group>
+		<Group id="af_table_map" backendName="bgp">
+          <Member name="tableMapRouteMapName" defaultValueForMo="" dataType="WAVE_ATTRIBUTE_TYPE_STRING" userTag="bgp_table_map_route_map">
+          </Member>
+		</Group>
+		<Group id="af_update_time" backendName="bgp">
+          <Member name="updateTime" defaultValueForMo="31" defaultValueForAttribute="31" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_update_time"> 
+          </Member>
+		</Group>
+      </CommonManagedObjectBase>
+
+	  <!-- ====================================================================================================== -->
+      							<!-- Redistribute CommonManagedObjectBase -->
+	  <!-- ====================================================================================================== -->
+
+      <CommonManagedObjectBase name="Redistribute">
+		<Include fileSpec="IpPolicy/Framework/IpPolicyLocalManagedObjects.h"/>
+		<!-- Include header for RouteMapLocalManagedObject -->
+
+		<!-- redistribute connected -->
+		<Group id="af_redistribute_connected" backendName="bgp">
+          <Member name="redistributeConnectedFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_redistribute_connected">
+		   <!--
+            <AdditionalAttributes name="unicastMetric"  deleteValue="0" />
+            <AdditionalAttributes name="redistributeRouteMapName"  deleteValue="" />
+			-->
+          </Member>
+		</Group>
+		<Group id="af_redistribute_connected_metric" backendName="bgp">
+          <Member name="unicastMetric" defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_unicast_metric"> 
+          </Member>
+		</Group>
+		<Group id="af_redistribute_connected_route_map" backendName="bgp">
+          <Member name="redistributeRouteMapName" defaultValueForMo="" defaultValueForAttribute="" dataType="WAVE_ATTRIBUTE_TYPE_STRING"
+		  userTag="bgp_redistribute_route_map">
+          </Member>
+		</Group>
+		<!-- end of redistribute connected -->
+
+
+		<!-- redistribute ISIS -->
+		<!-- LEO : NOT SUPPORTED
+		<Group id="af_redistribute_isis" backendName="bgp">
+          <Member name="redistributeIsIsFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_redistribute_isis">
+          </Member>
+		</Group>
+		<Group id="af_choice_isis" type="choice" backendName="bgp">
+        <Member name="choiceIsIs" defaultValueForMo="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_ch_isis_level">
+        </Member>
+		</Group>
+		<Group id="af_redistribute_isis_level_one" type="case" choiceGroupId="af_choice_isis" userTag="bgp_ca_level_1" backendName="bgp">
+          <Member name="levelOne" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_level_1"> 
+          </Member>
+		</Group>
+		<Group id="af_redistribute_isis_level_two" type="case" choiceGroupId="af_choice_isis" userTag="bgp_ca_level_2" backendName="bgp">
+          <Member name="levelTwo" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_level_2"> 
+          </Member>
+		</Group>
+		<Group id="af_redistribute_isis_level_one_two" type="case" choiceGroupId="af_choice_isis" userTag="bgp_ca_level_1_2" backendName="bgp">
+          <Member name="levelOneTwo" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_level_1_2"> 
+          </Member>
+		</Group>
+		<Group id="af_redistribute_isis_metric" backendName="bgp">
+          <Member name="isIsMetric" defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_isis_metric"> 
+          </Member>
+		</Group>
+		<Group id="af_redistribute_isis_route_map" backendName="bgp">
+          <Member name="isIsRouteMapName" defaultValueForMo="" dataType="WAVE_ATTRIBUTE_TYPE_STRING" userTag="bgp_isis_route_map">
+          </Member>
+		</Group>
+		-->
+		<!-- end of redistribute ISIS -->
+
+
+
+		<!-- redistribute OSPF -->
+		<Group id="af_redistribute_ospf" backendName="bgp">
+          <Member name="redistributeOspfFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_redistribute_ospf">
+          </Member>
+		</Group>
+		<Group id="af_redistribute_ospf_internal" backendName="bgp">
+          <Member name="ospfMatchInternal" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_ospf_internal"> 
+          </Member>
+		</Group>
+		<Group id="af_redistribute_ospf_externalOne" backendName="bgp">
+          <Member name="ospfMatchExternalOne" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_ospf_external1"> 
+          </Member>
+		</Group>
+		<Group id="af_redistribute_ospf_externalTwo" backendName="bgp">
+          <Member name="ospfMatchExternalTwo" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_ospf_external2"> 
+          </Member>
+		</Group>
+		<Group id="af_redistribute_ospf_metric" backendName="bgp">
+          <Member name="ospfMetric" defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_ospf_metric"> 
+          </Member>
+		</Group>
+		<Group id="af_redistribute_ospf_route_map" backendName="bgp">
+          <Member name="ospfRouteMapName" defaultValueForMo="" dataType="WAVE_ATTRIBUTE_TYPE_STRING" userTag="bgp_ospf_route_map">
+          </Member>
+		</Group>
+		<!-- end of redistribute OSPF -->
+
+
+		<!-- redistribute RIP -->
+		<!-- LEO : NOT SUPPORTED
+		<Group id="af_redistribute_rip" backendName="bgp">
+          <Member name="redistributeRipFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_redistribute_rip">
+          </Member>
+		</Group>
+		<Group id="af_redistribute_rip_metric" backendName="bgp">
+          <Member name="ripMetric" defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32" userTag="bgp_rip_metric"> 
+          </Member>
+		</Group>
+		<Group id="af_redistribute_rip_route_map" backendName="bgp">
+          <Member name="ripRouteMapName" defaultValueForMo="" dataType="WAVE_ATTRIBUTE_TYPE_STRING"  userTag="bgp_rip_route_map">
+          </Member>
+		</Group>
+		-->
+		<!-- end of redistribute RIP -->
+
+
+		<!-- redistribute static -->
+		<Group id="af_redistribute_static" backendName="bgp">
+          <Member name="redistributeStaticFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_redistribute_static">
+          </Member>
+		</Group>
+		<Group id="af_redistribute_static_metric" backendName="bgp">
+          <Member name="unicastStaticMetric" defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32"
+		  userTag="bgp_unicast_static_metric"> 
+          </Member>
+		</Group>
+		<Group id="af_redistribute_static_route_map" backendName="bgp">
+          <Member name="staticRouteMapName" defaultValueForMo="" dataType="WAVE_ATTRIBUTE_TYPE_STRING" userTag="bgp_static_route_map">
+          </Member>
+		</Group>
+		<!-- end of redistribute static -->
+      </CommonManagedObjectBase>
+
+	  <!-- ====================================================================================================== -->
+      							<!-- AggregateAttribute CommonManagedObjectBase-->
+	  <!-- ====================================================================================================== -->
+
+      <CommonManagedObjectBase name="AggregateAttribute">
+		<Group id="aggr_addr_advertise_map" backendName="bgp">
+          <Member name="advertiseMap" defaultValueForMo="" dataType="WAVE_ATTRIBUTE_TYPE_STRING" userTag="bgp_advertise_map"> 
+          </Member>
+		</Group>
+		<Group id="aggr_addr_as_set" backendName="bgp">
+          <Member name="asSetFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_as_set"> 
+          </Member>
+		</Group>
+		<Group id="aggr_addr_attribute_map" backendName="bgp">
+          <Member name="attributeMap" defaultValueForMo="" dataType="WAVE_ATTRIBUTE_TYPE_STRING" userTag="bgp_attribute_map"> 
+          </Member>
+		</Group>
+		<Group id="aggr_addr_summary_only" backendName="bgp">
+          <Member name="summaryOnlyFlag" defaultValueForMo="false" defaultValueForAttribute="false" dataType="WAVE_ATTRIBUTE_TYPE_BOOL" userTag="bgp_summary_only"> 
+          </Member>
+		</Group>
+		<Group id="aggr_addr_suppress_map" backendName="bgp">
+          <Member name="suppressMap" defaultValueForMo="" dataType="WAVE_ATTRIBUTE_TYPE_STRING" userTag="bgp_suppress_map"> 
+          </Member>
+		</Group>
+      </CommonManagedObjectBase>
+
+	  <!-- ====================================================================================================== -->
+      							<!-- AggregateIpv4Address ManagedObject-->
+	  <!-- ====================================================================================================== -->
+
+      <ManagedObject name="AggregateIpv4Address">
+		<Group id="aggr_addr_prefix" backendName="bgp">
+          <Member name="aggregateIpv4PrefixMask" defaultValueForMo="" dataType="WAVE_ATTRIBUTE_TYPE_IPV4ADDRESS_NETWORK_MASK" isKey="true"
+		  userTag="bgp_aggregate_ip_prefix"> 
+          </Member>
+		</Group>
+        <!-- inherit from aggregateBase -->
+        <Inheritance derivedFrom="AggregateAttribute" accessSpecifier="virtual public"/>
+      </ManagedObject>
+
+	  <!-- ====================================================================================================== -->
+      							<!-- Ipv4StaticNetwork ManagedObject -->
+	  <!-- ====================================================================================================== -->
+	  
+      <ManagedObject name="Ipv4StaticNetwork">
+		<Group id="static_network_prefix" backendName="bgp">
+          <Member name="staticNetworkAddressPrefix" defaultValueForMo="" dataType="WAVE_ATTRIBUTE_TYPE_IPV4ADDRESS_NETWORK_MASK" isKey="true"
+		  userTag="bgp_static_network_address"> 
+          </Member>
+		</Group>
+		<Group id="static_network_distance" backendName="bgp">
+          <Member name="staticNetworkDistance" defaultValueForMo="0" defaultValueForAttribute="0" dataType="WAVE_ATTRIBUTE_TYPE_UI32"
+		  userTag="bgp_static_network_distance"> 
+          </Member>
+		</Group>
+      </ManagedObject>
+
+
+    </Worker>
+
+	  <!-- ====================================================================================================== -->
+      							<!-- Enum Type declarations -->
+	  <!-- ====================================================================================================== -->
+
+	<EnumType name="action_t">
+     <Enum name="send" value="1" />
+     <Enum name="receive" value="2" />
+	</EnumType>
+
+	<EnumType name="interface_type_t">
+     <Enum name="gigabitethernet" value="1" />
+     <Enum name="tengigabitethernet" value="2" />
+     <Enum name="fortygigabitethernet" value="3" />
+	</EnumType>
+
+  </Local>
+</WavePlugin>

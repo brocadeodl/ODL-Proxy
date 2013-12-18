@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave FCAuth Module. -->
+
+<ModuleResources ModuleName = "FCAuth" ComponentName = "Dcm">
+	<ResourceEnum Name = "SecpolicyErrorStatus">
+		<Resource Name = "SECPOLICY_CREATE_FAILED">%% Error: Failed to create policy</Resource>
+		<Resource Name = "SECPOLICY_CREATE_POLICY_EXISTS">%% Error: Policy already exists</Resource>
+		<Resource Name = "SECPOLICY_MEMBER_ADD_FAILED">%% Error: Failed to add the member into the policy list</Resource>
+		<Resource Name = "SECPOLICY_MEMBER_FORMAT_ERROR">%% Error: The input format is not correct</Resource>
+		<Resource Name = "SECPOLICY_ACTIVATE_FAILED">%% Error: Failed to activate the policy</Resource>
+		<Resource Name = "SECPOLICY_ACTIVATE_NONEW">%% Error: No new entries to activate</Resource>
+		<Resource Name = "SECPOLICY_ACTIVATE_NOPOLICY">%% Error: No policy to activate</Resource>
+		<Resource Name = "SECPOLICY_SHOW_FAILED">%% Error: Failed to show the policy</Resource>
+		<Resource Name = "SECPOLICY_SHOW_NOENTRIES">%% Error: No policy/member to show</Resource>
+		<Resource Name = "SECPOLICY_DELETE_FAILED">%% Error: Failed to delete the policy</Resource>
+		<Resource Name = "SECPOLICY_MEMBER_DELETE_FAILED">%% Error: Failed to delete the member</Resource>
+		<Resource Name = "SECPOLICY_DELETE_NO_POLICY">%% Error: Policy does not exist</Resource>
+		<Resource Name = "SECPOLICY_DELETE_NO_MEMBER">%% Error: Member does not exist</Resource>
+		<Resource Name = "SECPOLICY_DELETE_MULTIPLE">%% Error: Deleting multiple members not allowed</Resource>
+		<Resource Name = "SECPOLICY_INVALID_COMMAND">%% Error: Invalid command</Resource>
+		<Resource Name = "SECPOLICY_WWN_INCORRECT">%% Error: Incorrect WWN</Resource>
+		<Resource Name = "SECPOLICY_CFG_REPLAY_ACTIVE_FAILED">%% Error: Config Replay of active policy failed</Resource>
+		<Resource Name = "SECPOLICY_CFG_REPLAY_DEFINED_FAILED">%% Error: Config Replay of defined policy failed</Resource>
+		<Resource Name = "SECPOLICY_NO_MEMORY">%% Error: out of memory</Resource>
+		<Resource Name = "SECPOLICY_NO_ACCESS">%% Error: Access denied</Resource>
+		<Resource Name = "SECPOLICY_INPUT_ERROR">%% Error: Incorrect user input</Resource>
+		<Resource Name = "SECPOLICY_DATA_ERROR">%% Error: Internal data error</Resource>
+		<Resource Name = "SECPOLICY_PERM_DENY">%% Error: Permission denied</Resource>
+		<Resource Name = "SECPOLICY_DB_TOO_LARGE">%% Error: Sec policy database too large</Resource>
+		<Resource Name = "SECPOLICY_GENERIC_FAILURE">%% Error: Generic failure</Resource>
+		<Resource Name = "SECPOLICY_ACT_CFG_NOT_ALLOWED">%% Error:Configuring active-policy is not allowed, please use defined-policy option to create or add the policy or members</Resource>
+		<Resource Name = "SECPOLICY_UNSUPPORTED_PLATFORM">%% Error: Command not supported in this platform</Resource>
+		<Resource Name = "SECPOLICY_INVALID_MAPPED_ID">%% Error: rbridge-id is not valid</Resource>
+	</ResourceEnum>
+	<ResourceEnum Name = "FcspAuthErrorStatus">
+		<Resource Name = "FCSPAUTH_INVALID_PARAMETER">%% Error: Invalid parameter</Resource>
+		<Resource Name = "FCSPAUTH_AUTHD_NOT_READY">%% Error: Authd daemon not ready</Resource>
+		<Resource Name = "FCSPAUTH_NO_LICENSE">%% Error: No license</Resource>
+		<Resource Name = "FCSPAUTH_SET_FAILED">%% Error: Failed to set auth</Resource>
+		<Resource Name = "FCSPAUTH_NO_MEMORY">%% Error: out of memory</Resource>
+		<Resource Name = "FCSPAUTH_PROTOCOL_CONFLICT">%% Error: protocol conflict</Resource>
+		<Resource Name = "FCSPAUTH_UNSUPPORTED_PLATFORM">%% Error: Command not supported in this platform</Resource>
+	</ResourceEnum>
+	<ResourceEnum Name = "FcspAuthSecretErrorStatus">
+		<Resource Name = "AUTHSECRET_INVALID_PARAMETER">%% Error: Invalid parameter</Resource>
+		<Resource Name = "AUTHSECRET_AUTHD_NOT_READY">%% Error: Authd daemon not ready</Resource>
+		<Resource Name = "AUTHSECRET_NO_LICENSE">%% Error: No license</Resource>
+		<Resource Name = "AUTHSECRET_CREATE_FAILED">%% Error: Failed to set auth secret</Resource>
+		<Resource Name = "AUTHSECRET_DELETE_FAILED">%% Error: Failed to delete auth secret</Resource>
+		<Resource Name = "AUTHSECRET_SHOW_FAILED">%% Error: Failed to show auth secret</Resource>
+		<Resource Name = "AUTHSECRET_NO_MEMORY">%% Error: out of memory</Resource>
+		<Resource Name = "AUTHSECRET_BACKEND">%% Error: resource busy, please try again</Resource>
+		<Resource Name = "AUTHSECRET_SPACE_INVALID">%%Error: Space character not allowed in secret</Resource>
+        <Resource Name = "AUTHSECRET_DB_MAX_ENTRIES_LIMIT_REACHED">%% Error: Maximum limit of auth secret database entries reached</Resource>
+		<Resource Name = "AUTHSECRET_INVALID_WWN">%% Error: Invalid WWN</Resource>
+		<Resource Name = "AUTHSECRET_LOCAL_WWN">%% Error: Local WWN entered in peer wwn field. Please specify a peer WWN</Resource>
+		<Resource Name = "AUTHSECRET_INVALID_LENGTH">%% Error: Secret length should be in the range 8-40</Resource>
+		<Resource Name = "AUTHSECRET_PEER_NOMATCH">%% Error: Peer secrets do not match</Resource>
+		<Resource Name = "AUTHSECRET_LOCAL_NOMATCH">%% Error: Local secrets do not match</Resource>
+		<Resource Name = "AUTHSECRET_OPERATION_CANCELLED">Operation cancelled</Resource>
+		<Resource Name = "AUTHSECRET_UNSUPPORTED_PLATFORM">%% Error: Command not supported in this platform</Resource>
+	</ResourceEnum>
+</ModuleResources>

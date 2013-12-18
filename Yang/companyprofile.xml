@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="companyprofile"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:companyprofile="http://brocade.com/ns/companyprofile"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types">
+  <namespace uri="http://brocade.com/ns/companyprofile"/>
+  <prefix value="companyprofile"/>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <list name="company">
+    <key value="companyname"/>
+    <leaf name="companyname">
+      <type name="string"/>
+    </leaf>
+    <list name="employee">
+      <key value="employeename"/>
+      <leaf name="employeename">
+        <type name="string"/>
+      </leaf>
+      <leaf name="employeegroup">
+        <type name="string"/>
+      </leaf>
+      <leaf name="employeelocation">
+        <type name="string"/>
+      </leaf>
+    </list>
+    <list name="group">
+      <key value="groupname"/>
+      <leaf name="groupname">
+        <type name="string"/>
+      </leaf>
+      <leaf-list name="groupemployee">
+        <type name="string"/>
+      </leaf-list>
+      <leaf name="grouplocation">
+        <type name="string"/>
+      </leaf>
+      <list name="subgroup">
+        <key value="subgroupname"/>
+        <leaf name="subgroupname">
+          <type name="string"/>
+        </leaf>
+        <leaf-list name="subgroupemployee">
+          <type name="string"/>
+        </leaf-list>
+        <leaf name="subgrouplocation">
+          <type name="string"/>
+        </leaf>
+      </list>
+    </list>
+    <list name="location">
+      <key value="locationname"/>
+      <leaf name="locationname">
+        <type name="string"/>
+      </leaf>
+      <leaf name="locationcityname">
+        <type name="string"/>
+      </leaf>
+    </list>
+  </list>
+  <list name="city">
+    <key value="cityname"/>
+    <leaf name="cityname">
+      <type name="string"/>
+    </leaf>
+    <leaf name="citycode">
+      <type name="uint32"/>
+    </leaf>
+    <leaf name="population">
+      <type name="uint64"/>
+    </leaf>
+    <leaf name="ismetro">
+      <type name="boolean"/>
+    </leaf>
+    <leaf name="cityIpV4Address">
+      <type name="inet:ipv4-address"/>
+    </leaf>
+    <leaf name="cityIpV4AddressNetworkMask">
+      <type name="inet:ipv4-prefix"/>
+    </leaf>
+    <leaf name="cityIpV6Address">
+      <type name="inet:ipv6-address"/>
+    </leaf>
+    <leaf name="cityIpV6AddressNetworkMask">
+      <type name="inet:ipv6-prefix"/>
+    </leaf>
+    <leaf name="cityIpVxAddress">
+      <type name="inet:ip-address"/>
+    </leaf>
+  </list>
+</module>

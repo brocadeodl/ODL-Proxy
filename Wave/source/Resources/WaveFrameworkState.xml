@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ModuleResources ModuleName = "FrameworkState" ComponentName = "Wave">
+     <ResourceEnum Name = "WaveFrameworkState">
+          <Resource Name = "WAVE_FRAMEWORK_STATE_UNKNOWN_STATE">Unknown State</Resource>
+          <Resource Name = "WAVE_FRAMEWORK_STATE_LOCK_IS_NOT_AVAILABLE">Other command is in progress</Resource>
+          <Resource Name = "WAVE_FRAMEWORK_STATE_CLUSTER_FIRMWAREDOWNLOAD">cluster firmwaredownload is in progress</Resource>
+          <Resource Name = "WAVE_FRAMEWORK_STATE_CLUSTER_FORMATION">cluster formation is in progress</Resource>
+     </ResourceEnum>
+</ModuleResources>

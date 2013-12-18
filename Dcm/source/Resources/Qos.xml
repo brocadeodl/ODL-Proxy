@@ -1,0 +1,254 @@
+<ModuleResources ModuleName="QOS" ComponentName="Dcm">
+    <ResourceEnum Name="QosStatusCodes">
+
+        <Resource Name = "SSM_QOS_NOT_IN_NON_CEE_MODE">%%Error: QoS is not in VCS non-CEE mode</Resource>
+        <Resource Name = "SSM_QOS_MAP_NOT_FOUND">%%Error: Map does not Exist.</Resource>
+        <Resource Name = "SSM_QOS_TRUST_UNSUPPORTED">%%Error: Trust unsupported</Resource>
+        <Resource Name = "SSM_QOS_ASYMMETRIC_PFC_NOT_SUPPORTED">%%Error: Asymmetric Priority-based Flow Control (PFC) configuration not supported</Resource>
+        <Resource Name = "SSM_QOS_COMMAND_NOT_SUPPORTED_IN_VCS_NON_CEE">%%Error: Command not supported in VCS non-CEE, QoS trust cos will be automatically removed if QoS cos-mutation map is removed on interfaces</Resource>
+
+        <Resource Name = "SSM_CEE_MAP_EXIST_ON_INTERFACE">%%Error: A CEE map is already applied to the interface</Resource>
+
+
+		<!-- Qos map cos-mutation -->
+        <Resource Name = "SSM_QOS_INVALID_MAP_NAME_PREFIX">%%Error: Invalid map name: '_' prefix OR default name not allowed</Resource>
+        <Resource Name = "SSM_QOS_COS7_MAP_NOT_ALLOWED_IN_VCS">%%Error: CoS7 is not allowed in mutated CoS values in VCS</Resource>
+        <Resource Name = "SSM_QOS_COS_MAP_EXCEEDS_LIMIT">%%Error: Number of CoS-to-CoS Mutation Maps exceeds limit 400</Resource>
+        <Resource Name = "SSM_QOS_COS_MAP_VIOLATES_PFC_RESTRICTION">%%Error: Map violates PFC restriction</Resource>
+        <Resource Name = "SSM_QOS_COS7_COS7">%%Error: CoS7 is only fixed for CoS 7 in standalone mode</Resource>
+
+		<!-- Qos map cos-traffic-class -->
+        <Resource Name = "SSM_QOS_COS7_TC_NOT_ALLOWED_IN_VCS">%%Error: TC7 is not allowed in mapped TC values in VCS</Resource>
+        <Resource Name = "SSM_QOS_COS_TC_EXCEEDS_LIMIT">%%Error: Number of CoS-to-Traffic  Mutation Maps exceeds limit 400</Resource>
+        <Resource Name = "SSM_QOS_MAP_IS_STILL_ACTIVATED">%%Error: Map is still activated</Resource>
+        <Resource Name = "SSM_QOS_NO_PFC_TC_MAP_STILL_ACTIVATED">%%Error: Pfc cannot be enabled on CoS with non-default Traffic Class mapping</Resource>
+        <Resource Name = "SSM_QOS_PROFILE_NO_PFC_TC_MAP_STILL_ACTIVATED">%%Error: Pfc cannot be enabled on a profile for CoS with non-default Traffic Class mapping</Resource>
+        <Resource Name = "SSM_QOS_COS7_TC7">%%Error: TC7 is only fixed for CoS 7 in standalone mode</Resource>
+
+		<!-- Qos scheduler-->
+        <Resource Name = "SSM_QOS_DWRR_WEIGHTS_SUM_NOT_100">%%Error: DWRR Weights do not sum to 100%% Bandwidth</Resource>
+
+		<!-- Qos CEE -->
+		<Resource Name = "SSM_QOS_CEE_MAP_EXCEEDS_LIMIT">%%Error: Number of CEE Maps exceeds limit 400</Resource>
+		<Resource Name = "SSM_QOS_CEE_INVALID_NAME">%%Error: Invalid map name. Use 'default'</Resource>
+		<Resource Name = "SSM_QOS_CEE_NO_REMOVE_DEFAULT">%%Error: 'default' CEE map cannot be removed</Resource>
+        <Resource Name = "SSM_QOS_CEE_NO_REMOVE_PRECEDENCE">%%Error: CEE map precedence cannot be removed</Resource>
+        <Resource Name = "SSM_QOS_CEE_INVALID_PGID">%%Error: Invalid Priority Group ID</Resource>
+        <Resource Name = "SSM_QOS_CEE_PGID150_NOT_ALLOWED_IN_VCS">%%Error: PGID 15.0 cannot be modified</Resource>
+        <Resource Name = "SSM_QOS_CEE_DWRR_SUM_OVER_100">%%Error: DWRR Weights sum to over 100%% Bandwidth</Resource>
+        <Resource Name = "SSM_QOS_CEE_PFC_RESTRICTION">* Only a single CoS can be mapped to a PGID with PFC enabled. * Strict Priority PGID with PFC enabled must have higher-priority CoS assigned to higher scheduler priorities. * DWRR PGID must have lower-priority CoS assigned than any Strict Priority PGID with PFC enabled</Resource>
+        <Resource Name = "SSM_QOS_CEE_PFC_RESTRICTION_DSCP">* PGID with PFC enabled can't have COS mapped to any of dscp-cos, dscp-tc maps</Resource>
+        <Resource Name = "SSM_QOS_CEE_REMAPPED_COS_NOT_ALLOW_PFC">%%Error: Remapped CoS cannot be connected to PGID with pfc enabled</Resource>
+        <Resource Name = "SSM_QOS_CEE_MQC_PFC_RESTRICTION">%%Error: PFC cannot be enabled for a cos which is used for MQC Marking or Shaping</Resource>
+        <Resource Name = "SSM_QOS_CEE_VCS_ONLY">%%Error: Command only allowed in VCS mode</Resource>
+        <Resource Name = "SSM_QOS_CEE_REMAPPED_COS_OUT_RANGE">%%Error: Priority should be [0, 6]</Resource>
+		<Resource Name = "SSM_QOS_CEE_PGID_ACTIVE">%%Error: Priority Group is still activated</Resource>
+        <Resource Name = "SSM_QOS_CEE_NO_REMAP">%%Error: 'no' option is not allowed</Resource>
+		<Resource Name = "SSM_QOS_CEE_REMAP_PRIORITY_MATCHES_FABRIC_PRIORITY">%%Error: Remap priority cannot be same as FCoE fabric priority</Resource>
+        <Resource Name = "SSM_DCM_QOS_CEE_FCOE">%%Error : CEE map cannot be applied on this interface because an FCoE map is already applied on it</Resource>
+        <Resource Name = "SSM_QOS_CEE_COS7_PGID150">%%Error: PGID 15.0 is only fixed for CoS 7</Resource>
+        <Resource Name = "SSM_QOS_CEE_ESP_PGID">%%Error: Strict Priority PGID's can't be deleted</Resource>
+
+		<!-- QoS VCS Sanity -->
+        <Resource Name = "SSM_DCM_QOS_VCS_ERROR">%%Error : Cluster QoS Sanity failed</Resource>
+        <Resource Name = "SSM_DCM_QOS_VCS_COS_MUTATE">%%Error : Command not allowed: mutated CoS conflicts with lossless priority or fabric priority in CEE Map</Resource>
+        <Resource Name = "SSM_DCM_QOS_VCS_COS_DEFAULT">%%Error : Command not allowed: default CoS conflicts with lossless priority or fabric priority in CEE Map</Resource>
+        <Resource Name = "SSM_DCM_QOS_VCS_DSCP_COS">%%Error : Command not allowed: Outbound CoS conflicts with lossless priority or fabric priority in CEE Map</Resource>
+        <Resource Name = "SSM_DCM_QOS_VCS_DSCP_TC">%%Error : Command not allowed: Outbound TC conflicts with lossless priority or fabric priority Traffic Class in CEE Map</Resource>
+        <Resource Name = "SSM_DCM_QOS_VCS_DSCP_MARK_VALUE">%%Error : Command not allowed: Marked value conflicts with lossless priority or fabric priority Traffic Class in CEE Map</Resource>
+        
+		<!-- Qos Interface error codes -->
+		<Resource Name = "SSM_INTF_IS_DESTINATION_MIRROR_PORT">%%Error: Interface is a destination mirror port</Resource>
+		<Resource Name = "SSM_INTF_IS_NOT_PHYSICAL_PORT_OR_TRUNK">%%Error: Interface is not physical port or trunk</Resource>
+		<Resource Name = "SSM_INTF_IS_NOT_ACTIVE">%%Error: Interface is not active</Resource>
+		<Resource Name = "SSM_INTF_QOS_NOT_IN_NON_CEE">%%Error: non-CEE commands are not allowed when QoS is in CEE Provisioning mode</Resource>
+		<Resource Name = "SSM_INTF_COSTOCOSMAP_ALREADY_APPLIED">%%Error: A CoS-to-CoS Mutation map is already applied to the interface</Resource>
+		<Resource Name = "SSM_INTF_CANT_ENABLE_PFC_ON_NON_DEF_TC">%% Error: PFC cannot be enabled on CoS with non-default Traffic Class mapping</Resource>
+		<Resource Name = "SSM_INTF_QOS_ON_LAG_MEMBER_NOT_ALLOWED">%%Error: QoS config on LAG member is not allowed</Resource>
+        <Resource Name = "SSM_QOS_CONFIG_NOT_ALLOWED_ON_PORT_PROFILED_PO">%%Error: QoS config is not allowed on a port-profiled LAG</Resource>
+		<Resource Name = "SSM_INTF_QOS_ON_LAG_MEMBER_IS_ALREADY_APPLIED">%%Error: QoS config on LAG member is already applied</Resource>
+		<Resource Name = "SSM_INTF_QOS_ON_LAG_IS_ALREADY_APPLIED">%%Error: QoS config on LAG is already applied</Resource>
+		<Resource Name = "SSM_INTF_FCOE_ON_LAG_IS_ALREADY_APPLIED">%%Error: Fcoe config on LAG is already applied</Resource>
+		<Resource Name = "SSM_INTF_QOS_ON_LAG_FCOE_MEMBER">%%Error: QoS config on LAG is not allowed as LAG has FCOE member</Resource>
+        <Resource Name = "SSM_INTF_QOS_FLOWCONTROL_ON_LAG_CONFLICTS_WITH_POLICER_ON_MEMBER_PORT">%%Error: Policer is configured on a member port.</Resource> 
+        <Resource Name = "SSM_INTF_POLICER_ON_MEMBER_PORT_CONFLICTS_WITH_QOS_FLOWCONTROL_ON_LAG">%%Error: qos flow-control is configured on LAG.</Resource>
+		<Resource Name = "SSM_INTF_COSTOTCMAP_ALREADY_APPLIED">%%Error: A CoS-to-Traffic Class map is already applied to the interface</Resource>
+		<Resource Name = "SSM_INTF_PFC_ON_COS_WITH_NON_DEFAULT_TC">%%Error: PFC cannot be enabled on CoS with non-default Traffic Class mapping</Resource>
+		<Resource Name = "SSM_INTF_COS7_NOT_ALLOWED_IN_VCS">%%Error: CoS7 is not allowed in VCS</Resource>
+        <Resource Name = "SSM_INTF_QOS_DEFAULT_COS7">%%Error: COS7 is not allowed as default cos</Resource>
+        <Resource Name = "SSM_INTF_QOS_TRUST_UNSUPPORTED">%%Error: Trust unsupported</Resource>
+		<Resource Name = "SSM_INTF_QOS_FLOW_CONTROL_ON_POLICED_PORT">%%Error: Flow control cannot be enabled as policer is configured for this port</Resource>
+        <Resource Name = "SSM_INTF_QOS_TRUST_COS_IN_VCS_NON_CEE">%%Error: Command not supported in VCS,'QoS Trust CoS' will be automatically applied if QoS CoS-Mutation map is applied on interfaces</Resource>
+        <Resource Name = "SSM_INTF_QOS_TRUST_DSCP_IN_VCS_NON_CEE">%%Error: Command not supported in VCS,'QoS Trust DSCP' will be automatically applied if QoS DSCP-TC, DSCP-COS maps are applied on interfaces</Resource>
+        <Resource Name = "SSM_INTF_QOS_CONFIG_CONFLICT">%%Error: Conflicting QoS config applied on this port</Resource>
+        <Resource Name = "SSM_INTF_REMOVE_QOS_TRUST_COS_IN_VCS_NON_CEE">%%Error: Command not supported in VCS,'QoS Trust CoS' will be automatically removed if QoS CoS-Mutation map is removed on interfaces</Resource>
+        <Resource Name = "SSM_INTF_PFC_ALREADY_APPLIED">%%Error: Priority-based Flow Control (PFC) is already applied to the interface</Resource>
+        <Resource Name = "SSM_INTF_PAUSE_ALREADY_APPLIED">%%Error: 802.3x Pause already applied to the interface</Resource>
+        <Resource Name = "SSM_INTF_ASYMMETRIC_PFC_CONFIG_NOT_SUPPORTED">%%Error: Aymmetric Priority-based Flow Control (PFC) configuration not supported </Resource>
+        <Resource Name = "SSM_QOS_CLEAR_INTF_NOT_IN_NON_FCOE_PROV">%% Error: QoS is not in non-FCoE Provisioning mode on interface </Resource>
+        <Resource Name = "SSM_QOS_CLEAR_INTF_UNKNOWN">%% Error: Unknown interface</Resource>
+        <Resource Name = "SSM_QOS_CLEAR_INTF_NOT_ALLOWED_ON_LAG">%% Error: QoS config on LAG member is not allowed</Resource>
+        <Resource Name = "SSM_QOS_CLEAR_INTF_FAILED">%% Error: Failed clearing interface counters</Resource>
+		<Resource Name = "SSM_INTF_PFC_NOT_SUPPORTED_ON_PO_WITH_1G_CU">%%Error: Priority-based Flow Control (PFC) is not supported on Port-Channel with 1 GigabitEthernet Copper interface member</Resource>
+		<Resource Name = "SSM_INTF_CANNOT_ADD_1G_CU_TO_PO_WITH_PFC">%%Error: 1 GigabitEthernet Copper interface cannot be added to Port-Channel with Priority-based Flow Control (PFC) configuration</Resource>
+        <Resource Name = "SSM_INTF_QOS_LONG_DIST_ONLY_SUPPORTED_ON_ISL_CEE">%%Error: Command only supported on ISL port in VCS CEE Mode </Resource>
+        <Resource Name = "SSM_INTF_QOS_LONG_DIST_EXCEED_MAX">%%Error: Distance can't exceed 10Km </Resource>
+        <Resource Name = "SSM_INTF_QOS_LONG_DIST_EXCEED_MAX_LINK_PER_CHIP">%%Error: Maximum 1 long-distance port is supported per Port Group </Resource>
+        <Resource Name = "SSM_INTF_QOS_LONG_DIST_INSUFFICIENT_RESOURCE">%%Error: Maximum 3 per-priority-flow-control(pfc) traffic class and 2 strict priority(SP) traffic class can be supported in CEE Map when long-distance is enabled</Resource>
+        <Resource Name = "SSM_INTF_QOS_LONG_DIST_CEE_RESTRICTION">%%Error: Port Group having a long-distance port can't have CEE Map configuration on any edge port</Resource>
+        <Resource Name = "SSM_INTF_QOS_LONG_DIST_10KM_ISL_RESTRICTION">%%Error: For 10Km and 30Km long distance link, no other ISL port is supported on the same Port Group</Resource>
+        <Resource Name = "SSM_INTF_QOS_LONG_DIST_2_AND_5KM_ISL_RESTRICTION">%%Error: For 2Km and 5Km long distance link, only 1 More additional ISL port is supported on Same Port Group</Resource>
+        <Resource Name = "SSM_INTF_QOS_LONG_DIST_PORT_UP_RESTRICTION">%%Error: Long Distance configuration not allowed when ports on the same Port Group are UP</Resource>
+        <Resource Name = "SSM_INTF_QOS_LONG_DIST_CEE_MODIFY_RESTRICTION">%%Error: CEE Map modification not allowed when Long Distance ISL is configured</Resource>
+        <Resource Name = "SSM_INTF_QOS_LONG_DIST_PLATFORM_RESTRICTION">%%Error: Command is not supported on this Platform</Resource>
+        <Resource Name = "SSM_INTF_QOS_LONG_DIST_BREAKOUTPORT_RESTRICTION">%%Error: Long Distance configuration is not supported on Breakout interface</Resource>
+        <Resource Name = "SSM_INTF_QOS_RCV_QUEUE_NOT_SUPPORTED_ERROR">%%Error: The command is not supported on this platform. </Resource>
+        <Resource Name = "SSM_QOS_EXTENDED_QOS_STATS_NOT_SUPPORTED_ON_THIS_PLATORM">%%Error:This feature is not supported on the current platform. </Resource>
+        <Resource Name = "SSM_INTF_QOS_FLOW_CONTROL_BLOCKED_IN_VCS_MODE">%% Error: qos flow control cannot be configured in cluster mode.</Resource>
+        
+        <!-- BPS Related Error Codes -->
+        <Resource Name = "SSM_QOS_INVALID_SLOT_NUMBER">%%Error: Invalid slot number</Resource>        
+
+		<!-- QOS CCB -->
+		<Resource Name = "SSM_QOS_COS_THRESH_SUM_EXCEEDS_100">%%Error: Sum of CoS Thresholds exceeds 100% </Resource>
+		<Resource Name = "SSM_QOS_COS_THRESH_SUM_EQUAL_0">%%Error: Sum of CoS Thresholds can't be 0% </Resource>
+		<Resource Name = "SSM_QOS_COS7_THRESH_LESS_THAN_8">%%Error: CoS7 needs to be at least 8%</Resource>
+		<Resource Name = "SSM_QOS_COS_THRESH_INTF_IS_ISL_PORT">%%Error: CoS Thresholds cannot be configured on ISL ports</Resource>
+
+		<!--QoS generic -->
+		<Resource Name = "SSM_QOS_MERCURY_PLATFORM_NOT_SUPPORTED">%%Error: Command is not supported on this platform.</Resource>
+		<Resource Name = "SSM_QOS_CALLISTO_PLATFORM_NOT_SUPPORTED">%%Error: Command is not supported on this platform.</Resource>
+
+		<!-- RED -->
+		<Resource Name = "SSM_QOS_CCB_RED_ACTIVE_ON_OTHER_CHIP">%%Error: RED profile is active on another chip</Resource>
+		<Resource Name = "SSM_QOS_CCB_RED_ACTIVE_PROFILE_PRESENT">%%Error: a RED profile is already active on the given CoS</Resource>
+		<Resource Name = "SSM_QOS_CCB_RED_BOTH_TRUNK_PORTS">%%Error: RED profile is already active on another trunk port</Resource>
+		<Resource Name = "SSM_QOS_CCB_RED_ENTRY_NOT_FOUND">%%Error: RED profile not found</Resource>
+		<Resource Name = "SSM_QOS_CCB_RED_PORT_SPEED_MISMATCH">%%Error: Interface speed mismatch with already activated interface</Resource>
+		<Resource Name = "SSM_QOS_CCB_RED_PORT_TYPE_MISMATCH">%%Error: Interface type mismatch with already activated interface</Resource>
+		<Resource Name = "SSM_QOS_CCB_RED_PROFILE_IS_ACTIVE">%%Error: RED profile is currently active</Resource>
+		<Resource Name = "SSM_QOS_CCB_RED_PROFILE_IS_NOT_ACTIVE">%%Error: no RED profile is active on the given CoS</Resource>
+		<Resource Name = "SSM_QOS_INVALID_PROFILE_ID">%%Error: RED profile id is invalid</Resource>
+		<Resource Name = "SSM_QOS_CCB_RED_MAX_COUNT_REACHED">%%Error: Maximum number of RED profiles already created</Resource>
+		<Resource Name = "SSM_QOS_CCB_RED_CHIP_COUNT_MAX_RCHD">%%Error: Maximum number RED profiles on the chip already created</Resource>
+		<Resource Name = "SSM_QOS_INVALID_PROFILE_PARAMETERS">%%Error: RED profile parameters are invalid</Resource>
+
+		<!-- DSCP -->
+		<Resource Name = "SSM_QOS_DSCP_MAP_EXCEEDS_LIMIT">%%Error: Maximum number of DSCP maps configured</Resource>
+		<Resource Name = "SSM_UNKNOWN_MAP_TYPE">%%Error: Map type is now known</Resource>
+		<Resource Name = "SSM_QOS_MARK_INVALID_RANGE">%%Error: Invalid Range String. Enter the mark range in ascending order, using \",\" and \"-\" characters.  Example:  1,2,4-7,8,9-22,55-63 </Resource>
+		<Resource Name = "SSM_INTF_DSCPTODSCPMAP_ALREADY_APPLIED">%%Error: A DSCP Mutation Map is already applied on the interface </Resource>
+		<Resource Name = "SSM_INTF_DSCPTOTCMAP_ALREADY_APPLIED">%%Error: A DSCP Traffic Class Map is already applied on the interface </Resource>
+		<Resource Name = "SSM_INTF_DSCPTOCOSMAP_ALREADY_APPLIED">%%Error: A DSCP CoS Map is already applied on the interface </Resource>
+		<Resource Name = "SSM_INTF_DSCPTODSCPMAP_NOT_APPLIED">%%Error: No DSCP Mutation Map is applied on the interface</Resource>
+		<Resource Name = "SSM_INTF_DSCPTOTCMAP_NOT_APPLIED">%%Error: No DSCP Traffic Class Map is applied on the interface</Resource>
+		<Resource Name = "SSM_INTF_DSCPTOCOSMAP_NOT_APPLIED">%%Error: No DSCP CoS Map is applied on the interface.</Resource>
+		<Resource Name = "SSM_INTF_MAX_L3_MAPS_REACHED_PER_CHIP">%%Error: Maximum 4 ports per port group can have L3 QoS Configuration on this platform </Resource>
+
+		<!-- Policer -->
+		<Resource Name = "SSM_POL_ERR_MAX_POLICY_MAPS_CREATED">%%Error: Maximum policy maps created already.</Resource>
+		<Resource Name = "SSM_POL_ERR_POLICY_MAP_IN_USE">%%Error: Policy map is in use.</Resource>
+		<Resource Name = "SSM_POL_ERR_POLICY_MAP_NOT_FOUND">%%Error: Policy map not found.</Resource>
+		<Resource Name = "SSM_POL_ERR_MAX_CLASS_MAPS_CREATED">%%Error: Maximum class maps created already.</Resource>
+		<Resource Name = "SSM_POL_ERR_CLASS_MAP_IN_USE">%%Error: Class map is in use.</Resource>
+		<Resource Name = "SSM_POL_ERR_CLASS_MAP_NOT_FOUND">%%Error: Class map not found.</Resource>
+		<Resource Name = "SSM_POL_ERR_MAX_PRIO_MAP_CREATED">%%Error: Maximum prio maps created already.</Resource>
+		<Resource Name = "SSM_POL_ERR_DEF_CLASS_MAP_DEL_NOT_ALLOWED">%%Error: 'default' class map cannot be removed.</Resource>
+		<Resource Name = "SSM_POL_ERR_PRIO_MAP_IN_USE">%%Error: Priority map is in use.</Resource>
+		<Resource Name = "SSM_POL_ERR_PRIO_MAP_NOT_FOUND">%%Error: Priority map not found.</Resource>
+		<Resource Name = "SSM_POL_ERR_ADD_CLASS_MAP_TO_POLICY_MAP">%%Error: Failed to add class map to policy map.</Resource>
+		<Resource Name = "SSM_POL_ERR_DEL_CLASS_MAP_FROM_POLICY_MAP">%%Error: Failed to delete class map from policy map.</Resource>
+		<Resource Name = "SSM_POL_ERR_RATE_VALUE_INCORRECT">%%Error: cir, eir must be multiple of 40000.</Resource>
+
+		<Resource Name = "SSM_POL_ERR_SET_ATTR_TO_POLICY_MAP">%%Error: Failed to set policer attributes for policy map.</Resource>
+        
+		<Resource Name = "SSM_POL_ERR_INTF_NOT_FOUND">%%Error: Interface is not found.</Resource>
+		<Resource Name = "SSM_POL_ERR_POLICY_MAP_IS_INCOMPLETE">%%Error: Failed to bind policy map to Interface as policy map is incomplete.</Resource>
+		<Resource Name = "SSM_POL_ERR_BIND_POLICY_MAP_EXIST">%%Error: Policy map is already bound to interface in same direction.</Resource>
+		<Resource Name = "SSM_POL_ERR_BIND_POLICY_MAP">%%Error: Failed to bind policy map to interface.</Resource>
+		<Resource Name = "SSM_POL_ERR_UNBIND_POLICY_MAP">%%Error: Failed to unbind policy map from interface.</Resource>
+		<Resource Name = "SSM_POL_ERR_UPD_CONFORM_COS_TO_PRIO_MAP">%%Error: Failed to update prio map with conform cos.</Resource>
+		<Resource Name = "SSM_POL_ERR_UPD_EXCEED_COS_TO_PRIO_MAP">%%Error: Failed to update prio map with exceed cos.</Resource>
+    	<Resource Name = "SSM_POL_ERR_FLOW_CONTROL_ENABLED">%%Error: Policy Map cannot be assigned as flow control is enabled.</Resource>
+		<Resource Name = "SSM_POL_ERR_ISL_PORT">%%Error: Policy Map cannot be assigned as it is an ISL port.</Resource>
+		<Resource Name = "SSM_POL_ERR_NOT_SUPPORTED_PLATFORM">%%Error: qos service-policy is not supported on this platform.</Resource>
+		<Resource Name = "SSM_POL_ERR_STORM_CONTROL_ENABLED">%%Error: Policer can't be enabled as storm control is enabled.</Resource>
+		<Resource Name = "SSM_STORMCONTROL_ERR_ALREADY_CONFIGURED">%%Error: BUM storm control is already active for the specified traffic.</Resource>
+		<Resource Name = "SSM_STORMCONTROL_ERR_NOT_ACTIVE">%%Error: Stormcontrol is not active on the interface.</Resource>
+		
+		
+		<!--QoS flowbased -->
+		<Resource Name = "SSM_QOS_FLOWBASED_INVALID_PARAM">%%Error: Invalid argument for the command</Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_CLASS_MAP_NOT_FOUND">%%Error: Class-Map not found</Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_POLICY_MAP_NOT_FOUND">%%Error: Policy-Map not found</Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_CANT_CREATE_CLASS_DEFAULT">%%Error: class 'default' can't be created</Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_CANT_DELETE_CLASS_DEFAULT">%%Error: class 'default' can't be deleted</Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_CANT_CREATE_CLASS_CEE">%%Error: class 'cee' can't be created</Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_CANT_DELETE_CLASS_CEE">%%Error: class 'cee' can't be deleted</Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_UNSUP_ACTION_IN_CLASS">%%Error: Action is not supported in this class</Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_ONE_FILTER_PER_CLASS">%%Error: A class-map can have atmost one filter</Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_CLASSMAP_INUSE">%%Error: class-map is in use, can't support this operation now</Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_POLICY_MAP_INUSE">%%Error: policy-map is active</Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_NO_CLASS_IN_PMAP">%%Error: Policy-Map does not have any class</Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_POLICY_NOT_INSTALLED">%%Error: No such Policy-Map is install on this interface</Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_INVALID_MUTATION_TYPE">%%Error: Unsupported Mutation Map specifyed</Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_MAP_INUSE">%%Error: Map is already in use, can't be modified or deleted</Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_MUTATION_EEXIST">%%Error: Specified Mutation Map does not exist</Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_CLASS_NOT_ADDED_IN_POLICY">%%Error: This Class is not added to policy-map</Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_ADD_ACTION_FAILED">%%Error: Failed to add the action</Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_ACTION_EEXIST">%%Error: No such action exist </Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_CMAP_EXEED_LIMIT">%%Error: Maximum limit of supported class-maps reached </Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_PMAP_EXEED_LIMIT">%%Error: Maximum limit of supported policy-maps reached </Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_MUTATIONMAP_EXEED_LIMIT">%%Error: Maximum limit of supported Mutation-maps reached </Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_POLICY_ALREADY_ACTIVE">%%Error: Policy-Map on this direction is already active </Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_CONFLICTING_FETAURE">%%Error: MQC and MLS/CEE configuration can't co-exist on the same interface </Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_EMPTY_FILTER">%%Error: Each user defined class-map should have a valid filter </Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_CANT_DEL_LAST_ACTIVE_CLASS">%%Error: Can not delete last class from an active policy-map </Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_MUTATION_ALLOWED_ONLY_IN_DEFAULT_CLASS">%%Error: Mutation Maps are allowed only in class-default </Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_PMAP_MOD_NOT_ALLOWED">%%Error: Policy-Map modification is not allowed at this time, please try latter </Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_HW_PROG_IN_PROGRESS">%%Error: Hardware programing is in progress, please try latter </Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_NO_CLASS_FILTER_TC">%%Error: Action not permitted for Class having match filter not a TC queue </Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_ACTION_NON_CLASS_DEF">%%Error: Action is allowed only in class-default </Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_ACTION_NON_CLASS_CEE">%%Error: Action is allowed only in class cee </Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_MARK_TO_FABRIC_PRIO">%%Error: Marking cos or traffic-class to 7 is not allowed </Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_PSHAPE_SCHD_CONFLICT">%%Error: Port-Shaper and Scheduler can't coexist </Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_POL_PSHAPE_SCHD_CONFLICT">%%Error: Police can't coexist with Port-Shaper or scheduler </Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_MUTATION_CEE_CONFLICT">%%Error: cos-mutation and cos-tc mutation can't coexist with 'priority-mapping-table' action </Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_UNSUP_EGRESS_ACTION">%%Error: Policy-Map contains action which is not supported on egress direction </Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_UNSUP_INGRESS_ACTION">%%Error: Policy-Map contains action which is not supported on ingress direction </Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_MARK_LOSSLESS_PRIO">%%Error: Marking or Shaping lossless priorities is not allowed </Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_ACL_DOESNT_EXIST">%%Error: Input ACL doesn't exist.</Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_CMAP_IN_PMAP_EXEED_LIMIT">%%Error: Maximum limit of supported class-maps in a policy-map reached </Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_NO_POLICY_MAP_APPLIED_ON_INTERFACE">%%Error: Policy-Map not configured for the interface</Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_POLICY_MAP_DOESNT_EXIST">%%Error: Policy-Map doesn't exist</Resource>
+		<Resource Name = "SSM_QOS_FB_SHAPE_RATE_ONLY_FOR_STRICT_PRIORITY_TC">%%Error: Please provide shaping rate only for the strict priority traffic class </Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_MUTATION_INUSE">%%Error: Mutation Map is already in use</Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_CMAP_CREATE_FAILED">%%Error: Class-Map creation failed</Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_PMAP_CREATE_FAILED">%%Error: Policy-Map creation failed</Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_CMAP_DELETE_FAILED">%%Error: Class-Map deletion failed</Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_PMAP_DELETE_FAILED">%%Error: Policy-Map deletion failed</Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_SERVICE_POLICY_AND_FCOE_CANNOT_CO_EXIST">%%Error: service-policy and fcoe config cannot co-exist on an interface</Resource>
+		<Resource Name = "SSM_QOS_FLOWBASED_SERVICE_POLICY_AND_CEE_CANNOT_CO_EXIST">%%Error: service-policy and cee config cannot co-exist on an interface</Resource>		
+		<Resource Name = "SSM_QOS_FLOWBASED_SHAPE_RATE_EXCEEDED_IF_BW">%%Error: Shape rate can not exceed interface bandwidth</Resource>
+		<Resource Name = "SSM_QOS_DSCP_MAP_EXEED_LIMIT">%%Error: Maximum limit of supported dscp mutation maps reached </Resource>
+		<Resource Name = "SSM_QOS_DSCP_COS_MAP_EXEED_LIMIT">%%Error: Maximum limit of supported dscp-cos maps reached </Resource>
+		<Resource Name = "SSM_QOS_DSCP_TC_MAP_EXEED_LIMIT">%%Error: Maximum limit of supported dscp-tc maps reached </Resource>
+
+		<!--QoS Auto NAS-->
+		<Resource Name = "AUTO_NAS_MAX_SERVER_IP_REACHED">%%Error: Maximum limit of supported server-ip configuration reached </Resource>
+		<Resource Name = "AUTO_NAS_VLAN_NOT_PRESENT">%%Error: VLAN does not exist</Resource>
+        <Resource Name = "SSM_QOS_AUTO_NAS_SERVER_IP_NOT_PRESENT">%% Error: Invalid Server IP.</Resource>
+		<Resource Name = "AUTO_NAS_CEE_MAP_NOT_DEFAULT">%% Error: CEE map is not set to default values.</Resource>
+		<Resource Name = "AUTO_NAS_COS_CONFLICT">%%Error: COS value conflicts with fabric or fcoe priority in CEE Map</Resource>
+		<Resource Name = "AUTO_NAS_PGID_DELETION_NOT_ALLOWED">%%Error: PGIDs 2 and 3 cannot be deleted when 'nas auto-qos' is configured</Resource>
+		<Resource Name = "AUTO_NAS_COS_PGID3_MAP_EXCEEDED">%%Error: More than one COS cannot be mapped to PGID 3 when 'nas auto-qos' is configured</Resource>
+		<Resource Name = "AUTO_NAS_PRIORITY_MAP_DELITION_NOT_ALLOWED">%%Error: Deletion of priority-map is not allowed when 'nas auto-qos' is configured</Resource>
+		<Resource Name = "AUTO_NAS_COS_STRICT_PRIORITY_NOT_ALLOWED">%%Error: COS 0 to 6 cannot be mapped to strict priority PGID when 'nas auto-qos' is configured</Resource>
+		<Resource Name = "AUTO_NAS_COS_CANNOT_CHANGE_PGID">%%Error: NAS COS cannot be mapped to a PGID other than PGID 3</Resource>
+		<Resource Name = "AUTO_NAS_PGID_3_CANNOT_BE_CHANGED">%%Error: PGID 3 cannot be modified when 'nas auto-qos' is configured</Resource>
+		<Resource Name = "AUTO_NAS_SERVER_CONFIGURED_WITH_VRF">%%Error: Input NAS server IP prefix is already configured with VRF</Resource>
+		<Resource Name = "AUTO_NAS_SERVER_CONFIGURED_WITH_VLAN">%%Error: Input NAS server IP prefix is already configured with VLAN</Resource>
+		<Resource Name = "AUTO_NAS_VRF_VLAN_NOT_PRESENT">%%Error: Vrf or vlan not created yet</Resource>
+
+    </ResourceEnum>
+</ModuleResources>

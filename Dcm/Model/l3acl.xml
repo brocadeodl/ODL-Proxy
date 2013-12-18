@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<WavePlugin name="AAA" nameSpace="DcmNs">
+<Global name="AAAGlobal">
+	<Worker name="GlobalIpAcl">
+		<ManagedObject name="IpAclPolicyManagedObject">
+			<Member name="name" dataType="string" />
+			<Member name="policyType" dataType="UI32" />
+		</ManagedObject>
+		<ManagedObject name="StdIpAclPolicyManagedObject" derivedClass="IpAclPolicyManagedObject">
+			<Member name="rules" dataType="vector/WaveManagedObjectPointer" umlType="COMPOSITION" referredObject="StdIpAclRuleManagedObject" />
+		</ManagedObject>
+		<ManagedObject name="ExtIpAclPolicyManagedObject" derivedClass="IpAclPolicyManagedObject">
+			<Member name="extRules" dataType="vector/WaveManagedObjectPointer" umlType="COMPOSITION" referredObject="ExtIpAclRuleManagedObject" />
+		</ManagedObject>
+		<ManagedObject name="IpAclRuleManagedObject">
+			<Member name="seqNum" dataType="UI32" />
+			<Member name="action" dataType="AclAction" />
+			<Member name="srcHost" dataType="string" />
+			<Member name="srcAddr" dataType="string" />
+			<Member name="srcMask" dataType="string" />
+	    </ManagedObject>
+		<ManagedObject name="StdIpAclRuleManagedObject" derivedClass="IpAclRuleManagedObject" />
+		<ManagedObject name="ExtIpAclRuleManagedObject" derivedClass="IpAclRuleManagedObject">
+			<Member name="protocol" dataType="IPProtoType" />
+			<Member name="destHost" dataType="string" />
+			<Member name="destAddr" dataType="string" />
+			<Member name="destMask" dataType="string" />
+			<Member name="srcPort" dataType="UI16" />
+			<Member name="destPort" dataType="UI16" />
+		</ManagedObject>
+	</Worker>
+</Global>
+</WavePlugin>

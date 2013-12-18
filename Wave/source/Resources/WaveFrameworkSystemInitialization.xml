@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Framework System Init Module. -->
+
+<ModuleResources ModuleName = "FrameworkSystemInitialization" ComponentName = "Wave">
+    <ResourceEnum Name = "WaveHaRecoveryType">
+        <Resource Name = "WAVE_HA_COLD_RECOVERY">Cold Recovery</Resource>
+        <Resource Name = "WAVE_HA_WARM_RECOVERY">Warm Recovery</Resource>
+    </ResourceEnum>
+</ModuleResources>

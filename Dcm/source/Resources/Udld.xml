@@ -1,0 +1,25 @@
+<ModuleResources ModuleName="UDLD" ComponentName="Dcm">
+    <ResourceEnum Name="UdldStatusCodes">
+
+        <Resource Name="UDLD_API_ERR_UNKNOWN">%% Error: Internal Error</Resource>
+        <Resource Name="UDLD_API_ERR_UDLD_IF_NOT_EXIST">%% Error: UDLD is not configured for this interface</Resource>
+        <Resource Name="UDLD_API_ERR_UDLD_IF_MEMORY">%% Error: Memory error</Resource>
+        <Resource Name="UDLD_API_ERR_UDLD_MASTER_NOT_EXIST">%% Error: UDLD master doesnot exist</Resource>
+        <Resource Name="UDLD_API_ERR_UDLD_MAC_ADDR_ERR">%% Error: UDlD Mac Address error</Resource>
+        <Resource Name="UDLD_API_ERR_UDLD_IP_ADDR_ERR">%% Error: UDLD IP Address error</Resource>
+        <Resource Name="UDLD_API_ERR_UDLD_REM_PORT_MAC_NOT_EXIST">%% Error: UDLD remote port doesn't exist</Resource>
+        <Resource Name="UDLD_API_ERR_UDLD_NOT_EXIST">%% Error: UDLD protocol is not configured.</Resource>
+        <Resource Name="UDLD_API_ERR_NO_MEMORY">%% Error: UDLD out of memory</Resource>
+        <Resource Name="UDLD_API_ERR_INTERFACE_NOT_ETHERNET">%% Error: Provided interface is not an ethernet interface</Resource>
+        <Resource Name="UDLD_API_ERR_IF_NOT_UP">%% Error: Provided interface is not up</Resource>
+        <Resource Name="UDLD_API_ERR_VR_NOT_UP">%% Error: Provided interface is not up</Resource>
+        <Resource Name="UDLD_API_ERR_UDLD_NOT_ON_DESTINATION_MIRR_PORT">%% Error: UDLD cannot be configured on a destination mirrored port</Resource>
+        <Resource Name="UDLD_ENABLED_PORT_CANNOT_BE_DEST_MIRROR_PORT">%% Error: Destination port mirroring cannot be configured on an UDLD enabled port</Resource>
+        <Resource Name="UDLD_API_ERR_UDLD_NOT_ALLOWED_ON_BROCADE_TRUNK_MEMBER">%% Error: UDLD cannot be enabled on a Brocade trunk memeber</Resource>
+        <Resource Name="UDLD_API_ERR_BROCADE_TRUNKING_NOT_ALLOWED_ON_UDLD_ENABLED_IF">%% Error: Brocade trunking cannot be enabled on an UDLD enabled port</Resource>
+        <Resource Name="UDLD_API_ERR_INTERNAL">%% Error: UDLD internal error</Resource>
+        <Resource Name="UDLD_API_ERR_UDLD_NOT_STARTED">%% UDLD protocol has not been enabled</Resource>
+        <Resource Name="UDLD_API_ERR_UDLD_NOT_ENABLED">%% UDLD protocol has been shut down</Resource>
+
+		</ResourceEnum>
+</ModuleResources>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ModuleResources ModuleName = "Igmps" ComponentName = "Wave">
+    <ResourceEnum Name = "IgmpsReturnSatus">
+        <Resource Name = "IGMP_ERR_GENERIC">%% Error: Operation failed</Resource>
+        <Resource Name = "IGMP_ERR_INVALID_COMMAND">%% Error: Invalid command</Resource>
+        <Resource Name = "IGMP_ERR_INVALID_VALUE">%% Error: Invalid value</Resource>
+        <Resource Name = "IGMP_ERR_INVALID_FLAG">%% Error: Invalid flag</Resource>
+        <Resource Name = "IGMP_ERR_INVALID_AF">%% Error: Invalid address-family</Resource>
+        <Resource Name = "IGMP_ERR_NO_SUCH_IFF">%% Error: IGMP No such interface configured</Resource>
+        <Resource Name = "IGMP_ERR_NO_SUCH_GROUP_REC">%% Error: No such Group-Rec found</Resource>
+        <Resource Name = "IGMP_ERR_NO_SUCH_SOURCE_REC">%% Error: No such Source-Rec found</Resource>
+        <Resource Name = "IGMP_ERR_NO_SUCH_SVC_REG">%% Error: No such Service-Registration found</Resource>
+        <Resource Name = "IGMP_ERR_NO_CONTEXT_INFO">%% Error: Failed to get VR/VRF Context Information</Resource>
+        <Resource Name = "IGMP_ERR_NO_VALID_CONFIG">%% Error: Invalid configuration for this operation</Resource>
+        <Resource Name = "IGMP_ERR_NO_SUCH_VALUE">%% Error: No such configured value found</Resource>
+        <Resource Name = "IGMP_ERR_DOOM">%% Error: IGMP is DOOMED!</Resource>
+        <Resource Name = "IGMP_ERR_OOM">%% Error: Out of memory</Resource>
+        <Resource Name = "IGMP_ERR_SOCK_JOIN_FAIL">%% Error: Failed to Join ALL-PIM-ROUTERS MCast Group</Resource>
+        <Resource Name = "IGMP_ERR_MALFORMED_ARG">%% Error: Malformed argument</Resource>
+        <Resource Name = "IGMP_ERR_QI_LE_QRI">%% Error: Query interval should be greater than Query Response Interval</Resource>
+        <Resource Name = "IGMP_ERR_QRI_GT_QI">%% Error: Query Response Interval should be less than Query Interval</Resource>
+        <Resource Name = "IGMP_ERR_MALFORMED_MSG">%% Error: Malformed message received</Resource>
+        <Resource Name = "IGMP_ERR_TEMP_INTERNAL">%% Error: Temporary internal run-time failure</Resource>
+        <Resource Name = "IGMP_ERR_CFG_WITH_MROUTE_PROXY">%% Error: Interface configured with mroute-proxy, undo first</Resource>
+        <Resource Name = "IGMP_ERR_CFG_FOR_PROXY_SERVICE">%% Error: Interface configured for proxy-service, undo first</Resource>
+        <Resource Name = "IGMP_ERR_UNINIT_WITHOUT_DEREG">%% Error: Cannot un-initialize without de-registration</Resource>
+        <Resource Name = "IGMP_ERR_IF_GREC_LIMIT_REACHED">%% Error: G-Rec Limit Reached on IF</Resource>
+        <Resource Name = "IGMP_ERR_BUF_TOO_SHORT">%% Error: Processing exceeded buffer space</Resource>
+        <Resource Name = "IGMP_ERR_L2_PHYSICAL_IF">%% Error: Command is invalid on VLAN constituent Interface</Resource>
+        <Resource Name = "IGMP_ERR_L3_NON_VLAN_IF">%% Error: Command is valid only on VLAN Interfaces</Resource>
+        <Resource Name = "IGMP_ERR_UNKNOWN_MSG">%% Error: Unknown Message</Resource>
+        <Resource Name = "IGMP_ERR_L2_SOCK_FAIL">%% Error: L2 socket initialization failed</Resource>
+        <Resource Name = "IGMP_ERR_L3_SOCK_FAIL">%% Error: L3 socket initialization failed</Resource>
+        <Resource Name = "IGMP_ERR_SNOOP_ENABLED">%% Error: IGMP Snooping is not enabled on VLAN Interface</Resource>
+        <Resource Name = "IGMP_ERR_SNOOPING_IS_ENABLED">%% Error: IGMP Snooping is enabled on VLAN Interface</Resource>
+        <Resource Name = "IGMP_ERR_IGMP_ENABLED">%% Error: IGMP is enabled on VLAN Interface</Resource>
+        <Resource Name = "IGMP_ERR_NOT_VLAN_MEMBER">%% Error: Specified Port Not a VLAN member</Resource>
+        <Resource Name = "IGMP_ERR_SNOOPQ_ENABLED">%% Error: Snooping querier is enabled on the vlan</Resource>
+        <Resource Name = "IGMP_ERR_MRTR_ENABLED">%% Error: Static mrouter is enabled on the vlan</Resource>
+        <Resource Name = "IGMP_ERR_INVALID_SOURCE_IP">%% Error: Invalid source-ip address</Resource>
+        <Resource Name = "IGMP_ERR_PIM_SOCK_FAIL">%% Error: AF_PIM socket initi failed</Resource>
+        <Resource Name = "IGMP_ERR_ILL_ADD">%% Error: Illegal multicast group address</Resource>
+        <Resource Name = "IGMP_ERR_NO_NOT_ALLOWED_ON_SEC_VLAN">%% Error: On secondary vlans this operation is not permitted</Resource>
+        <Resource Name = "IGMP_ERR_MAX_LIMIT_REACHED">%% Error: Maximum IGMP Snooping enabled interface limit reached.</Resource>
+        <Resource Name = "IGMP_ERR_GROUP_LIMIT_REACHED">%% Error: Route limit is reached.</Resource>
+        <Resource Name = "IGMP_ERR_L2_CONFIG_PRESENT">%% Error: Cannot configure aggregator member.</Resource>
+        <Resource Name = "IGMP_ERR_L3_NOT_READY">%% Error: Interface is not in L3 mode.</Resource>
+        <Resource Name = "IGMP_ERR_INTERFACE_DOES_NOT_EXIST">%%Error: Interface does not exist</Resource>
+        <Resource Name = "IGMP_ERR_GLOBAL_SNOOP_RESTRICT_NOT_SUPPORTED_PLATFORM">%% Error:The command is not supported on this platform </Resource>
+		
+		<!-- Collect And Validate -->
+		<Resource Name = "IGMP_CLUSTER_VERSION_MISMATCH">%% Error: Cluster validation failed - Version mismatch.</Resource>
+</ResourceEnum>
+</ModuleResources>

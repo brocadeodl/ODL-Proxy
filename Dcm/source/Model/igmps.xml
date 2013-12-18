@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?> 
+<WavePlugin name="Igmps" nameSpace="DcmNs">
+	<Global name="IgmpsGlobal">
+	<Worker name="IgmpsGlobal">
+		<ManagedObject name="IgmpsGlobalConfig">
+			<Member name="enable" dataType="bool" >
+			</Member>
+		</ManagedObject>
+		<Message name="UpdateIgmpsGlobalConfig" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="enable" dataType="bool" >
+			</Member>
+        </Message>
+	</Worker>
+	</Global>
+	<Local name="Igmps">
+	<Worker name="IgmpsLocalConfig">
+		<Message name="UpdateIgmpsConfig" sequencerType="SYNC" allowPreemption="FALSE" derivedClass="ManagementInterfaceMessage">
+			<Member name="enable" dataType="bool" >
+			</Member>
+        </Message>
+	</Worker>
+</Local>
+</WavePlugin>

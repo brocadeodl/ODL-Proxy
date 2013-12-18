@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<WavePlugin name="FCPathUtil" nameSpace="DcmNs">
+<Local name="FCPathUtil">
+	<Message name="GetPathInfo" sequencerType="ASYNC" allowPremption="FALSE">
+		<Member name="FID" dataType="SI32"> </Member>
+		<Member name="destDomainId" dataType="SI32"> </Member>
+		<Member name="sourcePort" dataType="SI32"> </Member>
+		<Member name="destPort" dataType="SI32"> </Member>
+		<Member name="basicStats" dataType="string"> </Member>
+		<Member name="extendedStats" dataType="string"> </Member>
+		<Member name="reversePath" dataType="string"> </Member>
+		<!-- Output variables -->
+		<Member name="ErrMsg" dataType="string"> </Member>
+		<Member name="HopCount" dataType="vector/UI32/"></Member>
+		<Member name="InPort" dataType="vector/UI32/"></Member>
+		<Member name="OutPort" dataType="vector/UI32/"></Member>
+		<Member name="RBridgeId" dataType="vector/UI32/"></Member>
+		<Member name="Bandwidth" dataType="vector/UI32/"></Member>
+		<Member name="IsReversePath" dataType="vector/UI32/"></Member>
+		<Member name="Cost" dataType="vector/UI32/"></Member>
+		<Member name="ShortIntvl" dataType="vector/UI32/"></Member>
+		<Member name="LongIntvl" dataType="vector/UI32/"></Member>
+		<Member name="InTxShortBps" dataType="vector/UI32/"></Member>
+		<Member name="InRxShortBps" dataType="vector/UI32/"></Member>
+		<Member name="OutTxShortBps" dataType="vector/UI32/"></Member>
+		<Member name="OutRxShortBps" dataType="vector/UI32/"></Member>
+		<Member name="InTxLongBps" dataType="vector/UI32/"></Member>
+		<Member name="InRxLongBps" dataType="vector/UI32/"></Member>
+		<Member name="OutTxLongBps" dataType="vector/UI32/"></Member>
+		<Member name="OutRxLongBps" dataType="vector/UI32/"></Member>
+		<Member name="InTxShortTxCrdz" dataType="vector/UI32/"></Member>
+		<Member name="InRxShortTxCrdz" dataType="vector/UI32/"></Member>
+		<Member name="OutTxShortTxCrdz" dataType="vector/UI32/"></Member>
+		<Member name="OutRxShortTxCrdz" dataType="vector/UI32/"></Member>
+		<Member name="InTxLongTxCrdz" dataType="vector/UI32/"></Member>
+		<Member name="InRxLongTxCrdz" dataType="vector/UI32/"></Member>
+		<Member name="OutTxLongTxCrdz" dataType="vector/UI32/"></Member>
+		<Member name="OutRxLongTxCrdz" dataType="vector/UI32/"></Member>
+		<Member name="InTxShortFps" dataType="vector/UI32/"></Member>
+		<Member name="InRxShortFps" dataType="vector/UI32/"></Member>
+		<Member name="OutTxShortFps" dataType="vector/UI32/"></Member>
+		<Member name="OutRxShortFps" dataType="vector/UI32/"></Member>
+		<Member name="InTxLongFps" dataType="vector/UI32/"></Member>
+		<Member name="InRxLongFps" dataType="vector/UI32/"></Member>
+		<Member name="OutTxLongFps" dataType="vector/UI32/"></Member>
+		<Member name="OutRxLongFps" dataType="vector/UI32/"></Member>
+		<Member name="InTxWords" dataType="vector/string/"></Member>
+		<Member name="InRxWords" dataType="vector/string/"></Member>
+		<Member name="OutTxWords" dataType="vector/string/"></Member>
+		<Member name="OutRxWords" dataType="vector/string/"></Member>
+		<Member name="InTxFrames" dataType="vector/string/"></Member>
+		<Member name="InRxFrames" dataType="vector/string/"></Member>
+		<Member name="OutTxFrames" dataType="vector/string/"></Member>
+		<Member name="OutRxFrames" dataType="vector/string/"></Member>
+		<Member name="InTxErrors" dataType="vector/UI32/"></Member>
+		<Member name="InRxErrors" dataType="vector/UI32/"></Member>
+		<Member name="OutTxErrors" dataType="vector/UI32/"></Member>
+		<Member name="OutRxErrors" dataType="vector/UI32/"></Member>
+	</Message>
+</Local>
+</WavePlugin>

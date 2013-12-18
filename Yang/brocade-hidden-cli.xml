@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-hidden-cli"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:hidden-cli="urn:brocade.com:mgmt:brocade-hidden-cli"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def"
+        xmlns:fabric-service="urn:brocade.com:mgmt:brocade-fabric-service"
+        xmlns:license="urn:brocade.com:mgmt:brocade-license"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface"
+        xmlns:xstp="urn:brocade.com:mgmt:brocade-xstp">
+  <namespace uri="urn:brocade.com:mgmt:brocade-hidden-cli"/>
+  <prefix value="hidden-cli"/>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <import module="brocade-fabric-service">
+    <prefix value="fabric-service"/>
+  </import>
+  <import module="brocade-license">
+    <prefix value="license"/>
+  </import>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <import module="brocade-xstp">
+    <prefix value="xstp"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+        San Jose, CA 95134
+         U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com 
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This management module is an instrumentation to manage  hidden 
+cli commands which might be useful in debugging but not exposed
+to customer.</text>
+  </description>
+  <revision date="2011-06-28">
+    <description>
+      <text>Initial version of the brocade-hidden-cli module.</text>
+    </description>
+  </revision>
+  <augment target-node="/common-def:show/fabric-service:fabric">
+    <container name="showfabric"/>
+  </augment>
+  <augment target-node="/common-def:clear">
+    <container name="fabric"/>
+  </augment>
+  <container name="debug">
+    <container name="fabric"/>
+  </container>
+  <augment target-node="/license:license">
+    <container name="showlicense"/>
+  </augment>
+  <container name="ras-debug">
+    <container name="prom-access"/>
+  </container>
+  <augment target-node="/common-def:show">
+    <container name="ras-debug"/>
+  </augment>
+  <augment target-node="/interface:protocol/xstp:spanning-tree/xstp:pvst">
+    <leaf name="mac-address-reduction">
+      <type name="enumeration">
+        <enum name="enable"/>
+        <enum name="standard"/>
+      </type>
+      <default value="enable"/>
+    </leaf>
+  </augment>
+  <augment target-node="/interface:protocol/xstp:spanning-tree/xstp:pvst/xstp:vlan">
+    <leaf name="aging-time">
+      <type name="uint32">
+        <range value="0..100000">
+          <error-message>
+            <value>% Error: Value out of range at '^' marker</value>
+          </error-message>
+        </range>
+      </type>
+    </leaf>
+  </augment>
+  <augment target-node="/interface:protocol/xstp:spanning-tree/xstp:rpvst">
+    <leaf name="mac-address-reduction">
+      <type name="enumeration">
+        <enum name="enable"/>
+        <enum name="standard"/>
+      </type>
+      <default value="enable"/>
+    </leaf>
+  </augment>
+  <augment target-node="/interface:protocol/xstp:spanning-tree/xstp:rpvst/xstp:vlan">
+    <leaf name="aging-time">
+      <type name="uint32">
+        <range value="0..100000">
+          <error-message>
+            <value>% Error: Value out of range at '^' marker</value>
+          </error-message>
+        </range>
+      </type>
+    </leaf>
+  </augment>
+  <typedef name="slot-num">
+    <type name="uint32">
+      <range value="1..16">
+        <error-message>
+          <value>Invalid slot number.</value>
+        </error-message>
+      </range>
+    </type>
+  </typedef>
+  <container name="linecard-cli"/>
+  <grouping name="ampp-vlan-classifier">
+    <container name="classifier-vlan">
+      <container name="classifier">
+        <container name="activate">
+          <list name="group">
+            <key value="groupid vlanclassifieroperation vlan"/>
+            <leaf name="groupid">
+              <type name="uint32">
+                <range value="1..16"/>
+              </type>
+            </leaf>
+            <leaf name="vlanclassifieroperation">
+              <type name="enumeration">
+                <enum name="vlan">
+                  <value value="0"/>
+                </enum>
+              </type>
+            </leaf>
+            <leaf name="vlan">
+              <type name="uint32">
+                <range value="1..4090"/>
+              </type>
+            </leaf>
+          </list>
+        </container>
+      </container>
+    </container>
+  </grouping>
+</module>

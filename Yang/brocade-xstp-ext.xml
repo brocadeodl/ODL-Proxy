@@ -1,0 +1,699 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-xstp-ext"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:xstp-extensions="urn:brocade.com:mgmt:brocade-xstp-ext"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface">
+  <namespace uri="urn:brocade.com:mgmt:brocade-xstp-ext"/>
+  <prefix value="xstp-extensions"/>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+        San Jose, CA 95134
+        U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This module describes the data model for Spanning Tree
+Protocol
+
+Glossary of the terms used:
+---------------------------
+CIST   Common and Internal Spanning Tree (IEEE 802.1Q)</text>
+  </description>
+  <reference>
+    <text>IEEE Std 802.1Q: IEEE Standard for Local and metropolitan area
+networks - Virtual Bridged Local Area Networks, December 2005.</text>
+  </reference>
+  <revision date="2011-02-22">
+    <description>
+      <text>Initial Version</text>
+    </description>
+  </revision>
+  <typedef name="yes-no-type">
+    <type name="enumeration">
+      <enum name="no">
+        <value value="1"/>
+      </enum>
+      <enum name="yes">
+        <value value="2"/>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="on-off-type">
+    <type name="enumeration">
+      <enum name="off">
+        <value value="1"/>
+      </enum>
+      <enum name="on">
+        <value value="2"/>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="bridge-id-type">
+    <type name="string"/>
+    <description>
+      <text>The Bridge-Identifier, as used in the STP, to uniquely
+identify a bridge. First two octets (in network byte
+order) contain a priority value, and last 6 octets contain
+the MAC address used to refer to a bridge in a unique
+fashion (typically, the numerically smallest MAC address
+of all ports on the bridge)</text>
+    </description>
+  </typedef>
+  <typedef name="stp-type">
+    <type name="enumeration">
+      <enum name="none">
+        <value value="1"/>
+      </enum>
+      <enum name="stp">
+        <value value="2"/>
+        <description>
+          <text>Classic Spanning Tree Protocol</text>
+        </description>
+      </enum>
+      <enum name="rstp">
+        <value value="3"/>
+        <description>
+          <text>Rapid Spanning Tree Protocol</text>
+        </description>
+      </enum>
+      <enum name="mstp">
+        <value value="4"/>
+        <description>
+          <text>Multiple Spanning Tree Protocol</text>
+        </description>
+      </enum>
+      <enum name="pvstp">
+        <value value="5"/>
+        <description>
+          <text>Per-VLAN Spanning Tree Protocol</text>
+        </description>
+      </enum>
+      <enum name="rpvstp">
+        <value value="6"/>
+        <description>
+          <text>Rapid Per-VLAN Spanning Tree Protocol</text>
+        </description>
+      </enum>
+    </type>
+    <description>
+      <text>Indicate the variant of the spanning tree protocol</text>
+    </description>
+  </typedef>
+  <typedef name="stp-port-state">
+    <type name="enumeration">
+      <enum name="error">
+        <value value="1"/>
+      </enum>
+      <enum name="disabled">
+        <value value="2"/>
+        <description>
+          <text>The port is inactive; does not participate in STP</text>
+        </description>
+      </enum>
+      <enum name="blocking">
+        <value value="3"/>
+        <description>
+          <text>When a port is enabled, it first moves to a blocked
+state before listening to the network. The port
+does not participate in frame forwarding. BPDUs are
+still received and processed</text>
+        </description>
+      </enum>
+      <enum name="listening">
+        <value value="4"/>
+        <description>
+          <text>In this state, the bridge still does not forward
+frames and does not learn network MAC addresses.
+The bridge does receive and process BPDUs and
+network management frames</text>
+        </description>
+      </enum>
+      <enum name="learning">
+        <value value="5"/>
+        <description>
+          <text>The bridge port still discards incoming frames or
+frames switched over for forwarding. The bridge
+begins to incorporate MAC addresses associated with
+this port. BPDU and network management messages are
+still processed</text>
+        </description>
+      </enum>
+      <enum name="forwarding">
+        <value value="6"/>
+        <description>
+          <text>This is the full functional state for a bridged
+port. In this state, the bridge does not discard
+incoming frames and forwards them to other ports;
+the bridge also forwards frames out the port. BPDUs
+and network management frames are still processed</text>
+        </description>
+      </enum>
+      <enum name="discarding">
+        <value value="7"/>
+        <description>
+          <text>In MSTP and RSTP, disabled, blocking and listening
+states are combined together in one state known as
+discarding state</text>
+        </description>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="stp-port-role">
+    <type name="enumeration">
+      <enum name="error">
+        <value value="1"/>
+      </enum>
+      <enum name="designated">
+        <value value="2"/>
+      </enum>
+      <enum name="root">
+        <value value="3"/>
+      </enum>
+      <enum name="alternate">
+        <value value="4"/>
+      </enum>
+      <enum name="backup">
+        <value value="5"/>
+      </enum>
+      <enum name="disabled">
+        <value value="6"/>
+      </enum>
+      <enum name="master">
+        <value value="7"/>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="stp-link-type">
+    <type name="enumeration">
+      <enum name="point-to-point">
+        <value value="1"/>
+        <description>
+          <text>Point-to-point - enable rapid transition</text>
+        </description>
+      </enum>
+      <enum name="shared">
+        <value value="2"/>
+        <description>
+          <text>Shared - disable rapid transition</text>
+        </description>
+      </enum>
+    </type>
+  </typedef>
+  <grouping name="bridge-attr">
+    <leaf name="priority">
+      <type name="uint32"/>
+      <description>
+        <text>Bridge priority (0..65535)</text>
+      </description>
+    </leaf>
+    <leaf name="bridge-id">
+      <type name="bridge-id-type"/>
+      <description>
+        <text>Bridge id</text>
+      </description>
+    </leaf>
+    <leaf name="hello-time">
+      <type name="uint32"/>
+      <description>
+        <text>The interval between two transmissions of BPDU packets
+sent by the Root Bridge to tell all other switches that
+it is indeed the Root Bridge (1..10 sec)</text>
+      </description>
+    </leaf>
+    <leaf name="max-age">
+      <type name="uint32"/>
+      <description>
+        <text>The Max Age may be set to ensure that old information
+does not endlessly circulate through redundant paths in
+the network, preventing the effective propagation of
+new information (6..40 sec)</text>
+      </description>
+    </leaf>
+    <leaf name="forward-delay">
+      <type name="uint32"/>
+      <description>
+        <text>Port on the Switch spends this time in the listening
+state while moving from the blocking state to the
+forwarding state (4..30 sec)</text>
+      </description>
+    </leaf>
+  </grouping>
+  <grouping name="transmit">
+    <leaf name="transmit-hold-count">
+      <type name="uint32"/>
+      <description>
+        <text>Maximum number of Hello packets transmitted per
+interval  (1..10)</text>
+      </description>
+    </leaf>
+    <leaf name="migrate-time">
+      <type name="uint32"/>
+      <description>
+        <text>Bridge migrate time (sec)</text>
+      </description>
+    </leaf>
+  </grouping>
+  <grouping name="interface-list">
+    <uses name="ports-list"/>
+  </grouping>
+  <grouping name="stp-brief-info">
+    <container name="root-bridge">
+      <uses name="bridge-attr"/>
+    </container>
+    <container name="bridge">
+      <uses name="bridge-attr"/>
+    </container>
+  </grouping>
+  <grouping name="ports-list">
+    <list name="port">
+      <uses name="interface:interface-name-info"/>
+      <leaf name="spanningtree-enabled">
+        <type name="boolean"/>
+        <description>
+          <text>Is spanning tree enabled</text>
+        </description>
+      </leaf>
+      <leaf name="if-index">
+        <type name="uint64"/>
+        <description>
+          <text>Interface index</text>
+        </description>
+      </leaf>
+      <leaf name="interface-id">
+        <type name="uint64"/>
+        <description>
+          <text>Interface id</text>
+        </description>
+      </leaf>
+      <leaf name="if-role">
+        <type name="stp-port-role"/>
+        <description>
+          <text>Interface role</text>
+        </description>
+      </leaf>
+      <leaf name="if-state">
+        <type name="stp-port-state"/>
+        <description>
+          <text>Interface state</text>
+        </description>
+      </leaf>
+      <leaf name="external-path-cost">
+        <type name="uint32"/>
+        <description>
+          <text>Designated external path cost</text>
+        </description>
+      </leaf>
+      <leaf name="internal-path-cost">
+        <type name="uint32"/>
+        <description>
+          <text>Designated internal path cost</text>
+        </description>
+      </leaf>
+      <leaf name="configured-path-cost">
+        <type name="uint32"/>
+        <description>
+          <text>Configured path cost</text>
+        </description>
+      </leaf>
+      <leaf name="designated-port-id">
+        <type name="uint64"/>
+        <description>
+          <text>Designated port id</text>
+        </description>
+      </leaf>
+      <leaf name="port-priority">
+        <type name="uint32"/>
+        <description>
+          <text>Port priority</text>
+        </description>
+      </leaf>
+      <leaf name="designated-bridge-id">
+        <type name="bridge-id-type"/>
+        <description>
+          <text>Designated bridge Id</text>
+        </description>
+      </leaf>
+      <leaf name="port-hello-time">
+        <type name="uint32"/>
+        <description>
+          <text>Port hello time</text>
+        </description>
+      </leaf>
+      <leaf name="forward-transitions-count">
+        <type name="uint32"/>
+        <description>
+          <text>Number of forward transitions</text>
+        </description>
+      </leaf>
+      <leaf name="received-stp-type">
+        <type name="stp-type"/>
+        <description>
+          <text>Received (rx) stp type</text>
+        </description>
+      </leaf>
+      <leaf name="transmitted-stp-type">
+        <type name="stp-type"/>
+        <description>
+          <text>Transmitted (tx) stp type</text>
+        </description>
+      </leaf>
+      <leaf name="edge-port">
+        <type name="on-off-type"/>
+        <description>
+          <text>Edge Port mode</text>
+        </description>
+      </leaf>
+      <leaf name="auto-edge">
+        <type name="yes-no-type"/>
+        <description>
+          <text>Auto Edge</text>
+        </description>
+      </leaf>
+      <leaf name="admin-edge">
+        <type name="yes-no-type"/>
+        <description>
+          <text>Admin Edge</text>
+        </description>
+      </leaf>
+      <leaf name="edge-delay">
+        <type name="uint32"/>
+        <description>
+          <text>Edge delay</text>
+        </description>
+      </leaf>
+      <leaf name="configured-root-guard">
+        <type name="on-off-type"/>
+        <description>
+          <text>Configured root guard</text>
+        </description>
+      </leaf>
+      <leaf name="oper-root-guard">
+        <type name="on-off-type"/>
+        <description>
+          <text>Operational root guard</text>
+        </description>
+      </leaf>
+      <leaf name="boundary-port">
+        <type name="yes-no-type"/>
+        <description>
+          <text>Is boundary</text>
+        </description>
+      </leaf>
+      <leaf name="oper-bpdu-guard">
+        <type name="on-off-type"/>
+        <description>
+          <text>Operational BPDU guard</text>
+        </description>
+      </leaf>
+      <leaf name="oper-bpdu-filter">
+        <type name="on-off-type"/>
+        <description>
+          <text>Pperational BPDU filter</text>
+        </description>
+      </leaf>
+      <leaf name="link-type">
+        <type name="stp-link-type"/>
+      </leaf>
+      <leaf name="rx-bpdu-count">
+        <type name="uint64"/>
+        <description>
+          <text>Received Bpdu count</text>
+        </description>
+      </leaf>
+      <leaf name="tx-bpdu-count">
+        <type name="uint64"/>
+        <description>
+          <text>Transmitted Bpdu count</text>
+        </description>
+      </leaf>
+    </list>
+  </grouping>
+  <grouping name="last-rcvd-record-info">
+    <description>
+      <text>Last received instance information. Client must fill these
+information in the RPC request if the previous call has
+returned partial information (has-more = true). When not
+filled, the RPC response would include spanning-tree
+instance information starting from the first instance.</text>
+    </description>
+    <container name="last-rcvd-instance">
+      <leaf name="instance-id">
+        <type name="uint32"/>
+        <description>
+          <text>Instance id of the last received spanning-tree
+instance.</text>
+        </description>
+      </leaf>
+    </container>
+  </grouping>
+  <grouping name="records-info">
+    <description>
+      <text>Indicates the state of RPC response.</text>
+    </description>
+    <leaf name="has-more">
+      <type name="boolean"/>
+      <description>
+        <text>Indicates if this response is complete or not. Value 
+'true' indicates that the response is partial and there
+are more spanning-tree instances. Clients can retrieve
+next set of instances by passing the last received
+instance id (from ../last-instance/instance-id) in the
+subsequent RPC call.</text>
+      </description>
+    </leaf>
+    <container name="last-instance">
+      <description>
+        <text>The 'last' spanning-tree instance included in this
+response.</text>
+      </description>
+      <leaf name="instance-id">
+        <type name="uint32"/>
+        <description>
+          <text>Instance id of the 'last' spanning-tree instance
+included in this response.</text>
+        </description>
+      </leaf>
+    </container>
+  </grouping>
+  <rpc name="get-stp-brief-info">
+    <description>
+      <text>RPC to return spanning tree information similar to the
+CLI 'show spanning-tree'.</text>
+    </description>
+    <input>
+      <choice name="request-type">
+        <case name="getnext-request">
+          <description>
+            <text>Indicate the last received instance information
+for get-next type of requests.</text>
+          </description>
+          <uses name="last-rcvd-record-info"/>
+        </case>
+      </choice>
+    </input>
+    <output>
+      <container name="spanning-tree-info">
+        <leaf name="stp-mode">
+          <type name="stp-type"/>
+          <description>
+            <text>Type of the spanning tree protocol configured
+on this switch</text>
+          </description>
+        </leaf>
+        <choice name="spanning-tree-mode">
+          <case name="stp">
+            <container name="stp">
+              <uses name="stp-brief-info"/>
+              <uses name="interface-list"/>
+            </container>
+          </case>
+          <case name="rstp">
+            <container name="rstp">
+              <uses name="stp-brief-info"/>
+              <uses name="transmit"/>
+              <uses name="interface-list"/>
+            </container>
+          </case>
+          <case name="mstp">
+            <container name="mstp">
+              <description>
+                <text>CIST information</text>
+              </description>
+              <uses name="stp-brief-info"/>
+              <uses name="transmit"/>
+              <uses name="interface-list"/>
+            </container>
+          </case>
+          <case name="pvstp">
+            <list name="pvstp">
+              <description>
+                <text>PVST instance information</text>
+              </description>
+              <key value="vlan-id"/>
+              <leaf name="vlan-id">
+                <type name="interface:vlan-type"/>
+              </leaf>
+              <uses name="stp-brief-info"/>
+              <uses name="transmit"/>
+              <uses name="interface-list"/>
+            </list>
+          </case>
+          <case name="rpvstp">
+            <list name="rpvstp">
+              <description>
+                <text>RPVST instance information</text>
+              </description>
+              <key value="vlan-id"/>
+              <leaf name="vlan-id">
+                <type name="interface:vlan-type"/>
+              </leaf>
+              <uses name="stp-brief-info"/>
+              <uses name="transmit"/>
+              <uses name="interface-list"/>
+            </list>
+          </case>
+        </choice>
+      </container>
+      <uses name="records-info">
+        <description>
+          <text>Indicates if there are more instances; client
+can retrieve the by invoking the rpc again with
+the last record information.
+Applicable for PVST and RPVST modes only.</text>
+        </description>
+      </uses>
+    </output>
+  </rpc>
+  <rpc name="get-stp-mst-detail">
+    <description>
+      <text>RPC to return MSTP details.. 
+Equivalent to CLI 'show spanning-tree mst detail'.</text>
+    </description>
+    <input>
+      <choice name="request-type">
+        <case name="getnext-request">
+          <uses name="last-rcvd-record-info"/>
+        </case>
+      </choice>
+    </input>
+    <output>
+      <container name="cist">
+        <leaf name="cist-root-id">
+          <type name="bridge-id-type"/>
+          <description>
+            <text>CIST Root Id</text>
+          </description>
+        </leaf>
+        <leaf name="cist-bridge-id">
+          <type name="bridge-id-type"/>
+          <description>
+            <text>CIST bridge Id</text>
+          </description>
+        </leaf>
+        <leaf name="cist-reg-root-id">
+          <type name="bridge-id-type"/>
+          <description>
+            <text>CIST regional root Id</text>
+          </description>
+        </leaf>
+        <leaf name="root-forward-delay">
+          <type name="uint32">
+            <range value="4..30"/>
+          </type>
+          <description>
+            <text>CIST root forward delay (4..30 sec)</text>
+          </description>
+        </leaf>
+        <leaf name="hello-time">
+          <type name="uint32">
+            <range value="1..10"/>
+          </type>
+          <description>
+            <text>CIST root hello time (1..10 sec)</text>
+          </description>
+        </leaf>
+        <leaf name="max-age">
+          <type name="uint32">
+            <range value="6..40"/>
+          </type>
+          <description>
+            <text>CIST root maximum age (6..40 sec)</text>
+          </description>
+        </leaf>
+        <leaf name="max-hops">
+          <type name="uint32">
+            <range value="1..40"/>
+          </type>
+          <description>
+            <text>Hops the BPDU will be valid (1..40)</text>
+          </description>
+        </leaf>
+        <leaf name="migrate-time">
+          <type name="uint32"/>
+          <description>
+            <text>Migration time (in seconds)</text>
+          </description>
+        </leaf>
+        <container name="vlans">
+          <description>
+            <text>VLANs associated with this instance.</text>
+          </description>
+          <leaf-list name="vlan-id">
+            <type name="interface:vlan-type"/>
+          </leaf-list>
+        </container>
+        <uses name="ports-list"/>
+      </container>
+      <list name="msti">
+        <key value="instance-id"/>
+        <leaf name="instance-id">
+          <type name="uint32"/>
+          <description>
+            <text>MSTI Instance</text>
+          </description>
+        </leaf>
+        <leaf name="msti-root-id">
+          <type name="bridge-id-type"/>
+          <description>
+            <text>MSTI Root Id</text>
+          </description>
+        </leaf>
+        <leaf name="msti-bridge-id">
+          <type name="bridge-id-type"/>
+          <description>
+            <text>MSTI bridge Id</text>
+          </description>
+        </leaf>
+        <leaf name="msti-bridge-priority">
+          <type name="uint32"/>
+          <description>
+            <text>MSTI Bridge priority</text>
+          </description>
+        </leaf>
+        <container name="vlans">
+          <description>
+            <text>VLANs associated with this instance..</text>
+          </description>
+          <leaf-list name="vlan-id">
+            <type name="interface:vlan-type"/>
+          </leaf-list>
+        </container>
+        <uses name="ports-list"/>
+      </list>
+      <uses name="records-info">
+        <description>
+          <text></text>
+        </description>
+      </uses>
+    </output>
+  </rpc>
+</module>

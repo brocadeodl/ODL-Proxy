@@ -1,0 +1,222 @@
+/* Copyright (c) 2005-2013 Brocade Communications Systems, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at:
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/***************************************************************************
+ *   Copyright (C) 2005-2010 Brocade Communications Systems, Inc.          *
+ *   All rights reserved.                                                  *
+ *   Author : pasu                                                     *
+ **************************************************************************/
+
+#ifndef SSMTYPESH_H
+#define SSMTYPESH_H
+
+namespace DcmNs
+{
+	#define UINT32_MAX					0xFFFFFFFF 
+	#define DEFAULT_PREC_DSCP_TOS_VAL 	64
+	#define DEFAULT_PORTNUM 			65536
+	/* MAC ACL Defines */
+	#define MAC_SET_VAL(x)  (x)[0], (x)[1], (x)[2],(x)[3],(x)[4],(x)[5]
+	#define MAC_FORMAT_STR "%02hx%02hx.%02hx%02hx.%02hx%02hx"
+
+    typedef enum
+    {
+        SSMLOCALSERVICEADDMACACLPOLICY = 0,
+        SSMLOCALSERVICEREMMACACLPOLICY,
+        SSMLOCALSERVICEASSOCRULETOPOLICY,
+        SSMLOCALSERVICEASSOCPOLICYTOINTERFACE,
+        SSMMACACLINTFSTATSLOCALSP,
+        SSMMACACLSHOWLOCALSP,
+        SSMIPACLSHOWLOCALSP,
+		SSMLOCALSERVICERESEQMACACLPOLICY,
+		SSMMACACLLOCALCLEAR,
+		/* Ip Acl Related */
+		SSMLOCALSERVICEADDIPACLPOLICY,
+		SSMLOCALSERVICEREMIPACLPOLICY,
+		SSMLOCALSERVICEASSOCIPRULETOPOLICY,
+	    SSMLOCALSERVICERESEQIPACLPOLICY,
+		SSMMACIPACLLOCALCLEAR,
+		SSMMACIPACLLOCALSHOW,
+		STORMCONTROLLOCALSHOW,
+		STORMCONTROLLOCALCLEAR,
+        BPRATELIMITLOCALCONFIG
+    }Ssm;
+
+	typedef enum
+	{
+		WELLKNOWN_PRECEDENCE_CRITICAL = 5,
+		WELLKNOWN_PRECEDENCE_FLASH = 3,
+		WELLKNOWN_PRECEDENCE_FLASH_OVERRIDE = 4,
+		WELLKNOWN_PRECEDENCE_IMMEDIATE = 2,
+		WELLKNOWN_PRECEDENCE_INTERNET = 6,
+		WELLKNOWN_PRECEDENCE_NETWORK = 7,
+		WELLKNOWN_PRECEDENCE_PRIORITY = 1,
+		WELLKNOWN_PRECEDENCE_ROUTINE = 0,
+		WELLKNOWN_PRECEDENCE_UNKNOWN = DEFAULT_PREC_DSCP_TOS_VAL 
+	} WellknownPrecedence;
+
+	typedef enum
+	{
+		WELLKNOWN_DSCP_AF11 = 10,
+		WELLKNOWN_DSCP_AF12 = 12,
+		WELLKNOWN_DSCP_AF13 = 14,
+		WELLKNOWN_DSCP_AF21 = 18,
+		WELLKNOWN_DSCP_AF22 = 20,
+		WELLKNOWN_DSCP_AF23 = 22,
+		WELLKNOWN_DSCP_AF31 = 26,
+		WELLKNOWN_DSCP_AF32 = 28,
+		WELLKNOWN_DSCP_AF33 = 30,
+		WELLKNOWN_DSCP_AF41 = 34,
+		WELLKNOWN_DSCP_AF42 = 36,
+		WELLKNOWN_DSCP_AF43 = 38,
+		WELLKNOWN_DSCP_CS1 = 8,
+		WELLKNOWN_DSCP_CS2 = 16,
+		WELLKNOWN_DSCP_CS3 = 24,
+		WELLKNOWN_DSCP_CS4 = 32,
+		WELLKNOWN_DSCP_CS5 = 40,
+		WELLKNOWN_DSCP_CS6 = 48,
+		WELLKNOWN_DSCP_CS7 = 56,
+		WELLKNOWN_DSCP_DEFAULT = 0,
+		WELLKNOWN_DSCP_EF = 46,
+		WELLKNOWN_DSCP_UNKNOWN = DEFAULT_PREC_DSCP_TOS_VAL 
+	} WellknownDscp;
+
+	typedef enum 
+	{
+		WELLKNOWN_TOS_MAX_RELIABILITY = 1,
+		WELLKNOWN_TOS_MAX_THROUGHPUT = 2,
+		WELLKNOWN_TOS_MIN_DELAY = 4,
+		WELLKNOWN_TOS_NORMAL = 0,
+		WELLKNOWN_TOS_UNKNOWN = DEFAULT_PREC_DSCP_TOS_VAL
+	} WellknownTos;
+
+	typedef enum
+	{
+    	SSM_ACL_ACTION_UNKNOWN = 0,
+		ACL_ACTION_PERMIT,
+		ACL_ACTION_DENY
+	} AclAction;
+
+	typedef enum
+	{
+		SSM_ACL_COUNT_UNKNOWN = 0,
+		ACL_IS_COUNT
+	}AclCount;
+
+	typedef enum
+	{
+		SSM_ACL_LOG_UNKNOWN = 0,
+		ACL_IS_LOG
+	}AclLog;
+	
+	typedef enum
+	{
+		ADDR_TYPE_NONE = 0,
+		ADDR_TYPE_ANY,
+		ADDR_TYPE_HOST
+	} AddrType;
+
+	typedef enum
+	{
+		IP_ADDR_TYPE_NONE = 0,
+		IP_ADDR_TYPE_ANY,
+		IP_ADDR_TYPE_HOST,
+		IP_ADDR_TYPE_IP_MASK
+	} IpAddrType;
+
+	typedef enum
+	{
+		ACL_FLAG_NONE = 0,
+		ACL_FLAG_COUNT = 1
+	} AclFlag;
+
+	typedef enum
+	{
+        ETHER_TYPE_UNKNOWN  = 0,
+        ETHER_TYPE_ARP      = 2054,
+        ETHER_TYPE_FCOE     = 35078,
+        ETHER_TYPE_IPV4     = 2048
+	} EtherType;
+
+	typedef enum
+	{
+		L3L4_PROTOTYPE_UNKNOWN = 0,
+		L3L4_PROTOTYPE_ICMP = 1,
+		L3L4_PROTOTYPE_IP = 4,
+		L3L4_PROTOTYPE_TCP = 6,
+		L3L4_PROTOTYPE_UDP = 17,
+		L3L4_PROTOTYPE_ICMP6 = 58
+	} L3L4wellknownProtoType;
+	
+
+	typedef enum 
+	{
+		PORTOPERATOR_UNKNOWN = 0,
+		PORTOPERATOR_EQ,
+		PORTOPERATOR_GT,
+		PORTOPERATOR_LT,
+		PORTOPERATOR_NEQ,
+		PORTOPERATOR_RANGE
+	}PortOperator;
+
+	typedef enum
+	{
+		WELLKNOWNPORT_TCP_UNKNOWN = DEFAULT_PORTNUM,
+		WELLKNOWNPORT_TCP_ECHO = 7,
+		WELLKNOWNPORT_TCP_DAYTIME = 13,
+		WELLKNOWNPORT_TCP_FTPDATA = 20,
+		WELLKNOWNPORT_TCP_FTP = 21,
+		WELLKNOWNPORT_TCP_TELNET = 23,
+		WELLKNOWNPORT_TCP_SMTP = 25,
+		WELLKNOWNPORT_TCP_TIME = 37,
+		WELLKNOWNPORT_TCP_TACAS = 49,
+		WELLKNOWNPORT_TCP_DOMAIN = 53,
+		WELLKNOWNPORT_TCP_WWW = 80,
+		WELLKNOWNPORT_TCP_HOSTNAME = 101,
+		WELLKNOWNPORT_TCP_BGP = 179,
+		WELLKNOWNPORT_TCP_PIM_AUTO_RP = 496,
+		WELLKNOWNPORT_TCP_LOGIN = 513,
+		WELLKNOWNPORT_TCP_SYSLOG = 514,
+		WELLKNOWNPORT_TCP_TALK = 517
+	} PortWellknownNumberTcp;
+	
+    typedef enum
+	{
+		WELLKNOWNPORT_UDP_UNKNOWN = DEFAULT_PORTNUM,
+		WELLKNOWNPORT_UDP_ECHO = 7,
+		WELLKNOWNPORT_UDP_TACAS = 49,
+		WELLKNOWNPORT_UDP_DOMAIN = 53,
+		WELLKNOWNPORT_UDP_BOOTPS = 67,
+		WELLKNOWNPORT_UDP_BOOTPC = 68,
+		WELLKNOWNPORT_UDP_TFTP = 69,
+		WELLKNOWNPORT_UDP_NTP = 123,
+		WELLKNOWNPORT_UDP_SNMP = 161,
+		WELLKNOWNPORT_UDP_PIM_AUTO_RP = 496,
+		WELLKNOWNPORT_UDP_SYSLOG = 514,
+		WELLKNOWNPORT_UDP_RIP = 520
+	} PortWellknownNumberUdp;
+	
+    /* Not Needed As of now since Type is made empty
+	typedef enum
+	{
+		TCPFLAG_UNKNOWN = 0,
+		TCPFLAG_ACK = 1,
+		TCPFLAG_FIN = 2,
+		TCPFLAG_RST = 3,
+		TCPFLAG_SYNC = 4
+	} TcpFlag; */
+
+}
+#endif                                            //SSMTYPESH_H

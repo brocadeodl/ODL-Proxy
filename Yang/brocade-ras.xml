@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-ras"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:ras="urn:brocade.com:mgmt:brocade-ras"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def">
+  <namespace uri="urn:brocade.com:mgmt:brocade-ras"/>
+  <prefix value="ras"/>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+        San Jose, CA 95134
+         U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com 
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This management module is an instrumentation to log collection 
+ like supportsave,copy support and USB management</text>
+  </description>
+  <revision date="2011-04-11">
+    <description>
+      <text>Initial version of this management module.</text>
+    </description>
+  </revision>
+  <typedef name="switchidType">
+    <type name="string">
+      <length value="1..3">
+        <error-message>
+          <value>Invalid rbridge-id (must be in the range 1 - 239) or all</value>
+        </error-message>
+      </length>
+    </type>
+  </typedef>
+  <typedef name="switchidType-noall">
+    <type name="string">
+      <length value="1..3">
+        <error-message>
+          <value>Invalid rbridge-id (must be in the range 1 - 239)</value>
+        </error-message>
+      </length>
+    </type>
+  </typedef>
+  <typedef name="timeout-value">
+    <type name="uint32">
+      <range value="2..5">
+        <error-message>
+          <value>Invalid Timeout (must be in range 2-5)</value>
+        </error-message>
+      </range>
+    </type>
+  </typedef>
+  <typedef name="directory-path">
+    <type name="string">
+      <length value="1..256">
+        <error-message>
+          <value>Enter Valid path with length not more than 256 charecters</value>
+        </error-message>
+      </length>
+    </type>
+  </typedef>
+  <typedef name="rbridge-ids-all-type">
+    <description>
+      <text>The unique identifier for a switch.  The usage of `all'
+refers to `all' rbridge-id's in the cluster.</text>
+    </description>
+    <type name="union">
+      <type name="common-def:ui32-range"/>
+      <type name="string">
+        <pattern value="all"/>
+      </type>
+    </type>
+  </typedef>
+  <grouping name="copy-support-ftp-scp-parameters">
+    <leaf name="user">
+      <type name="string"/>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="host">
+      <type name="string"/>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="directory">
+      <type name="directory-path"/>
+      <mandatory value="true"/>
+    </leaf>
+    <leaf name="password">
+      <type name="string"/>
+      <mandatory value="false"/>
+    </leaf>
+    <leaf name="rbridge-id">
+      <type name="rbridge-ids-all-type"/>
+      <mandatory value="false"/>
+    </leaf>
+    <leaf name="timeout">
+      <type name="timeout-value"/>
+      <mandatory value="false"/>
+    </leaf>
+  </grouping>
+  <typedef name="copy-support-status">
+    <type name="enumeration">
+      <enum name="success">
+        <value value="0"/>
+      </enum>
+      <enum name="failed">
+        <value value="1"/>
+      </enum>
+    </type>
+  </typedef>
+  <grouping name="copy-support-ftp-scp-output">
+    <list name="supportSaveResult">
+      <key value="rbridge-id"/>
+      <leaf name="rbridge-id">
+        <type name="switchidType"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="status-code">
+        <type name="copy-support-status"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="status-str">
+        <type name="string"/>
+        <mandatory value="false"/>
+      </leaf>
+    </list>
+  </grouping>
+  <container name="copy">
+    <container name="support"/>
+  </container>
+  <typedef name="audit-class">
+    <type name="enumeration">
+      <enum name="SECURITY">
+        <value value="1"/>
+      </enum>
+      <enum name="CONFIGURATION">
+        <value value="2"/>
+      </enum>
+      <enum name="FIRMWARE">
+        <value value="3"/>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="raslog-console">
+    <type name="enumeration">
+      <enum name="INFO">
+        <value value="1"/>
+      </enum>
+      <enum name="ERROR">
+        <value value="2"/>
+      </enum>
+      <enum name="WARNING">
+        <value value="3"/>
+      </enum>
+      <enum name="CRITICAL">
+        <value value="4"/>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="message-severity">
+    <type name="enumeration">
+      <enum name="INFO">
+        <value value="1"/>
+      </enum>
+      <enum name="ERROR">
+        <value value="2"/>
+      </enum>
+      <enum name="WARNING">
+        <value value="3"/>
+      </enum>
+      <enum name="CRITICAL">
+        <value value="4"/>
+      </enum>
+      <enum name="DEFAULT">
+        <value value="5"/>
+      </enum>
+    </type>
+  </typedef>
+  <typedef name="facility-enum">
+    <type name="enumeration">
+      <enum name="LOG_LOCAL0">
+        <value value="0"/>
+      </enum>
+      <enum name="LOG_LOCAL1">
+        <value value="1"/>
+      </enum>
+      <enum name="LOG_LOCAL2">
+        <value value="2"/>
+      </enum>
+      <enum name="LOG_LOCAL3">
+        <value value="3"/>
+      </enum>
+      <enum name="LOG_LOCAL4">
+        <value value="4"/>
+      </enum>
+      <enum name="LOG_LOCAL5">
+        <value value="5"/>
+      </enum>
+      <enum name="LOG_LOCAL6">
+        <value value="6"/>
+      </enum>
+      <enum name="LOG_LOCAL7">
+        <value value="7"/>
+      </enum>
+    </type>
+  </typedef>
+  <container name="logging">
+    <container name="raslog">
+      <container name="message">
+        <list name="msgId">
+          <key value="msgId"/>
+          <leaf name="msgId">
+            <type name="string"/>
+          </leaf>
+          <leaf name="severity">
+            <type name="message-severity"/>
+          </leaf>
+          <leaf name="suppress">
+            <type name="empty"/>
+          </leaf>
+          <leaf name="syslog">
+            <type name="empty"/>
+          </leaf>
+        </list>
+      </container>
+      <container name="module">
+        <list name="modId">
+          <key value="modId"/>
+          <leaf name="modId">
+            <type name="string"/>
+          </leaf>
+        </list>
+      </container>
+      <leaf name="console">
+        <type name="raslog-console"/>
+      </leaf>
+    </container>
+    <list name="syslog-server">
+      <max-elements value="4"/>
+      <key value="syslogip"/>
+      <leaf name="syslogip">
+        <type name="inet:ip-address"/>
+      </leaf>
+      <leaf name="secure">
+        <type name="empty"/>
+        <mandatory value="false"/>
+      </leaf>
+      <leaf name="port">
+        <type name="uint16">
+          <range value="0 .. 65535">
+            <error-message>
+              <value>Error : Port Number must be in the range 0 - 65535</value>
+            </error-message>
+          </range>
+        </type>
+        <mandatory value="false"/>
+        <default value="514"/>
+      </leaf>
+    </list>
+    <container name="auditlog">
+      <list name="class">
+        <max-elements value="3"/>
+        <key value="class"/>
+        <leaf name="class">
+          <type name="audit-class"/>
+        </leaf>
+      </list>
+    </container>
+    <container name="syslog-facility">
+      <leaf name="local">
+        <type name="facility-enum"/>
+      </leaf>
+    </container>
+  </container>
+  <container name="destination_console">
+    <container name="logging">
+      <container name="raslog"/>
+    </container>
+  </container>
+  <container name="system">
+    <container name="usb"/>
+    <container name="switch-attributes">
+      <list name="rbridge-id">
+        <key value="rbridge-id"/>
+        <leaf name="rbridge-id">
+          <type name="switchidType-noall"/>
+        </leaf>
+        <leaf name="chassis-name">
+          <type name="string">
+            <length value="1..30"/>
+          </type>
+        </leaf>
+        <leaf name="host-name">
+          <type name="string">
+            <length value="1..30"/>
+          </type>
+        </leaf>
+      </list>
+      <leaf name="chassis-name">
+        <type name="string">
+          <length value="1..30"/>
+        </type>
+      </leaf>
+      <leaf name="host-name">
+        <type name="string">
+          <length value="1..30"/>
+        </type>
+      </leaf>
+    </container>
+  </container>
+  <typedef name="cmd-status">
+    <type name="enumeration">
+      <enum name="unknown">
+        <value value="1"/>
+      </enum>
+      <enum name="completed">
+        <value value="2"/>
+      </enum>
+      <enum name="in-progress">
+        <value value="3"/>
+      </enum>
+      <enum name="error">
+        <value value="4"/>
+      </enum>
+    </type>
+  </typedef>
+  <rpc name="bna-config-cmd">
+    <description>
+      <text>copy configuration data to/from system. This is a non-blocking command, the caller needs to query for the command completion status using the session-id returned.</text>
+    </description>
+    <input>
+      <leaf name="src">
+        <description>
+          <text>ftp/scp URL/running-config/startup-config/default-config</text>
+        </description>
+        <type name="string"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="dest">
+        <type name="string"/>
+        <description>
+          <text>ftp/scp URL/running-config/startup-config</text>
+        </description>
+        <mandatory value="true"/>
+      </leaf>
+    </input>
+    <output>
+      <leaf name="session-id">
+        <type name="uint32"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="status">
+        <type name="cmd-status"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="status-string">
+        <description>
+          <text>Error in string format</text>
+        </description>
+        <type name="string"/>
+        <mandatory value="false"/>
+      </leaf>
+    </output>
+  </rpc>
+  <rpc name="bna-config-cmd-status">
+    <description>
+      <text>Query the status of a previous config-cmd</text>
+    </description>
+    <input>
+      <leaf name="session-id">
+        <type name="uint32"/>
+        <mandatory value="true"/>
+      </leaf>
+    </input>
+    <output>
+      <leaf name="status">
+        <type name="cmd-status"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="status-string">
+        <description>
+          <text>Error in string format</text>
+        </description>
+        <type name="string"/>
+        <mandatory value="false"/>
+      </leaf>
+    </output>
+  </rpc>
+  <container name="support">
+    <container name="autoupload-param">
+      <leaf name="hostip">
+        <type name="inet:ip-address"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="username">
+        <type name="string"/>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="directory">
+        <type name="string">
+          <length value="1..47">
+            <error-message>
+              <value>Enter valid path with length not more than 47 characters.</value>
+            </error-message>
+          </length>
+        </type>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="protocol">
+        <type name="string">
+          <length value="3..4"/>
+          <pattern value="ftp|scp|sftp|FTP|SCP|SFTP">
+            <error-message>
+              <value>Error: Invalid Protocol. Please use one of the following: ftp, scp, sftp.</value>
+            </error-message>
+          </pattern>
+        </type>
+        <mandatory value="true"/>
+      </leaf>
+      <leaf name="password">
+        <type name="string"/>
+        <mandatory value="false"/>
+      </leaf>
+    </container>
+    <container name="autoupload">
+      <leaf name="enable">
+        <type name="empty"/>
+      </leaf>
+    </container>
+    <leaf name="ffdc">
+      <type name="empty"/>
+      <description>
+        <text>FFDC operation</text>
+      </description>
+    </leaf>
+  </container>
+  <container name="logtest">
+    <container name="raslog"/>
+  </container>
+  <container name="auditlog"/>
+</module>

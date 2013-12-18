@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-policer"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:policer="urn:brocade.com:mgmt:brocade-policer"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface">
+  <namespace uri="urn:brocade.com:mgmt:brocade-policer"/>
+  <prefix value="policer"/>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <organization>
+    <text>Brocade Communications</text>
+  </organization>
+  <contact>
+    <text>SSM-QoS Team</text>
+  </contact>
+  <description>
+    <text>This module describes the data model for Modular Quality of Service
+(Modular QoS)</text>
+  </description>
+  <revision date="2011-03-04">
+    <description>
+      <text>Initial Version</text>
+    </description>
+  </revision>
+  <typedef name="priority-value">
+    <type name="uint32">
+      <range value="0..7"/>
+    </type>
+  </typedef>
+  <typedef name="dscp-value">
+    <type name="uint32">
+      <range value="0..63"/>
+    </type>
+  </typedef>
+  <typedef name="tc-value">
+    <type name="uint32">
+      <range value="0..7"/>
+    </type>
+  </typedef>
+  <typedef name="precedence-value">
+    <type name="uint32">
+      <range value="0..7"/>
+    </type>
+  </typedef>
+  <typedef name="map-name-type">
+    <type name="string">
+      <pattern value="[a-zA-Z]{1}([-a-zA-Z0-9_]{0,63})"/>
+    </type>
+  </typedef>
+  <typedef name="mac-ip-acl-name">
+    <type name="string">
+      <pattern value="[a-zA-Z0-9]{1}([-a-zA-Z0-9_]{0,62})"/>
+    </type>
+    <description>
+      <text>The definition for the mac/ip access-list name.</text>
+    </description>
+  </typedef>
+  <typedef name="shaping-rate-limit">
+    <type name="uint64">
+      <range value="28000 .. 100000000"/>
+    </type>
+  </typedef>
+  <list name="police-priority-map">
+    <key value="name"/>
+    <leaf name="name">
+      <type name="map-name-type"/>
+    </leaf>
+    <container name="conform">
+      <leaf name="map-pri0-conform">
+        <type name="priority-value"/>
+      </leaf>
+      <leaf name="map-pri1-conform">
+        <type name="priority-value"/>
+      </leaf>
+      <leaf name="map-pri2-conform">
+        <type name="priority-value"/>
+      </leaf>
+      <leaf name="map-pri3-conform">
+        <type name="priority-value"/>
+      </leaf>
+      <leaf name="map-pri4-conform">
+        <type name="priority-value"/>
+      </leaf>
+      <leaf name="map-pri5-conform">
+        <type name="priority-value"/>
+      </leaf>
+      <leaf name="map-pri6-conform">
+        <type name="priority-value"/>
+      </leaf>
+      <leaf name="map-pri7-conform">
+        <type name="priority-value"/>
+      </leaf>
+    </container>
+    <container name="exceed">
+      <leaf name="map-pri0-exceed">
+        <type name="priority-value"/>
+      </leaf>
+      <leaf name="map-pri1-exceed">
+        <type name="priority-value"/>
+      </leaf>
+      <leaf name="map-pri2-exceed">
+        <type name="priority-value"/>
+      </leaf>
+      <leaf name="map-pri3-exceed">
+        <type name="priority-value"/>
+      </leaf>
+      <leaf name="map-pri4-exceed">
+        <type name="priority-value"/>
+      </leaf>
+      <leaf name="map-pri5-exceed">
+        <type name="priority-value"/>
+      </leaf>
+      <leaf name="map-pri6-exceed">
+        <type name="priority-value"/>
+      </leaf>
+      <leaf name="map-pri7-exceed">
+        <type name="priority-value"/>
+      </leaf>
+    </container>
+  </list>
+  <list name="class-map">
+    <key value="name"/>
+    <leaf name="name">
+      <type name="map-name-type"/>
+    </leaf>
+    <container name="match">
+      <when condition='((../name !="default") and (../name !="cee"))'/>
+      <container name="access-group">
+        <description>
+          <text>This provides the grouping of configuration
+elements of MAC/IP access list.</text>
+        </description>
+        <leaf name="access-group-name">
+          <type name="mac-ip-acl-name"/>
+          <description>
+            <text>This specifies the Access list name which is 
+already configured at the global level. This
+access list contains access rules.</text>
+          </description>
+        </leaf>
+      </container>
+    </container>
+  </list>
+  <list name="policy-map">
+    <key value="po-name"/>
+    <leaf name="po-name">
+      <type name="map-name-type"/>
+    </leaf>
+    <list name="class">
+      <key value="cl-name"/>
+      <leaf name="cl-name">
+        <type name="map-name-type"/>
+      </leaf>
+      <container name="police">
+        <when condition='../cl-name != "cee"'/>
+        <leaf name="cir">
+          <type name="uint64">
+            <range value="40000..40000000000"/>
+          </type>
+          <units name="Bits Per Second."/>
+        </leaf>
+        <leaf name="cbs">
+          <type name="uint64">
+            <range value="1250..5000000000"/>
+          </type>
+          <units name="Bytes."/>
+        </leaf>
+        <leaf name="eir">
+          <type name="uint64">
+            <range value="0..40000000000"/>
+          </type>
+          <units name="Bits Per Second."/>
+        </leaf>
+        <leaf name="ebs">
+          <type name="uint64">
+            <range value="1250..5000000000"/>
+          </type>
+          <units name="Bytes."/>
+        </leaf>
+        <leaf name="set-priority">
+          <type name="string">
+            <length value="1..64"/>
+          </type>
+        </leaf>
+        <leaf name="conform-set-dscp">
+          <type name="dscp-value"/>
+        </leaf>
+        <leaf name="conform-set-prec">
+          <type name="precedence-value"/>
+        </leaf>
+        <leaf name="conform-set-tc">
+          <mandatory value="false"/>
+          <type name="tc-value"/>
+        </leaf>
+        <leaf name="exceed-set-dscp">
+          <type name="dscp-value"/>
+        </leaf>
+        <leaf name="exceed-set-prec">
+          <type name="precedence-value"/>
+        </leaf>
+        <leaf name="exceed-set-tc">
+          <type name="tc-value"/>
+        </leaf>
+      </container>
+      <container name="set">
+        <when condition='((../cl-name !="default") and (../cl-name !="cee"))'/>
+        <container name="set_cos_tc">
+          <leaf name="cos">
+            <type name="uint8">
+              <range value="0 .. 7">
+                <description>
+                  <text>&lt;0-7&gt;;;CoS value</text>
+                </description>
+              </range>
+            </type>
+          </leaf>
+          <leaf name="traffic-class">
+            <type name="uint8">
+              <range value="0 .. 7">
+                <description>
+                  <text>&lt;0-7&gt;;;Traffic class value</text>
+                </description>
+              </range>
+            </type>
+          </leaf>
+        </container>
+        <container name="set_dscp">
+          <leaf name="dscp">
+            <type name="uint16">
+              <range value="0 .. 63">
+                <description>
+                  <text>&lt;0-63&gt;;;dscp value</text>
+                </description>
+              </range>
+            </type>
+          </leaf>
+        </container>
+      </container>
+      <container name="map">
+        <when condition='../cl-name !="cee"'/>
+        <leaf name="cos-mutation">
+          <when condition='../../cl-name = "default"'/>
+          <type name="map-name-type"/>
+          <description>
+            <text>This specifies the mapping between CoS 
+to Cos.</text>
+          </description>
+        </leaf>
+        <leaf name="cos-traffic-class">
+          <when condition='../../cl-name = "default"'/>
+          <type name="map-name-type"/>
+          <description>
+            <text>This specifies the mapping between CoS 
+to Traffic class.</text>
+          </description>
+        </leaf>
+        <leaf name="dscp-cos">
+          <when condition='../../cl-name = "default"'/>
+          <type name="map-name-type"/>
+          <description>
+            <text>This specifies the mapping between Dscp
+to Cos.</text>
+          </description>
+        </leaf>
+        <leaf name="dscp-traffic-class">
+          <when condition='../../cl-name = "default"'/>
+          <type name="map-name-type"/>
+          <description>
+            <text>This specifies the mapping between Dscp
+to Traffic class.</text>
+          </description>
+        </leaf>
+        <leaf name="dscp-mutation">
+          <when condition='../../cl-name = "default"'/>
+          <type name="map-name-type"/>
+          <description>
+            <text>This specifies the mapping between Dscp
+to Dscp.</text>
+          </description>
+        </leaf>
+        <leaf name="sflow">
+          <when condition='../../cl-name !="default"'/>
+          <type name="map-name-type"/>
+          <description>
+            <text>This specifies the sflow action.</text>
+          </description>
+        </leaf>
+      </container>
+      <container name="shape">
+        <when condition='../cl-name = "default"'/>
+        <leaf name="shaping_rate">
+          <type name="shaping-rate-limit"/>
+        </leaf>
+      </container>
+      <container name="scheduler">
+        <when condition='../cl-name = "default"'/>
+        <container name="strict-priority">
+          <leaf name="priority-number">
+            <type name="uint8">
+              <range value="0 .. 7"/>
+            </type>
+          </leaf>
+          <leaf name="scheduler-type">
+            <type name="enumeration">
+              <enum name="dwrr">
+                <value value="1"/>
+              </enum>
+            </type>
+          </leaf>
+          <leaf name="dwrr-traffic-class0">
+            <type name="uint32">
+              <range value="0 .. 100"/>
+            </type>
+          </leaf>
+          <leaf name="dwrr-traffic-class1">
+            <type name="uint32">
+              <range value="0 .. 100"/>
+            </type>
+          </leaf>
+          <leaf name="dwrr-traffic-class2">
+            <type name="uint32">
+              <range value="0 .. 100"/>
+            </type>
+          </leaf>
+          <leaf name="dwrr-traffic-class3">
+            <type name="uint32">
+              <range value="0 .. 100"/>
+            </type>
+          </leaf>
+          <leaf name="dwrr-traffic-class4">
+            <type name="uint32">
+              <range value="0 .. 100"/>
+            </type>
+          </leaf>
+          <leaf name="dwrr-traffic-class5">
+            <type name="uint32">
+              <range value="0 .. 100"/>
+            </type>
+          </leaf>
+          <leaf name="dwrr-traffic-class6">
+            <type name="uint32">
+              <range value="0 .. 100"/>
+            </type>
+          </leaf>
+          <leaf name="dwrr-traffic-class-last">
+            <type name="uint32">
+              <range value="0 .. 100"/>
+            </type>
+          </leaf>
+          <leaf name="TC1">
+            <type name="shaping-rate-limit"/>
+          </leaf>
+          <leaf name="TC2">
+            <type name="shaping-rate-limit"/>
+          </leaf>
+          <leaf name="TC3">
+            <type name="shaping-rate-limit"/>
+          </leaf>
+          <leaf name="TC4">
+            <type name="shaping-rate-limit"/>
+          </leaf>
+          <leaf name="TC5">
+            <type name="shaping-rate-limit"/>
+          </leaf>
+          <leaf name="TC6">
+            <type name="shaping-rate-limit"/>
+          </leaf>
+          <leaf name="TC7">
+            <type name="shaping-rate-limit"/>
+          </leaf>
+        </container>
+      </container>
+      <container name="priority-mapping-table">
+        <when condition='../cl-name = "cee"'/>
+        <container name="import">
+          <leaf name="cee">
+            <type name="map-name-type"/>
+            <description>
+              <text>This specifies the cee map config to be imported.</text>
+            </description>
+          </leaf>
+        </container>
+      </container>
+    </list>
+  </list>
+  <grouping name="ser-pol">
+    <leaf name="in">
+      <type name="map-name-type"/>
+    </leaf>
+    <leaf name="out">
+      <type name="map-name-type"/>
+    </leaf>
+  </grouping>
+  <augment target-node="/interface:interface/interface:tengigabitethernet">
+    <container name="service-policy">
+      <uses name="ser-pol"/>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface/interface:gigabitethernet">
+    <container name="service-policy">
+      <uses name="ser-pol"/>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface/interface:fortygigabitethernet">
+    <container name="service-policy">
+      <uses name="ser-pol"/>
+    </container>
+  </augment>
+  <augment target-node="/interface:interface/interface:port-channel">
+    <container name="service-policy">
+      <uses name="ser-pol"/>
+    </container>
+  </augment>
+</module>

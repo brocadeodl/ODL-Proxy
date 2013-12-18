@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Framework Core Module. -->
+<!-- This file contains the resources for Wave Timer Module. -->
+
+<ModuleResources ModuleName = "Vcenter" ComponentName = "VcenterResourceIds">
+
+    <ResourceEnum Name = "VcenterUserConfigurations">
+        <Resource Name = "VCENTER_API_ERR_UNKNOWN">%%Command failed with error code </Resource>
+        <Resource Name = "VCENTER_COMMON_ERR_CLUSTER_VALIDATE_VERSION_MISMATCH">%%Error: Cluster Validation failed - Version Mismatch</Resource>
+        <Resource Name = "VCENTER_COMMON_ERR_URL_UPDATE">%%Error: Delete and recreate vCenter to update URL</Resource>
+        <Resource Name = "VCENTER_COMMON_ERR_MAX_VCENTER">%%Error: Maximum vcenters already configured</Resource>
+        <Resource Name = "VCENTER_COMMON_ERR_VCENTER_UNKNOWN">%%Error: vCenter name does not exist</Resource>
+        <Resource Name = "VCENTER_COMMON_ERR_INCOMPLETE_COMMAND">%%Error: Incomplete command</Resource>
+		<Resource Name = "VCENTER_COMMON_ERR_DELETE_IN_PROGRESS">%%Error: Deletion/De-activation in progress</Resource>
+		<Resource Name = "VCENTER_COMMON_ERR_ALREADY_DELETE">%%Error: vCenter already deleted</Resource>
+		<Resource Name = "VCENTER_COMMON_ERR_ALREADY_EXISTS">%%Error: vCenter already configured</Resource>
+    </ResourceEnum>
+
+</ModuleResources>

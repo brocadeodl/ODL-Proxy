@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-linecard-management"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:linecard-management="urn:brocade.com:mgmt:brocade-linecard-management"
+        xmlns:brocade-vcs="urn:brocade.com:mgmt:brocade-vcs"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def"
+        xmlns:rbridge="urn:brocade.com:mgmt:brocade-rbridge">
+  <namespace uri="urn:brocade.com:mgmt:brocade-linecard-management"/>
+  <prefix value="linecard-management"/>
+  <import module="brocade-vcs">
+    <prefix value="brocade-vcs"/>
+  </import>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <import module="brocade-rbridge">
+    <prefix value="rbridge"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+        San Jose, CA 95134
+         U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This linecard management module is used to manage linecards.
+It can be used to configure, show, or turn on/off a linecard.n</text>
+  </description>
+  <revision date="2011-09-06">
+    <description>
+      <text>Initial version of this management module.</text>
+    </description>
+  </revision>
+  <typedef name="linecardid">
+    <type name="string">
+      <pattern value="([1-9]|[1][0-6])">
+        <error-message>
+          <value>Invalid slot number. Slot number must be in the range 1..16</value>
+        </error-message>
+      </pattern>
+    </type>
+  </typedef>
+  <grouping name="linecard-cmds">
+    <container name="linecard">
+      <list name="linecards">
+        <key value="linecardName"/>
+        <leaf name="linecardName">
+          <type name="linecardid"/>
+          <mandatory value="true"/>
+        </leaf>
+        <leaf name="linecardType">
+          <type name="enumeration">
+            <enum name="LC48x10G">
+              <value value="1"/>
+            </enum>
+            <enum name="LC12x40G">
+              <value value="2"/>
+            </enum>
+            <enum name="LC72x1G">
+              <value value="8"/>
+            </enum>
+            <enum name="LC48x1G">
+              <value value="9"/>
+            </enum>
+          </type>
+        </leaf>
+      </list>
+    </container>
+  </grouping>
+  <augment target-node="/rbridge:rbridge-id">
+    <container name="global-lc-holder">
+      <uses name="linecard-cmds"/>
+    </container>
+  </augment>
+  <typedef name="slotnum">
+    <type name="uint32"/>
+  </typedef>
+  <typedef name="partition">
+    <type name="enumeration">
+      <enum name="p0"/>
+      <enum name="p1"/>
+    </type>
+  </typedef>
+  <typedef name="lcslotidtype">
+    <type name="string">
+      <length value="2"/>
+    </type>
+  </typedef>
+  <augment target-node="/common-def:show">
+    <container name="linecardinfo"/>
+    <container name="sfminfo"/>
+    <container name="mminfor"/>
+    <container name="slotsinfor"/>
+  </augment>
+  <container name="linecardservice"/>
+</module>

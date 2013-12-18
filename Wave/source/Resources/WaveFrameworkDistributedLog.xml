@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave DistributedLog Module. -->
+
+<ModuleResources ModuleName = "DistributedLog" ComponentName = "Wave">
+    <ResourceEnum Name = "LogStatus">
+        <Resource Name = "DISTRIBUTED_LOG_SUCCESS">Distributed log adding log entry success.</Resource>
+        <Resource Name = "DISTRIBUTED_LOG_ERROR">Distributed log adding log entry error.</Resource>
+        <Resource Name = "DISTRIBUTED_LOG_NULL_LOG_DESCRIPTION_ARGUMENTS">Distributed log null log description arguments given.</Resource>
+        <Resource Name = "DISTRIBUTED_LOG_INVALID_LOG_TYPE_DEFINED">Distributed log type is invalid.</Resource>
+        <Resource Name = "DISTRIBUTED_LOG_INVALID_LOG_DESCRIPTION_TYPE_DEFINED">Distributed log description type is invalid.</Resource>
+        <Resource Name = "DISTRIBUTED_LOG_INVALID_LOG_DESCRIPTION_TYPE_FOR_GIVEN_LOG_TYPE">Distributed log description type is invalid for the given log type.</Resource>
+        <Resource Name = "DISTRIBUTED_LOG_INVALID_ATTRIBUTE_TYPE">Distributed log invalid attribute type specified in log description arguments.</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "LogType">
+        <Resource Name = "DISTRIBUTED_LOG_TYPE_GENERIC_LOG">Generic Log Type</Resource>
+        <Resource Name = "DISTRIBUTED_LOG_TYPE_SERVICE_LOG">Service Log Type</Resource>
+        <Resource Name = "DISTRIBUTED_LOG_TYPE_MANAGED_OBJECT_LOG">Managed Object Log Type</Resource>
+        <Resource Name = "DISTRIBUTED_LOG_TYPE_AUDIT_LOG">Audit Log Type</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "LogDescriptionType">
+        <!-- The following resource names are for the GENERIC_LOG. -->
+        <Resource Name = "DISTRIBUTED_LOG_SUB_TYPE_GENERIC_ENTRY">%1</Resource>
+        <!-- The following resource names are for the SERVICE_LOG. -->
+        <Resource Name = "DISTRIBUTED_LOG_SUB_TYPE_SERVICE_ENTRY">%1</Resource>
+        <!-- The following resource names are for the MANAGED_OBJECT_LOG. -->
+        <Resource Name = "DISTRIBUTED_LOG_SUB_TYPE_MANAGED_OBJECT_ENTRY">%1</Resource>
+        <!-- The following resource names are for the AUDIT_LOG. First argument is the username but will be stored in it's own column for query purposes.-->
+        <Resource Name = "DISTRIBUTED_LOG_SUB_TYPE_SESSION_LOGIN">Logged in from %1 via %2 using %3 in session id %4.</Resource>
+        <Resource Name = "DISTRIBUTED_LOG_SUB_TYPE_SESSION_LOGOUT">Logged out from %1 via %2 using %3 in session id %4.</Resource>
+        <Resource Name = "DISTRIBUTED_LOG_SUB_TYPE_COMMAND">Executed %1 using %2 in session id %3.  Result : %4.</Resource>
+        <Resource Name = "DISTRIBUTED_LOG_SUB_TYPE_COMMAND_OPERATION">Executed operation %1 using %2 in session id %3.  Result : %4.</Resource>
+        <Resource Name = "DISTRIBUTED_LOG_SUB_TYPE_COMMAND_CONFIGURATION">Executed configuration %1 using %2 in session id %3.  Result : %4.</Resource>
+    </ResourceEnum>
+</ModuleResources>

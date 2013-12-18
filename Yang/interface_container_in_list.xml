@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="interface_container_in_list"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:interface_container_in_list="http://brocade.com/ns/interface_container_in_list"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types">
+  <namespace uri="http://brocade.com/ns/interface_container_in_list"/>
+  <prefix value="interface_container_in_list"/>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <container name="interface_container_in_list">
+    <list name="interface">
+      <key value="name"/>
+      <max-elements value="1024"/>
+      <leaf name="name">
+        <type name="string"/>
+      </leaf>
+      <container name="ip_wwn">
+        <leaf name="ip">
+          <type name="inet:ipv4-address"/>
+          <mandatory value="true"/>
+        </leaf>
+        <leaf name="wwn">
+          <type name="string"/>
+          <mandatory value="true"/>
+        </leaf>
+      </container>
+      <container name="mtu">
+        <leaf name="mtu32">
+          <type name="int32"/>
+          <mandatory value="true"/>
+        </leaf>
+      </container>
+      <container name="configtype">
+        <choice name="configtype">
+          <case name="fibrechannel">
+            <leaf name="fabricid">
+              <type name="int32"/>
+            </leaf>
+          </case>
+          <case name="ethernet">
+            <leaf name="ipaddress">
+              <type name="int32"/>
+            </leaf>
+          </case>
+        </choice>
+      </container>
+    </list>
+  </container>
+</module>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Layer 3 License Module. -->
+
+<ModuleResources ModuleName = "Layer3License" ComponentName = "Dcm">
+    <ResourceEnum Name = "Layer3LicenseErrorStatus">
+        <Resource Name = "LAYER_3_LICENSE_NOT_PRESENT_ERROR">%% Error: Layer 3 license not present.</Resource>
+        <Resource Name = "LAYER_3_LICENSE_REMOVE_FAIL_ERROR">%% Error: Failed to remove Layer 3 License.</Resource>
+        <Resource Name = "LAYER_3_NOT_SUPPORTED_SA_MODE">%% Error: Layer 3 configuration supported only in VCS mode on this platform.</Resource>
+   </ResourceEnum>
+</ModuleResources>

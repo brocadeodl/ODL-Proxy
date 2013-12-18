@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for VcsNodeHaObjectManager. -->
+
+<ModuleResources ModuleName = "VcsHaSupport" ComponentName = "Dcm">
+    
+   <ResourceEnum Name = "VcsNodeHaCpState">
+        <Resource Name = "VCS_NODE_HA_CP_STATE_NOT_INITIALIZED">CP state is not initialized</Resource>
+        <Resource Name = "VCS_NODE_HA_CP_ACTIVE">CP is in active state</Resource>
+        <Resource Name = "VCS_NODE_HA_CP_STANDBY">CP is in standby state</Resource>
+        <Resource Name = "VCS_NODE_HA_CP_STANDALONE">CP is in standalone</Resource>
+        <Resource Name = "VCS_NODE_HA_CP_FAILED">CP in failed state</Resource>
+
+    </ResourceEnum>
+</ModuleResources>
+

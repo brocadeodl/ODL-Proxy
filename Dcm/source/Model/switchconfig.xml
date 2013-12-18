@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<WavePlugin name="SwitchConfig" namespace="DcmNs">
+	<Local name="SwitchConfig">
+		<Message name="CfgChassisState" sequencerType="SYNC" allowPreemption="FALSE">
+			<Member name="enableChassis" dataType="bool"> </Member>
+			<Member name="beacon" dataType="bool"> </Member>
+		</Message>
+	</Local>
+</WavePlugin>

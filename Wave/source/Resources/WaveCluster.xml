@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Cluster Module. -->
+
+<ModuleResources ModuleName = "Cluster" ComponentName = "Wave">
+    <ResourceEnum Name = "ClusterStatus">
+        <Resource Name = "APP_CLUSTER_ERROR">Failed</Resource>
+        <Resource Name = "APP_CLUSTER_CAN_NOT_JOIN_CLUSTER">Can not join cluster</Resource>
+        <Resource Name = "APP_CLUSTER_INVALID_SECONDARY_ADDRESS">Invalid Secondary Address</Resource>
+        <Resource Name = "APP_CLUSTER_ALREADY_CREATED">Cluster already created</Resource>
+        <Resource Name = "APP_CLUSTER_ALREADY_PART_OF_ANOTHER_CLUSTER">This node is part of another cluster</Resource>
+        <Resource Name = "APP_CLUSTER_FAILED_TO_COMMUNICATE_TO_ALL_NODES">failed to Communicate to all nodes</Resource>
+        <Resource Name = "APP_CLUSTER_NODE_ALREADY_IN_CLUSTER">Node is already part of this cluster</Resource>
+        <Resource Name = "APP_CLUSTER_NO_CLUSTER_CREATED">No cluster created</Resource>
+        <Resource Name = "APP_CLUSTER_FAILED_COMMUNICATE_TO_NODE">Failed to communciate to node</Resource>
+        <Resource Name = "APP_CLUSTER_NO_DUPLICATE_HANDLER_REGISTERED">No duplicte handler registered</Resource>
+        <Resource Name = "APP_CLUSTER_MANAGMENT_OPERATION_IN_PROGRESS">Managment operation is currently in progress</Resource>
+        <Resource Name = "APP_CLUSTER_REMOTE_CONFIG_FAILED">Failed to configure remote node</Resource>
+        <Resource Name = "APP_CLUSTER_NOT_PRIMARY_NODE">Not the primary node. Command can be executed only from primay node</Resource>
+        <Resource Name = "APP_CLUSTER_NODE_NOT_IN_CLUSTER">Not is not part of the cluster</Resource>
+        <Resource Name = "APP_CLUSTER_CAN_NOT_DEL_PRIMAY_NODE">Can not delete primary node from cluser</Resource>
+        <Resource Name = "APP_CLUSTER_INVALID_APP_ID">Invalid IP address</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "ClusterCreateStatus">
+        <Resource Name = "WAVE_CLUSTER_CREATE_STATUS_NO_IP_ADDRESS_ASSIGNED_TO_ETHERNET_INTERFACE">No IP Address Assigned To Used Assigned Ethernet Interface On This Node</Resource>
+    </ResourceEnum>
+
+    <ResourceEnum Name = "ClusterDeleteStatus">
+        <Resource Name = "WAVE_CLUSTER_DELETE_STATUS_CLUSTER_NOT_FOUND">Cluster not yet created.</Resource>
+    </ResourceEnum>
+    
+
+    <ResourceEnum Name = "ClusterOperationErrorStatus">
+        <Resource Name = "CLUSTER_ERROR_1001">cluster wide operation failed on switch(es) %1 : Please check logs on the individual switches for more info.</Resource>
+		<Resource Name = "CLUSTER_ERROR_1002">Warning: Cluster wide operation failed on Node(s): %1 </Resource>
+    </ResourceEnum>
+
+</ModuleResources>

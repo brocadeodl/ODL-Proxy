@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-clock"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:clock-server="urn:brocade.com:mgmt:brocade-clock"
+        xmlns:ietfyang="urn:ietf:params:xml:ns:yang:ietf-yang-types"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def">
+  <namespace uri="urn:brocade.com:mgmt:brocade-clock"/>
+  <prefix value="clock-server"/>
+  <import module="ietf-yang-types">
+    <prefix value="ietfyang"/>
+  </import>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 130 Holger Way
+        San Jose, CA 95134
+         U.S.A
+Tel: +1-408-333-8000
+E-mail: support@Brocade.com
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>An instrumentation to configure local clock.</text>
+  </description>
+  <revision date="2009-05-01">
+    <description>
+      <text>Initial version of this module.</text>
+    </description>
+  </revision>
+  <container name="clock-set-datetime"/>
+  <container name="clock-set-timezone"/>
+  <augment target-node="/common-def:no">
+    <container name="clock"/>
+  </augment>
+  <rpc name="show-clock">
+    <description>
+      <text>display current time for the cluster or specified switch</text>
+    </description>
+    <input>
+      <leaf name="rbridge-id">
+        <mandatory value="false"/>
+        <type name="common-def:rbridge-id-all-type"/>
+      </leaf>
+    </input>
+    <output>
+      <list name="clock-time">
+        <leaf name="rbridge-id-out">
+          <type name="common-def:rbridge-id-type"/>
+        </leaf>
+        <leaf name="current-time">
+          <type name="ietfyang:date-and-time"/>
+          <description>
+            <text>switch date and time</text>
+          </description>
+        </leaf>
+        <leaf name="timezone">
+          <type name="string">
+            <length value="3 .. 100"/>
+          </type>
+          <description>
+            <text>region/city or region/state/city</text>
+          </description>
+        </leaf>
+      </list>
+    </output>
+  </rpc>
+</module>

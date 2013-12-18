@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<WavePlugin name="Pim" nameSpace="DcmNs">
+    <Global name="PimGlobal">
+        <Worker name="PimGlobal">
+        </Worker>
+    </Global>
+    <Local name="Pim">
+        <Worker name="Pim">
+            <!-- MO and message definitions for the BSR Candidate -->
+            <ManagedObject name="BsrCandidate">
+                <Member name="intfType" dataType="UI8">
+                </Member>
+                <Member name="intfName" dataType="string">
+                </Member>
+                <Member name="mask" dataType="UI16">
+                </Member>
+                <Member name="priority" dataType="UI16">
+                </Member>
+            </ManagedObject>
+            <Message name="BsrCandidateCfg" sequencerType="ASYNC" 
+                     allowPreemption="FALSE" 
+                     derivedClass="PrismMessage">
+                <Member name="msgType" dataType="UI8">
+                </Member>
+                <Member name="intfType" dataType="UI8">
+                </Member>
+                <Member name="intfName" dataType="string">
+                </Member>
+                <Member name="mask" dataType="UI16">
+                </Member>
+                <Member name="priority" dataType="UI16">
+                </Member>
+            </Message>
+            
+            <!-- MO and message definitions for the RP Candidate -->
+            <ManagedObject name="RpCandidate">
+                <Member name="intfType" dataType="UI8">
+                </Member>
+                <Member name="intfName" dataType="string">
+                </Member>
+                <Member name="prefixList" dataType="string">
+                </Member>
+            </ManagedObject>
+            <Message name="RpCandidateCfg" sequencerType="ASYNC" 
+                     allowPreemption="FALSE" 
+                     derivedClass="PrismMessage">
+                <Member name="msgType" dataType="UI8">
+                </Member>
+                <Member name="intfType" dataType="UI8">
+                </Member>
+                <Member name="intfName" dataType="string">
+                </Member>
+                <Member name="prefixList" dataType="string">
+                </Member>
+            </Message>
+
+            <!-- MO and message definitions for the Static RP -->
+            <ManagedObject name="StaticRp">
+                <Member name="rpAddr" dataType="IpV4Address">
+                </Member>
+                <Member name="prefixList" dataType="string">
+                </Member>
+            </ManagedObject>
+            <Message name="StaticRpCfg" sequencerType="ASYNC" 
+                     allowPreemption="FALSE" 
+                     derivedClass="PrismMessage">
+                <Member name="msgType" dataType="UI8">
+                </Member>
+                <Member name="rpAddr" dataType="IpV4Address">
+                </Member>
+                <Member name="prefixList" dataType="string">
+                </Member>
+            </Message>
+            
+            <!-- MO and message definitions for global PIM configuration -->
+            <ManagedObject name="PimRtrCfg">
+                <Member name="presenceFlag" dataType="bool">
+                </Member>
+                <Member name="vrfId" dataType="string">
+                </Member>
+                <Member name="maxMcache" dataType="UI32">
+                </Member>
+                <Member name="helloTimer" dataType="UI32">
+                </Member>
+                <Member name="NbrTimeout" dataType="SI16">
+                </Member>
+                <Member name="inactivityTimer" dataType="SI16">
+                </Member>
+                <Member name="msgInterval" dataType="SI32">
+                </Member>
+                <Member name="sptThresholdInt" dataType="UI32">
+                </Member>
+                <Member name="sptThresholdInf" dataType="SI8">
+                </Member>
+                <Member name="sptThresholdUnion" dataType="WaveUnion">
+                </Member>
+                <Member name="BsrCandidateCfg" dataType="vector/WaveManagedObjectPointer/"
+                        umlType="COMPOSITION" referredObject="BsrCandidate">
+                </Member>
+                <Member name="RpCandidateCfg" dataType="vector/WaveManagedObjectPointer/"
+                        umlType="COMPOSITION" referredObject="RpCandidate">
+                </Member>
+                <Member name="StaticRpCfg" dataType="vector/WaveManagedObjectPointer/"
+                        umlType="COMPOSITION" referredObject="StaticRp">
+                </Member>
+            </ManagedObject>
+            <Message name="RtrInst" sequencerType="ASYNC" 
+                     allowPreemption="FALSE" 
+                     derivedClass="PrismMessage">
+                <Member name="msgType" dataType="UI8">
+                </Member>
+                <Member name="cmdCode" dataType="UI8">
+                </Member>
+                <Member name="vrfId" dataType="string">
+                </Member>
+                <Member name="maxMcache" dataType="UI32">
+                </Member>
+                <Member name="helloTimer" dataType="SI16">
+                </Member>
+                <Member name="NbrTimeout" dataType="SI16">
+                </Member>
+                <Member name="inactivityTimer" dataType="SI16">
+                </Member>
+                <Member name="msgInterval" dataType="SI32">
+                </Member>
+                <Member name="sptThreshold" dataType="UI32">
+                </Member>
+            </Message>
+            
+            <!-- MO and message definitions for storing state of multicast
+                 routing -->
+            <ManagedObject name="MultRtrCfg">
+                <Member name="presenceFlag" dataType="bool">
+                </Member>
+                <Member name="enable" dataType="bool">
+                </Member>
+            </ManagedObject>
+            <Message name="MultRtrCfg" sequencerType="ASYNC" 
+                     allowPreemption="FALSE" 
+                     derivedClass="PrismMessage">
+                <Member name="msgType" dataType="UI8">
+                </Member>
+                <Member name="cmdCode" dataType="UI8">
+                </Member>
+                <Member name="enable" dataType="bool">
+                </Member>
+            </Message>
+            
+            <!-- MO and message definitions for the PIM configuration under
+                 an interface -->
+            <ManagedObject name="PimIntfCfg">
+                <Member name="enabled" dataType="bool">
+                </Member>
+                <Member name="drPriority" dataType="UI32">
+                </Member>
+                <Member name="multBoundaryAcl" dataType="string">
+                </Member>
+                <Member name="pimBorder" dataType="bool">
+                </Member>
+                <Member name="ttlThold" dataType="UI32">
+                </Member>
+            </ManagedObject>
+            <Message name="PimIntfCfg" sequencerType="ASYNC"
+                     allowPreemption="FALSE"
+                     derivedClass="PrismMessage">
+                <Member name="msgType" dataType="UI8">
+                </Member>
+                <Member name="cmdCode" dataType="UI8">
+                </Member>
+                <Member name="intfName" dataType="string">
+                </Member>
+                <Member name="enable" dataType="bool">
+                </Member>
+                <Member name="drPriority" dataType="UI32">
+                </Member>
+                <Member name="multBoundaryAcl" dataType="string">
+                </Member>
+                <Member name="pimBorder" dataType="bool">
+                </Member>
+                <Member name="ttlThold" dataType="UI32">
+                </Member>
+            </Message>
+        </Worker>    
+    </Local>
+</WavePlugin>

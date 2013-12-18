@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- This file contains the resources for Wave Framework Core Module. -->
+
+<ModuleResources ModuleName = "ntpclock" ComponentName = "NTPClockResourceIds">
+    <ResourceEnum Name = "NTPClockRetcodeEnum">
+        <Resource Name = "NTPCLOCK_INTERNAL_ERROR">Internal error</Resource>
+        <Resource Name = "NTPCLOCK_WAVE_ERROR">Unable to send request</Resource>
+        <Resource Name = "NTPCLOCK_RECOVER_ERROR">Unable to recover from error</Resource>
+        <Resource Name = "NTPCLOCK_INVALID_MAPPED_ID">Specified rbridge-id is invalid</Resource>
+        <Resource Name = "NTPCLOCK_TIME_ERROR">Invalid time/date</Resource>
+        <Resource Name = "NTPCLOCK_ZONE_ERROR">Invalid timezone</Resource>
+        <Resource Name = "NTPCLOCK_GETSERVER_ERROR">Unable to get active server</Resource>
+        <Resource Name = "NTPCLOCK_SERVER_ALREADY_IN_LIST">Specified NTP Server is already in the list</Resource>
+        <Resource Name = "NTPCLOCK_SERVER_NOT_IN_LIST">Specified NTP Server is not in the list</Resource>
+        <Resource Name = "NTPCLOCK_SETSERVERS_ERROR">Unable to set NTP Server list</Resource>
+        <Resource Name = "NTPCLOCK_ADDSERVER_ERROR">Unable to Add NTP Server</Resource>
+        <Resource Name = "NTPCLOCK_REMOVESERVER_ERROR">Unable to Remove NTP Server</Resource>
+        <Resource Name = "NTPCLOCK_INVALID_SERVER">Specified NTP Server is not valid</Resource>
+        <Resource Name = "NTPCLOCK_MAX_SERVERS">Max configured NTP Servers</Resource>
+        <Resource Name = "NTPCLOCK_NULLPTR_ERROR">Null input, Please try again</Resource>
+        <Resource Name = "NTPCLOCK_LOWMEM_ERROR">Out of Memory</Resource>
+        <Resource Name = "NTPCLOCK_MAX_SVRLEN_ERROR">NTP Server list length exceeds maximum</Resource>
+        <Resource Name = "NTPCLOCK_IPC_ERROR">IPC Error, Please try again</Resource>
+        <Resource Name = "NTPCLOCK_VERIFY_ERROR">Unable to verify NTP server</Resource>
+        <Resource Name = "NTPCLOCK_INVALID_CHAR">Invalid character in server ip address</Resource>
+        <Resource Name = "NTPCLOCK_INVALID_NTP_ERROR">Invalid NTP servers present in the list</Resource>
+        <Resource Name = "NTPCLOCK_SFOS_ERROR">SFOS not supported</Resource>
+        <Resource Name = "NTPCLOCK_QUERY_FAILED">NTP Query Failed.  No server is reachable</Resource>
+        <Resource Name = "NTPCLOCK_LOCL_ERROR">LOCL specified in NTP server list</Resource>
+        <Resource Name = "NTPCLOCK_UNKNOWN_ELEMENT">Unable to process parameters. Found unknown element.</Resource>
+        <Resource Name = "NTPCLOCK_SERVER_DEL_BULK_ERROR">Deleting all NTP servers in one transaction is not permitted</Resource>
+        <Resource Name = "NTPCLOCK_INVALID_KEY">Key ID must be in the range 1..65535</Resource>
+        <Resource Name = "NTPCLOCK_MAX_KEYS">Max configured NTP Keys</Resource>
+        <Resource Name = "NTPCLOCK_KEY_ASSOCIATION_ERROR">Associated key is not present in the key list</Resource>
+        <Resource Name = "NTPCLOCK_KEY_DISASSOCIATION_ERROR">Key removal failed, Specified key is associated with server</Resource>
+        <Resource Name = "NTPCLOCK_KEY_ALREADY_IN_LIST">Specified NTP authentication key is already in the list; Key and key-string should be unique</Resource>	
+        <Resource Name = "NTPCLOCK_KEY_NOT_IN_LIST">Specified NTP authentication key is not in the list</Resource>
+        <Resource Name = "NTPCLOCK_ADDKEY_ERROR">Unable to Add NTP authentication key</Resource>
+        <Resource Name = "NTPCLOCK_REMOVEKEY_ERROR">Unable to Remove NTP authentication key</Resource>
+        <Resource Name = "NTPCLOCK_CONFIG_SET_ERROR">Error in writing server and key in conf file</Resource>
+        <Resource Name = "NTPCLOCK_KEY_READ_ERROR">Error in processing ntp data</Resource>
+        <Resource Name = "NTPCLOCK_KEY_WRITE_ERROR">Error in writing ntp key file</Resource>
+        <Resource Name = "NTPCLOCK_TIMEZONE_SUCCESS">%%INFO: Reload is recommended to update all system entities with the configured time zone</Resource>
+    </ResourceEnum>
+
+</ModuleResources>

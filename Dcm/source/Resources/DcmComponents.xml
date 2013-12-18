@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- There can be a maximum of 4 top level compnents in the follwoing section                                  -->
+<!-- For now, we do not expect more than 2 entries here.  The first one will be the entry for the Wave itself. -->
+<!-- Second entry will be the Component entry corresponding to Dcm.                                            -->
+
+<WaveComponents>
+    <Component Name="Wave" Source="WaveModules.xml" ></Component>
+    <Component Name="Dcm"  Source="DcmModules.xml"  ></Component>
+</WaveComponents>

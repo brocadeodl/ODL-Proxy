@@ -1,0 +1,5 @@
+void   initializeDcmResourceIds ();
+string localizeResourceId       (unsigned long int resourceId);
+void   localizeResourceEnum     (unsigned long int resourceEnum, vector<unsigned long int> &resourcesVector);
+bool   isAResourceId            (unsigned long int resourceId);
+bool   isAResourceEnum          (unsigned long int resourceEnum);

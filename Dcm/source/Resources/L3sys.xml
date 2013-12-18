@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ModuleResources ModuleName = "L3ss" ComponentName = "Wave">
+    <ResourceEnum Name = "L3ssReturnCode">
+
+		<!-- L3SS common -->
+        <Resource Name = "L3SS_MEMORY_ALLOCATION_FAILED"></Resource>
+		<Resource Name = "L3SS_CLEAR_IN_PROGRESS">%%Error: Clear in Progress.</Resource>
+        <Resource Name = "L3SS_UNKNOWN_INTERNAL_ERROR">%%Error: Unknown internal error</Resource>
+
+    </ResourceEnum>
+</ModuleResources>

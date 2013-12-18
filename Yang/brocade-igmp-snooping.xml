@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module name="brocade-igmp-snooping"
+        xmlns="urn:ietf:params:xml:ns:yang:yin:1"
+        xmlns:igmp-snooping="urn:brocade.com:mgmt:brocade-igmp-snooping"
+        xmlns:inet="urn:ietf:params:xml:ns:yang:ietf-inet-types"
+        xmlns:interface="urn:brocade.com:mgmt:brocade-interface"
+        xmlns:common-def="urn:brocade.com:mgmt:brocade-common-def">
+  <namespace uri="urn:brocade.com:mgmt:brocade-igmp-snooping"/>
+  <prefix value="igmp-snooping"/>
+  <import module="ietf-inet-types">
+    <prefix value="inet"/>
+  </import>
+  <import module="brocade-interface">
+    <prefix value="interface"/>
+  </import>
+  <import module="brocade-common-def">
+    <prefix value="common-def"/>
+  </import>
+  <organization>
+    <text>Brocade Communications Systems, Inc.</text>
+  </organization>
+  <contact>
+    <text>Brocade Communications Systems, Inc.
+Postal: 1745 Technology Drive,
+        San Jose, CA 95110 
+         U.S.A
+Tel: +1-408-392-6061
+E-mail: support@Brocade.com 
+web: www.brocade.com.</text>
+  </contact>
+  <description>
+    <text>This management module is an instrumentation to manage the 
+'Internet Group Management Protocol (IGMP) Snooping'.</text>
+  </description>
+  <revision date="2010-06-02">
+    <description>
+      <text>Initial version of this module.</text>
+    </description>
+  </revision>
+  <container name="igmp-snooping">
+    <container name="ip">
+      <container name="igmp">
+        <container name="snooping">
+          <leaf name="enable">
+            <type name="empty"/>
+          </leaf>
+          <leaf name="restrict-unknown-mcast">
+            <type name="empty"/>
+          </leaf>
+        </container>
+      </container>
+    </container>
+  </container>
+  <typedef name="lmqt-type">
+    <type name="uint32">
+      <range value="100..25500"/>
+    </type>
+  </typedef>
+  <typedef name="qi-type">
+    <type name="uint32">
+      <range value="1..18000"/>
+    </type>
+  </typedef>
+  <typedef name="qmrt-type">
+    <type name="uint32">
+      <range value="1..25"/>
+    </type>
+  </typedef>
+  <typedef name="mrti-type">
+    <type name="uint32">
+      <range value="1..60000"/>
+    </type>
+  </typedef>
+  <typedef name="string-type">
+    <type name="string">
+      <length value="1..10"/>
+    </type>
+  </typedef>
+  <augment target-node="/interface:interface-vlan/interface:interface/interface:vlan/interface:ip">
+    <description>
+      <text>Internet Protocol (IP)</text>
+    </description>
+    <container name="igmp">
+      <leaf name="last-member-query-interval">
+        <type name="lmqt-type"/>
+        <units name="milliSeconds"/>
+        <default value="1000"/>
+      </leaf>
+      <leaf name="query-interval">
+        <type name="qi-type"/>
+        <units name="Seconds"/>
+        <default value="125"/>
+      </leaf>
+      <leaf name="query-max-response-time">
+        <type name="qmrt-type"/>
+        <units name="Seconds"/>
+        <default value="10"/>
+      </leaf>
+      <container name="snooping">
+        <leaf name="enable">
+          <type name="empty"/>
+        </leaf>
+        <leaf name="fast-leave">
+          <type name="empty"/>
+        </leaf>
+        <leaf name="mrouter-timeout">
+          <type name="mrti-type"/>
+          <units name="Seconds"/>
+          <default value="300"/>
+        </leaf>
+        <container name="querier">
+          <leaf name="qenable">
+            <type name="empty"/>
+          </leaf>
+        </container>
+        <container name="mrouter">
+          <list name="interface">
+            <key value="if-type value"/>
+            <leaf name="if-type">
+              <type name="enumeration">
+                <enum name="GigabitEthernet"/>
+                <enum name="TenGigabitEthernet"/>
+                <enum name="FortyGigabitEthernet"/>
+                <enum name="Port-channel"/>
+              </type>
+            </leaf>
+            <leaf name="value">
+              <type name="string-type"/>
+            </leaf>
+          </list>
+        </container>
+      </container>
+      <list name="static-group">
+        <key value="mcast-address interface if-type value"/>
+        <leaf name="mcast-address">
+          <type name="inet:ipv4-address"/>
+        </leaf>
+        <leaf name="interface">
+          <type name="enumeration">
+            <enum name="interface"/>
+          </type>
+        </leaf>
+        <leaf name="if-type">
+          <type name="enumeration">
+            <enum name="GigabitEthernet"/>
+            <enum name="TenGigabitEthernet"/>
+            <enum name="FortyGigabitEthernet"/>
+            <enum name="Port-channel"/>
+          </type>
+        </leaf>
+        <leaf name="value">
+          <type name="string-type"/>
+        </leaf>
+      </list>
+    </container>
+  </augment>
+</module>

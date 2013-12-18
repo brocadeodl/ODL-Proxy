@@ -1,0 +1,587 @@
+4c4
+<  *   Author : pbalacha                                                     *
+---
+>  *   Author : vguntaka                                                     *
+7,8c7
+< #include "Framework/Utils/FrameworkToolKit.h"
+< #include "Framework/ObjectModel/WaveManagedObjectSynchronousQueryContext.h"
+---
+> 
+21,24d19
+< #include "DcmResourceIdEnums.h"
+< #include "DcmCore/DcmToolKit.h"
+< #include "Utils/Layer3LicenseUtil.h"
+< #include "User/Bgp/BgpUtils.h"
+45,52c40
+<     	if(pAttribute->getAttributeName()== "vrfName") { 
+< 			trace (TRACE_LEVEL_INFO, string("BgpLocalUserCode. Check license"));
+< 			if (WRC_LAYER_3_LICENSE_NOT_PRESENT_ERROR == Layer3LicenseUtil::checkLayer3License()) {
+< 				trace (TRACE_LEVEL_INFO, string("BgpLocalUserCode. LAYER_3_LICENSE not present"));
+< 				status = WRC_LAYER_3_LICENSE_NOT_PRESENT_ERROR;
+< 			}
+<         }
+< 	}
+---
+>     }
+128,130d115
+< 	string localAsString;
+< 	AttributeString *localAsAttributeString;
+< 	
+135,158d119
+< 		if(pAttribute->getAttributeName()== "localAsNum") {
+< 			localAsAttributeString = dynamic_cast<AttributeString*> (pAttribute);
+< 			if (localAsAttributeString != NULL)
+< 			{
+< 			  	localAsString = localAsAttributeString->getValue();
+< 				localAsString = BgpUtils::getASinIntegerFormat(localAsString);
+< 				trace (TRACE_LEVEL_INFO, string("BgpLocalBasicConfigManagedObject::localAsString=")+localAsString);
+< 				if (BgpUtils::isValidAsNum(localAsString))
+< 				{
+< 					setlocalAsNum(localAsString);
+< 					localAsAttributeString->fromString(localAsString);
+< 				}
+< 				else
+< 				{
+< 					trace (TRACE_LEVEL_ERROR, string("BgpLocalBasicConfigManagedObject::addNewAttributeToBeUpdatedForUpdate incorrect AS num"));
+< 					status = BGP_CLI_ERR_INVALID_AS;
+< 				}
+< 			}
+< 			else
+< 			{
+< 				trace (TRACE_LEVEL_ERROR, string("BgpLocalBasicConfigManagedObject::addNewAttributeToBeUpdatedForUpdate dynamic_cast error"));
+< 				status = WAVE_MESSAGE_ERROR;
+< 			}
+< 		}
+811d771
+< 	string ipaddress;
+817,825d776
+< 
+< 		 if(pAttribute->getAttributeName()== "neighborIpvXAddress") {
+<             pAttribute->getPlainString(ipaddress);
+<             if (!IpVxAddress::isValidIpV4Address(ipaddress))
+<             {
+<                 trace(TRACE_LEVEL_INFO, string("BgpLocalNeighborIpxAddrManagedObject::validateForUpdate: invalid ip address "));
+<                 status = BGP_IPADDRESS_V6_NOT_SUPPORTED;
+<             }
+<         }
+855,860d805
+< 	string rbridgeIdString;
+< 	string interfaceValue;
+< 	UI32 rbridgeId;
+< 	LocationId locationId;
+< 	AttributeString *interfaceAttributeString;
+< 	size_t pos;
+866,894d810
+< 		if(pAttribute->getAttributeName()== "ethInterface") {
+< 		  interfaceAttributeString = dynamic_cast<AttributeString*> (pAttribute);
+< 		  if (interfaceAttributeString != NULL)
+< 		  {
+< 		      interfaceValue = interfaceAttributeString->getValue();
+< 		      pos = interfaceValue.find ("/", 0);
+< 		      rbridgeIdString = interfaceValue.substr(0, pos);
+< 
+< 
+< 		      rbridgeId = atoi(rbridgeIdString.c_str());
+<               trace (TRACE_LEVEL_INFO, string("BgpLocalNeighborIpxAddrManagedObject::validateForUpdateAtThisNode rbridgeid=") + rbridgeId);
+< 		      locationId = DcmToolKit::getLocationIdFromMappedId (rbridgeId);
+<               if (locationId == 0)
+<               {
+<                   trace (TRACE_LEVEL_DEBUG, string("BgpLocalNeighborIpxAddrManagedObject::validateForUpdateAtThisNode location 0"));
+< 		          status = BGP_INVALID_RBRIDGE;
+<               }
+< 		      else if (locationId != FrameworkToolKit::getThisLocationId ())
+< 		      {
+<               	  trace (TRACE_LEVEL_DEBUG, string("BgpLocalNeighborIpxAddrManagedObject::validateForUpdateAtThisNode not local"));
+< 			      status = BGP_INVALID_RBRIDGE;
+< 		      }
+< 		   }
+< 		   else
+< 		   {
+<               trace (TRACE_LEVEL_ERROR, string("BgpLocalNeighborIpxAddrManagedObject::validateForUpdateAtThisNode dynamic_cast error"));
+< 			  status = WAVE_MESSAGE_ERROR;
+< 		   }
+< 	    }
+933,934c849
+< 	//isAssociatedManagedObjectToBeCreated will be called only if the associated object does not exist. 
+< 	status = BGP_CLI_ERR_PG_NOT_EXIST;
+---
+>  
+951,952d865
+< 	string remoteAsString;
+<     AttributeString *remoteAsAttributeString;
+957,981d869
+< 		if(pAttribute->getAttributeName()== "remoteAsNum") {
+<             remoteAsAttributeString = dynamic_cast<AttributeString*> (pAttribute);
+<             if (remoteAsAttributeString != NULL)
+<             {
+<                 remoteAsString = remoteAsAttributeString->getValue();
+<                 remoteAsString = BgpUtils::getASinIntegerFormat(remoteAsString);
+<                 trace (TRACE_LEVEL_INFO, string("BgpLocalNeighborIpxAddrManagedObject::remoteAsString=")+remoteAsString);
+< 				if (BgpUtils::isValidAsNum(remoteAsString))
+< 				{
+<                 	setremoteAsNum(remoteAsString);
+<                 	remoteAsAttributeString->fromString(remoteAsString);
+< 				}
+< 				else
+< 				{
+< 					trace (TRACE_LEVEL_ERROR, string("BgpLocalNeighborIpxAddrManagedObjec::addNewAttributeToBeUpdatedForCreate incorrect remote AS num"));
+< 					status = BGP_CLI_ERR_INVALID_AS;
+< 				}
+<             }
+<             else
+<             {
+<                 trace (TRACE_LEVEL_ERROR, string("BgpLocalNeighborIpxAddrManagedObject::addNewAttributeToBeUpdatedForCreate dynamic_cast error"));
+<                 status = WAVE_MESSAGE_ERROR;
+<             }
+<         }
+< 
+999,1003d886
+< 	string remoteAsString;
+<     AttributeString *remoteAsAttributeString;
+< 	string localAsString;
+<     AttributeString *localAsAttributeString;
+< 
+1008,1077d890
+< 
+< 		if ((pAttribute->getAttributeName()== "as4EnableFlag")) {
+< 			setas4DisableFlag (false);
+< 			addAttributeToBeUpdated("as4DisableFlag");
+< 		}
+< 		if ((pAttribute->getAttributeName()== "as4DisableFlag")) {
+< 			setas4EnableFlag (false);
+< 			addAttributeToBeUpdated("as4EnableFlag");
+< 		}
+< 		if ((pAttribute->getAttributeName()== "enforceFirstAsFlag")) {
+< 			setenforceFirstAsDisableFlag (false);
+< 			addAttributeToBeUpdated("enforceFirstAsDisableFlag");
+< 		}
+< 		if ((pAttribute->getAttributeName()== "enforceFirstAsDisableFlag")) {
+< 			setenforceFirstAsFlag (false);
+< 			addAttributeToBeUpdated("enforceFirstAsFlag");
+< 		}
+< 		if ((pAttribute->getAttributeName()== "shutdownGenerateRibOutFlag")) {
+<             setshutdownFlag(true);
+<             addAttributeToBeUpdated("shutdownFlag");
+<         }
+< 		if(pAttribute->getAttributeName()== "remoteAsNum") {
+<             remoteAsAttributeString = dynamic_cast<AttributeString*> (pAttribute);
+<             if (remoteAsAttributeString != NULL)
+<             {
+<                 remoteAsString = remoteAsAttributeString->getValue();
+<                 remoteAsString = BgpUtils::getASinIntegerFormat(remoteAsString);
+<                 trace (TRACE_LEVEL_INFO, string("BgpLocalNeighborIpxAddrManagedObject::remoteAsString=")+remoteAsString);
+< 				if (BgpUtils::isValidAsNum(remoteAsString))
+< 				{
+<                 	setremoteAsNum(remoteAsString);
+<                 	remoteAsAttributeString->fromString(remoteAsString);
+< 				}
+< 				else
+< 				{
+< 					trace (TRACE_LEVEL_ERROR, string("BgpLocalNeighborIpxAddrManagedObjec::addNewAttributeToBeUpdatedForUpdate incorrect remote AS num"));
+< 					status = BGP_CLI_ERR_INVALID_AS;
+< 				}
+<             }
+<             else
+<             {
+<                 trace (TRACE_LEVEL_ERROR, string("BgpLocalNeighborIpxAddrManagedObject::addNewAttributeToBeUpdatedForUpdate dynamic_cast error"));
+<                 status = WAVE_MESSAGE_ERROR;
+<             }
+<         }
+< 		if(pAttribute->getAttributeName()== "localAsNum") {
+< 			localAsAttributeString = dynamic_cast<AttributeString*> (pAttribute);
+<             if (localAsAttributeString != NULL)
+<             {
+<                 localAsString = localAsAttributeString->getValue();
+<                 localAsString = BgpUtils::getASinIntegerFormat(localAsString);
+<                 trace (TRACE_LEVEL_INFO, string("BgpLocalNeighborIpxAddrManagedObject::localAsString=")+localAsString);
+< 				if (BgpUtils::isValidAsNum(localAsString))
+< 				{
+<                 	setlocalAsNum(localAsString);
+<                 	localAsAttributeString->fromString(localAsString);
+< 				}
+< 				else
+< 				{
+< 					trace (TRACE_LEVEL_ERROR, string("BgpLocalNeighborIpxAddrManagedObject::addNewAttributeToBeUpdatedForUpdate incorrect AS num"));
+< 					status = BGP_CLI_ERR_INVALID_AS;
+< 				}
+<             }
+<             else
+<             {
+<                 trace (TRACE_LEVEL_ERROR, string("BgpLocalNeighborIpxAddrManagedObject::addNewAttributeToBeUpdatedForUpdate local as dynamic_cast error"));
+<                 status = WAVE_MESSAGE_ERROR;
+<             }
+<         }
+< 
+1084,1158d896
+< void BgpLocalNeighborIpxAddrManagedObject::CleanupAssociatedNeighborsIpv4Mos(UpdateNewAttributeInManagedObjectContext *pContext)
+< {
+<     BgpLocalAfIpv4NeighborIpAddrManagedObject *mo;
+<     ObjectId objectid = getObjectId();
+<     ObjectId ownerObjectId;
+<     vector<string> selectedFields;
+<     selectedFields.push_back("objectId");
+<     selectedFields.push_back("ownerManagedObjectId");
+<     LocationId locationId= FrameworkToolKit::getThisLocationId ();
+<     WaveManagedObjectSynchronousQueryContext syncQueryCtxt(BgpLocalAfIpv4NeighborIpAddrManagedObject::getClassName());
+<     syncQueryCtxt.addAndAttribute (new AttributeObjectId (&objectid, "afIpv4NeighborIpAddress"));
+<     syncQueryCtxt.addSelectFields(selectedFields);
+<     vector<WaveManagedObject *> *pResults = querySynchronouslyLocalManagedObjectsForLocationId(locationId, &syncQueryCtxt);
+<     if(pResults && pResults->size() >= 1) {
+<         trace(TRACE_LEVEL_INFO, string("BgpLocalNeighborIpxAddrManagedObject::CleanupAssociatedNeighborsIpv4Mos deleting mos"));
+<         mo = dynamic_cast<BgpLocalAfIpv4NeighborIpAddrManagedObject*>((*pResults)[0]);
+<         ownerObjectId = mo->getOwnerManagedObjectId();
+<         objectid = mo->getObjectId();
+<         deleteFromComposition(BgpLocalAfIpv4UcastManagedObject::getClassName(), 
+<             BgpLocalAfIpv4NeighborIpAddrManagedObject::getClassName(), string("addressFamilyNeighborIpAddr"),
+<             ownerObjectId, objectid);
+<         pContext->addManagedObjectsForGarbageCollection(*pResults);
+<         delete pResults;
+<     }
+<     ownerObjectId = getOwnerManagedObjectId();
+<     objectid = getObjectId();
+<     deleteFromComposition(BgpLocalBasicConfigManagedObject::getClassName(), 
+<         BgpLocalNeighborIpxAddrManagedObject::getClassName(), string("routerBgpNeighborIpxAddr"),
+<         ownerObjectId, objectid);
+< }
+< 
+< void BgpLocalNeighborIpxAddrManagedObject::CleanupAssociatedNeighbors(UpdateNewAttributeInManagedObjectContext *pContext,  Attribute *pAttribute)
+< {
+<     if(pAttribute->getAttributeName()== "remoteAsNum") { 
+<         if (getassociatePeerGroup () == ObjectId::NullObjectId) {
+<         	/*knock off all neighbor if it is not associated peer group*/
+<         	CleanupAssociatedNeighborsIpv4Mos(pContext);
+< 		}
+< 		else {
+< 		  	// if the neighbor is associated with a peer-group
+< 			ObjectId peerGroupObjectid = getassociatePeerGroup ();
+< 			WaveManagedObject *pWaveManagedObject = NULL;
+< 			BgpLocalNeighborPeerGrpManagedObject *peerGroupMo = NULL;
+< 			pWaveManagedObject = queryManagedObject (peerGroupObjectid);
+< 			if (pWaveManagedObject != NULL)
+< 			{
+< 				peerGroupMo = dynamic_cast <BgpLocalNeighborPeerGrpManagedObject *> (pWaveManagedObject);
+< 				if (peerGroupMo != NULL)
+< 				{
+< 					string peerGroupRemoteAs = peerGroupMo->getremoteAsNum();
+< 					if (peerGroupRemoteAs == "")
+< 					{
+< 						/*knock off all neighbor config only if the associated peer group has no remote-as configured.*/
+< 						CleanupAssociatedNeighborsIpv4Mos(pContext);
+< 					}
+< 				}
+< 				else
+< 				{
+< 					trace(TRACE_LEVEL_ERROR, string("peerGroupMo is NULL"));
+< 				}
+< 				pContext->addManagedObjectForGarbageCollection(pWaveManagedObject);
+< 			}
+< 			else
+< 			{
+<         		trace(TRACE_LEVEL_ERROR, string("CleanupAssociatedNeighbors query returned NULL"));
+< 			}
+<     	}
+< 	}
+<     else if((pAttribute->getAttributeName()== "associatePeerGroup") &&
+<         (getremoteAsNum() == ""))
+<     {
+<         /*knock off all neighbor only if remote-as is not set*/
+<         CleanupAssociatedNeighborsIpv4Mos(pContext);
+<     }
+< }
+1174,1184d911
+<         CleanupAssociatedNeighbors(pContext, pAttribute);
+< 		if ((pAttribute->getAttributeName()== "localAsNum")) {
+< 			pContext->addNewAttributeName("localAsNoPrependFlag");
+< 			setlocalAsNoPrependFlag(false);
+< 		}
+< 		if ((pAttribute->getAttributeName()== "shutdownGenerateRibOutFlag")) {
+< 			setshutdownFlag(false);
+< 		}
+< 		if ((pAttribute->getAttributeName()== "shutdownFlag")) {
+< 			setshutdownGenerateRibOutFlag (false);
+< 		}
+2155,2160d1881
+< 	string rbridgeIdString;
+< 	string interfaceValue;
+< 	UI32 rbridgeId;
+< 	LocationId locationId;
+< 	AttributeString *interfaceAttributeString;
+< 	size_t pos;
+2166,2194d1886
+< 		if(pAttribute->getAttributeName()== "ethInterface") {
+< 		  interfaceAttributeString = dynamic_cast<AttributeString*> (pAttribute);
+< 		  if (interfaceAttributeString != NULL)
+< 		  {
+< 		      interfaceValue = interfaceAttributeString->getValue();
+< 		      pos = interfaceValue.find ("/", 0);
+< 		      rbridgeIdString = interfaceValue.substr(0, pos);
+< 
+< 
+< 		      rbridgeId = atoi(rbridgeIdString.c_str());
+<               trace (TRACE_LEVEL_INFO, string("BgpLocalNeighborPeerGrpManagedObject::validateForUpdateAtThisNode rbridgeid=") + rbridgeId);
+< 		      locationId = DcmToolKit::getLocationIdFromMappedId (rbridgeId);
+<               if (locationId == 0)
+<               {
+<                   trace (TRACE_LEVEL_DEBUG, string("BgpLocalNeighborPeerGrpManagedObject::validateForUpdateAtThisNode location 0"));
+< 		          status = BGP_INVALID_RBRIDGE;
+<               }
+< 		      else if (locationId != FrameworkToolKit::getThisLocationId ())
+< 		      {
+<               	  trace (TRACE_LEVEL_DEBUG, string("BgpLocalNeighborPeerGrpManagedObject::validateForUpdateAtThisNode not local"));
+< 			      status = BGP_INVALID_RBRIDGE;
+< 		      }
+< 		   }
+< 		   else
+< 		   {
+<               trace (TRACE_LEVEL_ERROR, string("BgpLocalNeighborPeerGrpManagedObject::validateForUpdateAtThisNode dynamic_cast error"));
+< 			  status = WAVE_MESSAGE_ERROR;
+< 		   }
+< 	    }
+2271,2276d1962
+< 	string remoteAsString;
+<     AttributeString *remoteAsAttributeString;
+< 	string localAsString;
+< 	AttributeString *localAsAttributeString;
+< 
+< 
+2281,2349d1966
+< 
+< 		if ((pAttribute->getAttributeName()== "as4EnableFlag")) {
+< 			setas4DisableFlag (false);
+< 			addAttributeToBeUpdated("as4DisableFlag");
+< 		}
+< 		if ((pAttribute->getAttributeName()== "as4DisableFlag")) {
+< 			setas4EnableFlag (false);
+< 			addAttributeToBeUpdated("as4EnableFlag");
+< 		}
+< 		if ((pAttribute->getAttributeName()== "enforceFirstAsFlag")) {
+< 			setenforceFirstAsDisableFlag (false);
+< 			addAttributeToBeUpdated("enforceFirstAsDisableFlag");
+< 		}
+< 		if ((pAttribute->getAttributeName()== "enforceFirstAsDisableFlag")) {
+< 			setenforceFirstAsFlag (false);
+< 			addAttributeToBeUpdated("enforceFirstAsFlag");
+< 		}
+< 		if ((pAttribute->getAttributeName()== "shutdownGenerateRibOutFlag")) {
+<             setshutdownFlag(true);
+<             addAttributeToBeUpdated("shutdownFlag");
+<         }
+< 		if(pAttribute->getAttributeName()== "remoteAsNum") {
+<             remoteAsAttributeString = dynamic_cast<AttributeString*> (pAttribute);
+<             if (remoteAsAttributeString != NULL)
+<             {
+<                 remoteAsString = remoteAsAttributeString->getValue();
+<                 remoteAsString = BgpUtils::getASinIntegerFormat(remoteAsString);
+<                 trace (TRACE_LEVEL_INFO, string("BgpLocalNeighborPeerGrpManagedObject::remoteAsString=")+remoteAsString);
+< 				if (BgpUtils::isValidAsNum(remoteAsString))
+< 				{
+<                 	setremoteAsNum(remoteAsString);
+<                 	remoteAsAttributeString->fromString(remoteAsString);
+< 				}
+< 				else
+< 				{
+< 					trace (TRACE_LEVEL_ERROR, string("BgpLocalNeighborPeerGrpManagedObject::addNewAttributeToBeUpdatedForCreate incorrect remote AS num"));
+< 					status = BGP_CLI_ERR_INVALID_AS;
+< 				}
+<             }
+<             else
+<             {
+<                 trace (TRACE_LEVEL_ERROR, string("BgpLocalNeighborPeerGrpManagedObject::addNewAttributeToBeUpdatedForUpdate dynamic_cast error"));
+<                 status = WAVE_MESSAGE_ERROR;
+<             }
+<         }
+< 		if(pAttribute->getAttributeName()== "localAsNum") {
+<             localAsAttributeString = dynamic_cast<AttributeString*> (pAttribute);
+<             if (localAsAttributeString != NULL)
+<             {
+<                 localAsString = localAsAttributeString->getValue();
+<                 localAsString = BgpUtils::getASinIntegerFormat(localAsString);
+<                 trace (TRACE_LEVEL_INFO, string("BgpLocalNeighborPeerGrpManagedObject::localAsString=")+localAsString);
+< 				if (BgpUtils::isValidAsNum(localAsString))
+< 				{
+< 					setlocalAsNum(localAsString);
+< 					localAsAttributeString->fromString(localAsString);
+< 				}
+< 				else
+< 				{
+< 					trace (TRACE_LEVEL_ERROR, string("BgpLocalBasicConfigManagedObject::addNewAttributeToBeUpdatedForUpdate incorrect AS num"));
+< 					status = BGP_CLI_ERR_INVALID_AS;
+< 				}
+<             }
+<             else
+<             {
+<                 trace (TRACE_LEVEL_ERROR, string("BgpLocalNeighborPeerGrpManagedObject::addNewAttributeToBeUpdatedForUpdate local as dynamic_cast error"));
+<                 status = WAVE_MESSAGE_ERROR;
+<             }
+<         }
+2356,2393d1972
+< void BgpLocalNeighborPeerGrpManagedObject::CleanupAssociatedNeighborPeerGroupMos(UpdateNewAttributeInManagedObjectContext *pContext)
+< {
+<     BgpLocalAfIpv4NeighborPeerGrpManagedObject *mo;
+<     ObjectId objectid = getObjectId();
+<     ObjectId ownerObjectId;
+<     vector<string> selectedFields;
+<     selectedFields.push_back("objectId");
+<     selectedFields.push_back("ownerManagedObjectId");
+<     LocationId locationId= FrameworkToolKit::getThisLocationId ();
+<     WaveManagedObjectSynchronousQueryContext syncQueryCtxt(BgpLocalAfIpv4NeighborPeerGrpManagedObject::getClassName());
+<     syncQueryCtxt.addAndAttribute (new AttributeObjectId (&objectid, "afIpv4NeighborPeerGrpName"));
+<     syncQueryCtxt.addSelectFields(selectedFields);
+<     vector<WaveManagedObject *> *pResults = querySynchronouslyLocalManagedObjectsForLocationId(locationId, &syncQueryCtxt);
+<     if(pResults && pResults->size() >= 1) {
+<         trace(TRACE_LEVEL_INFO, string("BgpLocalNeighborPeerGrpManagedObject::CleanupAssociatedNeighborPeerGroupMos deleting mos"));
+<         mo = dynamic_cast<BgpLocalAfIpv4NeighborPeerGrpManagedObject*>((*pResults)[0]);
+<         ownerObjectId = mo->getOwnerManagedObjectId();
+<         objectid = mo->getObjectId();
+<         deleteFromComposition(BgpLocalAfIpv4UcastManagedObject::getClassName(), 
+<             BgpLocalAfIpv4NeighborPeerGrpManagedObject::getClassName(), string("addressFamilyNeighborPeerGrp"),
+<             ownerObjectId, objectid);
+<         pContext->addManagedObjectsForGarbageCollection(*pResults);
+<         delete pResults;
+<     }
+<     ownerObjectId = getOwnerManagedObjectId();
+<     objectid = getObjectId();
+<     deleteFromComposition(BgpLocalBasicConfigManagedObject::getClassName(), 
+<         BgpLocalNeighborPeerGrpManagedObject::getClassName(), string("routerBgpNeighborPeerGrp"),
+<         ownerObjectId, objectid);
+< }
+< 
+< void BgpLocalNeighborPeerGrpManagedObject::CleanupAssociatedPeerGroups(UpdateNewAttributeInManagedObjectContext *pContext,  Attribute *pAttribute)
+< {
+<     if(pAttribute->getAttributeName()== "peerGrpFlag") { 
+< 		/*knock off peer group configurations*/
+< 		CleanupAssociatedNeighborPeerGroupMos(pContext);
+< 	}
+< }
+2409,2420d1987
+< 		CleanupAssociatedPeerGroups(pContext, pAttribute);
+< 		if ((pAttribute->getAttributeName()== "localAsNum")) {
+< 			pContext->addNewAttributeName("localAsNoPrependFlag");
+< 			setlocalAsNoPrependFlag(false);
+< 		}
+< 		if ((pAttribute->getAttributeName()== "shutdownGenerateRibOutFlag")) {
+< 			setshutdownFlag(false);
+< 		}
+< 		if ((pAttribute->getAttributeName()== "shutdownFlag")) {
+< 			setshutdownGenerateRibOutFlag (false);
+< 		}
+< 
+3447,3486d3013
+< 
+< 		//redistribute connected
+< 		if ((pAttribute->getAttributeName()== "unicastMetric") || (pAttribute->getAttributeName()== "redistributeRouteMapName")) { 
+<         	trace(TRACE_LEVEL_INFO, string("setting setredistributeConnectedFlag:"));;
+< 			setredistributeConnectedFlag(true);
+< 			addAttributeToBeUpdated("redistributeConnectedFlag");
+< 		}
+< 		//redistribute static 
+< 		if ((pAttribute->getAttributeName()== "unicastStaticMetric") || (pAttribute->getAttributeName()== "staticRouteMapName")) { 
+<         	trace(TRACE_LEVEL_INFO, string("setting setredistributeStaticFlag:"));;
+< 			setredistributeStaticFlag(true);
+< 			addAttributeToBeUpdated("redistributeStaticFlag");
+< 		}
+< 		//redistribute ospf 
+< 		if ((pAttribute->getAttributeName()== "ospfMatchInternal") || (pAttribute->getAttributeName()== "ospfMatchExternalOne") ||
+< 			(pAttribute->getAttributeName()== "ospfMatchExternalTwo") || (pAttribute->getAttributeName()== "ospfMetric") ||
+< 			(pAttribute->getAttributeName()== "ospfRouteMapName")) { 
+<         	trace(TRACE_LEVEL_INFO, string("setting setredistributeOspfFlag:"));;
+< 			setredistributeOspfFlag(true);
+< 			addAttributeToBeUpdated("redistributeOspfFlag");
+< 		}
+< 		//maximum-paths
+< 		if (pAttribute->getAttributeName()== "useLoadSharingFlag") {
+< 		  	setloadSharingValue(0);
+< 			addAttributeToBeUpdated("loadSharingValue");
+< 		}
+< 		if (pAttribute->getAttributeName()== "loadSharingValue") {
+< 		  	setuseLoadSharingFlag(false);
+< 			addAttributeToBeUpdated("useLoadSharingFlag");
+< 		}
+< 		//multipath
+< 		if (pAttribute->getAttributeName()== "multiPathEbgp") {
+< 		  	setmultiPathIbgp (false);
+< 			addAttributeToBeUpdated("multiPathIbgp");
+< 		}
+< 		if (pAttribute->getAttributeName()== "multiPathIbgp") {
+< 		  	setmultiPathEbgp (false);
+< 			addAttributeToBeUpdated("multiPathEbgp");
+< 		}
+< 
+3513,3528d3039
+< 
+< 		if ((pAttribute->getAttributeName()== "redistributeConnectedFlag")) { 
+< 			setunicastMetric(0);
+< 			setredistributeRouteMapName("");
+< 		}
+< 		if ((pAttribute->getAttributeName()== "redistributeOspfFlag")) { 
+< 		  	setospfMatchInternal(false);
+< 			setospfMatchExternalOne(false);
+< 			setospfMatchExternalTwo(false);
+< 			setospfMetric(0);
+< 			setospfRouteMapName("");
+< 		}
+< 		if ((pAttribute->getAttributeName()== "redistributeStaticFlag")) { 
+< 		  	setunicastStaticMetric(0);
+< 			setstaticRouteMapName("");
+< 		}
+4524,4525d4034
+< 	//isAssociatedManagedObjectToBeCreated will be called only if the associated object does not exist. 
+< 	status = BGP_CLI_ERR_CONFIGURE_REMOTE_AS_FIRST;
+4546,4549d4054
+< 		if ((pAttribute->getAttributeName()== "defaultOriginateRouteMapName")) {
+< 			addAttributeToBeUpdated("defaultOriginateStatus");
+< 			setdefaultOriginateStatus(true);
+< 		}
+4571,4574d4075
+< 		if ((pAttribute->getAttributeName()== "defaultOriginateRouteMapName")) {
+< 			addAttributeToBeUpdated("defaultOriginateStatus");
+< 			setdefaultOriginateStatus(true);
+< 		}
+4596,4603d4096
+< 		if ((pAttribute->getAttributeName()== "maxiumPrefixLimit")) {
+< 			setmaxiumPrefixLimit(0);
+< 			setmaxiumPrefixthreshold(0);
+< 			setmaxiumPrefixTeardownFlag(false);
+< 		}
+< 		if ((pAttribute->getAttributeName()== "defaultOriginateStatus")) { 
+< 		  	setdefaultOriginateRouteMapName("");
+< 		}
+5088,5089d4580
+< 	//isAssociatedManagedObjectToBeCreated will be called only if the associated object does not exist. 
+< 	status = BGP_CLI_ERR_PG_NOT_EXIST;
+5110,5113d4600
+< 		if ((pAttribute->getAttributeName()== "defaultOriginateRouteMapName")) {
+< 			addAttributeToBeUpdated("defaultOriginateStatus");
+< 			setdefaultOriginateStatus(true);
+< 		}
+5135,5138d4621
+< 		if ((pAttribute->getAttributeName()== "defaultOriginateRouteMapName")) {
+< 			addAttributeToBeUpdated("defaultOriginateStatus");
+< 			setdefaultOriginateStatus(true);
+< 		}
+5160,5168d4642
+< 
+< 		if ((pAttribute->getAttributeName()== "maxiumPrefixLimit")) { 
+< 			setmaxiumPrefixLimit(0);
+< 			setmaxiumPrefixthreshold(0);
+< 			setmaxiumPrefixTeardownFlag(false);
+< 		}
+< 		if ((pAttribute->getAttributeName()== "defaultOriginateStatus")) { 
+< 		  	setdefaultOriginateRouteMapName("");
+< 		}
+6358,6368d5831
+< void BgpLocalIpv4StaticNetworkManagedObject::cleanupStaticNetworkConfiguration(UpdateNewAttributeInManagedObjectContext *pContext)
+< {
+<     ObjectId ownerObjectId = getOwnerManagedObjectId();
+<     ObjectId objectid = getObjectId();
+< 
+<     deleteFromComposition(BgpLocalAfIpv4UcastManagedObject::getClassName(),
+<         BgpLocalIpv4StaticNetworkManagedObject::getClassName(), string("staticNetwork"),
+<         ownerObjectId, objectid);
+< }
+< 
+< 
+6384,6386d5846
+< 		if(pAttribute->getAttributeName()== "staticNetworkDistance") {
+<         	cleanupStaticNetworkConfiguration(pContext);
+<         }

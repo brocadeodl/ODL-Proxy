@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<ModuleResources ModuleName = "dhcprel" ComponentName = "Wave">
+    <ResourceEnum Name = "DhcpRelReturnStatus">
+		<Resource Name = "IPHELPER_DCM_MSG_ERR">%%Error: Invalid message </Resource>
+		<Resource Name = "IPHELPER_ARG_ERR">%%Error: Invalid argument </Resource>
+		<Resource Name = "IPHELPER_INTERNAL_ERR">%%Error: Encountered internal error</Resource>
+		<Resource Name = "IPHELPER_MEM_ERR">%%Error: Could not allocate memory</Resource>
+		<Resource Name = "IPHELPER_ENTRY_NOT_FOUND">%%Error: No entry found</Resource>
+		<Resource Name = "IPHELPER_DUP_ERR">%%Error: Entry already exists</Resource>
+		<Resource Name = "DHCPREL_CLI_ERR_INVALID_IP">%%Error: Invalid IP address</Resource>
+		<Resource Name = "DHCPREL_CLI_ERR_L3_NOT_READY">%%Error: Interface is not in L3 mode</Resource>
+    </ResourceEnum>
+</ModuleResources>

@@ -1,0 +1,232 @@
+#!/bin/bash
+
+ARCH=`uname -m`
+OS=`uname -s`
+
+# Global Variables
+
+export PATH=$WAVE_HOME/build/target26/postgresql/$ARCH/9.1.3/bin:$PATH
+export LD_LIBRARY_PATH=$WAVE_HOME/build/target26/postgresql/$ARCH/9.1.3/lib:$WAvE_HOME/build/target26/xercesc/$ARCH/3.0/lib/:$LD_LIBRARY_PATH
+export DBSHAREDBUFFERS="22MB"
+export PERSISTENTBOOTDETECTED="false"
+
+
+# Default Input Parameters
+
+export DCMN=1
+export MODE="SA"
+export HADCMN=0
+export SWBD=1000                      #Assuming Mercury chassis
+export DETECTSCHEMACHANGE="true"
+export HANDLEDBCORRUPTION="false"
+export YANGDIRECTORIES=$WAVE_HOME/../Yang
+
+# Get User Input
+
+parm=1
+for i in $*
+do
+ 	case $i in
+       	dcmn=*)
+       		export DCMN=`echo $i | sed 's/[-a-zA-Z0-9]*=//'`
+	        ;;
+       	mode=*)
+	       	export MODE=`echo $i | sed 's/[-a-zA-Z0-9]*=//'`
+	        ;;
+       	hadcmn=*)
+		    export HADCMN=`echo $i | sed 's/[-a-zA-Z0-9]*=//'`
+       	    ;;
+        swbd=*)
+            export SWBD=`echo $i | sed 's/[-a-zA-Z0-9]*=//'`
+            ;;
+   	    detectschemachange=*)
+   	        export DETECTSCHEMACHANGE=`echo $i | sed 's/[-a-zA-Z0-9]*=//'`
+            ;;
+   	    needdbcorruptiontobehandled=*)
+   	        export HANDLEDBCORRUPTION=`echo $i | sed 's/[-a-zA-Z0-9]*=//'`
+            ;;
+	      *)
+      
+            if [ $parm = 1 ];
+            then
+	      	    if [ "$1" = "--help" -o "$1" = "--usage" -o "$1" = "-h" ]
+				then
+			        echo "usage: startdcm [dcmn=<dcm #>] [mode=SA|FC|MC] [hadcmn=<ha peer dcm#>] [swbd=<BD type#>] [detectschemachange=<true|false>] [needdbcorruptiontobehandled=<true|false>]"
+				    echo "default usage: startdcm [#] - where # = dcmd instance#"
+		  			exit 0
+				else
+		       		export DCMN=$1
+	       		fi
+		    else
+			    echo "usage: startdcm [dcmn=<dcm #>] [mode=SA|FC|MC] [hadcmn=<ha peer dcm#>] [swbd=<BD type#>] [detectschemachange=<true|false>] [needdbcorruptiontobehandled=<true|false>]"
+				echo "default usage: startdcm [#] - where # = dcmd instance#"
+			    exit 0
+		    fi   
+		;;
+	esac
+	let parm++
+done
+
+export START_MODE_COMMAND_PARAMTERS=""
+
+if [ "$MODE" ==  "controller" ]
+then
+    mode="MC"
+    export START_MODE_COMMAND_PARAMTERS="-startmode controller"
+fi
+
+if [ "$MODE" ==  "client" ]
+then
+    mode="MC"
+    export START_MODE_COMMAND_PARAMTERS="-startmode client"
+fi
+
+if [ "$ARCH" == "x86_64" ]
+then 
+	export DBSHAREDBUFFERS="18MB"
+else
+	export DBSHAREDBUFFERS="22MB"
+fi
+
+# DCM paths and port numbers
+export DCMAPPDIR=$WAVE_HOME/../Dcm/application
+export DCMEXECDIR=`pwd`
+export DBPORT=`expr 9012 + $DCMN`
+export MGMTPORT=`expr 9109 + $DCMN`
+export PORT=`expr 3015 + $DCMN`
+export CLIENTPORT=`expr 9709 + $DCMN`
+export HTTPPORT=`expr 2300 + $DCMN`
+export DCMHAPORT=`expr 3515 + $DCMN`
+export CLIPORT=`expr 1100 + $DCMN`
+
+export NOSSMDMGMTPORT=`expr 19109 + $DCMN`
+
+if [ "$HADCMN" = 0 ]; then
+    export DCMHAPEERPORT=0
+else    
+     export DCMHAPEERPORT=`expr 3515 + $HADCMN`
+fi
+
+# Check for a persistent boot
+
+if [[ -e ./Dcmd.$OS.$ARCH.cfg ]]; then
+    export PERSISTENTBOOTDETECTED="true"
+fi
+    
+echo
+echo "SWBD                      = $SWBD"
+echo "DCMN                      = $DCMN"
+echo "HADCMN                    = $HADCMN"
+echo "MODE                      = $MODE"
+echo "DBPORT                    = $DBPORT"
+echo "MGMTPORT                  = $MGMTPORT"
+echo "PORT                      = $PORT"
+echo "HTTPPORT                  = $HTTPPORT"
+echo "DCMHAPORT                 = $DCMHAPORT"
+echo "DCMHAPEERPORT             = $DCMHAPEERPORT"
+echo "CLIPORT                   = $CLIPORT"
+echo
+
+#ulimit -s 1024
+
+CLUSTERPORT="eth0"
+
+export BLC_MACHINE=`hostname | cut -f 1 -d '-'`
+
+case $BLC_MACHINE in
+    'hq1')
+        echo $BLC_MACHINE
+        CLUSTERPORT="bond0"
+        ;;
+    'sagar.englab.brocade.com')
+        echo $BLC_MACHINE
+        CLUSTERPORT="em1"
+        ;;
+     *)
+        echo $BLC_MACHINE
+        CLUSTERPORT="eth0"
+        ;;
+esac
+
+# DCM only runs in clustering mode in MC mode
+if [ "$MODE" = "MC" ] 
+then
+    if [ -f ./cluster.conf ]
+    then
+        if [ `cat ./cluster.conf` != "1" ]
+        then
+            echo "1" > ./cluster.conf
+            rm -f Dcmd.$OS.$ARCH.cfg
+        fi
+    else
+        echo "1" > ./cluster.conf
+        rm -f Dcmd.$OS.$ARCH.cfg
+    fi
+else
+    if [ -f ./cluster.conf ]
+    then
+        if [ `cat ./cluster.conf` != "0" ]
+        then
+            echo "0" > ./cluster.conf
+            rm -f Dcmd.$OS.$ARCH.cfg
+        fi
+    else 
+        echo "0" > ./cluster.conf
+        rm -f Dcmd.$OS.$ARCH.cfg
+    fi
+fi
+
+# If vcs.conf exists for SA mode, it should be "0000"
+if [ "$MODE" = "SA" ];
+then
+    if [ -f ./vcs.conf ]
+    then
+        if [ `cat ./vcs.conf` != "0000" ]
+        then
+            echo "0000" > ./vcs.conf
+            rm -f Dcmd.$OS.$ARCH.cfg
+        fi
+    fi
+fi
+
+# vcs.conf should be "0001" for FC and MC mode
+if [ "$MODE" = "FC" -o "$MODE" = "MC" ];
+then
+    if [ -f ./vcs.conf ]
+    then
+        if [ `cat ./vcs.conf` == "0000" ]
+        then
+            echo "0001" > ./vcs.conf
+            rm -f Dcmd.$OS.$ARCH.cfg
+        fi
+    else
+        echo "0001" > ./vcs.conf
+        rm -f Dcmd.$OS.$ARCH.cfg
+    fi
+fi
+
+
+
+cd $DCMAPPDIR && gmake DCM_INSTANCE=$DCMN starttestapps && cd $DCMEXECDIR && echo FSC will start in 5 seconds ... && sleep 5;
+
+export BLD_MACHINE=`hostname | cut -f 1 -d '-'`
+        
+echo ./NosSmd.$OS.$ARCH -mgmtport $NOSSMDMGMTPORT -port $NOSSMDPORT -clientport $NOSSMDCLIENTPORT -httpport $NOSSMDHTTPPORT -haport $NOSSMDHAPORT -cliport $NOSSMDCLIPORT -swbd $SWBD -yinpath $YANGDIRECTORIES -daemon true -server "DCMD:127.0.0.1:$MGMTPORT"
+./NosSmd.$OS.$ARCH -mgmtport $NOSSMDMGMTPORT -swbd $SWBD -yinpath $YANGDIRECTORIES -daemon true -server "DCMD:127.0.0.1:$MGMTPORT"
+echo ./Fscd.$OS.$ARCH -enabledb true -dbport $DBPORT -dbsharedbuffers $DBSHAREDBUFFERS -mgmtport $MGMTPORT -port $PORT -clientport $CLIENTPORT -eth $CLUSTERPORT -httpport $HTTPPORT -haport $DCMHAPORT -hapeerport $DCMHAPEERPORT -distributionmode DCM_CCM -swbd $SWBD -detectschemachange $DETECTSCHEMACHANGE -handledbcorruption $HANDLEDBCORRUPTION -cliport $CLIPORT -yinpath $YANGDIRECTORIES $START_MODE_COMMAND_PARAMTERS
+./Fscd.$OS.$ARCH -enabledb true -dbport $DBPORT -dbsharedbuffers $DBSHAREDBUFFERS -mgmtport $MGMTPORT -port $PORT -clientport $CLIENTPORT -eth $CLUSTERPORT -httpport $HTTPPORT -haport $DCMHAPORT -hapeerport $DCMHAPEERPORT -distributionmode DCM_CCM -swbd $SWBD -detectschemachange $DETECTSCHEMACHANGE -handledbcorruption $HANDLEDBCORRUPTION -cliport $CLIPORT -yinpath $YANGDIRECTORIES $START_MODE_COMMAND_PARAMTERS
+
+USER=`whoami`
+
+# Start CCM only for the FC mode 
+# Will need to kill DCM after CCM exits because DCM is running in the background
+
+ps -ef | grep "$USER" | grep -w "NosSmd.$OS.$ARCH" | grep -v grep | sed "s/^ \ *//g" | sed "s/ \ */ /g" | cut -f 2 -d " " > .tmp.pid; 
+if [ -s .tmp.pid ]; 
+then 
+    echo "Killing - NosSmd.$OS.$ARCH "; 
+    kill -9 `cat .tmp.pid`; 
+    rm .tmp.pid;
+else 
+    echo "No Process - NosSmd.$OS.$ARCH"; 
+fi
